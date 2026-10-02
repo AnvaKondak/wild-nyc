@@ -11,13 +11,17 @@ class DailyCounts
   end
 
   # counts: { [species_id, Date] => Integer }
-  def write(cell:, source:, counts:, from:, to:)
+  # clear_missing: false only adds; use it when the source can't list every
+  # sighting in the window (eBird returns just the latest one per species).
+  def write(cell:, source:, counts:, from:, to:, clear_missing: true)
     window_from = WildSeries::TimeBucket.day(from)
     window_to = WildSeries::TimeBucket.day(to + 1)
 
     counts.each do |(species_id, date), n|
       @store.write(tags(cell, species_id, source), WildSeries::TimeBucket.day(date), n)
     end
+
+    return unless clear_missing
 
     @store.keys(cell: cell, source: source).each do |key|
       species_id = key.tags["species"]

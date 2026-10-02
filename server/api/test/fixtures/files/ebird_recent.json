@@ -1,0 +1,6 @@
+[
+  { "speciesCode": "rocpig", "comName": "Rock Pigeon", "sciName": "Columba livia", "locId": "L1", "locName": "Park Slope", "obsDt": "2026-09-30 08:15", "howMany": 14, "lat": 40.668, "lng": -73.976, "obsValid": true, "obsReviewed": false, "locationPrivate": false, "subId": "S1" },
+  { "speciesCode": "amerob", "comName": "American Robin", "sciName": "Turdus migratorius", "locId": "L2", "locName": "Backyard", "obsDt": "2026-09-29", "howMany": 2, "lat": 40.669, "lng": -73.975, "obsValid": true, "obsReviewed": false, "locationPrivate": true, "subId": "S2" },
+  { "speciesCode": "blujay", "comName": "Blue Jay", "sciName": "Cyanocitta cristata", "locId": "L3", "locName": "Prospect Park", "obsDt": "2026-09-30 07:00", "howMany": 3, "lat": 40.6602, "lng": -73.969, "obsValid": true, "obsReviewed": false, "locationPrivate": false, "subId": "S3" },
+  { "speciesCode": "norcar", "comName": "Northern Cardinal", "sciName": "Cardinalis cardinalis", "locId": "L1", "locName": "Park Slope", "obsDt": "2026-09-30 08:15", "howMany": 1, "lat": 40.668, "lng": -73.976, "obsValid": true, "obsReviewed": false, "locationPrivate": false, "subId": "S1" }
+]
