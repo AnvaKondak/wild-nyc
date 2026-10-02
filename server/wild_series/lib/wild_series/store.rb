@@ -61,6 +61,21 @@ module WildSeries
         .transform_values { |values| Aggregate.apply(fn, values) }
     end
 
+    # Retention: removes every point older than `cutoff`, and any series left empty.
+    # Returns how many points were removed.
+    def drop_before(cutoff)
+      removed = @series.each_value.sum { |series| series.drop_before(cutoff) }
+      @series.reject! { |_, series| series.empty? }
+      removed
+    end
+
+    # Every point in every series, as [key, time, value]. Used by compaction.
+    def each_point
+      return enum_for(:each_point) unless block_given?
+
+      @series.each { |key, series| series.each_point { |t, v| yield key, t, v } }
+    end
+
     def series_count = @series.size
     def point_count = @series.each_value.sum(&:size)
   end

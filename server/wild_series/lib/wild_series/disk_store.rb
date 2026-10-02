@@ -46,6 +46,16 @@ module WildSeries
       self
     end
 
+    # Rewrites the log as one segment holding only the current state: every
+    # overwritten value and every dropped point disappears from disk.
+    # With drop_before:, applies retention first (removes points older than it).
+    def compact(drop_before: nil)
+      @memory.drop_before(drop_before) if drop_before
+      records = @memory.each_point.lazy.map { |key, t, v| Log::Record.new(key: key, time: t, value: v) }
+      @log.compact(records)
+      self
+    end
+
     def close
       @log.close
     end

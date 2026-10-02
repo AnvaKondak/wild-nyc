@@ -45,6 +45,10 @@ module WildSeries
       n
     end
 
+    def each_point
+      @times.each_with_index { |t, i| yield t, @values[i] }
+    end
+
     def first_time = @times.first
     def last_time = @times.last
 

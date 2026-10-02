@@ -16,7 +16,11 @@ module WildSeries
   #   └ crc32 ┘    └────────── series key ─────────┘    └ time ─┘     └ value
   #
   # Plain text so it can be read with `cat` while debugging.
-  # See docs/design/004-append-only-log.md and 005-one-writer-many-readers.md.
+  #
+  # A compacted segment starts with a "#base" line: it holds the whole state, so
+  # every segment before it is ignored (and deleted by the writer).
+  # See docs/design/004-append-only-log.md, 005-one-writer-many-readers.md and
+  # 006-compaction-and-retention.md.
   class Log
     class Locked < StandardError; end
     class Corrupt < StandardError; end
@@ -24,6 +28,7 @@ module WildSeries
     Record = Data.define(:key, :time, :value)
 
     SEGMENT_GLOB = "[0-9][0-9][0-9][0-9][0-9][0-9].log"
+    BASE_MARKER = "#base\n"
     DEFAULT_SEGMENT_BYTES = 8 * 1024 * 1024
 
     attr_reader :dir
@@ -40,6 +45,7 @@ module WildSeries
 
       if writable
         take_lock
+        clean_up_after_compaction
         repair_tail
         open_active_segment
       end
@@ -50,8 +56,7 @@ module WildSeries
     def append(key, time, value)
       raise "log is read-only" unless @writable
 
-      payload = "#{key}\t#{Integer(time)}\t#{value}"
-      line = format("%08x\t%s\n", Zlib.crc32(payload), payload)
+      line = encode(key, time, value)
       rotate if @active.size + line.bytesize > @max_segment_bytes && @active.size.positive?
       @active.write(line)
       @active.flush
@@ -59,10 +64,38 @@ module WildSeries
       @offsets[@active.path] = @active.size
     end
 
+    # Replaces every segment with one new base segment holding `records` (the
+    # whole current state). Steps, each safe to crash between:
+    #   1. write NNNNNN.log.tmp and fsync it   (crash: the .tmp is deleted on open)
+    #   2. rename it to NNNNNN.log             (atomic; from now on it's the base)
+    #   3. delete the older segments           (crash: they're ignored, then deleted)
+    def compact(records)
+      raise "log is read-only" unless @writable
+
+      old = all_segments
+      path = segment_path(next_number)
+      File.open("#{path}.tmp", "wb") do |f|
+        f.write(BASE_MARKER)
+        records.each { |r| f.write(encode(r.key, r.time, r.value)) }
+        f.flush
+        f.fsync
+      end
+      @active.close
+      File.rename("#{path}.tmp", path)
+      fsync_dir
+      old.each { |p| File.delete(p) }
+
+      @active = File.open(path, "ab")
+      @offsets = { path => @active.size }
+    end
+
     # ---- reading ----
 
+    # The segments that count: the newest base segment and everything after it.
     def segments
-      Dir.glob(File.join(@dir, SEGMENT_GLOB)).sort
+      all = all_segments
+      base = all.rindex { |path| base?(path) }
+      base ? all[base..] : all
     end
 
     # Yields every record not read yet, oldest first, and remembers how far it got.
@@ -78,7 +111,7 @@ module WildSeries
           while (line = f.gets)
             break unless line.end_with?("\n") # still being written; read it next time
 
-            yield parse!(line, path)
+            yield parse!(line, path) unless line == BASE_MARKER
             offset += line.bytesize
           end
         end
@@ -113,6 +146,20 @@ module WildSeries
       raise Locked, "another process is writing to #{@dir}"
     end
 
+    def all_segments
+      Dir.glob(File.join(@dir, SEGMENT_GLOB)).sort
+    end
+
+    def base?(path)
+      File.open(path, "rb") { |f| f.gets == BASE_MARKER }
+    end
+
+    # Finishes or undoes a compaction that was interrupted by a crash.
+    def clean_up_after_compaction
+      Dir.glob(File.join(@dir, "*.log.tmp")).each { |p| File.delete(p) }
+      (all_segments - segments).each { |p| File.delete(p) }
+    end
+
     # A crash in the middle of `append` can leave half a line at the end of the
     # last segment. That write never finished, so it's safe to cut it off.
     # Damage anywhere else means something went really wrong: refuse to guess.
@@ -141,6 +188,8 @@ module WildSeries
     end
 
     def valid?(line)
+      return true if line == BASE_MARKER
+
       crc, payload = line.chomp.split("\t", 2)
       !payload.nil? && crc == format("%08x", Zlib.crc32(payload))
     end
@@ -150,6 +199,11 @@ module WildSeries
 
       _crc, key, time, value = line.chomp.split("\t")
       Record.new(key: key, time: Integer(time), value: parse_number(value))
+    end
+
+    def encode(key, time, value)
+      payload = "#{key}\t#{Integer(time)}\t#{value}"
+      format("%08x\t%s\n", Zlib.crc32(payload), payload)
     end
 
     def parse_number(text)
@@ -162,9 +216,20 @@ module WildSeries
     end
 
     def rotate
-      number = Integer(File.basename(@active.path, ".log"), 10) + 1
       @active.close
-      @active = File.open(segment_path(number), "ab")
+      @active = File.open(segment_path(next_number), "ab")
+    end
+
+    def next_number
+      last = all_segments.last
+      last ? Integer(File.basename(last, ".log"), 10) + 1 : 1
+    end
+
+    # Makes the rename itself durable, not just the file's contents.
+    def fsync_dir
+      File.open(@dir) { |d| d.fsync }
+    rescue Errno::EINVAL, Errno::EISDIR
+      # Some filesystems don't support fsync on a directory; the rename still happened.
     end
 
     def segment_path(number)
