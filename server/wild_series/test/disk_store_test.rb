@@ -113,3 +113,14 @@ class DiskStoreTest < Minitest::Test
     assert_equal 0, File.size(File.join(@dir, "000001.log"))
   end
 end
+
+class DiskStoreDirectoryTest < Minitest::Test
+  def test_creates_missing_parent_directories
+    Dir.mktmpdir do |root|
+      store = WildSeries::DiskStore.open(File.join(root, "a", "b", "series"))
+      store.write({ cell: "dr5rke" }, 1, 1)
+      store.close
+      assert File.exist?(File.join(root, "a", "b", "series", "000001.log"))
+    end
+  end
+end

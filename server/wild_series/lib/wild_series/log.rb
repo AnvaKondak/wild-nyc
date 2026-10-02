@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "fileutils"
 require "zlib"
 
 module WildSeries
@@ -41,7 +42,7 @@ module WildSeries
       @max_segment_bytes = max_segment_bytes
       @fsync = fsync
       @offsets = {} # segment path => bytes already read from it
-      Dir.mkdir(dir) unless Dir.exist?(dir)
+      FileUtils.mkdir_p(dir)
 
       if writable
         take_lock

@@ -16,6 +16,31 @@ Design notes, one per decision: [`docs/design/`](docs/design/).
   `brew services start postgresql@17`).
 - macOS's own Ruby is too old. Put Homebrew's first on PATH: `source server/bin/env`.
 
+## Run it
+
+```sh
+source server/bin/env
+cd server/api
+bundle install                 # installs into vendor/bundle
+bin/rails db:create db:migrate db:seed
+bin/rails server -p 3000       # terminal 1
+bin/worker                     # terminal 2
+curl localhost:3000/v1/neighborhoods/dr5rke
+bin/rails cells:warm           # optional: pre-fetch the app's bundled neighborhoods
+```
+
+Optional: `export EBIRD_API_KEY=...` (free from ebird.org/api/keygen) before starting
+the worker and server to add eBird. Without it the server uses iNaturalist only.
+
+## Tests
+
+```sh
+cd server/wild_series && bundle exec rake    # time-series store
+createdb wild_queue_test                     # once
+cd server/wild_queue && bundle exec rake     # job queue (memory + Postgres)
+cd server/api && bin/rails test              # API, jobs, privacy
+```
+
 ## Privacy rules (from CLAUDE.md)
 
 - The app only ever sends a geohash-6 cell (about 1.2 × 0.6 km). The server never

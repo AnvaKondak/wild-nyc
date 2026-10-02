@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+# Runs background jobs and the schedule. Run exactly one per time-series directory:
+# it takes the store's write lock and refuses to start if another worker has it.
+$stdout.sync = true # show log lines as they happen, even when redirected to a file
+require_relative "../config/environment"
+Rails.logger = ActiveSupport::Logger.new($stdout) if Rails.env.development?
+WorkerProcess.run
