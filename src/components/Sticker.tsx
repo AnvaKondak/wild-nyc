@@ -41,7 +41,7 @@ export function Sticker({
         },
         ghost
           ? {
-              backgroundColor: 'rgba(250,247,242,0.6)',
+              backgroundColor: 'rgba(250,247,242,0.88)',
               borderWidth: 2,
               borderStyle: 'dashed',
               borderColor: colors.inkMuted,

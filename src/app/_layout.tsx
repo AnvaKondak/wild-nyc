@@ -46,6 +46,7 @@ function Navigator() {
       <Stack.Screen name="welcome" options={{ gestureEnabled: false, animation: 'fade' }} />
       <Stack.Screen name="add-place" options={{ presentation: 'modal' }} />
       <Stack.Screen name="species/[id]" />
+      <Stack.Screen name="hurt-animal" />
     </Stack>
   );
 }
