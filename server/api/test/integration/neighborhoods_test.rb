@@ -55,6 +55,14 @@ class NeighborhoodsTest < ActionDispatch::IntegrationTest
   test "the web app may read responses (CORS)" do
     get "/v1/neighborhoods/dr5rke", headers: { "Origin" => "http://localhost:8081" }
     assert_equal "*", response.headers["Access-Control-Allow-Origin"]
+    assert_includes response.headers["Cache-Control"], "no-cache"
+  end
+
+  test "answers CORS preflight requests" do
+    process :options, "/v1/neighborhoods/dr5rke", headers: { "Origin" => "http://localhost:8081", "Access-Control-Request-Method" => "GET" }
+    assert_response :no_content
+    assert_equal "*", response.headers["Access-Control-Allow-Origin"]
+    assert_includes response.headers["Access-Control-Allow-Methods"], "GET"
   end
 
   test "rejects things that aren't cells" do

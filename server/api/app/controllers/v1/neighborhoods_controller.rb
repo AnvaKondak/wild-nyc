@@ -21,7 +21,9 @@ module V1
       JobQueue.fetch_cell(cell) unless record.fetched?
 
       species = SeriesStore.read { |store| NeighborhoodReport.new(cell).species(store) }
-      response.set_header("Cache-Control", "private, max-age=600")
+      # Revalidate every time (cheap: Rails answers 304 when the ETag matches). The app
+      # keeps its own cache, and a long browser cache once served stale CORS headers.
+      response.set_header("Cache-Control", "private, no-cache")
       render json: {
         cell: cell,
         status: record.fetched? ? "ready" : "warming_up",
@@ -33,6 +35,14 @@ module V1
           ({ name: "eBird", url: "https://ebird.org" } if EbirdClient.configured?),
         ].compact,
       }
+    end
+
+    # CORS preflight: a browser asks before a request with non-simple headers.
+    def preflight
+      response.set_header("Access-Control-Allow-Methods", "GET, OPTIONS")
+      response.set_header("Access-Control-Allow-Headers", "Accept, Content-Type")
+      response.set_header("Access-Control-Max-Age", "600")
+      head :no_content
     end
 
     private
