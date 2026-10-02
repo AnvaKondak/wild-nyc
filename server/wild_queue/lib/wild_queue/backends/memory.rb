@@ -10,13 +10,15 @@ module WildQueue
     #   complete(id)
     #   retry_later(id, error:, run_at:)
     #   bury(id, error:)
-    # plus find(id) and counts for inspecting.
+    # plus the housekeeping calls revive, prune and claim_slot, and find/counts/dead
+    # for inspecting.
     #
     # A Mutex makes each call atomic, so several worker threads can share one.
     class Memory
       def initialize
         @jobs = {}
         @next_id = 1
+        @slots = Set.new
         @lock = Mutex.new
       end
 
@@ -57,6 +59,31 @@ module WildQueue
 
       def bury(id, error:)
         update(id, state: "dead", last_error: error, locked_by: nil, locked_until: nil)
+      end
+
+      # Gives a dead job a fresh start.
+      def revive(id, now:)
+        update(id, state: "ready", attempts: 0, run_at: now, last_error: nil)
+      end
+
+      # Deletes done jobs that were due before `before`. Returns how many.
+      def prune(before:)
+        @lock.synchronize do
+          old = @jobs.select { |_, j| j.done? && j.run_at < before }.keys
+          old.each { |id| @jobs.delete(id) }
+          old.size
+        end
+      end
+
+      # True the first time it's called with a given key, false after that.
+      # The scheduler uses this so a recurring job is enqueued once per interval
+      # even with several workers running a scheduler.
+      def claim_slot(key)
+        @lock.synchronize { !!@slots.add?(key) }
+      end
+
+      def dead
+        @lock.synchronize { @jobs.each_value.select(&:dead?) }
       end
 
       def find(id)

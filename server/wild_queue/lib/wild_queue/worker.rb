@@ -14,7 +14,7 @@ module WildQueue
     # lease: how long a claimed job is ours. If we die, another worker can take
     # the job after this. Must be longer than the slowest job.
     def initialize(backend, queues: ["default"], lease: 300, poll_interval: 1.0,
-                   clock: -> { Time.now }, logger: nil, retry_policy: RetryPolicy.new)
+                   clock: -> { Time.now }, logger: nil, retry_policy: RetryPolicy.new, scheduler: nil)
       @backend = backend
       @queues = Array(queues).map(&:to_s)
       @lease = lease
@@ -22,12 +22,14 @@ module WildQueue
       @clock = clock
       @logger = logger
       @retry_policy = retry_policy
+      @scheduler = scheduler
       @id = "#{Socket.gethostname rescue 'host'}:#{Process.pid}:#{SecureRandom.hex(3)}"
       @stopping = false
     end
 
     def run
       until @stopping
+        @scheduler&.tick
         worked = work_one
         sleep(@poll_interval) unless worked || @stopping
       end

@@ -101,6 +101,56 @@ module QueueBehavior
     refute_equal a.id, c.id
   end
 
+  def test_revive_gives_a_dead_job_a_fresh_start
+    job = @queue.enqueue(AlwaysFailsJob)
+    @worker.work_off
+    @clock.advance(30)
+    @worker.work_off
+    assert_equal [job.id], @backend.dead.map(&:id)
+
+    @backend.revive(job.id, now: @clock.now)
+    record = @backend.find(job.id)
+    assert record.ready?
+    assert_equal 0, record.attempts
+    assert_empty @backend.dead
+  end
+
+  def test_prune_removes_old_done_jobs_only
+    old = @queue.enqueue(RecordingJob, n: 1)
+    @worker.work_off
+    @clock.advance(86_400)
+    recent = @queue.enqueue(RecordingJob, n: 2)
+    @worker.work_off
+    waiting = @queue.enqueue(RecordingJob, { n: 3 }, run_at: @clock.now - 999_999)
+
+    assert_equal 1, @backend.prune(before: @clock.now - 3600)
+    assert_nil @backend.find(old.id)
+    assert @backend.find(recent.id)
+    assert @backend.find(waiting.id), "not done, so kept"
+  end
+
+  def test_claim_slot_is_true_only_once
+    assert @backend.claim_slot("refresh:1")
+    refute @backend.claim_slot("refresh:1")
+    assert @backend.claim_slot("refresh:2")
+  end
+
+  def test_scheduler_enqueues_once_per_interval_across_schedulers
+    a = WildQueue::Scheduler.new(@queue, clock: @clock).every(3600, "refresh", RecordingJob, { "all" => true })
+    b = WildQueue::Scheduler.new(@queue, clock: @clock).every(3600, "refresh", RecordingJob, { "all" => true })
+
+    assert_equal ["refresh"], a.tick
+    assert_equal [], b.tick, "the other scheduler already took this hour"
+    assert_equal [], a.tick
+    @worker.work_off
+    assert_equal 1, RecordingJob.calls.size
+
+    @clock.advance(3600)
+    assert_equal ["refresh"], b.tick
+    @worker.work_off
+    assert_equal 2, RecordingJob.calls.size
+  end
+
   def test_refuses_classes_that_are_not_jobs
     assert_raises(ArgumentError) { @queue.enqueue(NotAJob) }
   end

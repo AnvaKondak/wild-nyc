@@ -5,6 +5,7 @@
 module WildQueue
 end
 
+require "set"
 require "socket"
 require_relative "wild_queue/job"
 require_relative "wild_queue/record"
@@ -12,3 +13,4 @@ require_relative "wild_queue/retry_policy"
 require_relative "wild_queue/backends/memory"
 require_relative "wild_queue/queue"
 require_relative "wild_queue/worker"
+require_relative "wild_queue/scheduler"
