@@ -1,0 +1,3 @@
+# Source this to put Homebrew's Ruby and Postgres first on PATH:
+#   source server/bin/env
+export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/4.0.0/bin:/opt/homebrew/opt/postgresql@17/bin:$PATH"
