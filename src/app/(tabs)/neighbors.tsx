@@ -11,8 +11,10 @@ import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
 import { species as allSpecies, type Season, type Species } from '@/content';
 import { shortDate } from '@/lib/format';
+import { seenLabel } from '@/lib/live';
 import { seasonOf } from '@/lib/time';
 import { useAppState } from '@/state/AppState';
+import { useLiveData } from '@/state/LiveData';
 import { movedIn } from '@/state/selectors';
 import { border, colors, fonts, offsetShadow } from '@/theme/tokens';
 import { type } from '@/theme/type';
@@ -110,9 +112,11 @@ export default function Neighbors() {
 
 function NeighborCard({ species, movedInOn, season }: { species: Species; movedInOn?: string; season: Season }) {
   const router = useRouter();
+  const { live } = useLiveData();
   const isMet = !!movedInOn;
   const away = !species.seasons.includes(season);
   const backIn = species.seasons[0];
+  const seen = seenLabel(live.get(species.id), new Date());
 
   let line: string;
   if (isMet) line = `Moved in ${shortDate(movedInOn)}. ${species.home}`;
@@ -147,6 +151,9 @@ function NeighborCard({ species, movedInOn, season }: { species: Species; movedI
         onPress={() => router.push({ pathname: '/species/[id]', params: { id: species.id } })}
         style={{ alignSelf: 'flex-start', marginTop: 4, borderWidth: border.width, borderColor: colors.ink }}
       />
+      {!isMet && seen && (
+        <Text style={{ fontFamily: fonts.bodySemi, fontSize: 14, color: colors.blue }}>{seen}. Keep an eye out!</Text>
+      )}
       {!isMet && !away && (
         <Text style={{ fontFamily: fonts.body, fontSize: 13, color: colors.inkMuted }}>
           They move in the first time you tap "I noticed them".

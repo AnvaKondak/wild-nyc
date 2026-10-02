@@ -6,9 +6,11 @@ import { Button } from '@/components/Button';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
 import { places, speciesFor } from '@/content';
+import { seenThisYear } from '@/lib/live';
 import { locateNeighborhood } from '@/lib/locate';
 import { seasonOf } from '@/lib/time';
 import { useAppState } from '@/state/AppState';
+import { useLiveData } from '@/state/LiveData';
 import { currentNeighborhood } from '@/state/selectors';
 import { border, colors, fonts } from '@/theme/tokens';
 import { type } from '@/theme/type';
@@ -22,7 +24,12 @@ export default function Welcome() {
   const hood = currentNeighborhood(state);
   const hasHood = state.neighborhoods.length > 0;
   const placeName = hood.placeId ? places.find((p) => p.id === hood.placeId)?.name : undefined;
-  const count = speciesFor(hood.kind, seasonOf(new Date())).length;
+  const { live } = useLiveData();
+  // With live data, count who's actually been seen around here; otherwise who
+  // usually lives in this kind of place.
+  const usual = speciesFor(hood.kind, seasonOf(new Date()));
+  const seen = seenThisYear(usual, live);
+  const count = seen.length > 0 ? seen.length : usual.length;
 
   const pickInstead = () => router.push({ pathname: '/add-place', params: { from: 'welcome' } });
 

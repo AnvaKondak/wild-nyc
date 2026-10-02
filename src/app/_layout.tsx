@@ -12,6 +12,7 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { AppStateProvider, useAppState } from '@/state/AppState';
+import { LiveDataProvider } from '@/state/LiveData';
 import { colors } from '@/theme/tokens';
 
 export default function RootLayout() {
@@ -41,12 +42,14 @@ function Navigator() {
   if (!hydrated) return null;
 
   return (
-    <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.paper } }}>
-      <Stack.Screen name="(tabs)" />
-      <Stack.Screen name="welcome" options={{ gestureEnabled: false, animation: 'fade' }} />
-      <Stack.Screen name="add-place" options={{ presentation: 'modal' }} />
-      <Stack.Screen name="species/[id]" />
-      <Stack.Screen name="hurt-animal" />
-    </Stack>
+    <LiveDataProvider>
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.paper } }}>
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="welcome" options={{ gestureEnabled: false, animation: 'fade' }} />
+        <Stack.Screen name="add-place" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="species/[id]" />
+        <Stack.Screen name="hurt-animal" />
+      </Stack>
+    </LiveDataProvider>
   );
 }

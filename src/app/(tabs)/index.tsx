@@ -10,10 +10,12 @@ import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { getSpecies, placeKinds, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
+import { orderStory } from '@/lib/live';
 import { buildStory } from '@/lib/story';
 import { seasonOf, timeHeader } from '@/lib/time';
 import { useNow } from '@/lib/useNow';
 import { useAppState } from '@/state/AppState';
+import { useLiveData } from '@/state/LiveData';
 import { currentNeighborhood } from '@/state/selectors';
 import { periodThemes } from '@/theme/periodTheme';
 import { border, colors, fonts } from '@/theme/tokens';
@@ -34,6 +36,7 @@ export default function RightNow() {
   const stickerSize = Math.min(210, Math.round(height * 0.24));
   const now = useNow();
   const { state } = useAppState();
+  const { live } = useLiveData();
   const hood = currentNeighborhood(state);
 
   // Sun times come from the cell's center, never the user's exact position.
@@ -51,9 +54,10 @@ export default function RightNow() {
   const season = seasonOf(now);
   const theme = periodThemes[header.period];
 
+  // Species actually seen around this neighborhood lately come first (live data).
   const story = useMemo(
-    () => buildStory(stories, { season, period: header.period, placeKind: hood.kind, where: placeKinds[hood.kind].where }),
-    [season, header.period, hood.kind],
+    () => orderStory(buildStory(stories, { season, period: header.period, placeKind: hood.kind, where: placeKinds[hood.kind].where }), live),
+    [season, header.period, hood.kind, live],
   );
 
   // Switching neighborhood or time of day restarts the story.

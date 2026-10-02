@@ -9,7 +9,9 @@ import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
 import { getSpecies, type Species } from '@/content';
+import { seenLabel } from '@/lib/live';
 import { seasonOf } from '@/lib/time';
+import { useLiveData } from '@/state/LiveData';
 import { useNoticed } from '@/state/useNoticed';
 import { border, colors, fonts } from '@/theme/tokens';
 import { type } from '@/theme/type';
@@ -29,6 +31,7 @@ function Profile({ species }: { species: Species }) {
   const { noticedToday, met, toggle } = useNoticed(species.id);
   const season = seasonOf(new Date());
   const name = species.friendlyName.toLowerCase();
+  const seen = seenLabel(useLiveData().live.get(species.id), new Date());
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.paper }} contentContainerStyle={{ paddingBottom: insets.bottom + 32 }}>
@@ -74,6 +77,7 @@ function Profile({ species }: { species: Species }) {
             {species.collectiveNoun} of {name}
           </Text>
         </View>
+        {seen && <Text style={{ fontFamily: fonts.bodySemi, fontSize: 14, color: colors.inkSoft, marginTop: 4 }}>{seen}</Text>}
       </View>
 
       <Card style={{ marginHorizontal: 16, marginTop: 24 }}>
