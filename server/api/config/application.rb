@@ -40,6 +40,9 @@ module Api
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    # Observation dates from both sources are local NYC dates, so "today" is too.
+    config.time_zone = "Eastern Time (US & Canada)"
+
     # Where the time-series store keeps its files (see server/wild_series).
     config.x.series_dir = ENV.fetch("WILD_SERIES_DIR") { Rails.root.join("storage", "series", Rails.env).to_s }
 

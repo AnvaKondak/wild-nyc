@@ -1,0 +1,22 @@
+{
+  "total_results": 8,
+  "per_page": 200,
+  "results": [
+    { "id": 1, "observed_on": "2026-09-28", "location": "40.668,-73.9765", "obscured": false, "geoprivacy": null, "taxon_geoprivacy": "open",
+      "taxon": { "id": 3017, "name": "Columba livia", "ancestor_ids": [48460, 1, 2, 355675, 3, 2708, 2715, 3000, 3017] } },
+    { "id": 2, "observed_on": "2026-09-28", "location": "40.669,-73.975", "obscured": false, "geoprivacy": null, "taxon_geoprivacy": "open",
+      "taxon": { "id": 122767, "name": "Columba livia domestica", "ancestor_ids": [48460, 1, 2, 355675, 3, 2708, 2715, 3000, 3017, 122767] } },
+    { "id": 3, "observed_on": "2026-09-29", "location": "40.6685,-73.976", "obscured": true, "geoprivacy": "obscured", "taxon_geoprivacy": "open",
+      "taxon": { "id": 3017, "name": "Columba livia", "ancestor_ids": [48460, 1, 2, 3017] } },
+    { "id": 4, "observed_on": "2026-09-29", "location": "40.6685,-73.976", "obscured": false, "geoprivacy": null, "taxon_geoprivacy": "obscured",
+      "taxon": { "id": 5212, "name": "Buteo jamaicensis", "ancestor_ids": [48460, 1, 2, 3, 5212] } },
+    { "id": 5, "observed_on": "2026-09-30", "location": "40.6715,-73.976", "obscured": false, "geoprivacy": null, "taxon_geoprivacy": "open",
+      "taxon": { "id": 13858, "name": "Passer domesticus", "ancestor_ids": [48460, 1, 2, 3, 13858] } },
+    { "id": 6, "observed_on": "2026-09-30", "location": "40.668,-73.977", "obscured": false, "geoprivacy": null, "taxon_geoprivacy": "open",
+      "taxon": { "id": 81582, "name": "Hyphantria cunea", "ancestor_ids": [48460, 1, 47120, 47157, 81582] } },
+    { "id": 7, "observed_on": "2026-09-30", "location": "40.668,-73.977", "obscured": false, "geoprivacy": null, "taxon_geoprivacy": "open",
+      "taxon": { "id": 48548, "name": "Vanessa cardui", "ancestor_ids": [48460, 1, 47120, 47157, 47224, 48548] } },
+    { "id": 8, "observed_on": "2026-09-30", "location": "40.668,-73.977", "obscured": false, "geoprivacy": null, "taxon_geoprivacy": "open",
+      "taxon": { "id": 48662, "name": "Danaus plexippus", "ancestor_ids": [48460, 1, 47120, 47157, 47224, 48662] } }
+  ]
+}
