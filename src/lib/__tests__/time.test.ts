@@ -76,4 +76,8 @@ describe('moonPhaseName', () => {
     // Full moon on 2026-09-26.
     expect(moonPhaseName(new Date(2026, 8, 26, 22))).toBe('Full moon');
   });
+
+  it('calls the days between full and last quarter gibbous', () => {
+    expect(moonPhaseName(new Date(2026, 9, 1, 21))).toBe('Waning gibbous moon');
+  });
 });

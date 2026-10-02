@@ -72,21 +72,21 @@ export function periodOf(date: Date, lat: number, lng: number): Period {
   return 'night';
 }
 
-const moonNames = [
-  'New moon',
-  'Waxing crescent moon',
-  'First quarter moon',
-  'Waxing gibbous moon',
-  'Full moon',
-  'Waning gibbous moon',
-  'Last quarter moon',
-  'Waning crescent moon',
-] as const;
-
-/** Moon phase name. SunCalc's phase runs 0 (new) → 0.5 (full) → 1 (new). */
+/**
+ * Moon phase name. SunCalc's phase runs 0 (new) → 0.5 (full) → 1 (new).
+ * New, quarter and full are moments, so they only get about a day either side.
+ */
 export function moonPhaseName(date: Date): string {
   const { phase } = SunCalc.getMoonIllumination(date);
-  return moonNames[Math.round(phase * 8) % 8];
+  const near = (target: number) => Math.abs(phase - target) < 0.035;
+  if (near(0) || near(1)) return 'New moon';
+  if (near(0.25)) return 'First quarter moon';
+  if (near(0.5)) return 'Full moon';
+  if (near(0.75)) return 'Last quarter moon';
+  if (phase < 0.25) return 'Waxing crescent moon';
+  if (phase < 0.5) return 'Waxing gibbous moon';
+  if (phase < 0.75) return 'Waning gibbous moon';
+  return 'Waning crescent moon';
 }
 
 function minutesUntil(from: Date, to: Date): number {

@@ -11,6 +11,7 @@ import {
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { AppStateProvider, useAppState } from '@/state/AppState';
 import { colors } from '@/theme/tokens';
 
 export default function RootLayout() {
@@ -27,11 +28,24 @@ export default function RootLayout() {
   if (!fontsLoaded) return null;
 
   return (
-    <>
+    <AppStateProvider>
       <StatusBar style="dark" />
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.paper } }}>
-        <Stack.Screen name="(tabs)" />
-      </Stack>
-    </>
+      <Navigator />
+    </AppStateProvider>
+  );
+}
+
+function Navigator() {
+  const { hydrated } = useAppState();
+  // Wait for saved state so first-timers and returning users land in the right place.
+  if (!hydrated) return null;
+
+  return (
+    <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.paper } }}>
+      <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="welcome" options={{ gestureEnabled: false, animation: 'fade' }} />
+      <Stack.Screen name="add-place" options={{ presentation: 'modal' }} />
+      <Stack.Screen name="species/[id]" />
+    </Stack>
   );
 }

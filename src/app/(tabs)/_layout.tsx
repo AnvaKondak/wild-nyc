@@ -1,7 +1,8 @@
 import type { ComponentType } from 'react';
 import { Text, type ColorValue } from 'react-native';
-import { Tabs } from 'expo-router';
+import { Redirect, Tabs } from 'expo-router';
 import { HeartIcon, HouseIcon, PeopleIcon, SunIcon } from '@/components/Icons';
+import { useAppState } from '@/state/AppState';
 import { border, colors, fonts } from '@/theme/tokens';
 
 type IconComponent = ComponentType<{ color?: ColorValue; size?: number }>;
@@ -17,6 +18,10 @@ function tab(title: string, Icon: IconComponent) {
 }
 
 export default function TabLayout() {
+  const { state } = useAppState();
+  // Welcome shows once, before the tabs.
+  if (!state.onboarded) return <Redirect href="/welcome" />;
+
   return (
     <Tabs
       screenOptions={{

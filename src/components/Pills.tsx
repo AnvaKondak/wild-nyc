@@ -8,6 +8,7 @@ type Props = {
   items: PillItem[];
   selectedId: string;
   onSelect: (id: string) => void;
+  onLongPress?: (id: string) => void;
   onAdd?: () => void;
   /** Outline/text color. Selected pill is filled with this. */
   ink?: string;
@@ -16,7 +17,7 @@ type Props = {
 };
 
 /** Neighborhood pills with a dashed "+" at the end. Scrolls sideways when long. */
-export function PillRow({ items, selectedId, onSelect, onAdd, ink = colors.ink, background = colors.paper }: Props) {
+export function PillRow({ items, selectedId, onSelect, onLongPress, onAdd, ink = colors.ink, background = colors.paper }: Props) {
   return (
     <ScrollView
       horizontal
@@ -29,6 +30,7 @@ export function PillRow({ items, selectedId, onSelect, onAdd, ink = colors.ink, 
           <Pressable
             key={item.id}
             onPress={() => onSelect(item.id)}
+            onLongPress={onLongPress ? () => onLongPress(item.id) : undefined}
             accessibilityRole="button"
             accessibilityState={{ selected: on }}
             hitSlop={{ top: 2, bottom: 2 }}

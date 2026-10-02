@@ -1,83 +1,194 @@
-// TEMPORARY (step 1): a gallery of the shared parts so the riso look can be
-// checked in the simulator. Replaced by the Right now story in step 3.
-import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { PanResponder, Pressable, Text, View } from 'react-native';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { setStatusBarStyle } from 'expo-status-bar';
 import { Button } from '@/components/Button';
-import { Card } from '@/components/Card';
-import { EyeIcon } from '@/components/Icons';
-import { PillRow } from '@/components/Pills';
+import { ChevronLeftIcon, ChevronRightIcon } from '@/components/Icons';
+import { NeighborhoodPills } from '@/components/NeighborhoodPills';
+import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
-import { Title } from '@/components/Title';
-import { colors, fonts } from '@/theme/tokens';
-import { type } from '@/theme/type';
+import { getSpecies, placeKinds, stories, type Period, type StorySlide } from '@/content';
+import { decodeGeohash } from '@/lib/geohash';
+import { buildStory } from '@/lib/story';
+import { seasonOf, timeHeader } from '@/lib/time';
+import { useNow } from '@/lib/useNow';
+import { useAppState } from '@/state/AppState';
+import { currentNeighborhood } from '@/state/selectors';
+import { periodThemes } from '@/theme/periodTheme';
+import { border, colors, fonts } from '@/theme/tokens';
 
-const hoods = [
-  { id: 'home', label: 'Home' },
-  { id: 'work', label: 'Work' },
-  { id: 'park', label: 'Prospect Park' },
-];
+const PERIOD_LABELS: Record<Period, string> = { dawn: 'Dawn', midday: 'Midday', dusk: 'Dusk', night: 'Night' };
 
-export default function PartsGallery() {
-  const [hood, setHood] = useState('home');
-  const [noticed, setNoticed] = useState(false);
+function tileFor(slide: StorySlide): string {
+  if (slide.kind === 'arriving') return colors.yellow;
+  if (slide.kind === 'goodbye') return colors.pink;
+  const s = slide.speciesId ? getSpecies(slide.speciesId) : undefined;
+  return s ? colors[s.tint] : colors.blueTint;
+}
+
+export default function RightNow() {
+  const router = useRouter();
+  const now = useNow();
+  const { state } = useAppState();
+  const hood = currentNeighborhood(state);
+
+  // Sun times come from the cell's center, never the user's exact position.
+  const { lat, lng } = decodeGeohash(hood.cell);
+  const realHeader = timeHeader(now, lat, lng);
+  // Dev only: tap the time header to preview each time-of-day theme.
+  const [previewPeriod, setPreviewPeriod] = useState<Period | null>(null);
+  const header = previewPeriod
+    ? { ...realHeader, period: previewPeriod, label: `${PERIOD_LABELS[previewPeriod]} (preview)` }
+    : realHeader;
+  const cyclePreview = () => {
+    const order: (Period | null)[] = [null, 'dawn', 'midday', 'dusk', 'night'];
+    setPreviewPeriod((p) => order[(order.indexOf(p) + 1) % order.length]);
+  };
+  const season = seasonOf(now);
+  const theme = periodThemes[header.period];
+
+  const story = useMemo(
+    () => buildStory(stories, { season, period: header.period, placeKind: hood.kind, where: placeKinds[hood.kind].where }),
+    [season, header.period, hood.kind],
+  );
+
+  // Switching neighborhood or time of day restarts the story.
+  const [index, setIndex] = useState(0);
+  useEffect(() => setIndex(0), [hood.id, header.period, season]);
+  const i = Math.min(index, story.length - 1);
+  const slide = story[i];
+
+  const next = useCallback(() => setIndex((n) => (n + 1) % story.length), [story.length]);
+  const prev = useCallback(() => setIndex((n) => Math.max(0, n - 1)), []);
+
+  // Swipe left/right, like stories.
+  const swipeRef = useRef({ next, prev });
+  swipeRef.current = { next, prev };
+  const pan = useMemo(
+    () =>
+      PanResponder.create({
+        onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dx) > 20 && Math.abs(g.dx) > Math.abs(g.dy) * 1.5,
+        onPanResponderRelease: (_, g) => {
+          if (g.dx < -40) swipeRef.current.next();
+          else if (g.dx > 40) swipeRef.current.prev();
+        },
+      }),
+    [],
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      setStatusBarStyle(theme.statusBar);
+      return () => setStatusBarStyle('dark');
+    }, [theme.statusBar]),
+  );
+
+  if (!slide) return <Screen background={theme.bg} scroll={false}>{null}</Screen>;
+
+  const species = slide.speciesId ? getSpecies(slide.speciesId) : undefined;
+  const ctaLabel = slide.cta ?? (species ? `Meet the ${species.friendlyName.toLowerCase()}` : 'Learn more');
+  const onCta = () => {
+    if (slide.link === 'kindness') router.push('/kindness');
+    else if (species) router.push({ pathname: '/species/[id]', params: { id: species.id } });
+  };
 
   return (
-    <Screen contentStyle={{ gap: 24 }}>
-      <View style={{ paddingHorizontal: 22, gap: 6 }}>
-        <Text style={type.label}>Step 1 · parts gallery</Text>
-        <Title accent="Neighbors">Wild</Title>
-      </View>
-
-      <PillRow items={hoods} selectedId={hood} onSelect={setHood} onAdd={() => {}} />
-
-      <View style={{ height: 260 }}>
-        <Sticker icon="bird" size={120} tint={colors.pinkTint} rotate={-8} style={{ position: 'absolute', left: 30, top: 20 }} />
-        <Sticker icon="squirrel" size={108} tint={colors.yellowTint} rotate={6} style={{ position: 'absolute', left: 160, top: 0 }} />
-        <Sticker icon="bug" size={100} tint={colors.blueTint} rotate={-4} style={{ position: 'absolute', left: 240, top: 110 }} />
-        <Sticker icon="critter" size={100} tint={colors.pink} rotate={9} style={{ position: 'absolute', left: 100, top: 145 }} />
-        <Sticker icon="bird" size={46} ghost style={{ position: 'absolute', left: 20, top: 190 }} />
-      </View>
-
-      <View style={{ paddingHorizontal: 22 }}>
-        <Title accent="your street" accentColor="blue" size={42}>6 neighbors share</Title>
-        <Text style={[type.bodyLarge, { marginTop: 12 }]}>
-          Pigeons on the ledges, sparrows in the hedge, squirrels in the tree. Come meet them.
-        </Text>
-      </View>
-
-      <Card style={{ marginHorizontal: 16 }}>
-        <Text style={type.kicker}>Personality type</Text>
-        <Text style={{ fontFamily: fonts.display, fontSize: 28, color: colors.ink }}>The Loyal Homebody</Text>
-        <Text style={type.body}>
-          Pairs usually stay together and come back to the same ledge year after year.
-        </Text>
-      </Card>
-
-      <Card background={colors.blue} shadow={colors.yellow} bordered={false} style={{ marginHorizontal: 16 }}>
-        <Text style={{ fontFamily: fonts.display, fontSize: 28, color: colors.white }}>Pigeons</Text>
-        <View style={{ flexDirection: 'row', gap: 10 }}>
-          <Button
-            label={noticed ? 'Noticed today' : 'I noticed them today'}
-            variant="yellow"
-            size="medium"
-            selected={noticed}
-            onPress={() => setNoticed((n) => !n)}
-            style={{ flexGrow: 1 }}
-          />
-          <Button label="How to help" variant="outline" color={colors.white} size="medium" onPress={() => {}} />
+    <Screen background={theme.bg} scroll={false}>
+      <View {...pan.panHandlers} style={{ flex: 1 }}>
+        <View style={{ flexDirection: 'row', gap: 4, paddingHorizontal: 16 }} accessibilityLabel={`Story ${i + 1} of ${story.length}`}>
+          {story.map((s, n) => (
+            <View key={s.id} style={{ flex: 1, height: 4, borderRadius: 2, backgroundColor: n <= i ? theme.barOn : theme.barOff }} />
+          ))}
         </View>
-      </Card>
 
-      <View style={{ paddingHorizontal: 16, gap: 14 }}>
-        <Button label="Meet the neighbors" onPress={() => {}} />
-        <Button label="I noticed pigeons today" shadow={colors.yellow} icon={<EyeIcon color={colors.white} />} onPress={() => {}} />
-        <Button label="Share your neighborhood" variant="outline" onPress={() => {}} />
+        <View style={{ paddingTop: 14 }}>
+          <NeighborhoodPills ink={theme.ink} background={theme.bg} />
+        </View>
+
+        <Pressable
+          onPress={__DEV__ ? cyclePreview : undefined}
+          disabled={!__DEV__}
+          accessible
+          accessibilityLabel={`${header.label}, ${header.clock}. ${header.sub}`}
+          style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 22, paddingTop: 18 }}
+        >
+          <PeriodIcon period={header.period} color={theme.ink} />
+          <View>
+            <Text style={{ fontFamily: fonts.display, fontSize: 20, color: theme.ink }}>
+              {header.label} · {header.clock}
+            </Text>
+            <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>{header.sub}</Text>
+          </View>
+        </Pressable>
+
+        <Pressable
+          onPress={next}
+          accessibilityRole="button"
+          accessibilityLabel="Next story"
+          style={{ alignSelf: 'center', marginTop: 28 }}
+        >
+          <Sticker
+            icon={species?.icon ?? 'bird'}
+            size={210}
+            tint={tileFor(slide)}
+            rotate={-5}
+            shadowColor={theme.shadow}
+          />
+        </Pressable>
+
+        <View style={{ paddingHorizontal: 24, paddingTop: 30, gap: 10 }}>
+          <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, letterSpacing: 1.4, textTransform: 'uppercase', color: theme.accent }}>
+            {slide.kicker}
+          </Text>
+          <Text accessibilityRole="header" style={{ fontFamily: fonts.display, fontSize: 32, lineHeight: 35, color: theme.ink }}>
+            {slide.title}
+          </Text>
+          <Text style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 25, color: theme.body }}>{slide.body}</Text>
+        </View>
+
+        <View style={{ flex: 1 }} />
+
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 16, paddingBottom: 20 }}>
+          <RoundNav label="Previous story" onPress={prev} color={theme.ink}>
+            <ChevronLeftIcon color={theme.ink} />
+          </RoundNav>
+          <View style={{ flex: 1 }}>
+            <Button
+              label={ctaLabel}
+              onPress={onCta}
+              shadow={theme.shadow}
+              style={{ backgroundColor: theme.btnBg }}
+              color={theme.btnInk}
+            />
+          </View>
+          <RoundNav label="Next story" onPress={next} color={theme.ink}>
+            <ChevronRightIcon color={theme.ink} />
+          </RoundNav>
+        </View>
       </View>
-
-      <Text style={{ textAlign: 'center', fontFamily: fonts.displayItalic, fontSize: 15, color: colors.inkMuted }}>
-        We notice. We don't follow.
-      </Text>
     </Screen>
+  );
+}
+
+function RoundNav({ label, onPress, color, children }: { label: string; onPress: () => void; color: string; children: React.ReactNode }) {
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      style={({ pressed }) => ({
+        width: 52,
+        height: 52,
+        borderRadius: 26,
+        borderWidth: border.width,
+        borderColor: color,
+        alignItems: 'center',
+        justifyContent: 'center',
+        opacity: pressed ? 0.6 : 1,
+      })}
+    >
+      {children}
+    </Pressable>
   );
 }
