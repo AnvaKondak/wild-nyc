@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Button } from '@/components/Button';
-import { ChevronLeftIcon } from '@/components/Icons';
+import { BackButton } from '@/components/BackButton';
 import { Screen } from '@/components/Screen';
 import { Title } from '@/components/Title';
 import { places, type Place } from '@/content';
@@ -61,14 +61,7 @@ export default function AddPlace() {
   return (
     <Screen contentStyle={{ gap: 18 }}>
       <View style={{ paddingHorizontal: 16, flexDirection: 'row' }}>
-        <Pressable
-          onPress={() => router.back()}
-          accessibilityRole="button"
-          accessibilityLabel="Back"
-          style={{ width: 44, height: 44, borderRadius: 22, borderWidth: border.width, borderColor: colors.ink, backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}
-        >
-          <ChevronLeftIcon size={18} color={colors.ink} />
-        </Pressable>
+        <BackButton />
       </View>
 
       <View style={{ paddingHorizontal: 22, gap: 8 }}>
