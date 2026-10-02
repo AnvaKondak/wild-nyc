@@ -37,6 +37,30 @@ module WildSeries
       @series.keys.select { |key| key.matches?(filter) }.sort_by(&:to_s)
     end
 
+    # One series, grouped into day or week buckets:
+    #   store.rollup(PIGEONS, from, to, bucket: :week)  # weekly totals
+    def rollup(tags, from = nil, to = nil, bucket:, fn: :sum)
+      Aggregate.rollup(range(tags, from, to), bucket: bucket, fn: fn)
+    end
+
+    # Combines every matching series over a time range, grouped by one tag:
+    #   store.group({ cell: "dr5rke" }, by: "species", from: a_month_ago, to: today)
+    #   # => { "house-sparrow" => 12, "rock-pigeon" => 31 }
+    # Series with no points in the range are left out.
+    def group(filter = {}, by:, from: nil, to: nil, fn: :sum)
+      by = by.to_s
+      values_by_group = Hash.new { |h, k| h[k] = [] }
+      keys(filter).each do |key|
+        group_name = key.tags[by]
+        next unless group_name # series without that tag can't be grouped by it
+        points = @series[key].range(from, to)
+        values_by_group[group_name].concat(points.map(&:value))
+      end
+      values_by_group
+        .reject { |_, values| values.empty? }
+        .transform_values { |values| Aggregate.apply(fn, values) }
+    end
+
     def series_count = @series.size
     def point_count = @series.each_value.sum(&:size)
   end
