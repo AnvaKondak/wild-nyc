@@ -10,7 +10,11 @@
     "tint": "pinkTint",
     "personality": {
       "type": "The Loyal Homebody",
-      "traits": ["Mates for life", "Remembers faces", "Loves a ledge"],
+      "traits": [
+        "Mates for life",
+        "Remembers faces",
+        "Loves a ledge"
+      ],
       "blurb": "Pairs usually stay together and come back to the same ledge year after year. Both parents feed their chicks a milk they make in their own throats."
     },
     "origin": "Wild rock doves nested on sea cliffs. People tamed them thousands of years ago, carried them everywhere, then let them go. To a pigeon, your building is a cliff.",
@@ -31,7 +35,14 @@
     },
     "sceneSpot": "ledge",
     "spotHint": "Look up at building ledges, window air conditioners and the underside of train bridges.",
-    "seasons": ["spring", "summer", "fall", "winter"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 3017,
+    "ebirdCode": "rocpig"
   },
   {
     "id": "house-sparrow",
@@ -44,7 +55,11 @@
     "tint": "blueTint",
     "personality": {
       "type": "The Chatty Gang",
-      "traits": ["Never alone", "Loves a dust bath", "Talks nonstop"],
+      "traits": [
+        "Never alone",
+        "Loves a dust bath",
+        "Talks nonstop"
+      ],
       "blurb": "Sparrows do everything as a group: eat, bathe, argue, nap. The constant chirping is how they keep track of who's where."
     },
     "origin": "Brought over from England in the 1850s and let go in Brooklyn, in the hope they would eat caterpillars. They liked the city so much they spread across the whole continent.",
@@ -65,7 +80,14 @@
     },
     "sceneSpot": "hedge",
     "spotHint": "Listen for nonstop chirping coming from inside a hedge or bush.",
-    "seasons": ["spring", "summer", "fall", "winter"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 13858,
+    "ebirdCode": "houspa"
   },
   {
     "id": "eastern-gray-squirrel",
@@ -78,7 +100,11 @@
     "tint": "yellowTint",
     "personality": {
       "type": "The Busy Planner",
-      "traits": ["Always prepping", "Great memory", "A bit of a trickster"],
+      "traits": [
+        "Always prepping",
+        "Great memory",
+        "A bit of a trickster"
+      ],
       "blurb": "A squirrel can bury thousands of nuts in a fall, each in its own spot, and find many of them again months later by memory and smell."
     },
     "origin": "Gray squirrels are from here. The forests that once covered the city were their home, and they came back to the parks in the 1800s once trees were planted again.",
@@ -99,7 +125,13 @@
     },
     "sceneSpot": "tree",
     "spotHint": "Look for a ball of leaves high in a tree, and listen for scrabbling claws on bark.",
-    "seasons": ["spring", "summer", "fall", "winter"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 46017
   },
   {
     "id": "european-starling",
@@ -112,7 +144,11 @@
     "tint": "yellowTint",
     "personality": {
       "type": "The Impressionist",
-      "traits": ["Copies sounds", "Shiny dresser", "Loves a crowd"],
+      "traits": [
+        "Copies sounds",
+        "Shiny dresser",
+        "Loves a crowd"
+      ],
       "blurb": "Starlings pick up sounds from the world around them: other birds, whistles, even car alarms and phone ringtones, and mix them into their songs."
     },
     "origin": "About a hundred were let go in Central Park in 1890. Today there are millions across North America, all from that one small group.",
@@ -133,7 +169,14 @@
     },
     "sceneSpot": "wire",
     "spotHint": "Look along the wires at dusk for a row of chattering, shiny dark birds.",
-    "seasons": ["spring", "summer", "fall", "winter"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 14850,
+    "ebirdCode": "eursta"
   },
   {
     "id": "mourning-dove",
@@ -146,7 +189,11 @@
     "tint": "pinkTint",
     "personality": {
       "type": "The Gentle Romantic",
-      "traits": ["Soft-spoken", "Always in pairs", "Calm under pressure"],
+      "traits": [
+        "Soft-spoken",
+        "Always in pairs",
+        "Calm under pressure"
+      ],
       "blurb": "Mourning doves sit close together on the wire, preening each other. That slow, sad hoo-oo-oo is actually a love song."
     },
     "origin": "They've always been here. Mourning doves are native birds who did well as forests turned into towns, fields and backyards.",
@@ -167,7 +214,14 @@
     },
     "sceneSpot": "wire",
     "spotHint": "Listen at dawn for a soft, slow hoo-OO-oo-oo, then look for two plump birds on a wire.",
-    "seasons": ["spring", "summer", "fall", "winter"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 3454,
+    "ebirdCode": "moudov"
   },
   {
     "id": "american-robin",
@@ -180,7 +234,11 @@
     "tint": "pinkTint",
     "personality": {
       "type": "The Early Riser",
-      "traits": ["First to sing", "Worm detective", "Loves the rain"],
+      "traits": [
+        "First to sing",
+        "Worm detective",
+        "Loves the rain"
+      ],
       "blurb": "Robins are often the first voice of the dawn chorus. On the lawn they run, stop, tilt their head and pounce on a worm."
     },
     "origin": "Native all across North America. They were named by early settlers after the much smaller robin back in Europe, because of the orange chest.",
@@ -201,20 +259,31 @@
     },
     "sceneSpot": "sidewalk",
     "spotHint": "After a rain, check patches of grass for an orange-chested bird running and stopping.",
-    "seasons": ["spring", "summer", "fall", "winter"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 12727,
+    "ebirdCode": "amerob"
   },
   {
     "id": "herring-gull",
     "friendlyName": "Gulls",
-    "commonName": "Herring Gull",
-    "scientificName": "Larus argentatus",
+    "commonName": "American Herring Gull",
+    "scientificName": "Larus smithsonianus",
     "collectiveNoun": "a colony",
     "group": "birds",
     "icon": "bird",
     "tint": "blueTint",
     "personality": {
       "type": "The Clever Opportunist",
-      "traits": ["Problem solver", "Loud opinions", "Rides the wind"],
+      "traits": [
+        "Problem solver",
+        "Loud opinions",
+        "Rides the wind"
+      ],
       "blurb": "Gulls figure things out. They drop clams onto hard ground to crack them, and they watch people very closely for snacks."
     },
     "origin": "Native coastal birds. New York's rivers, harbor and beaches have always had gulls, and rooftops make good stand-in cliffs.",
@@ -235,7 +304,14 @@
     },
     "sceneSpot": "sky",
     "spotHint": "Look up near the water or over parking lots for big white-and-gray birds gliding.",
-    "seasons": ["spring", "summer", "fall", "winter"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 1578489,
+    "ebirdCode": "amhgul1"
   },
   {
     "id": "raccoon",
@@ -248,7 +324,11 @@
     "tint": "blueTint",
     "personality": {
       "type": "The Night Shift",
-      "traits": ["Clever hands", "Creature of habit", "Will open that"],
+      "traits": [
+        "Clever hands",
+        "Creature of habit",
+        "Will open that"
+      ],
       "blurb": "Raccoons feel the world through their front paws, which are super sensitive. They remember routes and solutions, and use them night after night."
     },
     "origin": "Native to North America. They lived in the forests here long before the city, and adapted to it better than almost anyone.",
@@ -269,7 +349,13 @@
     },
     "sceneSpot": "trashcan",
     "spotHint": "After dark, look along fences and near trash cans for a masked face.",
-    "seasons": ["spring", "summer", "fall", "winter"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 41663
   },
   {
     "id": "monarch",
@@ -282,7 +368,11 @@
     "tint": "yellow",
     "personality": {
       "type": "The Long-Haul Traveler",
-      "traits": ["Big dreamer", "Picky eater", "Goes the distance"],
+      "traits": [
+        "Big dreamer",
+        "Picky eater",
+        "Goes the distance"
+      ],
       "blurb": "The monarchs passing through in fall will fly all the way to the mountains of Mexico, a place none of them has ever been."
     },
     "origin": "Native to the Americas. Every fall, monarchs from the East head to the same forests in central Mexico, and their great-grandchildren come back north.",
@@ -303,7 +393,11 @@
     },
     "sceneSpot": "flowerbox",
     "spotHint": "In late summer and fall, watch flower boxes and park gardens for a big orange butterfly gliding.",
-    "seasons": ["summer", "fall"]
+    "seasons": [
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 48662
   },
   {
     "id": "red-tailed-hawk",
@@ -316,7 +410,11 @@
     "tint": "yellowTint",
     "personality": {
       "type": "The Patient Watcher",
-      "traits": ["Sits very still", "Sharp eyes", "Famous scream"],
+      "traits": [
+        "Sits very still",
+        "Sharp eyes",
+        "Famous scream"
+      ],
       "blurb": "A red-tail can sit on a ledge for an hour without moving, watching the ground below for a rat to step out."
     },
     "origin": "Native and common across North America. They've moved into the city, nesting on buildings and hunting the rats and pigeons here.",
@@ -337,7 +435,14 @@
     },
     "sceneSpot": "rooftop",
     "spotHint": "Look up at rooftop edges and light poles for a big bird sitting very still.",
-    "seasons": ["spring", "summer", "fall", "winter"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 5212,
+    "ebirdCode": "rethaw"
   },
   {
     "id": "blue-jay",
@@ -350,7 +455,11 @@
     "tint": "blueTint",
     "personality": {
       "type": "The Loud Gardener",
-      "traits": ["Bossy voice", "Plants oaks", "Mimics hawks"],
+      "traits": [
+        "Bossy voice",
+        "Plants oaks",
+        "Mimics hawks"
+      ],
       "blurb": "Jays bury acorns all over, and the ones they forget grow into oak trees. They also copy hawk calls, maybe to clear everyone else away."
     },
     "origin": "Native to eastern North America, at home anywhere there are tall trees and acorns.",
@@ -371,7 +480,14 @@
     },
     "sceneSpot": "tree",
     "spotHint": "Listen for a loud, bossy JAY! JAY! from the treetops.",
-    "seasons": ["spring", "summer", "fall", "winter"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 8229,
+    "ebirdCode": "blujay"
   },
   {
     "id": "dark-eyed-junco",
@@ -384,7 +500,11 @@
     "tint": "blueTint",
     "personality": {
       "type": "The Winter Guest",
-      "traits": ["Snowbird", "Ground hopper", "Flashy tail"],
+      "traits": [
+        "Snowbird",
+        "Ground hopper",
+        "Flashy tail"
+      ],
       "blurb": "Juncos spend summer in northern forests and come down for the winter. When they fly off, white feathers flash on both sides of the tail."
     },
     "origin": "Native birds of North America. They breed in Canada and the mountains, and spend the cold months here.",
@@ -405,7 +525,13 @@
     },
     "sceneSpot": "hedge",
     "spotHint": "From October to April, look under hedges for small slate-gray birds with white bellies.",
-    "seasons": ["fall", "winter", "spring"]
+    "seasons": [
+      "fall",
+      "winter",
+      "spring"
+    ],
+    "iNatTaxonId": 10094,
+    "ebirdCode": "daejun"
   },
   {
     "id": "virginia-opossum",
@@ -418,7 +544,11 @@
     "tint": "pinkTint",
     "personality": {
       "type": "The Quiet Cleaner",
-      "traits": ["Shy", "Eats leftovers", "Plays dead (for real)"],
+      "traits": [
+        "Shy",
+        "Eats leftovers",
+        "Plays dead (for real)"
+      ],
       "blurb": "Opossums wander at night, eating slugs, beetles, fallen fruit and scraps. When very scared, they faint without meaning to, and wake up when it's safe."
     },
     "origin": "North America's only marsupial, carrying babies in a pouch like a kangaroo. Their family has been around since the time of the dinosaurs.",
@@ -439,7 +569,13 @@
     },
     "sceneSpot": "fence",
     "spotHint": "After dark, look along fences and back alleys for a white face and a long bare tail.",
-    "seasons": ["spring", "summer", "fall", "winter"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 42652
   },
   {
     "id": "american-crow",
@@ -452,7 +588,11 @@
     "tint": "blueTint",
     "personality": {
       "type": "The Neighborhood Watch",
-      "traits": ["Remembers faces", "Family first", "Holds a grudge"],
+      "traits": [
+        "Remembers faces",
+        "Family first",
+        "Holds a grudge"
+      ],
       "blurb": "Crows recognize individual people and remember how they were treated. Families stick together, and last year's kids help raise the new chicks."
     },
     "origin": "Native across North America. Crows have lived alongside people for thousands of years, learning our routines.",
@@ -473,7 +613,14 @@
     },
     "sceneSpot": "rooftop",
     "spotHint": "Listen for a loud caw-caw from the rooftops, then look for big all-black birds.",
-    "seasons": ["spring", "summer", "fall", "winter"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 8021,
+    "ebirdCode": "amecro"
   },
   {
     "id": "white-throated-sparrow",
@@ -486,7 +633,11 @@
     "tint": "pinkTint",
     "personality": {
       "type": "The Wistful Singer",
-      "traits": ["Whistles a tune", "Winter visitor", "Two styles"],
+      "traits": [
+        "Whistles a tune",
+        "Winter visitor",
+        "Two styles"
+      ],
       "blurb": "Their thin whistled song sounds like Oh sweet Canada, Canada, Canada. Some have white head stripes and some have tan ones."
     },
     "origin": "Native birds who raise their families in the forests of Canada and spend the winter in parks and backyards down here.",
@@ -507,7 +658,13 @@
     },
     "sceneSpot": "hedge",
     "spotHint": "From October to May, listen for a thin whistled song from low bushes in parks.",
-    "seasons": ["fall", "winter", "spring"]
+    "seasons": [
+      "fall",
+      "winter",
+      "spring"
+    ],
+    "iNatTaxonId": 9184,
+    "ebirdCode": "whtspa"
   },
   {
     "id": "chimney-swift",
@@ -520,7 +677,11 @@
     "tint": "yellowTint",
     "personality": {
       "type": "The Sky Acrobat",
-      "traits": ["Always flying", "Can't perch", "Twitters nonstop"],
+      "traits": [
+        "Always flying",
+        "Can't perch",
+        "Twitters nonstop"
+      ],
       "blurb": "Swifts eat, drink and even bathe while flying. Their feet can't grip a branch, so when they rest, they cling to the inside of a chimney."
     },
     "origin": "Native birds who once roosted in hollow trees. When forests were cut down, they moved into chimneys instead.",
@@ -541,7 +702,12 @@
     },
     "sceneSpot": "sky",
     "spotHint": "From late April to September, look up for tiny cigar-shaped birds zipping and twittering.",
-    "seasons": ["spring", "summer"]
+    "seasons": [
+      "spring",
+      "summer"
+    ],
+    "iNatTaxonId": 6571,
+    "ebirdCode": "chiswi"
   },
   {
     "id": "moths",
@@ -554,7 +720,11 @@
     "tint": "yellowTint",
     "personality": {
       "type": "The Night Gardener",
-      "traits": ["Night pollinator", "Lost in the light", "Fuzzy"],
+      "traits": [
+        "Night pollinator",
+        "Lost in the light",
+        "Fuzzy"
+      ],
       "blurb": "While bees sleep, moths visit flowers at night and spread their pollen. Many are as colorful as butterflies up close."
     },
     "origin": "There are many kinds of moths in the city, most of them native. They are older than butterflies, which actually evolved from moths.",
@@ -575,6 +745,12 @@
     },
     "sceneSpot": "lamp",
     "spotHint": "On a warm night, look at the glow around a streetlight or porch light.",
-    "seasons": ["spring", "summer", "fall"]
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 47157,
+    "iNatExcludeTaxonId": 47224
   }
 ]

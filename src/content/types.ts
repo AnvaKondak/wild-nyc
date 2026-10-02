@@ -45,7 +45,12 @@ export type Species = {
   spotHint: string;
   /** When they're around. */
   seasons: Season[];
-  iNatTaxonId?: number;
+  /** iNaturalist taxon to count. For a group (moths) it's the parent taxon… */
+  iNatTaxonId: number;
+  /** …minus this one (butterflies), when set. */
+  iNatExcludeTaxonId?: number;
+  /** eBird species code, for birds. */
+  ebirdCode?: string;
 };
 
 export type StorySlide = {
