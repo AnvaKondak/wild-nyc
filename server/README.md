@@ -29,8 +29,10 @@ curl localhost:3000/v1/neighborhoods/dr5rke
 bin/rails cells:warm           # optional: pre-fetch the app's bundled neighborhoods
 ```
 
-Optional: `export EBIRD_API_KEY=...` (free from ebird.org/api/keygen) before starting
-the worker and server to add eBird. Without it the server uses iNaturalist only.
+Optional: add eBird with a free key from ebird.org/api/keygen. Put
+`EBIRD_API_KEY=...` in `server/api/.env` (git-ignored; loaded in development, never in
+tests) or export it before starting the worker and server. Without it the server uses
+iNaturalist only.
 
 ## Tests
 

@@ -1,5 +1,17 @@
 require_relative "boot"
 
+# Local secrets (git-ignored api/.env), e.g. EBIRD_API_KEY=... Real environment
+# variables win. Not loaded in tests, so tests never depend on someone's key.
+env_file = File.expand_path("../.env", __dir__)
+if File.exist?(env_file) && ENV.fetch("RAILS_ENV", "development") != "test"
+  File.foreach(env_file) do |line|
+    key, value = line.strip.split("=", 2)
+    next if key.nil? || value.nil? || key.start_with?("#")
+
+    ENV[key] ||= value
+  end
+end
+
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
