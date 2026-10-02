@@ -23,6 +23,14 @@ class GeohashTest < ActiveSupport::TestCase
     assert(block.all? { |h| h.match?(Geohash::CELL_FORMAT) })
   end
 
+  test "block bounds cover all nine cells" do
+    box = Geohash.block_bounds("dr5rke")
+    Geohash.block("dr5rke").each do |h|
+      lat, lng = Geohash.bounds(h).center
+      assert(box.south < lat && lat < box.north && box.west < lng && lng < box.east)
+    end
+  end
+
   test "cell format" do
     assert "dr5rke".match?(Geohash::CELL_FORMAT)
     refute "dr5rk".match?(Geohash::CELL_FORMAT)

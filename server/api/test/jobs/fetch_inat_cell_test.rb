@@ -11,8 +11,8 @@ class FetchInatCellTest < ActiveSupport::TestCase
 
   teardown { FetchInatCell.client = nil }
 
-  def counts(species)
-    @series.range({ cell: "dr5rke", species: species, source: "inat" }).to_h { |p| [TB.to_date(p.time).iso8601, p.value] }
+  def counts(species, cell: "dr5rke")
+    @series.range({ cell: cell, species: species, source: "inat" }).to_h { |p| [TB.to_date(p.time).iso8601, p.value] }
   end
 
   test "stores daily counts per species, and nothing else" do
@@ -23,14 +23,24 @@ class FetchInatCellTest < ActiveSupport::TestCase
     assert_equal({ "2026-09-28" => 2 }, counts("rock-pigeon"))
     # The hawk's species is obscured by iNaturalist: never placed in a cell.
     assert_equal({}, counts("red-tailed-hawk"))
-    # The sparrow was just outside the cell.
+    # The sparrow was just north of the cell, so it counts for that neighbor.
     assert_equal({}, counts("house-sparrow"))
+    assert_equal({ "2026-09-30" => 1 }, counts("house-sparrow", cell: "dr5rks"))
     # A moth counts as "moths"; the Painted Lady butterfly doesn't; the Monarch is a Monarch.
     assert_equal({ "2026-09-30" => 1 }, counts("moths"))
     assert_equal({ "2026-09-30" => 1 }, counts("monarch"))
 
     tags = @series.keys.map(&:tags)
     assert(tags.all? { |t| t.keys.sort == %w[cell source species] }, "only cell, species and source are stored")
+  end
+
+  test "asks once for the whole 3x3 block" do
+    FetchInatCell.new.perform(cell: "dr5rke", today: "2026-10-01")
+    assert_equal 1, @http.requests.size
+    params = URI.decode_www_form(@http.requests.first.first.query).to_h
+    block = Geohash.block_bounds("dr5rke")
+    assert_in_delta block.south, params["swlat"].to_f, 1e-9
+    assert_in_delta block.east, params["nelng"].to_f, 1e-9
   end
 
   test "first run fetches a year, later runs a month" do

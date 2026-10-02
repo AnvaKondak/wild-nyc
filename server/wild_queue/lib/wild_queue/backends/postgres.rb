@@ -135,12 +135,12 @@ module WildQueue
       end
 
       def dead
-        @conn.exec("SELECT * FROM wild_queue_jobs WHERE state = 'dead' ORDER BY id").map { |r| record(r) }
+        query("SELECT * FROM wild_queue_jobs WHERE state = 'dead' ORDER BY id").map { |r| record(r) }
       end
 
       def counts
-        @conn.exec("SELECT state, count(*) AS n FROM wild_queue_jobs GROUP BY state")
-             .to_h { |r| [r["state"], Integer(r["n"])] }
+        query("SELECT state, count(*) AS n FROM wild_queue_jobs GROUP BY state")
+          .to_h { |r| [r["state"], Integer(r["n"])] }
       end
 
       private
@@ -150,8 +150,16 @@ module WildQueue
       end
 
       def first(sql, params)
-        @conn.exec_params(sql, params).first
+        query(sql, params).first
       end
+
+      # Results always come back as plain strings, whatever type mapping the
+      # connection was set up with (ActiveRecord's raw connection decodes types).
+      def query(sql, params = [])
+        @conn.exec_params(sql, params).map_types!(ALL_STRINGS)
+      end
+
+      ALL_STRINGS = PG::TypeMapAllStrings.new
 
       # Rows come back as strings; turn one into a Record.
       def record(row)

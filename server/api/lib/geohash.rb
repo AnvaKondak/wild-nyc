@@ -64,4 +64,11 @@ module Geohash
     dlng = b.east - b.west
     [-1, 0, 1].product([-1, 0, 1]).map { |dy, dx| encode(lat + dy * dlat, lng + dx * dlng, hash.length) }.uniq
   end
+
+  # One box around the whole block, for a single API query.
+  def block_bounds(hash)
+    boxes = block(hash).map { |h| bounds(h) }
+    Bounds.new(south: boxes.map(&:south).min, west: boxes.map(&:west).min,
+               north: boxes.map(&:north).max, east: boxes.map(&:east).max)
+  end
 end
