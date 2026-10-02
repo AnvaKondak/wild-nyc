@@ -1,0 +1,8 @@
+[
+  { "id": "fall-leaves", "season": "fall", "who": "Insects + songbirds", "title": "Leave the leaves", "why": "Fallen leaves shelter the insects that sparrows and other birds eat through the winter." },
+  { "id": "fall-lights", "season": "fall", "who": "Migrating birds", "title": "Lights out on big nights", "why": "Fall migration is on. Dark windows mean fewer birds crashing into glass." },
+  { "id": "fall-feet", "season": "fall", "who": "Pigeons", "title": "Check pigeons' feet for string", "why": "String wrapped around toes cuts off circulation. The Wild Bird Fund can help if you spot one." },
+  { "id": "fall-bread", "season": "fall", "who": "Ducks + geese", "title": "Skip the bread", "why": "It fills them up without feeding them. Let them forage for what their bodies need." },
+  { "id": "fall-poison", "season": "fall", "who": "Rats + hawks + owls", "title": "Say no to rat poison", "why": "Hawks and owls eat poisoned rats and die too. Sealing up gaps works without the suffering." },
+  { "id": "fall-fledgling", "season": "fall", "who": "Baby birds", "title": "Pause before rescuing a fledgling", "why": "Most babies on the ground are fledglings learning to fly, with parents nearby. Watch from a distance first." }
+]

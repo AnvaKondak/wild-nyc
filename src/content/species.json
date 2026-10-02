@@ -1,0 +1,580 @@
+[
+  {
+    "id": "rock-pigeon",
+    "friendlyName": "Pigeons",
+    "commonName": "Rock Pigeon",
+    "scientificName": "Columba livia",
+    "collectiveNoun": "a kit",
+    "group": "birds",
+    "icon": "bird",
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Loyal Homebody",
+      "traits": ["Mates for life", "Remembers faces", "Loves a ledge"],
+      "blurb": "Pairs usually stay together and come back to the same ledge year after year. Both parents feed their chicks a milk they make in their own throats."
+    },
+    "origin": "Wild rock doves nested on sea cliffs. People tamed them thousands of years ago, carried them everywhere, then let them go. To a pigeon, your building is a cliff.",
+    "home": "The ledges are home. To a pigeon, a building ledge feels like the sea cliffs their ancestors nested on.",
+    "rightNow": {
+      "spring": "Courting season. Watch a male puff up, spin in a circle and bow, cooing, while she pretends not to notice.",
+      "summer": "Raising chick after chick. A pair can fit in several families a year, taking turns on the eggs.",
+      "fall": "Still nesting. City pigeons can raise babies in any season, so some ledges near you have eggs on them even now.",
+      "winter": "Huddling. They fluff their feathers into a down jacket and press together on sunny ledges out of the wind."
+    },
+    "funFact": {
+      "title": "Why you never see baby pigeons",
+      "body": "They stay tucked in the nest until they're nearly grown. By the time you see one, it just looks like a slightly scruffy adult."
+    },
+    "kindness": {
+      "title": "Look at their feet.",
+      "body": "String and hair get wrapped around pigeon toes and slowly cut off circulation. If you spot one, the Wild Bird Fund can help."
+    },
+    "sceneSpot": "ledge",
+    "spotHint": "Look up at building ledges, window air conditioners and the underside of train bridges.",
+    "seasons": ["spring", "summer", "fall", "winter"]
+  },
+  {
+    "id": "house-sparrow",
+    "friendlyName": "Sparrows",
+    "commonName": "House Sparrow",
+    "scientificName": "Passer domesticus",
+    "collectiveNoun": "a host",
+    "group": "birds",
+    "icon": "bird",
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Chatty Gang",
+      "traits": ["Never alone", "Loves a dust bath", "Talks nonstop"],
+      "blurb": "Sparrows do everything as a group: eat, bathe, argue, nap. The constant chirping is how they keep track of who's where."
+    },
+    "origin": "Brought over from England in the 1850s and let go in Brooklyn, in the hope they would eat caterpillars. They liked the city so much they spread across the whole continent.",
+    "home": "The hedge is their clubhouse. They move as a group and chatter nonstop to keep track of each other.",
+    "rightNow": {
+      "spring": "Building messy nests in any gap they can find: signs, traffic lights, holes in old brick.",
+      "summer": "The block is full of fluffy young sparrows following their parents around, wings fluttering, begging loudly.",
+      "fall": "Dust-bathing by the curb on dry days to keep their feathers clean and bug-free.",
+      "winter": "Tucked deep in the hedge together, puffed up into little round balls to stay warm."
+    },
+    "funFact": {
+      "title": "They take baths in dirt",
+      "body": "A sparrow wriggles into dry dust and flicks it through its feathers. It scrubs out oil and tiny bugs, like a dry shampoo."
+    },
+    "kindness": {
+      "title": "Let the hedge grow shaggy.",
+      "body": "A thick, untrimmed hedge is a safe place to hide from hawks and cold wind. If you can, wait until fall to trim."
+    },
+    "sceneSpot": "hedge",
+    "spotHint": "Listen for nonstop chirping coming from inside a hedge or bush.",
+    "seasons": ["spring", "summer", "fall", "winter"]
+  },
+  {
+    "id": "eastern-gray-squirrel",
+    "friendlyName": "Squirrels",
+    "commonName": "Eastern Gray Squirrel",
+    "scientificName": "Sciurus carolinensis",
+    "collectiveNoun": "a scurry",
+    "group": "furry",
+    "icon": "squirrel",
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Busy Planner",
+      "traits": ["Always prepping", "Great memory", "A bit of a trickster"],
+      "blurb": "A squirrel can bury thousands of nuts in a fall, each in its own spot, and find many of them again months later by memory and smell."
+    },
+    "origin": "Gray squirrels are from here. The forests that once covered the city were their home, and they came back to the parks in the 1800s once trees were planted again.",
+    "home": "The big tree is home base. They nest high up in a ball of leaves called a drey.",
+    "rightNow": {
+      "spring": "New babies are tucked in the drey. Moms dash back and forth between feeding and keeping watch.",
+      "summer": "Lazy afternoons. On hot days they flatten out on a cool branch, legs spread, belly down.",
+      "fall": "Burying nuts in every planter on the block. The forgotten ones become trees.",
+      "winter": "Chase season. Those wild loops around the tree trunk are squirrels courting."
+    },
+    "funFact": {
+      "title": "They fake it when you're watching",
+      "body": "If a squirrel thinks someone is watching, it may dig a hole, pretend to drop a nut, and cover up nothing at all. The real stash goes somewhere else."
+    },
+    "kindness": {
+      "title": "Skip the junk food.",
+      "body": "Bread, chips and candy fill them up without the nutrients they need. Unsalted nuts in the shell are a treat, now and then."
+    },
+    "sceneSpot": "tree",
+    "spotHint": "Look for a ball of leaves high in a tree, and listen for scrabbling claws on bark.",
+    "seasons": ["spring", "summer", "fall", "winter"]
+  },
+  {
+    "id": "european-starling",
+    "friendlyName": "Starlings",
+    "commonName": "European Starling",
+    "scientificName": "Sturnus vulgaris",
+    "collectiveNoun": "a murmuration",
+    "group": "birds",
+    "icon": "bird",
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Impressionist",
+      "traits": ["Copies sounds", "Shiny dresser", "Loves a crowd"],
+      "blurb": "Starlings pick up sounds from the world around them: other birds, whistles, even car alarms and phone ringtones, and mix them into their songs."
+    },
+    "origin": "About a hundred were let go in Central Park in 1890. Today there are millions across North America, all from that one small group.",
+    "home": "They hang out on the wire, chattering and doing impressions of car alarms.",
+    "rightNow": {
+      "spring": "Dressed up in glossy purple and green with bright yellow beaks, singing from rooftops to impress a mate.",
+      "summer": "Plain brown youngsters are out of the nest, following their parents across lawns and begging.",
+      "fall": "Gathering in big chattering groups on the wires at dusk before flying to a shared roost.",
+      "winter": "Wearing their winter coat: dark feathers covered in white speckles, like stars."
+    },
+    "funFact": {
+      "title": "A murmuration is a dance",
+      "body": "Thousands of starlings can swirl through the sky as one shape. Each bird is just watching its seven closest neighbors."
+    },
+    "kindness": {
+      "title": "Wait to seal the gaps.",
+      "body": "Starlings nest in holes in buildings. If you need to close one up, wait until the chicks have left in summer."
+    },
+    "sceneSpot": "wire",
+    "spotHint": "Look along the wires at dusk for a row of chattering, shiny dark birds.",
+    "seasons": ["spring", "summer", "fall", "winter"]
+  },
+  {
+    "id": "mourning-dove",
+    "friendlyName": "Mourning Doves",
+    "commonName": "Mourning Dove",
+    "scientificName": "Zenaida macroura",
+    "collectiveNoun": "a piteousness",
+    "group": "birds",
+    "icon": "bird",
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Gentle Romantic",
+      "traits": ["Soft-spoken", "Always in pairs", "Calm under pressure"],
+      "blurb": "Mourning doves sit close together on the wire, preening each other. That slow, sad hoo-oo-oo is actually a love song."
+    },
+    "origin": "They've always been here. Mourning doves are native birds who did well as forests turned into towns, fields and backyards.",
+    "home": "That soft hooting at dawn is them, sitting side by side on the wire.",
+    "rightNow": {
+      "spring": "Building the flimsiest nest you've ever seen: a few twigs on a fire escape, somehow enough.",
+      "summer": "Raising family after family. A pair can have several broods in one summer.",
+      "fall": "Gathering in small groups to pick seeds off the ground in parks and yards.",
+      "winter": "Sitting puffed up on sunny wires, soaking in every bit of warmth."
+    },
+    "funFact": {
+      "title": "Their wings whistle",
+      "body": "When a mourning dove takes off, its wings make a squeaky whistle. It may work as an alarm, telling others it's time to go."
+    },
+    "kindness": {
+      "title": "Let the fire escape nest be.",
+      "body": "If doves nest on your fire escape or planter, give them a few weeks of peace. The chicks leave in about two weeks."
+    },
+    "sceneSpot": "wire",
+    "spotHint": "Listen at dawn for a soft, slow hoo-OO-oo-oo, then look for two plump birds on a wire.",
+    "seasons": ["spring", "summer", "fall", "winter"]
+  },
+  {
+    "id": "american-robin",
+    "friendlyName": "Robins",
+    "commonName": "American Robin",
+    "scientificName": "Turdus migratorius",
+    "collectiveNoun": "a round",
+    "group": "birds",
+    "icon": "bird",
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Early Riser",
+      "traits": ["First to sing", "Worm detective", "Loves the rain"],
+      "blurb": "Robins are often the first voice of the dawn chorus. On the lawn they run, stop, tilt their head and pounce on a worm."
+    },
+    "origin": "Native all across North America. They were named by early settlers after the much smaller robin back in Europe, because of the orange chest.",
+    "home": "They show up on the grass and sidewalk edges right after it rains.",
+    "rightNow": {
+      "spring": "Singing before sunrise and laying sky-blue eggs in a neat mud-lined cup.",
+      "summer": "Fledglings with spotted chests hop around on the ground while parents bring them worms.",
+      "fall": "Switching from worms to berries and gathering in loose flocks in the trees.",
+      "winter": "Many stay all winter. They go quiet, travel in flocks and eat berries left on the trees."
+    },
+    "funFact": {
+      "title": "They hunt by sight",
+      "body": "That head tilt isn't listening. A robin's eyes are on the sides of its head, so it turns to look at the ground with one eye."
+    },
+    "kindness": {
+      "title": "Skip lawn chemicals.",
+      "body": "Robins eat what lives in the soil. A lawn without pesticides keeps the worms, and the robins, healthy."
+    },
+    "sceneSpot": "sidewalk",
+    "spotHint": "After a rain, check patches of grass for an orange-chested bird running and stopping.",
+    "seasons": ["spring", "summer", "fall", "winter"]
+  },
+  {
+    "id": "herring-gull",
+    "friendlyName": "Gulls",
+    "commonName": "Herring Gull",
+    "scientificName": "Larus argentatus",
+    "collectiveNoun": "a colony",
+    "group": "birds",
+    "icon": "bird",
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Clever Opportunist",
+      "traits": ["Problem solver", "Loud opinions", "Rides the wind"],
+      "blurb": "Gulls figure things out. They drop clams onto hard ground to crack them, and they watch people very closely for snacks."
+    },
+    "origin": "Native coastal birds. New York's rivers, harbor and beaches have always had gulls, and rooftops make good stand-in cliffs.",
+    "home": "Always overhead, always riding the wind off the river.",
+    "rightNow": {
+      "spring": "Nesting on flat rooftops and harbor islands. They will loudly defend their spot.",
+      "summer": "Mottled brown youngsters are out, following their parents and whining for food.",
+      "fall": "Gathering along the waterfront as cooler air brings more gulls in from the north.",
+      "winter": "More gulls than any other season. Look for big mixed groups standing on the ice or the piers."
+    },
+    "funFact": {
+      "title": "The red spot is a doorbell",
+      "body": "Adult herring gulls have a red spot on their beak. Chicks peck at it, and that tells the parent to bring up food."
+    },
+    "kindness": {
+      "title": "Pick up fishing line.",
+      "body": "Lost fishing line tangles gulls' legs and wings. If you see some on the pier or beach, put it in the trash."
+    },
+    "sceneSpot": "sky",
+    "spotHint": "Look up near the water or over parking lots for big white-and-gray birds gliding.",
+    "seasons": ["spring", "summer", "fall", "winter"]
+  },
+  {
+    "id": "raccoon",
+    "friendlyName": "Raccoons",
+    "commonName": "Raccoon",
+    "scientificName": "Procyon lotor",
+    "collectiveNoun": "a gaze",
+    "group": "furry",
+    "icon": "critter",
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Night Shift",
+      "traits": ["Clever hands", "Creature of habit", "Will open that"],
+      "blurb": "Raccoons feel the world through their front paws, which are super sensitive. They remember routes and solutions, and use them night after night."
+    },
+    "origin": "Native to North America. They lived in the forests here long before the city, and adapted to it better than almost anyone.",
+    "home": "The night shift. You know where to find them.",
+    "rightNow": {
+      "spring": "Babies are born in hidden dens in tree holes and old buildings. Moms may forage by day to keep up.",
+      "summer": "Moms lead lines of youngsters on their first rounds of the neighborhood.",
+      "fall": "Eating everything they can to build fat for winter.",
+      "winter": "They don't hibernate, but on the coldest nights they stay curled up in the den for days."
+    },
+    "funFact": {
+      "title": "Daytime doesn't mean sick",
+      "body": "A raccoon out in daylight is usually just a busy mom or a hungry youngster. Give them space and let them go about their day."
+    },
+    "kindness": {
+      "title": "Put a lid on it.",
+      "body": "A trash can with a tight lid keeps raccoons safe from sharp edges, spoiled food and run-ins with people."
+    },
+    "sceneSpot": "trashcan",
+    "spotHint": "After dark, look along fences and near trash cans for a masked face.",
+    "seasons": ["spring", "summer", "fall", "winter"]
+  },
+  {
+    "id": "monarch",
+    "friendlyName": "Monarchs",
+    "commonName": "Monarch Butterfly",
+    "scientificName": "Danaus plexippus",
+    "collectiveNoun": "a kaleidoscope",
+    "group": "bugs",
+    "icon": "bug",
+    "tint": "yellow",
+    "personality": {
+      "type": "The Long-Haul Traveler",
+      "traits": ["Big dreamer", "Picky eater", "Goes the distance"],
+      "blurb": "The monarchs passing through in fall will fly all the way to the mountains of Mexico, a place none of them has ever been."
+    },
+    "origin": "Native to the Americas. Every fall, monarchs from the East head to the same forests in central Mexico, and their great-grandchildren come back north.",
+    "home": "Just passing through, stopping at every flower box on the way.",
+    "rightNow": {
+      "spring": "Working their way north, generation by generation. The first ones reach the city in late spring.",
+      "summer": "Laying eggs on milkweed, the only plant their caterpillars can eat.",
+      "fall": "Passing through on the way to Mexico, stopping to drink from late flowers.",
+      "winter": "Far away in Mexico, clustered by the millions on fir trees in the mountains."
+    },
+    "funFact": {
+      "title": "Poison is their armor",
+      "body": "Monarch caterpillars eat milkweed and keep its bitter chemicals in their bodies. Birds learn fast that orange-and-black tastes awful."
+    },
+    "kindness": {
+      "title": "Plant milkweed.",
+      "body": "A pot of native milkweed on a stoop or fire escape gives monarchs a place to lay eggs. Late flowers fuel their trip south."
+    },
+    "sceneSpot": "flowerbox",
+    "spotHint": "In late summer and fall, watch flower boxes and park gardens for a big orange butterfly gliding.",
+    "seasons": ["summer", "fall"]
+  },
+  {
+    "id": "red-tailed-hawk",
+    "friendlyName": "Red-tailed Hawks",
+    "commonName": "Red-tailed Hawk",
+    "scientificName": "Buteo jamaicensis",
+    "collectiveNoun": "a kettle",
+    "group": "birds",
+    "icon": "bird",
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Patient Watcher",
+      "traits": ["Sits very still", "Sharp eyes", "Famous scream"],
+      "blurb": "A red-tail can sit on a ledge for an hour without moving, watching the ground below for a rat to step out."
+    },
+    "origin": "Native and common across North America. They've moved into the city, nesting on buildings and hunting the rats and pigeons here.",
+    "home": "Up on the rooftops and light poles, watching the street below.",
+    "rightNow": {
+      "spring": "Sitting on eggs in big stick nests on building ledges and in tall trees.",
+      "summer": "Young hawks are learning to hunt, and screaming for their parents while they figure it out.",
+      "fall": "Hawks from the north stream over the city on their way south. The locals stay put.",
+      "winter": "Courting. Pairs soar together and sometimes lock talons in the air."
+    },
+    "funFact": {
+      "title": "That movie eagle is a hawk",
+      "body": "The fierce scream you hear when an eagle appears in a movie is usually a red-tailed hawk. Real bald eagles sound more like giggles."
+    },
+    "kindness": {
+      "title": "Say no to rat poison.",
+      "body": "Hawks eat poisoned rats and get poisoned too. Sealing gaps and cleaning up food keeps rats away without hurting hawks."
+    },
+    "sceneSpot": "rooftop",
+    "spotHint": "Look up at rooftop edges and light poles for a big bird sitting very still.",
+    "seasons": ["spring", "summer", "fall", "winter"]
+  },
+  {
+    "id": "blue-jay",
+    "friendlyName": "Blue Jays",
+    "commonName": "Blue Jay",
+    "scientificName": "Cyanocitta cristata",
+    "collectiveNoun": "a party",
+    "group": "birds",
+    "icon": "bird",
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Loud Gardener",
+      "traits": ["Bossy voice", "Plants oaks", "Mimics hawks"],
+      "blurb": "Jays bury acorns all over, and the ones they forget grow into oak trees. They also copy hawk calls, maybe to clear everyone else away."
+    },
+    "origin": "Native to eastern North America, at home anywhere there are tall trees and acorns.",
+    "home": "Up in the treetops, announcing everything that happens below.",
+    "rightNow": {
+      "spring": "Unusually quiet. Jays get secretive around their nests and slip in and out without a sound.",
+      "summer": "Families travel together through the trees, the young ones copying everything.",
+      "fall": "Burying acorns, and some flying south in loose flocks along the coast.",
+      "winter": "Bright blue against bare branches, and loud about it."
+    },
+    "funFact": {
+      "title": "They aren't really blue",
+      "body": "There's no blue color in a blue jay's feathers. Tiny structures inside scatter light so they look blue. Crush a feather and it turns brown."
+    },
+    "kindness": {
+      "title": "Keep an oak in mind.",
+      "body": "If your block has room for a new tree, ask for an oak. One oak feeds jays, squirrels and hundreds of kinds of insects."
+    },
+    "sceneSpot": "tree",
+    "spotHint": "Listen for a loud, bossy JAY! JAY! from the treetops.",
+    "seasons": ["spring", "summer", "fall", "winter"]
+  },
+  {
+    "id": "dark-eyed-junco",
+    "friendlyName": "Juncos",
+    "commonName": "Dark-eyed Junco",
+    "scientificName": "Junco hyemalis",
+    "collectiveNoun": "a flock",
+    "group": "birds",
+    "icon": "bird",
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Winter Guest",
+      "traits": ["Snowbird", "Ground hopper", "Flashy tail"],
+      "blurb": "Juncos spend summer in northern forests and come down for the winter. When they fly off, white feathers flash on both sides of the tail."
+    },
+    "origin": "Native birds of North America. They breed in Canada and the mountains, and spend the cold months here.",
+    "home": "Hopping under the hedge, picking at seeds on the ground.",
+    "rightNow": {
+      "spring": "Heading back north by April. Listen for a quick trill before they go.",
+      "summer": "Far up north in the forests of Canada, raising chicks.",
+      "fall": "Just arriving from Canada. Look for little gray birds hopping under bushes.",
+      "winter": "Settled in for the season, hopping around in small flocks under hedges."
+    },
+    "funFact": {
+      "title": "Why people call them snowbirds",
+      "body": "They tend to show up just as the weather turns cold, and they look like they're wearing a dark gray sky over a snowy belly."
+    },
+    "kindness": {
+      "title": "Leave the leaves.",
+      "body": "Juncos scratch through leaf litter for seeds and bugs. A leafy corner under a bush is their favorite diner."
+    },
+    "sceneSpot": "hedge",
+    "spotHint": "From October to April, look under hedges for small slate-gray birds with white bellies.",
+    "seasons": ["fall", "winter", "spring"]
+  },
+  {
+    "id": "virginia-opossum",
+    "friendlyName": "Opossums",
+    "commonName": "Virginia Opossum",
+    "scientificName": "Didelphis virginiana",
+    "collectiveNoun": "a passel",
+    "group": "furry",
+    "icon": "critter",
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Quiet Cleaner",
+      "traits": ["Shy", "Eats leftovers", "Plays dead (for real)"],
+      "blurb": "Opossums wander at night, eating slugs, beetles, fallen fruit and scraps. When very scared, they faint without meaning to, and wake up when it's safe."
+    },
+    "origin": "North America's only marsupial, carrying babies in a pouch like a kangaroo. Their family has been around since the time of the dinosaurs.",
+    "home": "Moving along the fence at night, quiet and in no hurry.",
+    "rightNow": {
+      "spring": "Moms carry tiny babies in their pouch. Later the babies ride on her back.",
+      "summer": "Young opossums head off on their own, exploring yards and alleys for the first time.",
+      "fall": "Bulking up on fallen fruit and bugs before the cold.",
+      "winter": "A hard season. Their bare ears and tails can get frostbite, so they stay in the den on cold nights."
+    },
+    "funFact": {
+      "title": "Rabies is rare for them",
+      "body": "Opossums have a low body temperature, which makes it hard for the rabies virus to survive. They hiss to look scary, but they're mostly bluffing."
+    },
+    "kindness": {
+      "title": "Check the pouch.",
+      "body": "If you find an opossum hit by a car, there may be living babies in the pouch. Call a wildlife rehabber right away."
+    },
+    "sceneSpot": "fence",
+    "spotHint": "After dark, look along fences and back alleys for a white face and a long bare tail.",
+    "seasons": ["spring", "summer", "fall", "winter"]
+  },
+  {
+    "id": "american-crow",
+    "friendlyName": "Crows",
+    "commonName": "American Crow",
+    "scientificName": "Corvus brachyrhynchos",
+    "collectiveNoun": "a murder",
+    "group": "birds",
+    "icon": "bird",
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Neighborhood Watch",
+      "traits": ["Remembers faces", "Family first", "Holds a grudge"],
+      "blurb": "Crows recognize individual people and remember how they were treated. Families stick together, and last year's kids help raise the new chicks."
+    },
+    "origin": "Native across North America. Crows have lived alongside people for thousands of years, learning our routines.",
+    "home": "Up on the rooftops, keeping an eye on everything.",
+    "rightNow": {
+      "spring": "Nesting high in trees. Older siblings help bring food to the new chicks.",
+      "summer": "Noisy families with begging youngsters move through the neighborhood together.",
+      "fall": "Families join up into bigger groups and start flying to shared roosts at dusk.",
+      "winter": "Sleeping in huge roosts with thousands of other crows, then spreading out over the city every morning."
+    },
+    "funFact": {
+      "title": "Why it's called a murder",
+      "body": "The name is an old, spooky bit of English wordplay. Crows are actually caring family birds who even gather around a crow who has died."
+    },
+    "kindness": {
+      "title": "Be a friendly face.",
+      "body": "Crows remember people. Be calm and kind around them, and you may find yourself with neighbors who nod back."
+    },
+    "sceneSpot": "rooftop",
+    "spotHint": "Listen for a loud caw-caw from the rooftops, then look for big all-black birds.",
+    "seasons": ["spring", "summer", "fall", "winter"]
+  },
+  {
+    "id": "white-throated-sparrow",
+    "friendlyName": "White-throated Sparrows",
+    "commonName": "White-throated Sparrow",
+    "scientificName": "Zonotrichia albicollis",
+    "collectiveNoun": "a host",
+    "group": "birds",
+    "icon": "bird",
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Wistful Singer",
+      "traits": ["Whistles a tune", "Winter visitor", "Two styles"],
+      "blurb": "Their thin whistled song sounds like Oh sweet Canada, Canada, Canada. Some have white head stripes and some have tan ones."
+    },
+    "origin": "Native birds who raise their families in the forests of Canada and spend the winter in parks and backyards down here.",
+    "home": "In the bushes and leaf litter, scratching with both feet at once.",
+    "rightNow": {
+      "spring": "Singing their whistled song before heading back to Canada in May.",
+      "summer": "Up north in Canadian forests, raising chicks on the forest floor.",
+      "fall": "Just arrived for the winter. Listen for their thin whistled song in the bushes.",
+      "winter": "Scratching through the leaves in small groups, kicking backward with both feet."
+    },
+    "funFact": {
+      "title": "Two kinds, one bird",
+      "body": "White-striped and tan-striped birds are the same species, and they almost always pair up with the other style."
+    },
+    "kindness": {
+      "title": "Turn off the lights.",
+      "body": "They migrate at night, and bright city lights pull them off course into windows. Lights out on big migration nights helps."
+    },
+    "sceneSpot": "hedge",
+    "spotHint": "From October to May, listen for a thin whistled song from low bushes in parks.",
+    "seasons": ["fall", "winter", "spring"]
+  },
+  {
+    "id": "chimney-swift",
+    "friendlyName": "Chimney Swifts",
+    "commonName": "Chimney Swift",
+    "scientificName": "Chaetura pelagica",
+    "collectiveNoun": "a screaming",
+    "group": "birds",
+    "icon": "bird",
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Sky Acrobat",
+      "traits": ["Always flying", "Can't perch", "Twitters nonstop"],
+      "blurb": "Swifts eat, drink and even bathe while flying. Their feet can't grip a branch, so when they rest, they cling to the inside of a chimney."
+    },
+    "origin": "Native birds who once roosted in hollow trees. When forests were cut down, they moved into chimneys instead.",
+    "home": "Zipping over the rooftops, twittering, all summer long.",
+    "rightNow": {
+      "spring": "Back from South America in late April. Listen for twittering overhead.",
+      "summer": "Zipping over rooftops catching bugs, and nesting inside old chimneys.",
+      "fall": "Gone south. Before they left, hundreds swirled into big chimneys at dusk.",
+      "winter": "Far away in the Amazon, catching bugs over the rainforest."
+    },
+    "funFact": {
+      "title": "Glued-on nests",
+      "body": "A chimney swift builds its nest out of twigs and glues it to the chimney wall with its own sticky spit."
+    },
+    "kindness": {
+      "title": "Leave old chimneys open.",
+      "body": "If a building has an unused chimney, keeping it uncapped from spring to fall gives swifts a place to nest."
+    },
+    "sceneSpot": "sky",
+    "spotHint": "From late April to September, look up for tiny cigar-shaped birds zipping and twittering.",
+    "seasons": ["spring", "summer"]
+  },
+  {
+    "id": "moths",
+    "friendlyName": "Moths",
+    "commonName": "Moths",
+    "scientificName": "many kinds, order Lepidoptera",
+    "collectiveNoun": "an eclipse",
+    "group": "bugs",
+    "icon": "bug",
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Night Gardener",
+      "traits": ["Night pollinator", "Lost in the light", "Fuzzy"],
+      "blurb": "While bees sleep, moths visit flowers at night and spread their pollen. Many are as colorful as butterflies up close."
+    },
+    "origin": "There are many kinds of moths in the city, most of them native. They are older than butterflies, which actually evolved from moths.",
+    "home": "Circling the streetlight after dark.",
+    "rightNow": {
+      "spring": "Coming out of their cocoons as the nights get warmer.",
+      "summer": "Peak moth season. Hundreds of kinds are flying on warm nights.",
+      "fall": "The last ones are flying. Many will spend winter as cocoons tucked in fallen leaves.",
+      "winter": "Mostly asleep as eggs and cocoons, though a few winter moths fly on mild nights."
+    },
+    "funFact": {
+      "title": "Why they circle lights",
+      "body": "Moths keep their back to the brightest thing in the sky to know which way is up. A streetlight tricks them into flying in circles."
+    },
+    "kindness": {
+      "title": "Switch off the porch light.",
+      "body": "Every outdoor light you turn off at night saves moths from circling until they're worn out."
+    },
+    "sceneSpot": "lamp",
+    "spotHint": "On a warm night, look at the glow around a streetlight or porch light.",
+    "seasons": ["spring", "summer", "fall"]
+  }
+]

@@ -1,0 +1,21 @@
+[
+  { "id": "fall-dawn-chorus", "season": "fall", "period": "dawn", "kicker": "Listen", "title": "The dawn chorus is on", "body": "Robins and sparrows sing loudest in this first hour. Stop for ten seconds {where} and count the voices.", "speciesId": "american-robin" },
+  { "id": "fall-dawn-wts", "season": "fall", "period": "dawn", "kicker": "Just arrived", "title": "White-throated Sparrows are back", "body": "They flew down from Canada for the winter. Listen for their thin whistled song in the bushes.", "speciesId": "white-throated-sparrow", "places": ["park"] },
+  { "id": "fall-dawn-pigeons", "season": "fall", "period": "dawn", "kicker": "Right now", "title": "Pigeons are off to breakfast", "body": "They leave the ledges in little groups and land wherever crumbs were dropped last night.", "speciesId": "rock-pigeon" },
+  { "id": "fall-dawn-squirrels", "season": "fall", "period": "dawn", "kicker": "Right now", "title": "Squirrels are burying nuts", "body": "Morning is their busiest time. Watch one dig, drop, pat it down and look around to check who saw.", "speciesId": "eastern-gray-squirrel" },
+
+  { "id": "fall-midday-sparrows", "season": "fall", "period": "midday", "kicker": "Right now", "title": "Sparrows are dust-bathing", "body": "Look by the curb {where}. They roll in dry dirt to keep their feathers clean and bug-free.", "speciesId": "house-sparrow" },
+  { "id": "fall-midday-pigeons", "season": "fall", "period": "midday", "kicker": "Right now", "title": "Pigeons are sunbathing", "body": "One wing tilted up, eyes half closed. The warmth helps them shake out parasites and it just feels good.", "speciesId": "rock-pigeon" },
+  { "id": "fall-midday-squirrels", "season": "fall", "period": "midday", "kicker": "Right now", "title": "Squirrels are napping", "body": "After the morning rush, many curl up in their leafy nest, called a drey, until the afternoon.", "speciesId": "eastern-gray-squirrel" },
+
+  { "id": "fall-dusk-starlings", "season": "fall", "period": "dusk", "kicker": "Look up", "title": "Starlings are gathering", "body": "They line up on the wires {where}, chattering, before heading to a shared roost for the night.", "speciesId": "european-starling" },
+  { "id": "fall-dusk-crows", "season": "fall", "period": "dusk", "kicker": "Look up", "title": "Crows are commuting home", "body": "In fall, crows fly across the city at dusk to sleep together in big roosts.", "speciesId": "american-crow" },
+  { "id": "fall-dusk-pigeons", "season": "fall", "period": "dusk", "kicker": "Right now", "title": "Pigeons are back on the ledge", "body": "Pairs settle in side by side. Same ledge, same partner, every night.", "speciesId": "rock-pigeon" },
+
+  { "id": "fall-night-raccoons", "season": "fall", "period": "night", "kicker": "Right now", "title": "Raccoons start their rounds", "body": "The night shift is up. They check the same spots {where} in the same order most nights.", "speciesId": "raccoon" },
+  { "id": "fall-night-moths", "season": "fall", "period": "night", "kicker": "Look up", "title": "Moths are at the streetlights", "body": "Bright lights pull them off course. Every porch light you switch off helps.", "speciesId": "moths" },
+  { "id": "fall-night-migration", "season": "fall", "period": "night", "kicker": "Overhead", "title": "Birds are migrating in the dark", "body": "Right now songbirds are flying south over the city, calling softly to stay together.", "cta": "Lights out tonight", "link": "kindness" },
+
+  { "id": "fall-arriving", "season": "fall", "period": "any", "kind": "arriving", "kicker": "Fall chapter · Arriving", "title": "Juncos are on their way", "body": "These little gray snowbirds are flying down from Canada and will spend the winter hopping under your hedges. White-throated Sparrows are arriving too.", "speciesId": "dark-eyed-junco" },
+  { "id": "fall-goodbye", "season": "fall", "period": "any", "kind": "goodbye", "kicker": "Fall chapter · Goodbye", "title": "The chimney swifts have left", "body": "The tiny birds that zipped over the rooftops all summer are flying to South America. Monarchs are passing through on their way to Mexico.", "speciesId": "chimney-swift" }
+]
