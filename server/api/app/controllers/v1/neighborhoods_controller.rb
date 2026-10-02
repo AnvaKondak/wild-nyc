@@ -8,6 +8,10 @@ module V1
     # stops anyone using the API to make us crawl the whole planet.
     SERVICE_AREA = { south: 40.45, north: 40.95, west: -74.30, east: -73.65 }.freeze
 
+    # Lets the web build of the app (a different origin) read responses. The data is
+    # public and no cookies are involved, so any origin may read it.
+    after_action { response.set_header("Access-Control-Allow-Origin", "*") }
+
     def show
       cell = params[:cell].to_s.downcase
       return render_error(:unprocessable_content, "not a geohash-6 cell") unless cell.match?(Geohash::CELL_FORMAT)

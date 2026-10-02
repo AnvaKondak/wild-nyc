@@ -52,6 +52,11 @@ class NeighborhoodsTest < ActionDispatch::IntegrationTest
     assert_equal({ "recentDays" => 30, "yearDays" => 365 }, body["window"])
   end
 
+  test "the web app may read responses (CORS)" do
+    get "/v1/neighborhoods/dr5rke", headers: { "Origin" => "http://localhost:8081" }
+    assert_equal "*", response.headers["Access-Control-Allow-Origin"]
+  end
+
   test "rejects things that aren't cells" do
     get "/v1/neighborhoods/dr5rk"
     assert_response :unprocessable_content
