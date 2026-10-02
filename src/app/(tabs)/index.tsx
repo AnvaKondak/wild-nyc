@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { PanResponder, Pressable, Text, View } from 'react-native';
+import { PanResponder, Pressable, Text, useWindowDimensions, View } from 'react-native';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { Button } from '@/components/Button';
@@ -29,6 +29,9 @@ function tileFor(slide: StorySlide): string {
 
 export default function RightNow() {
   const router = useRouter();
+  const { height } = useWindowDimensions();
+  // Smaller phones get a smaller sticker so the story still fits without scrolling.
+  const stickerSize = Math.min(210, Math.round(height * 0.24));
   const now = useNow();
   const { state } = useAppState();
   const hood = currentNeighborhood(state);
@@ -130,7 +133,7 @@ export default function RightNow() {
         >
           <Sticker
             icon={species?.icon ?? 'bird'}
-            size={210}
+            size={stickerSize}
             tint={tileFor(slide)}
             rotate={-5}
             shadowColor={theme.shadow}

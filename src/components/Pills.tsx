@@ -33,6 +33,11 @@ export function PillRow({ items, selectedId, onSelect, onLongPress, onAdd, ink =
             onLongPress={onLongPress ? () => onLongPress(item.id) : undefined}
             accessibilityRole="button"
             accessibilityState={{ selected: on }}
+            accessibilityHint={onLongPress ? 'Long press to remove' : undefined}
+            accessibilityActions={onLongPress ? [{ name: 'longpress', label: 'Remove' }] : undefined}
+            onAccessibilityAction={(e) => {
+              if (e.nativeEvent.actionName === 'longpress') onLongPress?.(item.id);
+            }}
             hitSlop={{ top: 2, bottom: 2 }}
             style={{
               minHeight: 40,

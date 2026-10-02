@@ -4,6 +4,7 @@ import { buildStory } from '@/lib/story';
 import {
   getSpecies,
   hurtAnimalGuide,
+  kindnesses,
   kindnessesFor,
   placeKinds,
   places,
@@ -14,8 +15,7 @@ import {
   type Season,
 } from '..';
 
-// Seasons with finished content. Step 6 adds the rest.
-const READY_SEASONS: Season[] = ['fall'];
+const READY_SEASONS: Season[] = ['spring', 'summer', 'fall', 'winter'];
 const PERIODS: Period[] = ['dawn', 'midday', 'dusk', 'night'];
 const KINDS = Object.keys(placeKinds) as PlaceKind[];
 
@@ -33,10 +33,13 @@ describe('species', () => {
     expect(s.funFact.title && s.funFact.body && s.kindness.title && s.kindness.body).toBeTruthy();
   });
 
-  it('use "who", never "that", when referring to animals', () => {
-    // Loose check for the copy rule: no "a bird that", "animals that", etc.
-    const text = JSON.stringify(species);
-    expect(text).not.toMatch(/\b(bird|birds|animal|animals|squirrel|squirrels|one) that\b/i);
+});
+
+describe('copy', () => {
+  it('uses "who", never "that", for animals', () => {
+    // Loose check for the "animals are someone" rule across all content.
+    const text = JSON.stringify([species, stories, kindnesses]);
+    expect(text).not.toMatch(/\b(birds?|animals?|squirrels?|insects?|bugs?|moths?|butterfl(y|ies)|babies|one) that\b/i);
   });
 });
 
