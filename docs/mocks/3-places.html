@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My block</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#2F5BEA}a:hover{color:#1F3FB0}
+</style>
+</helmet>
+<div style="width: 390px; height: 1140px; box-sizing: border-box; background: #FAF7F2; color: #1A1A2E; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; position: relative; overflow: hidden">
+
+<header style="padding: 56px 22px 0; display: flex; justify-content: space-between; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #55546A">Who shares your street</div>
+<h1 style="margin: 0; font-family: 'Fraunces', serif; font-size: 36px; font-weight: 600; line-height: 1.05; text-shadow: 3px 3px 0 #FFD23F">Your <span style="font-style: italic; font-weight: 400; color: #FF6B9A">block</span></h1>
+</div>
+<button aria-label="Add a spot" style="width: 48px; height: 48px; border-radius: 24px; border: none; background: #2F5BEA; color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 3px 3px 0 #FF6B9A; cursor: pointer; padding: 0">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+</button>
+</header>
+
+<div style="padding: 14px 16px 0; display: flex; gap: 8px">
+<button aria-pressed="true" style="min-height: 40px; padding: 0 14px; border-radius: 20px; border: 1.5px solid #1A1A2E; background: #1A1A2E; color: #FAF7F2; font-family: inherit; font-size: 14px; font-weight: 600">Home</button>
+<button aria-pressed="false" style="min-height: 40px; padding: 0 14px; border-radius: 20px; border: 1.5px solid #1A1A2E; background: transparent; color: #1A1A2E; font-family: inherit; font-size: 14px; font-weight: 600">Work</button>
+<button aria-pressed="false" style="min-height: 40px; padding: 0 14px; border-radius: 20px; border: 1.5px solid #1A1A2E; background: transparent; color: #1A1A2E; font-family: inherit; font-size: 14px; font-weight: 600">Prospect Park</button>
+<button aria-label="Add a neighborhood" style="width: 40px; height: 40px; border-radius: 20px; border: 1.5px dashed #1A1A2E; background: transparent; color: #1A1A2E; display: flex; align-items: center; justify-content: center; padding: 0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+
+<div style="margin: 16px 16px 0; width: 358px; height: 400px; position: relative; border-radius: 22px; overflow: hidden; border: 2px solid #1A1A2E; box-sizing: border-box">
+<svg width="354" height="396" viewBox="0 0 358 400" fill="none" style="position: absolute; left: 0; top: 0">
+<rect width="358" height="400" fill="#FAF7F2"></rect>
+<g stroke="#1A1A2E" stroke-width="1.5">
+<rect x="8" y="22" width="82" height="150" fill="#FFE3EC"></rect>
+<rect x="96" y="40" width="80" height="132" fill="#DDE6FF"></rect>
+<rect x="182" y="30" width="82" height="142" fill="#FFF4C7"></rect>
+<rect x="270" y="18" width="80" height="154" fill="#FFE3EC"></rect>
+</g>
+<g fill="#2F5BEA" fill-opacity="0.85">
+<rect x="20" y="38" width="16" height="22"></rect><rect x="56" y="38" width="16" height="22"></rect>
+<rect x="20" y="78" width="16" height="22"></rect><rect x="56" y="78" width="16" height="22"></rect>
+<rect x="108" y="56" width="16" height="22"></rect><rect x="146" y="56" width="16" height="22"></rect>
+<rect x="108" y="96" width="16" height="22"></rect><rect x="146" y="96" width="16" height="22"></rect>
+<rect x="196" y="46" width="54" height="20"></rect>
+<rect x="282" y="34" width="16" height="22"></rect><rect x="320" y="34" width="16" height="22"></rect>
+<rect x="282" y="74" width="16" height="22"></rect><rect x="320" y="74" width="16" height="22"></rect>
+</g>
+<g stroke="#1A1A2E" stroke-width="1.2">
+<path d="M14 66h68M14 106h68M20 66l62 40"></path>
+</g>
+<g stroke="#1A1A2E" stroke-width="1.5">
+<path d="M182 112h82v20h-82z" fill="#FF6B9A"></path>
+</g>
+<g fill="#FFFFFF">
+<rect x="192" y="113" width="10" height="18"></rect><rect x="212" y="113" width="10" height="18"></rect><rect x="232" y="113" width="10" height="18"></rect><rect x="252" y="113" width="10" height="18"></rect>
+</g>
+<text x="223" y="104" text-anchor="middle" font-family="Instrument Sans, sans-serif" font-size="11" font-weight="600" fill="#1A1A2E">BODEGA</text>
+<rect x="210" y="140" width="26" height="32" fill="#1A1A2E"></rect>
+<rect x="0" y="172" width="358" height="46" fill="#F1EBDD"></rect>
+<rect x="0" y="218" width="358" height="98" fill="#E6E2D8"></rect>
+<path d="M10 267h40M70 267h40M130 267h40M190 267h40M250 267h40M310 267h40" stroke="#FFD23F" stroke-width="4" stroke-linecap="round"></path>
+<g fill="#FFFFFF"><rect x="318" y="224" width="34" height="8"></rect><rect x="318" y="240" width="34" height="8"></rect><rect x="318" y="256" width="34" height="8"></rect><rect x="318" y="272" width="34" height="8"></rect><rect x="318" y="288" width="34" height="8"></rect><rect x="318" y="304" width="34" height="8"></rect></g>
+<text x="150" y="300" text-anchor="middle" font-family="Instrument Sans, sans-serif" font-size="11" letter-spacing="2" font-weight="600" fill="#55546A">YOUR STREET</text>
+<rect x="0" y="316" width="358" height="84" fill="#F1EBDD"></rect>
+<circle cx="63" cy="196" r="40" fill="#FF6B9A" fill-opacity="0.55"></circle>
+<circle cx="58" cy="192" r="40" fill="#2F5BEA"></circle>
+<circle cx="303" cy="198" r="26" fill="#FF6B9A" fill-opacity="0.55"></circle>
+<circle cx="299" cy="195" r="26" fill="#2F5BEA"></circle>
+<path d="M120 216V168M120 168h12" stroke="#1A1A2E" stroke-width="2.5" stroke-linecap="round"></path>
+<circle cx="134" cy="170" r="5" fill="#FFD23F" stroke="#1A1A2E" stroke-width="1.5"></circle>
+<rect x="154" y="330" width="112" height="28" rx="14" fill="#FF6B9A" fill-opacity="0.55"></rect>
+<rect x="150" y="327" width="112" height="28" rx="14" fill="#2F5BEA"></rect>
+<path d="M30 356h52M34 356v10M78 356v10M30 348h52" stroke="#1A1A2E" stroke-width="2.5" stroke-linecap="round"></path>
+</svg>
+
+<sc-for list="{{regulars}}" as="r" hint-placeholder-count="3">
+<button onClick="{{r.pick}}" aria-label="{{r.aria}}" aria-pressed="{{r.selected}}" style="position: absolute; left: {{r.x}}px; top: {{r.y}}px; display: flex; flex-direction: column; align-items: center; gap: 4px; background: transparent; border: none; padding: 0; cursor: pointer">
+<div style="width: 48px; height: 48px; border-radius: 24px; background: {{r.fill}}; border: 3px solid #FFFFFF; box-shadow: {{r.ring}}; display: flex; align-items: center; justify-content: center; box-sizing: border-box">
+<svg width="28" height="28" viewBox="0 0 48 48" fill="none" stroke="#1A1A2E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="{{r.d}}"></path></svg>
+</div>
+<div style="padding: 3px 9px; border-radius: 10px; background: #1A1A2E; color: #FFFFFF; font-size: 11px; font-weight: 600; font-family: 'Instrument Sans', sans-serif">{{r.name}}</div>
+</button>
+</sc-for>
+
+<div style="position: absolute; left: 296px; top: 330px; width: 48px; height: 48px; border-radius: 24px; border: 2px dashed #55546A; display: flex; align-items: center; justify-content: center; box-sizing: border-box; color: #55546A">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+</div>
+</div>
+
+<section style="margin: 18px 16px 0; padding: 20px; border-radius: 22px; background: #2F5BEA; color: #FFFFFF; display: flex; flex-direction: column; gap: 12px; box-shadow: 4px 4px 0 #FFD23F">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<div style="font-family: 'Fraunces', serif; font-size: 28px; font-weight: 600; line-height: 1">{{sel.name}}</div>
+<div style="font-family: 'Fraunces', serif; font-style: italic; font-size: 15px; color: #D6E0FF">{{sel.species}}</div>
+</div>
+<div style="font-size: 15px; line-height: 1.45">{{sel.spot}}</div>
+<div style="padding: 12px 14px; border-radius: 14px; background: #1F3FB0; display: flex; flex-direction: column; gap: 3px">
+<div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #FFD23F">In their lives right now</div>
+<div style="font-size: 14px; line-height: 1.45">{{sel.now}}</div>
+</div>
+<div style="display: flex; gap: 10px">
+<button onClick="{{sawToday}}" style="flex-grow: 1; min-height: 48px; border-radius: 24px; border: none; background: #FFD23F; color: #1A1A2E; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">{{sawLabel}}</button>
+<a href="Kindness.dc.html" style="min-height: 48px; padding: 0 18px; border-radius: 24px; border: 1.5px solid #FFFFFF; color: #FFFFFF; font-size: 15px; font-weight: 500; text-decoration: none; display: flex; align-items: center; box-sizing: border-box">How to help</a>
+</div>
+</section>
+
+<nav style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: #FFFFFF; border-top: 1.5px solid #1A1A2E; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-bottom: 18px; box-sizing: border-box">
+<a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #55546A; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"></path></svg>Right now</a>
+<a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #1A1A2E; font-size: 11px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3z"></path><path d="M10 20v-5h4v5"></path></svg>Places</a>
+<a href="Neighbors.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #55546A; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="8" cy="9" r="3"></circle><circle cx="16" cy="9" r="3"></circle><path d="M2 20c0-3 3-5 6-5s6 2 6 5M12 20c0-3 2-5 4-5s6 2 6 5"></path></svg>Neighbors</a>
+<a href="Kindness.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #55546A; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"></path></svg>Kindness</a>
+</nav>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1140}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { picked: "pigeons", noticed: {} };
+}
+renderVals() {
+var self = this;
+var bird = "M8 28c6 0 10-4 14-10 2-3 5-5 9-5 3 0 5 2 6 4l4 1-4 2c0 7-6 13-15 13H10";
+var squirrel = "M30 40c-8 0-13-6-13-13 0-5 3-8 7-9-3-5-1-13 6-13 8 0 11 10 5 16 4 2 6 6 5 11-1 5-5 8-10 8z";
+var data = [
+{ id: "pigeons", name: "Pigeons", species: "Rock Pigeon \u00b7 a kit", spot: "They love the ledge over the bodega. To a pigeon, a building ledge feels like the sea cliffs their ancestors nested on.", now: "Still nesting. City pigeons can raise babies in any season.", shared: 341, x: 196, y: 98, fill: "#FFE3EC", d: bird },
+{ id: "squirrels", name: "Squirrels", species: "Eastern Gray \u00b7 a scurry", spot: "The big tree is home base. They nest high up in a ball of leaves called a drey.", now: "Burying nuts in every planter on the block. The forgotten ones become trees.", shared: 287, x: 34, y: 150, fill: "#FFF4C7", d: squirrel },
+{ id: "sparrows", name: "Sparrow gang", species: "House Sparrow \u00b7 a host", spot: "The hedge is their clubhouse. They move as a group and chatter nonstop to keep track of each other.", now: "Dust-bathing by the curb on dry days to keep their feathers clean.", shared: 212, x: 182, y: 290, fill: "#DDE6FF", d: bird }
+];
+var picked = this.state.picked;
+var noticed = this.state.noticed || {};
+var sel = null;
+var regulars = data.map(function (r) {
+var isSel = r.id === picked;
+if (isSel) sel = r;
+return Object.assign({}, r, {
+selected: isSel,
+ring: isSel ? "0 0 0 4px #FFD23F, 3px 3px 0 4px #1A1A2E" : "2px 2px 0 #1A1A2E",
+aria: "Show the " + r.name,
+pick: function () { self.setState({ picked: r.id }); }
+});
+});
+var n = !!noticed[picked];
+return {
+regulars: regulars,
+sel: { name: sel.name, species: sel.species, spot: sel.spot, now: sel.now, shared: sel.shared + (n ? 1 : 0) },
+sawLabel: n ? "Noticed today" : "I noticed them today",
+sawToday: function () {
+var next = Object.assign({}, self.state.noticed);
+next[picked] = !next[picked];
+self.setState({ noticed: next });
+}
+};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Small kindnesses</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#2F5BEA}a:hover{color:#1F3FB0}
+</style>
+</helmet>
+<div style="width: 390px; height: 1300px; box-sizing: border-box; background: #FAF7F2; color: #1A1A2E; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; position: relative; overflow: hidden">
+
+<header style="padding: 56px 22px 0; display: flex; flex-direction: column; gap: 8px">
+<h1 style="margin: 0; font-family: 'Fraunces', serif; font-size: 38px; font-weight: 600; line-height: 1.05; text-shadow: 3px 3px 0 #FFD23F">Small <span style="font-style: italic; font-weight: 400; color: #FF6B9A">kindnesses</span></h1>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #3B3A50">Little things that make city life easier for your neighbors.</p>
+</header>
+
+<a href="#" style="margin: 18px 16px 0; min-height: 60px; padding: 0 18px; border-radius: 20px; background: #FF6B9A; border: 1.5px solid #1A1A2E; box-shadow: 4px 4px 0 #1A1A2E; display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1A1A2E; box-sizing: border-box">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v10M7 12h10"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 1px; flex-grow: 1"><div style="font-weight: 600; font-size: 16px">Found a hurt animal?</div><div style="font-size: 13px">What to do right now, and who can help</div></div>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"></path></svg>
+</a>
+
+<div style="margin: 18px 16px 0; padding: 16px 18px; border-radius: 18px; background: #2F5BEA; color: #FFFFFF; display: flex; align-items: center; justify-content: space-between">
+<div style="font-family: 'Fraunces', serif; font-size: 20px">This season</div>
+<div style="font-family: 'Fraunces', serif; font-size: 20px; color: #FFD23F">{{doneLabel}}</div>
+</div>
+
+<section style="margin: 14px 16px 0; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{items}}" as="k" hint-placeholder-count="6">
+<div style="padding: 16px; border-radius: 18px; background: {{k.bg}}; border: 1.5px solid #1A1A2E; display: flex; gap: 14px; align-items: flex-start">
+<div style="display: flex; flex-direction: column; gap: 4px; flex-grow: 1">
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #55546A">{{k.who}}</div>
+<div style="font-family: 'Fraunces', serif; font-size: 19px; line-height: 1.2">{{k.title}}</div>
+<div style="font-size: 14px; line-height: 1.45; color: #3B3A50">{{k.why}}</div>
+</div>
+<button onClick="{{k.toggle}}" aria-label="{{k.aria}}" aria-pressed="{{k.done}}" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 22px; border: 1.5px solid #1A1A2E; background: {{k.btn}}; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0">
+<sc-if value="{{k.done}}" hint-placeholder-val="{{ false }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A2E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+</sc-if>
+</button>
+</div>
+</sc-for>
+</section>
+
+<nav style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: #FFFFFF; border-top: 1.5px solid #1A1A2E; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-bottom: 18px; box-sizing: border-box">
+<a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #55546A; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"></path></svg>Right now</a>
+<a href="BlockMap.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #55546A; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3z"></path><path d="M10 20v-5h4v5"></path></svg>Places</a>
+<a href="Neighbors.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #55546A; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="8" cy="9" r="3"></circle><circle cx="16" cy="9" r="3"></circle><path d="M2 20c0-3 3-5 6-5s6 2 6 5M12 20c0-3 2-5 4-5s6 2 6 5"></path></svg>Neighbors</a>
+<a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #1A1A2E; font-size: 11px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"></path></svg>Kindness</a>
+</nav>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1300}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { done: { leaves: true } };
+}
+renderVals() {
+var self = this;
+var done = this.state.done || {};
+var list = [
+{ id: "leaves", who: "Insects + songbirds", title: "Leave the leaves", why: "Fallen leaves shelter the insects that sparrows and other birds eat through the winter." },
+{ id: "lights", who: "Migrating birds", title: "Lights out on big nights", why: "Fall migration is on. Dark windows mean fewer birds crashing into glass." },
+{ id: "feet", who: "Pigeons", title: "Check for tangled feet", why: "String wrapped around toes cuts off circulation. The Wild Bird Fund can help if you spot one." },
+{ id: "bread", who: "Ducks + geese", title: "Skip the bread", why: "It fills them up without feeding them. Let them forage for what their bodies need." },
+{ id: "poison", who: "Rats + hawks + owls", title: "Say no to rat poison", why: "Hawks and owls eat poisoned rats and die too. Sealing up gaps works without the suffering." },
+{ id: "fledgling", who: "Baby birds", title: "Pause before rescuing", why: "Most babies on the ground are fledglings learning to fly, with parents nearby. Watch from a distance first." }
+];
+var count = 0;
+var items = list.map(function (k) {
+var isDone = !!done[k.id];
+if (isDone) count++;
+return Object.assign({}, k, {
+done: isDone,
+bg: isDone ? "#FFF4C7" : "#FFFFFF",
+btn: isDone ? "#FFD23F" : "#FFFFFF",
+aria: (isDone ? "Unmark " : "Mark done: ") + k.title,
+toggle: function () {
+var next = Object.assign({}, self.state.done);
+next[k.id] = !next[k.id];
+self.setState({ done: next });
+}
+});
+});
+return { items: items, doneLabel: count + " of " + list.length };
+}
+}
+</script>
+</body>
+</html>

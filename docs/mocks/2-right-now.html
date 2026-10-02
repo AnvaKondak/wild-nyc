@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Right now on your block</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; position: relative; overflow: hidden">
+
+<div style="padding: 54px 16px 0; display: flex; gap: 4px">
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="4">
+<div style="flex-grow: 1; height: 4px; border-radius: 2px; background: {{b.c}}"></div>
+</sc-for>
+</div>
+
+<div style="padding: 14px 16px 0; display: flex; gap: 8px; overflow: hidden">
+<sc-for list="{{hoods}}" as="h" hint-placeholder-count="3">
+<button onClick="{{h.pick}}" aria-pressed="{{h.on}}" style="flex-shrink: 0; min-height: 40px; padding: 0 14px; border-radius: 20px; border: 1.5px solid {{t.ink}}; background: {{h.bg}}; color: {{h.fg}}; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer">{{h.name}}</button>
+</sc-for>
+<button aria-label="Add a neighborhood" style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 20px; border: 1.5px dashed {{t.ink}}; background: transparent; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+</button>
+</div>
+
+<div style="padding: 18px 22px 0; display: flex; align-items: center; gap: 10px">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{t.icon}}"></path></svg>
+<div style="display: flex; flex-direction: column">
+<div style="font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; line-height: 1.1">{{t.label}} · {{t.clock}}</div>
+<div style="font-size: 13px; color: {{t.muted}}">{{t.sub}}</div>
+</div>
+</div>
+
+<button onClick="{{next}}" aria-label="Next story" style="margin: 28px auto 0; width: 230px; height: 230px; border-radius: 115px; background: {{s.tile}}; border: 6px solid #FFFFFF; box-shadow: 6px 6px 0 {{t.shadow}}; transform: rotate(-5deg); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; box-sizing: border-box">
+<svg width="132" height="132" viewBox="0 0 48 48" fill="none" stroke="#1A1A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{s.d}}"></path></svg>
+</button>
+
+<section style="padding: 34px 24px 0; display: flex; flex-direction: column; gap: 10px">
+<div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: {{t.accent}}">{{s.kicker}}</div>
+<div style="font-family: 'Fraunces', serif; font-size: 32px; font-weight: 600; line-height: 1.08">{{s.title}}</div>
+<div style="font-size: 17px; line-height: 1.5; color: {{t.body}}">{{s.body}}</div>
+</section>
+
+<div style="flex-grow: 1"></div>
+
+<div style="padding: 0 16px 104px; display: flex; gap: 10px; align-items: center">
+<button onClick="{{prev}}" aria-label="Previous story" style="width: 52px; height: 52px; flex-shrink: 0; border-radius: 26px; border: 1.5px solid {{t.ink}}; background: transparent; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"></path></svg>
+</button>
+<a href="{{s.href}}" style="flex-grow: 1; min-height: 52px; border-radius: 26px; background: {{t.btnBg}}; color: {{t.btnInk}}; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 16px; font-weight: 600; box-shadow: 4px 4px 0 {{t.shadow}}">{{s.cta}}</a>
+<button onClick="{{next}}" aria-label="Next story" style="width: 52px; height: 52px; flex-shrink: 0; border-radius: 26px; border: 1.5px solid {{t.ink}}; background: transparent; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"></path></svg>
+</button>
+</div>
+
+<nav style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: #FFFFFF; border-top: 1.5px solid #1A1A2E; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-bottom: 18px; box-sizing: border-box">
+<a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #1A1A2E; font-size: 11px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"></path></svg>Right now</a>
+<a href="BlockMap.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #55546A; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3z"></path><path d="M10 20v-5h4v5"></path></svg>Places</a>
+<a href="Neighbors.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #55546A; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="8" cy="9" r="3"></circle><circle cx="16" cy="9" r="3"></circle><path d="M2 20c0-3 3-5 6-5s6 2 6 5M12 20c0-3 2-5 4-5s6 2 6 5"></path></svg>Neighbors</a>
+<a href="Kindness.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #55546A; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"></path></svg>Kindness</a>
+</nav>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"timeOfDay":{"editor":"enum","options":["dawn","midday","dusk","night"],"default":"dawn"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { idx: 0, hood: "home" };
+}
+renderVals() {
+var self = this;
+var bird = "M8 28c6 0 10-4 14-10 2-3 5-5 9-5 3 0 5 2 6 4l4 1-4 2c0 7-6 13-15 13H10M18 33l-4 7M24 33l-1 7";
+var squirrel = "M30 40c-8 0-13-6-13-13 0-5 3-8 7-9-3-5-1-13 6-13 8 0 11 10 5 16 4 2 6 6 5 11-1 5-5 8-10 8zM12 40h18";
+var critter = "M6 30c2-7 9-11 17-11 6 0 10 3 12 6l6 1-4 3c0 3-3 5-6 5H14c-3 0-6-1-8-4zM6 30c-2 3-3 7 0 10";
+var moth = "M24 14v22M24 20c-4-8-16-10-16-2 0 6 8 8 16 6M24 20c4-8 16-10 16-2 0 6-8 8-16 6M24 26c-3 4-10 8-10 12 0 3 6 2 10-6M24 26c3 4 10 8 10 12 0 3-6 2-10-6";
+var sunIcon = "M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2";
+var riseIcon = "M3 18h18M7 18a5 5 0 0 1 10 0M12 4v4M5 9l2 2M19 9l-2 2";
+var setIcon = "M3 18h18M7 18a5 5 0 0 1 10 0M12 9V5M9 7l3-3 3 3";
+var moonIcon = "M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z";
+var T = {
+dawn: { label: "Dawn", clock: "6:51a", sub: "Sunrise in 12 minutes", icon: riseIcon, bg: "#FFE3EC", ink: "#1A1A2E", body: "#3B3A50", muted: "#55546A", accent: "#C2185B", shadow: "#2F5BEA", btnBg: "#1A1A2E", btnInk: "#FFFFFF", on: "#1A1A2E", off: "rgba(26,26,46,0.18)" },
+midday: { label: "Midday", clock: "12:40p", sub: "Sun high, warm and dry", icon: sunIcon, bg: "#FFF4C7", ink: "#1A1A2E", body: "#3B3A50", muted: "#55546A", accent: "#2F5BEA", shadow: "#FF6B9A", btnBg: "#2F5BEA", btnInk: "#FFFFFF", on: "#1A1A2E", off: "rgba(26,26,46,0.18)" },
+dusk: { label: "Dusk", clock: "6:31p", sub: "Sunset in 7 minutes", icon: setIcon, bg: "#2F5BEA", ink: "#FFFFFF", body: "#E4EAFF", muted: "#D6E0FF", accent: "#FFD23F", shadow: "#FF6B9A", btnBg: "#FFD23F", btnInk: "#1A1A2E", on: "#FFFFFF", off: "rgba(255,255,255,0.3)" },
+night: { label: "Night", clock: "10:15p", sub: "Waning moon, clear sky", icon: moonIcon, bg: "#1A1A2E", ink: "#FAF7F2", body: "#D9D7E6", muted: "#A9A7BF", accent: "#FFD23F", shadow: "#2F5BEA", btnBg: "#FFD23F", btnInk: "#1A1A2E", on: "#FAF7F2", off: "rgba(250,247,242,0.25)" }
+};
+var S = {
+dawn: [
+{ kicker: "Listen", title: "The dawn chorus is on", body: "Robins and sparrows sing loudest in this first hour. Stop for ten seconds {w} and count the voices.", tile: "#DDE6FF", d: bird, cta: "Meet the robins", href: "#" },
+{ kicker: "Right now", title: "Pigeons are off to breakfast", body: "They leave the ledges in little groups and land wherever crumbs were dropped last night.", tile: "#FFE3EC", d: bird, cta: "Meet the pigeons", href: "Pigeon.dc.html" },
+{ kicker: "Right now", title: "Squirrels are burying nuts", body: "Morning is their busiest time. Watch one dig, drop, pat it down and look around to check who saw.", tile: "#FFF4C7", d: squirrel, cta: "Meet the squirrels", href: "#" }
+],
+midday: [
+{ kicker: "Right now", title: "Sparrows are dust-bathing", body: "Look by the curb {w}. They roll in dry dirt to keep their feathers clean and bug-free.", tile: "#DDE6FF", d: bird, cta: "Meet the sparrows", href: "#" },
+{ kicker: "Right now", title: "Pigeons are sunbathing", body: "One wing tilted up, eyes half closed. The warmth helps them shake out parasites and it just feels good.", tile: "#FFE3EC", d: bird, cta: "Meet the pigeons", href: "Pigeon.dc.html" },
+{ kicker: "Right now", title: "Squirrels are napping", body: "After the morning rush, many curl up in their leafy nest, called a drey, until the afternoon.", tile: "#FFF4C7", d: squirrel, cta: "Meet the squirrels", href: "#" }
+],
+dusk: [
+{ kicker: "Look up", title: "Starlings are gathering", body: "They line up on the wires {w}, chattering, before heading to a shared roost for the night.", tile: "#FFF4C7", d: bird, cta: "Meet the starlings", href: "#" },
+{ kicker: "Look up", title: "Crows are commuting home", body: "In fall, crows fly across the city at dusk to sleep together in big roosts.", tile: "#DDE6FF", d: bird, cta: "Meet the crows", href: "#" },
+{ kicker: "Right now", title: "Pigeons are back on the ledge", body: "Pairs settle in side by side. Same ledge, same partner, every night.", tile: "#FFE3EC", d: bird, cta: "Meet the pigeons", href: "Pigeon.dc.html" }
+],
+night: [
+{ kicker: "Right now", title: "Raccoons start their rounds", body: "The night shift is up. They check the same spots {w} in the same order most nights.", tile: "#DDE6FF", d: critter, cta: "Meet the raccoons", href: "#" },
+{ kicker: "Look up", title: "Moths are at the streetlights", body: "Bright lights pull them off course. Every porch light you switch off helps.", tile: "#FFF4C7", d: moth, cta: "Meet the moths", href: "#" },
+{ kicker: "Overhead", title: "Birds are migrating in the dark", body: "Right now songbirds are flying south over the city, calling softly to stay together.", tile: "#FFE3EC", d: bird, cta: "Lights out tonight", href: "Kindness.dc.html" }
+]
+};
+var hoods = [
+{ id: "home", name: "Home", w: "on your block" },
+{ id: "work", name: "Work", w: "near the office" },
+{ id: "park", name: "Prospect Park", w: "in the park" }
+];
+var tk = this.props.timeOfDay || "dawn";
+var t = T[tk] || T.dawn;
+var hood = hoods.find(function (h) { return h.id === self.state.hood; }) || hoods[0];
+var list = (S[tk] || S.dawn).slice();
+if (hood.id === "park" && tk === "dawn") {
+list.splice(1, 0, { kicker: "Just arrived", title: "White-throated Sparrows are back", body: "They flew down from Canada for the winter. Listen for their thin whistled song in the bushes.", tile: "#DDE6FF", d: bird, cta: "Meet them", href: "#" });
+}
+list.push({ kicker: "Fall chapter · Arriving", title: "Juncos are on their way", body: "These little gray snowbirds are flying down from Canada and will spend the winter hopping under your hedges. White-throated Sparrows are arriving too.", tile: "#FFD23F", d: bird, cta: "Who else is arriving", href: "#" });
+list.push({ kicker: "Fall chapter · Goodbye", title: "The chimney swifts have left", body: "The tiny birds that zipped over the rooftops all summer are flying to South America. Monarchs are passing through on their way to Mexico.", tile: "#FF6B9A", d: bird, cta: "Who else is leaving", href: "#" });
+var idx = Math.min(this.state.idx, list.length - 1);
+var cur = list.at(idx);
+var s = Object.assign({}, cur, { body: cur.body.split("{w}").join(hood.w) });
+var bars = list.map(function (x, i) { return { c: i <= idx ? t.on : t.off }; });
+var hoodItems = hoods.map(function (h) {
+var on = h.id === hood.id;
+return { name: h.name, on: on, bg: on ? t.ink : "transparent", fg: on ? t.bg : t.ink, pick: function () { self.setState({ hood: h.id, idx: 0 }); } };
+});
+return {
+t: t,
+s: s,
+bars: bars,
+hoods: hoodItems,
+next: function () { self.setState({ idx: (idx + 1) % list.length }); },
+prev: function () { self.setState({ idx: Math.max(0, idx - 1) }); }
+};
+}
+}
+</script>
+</body>
+</html>
