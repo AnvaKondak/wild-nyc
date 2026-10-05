@@ -7,7 +7,7 @@ import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { placeRegulars, SCENE_WIDTH, SceneView } from '@/components/scenes';
 import { Title } from '@/components/Title';
-import { speciesFor, type Season, type Species } from '@/content';
+import { places, speciesFor, type Season, type Species } from '@/content';
 import { rankByLive, seenLabel, type LiveSpecies } from '@/lib/live';
 import { seasonOf } from '@/lib/time';
 import { useAppState } from '@/state/AppState';
@@ -18,6 +18,7 @@ import { colors, fonts, offsetShadow } from '@/theme/tokens';
 import { type } from '@/theme/type';
 
 const SPOT = 48;
+const TITLE_WORD = { block: 'block', park: 'park', waterfront: 'waterfront' } as const;
 
 export default function Places() {
   const { width } = useWindowDimensions();
@@ -25,6 +26,7 @@ export default function Places() {
   const { live, report } = useLiveData();
   const hood = currentNeighborhood(state);
   const season = seasonOf(new Date());
+  const placeName = hood.placeId ? places.find((p) => p.id === hood.placeId)?.name : undefined;
 
   // The scene for this kind of place (block, park or waterfront), one regular per
   // spot. With live data, whoever's been seen nearby most lately gets the spot.
@@ -40,8 +42,8 @@ export default function Places() {
   return (
     <Screen contentStyle={{ gap: 16 }}>
       <View style={{ paddingHorizontal: 22, gap: 6 }}>
-        <Text style={type.label}>Who shares your street</Text>
-        <Title accent="block">Your</Title>
+        <Text style={type.label}>{placeName ? `Who shares ${placeName}` : 'Who shares your street'}</Text>
+        <Title accent={TITLE_WORD[hood.kind]}>Your</Title>
       </View>
 
       <NeighborhoodPills />

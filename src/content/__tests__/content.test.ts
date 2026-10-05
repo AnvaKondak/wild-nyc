@@ -6,6 +6,7 @@ import {
   hurtAnimalGuide,
   kindnesses,
   kindnessesFor,
+  moments,
   placeKinds,
   places,
   species,
@@ -35,10 +36,45 @@ describe('species', () => {
 
 });
 
+describe('moments', () => {
+  const SETTINGS = ['branch', 'trunk', 'wire', 'ledge', 'rooftop', 'streetlight', 'lawn', 'sidewalk', 'hedge', 'flowers', 'water', 'shore', 'pier', 'sky', 'night-sky', 'web', 'trashcan', 'fence', 'reeds', 'den'];
+
+  it('have unique ids, real species, known settings and at least one variant', () => {
+    expect(new Set(moments.map((m) => m.id)).size).toBe(moments.length);
+    for (const m of moments) {
+      expect(getSpecies(m.speciesId)).toBeDefined();
+      expect(SETTINGS).toContain(m.setting);
+      expect(m.variants.length).toBeGreaterThan(0);
+      expect(m.seasons.length).toBeGreaterThan(0);
+      expect(m.periods.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('only happen in seasons the species is around', () => {
+    for (const m of moments) {
+      const s = getSpecies(m.speciesId)!;
+      for (const season of m.seasons) expect(s.seasons).toContain(season);
+    }
+  });
+
+  it('only use {place} as a placeholder', () => {
+    for (const m of moments) for (const v of m.variants) {
+      expect((v.title + v.body).replace(/\{place\}/g, '')).not.toMatch(/[{}]/);
+    }
+  });
+
+  it.each(READY_SEASONS)('%s has several species with moments at every time of day', (season) => {
+    for (const period of PERIODS) {
+      const speciesWithMoments = new Set(moments.filter((m) => m.seasons.includes(season) && m.periods.includes(period)).map((m) => m.speciesId));
+      expect(speciesWithMoments.size).toBeGreaterThanOrEqual(3);
+    }
+  });
+});
+
 describe('copy', () => {
   it('uses "who", never "that", for animals', () => {
     // Loose check for the "animals are someone" rule across all content.
-    const text = JSON.stringify([species, stories, kindnesses]);
+    const text = JSON.stringify([species, stories, kindnesses, moments]);
     expect(text).not.toMatch(/\b(birds?|animals?|squirrels?|insects?|bugs?|moths?|butterfl(y|ies)|babies|one) that\b/i);
   });
 });

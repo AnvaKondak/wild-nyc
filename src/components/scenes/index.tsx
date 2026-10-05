@@ -77,7 +77,7 @@ export const SCENES: Record<PlaceKind, SceneDef> = {
       water: [{ x: 140, y: 236 }, { x: 30, y: 278 }, { x: 150, y: 286 }],
       shore: [{ x: 180, y: 326 }, { x: 240, y: 334 }],
       rocks: [{ x: 50, y: 300 }],
-      grass: [{ x: 90, y: 378 }, { x: 180, y: 384 }, { x: 270, y: 380 }],
+      grass: [{ x: 90, y: 356 }, { x: 180, y: 360 }, { x: 270, y: 356 }],
     },
   },
 };
