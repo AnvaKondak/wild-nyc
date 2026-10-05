@@ -29,7 +29,7 @@ export default function ArtPreview() {
           {SETTINGS.map((setting, i) => (
             <View key={setting} style={{ width: thumb, gap: 4 }}>
               <View style={{ width: thumb, height: h, borderRadius: 12, overflow: 'hidden', borderWidth: 1.5, borderColor: colors.ink, backgroundColor: i % 5 === 4 ? colors.ink : colors.yellowTint, alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{ position: 'absolute', top: 0, left: 0 }}>
+                <View style={{ position: 'absolute', top: 0, left: 0, width: thumb - 3, height: h - 3 }}>
                   <StoryBackdrop setting={setting} period={i % 5 === 4 ? 'night' : 'midday'} width={thumb - 3} height={h - 3} />
                 </View>
                 <Sticker art={raccoon.art} photo={speciesPhoto('raccoon')} size={thumb * 0.5} rotate={-5} style={{ marginBottom: h * 0.2 }} />
