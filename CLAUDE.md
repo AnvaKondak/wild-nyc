@@ -26,6 +26,7 @@ Full screen-by-screen spec: `docs/SPEC.md`. Visual mocks: `docs/mocks/` (see not
 - **Live updates up front, facts on the profile.** The home screen is short "what
   they're doing right now" moments. Long facts live on each species' profile page.
 - **Animals are someone.** Copy uses "who," not "that." Warm, playful, never preachy.
+  Voice is **funny + cute**: see `docs/VOICE.md`.
 - No shared "people noticed" counts until the app has real users.
 
 ## Stack

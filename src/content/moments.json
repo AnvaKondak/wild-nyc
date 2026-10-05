@@ -13,12 +13,16 @@
   "kicker": "Right now",
   "variants": [
    {
-    "title": "The raccoon kits are waking up in the tree",
-    "body": "Mom's already halfway down the trunk. The kits follow one careful paw at a time, and somebody always slips the last bit."
+    "title": "The raccoon babies are coming down for dinner",
+    "body": "Mom goes first. The kits follow, one tiny paw at a time, and somebody always slips the last bit. (They're fine. Mostly embarrassed.)"
    },
    {
-    "title": "Raccoon family, coming down the tree",
-    "body": "First mom, then a wobbly line of kits. They wait at the bottom, sniffing the air, before heading out {place}."
+    "title": "Raccoon family, now leaving the tree",
+    "body": "Mom, then a wobbly line of kits. They regroup at the bottom, sniff the air, and head out {place} like a very small parade."
+   },
+   {
+    "title": "The kits are practicing tree-climbing in reverse",
+    "body": "Down is harder than up. Lots of hugging the trunk. Mom waits at the bottom, not impressed, not worried."
    }
   ]
  },
@@ -37,12 +41,16 @@
   "kicker": "Right now",
   "variants": [
    {
-    "title": "A raccoon is checking the trash cans",
-    "body": "Same route as last night: the can with the loose lid, then the one by the fence. Raccoons remember what worked."
+    "title": "A raccoon is doing the nightly rounds",
+    "body": "Same route as yesterday: the can with the loose lid, then the one by the fence. Raccoons never forget a good lid."
    },
    {
-    "title": "The night shift is making the rounds",
-    "body": "Somewhere {place}, a raccoon is feeling along the curb with those clever front paws, reading the block by touch."
+    "title": "The night shift has clocked in",
+    "body": "Somewhere {place}, a raccoon is patting along the curb with those clever little hands, reading the block by touch."
+   },
+   {
+    "title": "A raccoon is investigating a very interesting lid",
+    "body": "Pry, wiggle, think, try again. Raccoons are excellent at puzzles, especially the ones you didn't mean to set."
    }
   ]
  },
@@ -60,8 +68,12 @@
   "kicker": "Look closer",
   "variants": [
    {
-    "title": "A raccoon is dabbling at a puddle",
-    "body": "Rolling a snack between wet paws. They aren't washing it: wet paws just feel things better."
+    "title": "A raccoon is splashing a snack around",
+    "body": "Rolling it between wet paws. They aren't washing it, exactly: wet paws just feel things better. Very fancy."
+   },
+   {
+    "title": "Raccoon at the puddle, hands busy",
+    "body": "Dabble, dabble, squint. Those front paws are so sensitive they're basically doing the looking."
    }
   ]
  },
@@ -78,8 +90,12 @@
   "kicker": "Right now",
   "variants": [
    {
-    "title": "A raccoon is bulking up for winter",
-    "body": "Acorns, fallen fruit, a dropped slice of pizza. Everything counts this time of year."
+    "title": "A raccoon is on a winter-prep snack tour",
+    "body": "Acorns, fallen apples, a dropped slice of pizza. Fall is all-you-can-eat season, and they take it very seriously."
+   },
+   {
+    "title": "Raccoon, getting extra fluffy for winter",
+    "body": "Every snack {place} is going straight to the winter-coat fund. Chubby is the goal."
    }
   ]
  },
@@ -97,12 +113,12 @@
   "kicker": "Tonight",
   "variants": [
    {
-    "title": "The raccoons are staying in tonight",
-    "body": "Too cold to bother. They're curled up in the den, tails over noses, waiting for a milder night."
+    "title": "The raccoons called in cozy",
+    "body": "Too cold to bother. They're curled up in the den, tails over noses, waiting for a nicer night."
    },
    {
-    "title": "A raccoon peeks out, then thinks better of it",
-    "body": "On cold nights they'll skip a shift or two. The trash cans {place} can wait."
+    "title": "A raccoon peeks out, then nopes back in",
+    "body": "On freezing nights they'll skip a shift or two. The trash cans {place} can wait."
    }
   ]
  },
@@ -120,8 +136,12 @@
   "kicker": "Right now",
   "variants": [
    {
-    "title": "A raccoon mom slips out for a quick bite",
-    "body": "Her kits are tucked in a den up high. She'll be back before they miss her."
+    "title": "A raccoon mom is sneaking out for a quick bite",
+    "body": "Her kits are tucked in a den up high. She'll grab a snack and be back before anyone wakes up."
+   },
+   {
+    "title": "Raccoon mom, on a very short break",
+    "body": "Babies at home, snacks out here. She moves fast, eats faster, and heads straight back."
    }
   ]
  },
@@ -140,12 +160,16 @@
   "kicker": "Right now",
   "variants": [
    {
-    "title": "An opossum is tiptoeing along a fence",
-    "body": "Slow and steady, tail helping with balance. They're on bug and slug patrol {place}."
+    "title": "An opossum is tightrope-walking the fence",
+    "body": "Slow and steady, tail helping with the balance. They're on bug and slug patrol {place}, and they're in no rush."
    },
    {
-    "title": "An opossum is out snacking",
-    "body": "Fallen fruit, beetles, the odd snail. They clean up the block and ask for nothing."
+    "title": "An opossum is out on a snack walk",
+    "body": "Fallen fruit, beetles, the odd snail. They tidy up the block and ask for nothing in return. Model neighbor."
+   },
+   {
+    "title": "A little white face is moving along the fence",
+    "body": "That's an opossum, waddling through. Pink nose, round ears, zero hurry."
    }
   ]
  },
@@ -164,7 +188,11 @@
   "variants": [
    {
     "title": "An opossum mom has passengers tonight",
-    "body": "A row of babies clings to her back, holding on tight while she waddles along."
+    "body": "A row of babies clings to her back, holding on tight while she waddles along. Best bus in town."
+   },
+   {
+    "title": "Opossum mom, giving piggyback rides",
+    "body": "When the babies get too big for her pouch, they ride on top instead. Nobody gets left behind."
    }
   ]
  },
@@ -182,8 +210,12 @@
   "kicker": "Right now",
   "variants": [
    {
-    "title": "A young opossum is out on their own",
-    "body": "Everything is new: the curb, the hedge, the smell of the gardens {place}. They sniff it all."
+    "title": "A young opossum is out on their own for the first time",
+    "body": "Everything is new: the curb, the hedge, the smell of the gardens {place}. They sniff all of it. Twice."
+   },
+   {
+    "title": "A teenage opossum is exploring",
+    "body": "Fresh out of mom's care and very curious. Every flowerpot needs a careful sniff."
    }
   ]
  },
@@ -202,7 +234,11 @@
   "variants": [
    {
     "title": "The opossums are keeping their ears warm",
-    "body": "Bare ears and tails don't like the cold. Tonight they're staying tucked in somewhere snug."
+    "body": "Bare ears and tails don't love the cold. Tonight they're staying tucked in somewhere snug."
+   },
+   {
+    "title": "Opossum, staying in under a pile of leaves",
+    "body": "Too chilly for a walk. They'll pop out again on a milder night."
    }
   ]
  },
@@ -221,12 +257,16 @@
   "kicker": "Look up",
   "variants": [
    {
-    "title": "Moths are circling the streetlight",
-    "body": "They steer by keeping the brightest light above them, so a streetlight sends them spinning. Every porch light switched off {place} helps."
+    "title": "The moths are having a dance party at the streetlight",
+    "body": "They steer by keeping the brightest light above them, so a streetlight sends them spinning. Every porch light switched off {place} helps them home."
    },
    {
-    "title": "A little crowd at the lamp",
-    "body": "Fuzzy wings, feathery antennae, dizzy loops. Look closely: some are as patterned as butterflies."
+    "title": "A little crowd is circling the lamp",
+    "body": "Fuzzy wings, feathery antennae, dizzy loops. Look closely: some are as fancy as butterflies, just on the night shift."
+   },
+   {
+    "title": "The moths found the streetlight again",
+    "body": "Round and round they go. It's not a party they meant to join, and a dark porch lets them get back to their night."
    }
   ]
  },
@@ -244,8 +284,12 @@
   "kicker": "Right now",
   "variants": [
    {
-    "title": "Moths are on the night shift at the flowers",
-    "body": "While the bees sleep, moths sip nectar and carry pollen from bloom to bloom."
+    "title": "The moths are covering the late shift at the flowers",
+    "body": "While the bees sleep, moths sip nectar and carry pollen from bloom to bloom. Very underrated coworkers."
+   },
+   {
+    "title": "A moth is sipping from a night flower",
+    "body": "Fuzzy, quiet and secretly doing important work. The garden {place} has a night crew."
    }
   ]
  },
@@ -262,8 +306,12 @@
   "kicker": "Look up",
   "variants": [
    {
-    "title": "The last moths of the year are out",
-    "body": "On mild fall evenings a few still flutter by. Many will spend winter as cocoons tucked in fallen leaves."
+    "title": "The last moths of the year are fluttering by",
+    "body": "On mild fall evenings a few are still out. Many will spend winter as cocoons tucked in fallen leaves."
+   },
+   {
+    "title": "One brave fall moth is out tonight",
+    "body": "Most are already bundled up as cocoons in the leaf litter. This one wanted one more evening."
    }
   ]
  },
@@ -283,12 +331,16 @@
   "kicker": "Right now",
   "variants": [
    {
-    "title": "Pigeons are heading out for breakfast",
+    "title": "The pigeons are heading out for breakfast",
     "body": "They leave the ledge in little groups and drop onto the sidewalk {place}, checking where crumbs landed last night."
    },
    {
     "title": "First flight of the morning",
     "body": "A clap of wings, a loop around the block, and down they come to see what the day left out."
+   },
+   {
+    "title": "The pigeons are doing their morning crumb inspection",
+    "body": "Strut, peck, strut. Every inch of sidewalk gets a very official review."
    }
   ]
  },
@@ -307,8 +359,12 @@
   "kicker": "Right now",
   "variants": [
    {
-    "title": "A pigeon is sunbathing",
-    "body": "One wing tipped up, eyes half closed. The warmth shakes out parasites, and it just feels nice."
+    "title": "A pigeon is sunbathing like it's a beach day",
+    "body": "One wing tipped up, eyes half closed. The warmth shakes out parasites, and honestly it just feels nice."
+   },
+   {
+    "title": "A pigeon is lying flat on a warm ledge",
+    "body": "Feathers fluffed, wing out, fully melted. Do not disturb."
    }
   ]
  },
@@ -327,8 +383,12 @@
   "kicker": "Right now",
   "variants": [
    {
-    "title": "A pigeon is showing off",
-    "body": "He puffs up, spins in a circle and bows, cooing the whole time. She keeps eating like she hasn't noticed."
+    "title": "A pigeon is showing off his best moves",
+    "body": "He puffs up, spins in a circle and bows, cooing the whole time. She keeps eating like she hasn't noticed. She noticed."
+   },
+   {
+    "title": "Pigeon romance is happening on the sidewalk",
+    "body": "Puff, spin, bow, coo. Repeat. Pairs often stay together for life, so the routine has to be good."
    }
   ]
  },
@@ -345,8 +405,12 @@
   "kicker": "Look up",
   "variants": [
    {
-    "title": "A pigeon is carrying a twig",
-    "body": "City pigeons nest any time of year. That twig is going to a ledge {place}, maybe one you walk under."
+    "title": "A pigeon is carrying one extremely important twig",
+    "body": "City pigeons nest any time of year. That twig is headed to a ledge {place}, maybe one you walk under every day."
+   },
+   {
+    "title": "Pigeon, busy with home improvements",
+    "body": "One twig at a time. Their nests are famously minimal. They like it that way."
    }
   ]
  },
@@ -364,8 +428,12 @@
   "kicker": "Right now",
   "variants": [
    {
-    "title": "Pigeons are huddled up",
+    "title": "The pigeons are wearing their puffy coats",
     "body": "Feathers fluffed into a down jacket, pressed together where the sun hits the building."
+   },
+   {
+    "title": "Pigeon huddle in progress",
+    "body": "Shoulder to shoulder on the sunny side of the ledge. Warmth shared is warmth doubled."
    }
   ]
  },
@@ -386,1256 +454,11 @@
   "variants": [
    {
     "title": "The pigeons are back on the ledge",
-    "body": "Pairs settle in side by side. Same ledge, same partner, every night."
-   }
-  ]
- },
- {
-  "id": "sparrow-awake",
-  "speciesId": "house-sparrow",
-  "seasons": [
-   "spring",
-   "summer",
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "hedge",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "The sparrow gang is awake",
-    "body": "The hedge {place} is chattering. That racket is how they keep track of who's where."
-   }
-  ]
- },
- {
-  "id": "sparrow-dust",
-  "speciesId": "house-sparrow",
-  "seasons": [
-   "spring",
-   "summer",
-   "fall"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "sidewalk",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "Sparrows are taking a dust bath",
-    "body": "They wriggle into a dry patch of dirt and flick it through their feathers, like a dry shampoo."
-   }
-  ]
- },
- {
-  "id": "sparrow-kids",
-  "speciesId": "house-sparrow",
-  "seasons": [
-   "summer"
-  ],
-  "periods": [
-   "dawn",
-   "midday"
-  ],
-  "setting": "sidewalk",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "Sparrow kids are begging",
-    "body": "Fluffy youngsters chase their parents, wings fluttering, beaks wide open. The parents mostly give in."
-   }
-  ]
- },
- {
-  "id": "sparrow-nest",
-  "speciesId": "house-sparrow",
-  "seasons": [
-   "spring"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "ledge",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "Sparrows are stuffing a gap with grass",
-    "body": "A sign, a traffic light, a hole in old brick: anywhere will do for a messy, cozy nest."
-   }
-  ]
- },
- {
-  "id": "sparrow-bedtime",
-  "speciesId": "house-sparrow",
-  "seasons": [
-   "spring",
-   "fall"
-  ],
-  "periods": [
-   "dusk"
-  ],
-  "setting": "hedge",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "The hedge is getting noisy",
-    "body": "Before bed, the whole gang gathers in the bushes and talks over the day. Loudly."
-   }
-  ]
- },
- {
-  "id": "sparrow-winter",
-  "speciesId": "house-sparrow",
-  "seasons": [
-   "winter"
-  ],
-  "periods": [
-   "midday",
-   "dusk"
-  ],
-  "setting": "hedge",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "The sparrows are tucked deep in the hedge",
-    "body": "Puffed into little round balls, shoulder to shoulder, out of the wind."
-   }
-  ]
- },
- {
-  "id": "squirrel-burying",
-  "speciesId": "eastern-gray-squirrel",
-  "seasons": [
-   "fall"
-  ],
-  "periods": [
-   "dawn",
-   "midday"
-  ],
-  "setting": "lawn",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "A squirrel is burying an acorn",
-    "body": "Dig, drop, pat it down, look around to check who saw. If someone's watching, they might fake it and hide it somewhere else."
+    "body": "Pairs settle in side by side. Same ledge, same partner, every single night."
    },
    {
-    "title": "Squirrels are planting next year's trees",
-    "body": "Every planter {place} is a pantry right now. The acorns they forget will sprout in spring."
-   }
-  ]
- },
- {
-  "id": "squirrel-morning",
-  "speciesId": "eastern-gray-squirrel",
-  "seasons": [
-   "spring",
-   "summer",
-   "winter"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "lawn",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "The squirrels are up and digging",
-    "body": "Morning is rush hour. They're checking old hiding spots and sniffing out breakfast {place}."
-   }
-  ]
- },
- {
-  "id": "squirrel-chase",
-  "speciesId": "eastern-gray-squirrel",
-  "seasons": [
-   "winter"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "trunk",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "Two squirrels are chasing around the tree",
-    "body": "Wild spirals up and down the trunk. It's courting season, and nobody's being subtle."
-   }
-  ]
- },
- {
-  "id": "squirrel-sploot",
-  "speciesId": "eastern-gray-squirrel",
-  "seasons": [
-   "summer"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "branch",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "A squirrel is splooting",
-    "body": "Flat on a cool branch, belly down, legs out. That's how a squirrel beats the heat."
-   }
-  ]
- },
- {
-  "id": "squirrel-drey",
-  "speciesId": "eastern-gray-squirrel",
-  "seasons": [
-   "spring"
-  ],
-  "periods": [
-   "midday",
-   "dusk"
-  ],
-  "setting": "branch",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "A squirrel mom is heading home to the drey",
-    "body": "Babies are tucked up in that ball of leaves. She checks on them between snack runs."
-   }
-  ]
- },
- {
-  "id": "squirrel-bedtime",
-  "speciesId": "eastern-gray-squirrel",
-  "seasons": [
-   "spring",
-   "summer",
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "dusk"
-  ],
-  "setting": "trunk",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "A squirrel is heading up for the night",
-    "body": "Up the trunk to the drey, tail flicking. Bedtime comes early for squirrels."
-   }
-  ]
- },
- {
-  "id": "starling-wire",
-  "speciesId": "european-starling",
-  "seasons": [
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "dusk"
-  ],
-  "setting": "wire",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "Starlings are lining up on the wire",
-    "body": "Dozens of them, chattering, before heading off together to a shared roost for the night."
-   },
-   {
-    "title": "A starling is doing impressions",
-    "body": "Listen: a whistle, a click, maybe a car alarm. Starlings borrow sounds from {place} and mix them into their songs."
-   }
-  ]
- },
- {
-  "id": "starling-lawn",
-  "speciesId": "european-starling",
-  "seasons": [
-   "spring",
-   "summer"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "lawn",
-  "kicker": "Look down",
-  "variants": [
-   {
-    "title": "Starlings are probing the lawn",
-    "body": "They stab their beaks into the grass and open them wide to pry up grubs. A clever little trick."
-   }
-  ]
- },
- {
-  "id": "starling-singing",
-  "speciesId": "european-starling",
-  "seasons": [
-   "spring"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "rooftop",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "A starling is singing from a chimney",
-    "body": "All dressed up in glossy purple and green, wings flicking, putting on a show."
-   }
-  ]
- },
- {
-  "id": "starling-kids",
-  "speciesId": "european-starling",
-  "seasons": [
-   "summer"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "lawn",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "Young starlings are following their parents",
-    "body": "Plain brown and very loud, they trail the grown-ups across the grass begging for bugs."
-   }
-  ]
- },
- {
-  "id": "starling-stars",
-  "speciesId": "european-starling",
-  "seasons": [
-   "winter"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "wire",
-  "kicker": "Look closer",
-  "variants": [
-   {
-    "title": "Starlings are wearing their stars",
-    "body": "Their winter feathers are covered in white speckles. Catch one in the sun and it sparkles."
-   }
-  ]
- },
- {
-  "id": "dove-cooing",
-  "speciesId": "mourning-dove",
-  "seasons": [
-   "spring",
-   "summer"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "wire",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "A mourning dove is cooing",
-    "body": "That soft, slow hoo-OO-oo-oo isn't sad at all. It's a love song from a wire {place}."
-   }
-  ]
- },
- {
-  "id": "dove-pair",
-  "speciesId": "mourning-dove",
-  "seasons": [
-   "spring",
-   "summer",
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "wire",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "Two doves are sitting close",
-    "body": "Side by side on the wire, preening each other. Mourning doves usually come in pairs."
-   }
-  ]
- },
- {
-  "id": "dove-nest",
-  "speciesId": "mourning-dove",
-  "seasons": [
-   "spring",
-   "summer"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "ledge",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "A dove is building the world's simplest nest",
-    "body": "A few twigs on a fire escape. Somehow, it's enough."
-   }
-  ]
- },
- {
-  "id": "dove-seeds",
-  "speciesId": "mourning-dove",
-  "seasons": [
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "dawn",
-   "midday"
-  ],
-  "setting": "lawn",
-  "kicker": "Look down",
-  "variants": [
-   {
-    "title": "Mourning doves are picking at seeds",
-    "body": "A small group walks the ground, bobbing their heads. When they take off, listen for the whistle of their wings."
-   }
-  ]
- },
- {
-  "id": "dove-last-sun",
-  "speciesId": "mourning-dove",
-  "seasons": [
-   "winter",
-   "fall"
-  ],
-  "periods": [
-   "dusk"
-  ],
-  "setting": "wire",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "The doves are soaking up the last sun",
-    "body": "Puffed up on the wire, facing the sunset, catching every bit of warmth before night."
-   }
-  ]
- },
- {
-  "id": "robin-chorus",
-  "speciesId": "american-robin",
-  "seasons": [
-   "spring",
-   "summer"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "branch",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "A robin is starting the dawn chorus",
-    "body": "Before the sun is up, one robin sings, then another. Listen for a cheery, rolling song {place}."
-   }
-  ]
- },
- {
-  "id": "robin-worm",
-  "speciesId": "american-robin",
-  "seasons": [
-   "spring",
-   "summer"
-  ],
-  "periods": [
-   "midday",
-   "dawn"
-  ],
-  "setting": "lawn",
-  "kicker": "Look down",
-  "variants": [
-   {
-    "title": "A robin is hunting worms",
-    "body": "Run, stop, tilt the head, pounce. That tilt isn't listening: they look at the ground with one eye."
-   }
-  ]
- },
- {
-  "id": "robin-fledgling",
-  "speciesId": "american-robin",
-  "seasons": [
-   "summer"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "lawn",
-  "kicker": "Look down",
-  "variants": [
-   {
-    "title": "A robin fledgling is learning the ropes",
-    "body": "Spotty chest, stubby tail, lots of hopping. A parent is nearby with a worm. No rescue needed."
-   }
-  ]
- },
- {
-  "id": "robin-berries",
-  "speciesId": "american-robin",
-  "seasons": [
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "branch",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "Robins are raiding the berries",
-    "body": "Worms are getting scarce, so they've switched to fruit. A group can strip a tree in an afternoon."
-   }
-  ]
- },
- {
-  "id": "robin-evening",
-  "speciesId": "american-robin",
-  "seasons": [
-   "spring",
-   "summer"
-  ],
-  "periods": [
-   "dusk"
-  ],
-  "setting": "branch",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "A robin is singing the day out",
-    "body": "First to sing in the morning and among the last at night."
-   }
-  ]
- },
- {
-  "id": "robin-winter-flock",
-  "speciesId": "american-robin",
-  "seasons": [
-   "winter",
-   "fall"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "branch",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "A quiet flock of robins is passing through",
-    "body": "Plenty of robins stay all winter. They stop singing and travel in groups, looking for berries."
-   }
-  ]
- },
- {
-  "id": "gull-wind",
-  "speciesId": "herring-gull",
-  "seasons": [
-   "spring",
-   "summer",
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "sky",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "A gull is riding the wind",
-    "body": "Wings barely moving, drifting over {place} like it's no effort at all. It mostly isn't."
-   }
-  ]
- },
- {
-  "id": "gull-clam",
-  "speciesId": "herring-gull",
-  "seasons": [
-   "fall",
-   "winter",
-   "spring"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "shore",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "A gull is cracking a clam",
-    "body": "Up, up, then drop it on the rocks. If it doesn't break, they'll try again. And again."
-   }
-  ]
- },
- {
-  "id": "gull-piling",
-  "speciesId": "herring-gull",
-  "seasons": [
-   "spring",
-   "summer",
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "pier",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "A gull is perched on a piling",
-    "body": "Watching the water {place}, waiting to see what the morning tide brings in."
-   }
-  ]
- },
- {
-  "id": "gull-roost",
-  "speciesId": "herring-gull",
-  "seasons": [
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "dusk"
-  ],
-  "setting": "water",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "Gulls are heading out to the water for the night",
-    "body": "They sleep floating together on the harbor, safe from anything on land."
-   }
-  ]
- },
- {
-  "id": "gull-roof",
-  "speciesId": "herring-gull",
-  "seasons": [
-   "spring"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "rooftop",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "A gull is guarding a rooftop nest",
-    "body": "Gulls nest on flat roofs around the city. Get too close and you'll hear about it."
-   }
-  ]
- },
- {
-  "id": "gull-kid",
-  "speciesId": "herring-gull",
-  "seasons": [
-   "summer"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "shore",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "A young gull is whining for lunch",
-    "body": "Mottled brown and as big as the grown-ups, still begging. The red spot on a parent's beak is the doorbell."
-   }
-  ]
- },
- {
-  "id": "monarch-sipping",
-  "speciesId": "monarch",
-  "seasons": [
-   "summer",
-   "fall"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "flowers",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "A monarch is drinking from the flowers",
-    "body": "Wings opening and closing slowly in the sun. Every sip is fuel."
-   }
-  ]
- },
- {
-  "id": "monarch-south",
-  "speciesId": "monarch",
-  "seasons": [
-   "fall"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "sky",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "A monarch is flying south",
-    "body": "This butterfly is headed to the mountains of Mexico, a place they've never been, by way of {place}."
-   }
-  ]
- },
- {
-  "id": "monarch-eggs",
-  "speciesId": "monarch",
-  "seasons": [
-   "summer"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "flowers",
-  "kicker": "Look closer",
-  "variants": [
-   {
-    "title": "A monarch is laying eggs on milkweed",
-    "body": "One tiny egg per leaf. Milkweed is the only plant their caterpillars can eat."
-   }
-  ]
- },
- {
-  "id": "monarch-resting",
-  "speciesId": "monarch",
-  "seasons": [
-   "fall"
-  ],
-  "periods": [
-   "dusk"
-  ],
-  "setting": "branch",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "Monarchs are settling in for the night",
-    "body": "Travelers rest together on branches, wings folded, before tomorrow's leg of the trip."
-   }
-  ]
- },
- {
-  "id": "hawk-watching",
-  "speciesId": "red-tailed-hawk",
-  "seasons": [
-   "spring",
-   "summer",
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "rooftop",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "A red-tailed hawk is sitting very still",
-    "body": "Up on a ledge {place}, watching the ground below. They can wait an hour for one good chance."
-   }
-  ]
- },
- {
-  "id": "hawk-circling",
-  "speciesId": "red-tailed-hawk",
-  "seasons": [
-   "fall",
-   "spring"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "sky",
-  "kicker": "Overhead",
-  "variants": [
-   {
-    "title": "A hawk is circling overhead",
-    "body": "Wide, lazy loops on rising warm air. Look for the rusty red tail when they bank."
-   }
-  ]
- },
- {
-  "id": "hawk-courting",
-  "speciesId": "red-tailed-hawk",
-  "seasons": [
-   "winter"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "sky",
-  "kicker": "Overhead",
-  "variants": [
-   {
-    "title": "Two red-tails are courting",
-    "body": "Soaring together in big circles. Sometimes one dives and they touch talons in the air."
-   }
-  ]
- },
- {
-  "id": "hawk-eggs",
-  "speciesId": "red-tailed-hawk",
-  "seasons": [
-   "spring"
-  ],
-  "periods": [
-   "dawn",
-   "midday"
-  ],
-  "setting": "rooftop",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "A red-tail is sitting on eggs",
-    "body": "In a big stick nest on a building or a tall tree. Their mate brings dinner."
-   }
-  ]
- },
- {
-  "id": "hawk-fledgling",
-  "speciesId": "red-tailed-hawk",
-  "seasons": [
-   "summer"
-  ],
-  "periods": [
-   "dawn",
-   "midday"
-  ],
-  "setting": "branch",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "A young hawk is screaming for dinner",
-    "body": "That long wheeze is a fledgling asking the parents to hurry up while they learn to hunt."
-   }
-  ]
- },
- {
-  "id": "hawk-bedtime",
-  "speciesId": "red-tailed-hawk",
-  "seasons": [
-   "spring",
-   "summer",
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "dusk"
-  ],
-  "setting": "branch",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "A hawk is tucking in for the night",
-    "body": "Perched close to a tree trunk, out of the wind, done for the day."
-   }
-  ]
- },
- {
-  "id": "jay-acorns",
-  "speciesId": "blue-jay",
-  "seasons": [
-   "fall"
-  ],
-  "periods": [
-   "dawn",
-   "midday"
-  ],
-  "setting": "branch",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "A blue jay is hiding acorns",
-    "body": "They can carry several at once in their throat. The ones they forget grow into oaks {place}."
-   }
-  ]
- },
- {
-  "id": "jay-hawk-call",
-  "speciesId": "blue-jay",
-  "seasons": [
-   "spring",
-   "summer",
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "branch",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "A blue jay is pretending to be a hawk",
-    "body": "That hawk scream might be a jay. Maybe it clears everyone off the good branch. Maybe it's just fun."
-   }
-  ]
- },
- {
-  "id": "jay-morning",
-  "speciesId": "blue-jay",
-  "seasons": [
-   "winter",
-   "spring"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "branch",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "A blue jay is announcing the morning",
-    "body": "JAY! JAY! Bright blue against bare branches, and loud about it."
-   }
-  ]
- },
- {
-  "id": "jay-sneaky",
-  "speciesId": "blue-jay",
-  "seasons": [
-   "spring",
-   "summer"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "branch",
-  "kicker": "Look closer",
-  "variants": [
-   {
-    "title": "A blue jay is being sneaky",
-    "body": "Near their nest, the loudest bird on the block slips in and out without a sound."
-   }
-  ]
- },
- {
-  "id": "jay-family",
-  "speciesId": "blue-jay",
-  "seasons": [
-   "summer"
-  ],
-  "periods": [
-   "dawn",
-   "midday"
-  ],
-  "setting": "branch",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "A blue jay family is on the move",
-    "body": "The youngsters follow the grown-ups through the trees and copy everything they do."
-   }
-  ]
- },
- {
-  "id": "junco-hopping",
-  "speciesId": "dark-eyed-junco",
-  "seasons": [
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "dawn",
-   "midday"
-  ],
-  "setting": "hedge",
-  "kicker": "Look down",
-  "variants": [
-   {
-    "title": "Juncos are hopping under the hedge",
-    "body": "Little gray birds with snowy bellies, scratching for seeds. When they fly, their tails flash white."
-   }
-  ]
- },
- {
-  "id": "junco-arrived",
-  "speciesId": "dark-eyed-junco",
-  "seasons": [
-   "fall"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "hedge",
-  "kicker": "Just arrived",
-  "variants": [
-   {
-    "title": "The first juncos just landed",
-    "body": "They flew down from Canada overnight and touched down {place}. They'll stay till spring."
-   }
-  ]
- },
- {
-  "id": "junco-trill",
-  "speciesId": "dark-eyed-junco",
-  "seasons": [
-   "spring"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "branch",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "A junco is trilling before the trip north",
-    "body": "A quick, bright trill from a branch. In a few weeks they'll be gone till fall."
-   }
-  ]
- },
- {
-  "id": "junco-bedtime",
-  "speciesId": "dark-eyed-junco",
-  "seasons": [
-   "winter",
-   "fall"
-  ],
-  "periods": [
-   "dusk"
-  ],
-  "setting": "hedge",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "Juncos are tucking into the hedge for the night",
-    "body": "A small flock huddles low in the bushes, out of the wind."
-   }
-  ]
- },
- {
-  "id": "crow-commute",
-  "speciesId": "american-crow",
-  "seasons": [
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "dusk"
-  ],
-  "setting": "sky",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "Crows are commuting home",
-    "body": "Long lines of them cross the sky at dusk, all heading to the same few roosts to sleep together."
-   }
-  ]
- },
- {
-  "id": "crow-fanning-out",
-  "speciesId": "american-crow",
-  "seasons": [
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "rooftop",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "The crows are fanning out for the day",
-    "body": "Thousands slept together last night. Now each family heads back to their own patch, maybe {place}."
-   }
-  ]
- },
- {
-  "id": "crow-watching",
-  "speciesId": "american-crow",
-  "seasons": [
-   "spring",
-   "summer",
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "rooftop",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "A crow is keeping an eye on things",
-    "body": "Crows remember faces. Be friendly and you might get a nod back."
-   }
-  ]
- },
- {
-  "id": "crow-helpers",
-  "speciesId": "american-crow",
-  "seasons": [
-   "spring",
-   "summer"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "branch",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "A crow family is feeding the new chicks",
-    "body": "Last year's kids help out. Big sisters and brothers bring food to the nest."
-   }
-  ]
- },
- {
-  "id": "crow-kids",
-  "speciesId": "american-crow",
-  "seasons": [
-   "summer"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "lawn",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "Young crows are begging loudly",
-    "body": "Fluffy, noisy and following the parents everywhere. Patience is not a crow-kid skill."
-   }
-  ]
- },
- {
-  "id": "wts-song",
-  "speciesId": "white-throated-sparrow",
-  "seasons": [
-   "fall",
-   "spring"
-  ],
-  "periods": [
-   "dawn"
-  ],
-  "setting": "hedge",
-  "kicker": "Listen",
-  "variants": [
-   {
-    "title": "A White-throated Sparrow is whistling",
-    "body": "Oh sweet Canada, Canada, Canada. A thin, clear song from the bushes {place}."
-   }
-  ]
- },
- {
-  "id": "wts-scratching",
-  "speciesId": "white-throated-sparrow",
-  "seasons": [
-   "fall",
-   "winter"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "lawn",
-  "kicker": "Look down",
-  "variants": [
-   {
-    "title": "White-throated Sparrows are scratching in the leaves",
-    "body": "Both feet at once, hop-kick backward. They're finding bugs and seeds under the leaf litter."
-   }
-  ]
- },
- {
-  "id": "wts-arrived",
-  "speciesId": "white-throated-sparrow",
-  "seasons": [
-   "fall"
-  ],
-  "periods": [
-   "dawn",
-   "midday"
-  ],
-  "setting": "hedge",
-  "kicker": "Just arrived",
-  "variants": [
-   {
-    "title": "White-throated Sparrows are back",
-    "body": "They flew in from Canadian forests and will spend the winter in the bushes here."
-   }
-  ]
- },
- {
-  "id": "wts-fueling",
-  "speciesId": "white-throated-sparrow",
-  "seasons": [
-   "spring"
-  ],
-  "periods": [
-   "midday"
-  ],
-  "setting": "hedge",
-  "kicker": "Right now",
-  "variants": [
-   {
-    "title": "White-throated Sparrows are fueling up",
-    "body": "In a few weeks they'll head north. Right now it's all snacks and practice songs."
-   }
-  ]
- },
- {
-  "id": "swift-zipping",
-  "speciesId": "chimney-swift",
-  "seasons": [
-   "spring",
-   "summer"
-  ],
-  "periods": [
-   "midday",
-   "dawn"
-  ],
-  "setting": "sky",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "Chimney swifts are zipping overhead",
-    "body": "Tiny cigar-shaped birds, twittering, catching bugs on the wing. They hardly ever land."
-   }
-  ]
- },
- {
-  "id": "swift-chimney",
-  "speciesId": "chimney-swift",
-  "seasons": [
-   "summer"
-  ],
-  "periods": [
-   "dusk"
-  ],
-  "setting": "sky",
-  "kicker": "Look up",
-  "variants": [
-   {
-    "title": "Swifts are swirling down a chimney",
-    "body": "As the light goes, they circle and pour into an old chimney {place} to roost, clinging to the inside wall."
-   }
-  ]
- },
- {
-  "id": "swift-back",
-  "speciesId": "chimney-swift",
-  "seasons": [
-   "spring"
-  ],
-  "periods": [
-   "dusk"
-  ],
-  "setting": "sky",
-  "kicker": "Just arrived",
-  "variants": [
-   {
-    "title": "The chimney swifts are back",
-    "body": "Fresh in from South America. Listen for high twittering over the rooftops."
+    "title": "Pigeon bedtime is starting",
+    "body": "One by one they flap up to the ledge {place} and shuffle in next to their favorite pigeon."
    }
   ]
  },
@@ -1659,8 +482,148 @@
     "body": "Heads tucked into their back feathers, pressed together in pairs, a few floors above the sidewalk {place}."
    },
    {
-    "title": "A pigeon is dozing under the eaves",
-    "body": "One foot up, feathers fluffed. City noise doesn't bother them a bit."
+    "title": "A pigeon is dozing on one foot",
+    "body": "Feathers fluffed, head tucked. City noise doesn't bother them one bit."
+   }
+  ]
+ },
+ {
+  "id": "sparrow-awake",
+  "speciesId": "house-sparrow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "hedge",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "The sparrow gang is up and talking",
+    "body": "The hedge {place} is chattering away. That racket is how they keep track of who's where. Also gossip, probably."
+   },
+   {
+    "title": "Good morning from the hedge",
+    "body": "Cheep, cheep, CHEEP. The sparrows have opinions about the day already."
+   }
+  ]
+ },
+ {
+  "id": "sparrow-dust",
+  "speciesId": "house-sparrow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "sidewalk",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The sparrows are taking a dust bath",
+    "body": "They wriggle into a dry patch of dirt and flick it through their feathers. It's dry shampoo, sparrow style."
+   },
+   {
+    "title": "Sparrow spa day at the curb",
+    "body": "Wiggle, flap, fluff, repeat. Dust scrubs away oil and tiny bugs. They come out cleaner, somehow."
+   }
+  ]
+ },
+ {
+  "id": "sparrow-kids",
+  "speciesId": "house-sparrow",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "sidewalk",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Sparrow kids are begging very dramatically",
+    "body": "Fluffy youngsters chase their parents, wings fluttering, beaks wide open. The parents mostly give in."
+   },
+   {
+    "title": "A baby sparrow is following a grown-up everywhere",
+    "body": "Flutter, flutter, CHEEP. The grown-up finds a bug, the baby finds a way to be standing right there."
+   }
+  ]
+ },
+ {
+  "id": "sparrow-nest",
+  "speciesId": "house-sparrow",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "ledge",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A sparrow is stuffing grass into a gap",
+    "body": "A sign, a traffic light, a hole in old brick: anywhere will do for a messy, cozy nest. Interior design: maximal."
+   },
+   {
+    "title": "Sparrow construction season is open",
+    "body": "Bits of grass, feathers and string go into every nook {place}. The result is lumpy and perfect."
+   }
+  ]
+ },
+ {
+  "id": "sparrow-bedtime",
+  "speciesId": "house-sparrow",
+  "seasons": [
+   "spring",
+   "fall"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "The hedge is having its evening meeting",
+    "body": "Before bed, the whole gang gathers in the bushes and talks over the day. Loudly. Everyone has a point."
+   },
+   {
+    "title": "The sparrows are arguing about bedtime",
+    "body": "Lots of chirping, lots of shuffling, then suddenly, quiet. They've settled it."
+   }
+  ]
+ },
+ {
+  "id": "sparrow-winter",
+  "speciesId": "house-sparrow",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The sparrows are tiny fluffballs today",
+    "body": "Puffed up round, shoulder to shoulder, deep in the hedge and out of the wind."
+   },
+   {
+    "title": "Sparrow sleepover in the hedge",
+    "body": "It's cold, so everyone's packed in close. Small birds, big huddle."
    }
   ]
  },
@@ -1681,7 +644,154 @@
   "variants": [
    {
     "title": "The sparrow gang is asleep in the hedge",
-    "body": "Deep inside the bushes, all puffed up together. The chatter starts again at first light."
+    "body": "Deep inside the bushes, all puffed up together. The chatter starts again at first light. Count on it."
+   },
+   {
+    "title": "Lights out in the hedge",
+    "body": "For a few hours, the loudest bushes {place} are completely quiet."
+   }
+  ]
+ },
+ {
+  "id": "squirrel-burying",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A squirrel is hiding an acorn",
+    "body": "Dig, drop, pat-pat-pat, then a very suspicious look around. You saw nothing."
+   },
+   {
+    "title": "Squirrels are planting next year's trees (by accident)",
+    "body": "Every planter {place} is a pantry right now. The acorns they forget will sprout in spring. Oops, a forest."
+   },
+   {
+    "title": "A squirrel is pretending to bury something",
+    "body": "If they think someone's watching, they'll fake it: dig, pat, nothing there. The real snack goes somewhere secret."
+   }
+  ]
+ },
+ {
+  "id": "squirrel-morning",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "spring",
+   "summer",
+   "winter"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The squirrels are up and digging",
+    "body": "Morning is rush hour. They're checking old hiding spots and sniffing out breakfast {place}."
+   },
+   {
+    "title": "A squirrel is speed-running the lawn",
+    "body": "Dash, stop, sniff, dig, dash. They have a lot of places to check before lunch."
+   }
+  ]
+ },
+ {
+  "id": "squirrel-chase",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "trunk",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Two squirrels are chasing each other around the tree",
+    "body": "Wild spirals up and down the trunk. It's courting season, and nobody is being subtle about it."
+   },
+   {
+    "title": "Squirrel loop-de-loops on the tree trunk",
+    "body": "Round and round and round. In winter, these chases are mostly about romance. Very dizzy romance."
+   }
+  ]
+ },
+ {
+  "id": "squirrel-sploot",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A squirrel is splooting",
+    "body": "Flat on a cool branch, belly down, legs out like a little rug. That's how a squirrel beats the heat."
+   },
+   {
+    "title": "Squirrel pancake on the branch",
+    "body": "Too hot to scamper. They've spread out flat in the shade and they are not getting up."
+   }
+  ]
+ },
+ {
+  "id": "squirrel-drey",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "midday",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A squirrel mom is heading home to the drey",
+    "body": "Babies are tucked up in that ball of leaves. She checks on them between snack runs."
+   },
+   {
+    "title": "Busy mom, coming through",
+    "body": "Up the trunk to the leafy nest, quick check on the kits, and back down for more snacks."
+   }
+  ]
+ },
+ {
+  "id": "squirrel-bedtime",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "trunk",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A squirrel is heading up for the night",
+    "body": "Up the trunk to the drey, tail flicking. Bedtime comes early for squirrels."
+   },
+   {
+    "title": "Last snack, then bed",
+    "body": "One final nibble, then straight up the tree. Squirrels keep very responsible hours."
    }
   ]
  },
@@ -1702,16 +812,393 @@
   "variants": [
    {
     "title": "A squirrel is curled up in the drey",
-    "body": "Wrapped in their own tail like a blanket, high in a ball of leaves. In winter, sometimes two share for warmth."
+    "body": "Wrapped in their own tail like a blanket, high in a ball of leaves. On cold nights, sometimes two share."
+   },
+   {
+    "title": "Squirrel, fast asleep in a leaf ball",
+    "body": "That messy clump of leaves up in the tree {place}? There's a very cozy squirrel inside."
    }
   ]
  },
  {
-  "id": "crow-roost",
-  "speciesId": "american-crow",
+  "id": "starling-wire",
+  "speciesId": "european-starling",
   "seasons": [
    "fall",
    "winter"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "wire",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "The starlings are lining up on the wire",
+    "body": "Dozens of them, chattering, before heading off together to a shared roost for the night."
+   },
+   {
+    "title": "A starling is doing impressions",
+    "body": "Listen: a whistle, a click, maybe a car alarm. Starlings borrow sounds from {place} and remix them into songs."
+   },
+   {
+    "title": "Starling group chat, live on the wire",
+    "body": "So much chatter. Then, all at once, everybody takes off. Meeting adjourned."
+   }
+  ]
+ },
+ {
+  "id": "starling-lawn",
+  "speciesId": "european-starling",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Look down",
+  "variants": [
+   {
+    "title": "Starlings are poking holes in the lawn",
+    "body": "They stab their beaks into the grass and open them wide to pry up grubs. A clever little trick."
+   },
+   {
+    "title": "The starlings are lawn-aerating for free",
+    "body": "Poke, open, snack. They march across the grass like a tiny, very shiny work crew."
+   }
+  ]
+ },
+ {
+  "id": "starling-singing",
+  "speciesId": "european-starling",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "rooftop",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A starling is putting on a rooftop concert",
+    "body": "All dressed up in glossy purple and green, wings flicking, singing every sound they know."
+   },
+   {
+    "title": "A starling is singing from a chimney",
+    "body": "Whistles, clicks, a borrowed car alarm. Spring starlings are very committed performers."
+   }
+  ]
+ },
+ {
+  "id": "starling-kids",
+  "speciesId": "european-starling",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Young starlings are following their parents around",
+    "body": "Plain brown and very loud, they trail the grown-ups across the grass begging for bugs."
+   },
+   {
+    "title": "Starling teens are being extremely loud",
+    "body": "They look nothing like the shiny grown-ups yet, but the volume is already perfect."
+   }
+  ]
+ },
+ {
+  "id": "starling-stars",
+  "speciesId": "european-starling",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "wire",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "The starlings are wearing their stars",
+    "body": "Their winter feathers are covered in white speckles. Catch one in the sun and they sparkle."
+   },
+   {
+    "title": "Starling, polka dots edition",
+    "body": "In winter they're dark and spotted all over, like a little starry sky with legs."
+   }
+  ]
+ },
+ {
+  "id": "dove-cooing",
+  "speciesId": "mourning-dove",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "wire",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A mourning dove is cooing",
+    "body": "That soft, slow hoo-OO-oo-oo isn't sad at all. It's a love song from a wire {place}."
+   },
+   {
+    "title": "Hoo-OO-oo-oo",
+    "body": "The mourning dove sounds a bit gloomy, but that's actually flirting."
+   }
+  ]
+ },
+ {
+  "id": "dove-pair",
+  "speciesId": "mourning-dove",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "wire",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "Two doves are sitting very close",
+    "body": "Side by side on the wire, preening each other. Mourning doves usually come in pairs. Adorable, honestly."
+   },
+   {
+    "title": "A dove couple is sharing the wire",
+    "body": "A little nudge, a little preen. They're doing their best impression of a valentine."
+   }
+  ]
+ },
+ {
+  "id": "dove-nest",
+  "speciesId": "mourning-dove",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "ledge",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A dove is building the world's simplest nest",
+    "body": "A few twigs on a fire escape. Somehow, it's enough. Minimalism wins again."
+   },
+   {
+    "title": "Mourning dove, nest-building on a budget",
+    "body": "Twig, twig, done. Their nests are so thin you can sometimes see the eggs from below."
+   }
+  ]
+ },
+ {
+  "id": "dove-seeds",
+  "speciesId": "mourning-dove",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Look down",
+  "variants": [
+   {
+    "title": "Mourning doves are picking at seeds",
+    "body": "A small group walks the ground, bobbing their heads. When they take off, listen for the whistle of their wings."
+   },
+   {
+    "title": "Head-bob parade on the ground",
+    "body": "The doves are strolling and snacking. If you startle them, their wings squeak like a toy."
+   }
+  ]
+ },
+ {
+  "id": "dove-last-sun",
+  "speciesId": "mourning-dove",
+  "seasons": [
+   "winter",
+   "fall"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "wire",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The doves are soaking up the last sun",
+    "body": "Puffed up on the wire, facing the sunset, catching every bit of warmth before night."
+   },
+   {
+    "title": "Dove, fluffed up to maximum",
+    "body": "Round as a dinner roll, eyes half closed, enjoying the last warm light {place}."
+   }
+  ]
+ },
+ {
+  "id": "robin-chorus",
+  "speciesId": "american-robin",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "branch",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A robin is kicking off the dawn chorus",
+    "body": "Before the sun is up, one robin sings, then another. Listen for a cheery, rolling song {place}."
+   },
+   {
+    "title": "The robins are up before everyone",
+    "body": "It's still mostly dark, and they're already singing like it's the best morning ever."
+   }
+  ]
+ },
+ {
+  "id": "robin-worm",
+  "speciesId": "american-robin",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Look down",
+  "variants": [
+   {
+    "title": "A robin is hunting worms",
+    "body": "Run, stop, tilt the head, pounce. That tilt isn't listening: they're looking at the ground with one eye."
+   },
+   {
+    "title": "Robin vs. worm, round one",
+    "body": "A tug, a stretch, a tug. The robin usually wins. The worm puts up a good fight."
+   }
+  ]
+ },
+ {
+  "id": "robin-fledgling",
+  "speciesId": "american-robin",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Look down",
+  "variants": [
+   {
+    "title": "A robin fledgling is figuring things out",
+    "body": "Spotty chest, stubby tail, lots of hopping. A parent is nearby with a worm. No rescue needed."
+   },
+   {
+    "title": "Baby robin, hopping around like a wind-up toy",
+    "body": "They can't fly well yet, but mom and dad are watching. Give them space and they'll be fine."
+   }
+  ]
+ },
+ {
+  "id": "robin-berries",
+  "speciesId": "american-robin",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The robins are raiding the berry bushes",
+    "body": "Worms are getting scarce, so they've switched to fruit. A group can clear a tree in an afternoon."
+   },
+   {
+    "title": "Robin berry buffet is open",
+    "body": "Gulp, gulp, gulp. In fall and winter, robins go full fruit mode."
+   }
+  ]
+ },
+ {
+  "id": "robin-evening",
+  "speciesId": "american-robin",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A robin is singing the day out",
+    "body": "First to sing in the morning and among the last at night. Long shift. Great attitude."
+   },
+   {
+    "title": "One more song from the robin",
+    "body": "As the light fades {place}, a robin is still going, cheerful as ever."
+   }
+  ]
+ },
+ {
+  "id": "robin-winter-flock",
+  "speciesId": "american-robin",
+  "seasons": [
+   "winter",
+   "fall"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "branch",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A quiet flock of robins is passing through",
+    "body": "Plenty of robins stay all winter. They stop singing and travel in groups, looking for berries."
+   },
+   {
+    "title": "Surprise, the robins never left",
+    "body": "In winter they're quieter and hang out in flocks, so you might not notice them. They're here."
+   }
+  ]
+ },
+ {
+  "id": "robin-roost",
+  "speciesId": "american-robin",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
   ],
   "periods": [
    "night"
@@ -1720,8 +1207,153 @@
   "kicker": "Tonight",
   "variants": [
    {
-    "title": "The crows are sleeping in a giant roost",
-    "body": "Hundreds, sometimes thousands, packed into the same stand of trees. There's safety in numbers."
+    "title": "The robins are at a big sleepover",
+    "body": "Dads and young robins often sleep together in one big group roost, then scatter at dawn."
+   },
+   {
+    "title": "Robins, roosting in the trees",
+    "body": "Dozens of them tucked into the branches, getting rested for tomorrow's very early concert."
+   }
+  ]
+ },
+ {
+  "id": "gull-wind",
+  "speciesId": "herring-gull",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A gull is riding the wind",
+    "body": "Wings barely moving, drifting over {place} like it's no effort at all. It mostly isn't."
+   },
+   {
+    "title": "A gull is just hanging in the air",
+    "body": "No flapping, no hurry. They found the perfect breeze and they're keeping it."
+   }
+  ]
+ },
+ {
+  "id": "gull-clam",
+  "speciesId": "herring-gull",
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "shore",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A gull is cracking a clam the clever way",
+    "body": "Up, up, then drop it on the rocks. If it doesn't break, they'll try again. And again. Persistence!"
+   },
+   {
+    "title": "Gull vs. clam",
+    "body": "The gull has a plan: fly high, let go, check the result. Repeat until lunch is served."
+   }
+  ]
+ },
+ {
+  "id": "gull-piling",
+  "speciesId": "herring-gull",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "pier",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A gull has claimed a piling",
+    "body": "Watching the water {place}, waiting to see what the morning tide brings in. That piling is taken."
+   },
+   {
+    "title": "Gull, on morning lookout",
+    "body": "Standing very tall on a post, judging the harbor. Breakfast could show up any minute."
+   }
+  ]
+ },
+ {
+  "id": "gull-roost",
+  "speciesId": "herring-gull",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "The gulls are heading out to the water for the night",
+    "body": "They sleep floating together on the harbor, safe from anything on land."
+   },
+   {
+    "title": "Gull commute, outbound",
+    "body": "As the sun goes down, the gulls fly out over the water to their floating bedroom."
+   }
+  ]
+ },
+ {
+  "id": "gull-roof",
+  "speciesId": "herring-gull",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "rooftop",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A gull is guarding a rooftop nest",
+    "body": "Gulls nest on flat roofs around the city. Get too close and you'll hear about it. Loudly."
+   },
+   {
+    "title": "Gull parent on roof duty",
+    "body": "Somewhere up there is a nest. The gull standing guard takes the job very seriously."
+   }
+  ]
+ },
+ {
+  "id": "gull-kid",
+  "speciesId": "herring-gull",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "shore",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A young gull is whining for lunch",
+    "body": "Mottled brown and as big as the grown-ups, still begging. The red spot on a parent's beak is the doorbell."
+   },
+   {
+    "title": "Gull teenager, still asking parents for food",
+    "body": "Full-size, fully capable, extremely whiny. They'll get there."
    }
   ]
  },
@@ -1741,8 +1373,450 @@
   "kicker": "Tonight",
   "variants": [
    {
+    "title": "Shh, the gulls are finally asleep",
+    "body": "All tucked in together on the harbor, bobbing like bath toys. For once, nobody is yelling."
+   },
+   {
     "title": "The gulls are asleep on the water",
-    "body": "Floating together out on the harbor, bobbing with the waves, safe from anything on land."
+    "body": "Floating out on the harbor, rising and falling with the waves, safe from anything on land."
+   }
+  ]
+ },
+ {
+  "id": "monarch-sipping",
+  "speciesId": "monarch",
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "flowers",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A monarch is drinking from the flowers",
+    "body": "Wings opening and closing slowly in the sun. Every sip is fuel for a very big trip."
+   },
+   {
+    "title": "Monarch at the snack bar",
+    "body": "Flower to flower, sip, sip. That orange is a warning to birds: they taste terrible."
+   }
+  ]
+ },
+ {
+  "id": "monarch-south",
+  "speciesId": "monarch",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A monarch is flying to Mexico",
+    "body": "This butterfly is headed to the mountains of Mexico, a place they've never been, by way of {place}. No map needed."
+   },
+   {
+    "title": "Tiny traveler, passing through",
+    "body": "A monarch is drifting south over the rooftops. Thousands of miles to go, one flap at a time."
+   }
+  ]
+ },
+ {
+  "id": "monarch-eggs",
+  "speciesId": "monarch",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "flowers",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A monarch is laying eggs on milkweed",
+    "body": "One tiny egg per leaf. Milkweed is the only plant their caterpillars can eat. Picky, but loyal."
+   },
+   {
+    "title": "Monarch mom, very particular about milkweed",
+    "body": "She tastes the leaves with her feet before leaving an egg. Only the best for the kids."
+   }
+  ]
+ },
+ {
+  "id": "monarch-resting",
+  "speciesId": "monarch",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The monarchs are settling in for the night",
+    "body": "Travelers rest together on branches, wings folded, before tomorrow's leg of the trip."
+   },
+   {
+    "title": "Monarch hotel, now open",
+    "body": "A few butterflies are bunking on the same branch {place}. Big day of flying tomorrow."
+   }
+  ]
+ },
+ {
+  "id": "hawk-watching",
+  "speciesId": "red-tailed-hawk",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "rooftop",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A red-tailed hawk is sitting very, very still",
+    "body": "Up on a ledge {place}, watching the ground below. They can wait an hour for one good chance."
+   },
+   {
+    "title": "Hawk on a light pole, doing nothing on purpose",
+    "body": "It looks like a nap. It is not a nap. They're watching everything."
+   }
+  ]
+ },
+ {
+  "id": "hawk-circling",
+  "speciesId": "red-tailed-hawk",
+  "seasons": [
+   "fall",
+   "spring"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "sky",
+  "kicker": "Overhead",
+  "variants": [
+   {
+    "title": "A hawk is circling overhead",
+    "body": "Wide, lazy loops on rising warm air. Look for the rusty red tail when they bank."
+   },
+   {
+    "title": "Free elevator ride for the hawk",
+    "body": "They ride warm air up and up without flapping. Effortless, and a little show-offy."
+   }
+  ]
+ },
+ {
+  "id": "hawk-courting",
+  "speciesId": "red-tailed-hawk",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "sky",
+  "kicker": "Overhead",
+  "variants": [
+   {
+    "title": "Two red-tails are on a sky date",
+    "body": "Soaring together in big circles. Sometimes one dives and they touch talons in the air. Very dramatic."
+   },
+   {
+    "title": "Red-tailed hawk romance, overhead",
+    "body": "Matching loops, a swoop, a near miss on purpose. Winter is courting season."
+   }
+  ]
+ },
+ {
+  "id": "hawk-eggs",
+  "speciesId": "red-tailed-hawk",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "rooftop",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A red-tail is sitting on eggs",
+    "body": "In a big stick nest on a building or a tall tree. Their partner brings dinner. Good partner."
+   },
+   {
+    "title": "Hawk, on nest duty",
+    "body": "Hunkered down on a giant pile of sticks, keeping the eggs warm while the city goes by."
+   }
+  ]
+ },
+ {
+  "id": "hawk-fledgling",
+  "speciesId": "red-tailed-hawk",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A young hawk is screaming for dinner",
+    "body": "That long wheeze is a fledgling asking the parents to hurry up while they learn to hunt."
+   },
+   {
+    "title": "Hawk teen, very loud, very hungry",
+    "body": "They can fly now, but hunting is hard. So they yell. A lot."
+   }
+  ]
+ },
+ {
+  "id": "hawk-bedtime",
+  "speciesId": "red-tailed-hawk",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A hawk is tucking in for the night",
+    "body": "Perched close to a tree trunk, out of the wind, done for the day."
+   },
+   {
+    "title": "Hawk, off the clock",
+    "body": "Shift's over. Feathers fluffed, tucked against the trunk, eyes closing."
+   }
+  ]
+ },
+ {
+  "id": "jay-acorns",
+  "speciesId": "blue-jay",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A blue jay is stuffing acorns in their throat",
+    "body": "They can carry several at once in a stretchy throat pouch. The ones they forget grow into oaks {place}."
+   },
+   {
+    "title": "Blue jay, burying treasure",
+    "body": "Acorn here, acorn there. Jays plant more oak trees than most people ever will."
+   }
+  ]
+ },
+ {
+  "id": "jay-hawk-call",
+  "speciesId": "blue-jay",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A blue jay is pretending to be a hawk",
+    "body": "That hawk scream might be a jay. Maybe it clears everyone off the good branch. Maybe it's just fun."
+   },
+   {
+    "title": "Wait, is that a hawk?",
+    "body": "Nope. It's a blue jay doing their best hawk impression. They're very good at it."
+   }
+  ]
+ },
+ {
+  "id": "jay-morning",
+  "speciesId": "blue-jay",
+  "seasons": [
+   "winter",
+   "spring"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "branch",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A blue jay is announcing the morning",
+    "body": "JAY! JAY! Bright blue against bare branches, and very loud about it."
+   },
+   {
+    "title": "Good morning, says the blue jay. Loudly.",
+    "body": "No alarm clock needed {place}. The jays have it covered."
+   }
+  ]
+ },
+ {
+  "id": "jay-sneaky",
+  "speciesId": "blue-jay",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A blue jay is being suspiciously quiet",
+    "body": "Near their nest, the loudest bird on the block slips in and out without a sound."
+   },
+   {
+    "title": "Blue jay in stealth mode",
+    "body": "Usually the loudest bird around. Right now, sneaky as a spy. There's a nest nearby."
+   }
+  ]
+ },
+ {
+  "id": "jay-family",
+  "speciesId": "blue-jay",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A blue jay family is on a field trip",
+    "body": "The youngsters follow the grown-ups through the trees and copy everything they do."
+   },
+   {
+    "title": "Young blue jays are learning the ropes",
+    "body": "Watch a grown-up, try it, mess it up, try again. Very relatable."
+   }
+  ]
+ },
+ {
+  "id": "junco-hopping",
+  "speciesId": "dark-eyed-junco",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "hedge",
+  "kicker": "Look down",
+  "variants": [
+   {
+    "title": "Juncos are hopping under the hedge",
+    "body": "Little gray birds with snowy bellies, scratching for seeds. When they fly, their tails flash white."
+   },
+   {
+    "title": "Tiny snowbirds, hop-hop-hopping",
+    "body": "Juncos never walk. They hop. Everywhere. Under every bush {place}."
+   }
+  ]
+ },
+ {
+  "id": "junco-arrived",
+  "speciesId": "dark-eyed-junco",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "hedge",
+  "kicker": "Just arrived",
+  "variants": [
+   {
+    "title": "The first juncos just landed",
+    "body": "They flew down from Canada overnight and touched down {place}. They'll stay till spring."
+   },
+   {
+    "title": "The snowbirds are back",
+    "body": "Juncos tend to show up right as it gets chilly. Welcome back, little gray friends."
+   }
+  ]
+ },
+ {
+  "id": "junco-trill",
+  "speciesId": "dark-eyed-junco",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "branch",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A junco is trilling before the trip north",
+    "body": "A quick, bright trill from a branch. In a few weeks they'll be gone till fall."
+   },
+   {
+    "title": "Junco, warming up for the road",
+    "body": "A little trill, a lot of snacking. Canada is a long way to fly."
+   }
+  ]
+ },
+ {
+  "id": "junco-bedtime",
+  "speciesId": "dark-eyed-junco",
+  "seasons": [
+   "winter",
+   "fall"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The juncos are tucking into the hedge for the night",
+    "body": "A small flock huddles low in the bushes, out of the wind."
+   },
+   {
+    "title": "Junco bedtime, low and cozy",
+    "body": "They pick the thickest part of the hedge and scoot in close together."
    }
   ]
  },
@@ -1762,16 +1836,135 @@
    {
     "title": "The juncos are asleep low in the hedge",
     "body": "Tucked close to the ground, out of the wind, saving every bit of warmth for tomorrow."
+   },
+   {
+    "title": "Little gray puffballs, fast asleep",
+    "body": "Somewhere under a hedge {place}, a few juncos are snoozing close together."
    }
   ]
  },
  {
-  "id": "robin-roost",
-  "speciesId": "american-robin",
+  "id": "crow-commute",
+  "speciesId": "american-crow",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "The crows are commuting home",
+    "body": "Long lines of them cross the sky at dusk, all heading to the same few roosts to sleep together."
+   },
+   {
+    "title": "Crow rush hour, overhead",
+    "body": "Caw, caw, caw. Everyone's heading to the big sleepover at once."
+   }
+  ]
+ },
+ {
+  "id": "crow-fanning-out",
+  "speciesId": "american-crow",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "rooftop",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "The crows are heading to work",
+    "body": "Thousands slept together last night. Now each family heads back to their own patch, maybe {place}."
+   },
+   {
+    "title": "Crow families are fanning out for the day",
+    "body": "One big roost, many little neighborhoods. Everybody knows their route."
+   }
+  ]
+ },
+ {
+  "id": "crow-watching",
+  "speciesId": "american-crow",
   "seasons": [
    "spring",
    "summer",
-   "fall"
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "rooftop",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A crow is keeping an eye on things",
+    "body": "Crows remember faces. Be friendly and you might get a nod back. They're excellent judges of character."
+   },
+   {
+    "title": "The neighborhood watch is on duty",
+    "body": "A crow on the roof edge is noting who's who {place}. They really do remember people."
+   }
+  ]
+ },
+ {
+  "id": "crow-helpers",
+  "speciesId": "american-crow",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Crow big siblings are on babysitting duty",
+    "body": "Last year's kids help out. Big sisters and brothers bring food to the nest."
+   },
+   {
+    "title": "A crow family is feeding the new chicks",
+    "body": "It takes a village. Or at least a few older siblings with snacks."
+   }
+  ]
+ },
+ {
+  "id": "crow-kids",
+  "speciesId": "american-crow",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "Young crows are begging loudly",
+    "body": "Fluffy, noisy and following the parents everywhere. Patience is not a crow-kid skill."
+   },
+   {
+    "title": "Crow kid, very sure they're starving",
+    "body": "They aren't. But they'd like everyone {place} to know they could eat."
+   }
+  ]
+ },
+ {
+  "id": "crow-roost",
+  "speciesId": "american-crow",
+  "seasons": [
+   "fall",
+   "winter"
   ],
   "periods": [
    "night"
@@ -1780,8 +1973,171 @@
   "kicker": "Tonight",
   "variants": [
    {
-    "title": "The robins are roosting in the trees",
-    "body": "Dads and young robins often sleep together in a big group roost, then scatter at dawn."
+    "title": "The crows are at a giant sleepover",
+    "body": "Hundreds, sometimes thousands, packed into the same stand of trees. There's safety in numbers."
+   },
+   {
+    "title": "Crow roost, lights out",
+    "body": "A whole city of crows, sleeping shoulder to shoulder in the trees."
+   }
+  ]
+ },
+ {
+  "id": "wts-song",
+  "speciesId": "white-throated-sparrow",
+  "seasons": [
+   "fall",
+   "spring"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "hedge",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A White-throated Sparrow is whistling",
+    "body": "Oh sweet Canada, Canada, Canada. A thin, clear song from the bushes {place}."
+   },
+   {
+    "title": "Someone in the bushes is singing about Canada",
+    "body": "That's a White-throated Sparrow. Very homesick song, very pretty."
+   }
+  ]
+ },
+ {
+  "id": "wts-scratching",
+  "speciesId": "white-throated-sparrow",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Look down",
+  "variants": [
+   {
+    "title": "White-throated Sparrows are doing the leaf kick",
+    "body": "Both feet at once, hop-kick backward. They're finding bugs and seeds under the leaves."
+   },
+   {
+    "title": "Hop, kick, look. Hop, kick, look.",
+    "body": "The White-throated Sparrows have a whole dance for finding snacks in the leaf litter."
+   }
+  ]
+ },
+ {
+  "id": "wts-arrived",
+  "speciesId": "white-throated-sparrow",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "hedge",
+  "kicker": "Just arrived",
+  "variants": [
+   {
+    "title": "The White-throated Sparrows are back",
+    "body": "They flew in from Canadian forests and will spend the winter in the bushes here."
+   },
+   {
+    "title": "New neighbors in the bushes",
+    "body": "White-throated Sparrows just moved in for the season. Listen for their whistle."
+   }
+  ]
+ },
+ {
+  "id": "wts-fueling",
+  "speciesId": "white-throated-sparrow",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "hedge",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "White-throated Sparrows are fueling up",
+    "body": "In a few weeks they'll head north. Right now it's all snacks and practice songs."
+   },
+   {
+    "title": "Snack break before the big trip",
+    "body": "The White-throated Sparrows are eating everything they can find. Canada's far."
+   }
+  ]
+ },
+ {
+  "id": "swift-zipping",
+  "speciesId": "chimney-swift",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "Chimney swifts are zipping overhead",
+    "body": "Tiny cigar-shaped birds, twittering, catching bugs on the wing. They hardly ever land."
+   },
+   {
+    "title": "Flying cigars, twittering",
+    "body": "Those little zoomy birds are chimney swifts. They eat, drink and bathe without landing."
+   }
+  ]
+ },
+ {
+  "id": "swift-chimney",
+  "speciesId": "chimney-swift",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "The swifts are pouring into a chimney",
+    "body": "As the light goes, they circle and swirl down into an old chimney {place} to sleep, clinging to the inside wall."
+   },
+   {
+    "title": "Swift tornado, right on schedule",
+    "body": "Round and round, then whoosh, they all drop into the chimney for the night."
+   }
+  ]
+ },
+ {
+  "id": "swift-back",
+  "speciesId": "chimney-swift",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "Just arrived",
+  "variants": [
+   {
+    "title": "The chimney swifts are back",
+    "body": "Fresh in from South America. Listen for high twittering over the rooftops."
+   },
+   {
+    "title": "Twitter, twitter, the swifts have landed",
+    "body": "Well, not landed. They barely ever land. But they're back!"
    }
   ]
  }
