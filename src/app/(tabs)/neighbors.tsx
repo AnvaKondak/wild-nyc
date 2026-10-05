@@ -10,7 +10,7 @@ import { NeighborhoodScene, placeSpecies, SCENE_SIZE } from '@/components/scenes
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
-import { species as allSpecies, type PlaceKind, type Season, type Species } from '@/content';
+import { species as allSpecies, speciesPhoto, type PlaceKind, type Season, type Species } from '@/content';
 import { shortDate } from '@/lib/format';
 import { seenLabel } from '@/lib/live';
 import { seasonOf } from '@/lib/time';
@@ -133,7 +133,7 @@ export default function Neighbors() {
                 boxShadow: selected ? `0px 0px 0px 4px ${colors.yellow}` : undefined,
               }}
             >
-              <Sticker art={s.art} size={STICKER} tint={colors[s.tint]} rotate={isMet ? tilt : 0} ghost={!isMet} />
+              <Sticker art={s.art} photo={speciesPhoto(s.id)} size={STICKER} tint={colors[s.tint]} rotate={isMet ? tilt : 0} ghost={!isMet} />
             </Pressable>
           );
         })}

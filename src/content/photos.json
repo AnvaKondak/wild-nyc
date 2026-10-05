@@ -1,0 +1,104 @@
+{
+  "american-crow": {
+    "file": "american-crow.jpg",
+    "license": "CC BY-SA",
+    "attribution": "(c) Gordon Leggett, some rights reserved (CC BY-SA)",
+    "source": "https://www.inaturalist.org/photos/97752362"
+  },
+  "american-robin": {
+    "file": "american-robin.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Judy Gallagher, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/111891996"
+  },
+  "blue-jay": {
+    "file": "blue-jay.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Judy Gallagher, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/530721418"
+  },
+  "chimney-swift": {
+    "file": "chimney-swift.jpg",
+    "license": "CC0",
+    "attribution": "no rights reserved, uploaded by Chrissy McClarren and Andy Reago",
+    "source": "https://www.inaturalist.org/photos/143746829"
+  },
+  "dark-eyed-junco": {
+    "file": "dark-eyed-junco.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Becky Matsubara, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/462900958"
+  },
+  "eastern-gray-squirrel": {
+    "file": "eastern-gray-squirrel.jpg",
+    "license": "CC BY-SA",
+    "attribution": "(c) Diliff, some rights reserved (CC BY-SA)",
+    "source": "https://www.inaturalist.org/photos/22144449"
+  },
+  "european-starling": {
+    "file": "european-starling.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Timothy Lindsey, some rights reserved (CC BY), uploaded by Timothy Lindsey",
+    "source": "https://www.inaturalist.org/photos/488854941"
+  },
+  "herring-gull": {
+    "file": "herring-gull.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Mila C., some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/245897403"
+  },
+  "house-sparrow": {
+    "file": "house-sparrow.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Esteban Poveda, some rights reserved (CC BY), uploaded by Esteban Poveda",
+    "source": "https://www.inaturalist.org/photos/136543105"
+  },
+  "monarch": {
+    "file": "monarch.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Shirley Zundell, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/45078365"
+  },
+  "moths": {
+    "file": "moths.jpg",
+    "license": "CC BY-SA",
+    "attribution": "(c) Jeff Niznik, some rights reserved (CC BY-SA), uploaded by Jeff Niznik",
+    "source": "https://www.inaturalist.org/photos/457812513"
+  },
+  "mourning-dove": {
+    "file": "mourning-dove.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Timothy Lindsey, some rights reserved (CC BY), uploaded by Timothy Lindsey",
+    "source": "https://www.inaturalist.org/photos/488854845"
+  },
+  "raccoon": {
+    "file": "raccoon.jpg",
+    "license": "CC0",
+    "attribution": "no rights reserved, uploaded by kent ozment",
+    "source": "https://www.inaturalist.org/photos/38408348"
+  },
+  "red-tailed-hawk": {
+    "file": "red-tailed-hawk.jpg",
+    "license": "CC0",
+    "attribution": "no rights reserved, uploaded by Claude Lyneis",
+    "source": "https://www.inaturalist.org/photos/319785046"
+  },
+  "rock-pigeon": {
+    "file": "rock-pigeon.jpg",
+    "license": "CC BY-SA",
+    "attribution": "(c) Birds of Gilgit-Baltistan, some rights reserved (CC BY-SA)",
+    "source": "https://www.inaturalist.org/photos/466776975"
+  },
+  "virginia-opossum": {
+    "file": "virginia-opossum.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Shirley Zundell, some rights reserved (CC BY), uploaded by Shirley Zundell",
+    "source": "https://www.inaturalist.org/photos/64550531"
+  },
+  "white-throated-sparrow": {
+    "file": "white-throated-sparrow.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Judy Gallagher, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/359148504"
+  }
+}

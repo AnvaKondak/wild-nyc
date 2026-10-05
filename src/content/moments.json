@@ -839,7 +839,7 @@
    },
    {
     "title": "A starling is doing impressions",
-    "body": "Listen: a whistle, a click, maybe a car alarm. Starlings borrow sounds from {place} and remix them into songs."
+    "body": "Listen: a whistle, a click, maybe a car alarm. Starlings borrow sounds from the street {place} and remix them into songs."
    },
    {
     "title": "Starling group chat, live on the wire",
@@ -1233,7 +1233,7 @@
   "variants": [
    {
     "title": "A gull is riding the wind",
-    "body": "Wings barely moving, drifting over {place} like it's no effort at all. It mostly isn't."
+    "body": "Wings barely moving, drifting over the rooftops {place} like it's no effort at all. It mostly isn't."
    },
    {
     "title": "A gull is just hanging in the air",
@@ -1419,7 +1419,7 @@
   "variants": [
    {
     "title": "A monarch is flying to Mexico",
-    "body": "This butterfly is headed to the mountains of Mexico, a place they've never been, by way of {place}. No map needed."
+    "body": "This butterfly is headed to the mountains of Mexico, a place they've never been. Today's stop: a snack break {place}. No map needed."
    },
    {
     "title": "Tiny traveler, passing through",

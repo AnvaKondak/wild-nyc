@@ -8,7 +8,7 @@ import { NeighborhoodPills } from '@/components/NeighborhoodPills';
 import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
-import { getSpecies, moments, placeKinds, places, species as allSpecies, speciesFor, stories, type Period, type StorySlide } from '@/content';
+import { getSpecies, moments, speciesPhoto, placeKinds, places, species as allSpecies, speciesFor, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
 import { buildLocalStory } from '@/lib/localStory';
 import { dateKey, seasonOf, timeHeader } from '@/lib/time';
@@ -153,6 +153,7 @@ export default function RightNow() {
         >
           <Sticker
             art={(species ?? getSpecies('rock-pigeon')!).art}
+            photo={speciesPhoto((species ?? getSpecies('rock-pigeon')!).id)}
             setting={slide.setting ?? (header.period === 'night' ? 'night-sky' : 'sky')}
             size={stickerSize}
             tint={tileFor(slide)}

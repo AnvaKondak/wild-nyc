@@ -7,7 +7,7 @@ import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
 import { SceneView } from '@/components/scenes';
-import { getSpecies, places, species, type Setting } from '@/content';
+import { getSpecies, places, species, speciesPhoto, type Setting } from '@/content';
 import { colors, fonts } from '@/theme/tokens';
 import { type } from '@/theme/type';
 
@@ -45,7 +45,7 @@ export default function ArtPreview() {
       {only !== 'settings' && <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 14 }}>
         {species.map((s, i) => (
           <View key={s.id} style={{ width: 96, alignItems: 'center', gap: 6 }}>
-            <Sticker art={s.art} size={84} tint={colors[s.tint]} rotate={[-5, 4, -3, 6][i % 4]} />
+            <Sticker art={s.art} photo={speciesPhoto(s.id)} size={84} tint={colors[s.tint]} rotate={[-5, 4, -3, 6][i % 4]} />
             <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, color: colors.ink, textAlign: 'center' }}>{s.friendlyName}</Text>
           </View>
         ))}
@@ -55,7 +55,7 @@ export default function ArtPreview() {
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 14 }}>
         {SETTINGS.map((setting) => (
           <View key={setting} style={{ width: 96, alignItems: 'center', gap: 6 }}>
-            <Sticker art={raccoon.art} size={84} tint={colors.blueTint} rotate={0} setting={setting} />
+            <Sticker art={raccoon.art} photo={speciesPhoto('raccoon')} size={84} tint={colors.blueTint} rotate={0} setting={setting} />
             <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, color: colors.ink }}>{setting}</Text>
           </View>
         ))}

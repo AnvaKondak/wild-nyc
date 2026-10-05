@@ -4,6 +4,8 @@
 import hurtAnimalJson from './hurt-animal.json';
 import kindnessJson from './kindness.json';
 import momentsJson from './moments.json';
+import { photoAssets } from './photoAssets';
+import photosJson from './photos.json';
 import placesJson from './places.json';
 import speciesJson from './species.json';
 import storiesJson from './stories.json';
@@ -30,6 +32,18 @@ export const placeKinds = placesJson.kinds as Record<PlaceKind, PlaceKindInfo>;
 export const hurtAnimalGuide = hurtAnimalJson as HurtAnimalGuide;
 
 const speciesById = new Map(species.map((s) => [s.id, s]));
+
+export type PhotoCredit = { file: string; license: string; attribution: string; source: string };
+const photoCredits = photosJson as Record<string, PhotoCredit>;
+
+/** The bundled photo for a species (an image asset), if there is one. */
+export function speciesPhoto(id: string): number | undefined {
+  return photoAssets[id];
+}
+
+export function photoCredit(id: string): PhotoCredit | undefined {
+  return photoCredits[id];
+}
 
 export function getSpecies(id: string): Species | undefined {
   return speciesById.get(id);

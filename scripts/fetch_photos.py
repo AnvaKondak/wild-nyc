@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+"""Fetch one freely licensed photo per species from iNaturalist and bundle it.
+
+Only CC0, CC BY and CC BY-SA photos are used (no "non-commercial", no all-rights-
+reserved), so the app can ship anywhere; every photo keeps its credit in
+src/content/photos.json and is shown on the species page.
+
+Run from the repo root:  python3 scripts/fetch_photos.py [species-id ...]
+Re-running keeps existing photos unless you name the species.
+"""
+import io, json, os, sys, time, urllib.parse, urllib.request
+from PIL import Image
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SPECIES = os.path.join(ROOT, "src/content/species.json")
+PHOTOS_JSON = os.path.join(ROOT, "src/content/photos.json")
+ASSETS_TS = os.path.join(ROOT, "src/content/photoAssets.ts")
+OUT = os.path.join(ROOT, "assets/photos")
+UA = {"User-Agent": "WildNeighbors/0.1 (bundling CC-licensed species photos)"}
+OK_LICENSES = {"cc0", "cc-by", "cc-by-sa"}
+SIZE = 360
+
+# Photos passed over after a look (wrong life stage, a silhouette...): species -> photo ids.
+SKIP_PHOTOS = {"monarch": [111043173], "european-starling": [365984069], "herring-gull": [343002826]}
+
+# Photos chosen by hand from the candidates: species -> photo id.
+PIN_PHOTOS = {"monarch": 45078365}
+
+# Groups get one representative species' photo.
+PHOTO_TAXON_OVERRIDES = {"moths": "Dryocampa rubicunda", "orb-weavers": "Argiope aurantia"}
+
+
+def get_json(url):
+    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30) as r:
+        return json.load(r)
+
+
+def taxon_id_for(species):
+    name = PHOTO_TAXON_OVERRIDES.get(species["id"])
+    if not name:
+        return species["iNatTaxonId"]
+    found = get_json("https://api.inaturalist.org/v1/taxa?" + urllib.parse.urlencode({"q": name, "per_page": 5}))["results"]
+    return next(t["id"] for t in found if t["name"] == name)
+
+
+def pick_photo(taxon_id, skip=(), pin=None):
+    taxon = get_json(f"https://api.inaturalist.org/v1/taxa/{taxon_id}")["results"][0]
+    if pin:
+        return pick_from_observations(taxon_id, skip, pin)
+    for tp in taxon.get("taxon_photos", []):
+        p = tp["photo"]
+        if p["id"] in skip:
+            continue
+        if (p.get("license_code") or "").lower() in OK_LICENSES:
+            return p
+    return pick_from_observations(taxon_id, skip)
+
+
+def pick_from_observations(taxon_id, skip=(), pin=None):
+    """Fallback: the most-faved research-grade observations with an OK photo license,
+    preferring ones annotated as adults (iNaturalist term 1 = life stage, 2 = adult)."""
+    base = {"taxon_id": taxon_id, "photo_license": ",".join(OK_LICENSES), "quality_grade": "research",
+            "order_by": "votes", "per_page": 50 if pin else 20}
+    for extra in ({"term_id": 1, "term_value_id": 2}, {}):
+        time.sleep(1.1)
+        obs = get_json("https://api.inaturalist.org/v1/observations?" + urllib.parse.urlencode({**base, **extra}))["results"]
+        for o in obs:
+            for p in o.get("photos", []):
+                if pin and p["id"] != pin:
+                    continue
+                if p["id"] not in skip and (p.get("license_code") or "").lower() in OK_LICENSES:
+                    p["medium_url"] = p["url"].replace("square", "medium")
+                    return p
+    return None
+
+
+def square(img):
+    w, h = img.size
+    side = min(w, h)
+    left, top = (w - side) // 2, (h - side) // 2
+    return img.crop((left, top, left + side, top + side)).resize((SIZE, SIZE), Image.LANCZOS)
+
+
+def main(only):
+    species = json.load(open(SPECIES))
+    photos = json.load(open(PHOTOS_JSON)) if os.path.exists(PHOTOS_JSON) else {}
+    for s in species:
+        sid = s["id"]
+        if sid in photos and os.path.exists(os.path.join(OUT, photos[sid]["file"])) and sid not in only:
+            continue
+        p = pick_photo(taxon_id_for(s), SKIP_PHOTOS.get(sid, []), PIN_PHOTOS.get(sid))
+        time.sleep(1.1)  # iNaturalist asks for about one request a second
+        if not p:
+            print(f"  ! {sid}: no CC0/CC BY/CC BY-SA photo found")
+            continue
+        url = p["medium_url"].replace("square", "medium")
+        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30) as r:
+            img = Image.open(io.BytesIO(r.read())).convert("RGB")
+        file = f"{sid}.jpg"
+        square(img).save(os.path.join(OUT, file), "JPEG", quality=82, optimize=True)
+        photos[sid] = {
+            "file": file,
+            "license": p["license_code"].upper().replace("CC-", "CC ").replace("CC0", "CC0"),
+            "attribution": p["attribution"],
+            "source": f"https://www.inaturalist.org/photos/{p['id']}",
+        }
+        print(f"  {sid}: {photos[sid]['license']} {p['attribution'][:60]}")
+        time.sleep(1.1)
+
+    json.dump(dict(sorted(photos.items())), open(PHOTOS_JSON, "w"), indent=2, ensure_ascii=False)
+    # Metro needs a literal require() per image, so generate the map.
+    lines = ["// Generated by scripts/fetch_photos.py. Do not edit by hand.", "", "export const photoAssets: Record<string, number> = {"]
+    for sid in sorted(photos):
+        lines.append(f"  '{sid}': require('../../assets/photos/{photos[sid]['file']}'),")
+    lines += ["};", ""]
+    open(ASSETS_TS, "w").write("\n".join(lines))
+    print(f"{len(photos)} photos")
+
+
+if __name__ == "__main__":
+    main(set(sys.argv[1:]))

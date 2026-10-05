@@ -7,7 +7,7 @@ import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { placeRegulars, SCENE_WIDTH, SceneView } from '@/components/scenes';
 import { Title } from '@/components/Title';
-import { places, speciesFor, type Season, type Species } from '@/content';
+import { places, speciesFor, speciesPhoto, type Season, type Species } from '@/content';
 import { rankByLive, seenLabel, type LiveSpecies } from '@/lib/live';
 import { seasonOf } from '@/lib/time';
 import { useAppState } from '@/state/AppState';
@@ -75,7 +75,7 @@ export default function Places() {
                   boxShadow: selected ? `0px 0px 0px 4px ${colors.yellow}` : undefined,
                 }}
               >
-                <Sticker art={s.art} size={SPOT} tint={colors[s.tint]} rotate={0} shadowColor={colors.ink} />
+                <Sticker art={s.art} photo={speciesPhoto(s.id)} size={SPOT} tint={colors[s.tint]} rotate={0} shadowColor={colors.ink} />
               </View>
               <View style={{ paddingVertical: 3, paddingHorizontal: 9, borderRadius: 10, backgroundColor: colors.ink }}>
                 <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, color: colors.white }}>{s.friendlyName}</Text>

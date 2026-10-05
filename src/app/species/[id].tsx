@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from 'react-native';
+import { Linking, Pressable, ScrollView, Text, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackButton } from '@/components/BackButton';
@@ -8,7 +8,7 @@ import { CheckIcon, EyeIcon, HeartIcon } from '@/components/Icons';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
-import { getSpecies, type Species } from '@/content';
+import { getSpecies, photoCredit, speciesPhoto, type Species } from '@/content';
 import { seenLabel } from '@/lib/live';
 import { seasonOf } from '@/lib/time';
 import { useLiveData } from '@/state/LiveData';
@@ -64,7 +64,7 @@ function Profile({ species }: { species: Species }) {
             <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, color: colors.ink }}>You've met them</Text>
           </View>
         )}
-        <Sticker art={species.art} size={170} tint={colors.white} rotate={-5} shadowColor={colors.blue} style={{ marginTop: 24 }} />
+        <Sticker art={species.art} photo={speciesPhoto(species.id)} size={170} tint={colors.white} rotate={-5} shadowColor={colors.blue} style={{ marginTop: 24 }} />
       </View>
 
       <View style={{ paddingHorizontal: 22, paddingTop: 22, gap: 6 }}>
@@ -78,6 +78,7 @@ function Profile({ species }: { species: Species }) {
           </Text>
         </View>
         {seen && <Text style={{ fontFamily: fonts.bodySemi, fontSize: 14, color: colors.inkSoft, marginTop: 4 }}>{seen}</Text>}
+        <PhotoCreditLine speciesId={species.id} />
       </View>
 
       <Card style={{ marginHorizontal: 16, marginTop: 24 }}>
@@ -139,6 +140,19 @@ function Profile({ species }: { species: Species }) {
         />
       </View>
     </ScrollView>
+  );
+}
+
+/** Who took the photo, and its license. Required by CC BY / CC BY-SA. */
+function PhotoCreditLine({ speciesId }: { speciesId: string }) {
+  const credit = photoCredit(speciesId);
+  if (!credit) return null;
+  return (
+    <Pressable onPress={() => Linking.openURL(credit.source)} accessibilityRole="link" accessibilityHint="Opens the photo on iNaturalist" hitSlop={6}>
+      <Text style={{ fontFamily: fonts.body, fontSize: 11, color: colors.inkMuted, marginTop: 6 }}>
+        Photo: {credit.attribution}. Cropped. Via iNaturalist.
+      </Text>
+    </Pressable>
   );
 }
 

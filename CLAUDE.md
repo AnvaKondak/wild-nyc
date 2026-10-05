@@ -77,7 +77,9 @@ Riso-print zine look. Flat colors, bold outlines, slightly offset color shadows
 - **Cards:** radius 18–24, 1.5px ink border, solid offset shadow (4–5px, no blur) in pink,
   yellow or ink.
 - **Animal art:** round "sticker" with a white 3–4px border, slight rotation (±3–8°),
-  offset ink shadow. Use simple placeholder line icons until real illustrations exist.
+  offset ink shadow. For now the sticker holds a real photo (CC0 / CC BY / CC BY-SA from
+  iNaturalist, credited on the species page; `scripts/fetch_photos.py`), sitting on drawn
+  backgrounds (scenes and story settings). Drawn placeholder art is the fallback.
 - **Time of day theme:** dawn = pink-tint background, midday = yellow-tint,
   dusk = blue background with white text, night = ink background with paper text.
 - **Touch targets:** at least 44px. Real buttons and links for accessibility.

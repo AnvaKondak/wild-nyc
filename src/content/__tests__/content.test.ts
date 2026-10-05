@@ -7,6 +7,8 @@ import {
   kindnesses,
   kindnessesFor,
   moments,
+  photoCredit,
+  speciesPhoto,
   placeKinds,
   places,
   species,
@@ -57,6 +59,12 @@ describe('moments', () => {
     }
   });
 
+  it('put {place} where both "near Astoria" and "on your block" read well', () => {
+    for (const m of moments) for (const v of m.variants) {
+      expect(v.title + ' ' + v.body).not.toMatch(/\b(over|at|by|in|to|of|from|on|into|around|near|past|through) \{place\}/i);
+    }
+  });
+
   it('only use {place} as a placeholder', () => {
     for (const m of moments) for (const v of m.variants) {
       expect((v.title + v.body).replace(/\{place\}/g, '')).not.toMatch(/[{}]/);
@@ -67,6 +75,18 @@ describe('moments', () => {
     for (const period of PERIODS) {
       const speciesWithMoments = new Set(moments.filter((m) => m.seasons.includes(season) && m.periods.includes(period)).map((m) => m.speciesId));
       expect(speciesWithMoments.size).toBeGreaterThanOrEqual(3);
+    }
+  });
+});
+
+describe('photos', () => {
+  it('every species has a bundled photo with a license we can ship and a credit', () => {
+    for (const s of species) {
+      expect(speciesPhoto(s.id)).toBeDefined();
+      const credit = photoCredit(s.id)!;
+      expect(['CC0', 'CC BY', 'CC BY-SA']).toContain(credit.license);
+      expect(credit.attribution.length).toBeGreaterThan(5);
+      expect(credit.source).toMatch(/^https:\/\/www\.inaturalist\.org\/photos\/\d+$/);
     }
   });
 });
