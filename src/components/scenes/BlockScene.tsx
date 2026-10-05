@@ -1,27 +1,11 @@
-import { Path, Rect, Circle, Text as SvgText, G } from 'react-native-svg';
-import Svg from 'react-native-svg';
-import type { SceneSpot } from '@/content/types';
+import { Circle, G, Path, Rect, Text as SvgText } from 'react-native-svg';
 import { colors } from '@/theme/tokens';
 
-// The generic street from mocks/3-places.html, reused for every neighborhood in v1.
-// Drawn on a 358×400 grid; the screen scales it to fit.
-export const STREET_SIZE = { width: 358, height: 400 } as const;
-
-/** Where a species sticker sits on the street, in grid units (top-left of a 48px spot). */
-export const STREET_SPOTS: Partial<Record<SceneSpot, { x: number; y: number }>> = {
-  ledge: { x: 286, y: 44 },
-  tree: { x: 34, y: 150 },
-  lamp: { x: 112, y: 112 },
-  sidewalk: { x: 262, y: 160 },
-  hedge: { x: 182, y: 286 },
-  trashcan: { x: 34, y: 300 },
-};
-
-export function StreetScene({ width }: { width: number }) {
-  const height = (width * STREET_SIZE.height) / STREET_SIZE.width;
+// The street from mocks/3-places.html, moved down 70 units to make room for the sky
+// band (where the neighborhood's landmark goes). 358×470 grid.
+export function BlockDrawing() {
   return (
-    <Svg width={width} height={height} viewBox="0 0 358 400" fill="none">
-      <Rect width={358} height={400} fill={colors.paper} />
+    <G transform="translate(0 70)">
       <G stroke={colors.ink} strokeWidth={1.5}>
         <Rect x={8} y={22} width={82} height={150} fill={colors.pinkTint} />
         <Rect x={96} y={40} width={80} height={132} fill={colors.blueTint} />
@@ -72,6 +56,6 @@ export function StreetScene({ width }: { width: number }) {
       <Rect x={150} y={327} width={112} height={28} rx={14} fill={colors.blue} />
       {/* Bench */}
       <Path d="M30 356h52M34 356v10M78 356v10M30 348h52" stroke={colors.ink} strokeWidth={2.5} strokeLinecap="round" />
-    </Svg>
+    </G>
   );
 }

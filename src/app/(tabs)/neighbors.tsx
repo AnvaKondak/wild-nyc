@@ -5,35 +5,50 @@ import * as Sharing from 'expo-sharing';
 import { captureRef } from 'react-native-view-shot';
 import { Button } from '@/components/Button';
 import { ShareIcon } from '@/components/Icons';
-import { NeighborhoodScene, placeSpecies, SCENE_SIZE } from '@/components/NeighborhoodScene';
+import { placeResidents, SCENE_WIDTH, SCENES, SceneView } from '@/components/scenes';
+import { NeighborhoodScene, placeSpecies, SCENE_SIZE } from '@/components/scenes/NeighborhoodScene';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
-import { species as allSpecies, type Season, type Species } from '@/content';
+import { species as allSpecies, type PlaceKind, type Season, type Species } from '@/content';
 import { shortDate } from '@/lib/format';
 import { seenLabel } from '@/lib/live';
 import { seasonOf } from '@/lib/time';
 import { useAppState } from '@/state/AppState';
 import { useLiveData } from '@/state/LiveData';
-import { movedIn } from '@/state/selectors';
+import { currentNeighborhood, movedIn } from '@/state/selectors';
 import { border, colors, fonts, offsetShadow } from '@/theme/tokens';
 import { type } from '@/theme/type';
 
 const STICKER = 46;
+const TILTS = [-6, 4, -3, 6, -5, 3, -4];
+const TABS: { kind: PlaceKind; label: string }[] = [
+  { kind: 'block', label: 'Block' },
+  { kind: 'park', label: 'Park' },
+  { kind: 'waterfront', label: 'Water' },
+];
 
 export default function Neighbors() {
   const { width } = useWindowDimensions();
   const { state } = useAppState();
   const met = movedIn(state);
   const season = seasonOf(new Date());
-  const placements = useMemo(() => placeSpecies(allSpecies), []);
-  const [pickedId, setPickedId] = useState<string>(placements[0]?.species.id ?? '');
-  const picked = placements.find((p) => p.species.id === pickedId)?.species;
+  // Neighbors live in one of three scenes; start on the one that fits where you are.
+  const [tab, setTab] = useState<PlaceKind>(currentNeighborhood(state).kind);
+  const placements = useMemo(
+    () =>
+      tab === 'block'
+        ? placeSpecies(allSpecies)
+        : placeResidents(tab, allSpecies).map((p, i) => ({ ...p, tilt: TILTS[i % TILTS.length] })),
+    [tab],
+  );
+  const [pickedId, setPickedId] = useState<string | null>(null);
+  const picked = placements.find((p) => p.species.id === pickedId)?.species ?? placements[0]?.species;
   const sceneRef = useRef<View>(null);
 
   // Scene sits in a 2px frame, 16px from each edge.
   const sceneWidth = width - 32 - 4;
-  const scale = sceneWidth / SCENE_SIZE.width;
+  const scale = sceneWidth / (tab === 'block' ? SCENE_SIZE.width : SCENE_WIDTH);
 
   const share = async () => {
     try {
@@ -57,6 +72,35 @@ export default function Neighbors() {
         <Title accent="you've met">Neighbors</Title>
       </View>
 
+      <View style={{ flexDirection: 'row', gap: 8, paddingHorizontal: 16 }} accessibilityRole="tablist">
+        {TABS.map((t) => {
+          const on = t.kind === tab;
+          const here = placeCount(t.kind, met);
+          return (
+            <Pressable
+              key={t.kind}
+              onPress={() => setTab(t.kind)}
+              accessibilityRole="tab"
+              accessibilityState={{ selected: on }}
+              style={{
+                flex: 1,
+                minHeight: 44,
+                borderRadius: 22,
+                borderWidth: border.width,
+                borderColor: colors.ink,
+                backgroundColor: on ? colors.ink : 'transparent',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 14, color: on ? colors.paper : colors.ink }}>
+                {t.label} <Text style={{ fontFamily: fonts.body, fontSize: 12 }}>{here}</Text>
+              </Text>
+            </Pressable>
+          );
+        })}
+      </View>
+
       <View
         ref={sceneRef}
         collapsable={false}
@@ -66,10 +110,10 @@ export default function Neighbors() {
           overflow: 'hidden',
           borderWidth: 2,
           borderColor: colors.ink,
-          backgroundColor: colors.pinkTint,
+          backgroundColor: tab === 'block' ? colors.pinkTint : colors.paper,
         }}
       >
-        <NeighborhoodScene width={sceneWidth} />
+        {tab === 'block' ? <NeighborhoodScene width={sceneWidth} /> : <SceneView kind={tab} width={sceneWidth} landmark={false} />}
         {placements.map(({ species: s, x, y, tilt }) => {
           const isMet = met.has(s.id);
           const selected = s.id === pickedId;
@@ -108,6 +152,12 @@ export default function Neighbors() {
       </View>
     </Screen>
   );
+}
+
+/** "3/12": met / living in that scene. */
+function placeCount(kind: PlaceKind, met: Map<string, string>): string {
+  const residents = allSpecies.filter((s) => s.homeScene === kind);
+  return `${residents.filter((s) => met.has(s.id)).length}/${residents.length}`;
 }
 
 function NeighborCard({ species, movedInOn, season }: { species: Species; movedInOn?: string; season: Season }) {

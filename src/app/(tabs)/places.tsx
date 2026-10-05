@@ -5,9 +5,9 @@ import { Button } from '@/components/Button';
 import { NeighborhoodPills } from '@/components/NeighborhoodPills';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
-import { STREET_SIZE, STREET_SPOTS, StreetScene } from '@/components/StreetScene';
+import { placeRegulars, SCENE_WIDTH, SceneView } from '@/components/scenes';
 import { Title } from '@/components/Title';
-import { speciesFor, type SceneSpot, type Season, type Species } from '@/content';
+import { speciesFor, type Season, type Species } from '@/content';
 import { rankByLive, seenLabel, type LiveSpecies } from '@/lib/live';
 import { seasonOf } from '@/lib/time';
 import { useAppState } from '@/state/AppState';
@@ -26,27 +26,16 @@ export default function Places() {
   const hood = currentNeighborhood(state);
   const season = seasonOf(new Date());
 
-  // One neighbor per spot on the street. With live data, whoever's been seen nearby
-  // most lately gets the spot; otherwise the first in this place's list.
-  const regulars = useMemo(() => {
-    const taken = new Set<SceneSpot>();
-    const out: Species[] = [];
-    for (const s of rankByLive(speciesFor(hood.kind, season), live)) {
-      const spot = s.spots.block;
-      if (spot && STREET_SPOTS[spot] && !taken.has(spot)) {
-        taken.add(spot);
-        out.push(s);
-      }
-    }
-    return out;
-  }, [hood.kind, season, live]);
+  // The scene for this kind of place (block, park or waterfront), one regular per
+  // spot. With live data, whoever's been seen nearby most lately gets the spot.
+  const regulars = useMemo(() => placeRegulars(hood.kind, rankByLive(speciesFor(hood.kind, season), live)), [hood.kind, season, live]);
 
   const [pickedId, setPickedId] = useState<string | null>(null);
-  const picked = regulars.find((s) => s.id === pickedId) ?? regulars[0];
+  const picked = regulars.find((p) => p.species.id === pickedId)?.species ?? regulars[0]?.species;
 
   // The scene sits inside a 2px frame, 16px from each screen edge.
   const sceneWidth = width - 32 - 4;
-  const scale = sceneWidth / STREET_SIZE.width;
+  const scale = sceneWidth / SCENE_WIDTH;
 
   return (
     <Screen contentStyle={{ gap: 16 }}>
@@ -66,9 +55,8 @@ export default function Places() {
           borderColor: colors.ink,
         }}
       >
-        <StreetScene width={sceneWidth} />
-        {regulars.map((s) => {
-          const spot = STREET_SPOTS[s.spots.block!]!;
+        <SceneView kind={hood.kind} width={sceneWidth} placeId={hood.placeId} />
+        {regulars.map(({ species: s, x, y }) => {
           const selected = s.id === picked?.id;
           return (
             <Pressable
@@ -77,7 +65,7 @@ export default function Places() {
               accessibilityRole="button"
               accessibilityLabel={`Show the ${s.friendlyName.toLowerCase()}`}
               accessibilityState={{ selected }}
-              style={{ position: 'absolute', left: spot.x * scale, top: spot.y * scale, alignItems: 'center', gap: 4 }}
+              style={{ position: 'absolute', left: x * scale, top: y * scale, alignItems: 'center', gap: 4 }}
             >
               <View
                 style={{

@@ -1,12 +1,13 @@
 // Dev-only gallery of the PLACEHOLDER art: every species, and every story setting.
 // Open with the deep link wildneighbors://art-preview (or /art-preview on web).
-import { Text, View } from 'react-native';
+import { Text, useWindowDimensions, View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { BackButton } from '@/components/BackButton';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
-import { getSpecies, species, type Setting } from '@/content';
+import { SceneView } from '@/components/scenes';
+import { getSpecies, places, species, type Setting } from '@/content';
 import { colors, fonts } from '@/theme/tokens';
 import { type } from '@/theme/type';
 
@@ -15,6 +16,26 @@ const SETTINGS: Setting[] = ['branch', 'trunk', 'den', 'wire', 'ledge', 'rooftop
 export default function ArtPreview() {
   const raccoon = getSpecies('raccoon')!;
   const { only } = useLocalSearchParams<{ only?: string }>();
+  const { width } = useWindowDimensions();
+  const thumb = (width - 32 - 12) / 2;
+  if (only === 'scenes') {
+    return (
+      <Screen contentStyle={{ gap: 12, paddingHorizontal: 16 }}>
+        <BackButton />
+        <Text style={type.kicker}>Scenes + landmarks</Text>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
+          {places.map((p) => (
+            <View key={p.id} style={{ width: thumb, gap: 4 }}>
+              <View style={{ borderWidth: 1.5, borderColor: colors.ink, borderRadius: 12, overflow: 'hidden' }}>
+                <SceneView kind={p.kind} width={thumb - 3} placeId={p.id} />
+              </View>
+              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, color: colors.ink }}>{p.name}</Text>
+            </View>
+          ))}
+        </View>
+      </Screen>
+    );
+  }
   return (
     <Screen contentStyle={{ gap: 18, paddingHorizontal: 16 }}>
       <BackButton />

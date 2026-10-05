@@ -24,13 +24,13 @@ const TILTS = [-6, 4, -3, 6, -5, 3, -4];
 
 export type ScenePlacement = { species: Species; x: number; y: number; tilt: number };
 
-/** Puts every species in its natural spot, in list order. Extras past the slots are left out. */
+/** Puts every block-dwelling species in its spot, in list order. Extras past the slots are left out. */
 export function placeSpecies(all: Species[]): ScenePlacement[] {
   const used: Partial<Record<BlockSpot, number>> = {};
   const out: ScenePlacement[] = [];
   all.forEach((species, i) => {
     const spot = species.spots.block;
-    if (!spot) return;
+    if (!spot || species.homeScene !== 'block') return;
     const n = used[spot] ?? 0;
     const slot = SLOTS[spot][n];
     if (!slot) return;
