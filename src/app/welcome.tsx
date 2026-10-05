@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
-import { places, speciesFor } from '@/content';
+import { getSpecies, places, speciesFor } from '@/content';
 import { seenThisYear } from '@/lib/live';
 import { locateNeighborhood } from '@/lib/locate';
 import { seasonOf } from '@/lib/time';
@@ -65,10 +65,10 @@ export default function Welcome() {
       </View>
 
       <View style={{ marginTop: 28, height: 280 }} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-        <Sticker icon="bird" size={120} tint={colors.pinkTint} rotate={-8} style={{ position: 'absolute', left: 4, top: 30 }} />
-        <Sticker icon="squirrel" size={108} tint={colors.yellowTint} rotate={6} style={{ position: 'absolute', left: 134, top: 0 }} />
-        <Sticker icon="bird" size={112} tint={colors.blueTint} rotate={-4} style={{ position: 'absolute', left: 212, top: 116 }} />
-        <Sticker icon="critter" size={104} tint={colors.pink} rotate={9} style={{ position: 'absolute', left: 80, top: 166 }} />
+        <Sticker art={getSpecies('rock-pigeon')!.art} size={120} tint={colors.pinkTint} rotate={-8} style={{ position: 'absolute', left: 4, top: 30 }} />
+        <Sticker art={getSpecies('eastern-gray-squirrel')!.art} size={108} tint={colors.yellowTint} rotate={6} style={{ position: 'absolute', left: 134, top: 0 }} />
+        <Sticker art={getSpecies('house-sparrow')!.art} size={112} tint={colors.blueTint} rotate={-4} style={{ position: 'absolute', left: 212, top: 116 }} />
+        <Sticker art={getSpecies('raccoon')!.art} size={104} tint={colors.pink} rotate={9} style={{ position: 'absolute', left: 80, top: 166 }} />
       </View>
 
       <Title accent="your street" accentColor="blue" size={42} style={{ marginTop: 16 }}>

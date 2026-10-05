@@ -152,7 +152,8 @@ export default function RightNow() {
           style={{ alignSelf: 'center', marginTop: 28 }}
         >
           <Sticker
-            icon={species?.icon ?? 'bird'}
+            art={(species ?? getSpecies('rock-pigeon')!).art}
+            setting={slide.setting ?? (header.period === 'night' ? 'night-sky' : 'sky')}
             size={stickerSize}
             tint={tileFor(slide)}
             rotate={-5}

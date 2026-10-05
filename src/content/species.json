@@ -6,7 +6,6 @@
     "scientificName": "Columba livia",
     "collectiveNoun": "a kit",
     "group": "birds",
-    "icon": "bird",
     "tint": "pinkTint",
     "personality": {
       "type": "The Loyal Homebody",
@@ -47,6 +46,17 @@
       "block": "ledge",
       "park": "path",
       "waterfront": "railing"
+    },
+    "art": {
+      "body": "pigeon",
+      "main": "gray",
+      "second": "lightGray",
+      "accent": "ink",
+      "features": [
+        "wingbars",
+        "patch",
+        "redeye"
+      ]
     }
   },
   {
@@ -56,7 +66,6 @@
     "scientificName": "Passer domesticus",
     "collectiveNoun": "a host",
     "group": "birds",
-    "icon": "bird",
     "tint": "blueTint",
     "personality": {
       "type": "The Chatty Gang",
@@ -97,6 +106,17 @@
       "block": "hedge",
       "park": "bench",
       "waterfront": "grass"
+    },
+    "art": {
+      "body": "songbird",
+      "main": "tan",
+      "second": "brown",
+      "belly": "lightGray",
+      "accent": "ink",
+      "features": [
+        "bib",
+        "wingbars"
+      ]
     }
   },
   {
@@ -106,7 +126,6 @@
     "scientificName": "Sciurus carolinensis",
     "collectiveNoun": "a scurry",
     "group": "furry",
-    "icon": "squirrel",
     "tint": "yellowTint",
     "personality": {
       "type": "The Busy Planner",
@@ -146,6 +165,11 @@
       "block": "tree",
       "park": "trunk",
       "waterfront": "grass"
+    },
+    "art": {
+      "body": "squirrel",
+      "main": "gray",
+      "belly": "white"
     }
   },
   {
@@ -155,7 +179,6 @@
     "scientificName": "Sturnus vulgaris",
     "collectiveNoun": "a murmuration",
     "group": "birds",
-    "icon": "bird",
     "tint": "yellowTint",
     "personality": {
       "type": "The Impressionist",
@@ -196,6 +219,16 @@
       "block": "wire",
       "park": "lawn",
       "waterfront": "piling"
+    },
+    "art": {
+      "body": "songbird",
+      "main": "ink",
+      "second": "ink",
+      "belly": "ink",
+      "accent": "yellow",
+      "features": [
+        "spots"
+      ]
     }
   },
   {
@@ -205,7 +238,6 @@
     "scientificName": "Zenaida macroura",
     "collectiveNoun": "a piteousness",
     "group": "birds",
-    "icon": "bird",
     "tint": "pinkTint",
     "personality": {
       "type": "The Gentle Romantic",
@@ -246,6 +278,15 @@
       "block": "wire",
       "park": "lawn",
       "waterfront": "railing"
+    },
+    "art": {
+      "body": "pigeon",
+      "main": "tan",
+      "second": "tan",
+      "accent": "ink",
+      "features": [
+        "spots"
+      ]
     }
   },
   {
@@ -255,7 +296,6 @@
     "scientificName": "Turdus migratorius",
     "collectiveNoun": "a round",
     "group": "birds",
-    "icon": "bird",
     "tint": "pinkTint",
     "personality": {
       "type": "The Early Riser",
@@ -296,6 +336,13 @@
       "block": "sidewalk",
       "park": "lawn",
       "waterfront": "grass"
+    },
+    "art": {
+      "body": "songbird",
+      "main": "gray",
+      "second": "ink",
+      "belly": "orange",
+      "accent": "yellow"
     }
   },
   {
@@ -305,7 +352,6 @@
     "scientificName": "Larus smithsonianus",
     "collectiveNoun": "a colony",
     "group": "birds",
-    "icon": "bird",
     "tint": "blueTint",
     "personality": {
       "type": "The Clever Opportunist",
@@ -346,6 +392,15 @@
       "block": "sky",
       "park": "pond",
       "waterfront": "piling"
+    },
+    "art": {
+      "body": "gull",
+      "main": "white",
+      "second": "lightGray",
+      "accent": "yellow",
+      "features": [
+        "spots"
+      ]
     }
   },
   {
@@ -355,7 +410,6 @@
     "scientificName": "Procyon lotor",
     "collectiveNoun": "a gaze",
     "group": "furry",
-    "icon": "critter",
     "tint": "blueTint",
     "personality": {
       "type": "The Night Shift",
@@ -395,6 +449,10 @@
       "block": "trashcan",
       "park": "log",
       "waterfront": "rocks"
+    },
+    "art": {
+      "body": "raccoon",
+      "main": "gray"
     }
   },
   {
@@ -404,7 +462,6 @@
     "scientificName": "Danaus plexippus",
     "collectiveNoun": "a kaleidoscope",
     "group": "bugs",
-    "icon": "bug",
     "tint": "yellow",
     "personality": {
       "type": "The Long-Haul Traveler",
@@ -442,6 +499,11 @@
       "block": "flowerbox",
       "park": "flowers",
       "waterfront": "grass"
+    },
+    "art": {
+      "body": "butterfly",
+      "main": "orange",
+      "second": "ink"
     }
   },
   {
@@ -451,7 +513,6 @@
     "scientificName": "Buteo jamaicensis",
     "collectiveNoun": "a kettle",
     "group": "birds",
-    "icon": "bird",
     "tint": "yellowTint",
     "personality": {
       "type": "The Patient Watcher",
@@ -492,6 +553,16 @@
       "block": "rooftop",
       "park": "treetop",
       "waterfront": "lamp"
+    },
+    "art": {
+      "body": "raptor",
+      "main": "brown",
+      "second": "brown",
+      "belly": "white",
+      "accent": "red",
+      "features": [
+        "stripes"
+      ]
     }
   },
   {
@@ -501,7 +572,6 @@
     "scientificName": "Cyanocitta cristata",
     "collectiveNoun": "a party",
     "group": "birds",
-    "icon": "bird",
     "tint": "blueTint",
     "personality": {
       "type": "The Loud Gardener",
@@ -541,6 +611,18 @@
     "spots": {
       "block": "tree",
       "park": "treetop"
+    },
+    "art": {
+      "body": "songbird",
+      "main": "blue",
+      "second": "blue",
+      "belly": "white",
+      "accent": "ink",
+      "features": [
+        "crest",
+        "bib",
+        "wingbars"
+      ]
     }
   },
   {
@@ -550,7 +632,6 @@
     "scientificName": "Junco hyemalis",
     "collectiveNoun": "a flock",
     "group": "birds",
-    "icon": "bird",
     "tint": "blueTint",
     "personality": {
       "type": "The Winter Guest",
@@ -589,6 +670,13 @@
     "spots": {
       "block": "hedge",
       "park": "shrubs"
+    },
+    "art": {
+      "body": "songbird",
+      "main": "gray",
+      "second": "gray",
+      "belly": "white",
+      "accent": "pinkTint"
     }
   },
   {
@@ -598,7 +686,6 @@
     "scientificName": "Didelphis virginiana",
     "collectiveNoun": "a passel",
     "group": "furry",
-    "icon": "critter",
     "tint": "pinkTint",
     "personality": {
       "type": "The Quiet Cleaner",
@@ -637,6 +724,10 @@
     "spots": {
       "block": "fence",
       "park": "log"
+    },
+    "art": {
+      "body": "opossum",
+      "main": "lightGray"
     }
   },
   {
@@ -646,7 +737,6 @@
     "scientificName": "Corvus brachyrhynchos",
     "collectiveNoun": "a murder",
     "group": "birds",
-    "icon": "bird",
     "tint": "blueTint",
     "personality": {
       "type": "The Neighborhood Watch",
@@ -687,6 +777,13 @@
       "block": "rooftop",
       "park": "lawn",
       "waterfront": "shore"
+    },
+    "art": {
+      "body": "crow",
+      "main": "ink",
+      "second": "ink",
+      "belly": "ink",
+      "accent": "ink"
     }
   },
   {
@@ -696,7 +793,6 @@
     "scientificName": "Zonotrichia albicollis",
     "collectiveNoun": "a host",
     "group": "birds",
-    "icon": "bird",
     "tint": "pinkTint",
     "personality": {
       "type": "The Wistful Singer",
@@ -735,6 +831,17 @@
     "spots": {
       "block": "hedge",
       "park": "shrubs"
+    },
+    "art": {
+      "body": "songbird",
+      "main": "tan",
+      "second": "brown",
+      "belly": "lightGray",
+      "accent": "ink",
+      "features": [
+        "eyestripe",
+        "wingbars"
+      ]
     }
   },
   {
@@ -744,7 +851,6 @@
     "scientificName": "Chaetura pelagica",
     "collectiveNoun": "a screaming",
     "group": "birds",
-    "icon": "bird",
     "tint": "yellowTint",
     "personality": {
       "type": "The Sky Acrobat",
@@ -783,6 +889,10 @@
       "block": "sky",
       "park": "sky",
       "waterfront": "sky"
+    },
+    "art": {
+      "body": "swift",
+      "main": "gray"
     }
   },
   {
@@ -792,7 +902,6 @@
     "scientificName": "many kinds, order Lepidoptera",
     "collectiveNoun": "an eclipse",
     "group": "bugs",
-    "icon": "bug",
     "tint": "yellowTint",
     "personality": {
       "type": "The Night Gardener",
@@ -832,6 +941,12 @@
       "block": "lamp",
       "park": "lamp",
       "waterfront": "lamp"
+    },
+    "art": {
+      "body": "moth",
+      "main": "tan",
+      "second": "brown",
+      "belly": "tan"
     }
   }
 ]

@@ -64,7 +64,7 @@ function Profile({ species }: { species: Species }) {
             <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, color: colors.ink }}>You've met them</Text>
           </View>
         )}
-        <Sticker icon={species.icon} size={170} tint={colors.white} rotate={-5} shadowColor={colors.blue} style={{ marginTop: 24 }} />
+        <Sticker art={species.art} size={170} tint={colors.white} rotate={-5} shadowColor={colors.blue} style={{ marginTop: 24 }} />
       </View>
 
       <View style={{ paddingHorizontal: 22, paddingTop: 22, gap: 6 }}>

@@ -85,7 +85,7 @@ export default function Places() {
                   boxShadow: selected ? `0px 0px 0px 4px ${colors.yellow}` : undefined,
                 }}
               >
-                <Sticker icon={s.icon} size={SPOT} tint={colors[s.tint]} rotate={0} shadowColor={colors.ink} />
+                <Sticker art={s.art} size={SPOT} tint={colors[s.tint]} rotate={0} shadowColor={colors.ink} />
               </View>
               <View style={{ paddingVertical: 3, paddingHorizontal: 9, borderRadius: 10, backgroundColor: colors.ink }}>
                 <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, color: colors.white }}>{s.friendlyName}</Text>

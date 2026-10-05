@@ -1,7 +1,7 @@
 // Content model from docs/SPEC.md, plus a few fields the screens need
 // (icon, tint, home). All content is bundled JSON in phase 2.
 
-import type { AnimalIconName } from '@/components/AnimalIcon';
+import type { ArtSpec } from '@/components/art/CritterArt';
 
 export type Season = 'spring' | 'summer' | 'fall' | 'winter';
 export type Period = 'dawn' | 'midday' | 'dusk' | 'night';
@@ -35,7 +35,8 @@ export type Species = {
   scientificName: string;
   collectiveNoun: string;
   group: 'birds' | 'furry' | 'bugs';
-  icon: AnimalIconName;
+  /** Placeholder art: body type + colors (see components/art). */
+  art: ArtSpec;
   tint: TintName;
   personality: { type: string; traits: string[]; blurb: string };
   origin: string;
