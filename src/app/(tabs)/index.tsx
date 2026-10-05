@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { PanResponder, Pressable, Text, useWindowDimensions, View } from 'react-native';
+import { PanResponder, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
+import { StoryBackdrop } from '@/components/art/StoryBackdrop';
 import { Button } from '@/components/Button';
 import { ChevronLeftIcon, ChevronRightIcon } from '@/components/Icons';
 import { NeighborhoodPills } from '@/components/NeighborhoodPills';
@@ -71,13 +72,13 @@ export default function RightNow() {
         where: placeKinds[hood.kind].where,
         live,
         seed: `${hood.cell}:${today}:${header.period}`,
-        today: new Date(),
       }),
     [season, header.period, hood.kind, hood.cell, placeName, live, today],
   );
 
   // Switching neighborhood or time of day restarts the story.
   const [index, setIndex] = useState(0);
+  const [area, setArea] = useState({ width: 0, height: 0 });
   useEffect(() => setIndex(0), [hood.id, header.period, season]);
   const i = Math.min(index, story.length - 1);
   const slide = story[i];
@@ -116,83 +117,92 @@ export default function RightNow() {
     else if (species) router.push({ pathname: '/species/[id]', params: { id: species.id } });
   };
 
+  const setting = slide.setting ?? (header.period === 'night' ? 'night-sky' : 'sky');
+
   return (
-    <Screen background={theme.bg} scroll={false}>
-      <View {...pan.panHandlers} style={{ flex: 1 }}>
-        <View style={{ flexDirection: 'row', gap: 4, paddingHorizontal: 16 }} accessibilityLabel={`Story ${i + 1} of ${story.length}`}>
-          {story.map((s, n) => (
-            <View key={s.id} style={{ flex: 1, height: 4, borderRadius: 2, backgroundColor: n <= i ? theme.barOn : theme.barOff }} />
-          ))}
+    <View style={{ flex: 1, backgroundColor: theme.bg }} onLayout={(e) => setArea(e.nativeEvent.layout)}>
+      {/* The moment's setting fills the whole story; the animal is the one circle on top. */}
+      {area.width > 0 && (
+        <View style={StyleSheet.absoluteFill} pointerEvents="none">
+          <StoryBackdrop setting={setting} period={header.period} width={area.width} height={area.height} />
         </View>
-
-        <View style={{ paddingTop: 14 }}>
-          <NeighborhoodPills ink={theme.ink} background={theme.bg} />
-        </View>
-
-        <Pressable
-          onPress={__DEV__ ? cyclePreview : undefined}
-          disabled={!__DEV__}
-          accessible
-          accessibilityLabel={`${header.label}, ${header.clock}. ${header.sub}`}
-          style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 22, paddingTop: 18 }}
-        >
-          <PeriodIcon period={header.period} color={theme.ink} />
-          <View>
-            <Text style={{ fontFamily: fonts.display, fontSize: 20, color: theme.ink }}>
-              {header.label} · {header.clock}
-            </Text>
-            <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>{header.sub}</Text>
+      )}
+      <Screen background="transparent" scroll={false}>
+        <View {...pan.panHandlers} style={{ flex: 1 }}>
+          <View style={{ flexDirection: 'row', gap: 4, paddingHorizontal: 16 }} accessibilityLabel={`Story ${i + 1} of ${story.length}`}>
+            {story.map((s, n) => (
+              <View key={s.id} style={{ flex: 1, height: 4, borderRadius: 2, backgroundColor: n <= i ? theme.barOn : theme.barOff }} />
+            ))}
           </View>
-        </Pressable>
 
-        <Pressable
-          onPress={next}
-          accessibilityRole="button"
-          accessibilityLabel="Next story"
-          style={{ alignSelf: 'center', marginTop: 28 }}
-        >
-          <Sticker
-            art={(species ?? getSpecies('rock-pigeon')!).art}
-            photo={speciesPhoto((species ?? getSpecies('rock-pigeon')!).id)}
-            setting={slide.setting ?? (header.period === 'night' ? 'night-sky' : 'sky')}
-            size={stickerSize}
-            tint={tileFor(slide)}
-            rotate={-5}
-            shadowColor={theme.shadow}
-          />
-        </Pressable>
+          <View style={{ paddingTop: 14 }}>
+            <NeighborhoodPills ink={theme.ink} background={theme.bg} />
+          </View>
 
-        <View style={{ paddingHorizontal: 24, paddingTop: 30, gap: 10 }}>
-          <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, letterSpacing: 1.4, textTransform: 'uppercase', color: theme.accent }}>
-            {slide.kicker}
-          </Text>
-          <Text accessibilityRole="header" style={{ fontFamily: fonts.display, fontSize: 32, lineHeight: 35, color: theme.ink }}>
-            {slide.title}
-          </Text>
-          <Text style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 25, color: theme.body }}>{slide.body}</Text>
-        </View>
+          <Pressable
+            onPress={__DEV__ ? cyclePreview : undefined}
+            disabled={!__DEV__}
+            accessible
+            accessibilityLabel={`${header.label}, ${header.clock}. ${header.sub}`}
+            style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 22, paddingTop: 18 }}
+          >
+            <PeriodIcon period={header.period} color={theme.ink} />
+            <View>
+              <Text style={{ fontFamily: fonts.display, fontSize: 20, color: theme.ink }}>
+                {header.label} · {header.clock}
+              </Text>
+              <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>{header.sub}</Text>
+            </View>
+          </Pressable>
 
-        <View style={{ flex: 1 }} />
-
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 16, paddingBottom: 20 }}>
-          <RoundNav label="Previous story" onPress={prev} color={theme.ink}>
-            <ChevronLeftIcon color={theme.ink} />
-          </RoundNav>
-          <View style={{ flex: 1 }}>
-            <Button
-              label={ctaLabel}
-              onPress={onCta}
-              shadow={theme.shadow}
-              style={{ backgroundColor: theme.btnBg }}
-              color={theme.btnInk}
+          <Pressable
+            onPress={next}
+            accessibilityRole="button"
+            accessibilityLabel="Next story"
+            style={{ alignSelf: 'center', marginTop: 28 }}
+          >
+            <Sticker
+              art={(species ?? getSpecies('rock-pigeon')!).art}
+              photo={speciesPhoto((species ?? getSpecies('rock-pigeon')!).id)}
+              size={stickerSize}
+              tint={tileFor(slide)}
+              rotate={-5}
+              shadowColor={theme.shadow}
             />
+          </Pressable>
+
+          <View style={{ paddingHorizontal: 24, paddingTop: 30, gap: 10 }}>
+            <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, letterSpacing: 1.4, textTransform: 'uppercase', color: theme.accent }}>
+              {slide.kicker}
+            </Text>
+            <Text accessibilityRole="header" style={{ fontFamily: fonts.display, fontSize: 32, lineHeight: 35, color: theme.ink }}>
+              {slide.title}
+            </Text>
+            <Text style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 25, color: theme.body }}>{slide.body}</Text>
           </View>
-          <RoundNav label="Next story" onPress={next} color={theme.ink}>
-            <ChevronRightIcon color={theme.ink} />
-          </RoundNav>
+
+          <View style={{ flex: 1 }} />
+
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 16, paddingBottom: 20 }}>
+            <RoundNav label="Previous story" onPress={prev} color={theme.ink}>
+              <ChevronLeftIcon color={theme.ink} />
+            </RoundNav>
+            <View style={{ flex: 1 }}>
+              <Button
+                label={ctaLabel}
+                onPress={onCta}
+                shadow={theme.shadow}
+                style={{ backgroundColor: theme.btnBg }}
+                color={theme.btnInk}
+              />
+            </View>
+            <RoundNav label="Next story" onPress={next} color={theme.ink}>
+              <ChevronRightIcon color={theme.ink} />
+            </RoundNav>
+          </View>
         </View>
-      </View>
-    </Screen>
+      </Screen>
+    </View>
   );
 }
 

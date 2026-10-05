@@ -71,7 +71,7 @@ export type StorySlide = {
   /** May contain {where}. */
   body: string;
   speciesId?: string;
-  kind?: 'scene' | 'arriving' | 'goodbye' | 'this-week';
+  kind?: 'scene' | 'arriving' | 'goodbye';
   /** Backdrop for the sticker (moments set this). */
   setting?: Setting;
   /** Only show in these kinds of places. Omit for everywhere. */

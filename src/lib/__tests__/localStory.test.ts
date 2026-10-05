@@ -1,7 +1,7 @@
 import { species as allSpecies, stories, speciesFor } from '@/content';
 import type { Moment } from '@/content/types';
 import { toLiveMap, type LiveSpecies } from '../live';
-import { buildLocalStory, fillPlace, placePhrase, thisWeekSlide } from '../localStory';
+import { buildLocalStory, fillPlace, placePhrase } from '../localStory';
 import { pick, seededRandom, shuffle } from '../random';
 
 const today = new Date(2026, 9, 4);
@@ -28,7 +28,6 @@ const base = {
   residents: speciesFor('waterfront', 'fall'),
   placeName: 'Liberty State Park',
   where: 'by the water',
-  today,
 };
 
 describe('random', () => {
@@ -79,28 +78,17 @@ describe('buildLocalStory', () => {
     expect(variety.size).toBeGreaterThan(3);
   });
 
+  it('is about one species per slide, never a list', () => {
+    const live = toLiveMap({ cell: 'x', status: 'ready', updatedAt: null, sources: [], species: [liveSpecies('herring-gull', 9), liveSpecies('moths', 21), liveSpecies('raccoon', 3)] });
+    const story = buildLocalStory({ ...base, live, seed: 's2' });
+    expect(story.every((s) => s.speciesId || s.link === 'kindness')).toBe(true);
+  });
+
   it('tops up with generic slides and ends with the chapters', () => {
     const story = buildLocalStory({ ...base, moments: [], live: new Map(), seed: 's' });
     expect(story.filter((s) => (s.kind ?? 'scene') === 'scene').length).toBeGreaterThanOrEqual(3);
     expect(story.at(-2)?.kind).toBe('arriving');
     expect(story.at(-1)?.kind).toBe('goodbye');
     expect(story.every((s) => !s.body.includes('{place}') && !s.body.includes('{where}'))).toBe(true);
-  });
-});
-
-describe('thisWeekSlide', () => {
-  it('lists who was spotted in the last 7 days, in words', () => {
-    const live = toLiveMap({ cell: 'x', status: 'ready', updatedAt: null, sources: [], species: [
-      liveSpecies('herring-gull', 9), liveSpecies('european-starling', 4), liveSpecies('monarch', 2), liveSpecies('raccoon', 1, '2026-08-01'),
-    ] });
-    const slide = thisWeekSlide(allSpecies, live, today, 'fall', 'night', 'Exchange Place');
-    expect(slide?.kicker).toBe('This week near Exchange Place');
-    expect(slide?.body).toBe('Spotted near Exchange Place this week: gulls, starlings and monarchs.');
-    expect(slide?.body).not.toMatch(/\d/);
-  });
-
-  it('needs at least two species', () => {
-    const live = toLiveMap({ cell: 'x', status: 'ready', updatedAt: null, sources: [], species: [liveSpecies('moths', 3)] });
-    expect(thisWeekSlide(allSpecies, live, today, 'fall', 'night', null)).toBeNull();
   });
 });

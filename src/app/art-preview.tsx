@@ -6,6 +6,7 @@ import { BackButton } from '@/components/BackButton';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
+import { StoryBackdrop } from '@/components/art/StoryBackdrop';
 import { SceneView } from '@/components/scenes';
 import { getSpecies, places, species, speciesPhoto, type Setting } from '@/content';
 import { colors, fonts } from '@/theme/tokens';
@@ -18,6 +19,28 @@ export default function ArtPreview() {
   const { only } = useLocalSearchParams<{ only?: string }>();
   const { width } = useWindowDimensions();
   const thumb = (width - 32 - 12) / 2;
+  if (only === 'backdrops') {
+    const h = thumb * 1.9;
+    return (
+      <Screen contentStyle={{ gap: 12, paddingHorizontal: 16 }}>
+        <BackButton />
+        <Text style={type.kicker}>Story backdrops</Text>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
+          {SETTINGS.map((setting, i) => (
+            <View key={setting} style={{ width: thumb, gap: 4 }}>
+              <View style={{ width: thumb, height: h, borderRadius: 12, overflow: 'hidden', borderWidth: 1.5, borderColor: colors.ink, backgroundColor: i % 5 === 4 ? colors.ink : colors.yellowTint, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ position: 'absolute', top: 0, left: 0 }}>
+                  <StoryBackdrop setting={setting} period={i % 5 === 4 ? 'night' : 'midday'} width={thumb - 3} height={h - 3} />
+                </View>
+                <Sticker art={raccoon.art} photo={speciesPhoto('raccoon')} size={thumb * 0.5} rotate={-5} style={{ marginBottom: h * 0.2 }} />
+              </View>
+              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, color: colors.ink }}>{setting}</Text>
+            </View>
+          ))}
+        </View>
+      </Screen>
+    );
+  }
   if (only === 'scenes') {
     return (
       <Screen contentStyle={{ gap: 12, paddingHorizontal: 16 }}>

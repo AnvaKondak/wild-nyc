@@ -5,8 +5,9 @@
 //   2. Take the first few who have a moment for this season and time of day, and
 //      pick one variant of each, again seeded.
 //   3. Top up with the generic slides if there aren't enough.
-//   4. "This week near {place}": who's been spotted in the last 7 days (live).
-//   5. The season's Arriving and Goodbye chapters.
+//   4. The season's Arriving and Goodbye chapters.
+//
+// Every slide is about one species; the story never lists species.
 //
 // The seed is neighborhood + date + time of day, so the story holds still while
 // you look at it, changes tomorrow, and differs down the street.
@@ -18,7 +19,6 @@ import { buildStory } from './story';
 
 const FEATURED = 4; // species moments per story
 const MIN_SCENES = 3;
-const THIS_WEEK_DAYS = 7;
 
 export type LocalStoryInput = {
   moments: Moment[];
@@ -35,7 +35,6 @@ export type LocalStoryInput = {
   where: string;
   live: LiveMap;
   seed: string;
-  today: Date;
 };
 
 /** "near Liberty State Park", or the place kind's phrase ("on your block"). */
@@ -48,7 +47,7 @@ export function fillPlace(text: string, phrase: string): string {
 }
 
 export function buildLocalStory(input: LocalStoryInput): StorySlide[] {
-  const { moments, slides, residents, allSpecies, season, period, placeKind, placeName, where, live, seed, today } = input;
+  const { moments, slides, residents, allSpecies, season, period, placeKind, placeName, where, live, seed } = input;
   const random = seededRandom(seed);
   const phrase = placePhrase(placeName, where);
 
@@ -93,53 +92,10 @@ export function buildLocalStory(input: LocalStoryInput): StorySlide[] {
     featured.push(s);
   }
 
-  // 4. This week, from live data.
-  const thisWeek = thisWeekSlide(allSpecies, live, today, season, period, placeName);
-
-  return [...featured, ...(thisWeek ? [thisWeek] : []), ...chapters];
-}
-
-/** "Spotted near Exchange Place this week: pigeons, starlings and White-throated Sparrows." */
-export function thisWeekSlide(
-  allSpecies: Species[],
-  live: LiveMap,
-  today: Date,
-  season: Season,
-  period: Period,
-  placeName: string | null,
-): StorySlide | null {
-  const recent = allSpecies
-    .map((s) => ({ s, l: live.get(s.id) }))
-    .filter(({ l }) => l && daysAgo(l.lastSeenOn, today) <= THIS_WEEK_DAYS)
-    .sort((a, b) => b.l!.recent - a.l!.recent)
-    .slice(0, 4)
-    .map(({ s }) => s);
-  if (recent.length < 2) return null;
-
-  const names = recent.map((s) => s.friendlyName.toLowerCase());
-  const list = names.length === 2 ? names.join(' and ') : `${names.slice(0, -1).join(', ')} and ${names.at(-1)}`;
-  const where = placeName ? `near ${placeName}` : 'nearby';
-  return {
-    id: `this-week:${recent.map((s) => s.id).join(',')}`,
-    season,
-    period,
-    kind: 'this-week',
-    kicker: placeName ? `This week near ${placeName}` : 'This week nearby',
-    title: "Who's been around",
-    body: `Spotted ${where} this week: ${list}.`,
-    speciesId: recent[0].id,
-    setting: 'sky',
-  };
+  return [...featured, ...chapters];
 }
 
 function uniqueById(list: Species[]): Species[] {
   const seen = new Set<string>();
   return list.filter((s) => (seen.has(s.id) ? false : (seen.add(s.id), true)));
-}
-
-function daysAgo(dateKey: string, today: Date): number {
-  const [y, m, d] = dateKey.split('-').map(Number);
-  const then = new Date(y, m - 1, d).getTime();
-  const now = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
-  return Math.round((now - then) / 86_400_000);
 }
