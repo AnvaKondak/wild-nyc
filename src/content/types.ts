@@ -105,6 +105,9 @@ export type Kindness = {
   why: string;
 };
 
+/** Real spots in a neighborhood that story lines can name: {green}, {water}, {landmark}, {street}. */
+export type LocalNames = { green: string; water: string; landmark: string; street: string };
+
 export type Place = {
   id: string;
   name: string;
@@ -113,10 +116,13 @@ export type Place = {
   /** Rough center, used only to name a cell and to compute sun times. */
   lat: number;
   lng: number;
+  local: LocalNames;
 };
 
 export type PlaceKindInfo = {
   where: string;
+  /** Gentle generic stand-ins for unnamed spots. */
+  local: LocalNames;
 };
 
 export type RehabContact = {

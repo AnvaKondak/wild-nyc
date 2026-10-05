@@ -23,6 +23,10 @@
    {
     "title": "The kits are practicing tree-climbing in reverse",
     "body": "Down is harder than up. Lots of hugging the trunk. Mom waits at the bottom, not impressed, not worried."
+   },
+   {
+    "title": "The raccoon kits are heading out for their first rounds",
+    "body": "Mom shimmies down the trunk and waits while the kits figure it out, one wobbly paw at a time. Tonight's lesson: the quiet way along {street} toward {green}, where the snacks are."
    }
   ]
  },
@@ -51,6 +55,10 @@
    {
     "title": "A raccoon is investigating a very interesting lid",
     "body": "Pry, wiggle, think, try again. Raccoons are excellent at puzzles, especially the ones you didn't mean to set."
+   },
+   {
+    "title": "A raccoon is walking the same route as always",
+    "body": "Down {street}, a careful pat along the curb, a peek behind {landmark}, then on toward {green}. They've done this loop so many nights they could do it with their eyes closed."
    }
   ]
  },
@@ -74,6 +82,10 @@
    {
     "title": "Raccoon at the puddle, hands busy",
     "body": "Dabble, dabble, squint. Those front paws are so sensitive they're basically doing the looking."
+   },
+   {
+    "title": "A raccoon found a puddle near {green}",
+    "body": "They're sitting at the edge, rolling something between wet paws, totally absorbed. It looks like washing. It's really feeling: wet fingers tell them more about what they've got."
    }
   ]
  },
@@ -96,6 +108,10 @@
    {
     "title": "Raccoon, getting extra fluffy for winter",
     "body": "Every snack {place} is going straight to the winter-coat fund. Chubby is the goal."
+   },
+   {
+    "title": "A raccoon is on a serious fall snack mission",
+    "body": "Fallen apples, acorns, whatever the trees around {green} dropped today. Every bite goes toward a cozy winter, and they are not skipping a single one."
    }
   ]
  },
@@ -119,6 +135,10 @@
    {
     "title": "A raccoon peeks out, then nopes back in",
     "body": "On freezing nights they'll skip a shift or two. The trash cans {place} can wait."
+   },
+   {
+    "title": "The raccoons are sleeping in tonight",
+    "body": "Somewhere in a hollow tree near {green}, a raccoon family is piled into one warm, stripy heap. The cans on {street} will still be there when it's warmer."
    }
   ]
  },
@@ -142,6 +162,10 @@
    {
     "title": "Raccoon mom, on a very short break",
     "body": "Babies at home, snacks out here. She moves fast, eats faster, and heads straight back."
+   },
+   {
+    "title": "A raccoon mom just slipped out for a minute",
+    "body": "Her kits are tucked in a den high above {street}, too little to follow. She'll grab a quick bite near {green} and hurry right back to the pile."
    }
   ]
  },
@@ -170,6 +194,10 @@
    {
     "title": "A little white face is moving along the fence",
     "body": "That's an opossum, waddling through. Pink nose, round ears, zero hurry."
+   },
+   {
+    "title": "An opossum is taking the scenic route",
+    "body": "Along the fences behind {street}, slow and steady, nose working the whole way. They're eating slugs and fallen fruit and asking nothing of anyone. Honestly, a perfect neighbor."
    }
   ]
  },
@@ -193,6 +221,10 @@
    {
     "title": "Opossum mom, giving piggyback rides",
     "body": "When the babies get too big for her pouch, they ride on top instead. Nobody gets left behind."
+   },
+   {
+    "title": "An opossum mom is giving the whole family a ride",
+    "body": "A row of tiny babies clings to her back as she waddles along the edge of {green}. When one slips, she waits. Nobody gets left behind on this bus."
    }
   ]
  },
@@ -216,6 +248,10 @@
    {
     "title": "A teenage opossum is exploring",
     "body": "Fresh out of mom's care and very curious. Every flowerpot needs a careful sniff."
+   },
+   {
+    "title": "A young opossum is out exploring for the very first time",
+    "body": "New to being on their own, they're giving every flowerpot near {street} a careful, curious sniff. Everything is interesting. Everything takes a while."
    }
   ]
  },
@@ -239,6 +275,10 @@
    {
     "title": "Opossum, staying in under a pile of leaves",
     "body": "Too chilly for a walk. They'll pop out again on a milder night."
+   },
+   {
+    "title": "The opossums are waiting out the cold",
+    "body": "Bare pink ears and tails don't love winter, so tonight they're curled up somewhere snug near {green}, under leaves or tucked beneath a porch."
    }
   ]
  },
@@ -267,6 +307,10 @@
    {
     "title": "The moths found the streetlight again",
     "body": "Round and round they go. It's not a party they meant to join, and a dark porch lets them get back to their night."
+   },
+   {
+    "title": "The moths have found the streetlight on {street}",
+    "body": "Round and round they go, dizzy and determined, steering by a light that isn't the moon. Every window that goes dark nearby helps one of them get back to their night."
    }
   ]
  },
@@ -290,6 +334,10 @@
    {
     "title": "A moth is sipping from a night flower",
     "body": "Fuzzy, quiet and secretly doing important work. The garden {place} has a night crew."
+   },
+   {
+    "title": "The night-shift pollinators are working {green}",
+    "body": "While the bees sleep, moths drift from bloom to bloom in the dark, sipping and carrying pollen. Most people never see them. The flowers know."
    }
   ]
  },
@@ -312,6 +360,10 @@
    {
     "title": "One brave fall moth is out tonight",
     "body": "Most are already bundled up as cocoons in the leaf litter. This one wanted one more evening."
+   },
+   {
+    "title": "One of the year's last moths is out over {green}",
+    "body": "On a mild fall evening, a single moth flutters by, unhurried. Most of their friends are already tucked into the leaf litter as cocoons, waiting for spring."
    }
   ]
  },
@@ -341,6 +393,10 @@
    {
     "title": "The pigeons are doing their morning crumb inspection",
     "body": "Strut, peck, strut. Every inch of sidewalk gets a very official review."
+   },
+   {
+    "title": "The pigeons are heading out for breakfast on {street}",
+    "body": "They lift off the ledges in little flocks, loop once around {landmark}, and land wherever the morning left crumbs. Same breakfast spots, same friends, every day."
    }
   ]
  },
@@ -365,6 +421,10 @@
    {
     "title": "A pigeon is lying flat on a warm ledge",
     "body": "Feathers fluffed, wing out, fully melted. Do not disturb."
+   },
+   {
+    "title": "A pigeon is soaking up the sun near {landmark}",
+    "body": "One wing tipped open, eyes half closed, flattened out on a warm ledge. The heat helps their feathers. Mostly, it just feels really, really nice."
    }
   ]
  },
@@ -389,6 +449,10 @@
    {
     "title": "Pigeon romance is happening on the sidewalk",
     "body": "Puff, spin, bow, coo. Repeat. Pairs often stay together for life, so the routine has to be good."
+   },
+   {
+    "title": "Pigeon romance is happening on {street}",
+    "body": "He puffs up his shiny neck, spins in a circle and bows, cooing his heart out. She pretends to keep eating. Pigeon pairs often stay together for life, so she's taking her time deciding."
    }
   ]
  },
@@ -411,6 +475,10 @@
    {
     "title": "Pigeon, busy with home improvements",
     "body": "One twig at a time. Their nests are famously minimal. They like it that way."
+   },
+   {
+    "title": "A pigeon is flying one perfect twig home",
+    "body": "Somewhere on a ledge above {street} there's a nest in progress. City pigeons build any time of year, one twig at a time, a few floors above everyone's heads."
    }
   ]
  },
@@ -434,6 +502,10 @@
    {
     "title": "Pigeon huddle in progress",
     "body": "Shoulder to shoulder on the sunny side of the ledge. Warmth shared is warmth doubled."
+   },
+   {
+    "title": "The pigeons are huddled on the sunny side of {landmark}",
+    "body": "Shoulder to shoulder, fluffed up like little gray pillows, waiting for the sun to warm their ledge. They share the warmth, so nobody gets too cold."
    }
   ]
  },
@@ -459,6 +531,10 @@
    {
     "title": "Pigeon bedtime is starting",
     "body": "One by one they flap up to the ledge {place} and shuffle in next to their favorite pigeon."
+   },
+   {
+    "title": "The pigeons are coming home to their ledge",
+    "body": "As the light goes, pairs flap up above {street} and settle in side by side. Same ledge, same partner, every night, like they've been doing for years."
    }
   ]
  },
@@ -484,6 +560,10 @@
    {
     "title": "A pigeon is dozing on one foot",
     "body": "Feathers fluffed, head tucked. City noise doesn't bother them one bit."
+   },
+   {
+    "title": "The pigeons are asleep above {street}",
+    "body": "Heads tucked into their back feathers, pressed together in pairs on the ledges. Below them, the neighborhood keeps humming. They don't mind one bit."
    }
   ]
  },
@@ -509,6 +589,10 @@
    {
     "title": "Good morning from the hedge",
     "body": "Cheep, cheep, CHEEP. The sparrows have opinions about the day already."
+   },
+   {
+    "title": "The sparrow gang is waking up the block",
+    "body": "The hedges along {street} are suddenly full of chatter. It's how they check in every morning: who's here, who found food, who's being dramatic."
    }
   ]
  },
@@ -533,6 +617,10 @@
    {
     "title": "Sparrow spa day at the curb",
     "body": "Wiggle, flap, fluff, repeat. Dust scrubs away oil and tiny bugs. They come out cleaner, somehow."
+   },
+   {
+    "title": "The sparrows are having a dust bath near {green}",
+    "body": "They've found a dry patch of dirt and they're wriggling in it like it's a spa. A good dust bath keeps their feathers clean. Also, it looks extremely fun."
    }
   ]
  },
@@ -556,6 +644,10 @@
    {
     "title": "A baby sparrow is following a grown-up everywhere",
     "body": "Flutter, flutter, CHEEP. The grown-up finds a bug, the baby finds a way to be standing right there."
+   },
+   {
+    "title": "Baby sparrows are begging all over {street}",
+    "body": "Fluffy youngsters chase their parents from curb to hedge, wings fluttering, mouths wide open. The grown-ups look tired. They keep feeding them anyway."
    }
   ]
  },
@@ -578,6 +670,10 @@
    {
     "title": "Sparrow construction season is open",
     "body": "Bits of grass, feathers and string go into every nook {place}. The result is lumpy and perfect."
+   },
+   {
+    "title": "A sparrow is moving into a gap near {landmark}",
+    "body": "Grass, feathers, a bit of string: they're stuffing it all into a crack in the old brick. It won't win any design awards. It will be very cozy."
    }
   ]
  },
@@ -601,6 +697,10 @@
    {
     "title": "The sparrows are arguing about bedtime",
     "body": "Lots of chirping, lots of shuffling, then suddenly, quiet. They've settled it."
+   },
+   {
+    "title": "The hedge on {street} is having its evening meeting",
+    "body": "Every sparrow on the block is in there, chattering about the day before bed. Then, all at once, it goes quiet. Meeting adjourned."
    }
   ]
  },
@@ -624,6 +724,10 @@
    {
     "title": "Sparrow sleepover in the hedge",
     "body": "It's cold, so everyone's packed in close. Small birds, big huddle."
+   },
+   {
+    "title": "The sparrows are huddled deep in the hedge",
+    "body": "Puffed into round little balls, packed shoulder to shoulder out of the wind along {street}. Small birds, big huddle, warm enough."
    }
   ]
  },
@@ -649,6 +753,10 @@
    {
     "title": "Lights out in the hedge",
     "body": "For a few hours, the loudest bushes {place} are completely quiet."
+   },
+   {
+    "title": "Lights out in the sparrow hedge",
+    "body": "Deep in the bushes along {street}, the whole gang is asleep, feathers fluffed. The loudest hedge in the neighborhood is finally, completely quiet."
    }
   ]
  },
@@ -676,6 +784,10 @@
    {
     "title": "A squirrel is pretending to bury something",
     "body": "If they think someone's watching, they'll fake it: dig, pat, nothing there. The real snack goes somewhere secret."
+   },
+   {
+    "title": "A squirrel is planting an acorn in {green}",
+    "body": "Dig, drop, pat-pat-pat, then a quick look around to see who's watching. They'll find a lot of these again by memory. The ones they forget might be oak trees someday."
    }
   ]
  },
@@ -700,6 +812,10 @@
    {
     "title": "A squirrel is speed-running the lawn",
     "body": "Dash, stop, sniff, dig, dash. They have a lot of places to check before lunch."
+   },
+   {
+    "title": "The squirrels are making their morning rounds",
+    "body": "Up and down the trees on {street}, checking old hiding spots, sniffing for breakfast. Morning is their busiest time, and they have a lot of spots to check."
    }
   ]
  },
@@ -722,6 +838,10 @@
    {
     "title": "Squirrel loop-de-loops on the tree trunk",
     "body": "Round and round and round. In winter, these chases are mostly about romance. Very dizzy romance."
+   },
+   {
+    "title": "Two squirrels are chasing circles around a tree",
+    "body": "Up, down and around the trunk near {green}, so fast it's dizzying. It's winter courting season, and nobody's being subtle about it."
    }
   ]
  },
@@ -744,6 +864,10 @@
    {
     "title": "Squirrel pancake on the branch",
     "body": "Too hot to scamper. They've spread out flat in the shade and they are not getting up."
+   },
+   {
+    "title": "A squirrel is lying flat as a pancake",
+    "body": "Stretched belly-down on a cool branch over {street}, legs out, done with the heat. It's called splooting, and it's the most relatable thing in nature."
    }
   ]
  },
@@ -767,6 +891,10 @@
    {
     "title": "Busy mom, coming through",
     "body": "Up the trunk to the leafy nest, quick check on the kits, and back down for more snacks."
+   },
+   {
+    "title": "A squirrel mom is checking on her babies",
+    "body": "Up the trunk to a ball of leaves high above {green}. Her kits are tucked inside. She'll peek in, then head back out for more snacks."
    }
   ]
  },
@@ -792,6 +920,10 @@
    {
     "title": "Last snack, then bed",
     "body": "One final nibble, then straight up the tree. Squirrels keep very responsible hours."
+   },
+   {
+    "title": "A squirrel is heading up for the night",
+    "body": "One last snack near {green}, then straight up the tree to the leafy drey. Squirrels keep sensible hours. Lights out early."
    }
   ]
  },
@@ -817,6 +949,10 @@
    {
     "title": "Squirrel, fast asleep in a leaf ball",
     "body": "That messy clump of leaves up in the tree {place}? There's a very cozy squirrel inside."
+   },
+   {
+    "title": "A squirrel is fast asleep in the drey",
+    "body": "High in a tree near {green}, curled inside a ball of leaves, tail wrapped around like a blanket. On cold nights, sometimes two squirrels share."
    }
   ]
  },
@@ -844,6 +980,10 @@
    {
     "title": "Starling group chat, live on the wire",
     "body": "So much chatter. Then, all at once, everybody takes off. Meeting adjourned."
+   },
+   {
+    "title": "The starlings are gathering on the wires over {street}",
+    "body": "Dozens of them, chattering and swapping places, before they all take off together toward their night roost. Listen closely: some of those sounds are borrowed from the neighborhood."
    }
   ]
  },
@@ -867,6 +1007,10 @@
    {
     "title": "The starlings are lawn-aerating for free",
     "body": "Poke, open, snack. They march across the grass like a tiny, very shiny work crew."
+   },
+   {
+    "title": "The starlings are working the grass at {green}",
+    "body": "They push their beaks into the lawn and pop them open to pry up grubs. It's a clever little trick, and they march across the grass like a shiny work crew."
    }
   ]
  },
@@ -889,6 +1033,10 @@
    {
     "title": "A starling is singing from a chimney",
     "body": "Whistles, clicks, a borrowed car alarm. Spring starlings are very committed performers."
+   },
+   {
+    "title": "A starling is singing from a chimney above {street}",
+    "body": "Glossy purple and green, wings flicking, mixing whistles and clicks and maybe a car alarm into one long spring song. They put their whole heart into it."
    }
   ]
  },
@@ -911,6 +1059,10 @@
    {
     "title": "Starling teens are being extremely loud",
     "body": "They look nothing like the shiny grown-ups yet, but the volume is already perfect."
+   },
+   {
+    "title": "Young starlings are following their parents across {green}",
+    "body": "Plain brown and very loud, they trail the shiny grown-ups across the grass, begging for bugs. They'll get their spots soon enough."
    }
   ]
  },
@@ -933,6 +1085,10 @@
    {
     "title": "Starling, polka dots edition",
     "body": "In winter they're dark and spotted all over, like a little starry sky with legs."
+   },
+   {
+    "title": "The starlings are sparkling in the winter sun",
+    "body": "Perched on a wire over {street}, covered in tiny white speckles. When the light hits just right, they look like little starry skies."
    }
   ]
  },
@@ -956,6 +1112,10 @@
    {
     "title": "Hoo-OO-oo-oo",
     "body": "The mourning dove sounds a bit gloomy, but that's actually flirting."
+   },
+   {
+    "title": "A mourning dove is cooing softly on {street}",
+    "body": "Hoo-OO-oo-oo, from a wire somewhere above. It sounds a little sad, but it's a love song, and someone nearby is probably listening."
    }
   ]
  },
@@ -981,6 +1141,10 @@
    {
     "title": "A dove couple is sharing the wire",
     "body": "A little nudge, a little preen. They're doing their best impression of a valentine."
+   },
+   {
+    "title": "Two mourning doves are sitting close together",
+    "body": "Side by side on a wire near {green}, gently preening each other. Doves usually come in pairs, and these two look perfectly content."
    }
   ]
  },
@@ -1004,6 +1168,10 @@
    {
     "title": "Mourning dove, nest-building on a budget",
     "body": "Twig, twig, done. Their nests are so thin you can sometimes see the eggs from below."
+   },
+   {
+    "title": "A dove is building a tiny nest near {landmark}",
+    "body": "A few twigs balanced on a fire escape or a ledge. It doesn't look like much, but it's enough, and in a couple of weeks there might be chicks."
    }
   ]
  },
@@ -1028,6 +1196,10 @@
    {
     "title": "Head-bob parade on the ground",
     "body": "The doves are strolling and snacking. If you startle them, their wings squeak like a toy."
+   },
+   {
+    "title": "Mourning doves are strolling through {green}",
+    "body": "A little group walks the ground, bobbing their heads and picking up seeds. If something startles them, listen for the soft whistle of their wings."
    }
   ]
  },
@@ -1051,6 +1223,10 @@
    {
     "title": "Dove, fluffed up to maximum",
     "body": "Round as a dinner roll, eyes half closed, enjoying the last warm light {place}."
+   },
+   {
+    "title": "The doves are catching the last warm light",
+    "body": "Puffed up round on a wire over {street}, facing the sunset, soaking in every bit of warmth before the night comes."
    }
   ]
  },
@@ -1074,6 +1250,10 @@
    {
     "title": "The robins are up before everyone",
     "body": "It's still mostly dark, and they're already singing like it's the best morning ever."
+   },
+   {
+    "title": "A robin is singing the neighborhood awake",
+    "body": "It's barely light, and a robin near {green} is already singing. Then another answers from down {street}. The dawn chorus has begun."
    }
   ]
  },
@@ -1098,6 +1278,10 @@
    {
     "title": "Robin vs. worm, round one",
     "body": "A tug, a stretch, a tug. The robin usually wins. The worm puts up a good fight."
+   },
+   {
+    "title": "A robin is hunting worms in {green}",
+    "body": "Run, stop, tilt, pounce. That head tilt isn't listening: robins look at the ground with one eye, searching for the tiniest wiggle."
    }
   ]
  },
@@ -1120,6 +1304,10 @@
    {
     "title": "Baby robin, hopping around like a wind-up toy",
     "body": "They can't fly well yet, but mom and dad are watching. Give them space and they'll be fine."
+   },
+   {
+    "title": "A baby robin is hopping around {green}",
+    "body": "Spotty chest, stubby tail, not quite flying yet. A parent is close by with a worm. This little one is right where they're supposed to be."
    }
   ]
  },
@@ -1143,6 +1331,10 @@
    {
     "title": "Robin berry buffet is open",
     "body": "Gulp, gulp, gulp. In fall and winter, robins go full fruit mode."
+   },
+   {
+    "title": "The robins are feasting on berries near {green}",
+    "body": "Worms are getting scarce, so they've switched to fruit. A whole flock can clear a berry tree in an afternoon, gulping happily the whole time."
    }
   ]
  },
@@ -1166,6 +1358,10 @@
    {
     "title": "One more song from the robin",
     "body": "As the light fades {place}, a robin is still going, cheerful as ever."
+   },
+   {
+    "title": "A robin is singing the day out",
+    "body": "As the light fades over {street}, one robin is still going, cheerful as ever. First voice in the morning, one of the last at night."
    }
   ]
  },
@@ -1189,6 +1385,10 @@
    {
     "title": "Surprise, the robins never left",
     "body": "In winter they're quieter and hang out in flocks, so you might not notice them. They're here."
+   },
+   {
+    "title": "A quiet flock of robins is passing through {green}",
+    "body": "Plenty of robins stay all winter. They stop singing and travel together, looking for berries, so you might not notice them. They're still your neighbors."
    }
   ]
  },
@@ -1213,6 +1413,10 @@
    {
     "title": "Robins, roosting in the trees",
     "body": "Dozens of them tucked into the branches, getting rested for tomorrow's very early concert."
+   },
+   {
+    "title": "The robins are at their big sleepover",
+    "body": "Dozens tucked into the trees near {green}, sleeping together in one group roost. At dawn, they'll scatter back to their own patches."
    }
   ]
  },
@@ -1238,6 +1442,10 @@
    {
     "title": "A gull is just hanging in the air",
     "body": "No flapping, no hurry. They found the perfect breeze and they're keeping it."
+   },
+   {
+    "title": "A gull is gliding over {water}",
+    "body": "Wings out, barely moving, riding the breeze off the water like it costs nothing. Every so often they tilt, just a little, and the whole sky turns with them."
    }
   ]
  },
@@ -1262,6 +1470,10 @@
    {
     "title": "Gull vs. clam",
     "body": "The gull has a plan: fly high, let go, check the result. Repeat until lunch is served."
+   },
+   {
+    "title": "A gull is cracking a clam on the rocks by {water}",
+    "body": "Up high, then drop. Check it. Not yet? Up again. It's a clever trick, and they'll keep at it until lunch is served."
    }
   ]
  },
@@ -1287,6 +1499,10 @@
    {
     "title": "Gull, on morning lookout",
     "body": "Standing very tall on a post, judging the harbor. Breakfast could show up any minute."
+   },
+   {
+    "title": "A gull is keeping watch from a post on {water}",
+    "body": "Standing tall, feathers ruffling, watching the morning water for whatever the tide brings in. That post is theirs, and everyone knows it."
    }
   ]
  },
@@ -1310,6 +1526,10 @@
    {
     "title": "Gull commute, outbound",
     "body": "As the sun goes down, the gulls fly out over the water to their floating bedroom."
+   },
+   {
+    "title": "The gulls are flying out to {water} for the night",
+    "body": "As the sky turns pink, they head out over the water to sleep floating together, far from anything on land."
    }
   ]
  },
@@ -1332,6 +1552,10 @@
    {
     "title": "Gull parent on roof duty",
     "body": "Somewhere up there is a nest. The gull standing guard takes the job very seriously."
+   },
+   {
+    "title": "A gull is guarding a nest on a rooftop near {street}",
+    "body": "Up on a flat roof, a gull parent stands watch over a nest. Get too close and you'll hear about it. Gulls take parenting very seriously."
    }
   ]
  },
@@ -1354,6 +1578,10 @@
    {
     "title": "Gull teenager, still asking parents for food",
     "body": "Full-size, fully capable, extremely whiny. They'll get there."
+   },
+   {
+    "title": "A young gull is whining for lunch by {water}",
+    "body": "Mottled brown, already as big as the grown-ups, and still begging. The red spot on a parent's beak is the doorbell, and this kid keeps ringing it."
    }
   ]
  },
@@ -1379,6 +1607,10 @@
    {
     "title": "The gulls are asleep on the water",
     "body": "Floating out on the harbor, rising and falling with the waves, safe from anything on land."
+   },
+   {
+    "title": "The gulls are asleep out on {water}",
+    "body": "Floating together, tucked in, bobbing like bath toys on the night water. For once, the loudest birds in the neighborhood are completely quiet."
    }
   ]
  },
@@ -1402,6 +1634,10 @@
    {
     "title": "Monarch at the snack bar",
     "body": "Flower to flower, sip, sip. That orange is a warning to birds: they taste terrible."
+   },
+   {
+    "title": "A monarch is drinking from the flowers in {green}",
+    "body": "Wings opening and closing slowly in the sun, moving bloom to bloom. Every sip is fuel for a long trip, and this one is taking it seriously."
    }
   ]
  },
@@ -1424,6 +1660,10 @@
    {
     "title": "Tiny traveler, passing through",
     "body": "A monarch is drifting south over the rooftops. Thousands of miles to go, one flap at a time."
+   },
+   {
+    "title": "A monarch is passing through {green} on the way to Mexico",
+    "body": "This butterfly has never been to the mountains of Mexico, but they know the way. Today's stop: a quick rest and a snack, right here."
    }
   ]
  },
@@ -1446,6 +1686,10 @@
    {
     "title": "Monarch mom, very particular about milkweed",
     "body": "She tastes the leaves with her feet before leaving an egg. Only the best for the kids."
+   },
+   {
+    "title": "A monarch is leaving eggs on milkweed near {green}",
+    "body": "She tastes each leaf with her feet before leaving one tiny egg. Milkweed is the only plant her caterpillars can eat, so she's very particular."
    }
   ]
  },
@@ -1468,6 +1712,10 @@
    {
     "title": "Monarch hotel, now open",
     "body": "A few butterflies are bunking on the same branch {place}. Big day of flying tomorrow."
+   },
+   {
+    "title": "Monarchs are resting together near {green}",
+    "body": "A few travelers have folded their wings on the same branch for the night. Tomorrow they'll keep flying south. Tonight, they rest."
    }
   ]
  },
@@ -1493,6 +1741,10 @@
    {
     "title": "Hawk on a light pole, doing nothing on purpose",
     "body": "It looks like a nap. It is not a nap. They're watching everything."
+   },
+   {
+    "title": "A red-tailed hawk is watching over {street}",
+    "body": "Up on {landmark}, perfectly still, eyes on the ground below. They can wait a whole hour for one good chance. Patience is their superpower."
    }
   ]
  },
@@ -1516,6 +1768,10 @@
    {
     "title": "Free elevator ride for the hawk",
     "body": "They ride warm air up and up without flapping. Effortless, and a little show-offy."
+   },
+   {
+    "title": "A hawk is circling high above {green}",
+    "body": "Wide, slow loops on rising warm air, hardly a single flap. When they bank, look for the rusty red tail glowing in the sun."
    }
   ]
  },
@@ -1538,6 +1794,10 @@
    {
     "title": "Red-tailed hawk romance, overhead",
     "body": "Matching loops, a swoop, a near miss on purpose. Winter is courting season."
+   },
+   {
+    "title": "Two red-tailed hawks are dancing in the sky",
+    "body": "Soaring together above {green} in matching circles. Sometimes one dives toward the other and they touch talons midair. Winter is their season for romance."
    }
   ]
  },
@@ -1561,6 +1821,10 @@
    {
     "title": "Hawk, on nest duty",
     "body": "Hunkered down on a giant pile of sticks, keeping the eggs warm while the city goes by."
+   },
+   {
+    "title": "A red-tail is keeping eggs warm near {landmark}",
+    "body": "In a big nest of sticks on a ledge or a tall tree, a hawk sits very still. Their partner brings dinner. Good partner."
    }
   ]
  },
@@ -1584,6 +1848,10 @@
    {
     "title": "Hawk teen, very loud, very hungry",
     "body": "They can fly now, but hunting is hard. So they yell. A lot."
+   },
+   {
+    "title": "A young hawk is calling for dinner over {green}",
+    "body": "That long, wheezy scream is a fledgling asking the parents to hurry up. They can fly now. Hunting is still a work in progress."
    }
   ]
  },
@@ -1609,6 +1877,10 @@
    {
     "title": "Hawk, off the clock",
     "body": "Shift's over. Feathers fluffed, tucked against the trunk, eyes closing."
+   },
+   {
+    "title": "A hawk is settling in for the night",
+    "body": "Perched close against a tree trunk near {green}, out of the wind, feathers fluffed. Shift's over. Tomorrow, the watch begins again."
    }
   ]
  },
@@ -1632,6 +1904,10 @@
    {
     "title": "Blue jay, burying treasure",
     "body": "Acorn here, acorn there. Jays plant more oak trees than most people ever will."
+   },
+   {
+    "title": "A blue jay is planting oaks around {green}",
+    "body": "They carry acorns in a stretchy pouch in their throat and bury them all over. The ones they forget sprout, so this jay is quietly growing a forest."
    }
   ]
  },
@@ -1657,6 +1933,10 @@
    {
     "title": "Wait, is that a hawk?",
     "body": "Nope. It's a blue jay doing their best hawk impression. They're very good at it."
+   },
+   {
+    "title": "A blue jay is doing their best hawk impression",
+    "body": "That scream from the trees near {green}? Probably a jay. They copy hawks so well it can clear the whole branch. Maybe that's the point. Maybe it's just fun."
    }
   ]
  },
@@ -1680,6 +1960,10 @@
    {
     "title": "Good morning, says the blue jay. Loudly.",
     "body": "No alarm clock needed {place}. The jays have it covered."
+   },
+   {
+    "title": "A blue jay is announcing the morning",
+    "body": "JAY! JAY! from a bare branch over {street}. Bright blue, very loud, absolutely sure everyone should be awake by now."
    }
   ]
  },
@@ -1703,6 +1987,10 @@
    {
     "title": "Blue jay in stealth mode",
     "body": "Usually the loudest bird around. Right now, sneaky as a spy. There's a nest nearby."
+   },
+   {
+    "title": "A blue jay is being suspiciously quiet",
+    "body": "Usually the loudest bird around {green}. Right now, slipping silently through the leaves. That means there's a nest nearby, and they're keeping it secret."
    }
   ]
  },
@@ -1726,6 +2014,10 @@
    {
     "title": "Young blue jays are learning the ropes",
     "body": "Watch a grown-up, try it, mess it up, try again. Very relatable."
+   },
+   {
+    "title": "A blue jay family is on a field trip through {green}",
+    "body": "The youngsters follow the grown-ups from tree to tree, copying everything they do. Watch, try, mess up, try again."
    }
   ]
  },
@@ -1750,6 +2042,10 @@
    {
     "title": "Tiny snowbirds, hop-hop-hopping",
     "body": "Juncos never walk. They hop. Everywhere. Under every bush {place}."
+   },
+   {
+    "title": "Juncos are hopping under the hedges on {street}",
+    "body": "Little gray birds with snowy bellies, scratching through the leaves for seeds. They don't walk, they hop. And when they fly, their tails flash white."
    }
   ]
  },
@@ -1772,6 +2068,10 @@
    {
     "title": "The snowbirds are back",
     "body": "Juncos tend to show up right as it gets chilly. Welcome back, little gray friends."
+   },
+   {
+    "title": "The juncos just arrived from Canada",
+    "body": "They flew all night and landed near {green} this morning. They'll spend the whole winter here, hopping under the hedges. Welcome back, snowbirds."
    }
   ]
  },
@@ -1794,6 +2094,10 @@
    {
     "title": "Junco, warming up for the road",
     "body": "A little trill, a lot of snacking. Canada is a long way to fly."
+   },
+   {
+    "title": "A junco is trilling before the trip north",
+    "body": "A quick, bright song from a branch near {green}. In a few weeks they'll head back to Canada. Until then, lots of snacks and practice songs."
    }
   ]
  },
@@ -1817,6 +2121,10 @@
    {
     "title": "Junco bedtime, low and cozy",
     "body": "They pick the thickest part of the hedge and scoot in close together."
+   },
+   {
+    "title": "The juncos are tucking into the hedge for the night",
+    "body": "A little flock scoots low into the thickest part of the bushes along {street}, out of the wind, close together."
    }
   ]
  },
@@ -1840,6 +2148,10 @@
    {
     "title": "Little gray puffballs, fast asleep",
     "body": "Somewhere under a hedge {place}, a few juncos are snoozing close together."
+   },
+   {
+    "title": "The juncos are asleep under the hedge",
+    "body": "Somewhere along {street}, a few little gray puffballs are snoozing close to the ground, saving their warmth for tomorrow."
    }
   ]
  },
@@ -1863,6 +2175,10 @@
    {
     "title": "Crow rush hour, overhead",
     "body": "Caw, caw, caw. Everyone's heading to the big sleepover at once."
+   },
+   {
+    "title": "The crows are commuting home over {street}",
+    "body": "Long, loose lines of them, cawing to each other, all headed to the same big roost to sleep together. It's crow rush hour."
    }
   ]
  },
@@ -1886,6 +2202,10 @@
    {
     "title": "Crow families are fanning out for the day",
     "body": "One big roost, many little neighborhoods. Everybody knows their route."
+   },
+   {
+    "title": "The crows are heading back to their neighborhoods",
+    "body": "After a night in the big roost, each family flies home to its own patch. One of those families lives around {green}. They know every rooftop."
    }
   ]
  },
@@ -1911,6 +2231,10 @@
    {
     "title": "The neighborhood watch is on duty",
     "body": "A crow on the roof edge is noting who's who {place}. They really do remember people."
+   },
+   {
+    "title": "A crow is keeping an eye on {street}",
+    "body": "Perched on {landmark}, watching who comes and goes. Crows remember faces for years. Be kind, and you might get a nod back someday."
    }
   ]
  },
@@ -1934,6 +2258,10 @@
    {
     "title": "A crow family is feeding the new chicks",
     "body": "It takes a village. Or at least a few older siblings with snacks."
+   },
+   {
+    "title": "A crow family is raising the new chicks together",
+    "body": "In a tall tree near {green}, last year's kids are helping out, bringing food to their new little siblings. It takes a family."
    }
   ]
  },
@@ -1956,6 +2284,10 @@
    {
     "title": "Crow kid, very sure they're starving",
     "body": "They aren't. But they'd like everyone {place} to know they could eat."
+   },
+   {
+    "title": "Young crows are begging loudly near {green}",
+    "body": "Fluffy, noisy and following their parents everywhere, absolutely convinced they're starving. They aren't. Patience is not a crow-kid skill."
    }
   ]
  },
@@ -1979,6 +2311,10 @@
    {
     "title": "Crow roost, lights out",
     "body": "A whole city of crows, sleeping shoulder to shoulder in the trees."
+   },
+   {
+    "title": "The crows are sleeping together tonight",
+    "body": "Hundreds of crows, maybe thousands, packed into one stand of trees. Somewhere in there is the family from around {green}. Safety in numbers."
    }
   ]
  },
@@ -2002,6 +2338,10 @@
    {
     "title": "Someone in the bushes is singing about Canada",
     "body": "That's a White-throated Sparrow. Very homesick song, very pretty."
+   },
+   {
+    "title": "A White-throated Sparrow is singing about Canada",
+    "body": "Oh sweet Canada, Canada, Canada, a thin, clear whistle from the bushes near {green}. It's one of the loveliest sounds of the season."
    }
   ]
  },
@@ -2025,6 +2365,10 @@
    {
     "title": "Hop, kick, look. Hop, kick, look.",
     "body": "The White-throated Sparrows have a whole dance for finding snacks in the leaf litter."
+   },
+   {
+    "title": "White-throated Sparrows are doing the leaf kick",
+    "body": "Both feet at once, hop-kick backward, in the leaf litter near {green}. They're uncovering seeds and bugs, one little kick at a time."
    }
   ]
  },
@@ -2048,6 +2392,10 @@
    {
     "title": "New neighbors in the bushes",
     "body": "White-throated Sparrows just moved in for the season. Listen for their whistle."
+   },
+   {
+    "title": "The White-throated Sparrows are back for the winter",
+    "body": "They flew down from the forests of Canada and moved into the bushes around {green}. Listen for their whistle all season long."
    }
   ]
  },
@@ -2070,6 +2418,10 @@
    {
     "title": "Snack break before the big trip",
     "body": "The White-throated Sparrows are eating everything they can find. Canada's far."
+   },
+   {
+    "title": "White-throated Sparrows are fueling up for the trip north",
+    "body": "Snacking under the bushes near {green}, and practicing their song. In a few weeks they'll be gone till fall."
    }
   ]
  },
@@ -2094,6 +2446,10 @@
    {
     "title": "Flying cigars, twittering",
     "body": "Those little zoomy birds are chimney swifts. They eat, drink and bathe without landing."
+   },
+   {
+    "title": "Chimney swifts are zipping over {street}",
+    "body": "Tiny cigar-shaped birds, twittering, swooping, catching bugs on the wing. They eat, drink and even bathe without landing."
    }
   ]
  },
@@ -2116,6 +2472,10 @@
    {
     "title": "Swift tornado, right on schedule",
     "body": "Round and round, then whoosh, they all drop into the chimney for the night."
+   },
+   {
+    "title": "The swifts are pouring into an old chimney",
+    "body": "At dusk they swirl together above {street}, round and round, then funnel down into a chimney all at once, to sleep clinging to the inside wall."
    }
   ]
  },
@@ -2138,6 +2498,10 @@
    {
     "title": "Twitter, twitter, the swifts have landed",
     "body": "Well, not landed. They barely ever land. But they're back!"
+   },
+   {
+    "title": "The chimney swifts are back over {street}",
+    "body": "Fresh in from South America after a very long trip. Listen for their high twittering over the rooftops: summer is on its way."
    }
   ]
  }

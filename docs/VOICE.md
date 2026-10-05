@@ -21,7 +21,8 @@ stoop. The animals have personalities. We laugh *with* them, never at them.
 ## Rules
 
 - **Action first.** What they're doing right now, in the present tense.
-- **Titles** are short and punchy. **Bodies** are one or two sentences, about 30 words.
+- **Titles** are short and punchy. **Bodies** are one to three sentences, up to about
+  50 words. Detail is welcome when it makes the moment feel real and local.
 - **One joke per line, at most.** A parenthetical aside is a good place for it.
 - **Cute words sparingly** ("tiny", "little", "pat-pat-pat") so they keep their charm.
 - **Never mocking, gross or scary.** No jokes about animals being dumb, dirty or pests.
@@ -30,4 +31,10 @@ stoop. The animals have personalities. We laugh *with* them, never at them.
 - **No guilt, no numbers.** Kindness nudges are invitations, not chores.
 - **`{place}`** becomes "near Liberty State Park" or "on your block". Use it where
   either reads naturally, at most once per moment.
+- **Name the neighborhood's real spots** with `{green}`, `{water}`, `{landmark}` and
+  `{street}` (Liberty State Park: "the salt marsh by the Interpretive Center", "the
+  harbor", "the old train terminal", "Liberty Walk"). Unnamed spots get gentle generic
+  stand-ins. Phrase it so it's true anywhere: "somewhere near {green}", "toward {water}",
+  never a claim that an animal is definitely at an exact spot.
+- **Sentimental is good.** Routines, families, coming home, belonging to the place.
 - **Several variants per moment**, so the same scene doesn't read the same twice.

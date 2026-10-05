@@ -28,6 +28,7 @@ const base = {
   residents: speciesFor('waterfront', 'fall'),
   placeName: 'Liberty State Park',
   where: 'by the water',
+  local: { green: 'the salt marsh', water: 'the harbor', landmark: 'the old train terminal', street: 'Liberty Walk' },
 };
 
 describe('random', () => {
@@ -53,6 +54,10 @@ describe('placePhrase', () => {
     expect(placePhrase('Liberty State Park', 'by the water')).toBe('near Liberty State Park');
     expect(placePhrase(null, 'on your block')).toBe('on your block');
     expect(fillPlace('Look {place}. Or {where}.', 'near Astoria')).toBe('Look near Astoria. Or near Astoria.');
+    const local = { green: 'Astoria Park', water: 'the East River', landmark: 'the Hell Gate Bridge', street: 'Ditmars Boulevard' };
+    expect(fillPlace('Down {street}, past {green}, under {landmark}, to {water}.', 'near Astoria', local)).toBe(
+      'Down Ditmars Boulevard, past Astoria Park, under the Hell Gate Bridge, to the East River.',
+    );
   });
 });
 
@@ -64,6 +69,16 @@ describe('buildLocalStory', () => {
     expect(scenes.slice(0, 2).map((s) => s.speciesId)).toEqual(['moths', 'herring-gull']);
     expect(scenes[0].body).toContain('near Liberty State Park');
     expect(scenes[0].setting).toBe('branch');
+  });
+
+  it('names local spots in a named neighborhood', () => {
+    const localMoment: Moment = { ...moment('raccoon', 1), id: 'raccoon-local', variants: [
+      { title: 'Plain', body: 'A raccoon is out {place}.' },
+      { title: 'Local', body: 'A raccoon is heading for {green}.' },
+    ] };
+    const picks = Array.from({ length: 40 }, (_, i) => buildLocalStory({ ...base, moments: [localMoment], residents: speciesFor('waterfront', 'fall').filter((s) => s.id === 'raccoon'), live: new Map(), seed: `n${i}` })[0]);
+    const localShare = picks.filter((s) => s.body.includes('the salt marsh')).length / picks.length;
+    expect(localShare).toBeGreaterThan(0.5);
   });
 
   it('only uses moments for this time of day', () => {

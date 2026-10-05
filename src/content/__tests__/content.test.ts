@@ -1,5 +1,6 @@
 // Guards the bundled content: every reference points somewhere real, and every
 // season the app can land in has a full set.
+import { fillPlace } from '@/lib/localStory';
 import { buildStory } from '@/lib/story';
 import {
   getSpecies,
@@ -65,9 +66,19 @@ describe('moments', () => {
     }
   });
 
-  it('only use {place} as a placeholder', () => {
+  it('only use known placeholders', () => {
     for (const m of moments) for (const v of m.variants) {
-      expect((v.title + v.body).replace(/\{place\}/g, '')).not.toMatch(/[{}]/);
+      expect((v.title + v.body).replace(/\{(place|green|water|landmark|street)\}/g, '')).not.toMatch(/[{}]/);
+    }
+  });
+
+  it('fill in completely for every neighborhood and every unnamed kind of place', () => {
+    const locals = [...places.map((p) => p.local), ...KINDS.map((k) => placeKinds[k].local)];
+    for (const local of locals) {
+      for (const k of Object.keys(local)) expect((local as Record<string, string>)[k].length).toBeGreaterThan(2);
+      for (const m of moments) for (const v of m.variants) {
+        expect(fillPlace(v.title + ' ' + v.body, 'near Astoria', local)).not.toMatch(/[{}]/);
+      }
     }
   });
 

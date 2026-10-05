@@ -12,7 +12,7 @@
 // The seed is neighborhood + date + time of day, so the story holds still while
 // you look at it, changes tomorrow, and differs down the street.
 
-import type { Moment, Period, PlaceKind, Season, Species, StorySlide } from '@/content/types';
+import type { LocalNames, Moment, Period, PlaceKind, Season, Species, StorySlide } from '@/content/types';
 import type { LiveMap } from './live';
 import { pick, seededRandom, shuffle } from './random';
 import { buildStory } from './story';
@@ -33,6 +33,8 @@ export type LocalStoryInput = {
   placeName: string | null;
   /** Fallback phrase for an unnamed spot: "on your block". */
   where: string;
+  /** Real local spots ({green}, {water}, {landmark}, {street}), or generic stand-ins. */
+  local: LocalNames;
   live: LiveMap;
   seed: string;
 };
@@ -42,12 +44,18 @@ export function placePhrase(placeName: string | null, where: string): string {
   return placeName ? `near ${placeName}` : where;
 }
 
-export function fillPlace(text: string, phrase: string): string {
-  return text.split('{place}').join(phrase).split('{where}').join(phrase);
+/** Fills {place}/{where} with the place phrase and {green}/{water}/{landmark}/{street}
+ * with the neighborhood's real spots. */
+export function fillPlace(text: string, phrase: string, local?: LocalNames): string {
+  let out = text.split('{place}').join(phrase).split('{where}').join(phrase);
+  if (local) {
+    for (const key of ['green', 'water', 'landmark', 'street'] as const) out = out.split(`{${key}}`).join(local[key]);
+  }
+  return out;
 }
 
 export function buildLocalStory(input: LocalStoryInput): StorySlide[] {
-  const { moments, slides, residents, allSpecies, season, period, placeKind, placeName, where, live, seed } = input;
+  const { moments, slides, residents, allSpecies, season, period, placeKind, placeName, where, local, live, seed } = input;
   const random = seededRandom(seed);
   const phrase = placePhrase(placeName, where);
 
@@ -67,14 +75,14 @@ export function buildLocalStory(input: LocalStoryInput): StorySlide[] {
     const options = moments.filter((m) => m.speciesId === s.id && m.seasons.includes(season) && m.periods.includes(period));
     if (options.length === 0) continue;
     const moment = pick(options, random);
-    const variant = pick(moment.variants, random);
+    const variant = pickVariant(moment, placeName !== null, random);
     featured.push({
       id: `${moment.id}:${moment.variants.indexOf(variant)}`,
       season,
       period,
       kicker: moment.kicker,
-      title: fillPlace(variant.title, phrase),
-      body: fillPlace(variant.body, phrase),
+      title: fillPlace(variant.title, phrase, local),
+      body: fillPlace(variant.body, phrase, local),
       speciesId: s.id,
       setting: moment.setting,
       kind: 'scene',
@@ -93,6 +101,15 @@ export function buildLocalStory(input: LocalStoryInput): StorySlide[] {
   }
 
   return [...featured, ...chapters];
+}
+
+const LOCAL_SPOT = /\{(green|water|landmark|street)\}/;
+
+/** In a named neighborhood, lean toward versions that mention its real spots. */
+function pickVariant(moment: Moment, named: boolean, random: () => number) {
+  const local = moment.variants.filter((v) => LOCAL_SPOT.test(v.title + v.body));
+  if (named && local.length > 0 && random() < 0.65) return pick(local, random);
+  return pick(moment.variants, random);
 }
 
 function uniqueById(list: Species[]): Species[] {

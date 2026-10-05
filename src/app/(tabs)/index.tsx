@@ -57,7 +57,8 @@ export default function RightNow() {
 
   // Built around who's been seen near this neighborhood (live), with a seeded pick of
   // moments: steady while you look, different tomorrow and down the street.
-  const placeName = hood.placeId ? places.find((p) => p.id === hood.placeId)?.name ?? null : null;
+  const place = hood.placeId ? places.find((p) => p.id === hood.placeId) : undefined;
+  const placeName = place?.name ?? null;
   const today = dateKey(now);
   const story = useMemo(
     () =>
@@ -71,10 +72,11 @@ export default function RightNow() {
         placeKind: hood.kind,
         placeName,
         where: placeKinds[hood.kind].where,
+        local: place?.local ?? placeKinds[hood.kind].local,
         live,
         seed: `${hood.cell}:${today}:${header.period}`,
       }),
-    [season, header.period, hood.kind, hood.cell, placeName, live, today],
+    [season, header.period, hood.kind, hood.cell, place, placeName, live, today],
   );
 
   // Switching neighborhood or time of day restarts the story.

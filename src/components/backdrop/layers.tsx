@@ -30,12 +30,17 @@ export type BackdropInput = {
 
 type Ctx = BackdropInput & { u: number; rnd: () => number; horizon: number };
 
-/** Where ground meets sky for the horizon details. */
-const HORIZON = 0.84;
+/**
+ * The horizon (landmark, harbor, city lights) sits just above the story's button, below
+ * the text. Sky things stay below the time header: SKY_TOP is the highest they go.
+ */
+const BUTTON_ZONE = 96; // pt from the bottom: the "Meet the…" button and its padding
+const LANDMARK_MAX = 50; // pt: keeps the landmark in the gap under the text
+const SKY_TOP = 0.28;
 
 export function buildLayers(input: BackdropInput): Layer[] {
   const u = Math.min(input.w, input.h) / 100;
-  const c: Ctx = { ...input, u, rnd: seededRandom(`${input.setting}:${input.variant}:${input.season}`), horizon: input.h * HORIZON };
+  const c: Ctx = { ...input, u, rnd: seededRandom(`${input.setting}:${input.variant}:${input.season}`), horizon: Math.max(input.h * 0.7, input.h - BUTTON_ZONE) };
   const isDay = c.period !== 'night';
   return [
     ...timeOfDay(c),
@@ -61,7 +66,7 @@ function timeOfDay(c: Ctx): Layer[] {
         <G>
           {Array.from({ length: n }, (_, i) => {
             const x = rnd() < 0.5 ? rnd() * 0.25 : 0.75 + rnd() * 0.25; // keep to the sides of the photo
-            return <Circle key={i} cx={w * x} cy={h * (0.22 + rnd() * 0.4)} r={(0.7 + rnd() * 0.8) * u} fill={inks.yellow} />;
+            return <Circle key={i} cx={w * x} cy={h * (SKY_TOP + rnd() * 0.36)} r={(0.7 + rnd() * 0.8) * u} fill={inks.yellow} />;
           })}
         </G>
       );
@@ -80,14 +85,14 @@ function timeOfDay(c: Ctx): Layer[] {
         id: 'shooting-star',
         depth: 0.1,
         motion: { kind: 'flash', every: [7000, 11000, 9000][variant], duration: 900, dx: w * 0.35, dy: h * 0.12 },
-        node: <Path d={`M${w * 0.1} ${h * 0.12} l${10 * u} ${3.5 * u}`} stroke={inks.yellow} strokeWidth={0.9 * u} strokeLinecap="round" />,
+        node: <Path d={`M${w * 0.06} ${h * SKY_TOP} l${10 * u} ${3.5 * u}`} stroke={inks.yellow} strokeWidth={0.9 * u} strokeLinecap="round" />,
       },
     ];
   }
 
   if (period === 'midday') {
     const sx = w * [0.86, 0.14, 0.88][variant];
-    const sy = h * 0.27;
+    const sy = h * (SKY_TOP + 0.04);
     const r = 6 * u;
     return [
       {
@@ -120,7 +125,7 @@ function timeOfDay(c: Ctx): Layer[] {
       node: (
         <G>
           {bands.map((color, i) => (
-            <Rect key={color} x={0} y={h * (0.64 + i * 0.07)} width={w} height={h * 0.07} fill={color} />
+            <Rect key={color} x={0} y={c.horizon - (3 - i) * h * 0.05} width={w} height={h * 0.05} fill={color} />
           ))}
         </G>
       ),
@@ -170,9 +175,9 @@ function clouds(c: Ctx): Layer[] {
   // Three looks: puffy trio, two big billows, long thin streaks.
   const far =
     variant === 2 ? (
-      <G>{streak(w * 0.05, h * 0.25, w * 0.3, u)}{streak(w * 0.55, h * 0.33, w * 0.35, u)}{streak(w * 0.25, h * 0.47, w * 0.25, u)}</G>
+      <G>{streak(w * 0.05, h * 0.3, w * 0.3, u)}{streak(w * 0.55, h * 0.36, w * 0.35, u)}{streak(w * 0.25, h * 0.5, w * 0.25, u)}</G>
     ) : (
-      <G>{cloud(w * 0.2, h * 0.26, 3.5 * u, tint)}{cloud(w * 0.7, h * 0.34, 3 * u, tint)}</G>
+      <G>{cloud(w * 0.2, h * 0.31, 3.5 * u, tint)}{cloud(w * 0.7, h * 0.37, 3 * u, tint)}</G>
     );
   const near =
     variant === 1 ? (
@@ -180,7 +185,7 @@ function clouds(c: Ctx): Layer[] {
     ) : variant === 2 ? (
       <G>{cloud(w * 0.6, h * 0.42, 5 * u, tint)}</G>
     ) : (
-      <G>{cloud(w * 0.1, h * 0.3, 6.5 * u, tint)}{cloud(w * 0.5, h * 0.24, 4.2 * u, tint)}{cloud(w * 0.82, h * 0.44, 5.5 * u, tint)}</G>
+      <G>{cloud(w * 0.1, h * 0.33, 6.5 * u, tint)}{cloud(w * 0.5, h * 0.3, 4.2 * u, tint)}{cloud(w * 0.82, h * 0.46, 5.5 * u, tint)}</G>
     );
   return [
     { id: 'clouds-far', depth: 0.15, opacity: 0.7, motion: { kind: 'travelX', duration: [120000, 140000, 100000][variant] }, node: far },
@@ -196,7 +201,7 @@ function bird(x: number, y: number, s: number, u: number) {
 
 function flock(c: Ctx): Layer[] {
   const { w, h, u, variant, placeKind } = c;
-  const y = h * [0.2, 0.16, 0.22][variant];
+  const y = h * [0.33, 0.3, 0.36][variant]; // below the header; passes behind the photo
   if (placeKind === 'waterfront' && variant !== 1) {
     // A V of geese.
     const birds = Array.from({ length: 7 }, (_, i) => {
@@ -220,7 +225,7 @@ function horizon(c: Ctx): Layer[] {
   const dark = period === 'dusk' || period === 'night';
 
   // The neighborhood's landmark, faint, standing on the horizon.
-  const s = Math.min(w / 358, (h * 0.18) / 100);
+  const s = Math.min(w / 358, LANDMARK_MAX / 100);
   const x0 = (w - 358 * s) / 2;
   out.push({
     id: 'landmark',
