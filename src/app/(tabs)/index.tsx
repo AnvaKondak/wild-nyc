@@ -8,11 +8,10 @@ import { NeighborhoodPills } from '@/components/NeighborhoodPills';
 import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
-import { getSpecies, placeKinds, stories, type Period, type StorySlide } from '@/content';
+import { getSpecies, moments, placeKinds, places, species as allSpecies, speciesFor, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
-import { orderStory } from '@/lib/live';
-import { buildStory } from '@/lib/story';
-import { seasonOf, timeHeader } from '@/lib/time';
+import { buildLocalStory } from '@/lib/localStory';
+import { dateKey, seasonOf, timeHeader } from '@/lib/time';
 import { useNow } from '@/lib/useNow';
 import { useAppState } from '@/state/AppState';
 import { useLiveData } from '@/state/LiveData';
@@ -54,10 +53,27 @@ export default function RightNow() {
   const season = seasonOf(now);
   const theme = periodThemes[header.period];
 
-  // Species actually seen around this neighborhood lately come first (live data).
+  // Built around who's been seen near this neighborhood (live), with a seeded pick of
+  // moments: steady while you look, different tomorrow and down the street.
+  const placeName = hood.placeId ? places.find((p) => p.id === hood.placeId)?.name ?? null : null;
+  const today = dateKey(now);
   const story = useMemo(
-    () => orderStory(buildStory(stories, { season, period: header.period, placeKind: hood.kind, where: placeKinds[hood.kind].where }), live),
-    [season, header.period, hood.kind, live],
+    () =>
+      buildLocalStory({
+        moments,
+        slides: stories,
+        residents: speciesFor(hood.kind, season),
+        allSpecies,
+        season,
+        period: header.period,
+        placeKind: hood.kind,
+        placeName,
+        where: placeKinds[hood.kind].where,
+        live,
+        seed: `${hood.cell}:${today}:${header.period}`,
+        today: new Date(),
+      }),
+    [season, header.period, hood.kind, hood.cell, placeName, live, today],
   );
 
   // Switching neighborhood or time of day restarts the story.

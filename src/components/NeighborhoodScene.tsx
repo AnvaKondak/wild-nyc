@@ -1,12 +1,12 @@
 import Svg, { Circle, G, Path, Rect } from 'react-native-svg';
-import type { SceneSpot, Species } from '@/content/types';
+import type { BlockSpot, Species } from '@/content/types';
 import { colors } from '@/theme/tokens';
 
 // The riso neighborhood scene from mocks/4-neighbors.html, on a 358×560 grid.
 export const SCENE_SIZE = { width: 358, height: 560 } as const;
 
 /** Sticker slots (top-left of a 46px sticker) for each spot, filled in order. */
-const SLOTS: Record<SceneSpot, { x: number; y: number }[]> = {
+const SLOTS: Record<BlockSpot, { x: number; y: number }[]> = {
   sky: [{ x: 140, y: 34 }, { x: 212, y: 62 }],
   rooftop: [{ x: 50, y: 64 }, { x: 98, y: 60 }],
   ledge: [{ x: 44, y: 154 }, { x: 90, y: 236 }],
@@ -26,13 +26,15 @@ export type ScenePlacement = { species: Species; x: number; y: number; tilt: num
 
 /** Puts every species in its natural spot, in list order. Extras past the slots are left out. */
 export function placeSpecies(all: Species[]): ScenePlacement[] {
-  const used: Partial<Record<SceneSpot, number>> = {};
+  const used: Partial<Record<BlockSpot, number>> = {};
   const out: ScenePlacement[] = [];
   all.forEach((species, i) => {
-    const n = used[species.sceneSpot] ?? 0;
-    const slot = SLOTS[species.sceneSpot][n];
+    const spot = species.spots.block;
+    if (!spot) return;
+    const n = used[spot] ?? 0;
+    const slot = SLOTS[spot][n];
     if (!slot) return;
-    used[species.sceneSpot] = n + 1;
+    used[spot] = n + 1;
     out.push({ species, ...slot, tilt: TILTS[i % TILTS.length] });
   });
   return out;

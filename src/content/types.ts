@@ -9,18 +9,22 @@ export type Period = 'dawn' | 'midday' | 'dusk' | 'night';
 /** What kind of place a neighborhood is. Picks its species and its {where}. */
 export type PlaceKind = 'block' | 'park' | 'waterfront';
 
-export type SceneSpot =
-  | 'ledge'
-  | 'wire'
-  | 'sky'
-  | 'tree'
-  | 'hedge'
-  | 'sidewalk'
-  | 'flowerbox'
-  | 'trashcan'
-  | 'rooftop'
-  | 'fence'
-  | 'lamp';
+/** Spots in the block scene. */
+export type BlockSpot = 'sky' | 'rooftop' | 'ledge' | 'wire' | 'lamp' | 'tree' | 'flowerbox' | 'trashcan' | 'hedge' | 'fence' | 'sidewalk';
+/** Spots in the park scene. */
+export type ParkSpot = 'sky' | 'treetop' | 'trunk' | 'shrubs' | 'lawn' | 'path' | 'bench' | 'flowers' | 'pond' | 'reeds' | 'log' | 'lamp';
+/** Spots in the waterfront scene. */
+export type WaterfrontSpot = 'sky' | 'lamp' | 'railing' | 'pier' | 'piling' | 'water' | 'shore' | 'rocks' | 'grass';
+
+export type SceneSpot = BlockSpot | ParkSpot | WaterfrontSpot;
+
+/** Where a species shows up in each kind of place. Having an entry means they live there. */
+export type Spots = { block?: BlockSpot; park?: ParkSpot; waterfront?: WaterfrontSpot };
+
+/** Backdrop drawn behind the animal on a story sticker. */
+export type Setting =
+  | 'branch' | 'trunk' | 'wire' | 'ledge' | 'rooftop' | 'streetlight' | 'lawn' | 'sidewalk' | 'hedge'
+  | 'flowers' | 'water' | 'shore' | 'pier' | 'sky' | 'night-sky' | 'web' | 'trashcan' | 'fence' | 'reeds' | 'den';
 
 export type TintName = 'pinkTint' | 'yellowTint' | 'blueTint' | 'yellow' | 'pink';
 
@@ -40,7 +44,10 @@ export type Species = {
   rightNow: Record<Season, string>;
   funFact: { title: string; body: string };
   kindness: { title: string; body: string };
-  sceneSpot: SceneSpot;
+  /** Which scene they live in on the Neighbors screen. */
+  homeScene: PlaceKind;
+  /** Where they appear in each scene; also which kinds of places they live in. */
+  spots: Spots;
   /** How to find them if not met yet. */
   spotHint: string;
   /** When they're around. */
@@ -63,13 +70,30 @@ export type StorySlide = {
   /** May contain {where}. */
   body: string;
   speciesId?: string;
-  kind?: 'scene' | 'arriving' | 'goodbye';
+  kind?: 'scene' | 'arriving' | 'goodbye' | 'this-week';
+  /** Backdrop for the sticker (moments set this). */
+  setting?: Setting;
   /** Only show in these kinds of places. Omit for everywhere. */
   places?: PlaceKind[];
   /** Button label override. Defaults to "Meet the {friendlyName}". */
   cta?: string;
   /** Button goes to Kindness instead of the species profile. */
   link?: 'kindness';
+};
+
+/**
+ * Something a species is doing at a season and time of day: an action, not a fact.
+ * Several variants, so the same moment doesn't read the same every day.
+ * Bodies may use {place}: "near Liberty State Park", or "on your block".
+ */
+export type Moment = {
+  id: string;
+  speciesId: string;
+  seasons: Season[];
+  periods: Period[];
+  setting: Setting;
+  kicker: string;
+  variants: { title: string; body: string }[];
 };
 
 export type Kindness = {
@@ -92,7 +116,6 @@ export type Place = {
 
 export type PlaceKindInfo = {
   where: string;
-  species: string[];
 };
 
 export type RehabContact = {

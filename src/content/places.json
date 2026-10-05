@@ -1,38 +1,175 @@
 {
   "kinds": {
     "block": {
-      "where": "on your block",
-      "species": ["rock-pigeon", "house-sparrow", "eastern-gray-squirrel", "european-starling", "mourning-dove", "american-robin", "american-crow", "raccoon", "virginia-opossum", "moths", "dark-eyed-junco", "red-tailed-hawk", "chimney-swift", "monarch"]
+      "where": "on your block"
     },
     "park": {
-      "where": "in the park",
-      "species": ["rock-pigeon", "house-sparrow", "eastern-gray-squirrel", "european-starling", "mourning-dove", "american-robin", "american-crow", "raccoon", "virginia-opossum", "moths", "dark-eyed-junco", "red-tailed-hawk", "chimney-swift", "monarch", "blue-jay", "white-throated-sparrow", "herring-gull"]
+      "where": "in the park"
     },
     "waterfront": {
-      "where": "by the water",
-      "species": ["rock-pigeon", "house-sparrow", "european-starling", "mourning-dove", "american-robin", "american-crow", "herring-gull", "eastern-gray-squirrel", "raccoon", "moths", "chimney-swift", "monarch", "red-tailed-hawk"]
+      "where": "by the water"
     }
   },
   "places": [
-    { "id": "park-slope", "name": "Park Slope", "city": "NYC", "kind": "block", "lat": 40.671, "lng": -73.9814 },
-    { "id": "prospect-park", "name": "Prospect Park", "city": "NYC", "kind": "park", "lat": 40.6602, "lng": -73.969 },
-    { "id": "williamsburg", "name": "Williamsburg", "city": "NYC", "kind": "block", "lat": 40.7081, "lng": -73.9571 },
-    { "id": "bed-stuy", "name": "Bed-Stuy", "city": "NYC", "kind": "block", "lat": 40.6872, "lng": -73.9418 },
-    { "id": "brooklyn-bridge-park", "name": "Brooklyn Bridge Park", "city": "NYC", "kind": "waterfront", "lat": 40.7003, "lng": -73.9967 },
-    { "id": "lower-east-side", "name": "Lower East Side", "city": "NYC", "kind": "block", "lat": 40.715, "lng": -73.9843 },
-    { "id": "battery-park-city", "name": "Battery Park City", "city": "NYC", "kind": "waterfront", "lat": 40.7116, "lng": -74.0158 },
-    { "id": "central-park", "name": "Central Park", "city": "NYC", "kind": "park", "lat": 40.7812, "lng": -73.9665 },
-    { "id": "harlem", "name": "Harlem", "city": "NYC", "kind": "block", "lat": 40.8116, "lng": -73.9465 },
-    { "id": "washington-heights", "name": "Washington Heights", "city": "NYC", "kind": "block", "lat": 40.8417, "lng": -73.9394 },
-    { "id": "astoria", "name": "Astoria", "city": "NYC", "kind": "block", "lat": 40.7644, "lng": -73.9235 },
-    { "id": "jackson-heights", "name": "Jackson Heights", "city": "NYC", "kind": "block", "lat": 40.7557, "lng": -73.8831 },
-    { "id": "mott-haven", "name": "Mott Haven", "city": "NYC", "kind": "block", "lat": 40.8091, "lng": -73.9229 },
-    { "id": "st-george", "name": "St. George", "city": "NYC", "kind": "block", "lat": 40.6437, "lng": -74.0776 },
-    { "id": "downtown-jc", "name": "Downtown JC", "city": "Jersey City", "kind": "block", "lat": 40.7178, "lng": -74.0431 },
-    { "id": "exchange-place", "name": "Exchange Place", "city": "Jersey City", "kind": "waterfront", "lat": 40.7163, "lng": -74.033 },
-    { "id": "journal-square", "name": "Journal Square", "city": "Jersey City", "kind": "block", "lat": 40.7328, "lng": -74.0627 },
-    { "id": "the-heights", "name": "The Heights", "city": "Jersey City", "kind": "block", "lat": 40.7486, "lng": -74.0473 },
-    { "id": "lincoln-park-jc", "name": "Lincoln Park", "city": "Jersey City", "kind": "park", "lat": 40.7253, "lng": -74.0838 },
-    { "id": "liberty-state-park", "name": "Liberty State Park", "city": "Jersey City", "kind": "waterfront", "lat": 40.7033, "lng": -74.0551 }
+    {
+      "id": "park-slope",
+      "name": "Park Slope",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.671,
+      "lng": -73.9814
+    },
+    {
+      "id": "prospect-park",
+      "name": "Prospect Park",
+      "city": "NYC",
+      "kind": "park",
+      "lat": 40.6602,
+      "lng": -73.969
+    },
+    {
+      "id": "williamsburg",
+      "name": "Williamsburg",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.7081,
+      "lng": -73.9571
+    },
+    {
+      "id": "bed-stuy",
+      "name": "Bed-Stuy",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.6872,
+      "lng": -73.9418
+    },
+    {
+      "id": "brooklyn-bridge-park",
+      "name": "Brooklyn Bridge Park",
+      "city": "NYC",
+      "kind": "waterfront",
+      "lat": 40.7003,
+      "lng": -73.9967
+    },
+    {
+      "id": "lower-east-side",
+      "name": "Lower East Side",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.715,
+      "lng": -73.9843
+    },
+    {
+      "id": "battery-park-city",
+      "name": "Battery Park City",
+      "city": "NYC",
+      "kind": "waterfront",
+      "lat": 40.7116,
+      "lng": -74.0158
+    },
+    {
+      "id": "central-park",
+      "name": "Central Park",
+      "city": "NYC",
+      "kind": "park",
+      "lat": 40.7812,
+      "lng": -73.9665
+    },
+    {
+      "id": "harlem",
+      "name": "Harlem",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.8116,
+      "lng": -73.9465
+    },
+    {
+      "id": "washington-heights",
+      "name": "Washington Heights",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.8417,
+      "lng": -73.9394
+    },
+    {
+      "id": "astoria",
+      "name": "Astoria",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.7644,
+      "lng": -73.9235
+    },
+    {
+      "id": "jackson-heights",
+      "name": "Jackson Heights",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.7557,
+      "lng": -73.8831
+    },
+    {
+      "id": "mott-haven",
+      "name": "Mott Haven",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.8091,
+      "lng": -73.9229
+    },
+    {
+      "id": "st-george",
+      "name": "St. George",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.6437,
+      "lng": -74.0776
+    },
+    {
+      "id": "downtown-jc",
+      "name": "Downtown JC",
+      "city": "Jersey City",
+      "kind": "block",
+      "lat": 40.7178,
+      "lng": -74.0431
+    },
+    {
+      "id": "exchange-place",
+      "name": "Exchange Place",
+      "city": "Jersey City",
+      "kind": "waterfront",
+      "lat": 40.7163,
+      "lng": -74.033
+    },
+    {
+      "id": "journal-square",
+      "name": "Journal Square",
+      "city": "Jersey City",
+      "kind": "block",
+      "lat": 40.7328,
+      "lng": -74.0627
+    },
+    {
+      "id": "the-heights",
+      "name": "The Heights",
+      "city": "Jersey City",
+      "kind": "block",
+      "lat": 40.7486,
+      "lng": -74.0473
+    },
+    {
+      "id": "lincoln-park-jc",
+      "name": "Lincoln Park",
+      "city": "Jersey City",
+      "kind": "park",
+      "lat": 40.7253,
+      "lng": -74.0838
+    },
+    {
+      "id": "liberty-state-park",
+      "name": "Liberty State Park",
+      "city": "Jersey City",
+      "kind": "waterfront",
+      "lat": 40.7033,
+      "lng": -74.0551
+    }
   ]
 }

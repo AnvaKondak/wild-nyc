@@ -32,8 +32,9 @@ export default function Places() {
     const taken = new Set<SceneSpot>();
     const out: Species[] = [];
     for (const s of rankByLive(speciesFor(hood.kind, season), live)) {
-      if (STREET_SPOTS[s.sceneSpot] && !taken.has(s.sceneSpot)) {
-        taken.add(s.sceneSpot);
+      const spot = s.spots.block;
+      if (spot && STREET_SPOTS[spot] && !taken.has(spot)) {
+        taken.add(spot);
         out.push(s);
       }
     }
@@ -67,7 +68,7 @@ export default function Places() {
       >
         <StreetScene width={sceneWidth} />
         {regulars.map((s) => {
-          const spot = STREET_SPOTS[s.sceneSpot]!;
+          const spot = STREET_SPOTS[s.spots.block!]!;
           const selected = s.id === picked?.id;
           return (
             <Pressable

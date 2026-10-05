@@ -33,7 +33,6 @@
       "title": "Look at their feet.",
       "body": "String and hair get wrapped around pigeon toes and slowly cut off circulation. If you spot one, the Wild Bird Fund can help."
     },
-    "sceneSpot": "ledge",
     "spotHint": "Look up at building ledges, window air conditioners and the underside of train bridges.",
     "seasons": [
       "spring",
@@ -42,7 +41,13 @@
       "winter"
     ],
     "iNatTaxonId": 3017,
-    "ebirdCode": "rocpig"
+    "ebirdCode": "rocpig",
+    "homeScene": "block",
+    "spots": {
+      "block": "ledge",
+      "park": "path",
+      "waterfront": "railing"
+    }
   },
   {
     "id": "house-sparrow",
@@ -78,7 +83,6 @@
       "title": "Let the hedge grow shaggy.",
       "body": "A thick, untrimmed hedge is a safe place to hide from hawks and cold wind. If you can, wait until fall to trim."
     },
-    "sceneSpot": "hedge",
     "spotHint": "Listen for nonstop chirping coming from inside a hedge or bush.",
     "seasons": [
       "spring",
@@ -87,7 +91,13 @@
       "winter"
     ],
     "iNatTaxonId": 13858,
-    "ebirdCode": "houspa"
+    "ebirdCode": "houspa",
+    "homeScene": "block",
+    "spots": {
+      "block": "hedge",
+      "park": "bench",
+      "waterfront": "grass"
+    }
   },
   {
     "id": "eastern-gray-squirrel",
@@ -123,7 +133,6 @@
       "title": "Skip the junk food.",
       "body": "Bread, chips and candy fill them up without the nutrients they need. Unsalted nuts in the shell are a treat, now and then."
     },
-    "sceneSpot": "tree",
     "spotHint": "Look for a ball of leaves high in a tree, and listen for scrabbling claws on bark.",
     "seasons": [
       "spring",
@@ -131,7 +140,13 @@
       "fall",
       "winter"
     ],
-    "iNatTaxonId": 46017
+    "iNatTaxonId": 46017,
+    "homeScene": "park",
+    "spots": {
+      "block": "tree",
+      "park": "trunk",
+      "waterfront": "grass"
+    }
   },
   {
     "id": "european-starling",
@@ -167,7 +182,6 @@
       "title": "Wait to seal the gaps.",
       "body": "Starlings nest in holes in buildings. If you need to close one up, wait until the chicks have left in summer."
     },
-    "sceneSpot": "wire",
     "spotHint": "Look along the wires at dusk for a row of chattering, shiny dark birds.",
     "seasons": [
       "spring",
@@ -176,7 +190,13 @@
       "winter"
     ],
     "iNatTaxonId": 14850,
-    "ebirdCode": "eursta"
+    "ebirdCode": "eursta",
+    "homeScene": "block",
+    "spots": {
+      "block": "wire",
+      "park": "lawn",
+      "waterfront": "piling"
+    }
   },
   {
     "id": "mourning-dove",
@@ -212,7 +232,6 @@
       "title": "Let the fire escape nest be.",
       "body": "If doves nest on your fire escape or planter, give them a few weeks of peace. The chicks leave in about two weeks."
     },
-    "sceneSpot": "wire",
     "spotHint": "Listen at dawn for a soft, slow hoo-OO-oo-oo, then look for two plump birds on a wire.",
     "seasons": [
       "spring",
@@ -221,7 +240,13 @@
       "winter"
     ],
     "iNatTaxonId": 3454,
-    "ebirdCode": "moudov"
+    "ebirdCode": "moudov",
+    "homeScene": "block",
+    "spots": {
+      "block": "wire",
+      "park": "lawn",
+      "waterfront": "railing"
+    }
   },
   {
     "id": "american-robin",
@@ -257,7 +282,6 @@
       "title": "Skip lawn chemicals.",
       "body": "Robins eat what lives in the soil. A lawn without pesticides keeps the worms, and the robins, healthy."
     },
-    "sceneSpot": "sidewalk",
     "spotHint": "After a rain, check patches of grass for an orange-chested bird running and stopping.",
     "seasons": [
       "spring",
@@ -266,7 +290,13 @@
       "winter"
     ],
     "iNatTaxonId": 12727,
-    "ebirdCode": "amerob"
+    "ebirdCode": "amerob",
+    "homeScene": "block",
+    "spots": {
+      "block": "sidewalk",
+      "park": "lawn",
+      "waterfront": "grass"
+    }
   },
   {
     "id": "herring-gull",
@@ -302,7 +332,6 @@
       "title": "Pick up fishing line.",
       "body": "Lost fishing line tangles gulls' legs and wings. If you see some on the pier or beach, put it in the trash."
     },
-    "sceneSpot": "sky",
     "spotHint": "Look up near the water or over parking lots for big white-and-gray birds gliding.",
     "seasons": [
       "spring",
@@ -311,7 +340,13 @@
       "winter"
     ],
     "iNatTaxonId": 1578489,
-    "ebirdCode": "amhgul1"
+    "ebirdCode": "amhgul1",
+    "homeScene": "waterfront",
+    "spots": {
+      "block": "sky",
+      "park": "pond",
+      "waterfront": "piling"
+    }
   },
   {
     "id": "raccoon",
@@ -347,7 +382,6 @@
       "title": "Put a lid on it.",
       "body": "A trash can with a tight lid keeps raccoons safe from sharp edges, spoiled food and run-ins with people."
     },
-    "sceneSpot": "trashcan",
     "spotHint": "After dark, look along fences and near trash cans for a masked face.",
     "seasons": [
       "spring",
@@ -355,7 +389,13 @@
       "fall",
       "winter"
     ],
-    "iNatTaxonId": 41663
+    "iNatTaxonId": 41663,
+    "homeScene": "block",
+    "spots": {
+      "block": "trashcan",
+      "park": "log",
+      "waterfront": "rocks"
+    }
   },
   {
     "id": "monarch",
@@ -391,13 +431,18 @@
       "title": "Plant milkweed.",
       "body": "A pot of native milkweed on a stoop or fire escape gives monarchs a place to lay eggs. Late flowers fuel their trip south."
     },
-    "sceneSpot": "flowerbox",
     "spotHint": "In late summer and fall, watch flower boxes and park gardens for a big orange butterfly gliding.",
     "seasons": [
       "summer",
       "fall"
     ],
-    "iNatTaxonId": 48662
+    "iNatTaxonId": 48662,
+    "homeScene": "block",
+    "spots": {
+      "block": "flowerbox",
+      "park": "flowers",
+      "waterfront": "grass"
+    }
   },
   {
     "id": "red-tailed-hawk",
@@ -433,7 +478,6 @@
       "title": "Say no to rat poison.",
       "body": "Hawks eat poisoned rats and get poisoned too. Sealing gaps and cleaning up food keeps rats away without hurting hawks."
     },
-    "sceneSpot": "rooftop",
     "spotHint": "Look up at rooftop edges and light poles for a big bird sitting very still.",
     "seasons": [
       "spring",
@@ -442,7 +486,13 @@
       "winter"
     ],
     "iNatTaxonId": 5212,
-    "ebirdCode": "rethaw"
+    "ebirdCode": "rethaw",
+    "homeScene": "block",
+    "spots": {
+      "block": "rooftop",
+      "park": "treetop",
+      "waterfront": "lamp"
+    }
   },
   {
     "id": "blue-jay",
@@ -478,7 +528,6 @@
       "title": "Keep an oak in mind.",
       "body": "If your block has room for a new tree, ask for an oak. One oak feeds jays, squirrels and hundreds of kinds of insects."
     },
-    "sceneSpot": "tree",
     "spotHint": "Listen for a loud, bossy JAY! JAY! from the treetops.",
     "seasons": [
       "spring",
@@ -487,7 +536,12 @@
       "winter"
     ],
     "iNatTaxonId": 8229,
-    "ebirdCode": "blujay"
+    "ebirdCode": "blujay",
+    "homeScene": "park",
+    "spots": {
+      "block": "tree",
+      "park": "treetop"
+    }
   },
   {
     "id": "dark-eyed-junco",
@@ -523,7 +577,6 @@
       "title": "Leave the leaves.",
       "body": "Juncos scratch through leaf litter for seeds and bugs. A leafy corner under a bush is their favorite diner."
     },
-    "sceneSpot": "hedge",
     "spotHint": "From October to April, look under hedges for small slate-gray birds with white bellies.",
     "seasons": [
       "fall",
@@ -531,7 +584,12 @@
       "spring"
     ],
     "iNatTaxonId": 10094,
-    "ebirdCode": "daejun"
+    "ebirdCode": "daejun",
+    "homeScene": "block",
+    "spots": {
+      "block": "hedge",
+      "park": "shrubs"
+    }
   },
   {
     "id": "virginia-opossum",
@@ -567,7 +625,6 @@
       "title": "Check the pouch.",
       "body": "If you find an opossum hit by a car, there may be living babies in the pouch. Call a wildlife rehabber right away."
     },
-    "sceneSpot": "fence",
     "spotHint": "After dark, look along fences and back alleys for a white face and a long bare tail.",
     "seasons": [
       "spring",
@@ -575,7 +632,12 @@
       "fall",
       "winter"
     ],
-    "iNatTaxonId": 42652
+    "iNatTaxonId": 42652,
+    "homeScene": "block",
+    "spots": {
+      "block": "fence",
+      "park": "log"
+    }
   },
   {
     "id": "american-crow",
@@ -611,7 +673,6 @@
       "title": "Be a friendly face.",
       "body": "Crows remember people. Be calm and kind around them, and you may find yourself with neighbors who nod back."
     },
-    "sceneSpot": "rooftop",
     "spotHint": "Listen for a loud caw-caw from the rooftops, then look for big all-black birds.",
     "seasons": [
       "spring",
@@ -620,7 +681,13 @@
       "winter"
     ],
     "iNatTaxonId": 8021,
-    "ebirdCode": "amecro"
+    "ebirdCode": "amecro",
+    "homeScene": "block",
+    "spots": {
+      "block": "rooftop",
+      "park": "lawn",
+      "waterfront": "shore"
+    }
   },
   {
     "id": "white-throated-sparrow",
@@ -656,7 +723,6 @@
       "title": "Turn off the lights.",
       "body": "They migrate at night, and bright city lights pull them off course into windows. Lights out on big migration nights helps."
     },
-    "sceneSpot": "hedge",
     "spotHint": "From October to May, listen for a thin whistled song from low bushes in parks.",
     "seasons": [
       "fall",
@@ -664,7 +730,12 @@
       "spring"
     ],
     "iNatTaxonId": 9184,
-    "ebirdCode": "whtspa"
+    "ebirdCode": "whtspa",
+    "homeScene": "park",
+    "spots": {
+      "block": "hedge",
+      "park": "shrubs"
+    }
   },
   {
     "id": "chimney-swift",
@@ -700,14 +771,19 @@
       "title": "Leave old chimneys open.",
       "body": "If a building has an unused chimney, keeping it uncapped from spring to fall gives swifts a place to nest."
     },
-    "sceneSpot": "sky",
     "spotHint": "From late April to September, look up for tiny cigar-shaped birds zipping and twittering.",
     "seasons": [
       "spring",
       "summer"
     ],
     "iNatTaxonId": 6571,
-    "ebirdCode": "chiswi"
+    "ebirdCode": "chiswi",
+    "homeScene": "block",
+    "spots": {
+      "block": "sky",
+      "park": "sky",
+      "waterfront": "sky"
+    }
   },
   {
     "id": "moths",
@@ -743,7 +819,6 @@
       "title": "Switch off the porch light.",
       "body": "Every outdoor light you turn off at night saves moths from circling until they're worn out."
     },
-    "sceneSpot": "lamp",
     "spotHint": "On a warm night, look at the glow around a streetlight or porch light.",
     "seasons": [
       "spring",
@@ -751,6 +826,12 @@
       "fall"
     ],
     "iNatTaxonId": 47157,
-    "iNatExcludeTaxonId": 47224
+    "iNatExcludeTaxonId": 47224,
+    "homeScene": "block",
+    "spots": {
+      "block": "lamp",
+      "park": "lamp",
+      "waterfront": "lamp"
+    }
   }
 ]

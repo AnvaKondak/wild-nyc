@@ -79,11 +79,13 @@ describe('kindness', () => {
 });
 
 describe('places', () => {
-  it('reference real species and kinds', () => {
-    for (const info of Object.values(placeKinds)) {
-      for (const id of info.species) expect(getSpecies(id)).toBeDefined();
-    }
+  it('use real kinds, and every kind has residents', () => {
     for (const p of places) expect(KINDS).toContain(p.kind);
+    for (const kind of KINDS) expect(species.some((s) => s.spots[kind])).toBe(true);
+  });
+
+  it('every species lives somewhere, including its home scene', () => {
+    for (const s of species) expect(s.spots[s.homeScene]).toBeDefined();
   });
 
   it('are all in NYC or Jersey City', () => {
