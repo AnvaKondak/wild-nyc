@@ -89,6 +89,11 @@ export function moonPhaseName(date: Date): string {
   return 'Waning crescent moon';
 }
 
+/** How much of the moon is lit: 0 = new, 1 = full. */
+export function moonLitFraction(date: Date): number {
+  return SunCalc.getMoonIllumination(date).fraction;
+}
+
 function minutesUntil(from: Date, to: Date): number {
   return Math.max(1, Math.round((to.getTime() - from.getTime()) / MINUTE));
 }

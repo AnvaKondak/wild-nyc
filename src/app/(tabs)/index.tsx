@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { PanResponder, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
-import { StoryBackdrop } from '@/components/art/StoryBackdrop';
+import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
 import { ChevronLeftIcon, ChevronRightIcon } from '@/components/Icons';
 import { NeighborhoodPills } from '@/components/NeighborhoodPills';
@@ -12,7 +12,8 @@ import { Sticker } from '@/components/Sticker';
 import { getSpecies, moments, speciesPhoto, placeKinds, places, species as allSpecies, speciesFor, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
 import { buildLocalStory } from '@/lib/localStory';
-import { dateKey, seasonOf, timeHeader } from '@/lib/time';
+import { hashString } from '@/lib/random';
+import { dateKey, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
 import { useNow } from '@/lib/useNow';
 import { useAppState } from '@/state/AppState';
 import { useLiveData } from '@/state/LiveData';
@@ -124,7 +125,17 @@ export default function RightNow() {
       {/* The moment's setting fills the whole story; the animal is the one circle on top. */}
       {area.width > 0 && (
         <View style={StyleSheet.absoluteFill} pointerEvents="none">
-          <StoryBackdrop setting={setting} period={header.period} width={area.width} height={area.height} />
+          <StoryBackdrop
+            setting={setting}
+            period={header.period}
+            season={season}
+            placeKind={hood.kind}
+            placeId={hood.placeId}
+            variant={hashString(`${slide.id}:${today}`) % 3}
+            moonLit={moonLitFraction(now)}
+            width={area.width}
+            height={area.height}
+          />
         </View>
       )}
       <Screen background="transparent" scroll={false}>

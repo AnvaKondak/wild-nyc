@@ -6,7 +6,7 @@ import { BackButton } from '@/components/BackButton';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
-import { StoryBackdrop } from '@/components/art/StoryBackdrop';
+import { StoryBackdrop } from '@/components/backdrop';
 import { SceneView } from '@/components/scenes';
 import { getSpecies, places, species, speciesPhoto, type Setting } from '@/content';
 import { colors, fonts } from '@/theme/tokens';
@@ -28,9 +28,19 @@ export default function ArtPreview() {
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
           {SETTINGS.map((setting, i) => (
             <View key={setting} style={{ width: thumb, gap: 4 }}>
-              <View style={{ width: thumb, height: h, borderRadius: 12, overflow: 'hidden', borderWidth: 1.5, borderColor: colors.ink, backgroundColor: i % 5 === 4 ? colors.ink : colors.yellowTint, alignItems: 'center', justifyContent: 'center' }}>
+              <View style={{ width: thumb, height: h, borderRadius: 12, overflow: 'hidden', borderWidth: 1.5, borderColor: colors.ink, backgroundColor: i % 4 === 3 ? colors.ink : i % 4 === 2 ? colors.blue : i % 4 === 1 ? colors.yellowTint : colors.pinkTint, alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ position: 'absolute', top: 0, left: 0, width: thumb - 3, height: h - 3 }}>
-                  <StoryBackdrop setting={setting} period={i % 5 === 4 ? 'night' : 'midday'} width={thumb - 3} height={h - 3} />
+                  <StoryBackdrop
+                    setting={setting}
+                    period={(['dawn', 'midday', 'dusk', 'night'] as const)[i % 4]}
+                    season={(['spring', 'summer', 'fall', 'winter'] as const)[Math.floor(i / 4) % 4]}
+                    placeKind={(['block', 'park', 'waterfront'] as const)[i % 3]}
+                    placeId={['park-slope', 'prospect-park', 'liberty-state-park', 'astoria', 'exchange-place'][i % 5]}
+                    variant={i % 3}
+                    moonLit={0.4}
+                    width={thumb - 3}
+                    height={h - 3}
+                  />
                 </View>
                 <Sticker art={raccoon.art} photo={speciesPhoto('raccoon')} size={thumb * 0.5} rotate={-5} style={{ marginBottom: h * 0.2 }} />
               </View>
