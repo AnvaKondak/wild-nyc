@@ -155,21 +155,29 @@ export default function RightNow() {
             </View>
           </Pressable>
 
-          <Pressable
-            onPress={next}
-            accessibilityRole="button"
-            accessibilityLabel="Next story"
-            style={{ alignSelf: 'center', marginTop: 28 }}
-          >
-            <Sticker
-              art={(species ?? getSpecies('rock-pigeon')!).art}
-              photo={speciesPhoto((species ?? getSpecies('rock-pigeon')!).id)}
-              size={stickerSize}
-              tint={tileFor(slide)}
-              rotate={-5}
-              shadowColor={theme.shadow}
-            />
-          </Pressable>
+          {/* Prev / next sit beside the photo, in the middle of the screen. */}
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, marginTop: 28 }}>
+            <RoundNav label="Previous story" onPress={prev} color={theme.ink} fill={theme.bg}>
+              <ChevronLeftIcon color={theme.ink} />
+            </RoundNav>
+            <Pressable
+              onPress={next}
+              accessibilityRole="button"
+              accessibilityLabel={`${species?.friendlyName ?? 'Animal'} photo. Next story`}
+            >
+              <Sticker
+                art={(species ?? getSpecies('rock-pigeon')!).art}
+                photo={speciesPhoto((species ?? getSpecies('rock-pigeon')!).id)}
+                size={stickerSize}
+                tint={tileFor(slide)}
+                rotate={-5}
+                shadowColor={theme.shadow}
+              />
+            </Pressable>
+            <RoundNav label="Next story" onPress={next} color={theme.ink} fill={theme.bg}>
+              <ChevronRightIcon color={theme.ink} />
+            </RoundNav>
+          </View>
 
           <View style={{ paddingHorizontal: 24, paddingTop: 30, gap: 10 }}>
             <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, letterSpacing: 1.4, textTransform: 'uppercase', color: theme.accent }}>
@@ -183,22 +191,14 @@ export default function RightNow() {
 
           <View style={{ flex: 1 }} />
 
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 16, paddingBottom: 20 }}>
-            <RoundNav label="Previous story" onPress={prev} color={theme.ink}>
-              <ChevronLeftIcon color={theme.ink} />
-            </RoundNav>
-            <View style={{ flex: 1 }}>
-              <Button
-                label={ctaLabel}
-                onPress={onCta}
-                shadow={theme.shadow}
-                style={{ backgroundColor: theme.btnBg }}
-                color={theme.btnInk}
-              />
-            </View>
-            <RoundNav label="Next story" onPress={next} color={theme.ink}>
-              <ChevronRightIcon color={theme.ink} />
-            </RoundNav>
+          <View style={{ paddingHorizontal: 16, paddingBottom: 20 }}>
+            <Button
+              label={ctaLabel}
+              onPress={onCta}
+              shadow={theme.shadow}
+              style={{ backgroundColor: theme.btnBg }}
+              color={theme.btnInk}
+            />
           </View>
         </View>
       </Screen>
@@ -206,7 +206,7 @@ export default function RightNow() {
   );
 }
 
-function RoundNav({ label, onPress, color, children }: { label: string; onPress: () => void; color: string; children: React.ReactNode }) {
+function RoundNav({ label, onPress, color, fill, children }: { label: string; onPress: () => void; color: string; fill: string; children: React.ReactNode }) {
   return (
     <Pressable
       onPress={onPress}
@@ -218,6 +218,7 @@ function RoundNav({ label, onPress, color, children }: { label: string; onPress:
         borderRadius: 26,
         borderWidth: border.width,
         borderColor: color,
+        backgroundColor: fill, // solid, so the backdrop (a cloud, a branch) never shows through
         alignItems: 'center',
         justifyContent: 'center',
         opacity: pressed ? 0.6 : 1,
