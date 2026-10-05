@@ -20,12 +20,14 @@ type Box = { w: number; h: number; u: number };
 /** What a setting draws, by how it moves. */
 type Layers = {
   base?: ReactNode;
-  /** Drifts sideways slowly (clouds). */
+  /** Travels all the way across and wraps around (clouds). Drawn for one screen width. */
   drift?: ReactNode;
   /** Sways from the bottom, like plants in a breeze. */
   sway?: ReactNode;
-  /** Rolls side to side (water). */
+  /** Rolls steadily in one direction and wraps around (water). */
   waves?: ReactNode;
+  /** Bobs side to side (a wire in the wind). */
+  bob?: ReactNode;
   /** Pulses softly (lamp light). */
   glow?: ReactNode;
   /** Twinkles (stars). */
@@ -42,14 +44,16 @@ export function StoryBackdrop({ setting, period, width, height }: { setting: Set
     drift: sky.drift,
     sway: scene.sway,
     waves: scene.waves,
+    bob: scene.bob,
     glow: scene.glow,
     twinkle: sky.twinkle,
   };
 
   const still = useReduceMotion();
-  const drift = useLoop(14000, still);
+  const drift = useCycle(70000, still);
+  const waves = useCycle(9000, still);
   const sway = useLoop(3200, still);
-  const waves = useLoop(2600, still);
+  const bob = useLoop(2600, still);
   const glow = useLoop(2400, still);
   const twinkle = useLoop(1800, still);
 
@@ -60,13 +64,28 @@ export function StoryBackdrop({ setting, period, width, height }: { setting: Set
       </Animated.View>
     ) : null;
 
+  // A layer that travels a full screen width and wraps: two copies side by side, the
+  // second a screen to the left, both sliding right by one screen, then repeating.
+  // When the loop restarts, the copies have swapped places, so there's no jump.
+  const travelling = (node: ReactNode, value: Animated.Value) =>
+    node ? (
+      <Animated.View
+        style={[StyleSheet.absoluteFill, { transform: [{ translateX: value.interpolate({ inputRange: [0, 1], outputRange: [0, width] }) }] }]}
+        pointerEvents="none"
+      >
+        <Svg width={width} height={height} style={StyleSheet.absoluteFill}>{node}</Svg>
+        <Svg width={width} height={height} style={[StyleSheet.absoluteFill, { left: -width }]}>{node}</Svg>
+      </Animated.View>
+    ) : null;
+
   return (
     <View style={[StyleSheet.absoluteFill, { opacity: dark ? 0.5 : 0.75 }]} pointerEvents="none">
       {layer(layers.base, {})}
-      {layer(layers.drift, { transform: [{ translateX: drift.interpolate({ inputRange: [0, 1], outputRange: [-width * 0.04, width * 0.06] }) }] })}
+      {travelling(layers.drift, drift)}
       {layer(layers.glow, { opacity: glow.interpolate({ inputRange: [0, 1], outputRange: [0.55, 1] }) })}
       {layer(layers.twinkle, { opacity: twinkle.interpolate({ inputRange: [0, 1], outputRange: [0.35, 1] }) })}
-      {layer(layers.waves, { transform: [{ translateX: waves.interpolate({ inputRange: [0, 1], outputRange: [-3 * b.u, 3 * b.u] }) }] })}
+      {travelling(layers.waves, waves)}
+      {layer(layers.bob, { transform: [{ translateY: bob.interpolate({ inputRange: [0, 1], outputRange: [-1.2 * b.u, 1.2 * b.u] }) }] })}
       {layer(layers.sway, {
         transformOrigin: 'bottom',
         transform: [{ skewX: sway.interpolate({ inputRange: [0, 1], outputRange: ['-3deg', '3deg'] }) }],
@@ -87,6 +106,20 @@ function useLoop(duration: number, still: boolean): Animated.Value {
     const loop = Animated.loop(
       Animated.sequence([Animated.timing(value, { ...half, toValue: 1 }), Animated.timing(value, { ...half, toValue: 0 })]),
     );
+    loop.start();
+    return () => loop.stop();
+  }, [duration, still, value]);
+  return value;
+}
+
+/** A value that runs 0 → 1 at a steady pace, then starts over, forever. Still when
+ * motion is reduced. */
+function useCycle(duration: number, still: boolean): Animated.Value {
+  const value = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    value.setValue(0);
+    if (still) return;
+    const loop = Animated.loop(Animated.timing(value, { toValue: 1, duration, easing: Easing.linear, useNativeDriver: true }));
     loop.start();
     return () => loop.stop();
   }, [duration, still, value]);
@@ -122,7 +155,15 @@ function skyLayers({ w, h, u }: Box, period: Period, setting: Setting): Pick<Lay
       ),
     };
   }
-  return { drift: <G>{cloud(w * 0.1, h * 0.3, u, 0.9)}{cloud(w * 0.92, h * 0.44, u, 0.75)}</G> };
+  return {
+    drift: (
+      <G>
+        {cloud(w * 0.1, h * 0.3, u, 0.9)}
+        {cloud(w * 0.5, h * 0.24, u, 0.6)}
+        {cloud(w * 0.82, h * 0.44, u, 0.75)}
+      </G>
+    ),
+  };
 }
 
 function cloud(x: number, y: number, u: number, s: number) {
@@ -217,7 +258,7 @@ function draw(setting: Setting, b: Box): Layers {
           </G>
         ),
         // The wire bobs a little in the wind.
-        waves: <Path d={`M0 ${h * 0.46} Q${w / 2} ${h * 0.52} ${w} ${h * 0.44}`} stroke={INK} strokeWidth={1.2 * u} fill="none" />,
+        bob: <Path d={`M0 ${h * 0.46} Q${w / 2} ${h * 0.52} ${w} ${h * 0.44}`} stroke={INK} strokeWidth={1.2 * u} fill="none" />,
       };
     case 'ledge':
     case 'rooftop':
