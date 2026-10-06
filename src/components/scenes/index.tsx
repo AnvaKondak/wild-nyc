@@ -51,8 +51,8 @@ export const SCENES: Record<PlaceKind, SceneDef> = {
     Drawing: ParkDrawing,
     slots: {
       sky: [{ x: 150, y: 14 }, { x: 220, y: 40 }],
-      treetop: [{ x: 30, y: 60 }, { x: 276, y: 100 }, { x: 84, y: 90 }],
-      trunk: [{ x: 58, y: 176 }, { x: 288, y: 176 }],
+      treetop: [{ x: 30, y: 60 }, { x: 276, y: 100 }, { x: 84, y: 90 }, { x: 320, y: 54 }],
+      trunk: [{ x: 58, y: 176 }, { x: 288, y: 176 }, { x: 10, y: 222 }],
       shrubs: [{ x: 150, y: 186 }, { x: 198, y: 186 }],
       lawn: [{ x: 176, y: 240 }, { x: 232, y: 230 }, { x: 130, y: 300 }, { x: 250, y: 290 }],
       bench: [{ x: 116, y: 250 }],

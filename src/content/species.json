@@ -1614,5 +1614,759 @@
     ],
     "iNatTaxonId": 42223,
     "sightingsOnly": true
+  },
+  {
+    "id": "northern-mockingbird",
+    "friendlyName": "Mockingbirds",
+    "commonName": "Northern Mockingbird",
+    "scientificName": "Mimus polyglottos",
+    "collectiveNoun": "an echo",
+    "group": "birds",
+    "art": {
+      "body": "songbird",
+      "main": "gray",
+      "second": "gray",
+      "belly": "white",
+      "accent": "ink",
+      "features": [
+        "wingbars"
+      ]
+    },
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Neighborhood DJ",
+      "traits": [
+        "Knows every song",
+        "Sings at night",
+        "Guards the yard"
+      ],
+      "blurb": "Mockingbirds learn the songs of other birds (and car alarms, and squeaky gates) and string them together for minutes at a time. Some sing right through the night."
+    },
+    "origin": "Native birds who moved north into New York over the last century as yards, parks and berry bushes spread.",
+    "home": "Up on the highest antenna, chimney or treetop, singing everything they know.",
+    "rightNow": {
+      "spring": "Singing nonstop, sometimes all night, to win over a mate.",
+      "summer": "Guarding the nest and chasing off cats, crows and anyone else who gets too close.",
+      "fall": "Claiming a berry bush for the winter and defending it fiercely.",
+      "winter": "Quieter, but still guarding their favorite berry bush from every other bird."
+    },
+    "funFact": {
+      "title": "Hundreds of songs",
+      "body": "A single mockingbird can learn up to around 200 different songs, including other birds, frogs and car alarms."
+    },
+    "kindness": {
+      "title": "Keep the berry bushes.",
+      "body": "Winterberry, holly and other berry shrubs feed mockingbirds through the cold months. Leave the berries on."
+    },
+    "homeScene": "block",
+    "spots": {
+      "block": "tree",
+      "park": "treetop",
+      "waterfront": "lamp"
+    },
+    "spotHint": "Listen for a long string of different songs from a rooftop antenna or treetop, then look for a slim gray bird.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 14886,
+    "ebirdCode": "normoc"
+  },
+  {
+    "id": "northern-cardinal",
+    "friendlyName": "Cardinals",
+    "commonName": "Northern Cardinal",
+    "scientificName": "Cardinalis cardinalis",
+    "collectiveNoun": "a radiance",
+    "group": "birds",
+    "art": {
+      "body": "songbird",
+      "main": "red",
+      "second": "red",
+      "belly": "red",
+      "accent": "orange",
+      "features": [
+        "crest",
+        "mask"
+      ]
+    },
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Sweetheart",
+      "traits": [
+        "Bright red",
+        "Shares snacks",
+        "Sings in pairs"
+      ],
+      "blurb": "Cardinal couples stay together all year. In spring the male feeds the female seed by seed, beak to beak, like a little kiss."
+    },
+    "origin": "Native birds who spread north into New York over the last hundred years, following backyards and bird feeders.",
+    "home": "Tucked in the thickest part of the hedge, flashing red.",
+    "rightNow": {
+      "spring": "The male is feeding his partner beak to beak, and both are singing back and forth.",
+      "summer": "Raising chicks in dense shrubs, sometimes two or three families a summer.",
+      "fall": "Pairs are sticking close together, snacking on seeds and berries.",
+      "winter": "Bright red against the snow, puffed up round, visiting the same hedges every day."
+    },
+    "funFact": {
+      "title": "The girls sing too",
+      "body": "Female cardinals sing, often from the nest, possibly to tell their partner what they need."
+    },
+    "kindness": {
+      "title": "Leave some shrubs thick.",
+      "body": "Cardinals nest and hide in dense bushes. A shaggy hedge is a five-star hotel for them."
+    },
+    "homeScene": "block",
+    "spots": {
+      "block": "hedge",
+      "park": "shrubs"
+    },
+    "spotHint": "Look for a flash of bright red in a hedge, or listen for a loud, clear whistle: cheer, cheer, cheer.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 9083,
+    "ebirdCode": "norcar"
+  },
+  {
+    "id": "common-grackle",
+    "friendlyName": "Grackles",
+    "commonName": "Common Grackle",
+    "scientificName": "Quiscalus quiscula",
+    "collectiveNoun": "a flock",
+    "group": "birds",
+    "art": {
+      "body": "crow",
+      "main": "ink",
+      "second": "blue",
+      "belly": "ink",
+      "accent": "ink"
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Shiny Strutter",
+      "traits": [
+        "Purple-bronze shine",
+        "Yellow eyes",
+        "Rusty-gate song"
+      ],
+      "blurb": "Grackles strut across lawns with their long tails held in a V. Their song sounds like a rusty gate, and they're proud of it."
+    },
+    "origin": "Native blackbirds of eastern North America who love open lawns with a few tall trees.",
+    "home": "Strutting across the sidewalk and lawn, tail held in a V.",
+    "rightNow": {
+      "spring": "Back in force, males puffing up and squeaking their rusty-gate songs from the treetops.",
+      "summer": "Walking the lawns with beaks full of bugs for their chicks.",
+      "fall": "Gathering in huge noisy flocks with other blackbirds before heading south.",
+      "winter": "Most have gone south; a few stay with the starlings."
+    },
+    "funFact": {
+      "title": "Shiny in the sun",
+      "body": "Grackles look black until the light hits them. Then their heads shine purple-blue and their bodies glow bronze."
+    },
+    "kindness": {
+      "title": "Let the lawn get a little wild.",
+      "body": "Grackles find their bugs in lawns without pesticides. A few dandelions are a feast."
+    },
+    "homeScene": "block",
+    "spots": {
+      "block": "sidewalk",
+      "park": "lawn",
+      "waterfront": "grass"
+    },
+    "spotHint": "Look on lawns for a long-tailed black bird with bright yellow eyes, strutting.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 9602,
+    "ebirdCode": "comgra"
+  },
+  {
+    "id": "gray-catbird",
+    "friendlyName": "Catbirds",
+    "commonName": "Gray Catbird",
+    "scientificName": "Dumetella carolinensis",
+    "collectiveNoun": "a flock",
+    "group": "birds",
+    "art": {
+      "body": "songbird",
+      "main": "gray",
+      "second": "gray",
+      "belly": "gray",
+      "accent": "ink",
+      "features": [
+        "cap"
+      ]
+    },
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Meowing Mimic",
+      "traits": [
+        "Meows like a cat",
+        "Black cap",
+        "Shy in the bushes"
+      ],
+      "blurb": "Catbirds hide in thick bushes and make a call that sounds exactly like a cat's meow. Then they launch into a long, rambling song."
+    },
+    "origin": "Native songbirds who spend summer in our thickets and winter in the southern US and the Caribbean.",
+    "home": "Hidden deep in the shrubs, meowing.",
+    "rightNow": {
+      "spring": "Just back from the south, singing long rambling songs from inside the bushes.",
+      "summer": "Raising chicks in dense thickets and gobbling berries.",
+      "fall": "Fattening up on berries before heading south.",
+      "winter": "Down south, in the Gulf states, Central America and the Caribbean."
+    },
+    "funFact": {
+      "title": "Two voices at once",
+      "body": "Catbirds, like other mimics, can sing two notes at the same time, one from each side of their voice box."
+    },
+    "kindness": {
+      "title": "Plant native berries.",
+      "body": "Serviceberry, elderberry and dogwood fuel catbirds for their migration."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "shrubs",
+      "block": "hedge"
+    },
+    "spotHint": "Listen for a meow from a thick bush, then look for a slim gray bird with a black cap.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 14995,
+    "ebirdCode": "grycat"
+  },
+  {
+    "id": "song-sparrow",
+    "friendlyName": "Song Sparrows",
+    "commonName": "Song Sparrow",
+    "scientificName": "Melospiza melodia",
+    "collectiveNoun": "a host",
+    "group": "birds",
+    "art": {
+      "body": "songbird",
+      "main": "tan",
+      "second": "brown",
+      "belly": "white",
+      "accent": "ink",
+      "features": [
+        "spots"
+      ]
+    },
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The All-Year Singer",
+      "traits": [
+        "Sings all year",
+        "Streaky chest",
+        "Tail pumper"
+      ],
+      "blurb": "Song sparrows sing on bright days even in winter. Each male knows several songs, and neighbors often match each other."
+    },
+    "origin": "Native sparrows found almost everywhere in North America, from marsh edges to backyard hedges.",
+    "home": "Perched on a shrub by the water's edge, singing.",
+    "rightNow": {
+      "spring": "Singing from the top of every shrub to claim a spot.",
+      "summer": "Raising one family after another in low, hidden nests.",
+      "fall": "More arrive from the north, filling weedy edges and hedges.",
+      "winter": "Still here, and still singing on sunny days."
+    },
+    "funFact": {
+      "title": "Learning from the neighbors",
+      "body": "Young song sparrows learn their songs from the males around them, so each neighborhood has its own local tunes."
+    },
+    "kindness": {
+      "title": "Leave weedy edges.",
+      "body": "Seed heads and tangles along fences and water feed song sparrows all winter."
+    },
+    "homeScene": "waterfront",
+    "spots": {
+      "waterfront": "grass",
+      "park": "shrubs",
+      "block": "hedge"
+    },
+    "spotHint": "Look for a streaky brown sparrow with a dark spot in the middle of their chest, singing from a low shrub.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 9100,
+    "ebirdCode": "sonspa"
+  },
+  {
+    "id": "american-kestrel",
+    "friendlyName": "Kestrels",
+    "commonName": "American Kestrel",
+    "scientificName": "Falco sparverius",
+    "collectiveNoun": "a hover",
+    "group": "birds",
+    "art": {
+      "body": "raptor",
+      "main": "orange",
+      "second": "blue",
+      "belly": "white",
+      "accent": "orange",
+      "features": [
+        "mustache"
+      ]
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Tiny Falcon",
+      "traits": [
+        "Smallest falcon",
+        "Hovers in place",
+        "Colorful"
+      ],
+      "blurb": "Kestrels are falcons about the size of a mourning dove. They hover in midair over a lawn, then drop down onto a grasshopper."
+    },
+    "origin": "Native falcons who nest in cavities, including nooks in old city buildings.",
+    "home": "Hovering over the open sky above the street, wings fluttering.",
+    "rightNow": {
+      "spring": "Pairs are checking out nooks in old buildings for a nest.",
+      "summer": "Parents are hunting grasshoppers and mice for their chicks.",
+      "fall": "Migrating kestrels are streaming past along the coast.",
+      "winter": "Some stay all winter, perched on wires and light poles, watching the ground."
+    },
+    "funFact": {
+      "title": "They see invisible trails",
+      "body": "Kestrels can see ultraviolet light, which may help them spot the trails that mice and voles leave behind."
+    },
+    "kindness": {
+      "title": "Skip the pesticides.",
+      "body": "Kestrels eat grasshoppers and other bugs. Lawns without pesticides keep their food safe."
+    },
+    "homeScene": "block",
+    "spots": {
+      "block": "sky",
+      "park": "sky",
+      "waterfront": "sky"
+    },
+    "spotHint": "Look for a small, colorful falcon hovering in place over a lawn or perched on a wire.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 4665,
+    "ebirdCode": "amekes"
+  },
+  {
+    "id": "coopers-hawk",
+    "friendlyName": "Cooper's Hawks",
+    "commonName": "Cooper's Hawk",
+    "scientificName": "Astur cooperii",
+    "collectiveNoun": "a cast",
+    "group": "birds",
+    "art": {
+      "body": "raptor",
+      "main": "gray",
+      "second": "gray",
+      "belly": "orange",
+      "accent": "gray",
+      "features": [
+        "stripes",
+        "cap"
+      ]
+    },
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Stealthy Swooper",
+      "traits": [
+        "Fast and agile",
+        "Hunts birds",
+        "Long striped tail"
+      ],
+      "blurb": "Cooper's hawks dart through trees and around corners at top speed, chasing small birds. They're built for twists and turns."
+    },
+    "origin": "Native hawks who have moved into cities in a big way over recent decades.",
+    "home": "Hidden high in a tree, watching.",
+    "rightNow": {
+      "spring": "Pairs are building nests high in trees in parks and yards.",
+      "summer": "Parents are bringing food to fluffy white chicks.",
+      "fall": "Young hawks are learning to hunt, and migrants are passing through.",
+      "winter": "Patrolling the neighborhood, sometimes sitting very still near busy bird spots."
+    },
+    "funFact": {
+      "title": "Built for tight turns",
+      "body": "Their short rounded wings and long tail let Cooper's hawks steer through branches like a fighter jet."
+    },
+    "kindness": {
+      "title": "Make windows visible.",
+      "body": "Hawks chasing birds can crash into glass too. Window decals help everyone."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "treetop",
+      "block": "tree"
+    },
+    "spotHint": "Watch for a crow-sized hawk with a long striped tail darting through trees.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 1579017,
+    "ebirdCode": "coohaw"
+  },
+  {
+    "id": "peregrine-falcon",
+    "friendlyName": "Peregrine Falcons",
+    "commonName": "Peregrine Falcon",
+    "scientificName": "Falco peregrinus",
+    "collectiveNoun": "a cast",
+    "group": "birds",
+    "art": {
+      "body": "raptor",
+      "main": "gray",
+      "second": "gray",
+      "belly": "white",
+      "accent": "yellow",
+      "features": [
+        "mustache",
+        "cap",
+        "stripes"
+      ]
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Speed Champion",
+      "traits": [
+        "Fastest animal alive",
+        "Nests on bridges",
+        "Dramatic dives"
+      ],
+      "blurb": "Peregrines dive after pigeons at over 200 miles an hour, making them the fastest animal on Earth. City bridges and skyscrapers make perfect cliffs for them."
+    },
+    "origin": "Native falcons who nearly disappeared in the 1960s because of the pesticide DDT, and came back. New York City now has one of the highest densities of nesting peregrines anywhere.",
+    "home": "Perched high on a ledge or bridge tower, scanning the sky.",
+    "rightNow": {
+      "spring": "Nesting on bridges and skyscraper ledges, with eggs in a scrape on bare stone.",
+      "summer": "Young peregrines are learning to fly and practicing dives over the rooftops.",
+      "fall": "Migrating peregrines are passing down the coast; the city pairs stay.",
+      "winter": "Pairs are back at their favorite ledges, perched together on cold, bright days."
+    },
+    "funFact": {
+      "title": "Over 200 miles an hour",
+      "body": "In a hunting dive, called a stoop, a peregrine can top 200 miles per hour."
+    },
+    "kindness": {
+      "title": "Say no to rat poison.",
+      "body": "Raptors like peregrines can be poisoned by eating poisoned animals. Choose traps and sealing gaps instead."
+    },
+    "homeScene": "block",
+    "spots": {
+      "block": "ledge",
+      "waterfront": "lamp"
+    },
+    "spotHint": "Look up at bridge towers and tall ledges for a sleek falcon with a dark helmet.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 4647,
+    "ebirdCode": "perfal"
+  },
+  {
+    "id": "downy-woodpecker",
+    "friendlyName": "Downy Woodpeckers",
+    "commonName": "Downy Woodpecker",
+    "scientificName": "Dryobates pubescens",
+    "collectiveNoun": "a descent",
+    "group": "birds",
+    "art": {
+      "body": "woodpecker",
+      "main": "white",
+      "second": "ink",
+      "belly": "white",
+      "features": [
+        "stripes"
+      ]
+    },
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Little Drummer",
+      "traits": [
+        "Smallest woodpecker",
+        "Drums on trees",
+        "Red cap (boys)"
+      ],
+      "blurb": "Downy woodpeckers are tiny and busy, hitching up tree trunks and tapping for bugs. In spring they drum fast rhythms on hollow branches to talk to each other."
+    },
+    "origin": "Native woodpeckers found in almost every park and leafy street with big trees.",
+    "home": "Clinging to a tree trunk, tapping for bugs.",
+    "rightNow": {
+      "spring": "Drumming fast rhythms on hollow branches to call to a mate.",
+      "summer": "Feeding chicks in a hole they carved in a dead branch.",
+      "fall": "Picking insects out of bark and joining flocks with chickadees and titmice.",
+      "winter": "Tapping through the cold, tucked into a tree hole at night."
+    },
+    "funFact": {
+      "title": "A built-in helmet",
+      "body": "Woodpeckers have a spongy skull and a long tongue that wraps around their head, cushioning every peck."
+    },
+    "kindness": {
+      "title": "Leave dead branches.",
+      "body": "Dead wood is full of bugs and good nest holes. If it's safe, let an old branch stay."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "trunk",
+      "block": "tree"
+    },
+    "spotHint": "Listen for soft tapping and look for a small black-and-white bird hitching up a trunk.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 792988,
+    "ebirdCode": "dowwoo"
+  },
+  {
+    "id": "red-bellied-woodpecker",
+    "friendlyName": "Red-bellied Woodpeckers",
+    "commonName": "Red-bellied Woodpecker",
+    "scientificName": "Melanerpes carolinus",
+    "collectiveNoun": "a descent",
+    "group": "birds",
+    "art": {
+      "body": "woodpecker",
+      "main": "tan",
+      "second": "ink",
+      "belly": "tan",
+      "features": [
+        "stripes"
+      ]
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Zebra-Backed Chatterbox",
+      "traits": [
+        "Red cap",
+        "Zebra stripes",
+        "Loud rolling call"
+      ],
+      "blurb": "Despite the name, the red is on their head. Their black-and-white striped back and loud, rolling kwirr call give them away."
+    },
+    "origin": "Native woodpeckers who spread north into New York over the past century.",
+    "home": "On a tree trunk, calling kwirr! across the park.",
+    "rightNow": {
+      "spring": "Calling loudly and carving out a fresh nest hole.",
+      "summer": "Feeding chicks and snacking on fruit and bugs.",
+      "fall": "Storing acorns and nuts in cracks in the bark.",
+      "winter": "Raiding their bark pantries and visiting feeders."
+    },
+    "funFact": {
+      "title": "Where's the red belly?",
+      "body": "Red-bellied woodpeckers do have a red belly, but it's a faint blush you can barely see. The bright red is on their head."
+    },
+    "kindness": {
+      "title": "Keep the old trees.",
+      "body": "Big, old trees with a few dead limbs are woodpecker homes. They're worth protecting."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "trunk",
+      "block": "tree"
+    },
+    "spotHint": "Listen for a loud rolling kwirr and look for zebra stripes on a trunk.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 18205,
+    "ebirdCode": "rebwoo"
+  },
+  {
+    "id": "tufted-titmouse",
+    "friendlyName": "Tufted Titmice",
+    "commonName": "Tufted Titmouse",
+    "scientificName": "Baeolophus bicolor",
+    "collectiveNoun": "a banditry",
+    "group": "birds",
+    "art": {
+      "body": "songbird",
+      "main": "gray",
+      "second": "gray",
+      "belly": "white",
+      "accent": "ink",
+      "features": [
+        "crest"
+      ]
+    },
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Curious Little Boss",
+      "traits": [
+        "Pointy crest",
+        "Big dark eyes",
+        "Peter, peter!"
+      ],
+      "blurb": "Titmice are small, gray and very curious. Their loud peter-peter-peter whistle rings through the trees all year."
+    },
+    "origin": "Native songbirds of eastern forests who moved north as parks and yards grew leafy.",
+    "home": "Hopping through the treetops, whistling peter, peter, peter.",
+    "rightNow": {
+      "spring": "Whistling peter-peter-peter and collecting soft nest lining.",
+      "summer": "Raising chicks in tree holes and old woodpecker nests.",
+      "fall": "Joining mixed flocks with chickadees and woodpeckers and stashing seeds.",
+      "winter": "Leading mixed flocks through the bare trees, cheerful as ever."
+    },
+    "funFact": {
+      "title": "Hair for the nest",
+      "body": "Titmice line their nests with soft hair, sometimes plucked straight from a sleeping raccoon or a dog."
+    },
+    "kindness": {
+      "title": "Leave pet fur out in spring.",
+      "body": "Untreated pet fur or cotton tucked in a bush makes great nest lining for titmice."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "treetop",
+      "block": "tree"
+    },
+    "spotHint": "Listen for a loud peter-peter-peter and look for a small gray bird with a pointy crest.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 13632,
+    "ebirdCode": "tuftit"
+  },
+  {
+    "id": "hermit-thrush",
+    "friendlyName": "Hermit Thrushes",
+    "commonName": "Hermit Thrush",
+    "scientificName": "Catharus guttatus",
+    "collectiveNoun": "a mutation",
+    "group": "birds",
+    "art": {
+      "body": "songbird",
+      "main": "tan",
+      "second": "brown",
+      "belly": "white",
+      "accent": "ink",
+      "features": [
+        "spots"
+      ]
+    },
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Quiet Poet",
+      "traits": [
+        "Spotted chest",
+        "Lifts their tail",
+        "Gorgeous flute song"
+      ],
+      "blurb": "Hermit thrushes are shy, spotted birds of the forest floor. Their flute-like song is one of the most beautiful sounds in North America."
+    },
+    "origin": "Native thrushes who nest in northern forests and pass through, or spend the winter, in our parks.",
+    "home": "On the leafy ground under the trees, flicking their tail.",
+    "rightNow": {
+      "spring": "Passing through on the way north, sometimes singing a few flute-like notes.",
+      "summer": "Up in northern forests, filling the woods with song.",
+      "fall": "Arriving from the north, hopping through the leaf litter in quiet corners.",
+      "winter": "A few stay all winter, eating berries in thickets."
+    },
+    "funFact": {
+      "title": "A song in harmony",
+      "body": "Hermit thrushes sing notes that follow the same harmonic patterns as human music."
+    },
+    "kindness": {
+      "title": "Leave the leaves.",
+      "body": "Thrushes find their food in leaf litter. A leafy corner under trees is their kitchen."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "lawn",
+      "block": "hedge"
+    },
+    "spotHint": "In fall and winter, look in quiet leafy corners for a brown bird with a spotted chest who slowly raises their tail.",
+    "seasons": [
+      "fall",
+      "winter",
+      "spring"
+    ],
+    "iNatTaxonId": 12890,
+    "ebirdCode": "herthr"
+  },
+  {
+    "id": "yellow-rumped-warbler",
+    "friendlyName": "Yellow-rumped Warblers",
+    "commonName": "Yellow-rumped Warbler",
+    "scientificName": "Setophaga coronata",
+    "collectiveNoun": "a confusion",
+    "group": "birds",
+    "art": {
+      "body": "songbird",
+      "main": "gray",
+      "second": "ink",
+      "belly": "white",
+      "accent": "ink",
+      "features": [
+        "wingbars"
+      ]
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Butter Butt",
+      "traits": [
+        "Yellow rump",
+        "Berry eater",
+        "Check, check!"
+      ],
+      "blurb": "Birders call them butter butts for the yellow patch above their tail. They're one of the few warblers tough enough to spend winter here."
+    },
+    "origin": "Native warblers who nest in northern forests and winter along the coast, including New York.",
+    "home": "Flitting through the treetops, flashing a yellow rump.",
+    "rightNow": {
+      "spring": "Passing through in big numbers, males in bright yellow, black and white.",
+      "summer": "Up north raising chicks in evergreen forests.",
+      "fall": "Arriving by the hundreds and staying for winter.",
+      "winter": "Eating bayberries and poison ivy berries, flashing that yellow rump."
+    },
+    "funFact": {
+      "title": "They can digest wax",
+      "body": "Yellow-rumped warblers can digest the waxy coating on bayberries, which lets them survive winters other warblers can't."
+    },
+    "kindness": {
+      "title": "Plant bayberry.",
+      "body": "Bayberry and other native berry shrubs feed warblers all winter long."
+    },
+    "homeScene": "block",
+    "spots": {
+      "block": "tree",
+      "park": "treetop",
+      "waterfront": "grass"
+    },
+    "spotHint": "Look for a small gray bird with a flash of yellow on the rump, calling check! from the trees.",
+    "seasons": [
+      "fall",
+      "winter",
+      "spring"
+    ],
+    "iNatTaxonId": 145245,
+    "ebirdCode": "yerwar"
   }
 ]

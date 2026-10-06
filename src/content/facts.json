@@ -706,5 +706,288 @@
    "dawn",
    "dusk"
   ]
+ },
+ {
+  "speciesId": "northern-mockingbird",
+  "text": "A mockingbird can learn around 200 different songs and keeps adding new ones through life."
+ },
+ {
+  "speciesId": "northern-mockingbird",
+  "text": "Unpaired male mockingbirds often sing all night, especially under bright lights.",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "night",
+   "dusk"
+  ]
+ },
+ {
+  "speciesId": "northern-mockingbird",
+  "text": "Mockingbirds flash the white patches on their wings, possibly to startle insects out of hiding."
+ },
+ {
+  "speciesId": "northern-mockingbird",
+  "text": "In fall and winter, a mockingbird will claim one berry bush and defend it all season.",
+  "seasons": [
+   "fall",
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "northern-cardinal",
+  "text": "Cardinal couples stay together all year, and in spring the male feeds the female beak to beak."
+ },
+ {
+  "speciesId": "northern-cardinal",
+  "text": "Female cardinals sing too, often from the nest."
+ },
+ {
+  "speciesId": "northern-cardinal",
+  "text": "A cardinal's red comes from pigments in the berries and seeds they eat."
+ },
+ {
+  "speciesId": "northern-cardinal",
+  "text": "Cardinals are often among the first birds at dawn and the last at dusk.",
+  "periods": [
+   "dawn",
+   "dusk"
+  ]
+ },
+ {
+  "speciesId": "common-grackle",
+  "text": "Grackles look black, but in sunlight their heads shine purple-blue and their bodies glow bronze."
+ },
+ {
+  "speciesId": "common-grackle",
+  "text": "Grackles sometimes let ants crawl over their feathers, which may help clean them."
+ },
+ {
+  "speciesId": "common-grackle",
+  "text": "In fall, grackles join enormous roosts with other blackbirds.",
+  "seasons": [
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "common-grackle",
+  "text": "A grackle's long tail is held in a V shape when they fly."
+ },
+ {
+  "speciesId": "gray-catbird",
+  "text": "Catbirds get their name from a call that sounds exactly like a meowing cat."
+ },
+ {
+  "speciesId": "gray-catbird",
+  "text": "A catbird's song can go on for ten minutes without repeating."
+ },
+ {
+  "speciesId": "gray-catbird",
+  "text": "Catbirds spend winter in the southern US, Central America and the Caribbean.",
+  "seasons": [
+   "fall",
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "gray-catbird",
+  "text": "Catbirds recognize cowbird eggs in their nest and toss them out.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "song-sparrow",
+  "text": "Young song sparrows learn their songs from neighbors, so each area has its own local tunes."
+ },
+ {
+  "speciesId": "song-sparrow",
+  "text": "A male song sparrow knows several different songs and switches between them."
+ },
+ {
+  "speciesId": "song-sparrow",
+  "text": "Song sparrows pump their tails up and down when they fly short distances."
+ },
+ {
+  "speciesId": "song-sparrow",
+  "text": "Song sparrows sing even in winter on sunny days.",
+  "seasons": [
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "american-kestrel",
+  "text": "The American kestrel is the smallest falcon in North America, about the size of a mourning dove."
+ },
+ {
+  "speciesId": "american-kestrel",
+  "text": "Kestrels can hover in place in the wind, like a tiny helicopter.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "speciesId": "american-kestrel",
+  "text": "Kestrels nest in cavities, including nooks in old city buildings.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "american-kestrel",
+  "text": "Male kestrels have blue-gray wings; females have rusty-brown wings."
+ },
+ {
+  "speciesId": "coopers-hawk",
+  "text": "Cooper's hawks hunt by darting through trees, using their long tail to steer."
+ },
+ {
+  "speciesId": "coopers-hawk",
+  "text": "Adult Cooper's hawks have red eyes; young ones have yellow eyes."
+ },
+ {
+  "speciesId": "coopers-hawk",
+  "text": "Cooper's hawks have moved into cities in a big way over the last few decades."
+ },
+ {
+  "speciesId": "coopers-hawk",
+  "text": "Cooper's hawk chicks are covered in fluffy white down.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "peregrine-falcon",
+  "text": "A diving peregrine can top 200 miles per hour, faster than any other animal."
+ },
+ {
+  "speciesId": "peregrine-falcon",
+  "text": "Peregrines nearly vanished in the 1960s because of the pesticide DDT, then made a comeback."
+ },
+ {
+  "speciesId": "peregrine-falcon",
+  "text": "New York City has one of the highest densities of nesting peregrine falcons in the world."
+ },
+ {
+  "speciesId": "peregrine-falcon",
+  "text": "Peregrines lay their eggs in a simple scrape on a bare ledge, no sticks needed.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "downy-woodpecker",
+  "text": "Downy woodpeckers are the smallest woodpeckers in North America."
+ },
+ {
+  "speciesId": "downy-woodpecker",
+  "text": "Woodpeckers have a long tongue that wraps around the inside of their skull."
+ },
+ {
+  "speciesId": "downy-woodpecker",
+  "text": "Downy woodpeckers drum fast rhythms on hollow wood to communicate, not to find food.",
+  "seasons": [
+   "winter",
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "downy-woodpecker",
+  "text": "Each downy sleeps alone in a tree hole at night.",
+  "periods": [
+   "dusk",
+   "night"
+  ]
+ },
+ {
+  "speciesId": "red-bellied-woodpecker",
+  "text": "The red belly is a faint blush you can barely see; the bright red is on their head."
+ },
+ {
+  "speciesId": "red-bellied-woodpecker",
+  "text": "Red-bellied woodpeckers can stick their tongue out about two inches past their beak."
+ },
+ {
+  "speciesId": "red-bellied-woodpecker",
+  "text": "In fall, they wedge nuts into bark cracks to eat later.",
+  "seasons": [
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "red-bellied-woodpecker",
+  "text": "Red-bellied woodpeckers have spread north into New York over the past century."
+ },
+ {
+  "speciesId": "tufted-titmouse",
+  "text": "Titmice line their nests with soft hair, sometimes plucked from sleeping animals.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "tufted-titmouse",
+  "text": "Titmice often lead mixed winter flocks of chickadees, nuthatches and woodpeckers.",
+  "seasons": [
+   "fall",
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "tufted-titmouse",
+  "text": "A titmouse's loud whistle sounds like peter-peter-peter."
+ },
+ {
+  "speciesId": "tufted-titmouse",
+  "text": "Titmice hide seeds in bark crevices to eat later."
+ },
+ {
+  "speciesId": "hermit-thrush",
+  "text": "The hermit thrush's song follows the same harmonic patterns as human music."
+ },
+ {
+  "speciesId": "hermit-thrush",
+  "text": "Hermit thrushes slowly raise and lower their tail when they land."
+ },
+ {
+  "speciesId": "hermit-thrush",
+  "text": "Hermit thrushes are the only thrushes in our area likely to stay through winter.",
+  "seasons": [
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "hermit-thrush",
+  "text": "In spring, hermit thrushes pass through on their way to northern forests.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "yellow-rumped-warbler",
+  "text": "Yellow-rumped warblers can digest the waxy coating on bayberries."
+ },
+ {
+  "speciesId": "yellow-rumped-warbler",
+  "text": "Birders nicknamed them butter butts for the yellow patch above their tail."
+ },
+ {
+  "speciesId": "yellow-rumped-warbler",
+  "text": "Yellow-rumped warblers are often the first warblers to arrive in spring.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "yellow-rumped-warbler",
+  "text": "They're one of the few warblers tough enough to spend winter in New York.",
+  "seasons": [
+   "winter",
+   "fall"
+  ]
  }
 ]

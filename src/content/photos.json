@@ -5,6 +5,12 @@
     "attribution": "(c) Gordon Leggett, some rights reserved (CC BY-SA)",
     "source": "https://www.inaturalist.org/photos/97752362"
   },
+  "american-kestrel": {
+    "file": "american-kestrel.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Jonathan Eisen, some rights reserved (CC BY), uploaded by Jonathan Eisen",
+    "source": "https://www.inaturalist.org/photos/180143049"
+  },
   "american-robin": {
     "file": "american-robin.jpg",
     "license": "CC BY",
@@ -47,11 +53,23 @@
     "attribution": "no rights reserved, uploaded by Chrissy McClarren and Andy Reago",
     "source": "https://www.inaturalist.org/photos/143746829"
   },
+  "common-grackle": {
+    "file": "common-grackle.jpg",
+    "license": "CC0",
+    "attribution": "no rights reserved",
+    "source": "https://www.inaturalist.org/photos/433625471"
+  },
   "common-tern": {
     "file": "common-tern.jpg",
     "license": "CC BY",
     "attribution": "(c) Bill Keim, some rights reserved (CC BY)",
     "source": "https://www.inaturalist.org/photos/8318331"
+  },
+  "coopers-hawk": {
+    "file": "coopers-hawk.jpg",
+    "license": "CC0",
+    "attribution": "no rights reserved",
+    "source": "https://www.inaturalist.org/photos/12118242"
   },
   "dark-eyed-junco": {
     "file": "dark-eyed-junco.jpg",
@@ -65,6 +83,12 @@
     "attribution": "no rights reserved",
     "source": "https://www.inaturalist.org/photos/512439682"
   },
+  "downy-woodpecker": {
+    "file": "downy-woodpecker.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Alexis Williams, some rights reserved (CC BY), uploaded by Alexis Williams",
+    "source": "https://www.inaturalist.org/photos/177108982"
+  },
   "eastern-gray-squirrel": {
     "file": "eastern-gray-squirrel.jpg",
     "license": "CC BY-SA",
@@ -77,11 +101,23 @@
     "attribution": "(c) Timothy Lindsey, some rights reserved (CC BY), uploaded by Timothy Lindsey",
     "source": "https://www.inaturalist.org/photos/488854941"
   },
+  "gray-catbird": {
+    "file": "gray-catbird.jpg",
+    "license": "CC BY",
+    "attribution": "(c) kirk gardner, some rights reserved (CC BY), uploaded by kirk gardner",
+    "source": "https://www.inaturalist.org/photos/129956324"
+  },
   "great-blue-heron": {
     "file": "great-blue-heron.jpg",
     "license": "CC BY-SA",
     "attribution": "(c) Basar, some rights reserved (CC BY-SA)",
     "source": "https://www.inaturalist.org/photos/452211592"
+  },
+  "hermit-thrush": {
+    "file": "hermit-thrush.jpg",
+    "license": "CC BY",
+    "attribution": "(c) kirk gardner, some rights reserved (CC BY), uploaded by kirk gardner",
+    "source": "https://www.inaturalist.org/photos/60987495"
   },
   "herring-gull": {
     "file": "herring-gull.jpg",
@@ -125,11 +161,35 @@
     "attribution": "(c) Laura Mae, some rights reserved (CC BY), uploaded by Laura Mae",
     "source": "https://www.inaturalist.org/photos/283242966"
   },
+  "northern-cardinal": {
+    "file": "northern-cardinal.jpg",
+    "license": "CC BY-SA",
+    "attribution": "(c) The Cosmonaut, some rights reserved (CC BY-SA)",
+    "source": "https://www.inaturalist.org/photos/452211481"
+  },
+  "northern-mockingbird": {
+    "file": "northern-mockingbird.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Morgan Caygill, some rights reserved (CC BY), uploaded by Morgan Caygill",
+    "source": "https://www.inaturalist.org/photos/209802918"
+  },
+  "peregrine-falcon": {
+    "file": "peregrine-falcon.jpg",
+    "license": "CC BY-SA",
+    "attribution": "(c) Nicolás Villaseca Merino, some rights reserved (CC BY-SA), uploaded by Nicolás Villaseca Merino",
+    "source": "https://www.inaturalist.org/photos/226608554"
+  },
   "raccoon": {
     "file": "raccoon.jpg",
     "license": "CC0",
     "attribution": "no rights reserved, uploaded by kent ozment",
     "source": "https://www.inaturalist.org/photos/38408348"
+  },
+  "red-bellied-woodpecker": {
+    "file": "red-bellied-woodpecker.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Troy B, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/163013382"
   },
   "red-tailed-hawk": {
     "file": "red-tailed-hawk.jpg",
@@ -155,6 +215,18 @@
     "attribution": "(c) Birds of Gilgit-Baltistan, some rights reserved (CC BY-SA)",
     "source": "https://www.inaturalist.org/photos/466776975"
   },
+  "song-sparrow": {
+    "file": "song-sparrow.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Daniel Levitis, some rights reserved (CC BY), uploaded by Daniel Levitis",
+    "source": "https://www.inaturalist.org/photos/355151027"
+  },
+  "tufted-titmouse": {
+    "file": "tufted-titmouse.jpg",
+    "license": "CC0",
+    "attribution": "no rights reserved, uploaded by David Bird",
+    "source": "https://www.inaturalist.org/photos/107992898"
+  },
   "virginia-opossum": {
     "file": "virginia-opossum.jpg",
     "license": "CC BY",
@@ -172,5 +244,11 @@
     "license": "CC BY",
     "attribution": "(c) Judy Gallagher, some rights reserved (CC BY)",
     "source": "https://www.inaturalist.org/photos/359148504"
+  },
+  "yellow-rumped-warbler": {
+    "file": "yellow-rumped-warbler.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Dan Vickers, some rights reserved (CC BY), uploaded by Dan Vickers",
+    "source": "https://www.inaturalist.org/photos/442752262"
   }
 }

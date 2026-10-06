@@ -3642,5 +3642,1120 @@
     "body": "Fall means acorns, and a few deer are making the most of them."
    }
   ]
+ },
+ {
+  "id": "mock-medley",
+  "speciesId": "northern-mockingbird",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "rooftop",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A mockingbird is singing a medley",
+    "body": "A robin, a cardinal, a car alarm, a squeaky gate, all in one breath. Each song gets repeated a few times before the next."
+   },
+   {
+    "title": "The neighborhood DJ is on",
+    "body": "Twenty different songs and counting, from the top of an antenna. No two minutes sound the same."
+   },
+   {
+    "title": "A mockingbird is performing above {street}",
+    "body": "From the highest antenna around, they're running through every song they've ever heard, including a few car alarms."
+   }
+  ]
+ },
+ {
+  "id": "mock-night",
+  "speciesId": "northern-mockingbird",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "streetlight",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "A mockingbird is singing in the middle of the night",
+    "body": "Unpaired males sometimes sing all night long, especially under bright city lights. Very romantic. Very loud."
+   },
+   {
+    "title": "Someone's singing under the streetlight",
+    "body": "It's a mockingbird, still going at midnight, hoping someone special is listening."
+   },
+   {
+    "title": "A mockingbird is serenading {street} at midnight",
+    "body": "Under the streetlights, a lonely male is singing song after song, hoping to impress."
+   }
+  ]
+ },
+ {
+  "id": "mock-berries",
+  "speciesId": "northern-mockingbird",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A mockingbird is guarding a berry bush",
+    "body": "This bush is theirs for the winter. Any robin who tries for a snack gets chased off."
+   },
+   {
+    "title": "Mockingbird flashing their wings",
+    "body": "They lift their wings to show white patches. Maybe to startle bugs, maybe just to show off."
+   },
+   {
+    "title": "A mockingbird is defending a berry bush near {green}",
+    "body": "All winter long, this one bush is theirs, and they'll chase off anyone who tries a berry."
+   }
+  ]
+ },
+ {
+  "id": "cardinal-feeding",
+  "speciesId": "northern-cardinal",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "hedge",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A cardinal is feeding his partner",
+    "body": "He hops over, a seed in his beak, and passes it to her beak to beak. It's basically a kiss."
+   },
+   {
+    "title": "Cardinal couple goals",
+    "body": "He brings her snacks, she sings back from the nest. They're together all year."
+   },
+   {
+    "title": "A cardinal couple is sharing snacks near {green}",
+    "body": "He picks a seed and hands it to her beak to beak, right there in the hedge."
+   }
+  ]
+ },
+ {
+  "id": "cardinal-snow",
+  "speciesId": "northern-cardinal",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "hedge",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A red cardinal is glowing in the hedge",
+    "body": "Bright red against the gray, puffed up round, checking for seeds."
+   },
+   {
+    "title": "A cardinal is fluffed up like a red tomato",
+    "body": "Feathers puffed out to stay warm. Very round, very red."
+   },
+   {
+    "title": "A cardinal is visiting the hedges along {street}",
+    "body": "A flash of red in the bare branches, round and puffed up against the cold."
+   }
+  ]
+ },
+ {
+  "id": "cardinal-song",
+  "speciesId": "northern-cardinal",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "branch",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A cardinal is whistling cheer, cheer, cheer",
+    "body": "Loud and clear from the top of a tree. Often the female sings back."
+   },
+   {
+    "title": "Birdie, birdie, birdie",
+    "body": "That's a cardinal, whistling from the treetop at first light."
+   },
+   {
+    "title": "A cardinal is whistling over {street}",
+    "body": "Cheer, cheer, cheer, loud and bright, as the neighborhood wakes up."
+   }
+  ]
+ },
+ {
+  "id": "cardinal-dusk",
+  "speciesId": "northern-cardinal",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The cardinals are the last ones at the snack bar",
+    "body": "Cardinals often feed late, right as the light is fading."
+   },
+   {
+    "title": "A cardinal is calling chip, chip in the dusk",
+    "body": "One last check-in with their partner before bed."
+   },
+   {
+    "title": "Cardinals are grabbing a late snack near {green}",
+    "body": "They're often the last birds out as the light fades."
+   }
+  ]
+ },
+ {
+  "id": "grackle-strut",
+  "speciesId": "common-grackle",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A grackle is strutting across the lawn",
+    "body": "Long tail held in a V, yellow eyes on the grass. Very serious walk."
+   },
+   {
+    "title": "The grackles are shining in the sun",
+    "body": "Black at first glance, then purple, blue and bronze when the light hits."
+   },
+   {
+    "title": "A grackle is strutting near {green}",
+    "body": "Shiny and serious, tail in a V, marching across the grass looking for bugs."
+   }
+  ]
+ },
+ {
+  "id": "grackle-song",
+  "speciesId": "common-grackle",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "branch",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A grackle is singing like a rusty gate",
+    "body": "Puffs up, fluffs out, and makes a sound like squeaky hinges. He thinks it's beautiful."
+   },
+   {
+    "title": "Squeak, creak, that's a grackle",
+    "body": "The rusty-gate song is how male grackles show off."
+   },
+   {
+    "title": "A grackle is squeaking from a tree over {street}",
+    "body": "Puffed up, tail spread, singing his rusty-gate song with total confidence."
+   }
+  ]
+ },
+ {
+  "id": "grackle-flock",
+  "speciesId": "common-grackle",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "Huge flocks of grackles are heading to roost",
+    "body": "Thousands, mixed with starlings and red-wings, streaming across the evening sky."
+   },
+   {
+    "title": "A river of blackbirds overhead",
+    "body": "Fall flocks of grackles can be enormous and very noisy."
+   },
+   {
+    "title": "Grackles are streaming over {green}",
+    "body": "A long noisy river of blackbirds, all heading to the same roost."
+   }
+  ]
+ },
+ {
+  "id": "catbird-meow",
+  "speciesId": "gray-catbird",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "hedge",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A catbird just meowed at you",
+    "body": "Not a kitten. A slim gray bird hiding in the bush, making a perfect cat sound."
+   },
+   {
+    "title": "Mew, says the bushes",
+    "body": "It's a catbird. They meow, then launch into a long rambling song."
+   },
+   {
+    "title": "A catbird is meowing from the shrubs near {green}",
+    "body": "Somewhere in there is a slim gray bird with a black cap, sounding exactly like a cat."
+   }
+  ]
+ },
+ {
+  "id": "catbird-berries",
+  "speciesId": "gray-catbird",
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A catbird is gobbling berries",
+    "body": "Fueling up for the trip south. Every berry counts."
+   },
+   {
+    "title": "Catbird snack time",
+    "body": "Hopping through the branches, picking the ripest berries one by one."
+   },
+   {
+    "title": "A catbird is eating berries near {green}",
+    "body": "Getting ready for a long trip south, one ripe berry at a time."
+   }
+  ]
+ },
+ {
+  "id": "catbird-song",
+  "speciesId": "gray-catbird",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A catbird is rambling on and on",
+    "body": "Squeaks, whistles, chatters, borrowed sounds, all jumbled together for minutes."
+   },
+   {
+    "title": "Catbird open mic night",
+    "body": "A long improvised song from deep inside the bushes."
+   },
+   {
+    "title": "A catbird is singing in the bushes along {street}",
+    "body": "A long, jumbly, improvised song, right as the evening settles in."
+   }
+  ]
+ },
+ {
+  "id": "songsparrow-sing",
+  "speciesId": "song-sparrow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "hedge",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A song sparrow is singing on a sunny day",
+    "body": "Even in winter, a bit of sun gets them going. Three clear notes, then a jumble."
+   },
+   {
+    "title": "Song sparrow on the top of a shrub",
+    "body": "Head back, beak open, singing their neighborhood's local tune."
+   },
+   {
+    "title": "A song sparrow is singing by {water}",
+    "body": "Perched on a low shrub, singing the local song all the neighbors know."
+   }
+  ]
+ },
+ {
+  "id": "songsparrow-pump",
+  "speciesId": "song-sparrow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A song sparrow is pumping their tail",
+    "body": "When they fly a short way, their tail pumps up and down. It's how you know it's them."
+   },
+   {
+    "title": "A streaky sparrow with a dark spot",
+    "body": "That spot in the middle of the chest is the song sparrow's badge."
+   },
+   {
+    "title": "A song sparrow is hopping along the edge of {green}",
+    "body": "Streaky brown, dark chest spot, tail pumping as they flit from weed to weed."
+   }
+  ]
+ },
+ {
+  "id": "songsparrow-roost",
+  "speciesId": "song-sparrow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "hedge",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "A song sparrow is tucking into the tangles",
+    "body": "Low in a thick shrub, safe and snug for the night."
+   },
+   {
+    "title": "Lights out for the song sparrow",
+    "body": "Deep in the brambles, feathers fluffed, done singing for today."
+   },
+   {
+    "title": "A song sparrow is settling in near {water}",
+    "body": "Low in a tangled shrub, tucked away for the night."
+   }
+  ]
+ },
+ {
+  "id": "kestrel-hover",
+  "speciesId": "american-kestrel",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A kestrel is hovering in midair",
+    "body": "Wings fluttering, tail spread, head perfectly still. Then down onto a grasshopper."
+   },
+   {
+    "title": "A tiny falcon is hanging in the sky",
+    "body": "Kestrels can hover in place like a helicopter, watching the ground."
+   },
+   {
+    "title": "A kestrel is hovering over {green}",
+    "body": "Wings a blur, head perfectly still, staring down at the grass."
+   }
+  ]
+ },
+ {
+  "id": "kestrel-wire",
+  "speciesId": "american-kestrel",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday",
+   "dusk"
+  ],
+  "setting": "wire",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A kestrel is perched on a wire",
+    "body": "Small and colorful, bobbing their tail, eyes on the ground below."
+   },
+   {
+    "title": "The smallest falcon is watching the street",
+    "body": "A kestrel on a wire, as colorful as a parrot and as focused as a hawk."
+   },
+   {
+    "title": "A kestrel is watching from a wire along {street}",
+    "body": "Tail bobbing, head turning, waiting for something to move in the grass."
+   }
+  ]
+ },
+ {
+  "id": "kestrel-nest",
+  "speciesId": "american-kestrel",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "rooftop",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "Kestrels are nesting in an old building",
+    "body": "They use nooks in cornices and walls, right in the middle of the city."
+   },
+   {
+    "title": "A kestrel is bringing home a grasshopper",
+    "body": "Somewhere in a gap in the building, hungry chicks are waiting."
+   },
+   {
+    "title": "Kestrels are nesting in a nook near {landmark}",
+    "body": "A gap in old brickwork makes a perfect falcon home."
+   }
+  ]
+ },
+ {
+  "id": "coopers-swoop",
+  "speciesId": "coopers-hawk",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A Cooper's hawk just zipped through the trees",
+    "body": "Fast, low, and gone. Every small bird nearby froze."
+   },
+   {
+    "title": "All the little birds just went quiet",
+    "body": "There's probably a Cooper's hawk perched nearby, very still."
+   },
+   {
+    "title": "A Cooper's hawk is darting through the trees near {green}",
+    "body": "A flash of striped tail between the branches, and every small bird hides."
+   }
+  ]
+ },
+ {
+  "id": "coopers-perch",
+  "speciesId": "coopers-hawk",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A Cooper's hawk is sitting very still in a tree",
+    "body": "Red eyes, barred orange chest, long striped tail. Patient and focused."
+   },
+   {
+    "title": "A hawk is hiding in plain sight",
+    "body": "Cooper's hawks often perch inside a tree, not on top, so they can surprise their prey."
+   },
+   {
+    "title": "A Cooper's hawk is perched in the trees near {green}",
+    "body": "Tucked inside the branches, watching everything below."
+   }
+  ]
+ },
+ {
+  "id": "coopers-nest",
+  "speciesId": "coopers-hawk",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A Cooper's hawk family is up in the tree",
+    "body": "Fluffy white chicks peek over the edge of a stick nest, waiting for dinner."
+   },
+   {
+    "title": "Hawk parents on duty",
+    "body": "One guards the nest while the other hunts."
+   },
+   {
+    "title": "Cooper's hawks are nesting in a tall tree near {green}",
+    "body": "High up, a stick nest, and fluffy white chicks waiting for lunch."
+   }
+  ]
+ },
+ {
+  "id": "peregrine-dive",
+  "speciesId": "peregrine-falcon",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A peregrine is diving at top speed",
+    "body": "Wings tucked, over 200 miles an hour. The fastest animal on Earth, right overhead."
+   },
+   {
+    "title": "A falcon just stooped past",
+    "body": "That blur was a peregrine diving after a pigeon. The pigeon usually wins, honestly."
+   },
+   {
+    "title": "A peregrine is diving over {street}",
+    "body": "From high above, wings folded, faster than anything else alive."
+   }
+  ]
+ },
+ {
+  "id": "peregrine-ledge",
+  "speciesId": "peregrine-falcon",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk",
+   "midday"
+  ],
+  "setting": "ledge",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A peregrine is perched on a high ledge",
+    "body": "Dark helmet, sharp eyes, scanning the sky from the city's cliffs."
+   },
+   {
+    "title": "The falcons are home on the bridge",
+    "body": "Bridges and skyscrapers are perfect cliffs for peregrines."
+   },
+   {
+    "title": "A peregrine is perched high above {street}",
+    "body": "On a tall ledge, dark helmet, watching the whole neighborhood."
+   }
+  ]
+ },
+ {
+  "id": "peregrine-chicks",
+  "speciesId": "peregrine-falcon",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "rooftop",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Peregrine chicks are on a skyscraper ledge",
+    "body": "Fluffy white balls of down, high above the street, waiting for their next meal."
+   },
+   {
+    "title": "Young peregrines are learning to fly",
+    "body": "Clumsy first flights between rooftops, with parents watching closely."
+   },
+   {
+    "title": "Peregrines are raising chicks high above {street}",
+    "body": "On a bare stone ledge, fluffy white chicks wait for their parents to come back."
+   }
+  ]
+ },
+ {
+  "id": "downy-tapping",
+  "speciesId": "downy-woodpecker",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "trunk",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A downy woodpecker is tapping for bugs",
+    "body": "Tap, tap, tap. Tiny, black and white, hitching up the trunk in little hops."
+   },
+   {
+    "title": "A little drummer is at work",
+    "body": "Soft taps on bark mean a downy is looking for a snack."
+   },
+   {
+    "title": "A downy woodpecker is tapping on a tree near {green}",
+    "body": "Small and busy, hopping up the trunk, tapping for bugs under the bark."
+   }
+  ]
+ },
+ {
+  "id": "downy-drum",
+  "speciesId": "downy-woodpecker",
+  "seasons": [
+   "spring",
+   "winter"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "trunk",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A woodpecker is drumming a rhythm",
+    "body": "Fast rat-a-tat on a hollow branch. It's how downies say hello, or hey, this is mine."
+   },
+   {
+    "title": "Rat-a-tat-tat from the treetops",
+    "body": "That's not construction. It's a downy woodpecker drumming."
+   },
+   {
+    "title": "A downy is drumming in the trees near {green}",
+    "body": "A quick rat-a-tat on a hollow branch, echoing across the neighborhood."
+   }
+  ]
+ },
+ {
+  "id": "downy-night",
+  "speciesId": "downy-woodpecker",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "den",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "A downy woodpecker is asleep in a tree hole",
+    "body": "Tucked inside a hole they carved themselves, safe from the cold."
+   },
+   {
+    "title": "Woodpecker bedtime",
+    "body": "Each downy sleeps alone in their own little tree hole."
+   },
+   {
+    "title": "A downy woodpecker is sleeping in a tree near {green}",
+    "body": "Snug inside a little hole in a dead branch, out of the wind."
+   }
+  ]
+ },
+ {
+  "id": "rbwo-call",
+  "speciesId": "red-bellied-woodpecker",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "trunk",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A red-bellied woodpecker is calling kwirr",
+    "body": "That loud, rolling call echoes across the park. Look for zebra stripes on the trunk."
+   },
+   {
+    "title": "Kwirr, kwirr, says the woodpecker",
+    "body": "A red-bellied woodpecker is announcing themselves to the whole neighborhood."
+   },
+   {
+    "title": "A red-bellied woodpecker is calling near {green}",
+    "body": "A loud rolling kwirr, then a flash of red cap and zebra stripes on a trunk."
+   }
+  ]
+ },
+ {
+  "id": "rbwo-stash",
+  "speciesId": "red-bellied-woodpecker",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "trunk",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A woodpecker is stashing acorns in the bark",
+    "body": "Wedging nuts into cracks to eat later. A winter pantry, one acorn at a time."
+   },
+   {
+    "title": "Red-bellied woodpecker, pantry manager",
+    "body": "Every crack in the bark is a cupboard right now."
+   },
+   {
+    "title": "A woodpecker is filling a pantry near {green}",
+    "body": "Wedging acorns and nuts into bark cracks to snack on all winter."
+   }
+  ]
+ },
+ {
+  "id": "rbwo-winter",
+  "speciesId": "red-bellied-woodpecker",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "trunk",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A woodpecker is raiding their own pantry",
+    "body": "Prying out the nuts they hid in the bark back in fall."
+   },
+   {
+    "title": "A zebra-striped woodpecker is out in the cold",
+    "body": "Red cap bright against the gray, checking the bark for snacks."
+   },
+   {
+    "title": "A red-bellied woodpecker is snacking near {green}",
+    "body": "Digging the nuts they hid in fall out of the bark, one by one."
+   }
+  ]
+ },
+ {
+  "id": "titmouse-peter",
+  "speciesId": "tufted-titmouse",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A titmouse is whistling peter, peter, peter",
+    "body": "Loud for such a small gray bird. Look for the pointy crest."
+   },
+   {
+    "title": "Peter, peter, from the trees",
+    "body": "That's a tufted titmouse, the curious little boss of the treetops."
+   },
+   {
+    "title": "A titmouse is whistling in the trees near {green}",
+    "body": "Peter, peter, peter, from a small gray bird with big dark eyes and a pointy crest."
+   }
+  ]
+ },
+ {
+  "id": "titmouse-flock",
+  "speciesId": "tufted-titmouse",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A titmouse is leading a mixed flock",
+    "body": "Chickadees, woodpeckers and kinglets follow along. Titmice are the lookouts."
+   },
+   {
+    "title": "The little gray boss is in charge",
+    "body": "When the titmouse calls an alarm, the whole flock listens."
+   },
+   {
+    "title": "A mixed flock is moving through {green}",
+    "body": "Led by a bossy little titmouse, with woodpeckers and other small birds tagging along."
+   }
+  ]
+ },
+ {
+  "id": "titmouse-hair",
+  "speciesId": "tufted-titmouse",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A titmouse is collecting soft nest lining",
+    "body": "Hair, fur, fluff. They've been known to pluck it from a sleeping raccoon."
+   },
+   {
+    "title": "Titmouse on a fluff-gathering mission",
+    "body": "Every soft thing goes into the nest."
+   },
+   {
+    "title": "A titmouse is gathering nest fluff near {green}",
+    "body": "Anything soft will do, even fur from a sleeping raccoon."
+   }
+  ]
+ },
+ {
+  "id": "thrush-leaves",
+  "speciesId": "hermit-thrush",
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A hermit thrush is flicking through the leaves",
+    "body": "Hop, pause, raise the tail slowly, lower it. They're shy and very gentle."
+   },
+   {
+    "title": "A spotted bird is hiding on the ground",
+    "body": "Brown back, spotted chest, rusty tail lifting slowly. That's a hermit thrush."
+   },
+   {
+    "title": "A hermit thrush is hopping through the leaves near {green}",
+    "body": "Quiet and shy, lifting their rusty tail slowly, picking bugs from the leaf litter."
+   }
+  ]
+ },
+ {
+  "id": "thrush-song",
+  "speciesId": "hermit-thrush",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dawn",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A hermit thrush is singing like a flute",
+    "body": "A clear note, then a spiral of echoing tones. One of the loveliest songs anywhere."
+   },
+   {
+    "title": "Listen: a flute in the trees",
+    "body": "It's a hermit thrush passing through, singing a little before heading north."
+   },
+   {
+    "title": "A hermit thrush is singing near {green}",
+    "body": "A clear, echoing, flute-like song, rising in spirals in the evening light."
+   }
+  ]
+ },
+ {
+  "id": "thrush-berries",
+  "speciesId": "hermit-thrush",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A hermit thrush stayed for winter",
+    "body": "Living on berries in a sheltered thicket, quietly getting by."
+   },
+   {
+    "title": "A thrush is snacking on winter berries",
+    "body": "When the bugs are gone, berries keep them going."
+   },
+   {
+    "title": "A hermit thrush is eating berries near {green}",
+    "body": "Tucked in a sheltered thicket, picking at the last winter berries."
+   }
+  ]
+ },
+ {
+  "id": "yrwa-flash",
+  "speciesId": "yellow-rumped-warbler",
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "branch",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A butter butt is flitting through the trees",
+    "body": "Watch for the flash of yellow above the tail as they hop from branch to branch."
+   },
+   {
+    "title": "Check, check, from the branches",
+    "body": "A yellow-rumped warbler is calling to their flock."
+   },
+   {
+    "title": "Yellow-rumped warblers are flitting through the trees near {green}",
+    "body": "Little gray birds flashing yellow rumps, calling check! as they go."
+   }
+  ]
+ },
+ {
+  "id": "yrwa-berries",
+  "speciesId": "yellow-rumped-warbler",
+  "seasons": [
+   "winter",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "hedge",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A warbler is eating waxy bayberries",
+    "body": "Their superpower: they can digest the wax, so they survive winters other warblers can't."
+   },
+   {
+    "title": "A tough little warbler is staying for winter",
+    "body": "Most warblers fly south. This one stays and eats berries."
+   },
+   {
+    "title": "Yellow-rumped warblers are eating berries near {water}",
+    "body": "Plucking waxy bayberries from the shrubs, one of the few warblers who winter here."
+   }
+  ]
+ },
+ {
+  "id": "yrwa-spring",
+  "speciesId": "yellow-rumped-warbler",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "branch",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Warblers are passing through in their spring colors",
+    "body": "Bright yellow, black and white. They'll be gone north in a few weeks."
+   },
+   {
+    "title": "A wave of warblers is moving through",
+    "body": "Spring migration! Yellow-rumps are first to arrive and most common."
+   },
+   {
+    "title": "Spring warblers are moving through {green}",
+    "body": "Yellow-rumps in their brightest colors, stopping to feed on their way north."
+   }
+  ]
  }
 ]
