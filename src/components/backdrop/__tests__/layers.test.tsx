@@ -37,7 +37,7 @@ describe('buildLayers', () => {
     for (const period of PERIODS) for (const placeKind of KINDS) {
       const layers = buildLayers({ w: 390, h: 760, setting: 'sky', period, season: 'fall', placeKind, placeId: 'williamsburg', variant: 1, moonLit: 0.5 });
       expect(layers.map((l) => l.id)).not.toEqual(expect.arrayContaining(['landmark']));
-      expect(layers.some((l) => /^(landmark|harbor|boat|buildings|windows-|light-bands)/.test(l.id))).toBe(false);
+      expect(layers.some((l) => /^(landmark|harbor|buildings|light-bands)/.test(l.id))).toBe(false);
       expect(layers.find((l) => l.id === 'sun-rays')?.motion.kind ?? 'still').toBe('still');
     }
   });
@@ -59,5 +59,13 @@ describe('buildLayers', () => {
       const all = ids(sky, ['wind', 'heat', 'cold']);
       expect(new Set(all).size).toBe(all.length);
     }
+  });
+
+  it('draws an illustrated scene for each kind of place', () => {
+    const ids = (placeKind: (typeof KINDS)[number], period: (typeof PERIODS)[number] = 'midday') =>
+      buildLayers({ w: 390, h: 760, setting: 'lawn', period, season: 'spring', placeKind, variant: 0, moonLit: 1 }).map((l) => l.id);
+    expect(ids('park')).toEqual(expect.arrayContaining(['skyline', 'hills', 'pond', 'bushes', 'lawn', 'lamp', 'trees']));
+    expect(ids('block')).toEqual(expect.arrayContaining(['skyline', 'brownstones', 'windows', 'trees']));
+    expect(ids('waterfront')).toEqual(expect.arrayContaining(['skyline', 'river', 'boat', 'promenade', 'lamps', 'trees']));
   });
 });

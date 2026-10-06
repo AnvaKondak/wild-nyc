@@ -11,14 +11,13 @@ type Props = Omit<BackdropInput, 'w' | 'h'> & { width: number; height: number };
 export function StoryBackdrop({ width, height, ...rest }: Props) {
   const still = useReduceMotion();
   const tilt = useTilt(still);
-  const dark = rest.period === 'dusk' || rest.period === 'night';
   const layers = useMemo(
     () => buildLayers({ ...rest, w: width, h: height }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [width, height, rest.setting, rest.period, rest.season, rest.placeKind, rest.placeId, rest.variant, rest.moonLit, rest.sky, rest.weather?.join()],
   );
   return (
-    <View style={[StyleSheet.absoluteFill, { opacity: dark ? 0.75 : 0.85 }]} pointerEvents="none">
+    <View style={StyleSheet.absoluteFill} pointerEvents="none">
       {layers.map((layer) => (
         <MovingLayer key={layer.id} layer={layer} width={width} height={height} still={still} tilt={tilt} />
       ))}

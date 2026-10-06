@@ -27,7 +27,7 @@ import { useLiveData } from '@/state/LiveData';
 import { useWeather } from '@/state/Weather';
 import { currentNeighborhood } from '@/state/selectors';
 import { periodThemes } from '@/theme/periodTheme';
-import { border, colors, fonts } from '@/theme/tokens';
+import { border, colors, fonts, offsetShadow } from '@/theme/tokens';
 
 const PERIOD_LABELS: Record<Period, string> = { dawn: 'Dawn', midday: 'Midday', dusk: 'Dusk', night: 'Night' };
 
@@ -328,36 +328,37 @@ export default function RightNow() {
             </View>
           )}
 
-          {/* The words scroll if they're long, so the button below always stays in place. */}
+          {/* The words sit on a card over the scene, and scroll if they're long, so the button stays put. */}
           <ScrollView
             style={{ flex: 1 }}
-            contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 26, paddingBottom: 16, gap: 10 }}
+            contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 22, paddingBottom: 14 }}
             showsVerticalScrollIndicator={false}
           >
-            <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, letterSpacing: 1.4, textTransform: 'uppercase', color: theme.accent }}>
-              {slide.kicker}
-            </Text>
-            <Text accessibilityRole="header" style={{ fontFamily: fonts.display, fontSize: slide.title.length > 44 ? 27 : 32, lineHeight: slide.title.length > 44 ? 31 : 35, color: theme.ink }}>
-              {slide.title}
-            </Text>
-            <Text style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 25, color: theme.body }}>{slide.body}</Text>
-            {slide.fact && (
-              <View
-                style={{
-                  marginTop: 4,
-                  paddingVertical: 10,
-                  paddingHorizontal: 14,
-                  borderRadius: 14,
-                  borderWidth: 1.5,
-                  borderColor: theme.ink,
-                  backgroundColor: theme.card,
-                  gap: 2,
-                }}
-              >
-                <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: theme.accent }}>Fun fact</Text>
-                <Text style={{ fontFamily: fonts.body, fontSize: 14, lineHeight: 20, color: theme.body }}>{slide.fact}</Text>
-              </View>
-            )}
+            <View
+              style={{
+                padding: 18,
+                gap: 8,
+                borderRadius: 22,
+                borderWidth: border.width,
+                borderColor: theme.ink,
+                backgroundColor: theme.card,
+                boxShadow: offsetShadow(theme.shadow, 4),
+              }}
+            >
+              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, letterSpacing: 1.4, textTransform: 'uppercase', color: theme.accent }}>
+                {slide.kicker}
+              </Text>
+              <Text accessibilityRole="header" style={{ fontFamily: fonts.display, fontSize: slide.title.length > 44 ? 25 : 29, lineHeight: slide.title.length > 44 ? 29 : 33, color: theme.ink }}>
+                {slide.title}
+              </Text>
+              <Text style={{ fontFamily: fonts.body, fontSize: 16, lineHeight: 23, color: theme.body }}>{slide.body}</Text>
+              {slide.fact && (
+                <View style={{ marginTop: 6, paddingTop: 10, borderTopWidth: 1.5, borderStyle: 'dashed', borderColor: theme.ink, gap: 2 }}>
+                  <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: theme.accent }}>Fun fact</Text>
+                  <Text style={{ fontFamily: fonts.body, fontSize: 14, lineHeight: 20, color: theme.body }}>{slide.fact}</Text>
+                </View>
+              )}
+            </View>
           </ScrollView>
 
           <View style={{ paddingHorizontal: 16, paddingBottom: 20 }}>

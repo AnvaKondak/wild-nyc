@@ -9,13 +9,17 @@ import { Title } from '@/components/Title';
 import { StoryBackdrop } from '@/components/backdrop';
 import { getSpecies, species, speciesPhoto, type Setting } from '@/content';
 import { colors, fonts } from '@/theme/tokens';
+import { periodThemes } from '@/theme/periodTheme';
 import { type } from '@/theme/type';
 
+const SCENES = (['park', 'block', 'waterfront'] as const).flatMap((placeKind, k) =>
+  (['spring', 'summer', 'fall', 'winter'] as const).map((season, j) => ({ placeKind, season, period: (['dawn', 'midday', 'dusk', 'night'] as const)[(j + k) % 4] })),
+);
 const SETTINGS: Setting[] = ['branch', 'trunk', 'den', 'wire', 'ledge', 'rooftop', 'streetlight', 'lawn', 'sidewalk', 'hedge', 'flowers', 'water', 'shore', 'pier', 'reeds', 'fence', 'trashcan', 'web', 'sky', 'night-sky'];
 
 export default function ArtPreview() {
   const raccoon = getSpecies('raccoon')!;
-  const { only } = useLocalSearchParams<{ only?: string }>();
+  const { only, from } = useLocalSearchParams<{ only?: string; from?: string }>();
   const { width } = useWindowDimensions();
   const thumb = (width - 32 - 12) / 2;
   if (only === 'backdrops') {
@@ -25,16 +29,15 @@ export default function ArtPreview() {
         <BackButton />
         <Text style={type.kicker}>Story backdrops</Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
-          {SETTINGS.map((setting, i) => (
-            <View key={setting} style={{ width: thumb, gap: 4 }}>
-              <View style={{ width: thumb, height: h, borderRadius: 12, overflow: 'hidden', borderWidth: 1.5, borderColor: colors.ink, backgroundColor: i % 4 === 3 ? colors.ink : i % 4 === 2 ? colors.blue : i % 4 === 1 ? colors.yellowTint : colors.pinkTint, alignItems: 'center', justifyContent: 'center' }}>
+          {SCENES.slice(Number(from ?? 0)).map(({ placeKind, season, period }, i) => (
+            <View key={`${placeKind}-${season}`} style={{ width: thumb, gap: 4 }}>
+              <View style={{ width: thumb, height: h, borderRadius: 12, overflow: 'hidden', borderWidth: 1.5, borderColor: colors.ink, backgroundColor: periodThemes[period].bg, alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ position: 'absolute', top: 0, left: 0, width: thumb - 3, height: h - 3 }}>
                   <StoryBackdrop
-                    setting={setting}
-                    period={(['dawn', 'midday', 'dusk', 'night'] as const)[i % 4]}
-                    season={(['spring', 'summer', 'fall', 'winter'] as const)[Math.floor(i / 4) % 4]}
-                    placeKind={(['block', 'park', 'waterfront'] as const)[i % 3]}
-                    placeId={['park-slope', 'prospect-park', 'liberty-state-park', 'astoria', 'exchange-place'][i % 5]}
+                    setting="sky"
+                    period={period}
+                    season={season}
+                    placeKind={placeKind}
                     variant={i % 3}
                     moonLit={0.4}
                     width={thumb - 3}
@@ -43,7 +46,7 @@ export default function ArtPreview() {
                 </View>
                 <Sticker art={raccoon.art} photo={speciesPhoto('raccoon')} size={thumb * 0.5} rotate={-5} style={{ marginBottom: h * 0.2 }} />
               </View>
-              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, color: colors.ink }}>{setting}</Text>
+              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, color: colors.ink }}>{placeKind} · {season} · {period}</Text>
             </View>
           ))}
         </View>
