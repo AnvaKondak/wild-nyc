@@ -1,6 +1,6 @@
 // Welcome: three little story pages, in the same style as the app itself. Dawn in the
 // park (meet the neighbors), midday on the block (a new story every day), dusk by the
-// water (we notice, we don't follow), then find your neighborhood.
+// water (their own lives while you're busy), then find your neighborhood.
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Animated, Easing, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -18,7 +18,7 @@ import { locateNeighborhood } from '@/lib/locate';
 import { seasonOf } from '@/lib/time';
 import { useAppState } from '@/state/AppState';
 import { periodThemes } from '@/theme/periodTheme';
-import { border, colors, fonts } from '@/theme/tokens';
+import { colors, fonts } from '@/theme/tokens';
 
 type Page = { period: Period; place: PlaceKind; kicker: string; title: string; body: string };
 
@@ -40,9 +40,9 @@ const PAGES: Page[] = [
   {
     period: 'dusk',
     place: 'waterfront',
-    kicker: 'Our promise',
-    title: "We notice. We don't follow.",
-    body: 'Your location turns into a neighborhood on your phone and never leaves it. We never show where any animal is. No accounts, no ads, no tracking.',
+    kicker: "While you're busy",
+    title: "Ever wonder what they're up to?",
+    body: "While you work, the squirrel out back is burying snacks for later. While you sleep, the raccoons make their rounds. And those geese honking overhead? They may have just flown in from Canada. Curious? Come see.",
   },
 ];
 
@@ -104,10 +104,10 @@ export default function Welcome() {
           </Text>
 
           {/* The picture for each page, floating gently in the scene. */}
-          <View style={{ height: 300, marginTop: 24 }} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+          <View style={{ height: 250, marginTop: 24 }} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
             {index === 0 && <FloatingCast />}
             {index === 1 && <TimesOfDay ink={theme.ink} />}
-            {index === 2 && <Promise />}
+            {index === 2 && <BusyPair />}
           </View>
 
           <StoryCard kicker={page.kicker} title={page.title} body={page.body} theme={theme} bottom>
@@ -147,9 +147,9 @@ function FloatingCast() {
   const spots = [
     { left: '6%', top: 40, size: 112, rotate: -8 },
     { left: '36%', top: 0, size: 104, rotate: 6 },
-    { left: '64%', top: 56, size: 108, rotate: -4 },
-    { left: '16%', top: 170, size: 96, rotate: 9 },
-    { left: '52%', top: 180, size: 92, rotate: -6 },
+    { left: '64%', top: 46, size: 108, rotate: -4 },
+    { left: '16%', top: 140, size: 96, rotate: 9 },
+    { left: '52%', top: 146, size: 92, rotate: -6 },
   ] as const;
   return (
     <>
@@ -175,7 +175,7 @@ function TimesOfDay({ ink }: { ink: string }) {
     { period: 'night', tint: colors.white },
   ];
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 10, paddingTop: 110 }}>
+    <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 10, paddingTop: 60 }}>
       {times.map((t, i) => (
         <Bob key={t.period} still={still} delay={i * 250} style={{ marginTop: i === 1 || i === 2 ? -24 : 0 }}>
           <View style={{ width: 72, height: 72, borderRadius: 36, borderWidth: 4, borderColor: colors.white, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center', boxShadow: `3px 3px 0 ${colors.ink}`, transform: [{ rotate: `${i % 2 ? 5 : -5}deg` }] }}>
@@ -187,12 +187,12 @@ function TimesOfDay({ ink }: { ink: string }) {
   );
 }
 
-/** Two neighbors, safe and unbothered, under a little heart. */
-function Promise() {
+/** Two neighbors going about their day. */
+function BusyPair() {
   const still = useReduceMotion();
-  const pair = ['mourning-dove', 'eastern-gray-squirrel'];
+  const pair = ['eastern-gray-squirrel', 'canada-goose'];
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end', gap: 18, paddingTop: 110 }}>
+    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end', gap: 18, paddingTop: 60 }}>
       {pair.map((id, i) => {
         const s = getSpecies(id)!;
         return (
@@ -201,9 +201,6 @@ function Promise() {
           </Bob>
         );
       })}
-      <View style={{ position: 'absolute', top: 60, paddingVertical: 6, paddingHorizontal: 12, borderRadius: 14, backgroundColor: colors.pink, borderWidth: border.width, borderColor: colors.ink }}>
-        <Text style={{ fontFamily: fonts.bodySemi, fontSize: 13, color: colors.ink }}>neighbors, not data ♥</Text>
-      </View>
     </View>
   );
 }
