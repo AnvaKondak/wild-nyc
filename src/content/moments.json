@@ -4757,5 +4757,706 @@
     "body": "Yellow-rumps in their brightest colors, stopping to feed on their way north."
    }
   ]
+ },
+ {
+  "id": "bumble-flowers",
+  "speciesId": "common-eastern-bumble-bee",
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "flowers",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A bumble bee is wrestling a flower",
+    "body": "She grabs on, hums loud, and shakes the pollen loose. The flower bounces. Totally worth it."
+   },
+   {
+    "title": "Pollen pants, fully loaded",
+    "body": "Bumble bee workers pack pollen into baskets on their back legs until they look like they're wearing orange shorts."
+   },
+   {
+    "title": "A bumble bee is humming through the flowers near {green}",
+    "body": "Fuzzy, round and very busy, buzzing pollen loose from one bloom after another."
+   }
+  ]
+ },
+ {
+  "id": "bumble-queen",
+  "speciesId": "common-eastern-bumble-bee",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A queen bumble bee is house hunting",
+    "body": "Big and slow, flying low over the ground, checking every hole and tuft of old grass for a nest spot."
+   },
+   {
+    "title": "The first bumble bee of the year",
+    "body": "She slept alone underground all winter. Now she's starting a whole family by herself."
+   },
+   {
+    "title": "A bumble bee queen is searching for a nest near {green}",
+    "body": "Flying low and slow, peeking into old burrows, looking for the perfect spot."
+   }
+  ]
+ },
+ {
+  "id": "bumble-sleep",
+  "speciesId": "common-eastern-bumble-bee",
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "flowers",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "A bumble bee fell asleep in a flower",
+    "body": "Didn't make it home before dark, so she's holding on and napping right there. Very relatable."
+   },
+   {
+    "title": "Shh, a bee is sleeping",
+    "body": "Sometimes bumble bees spend the night clinging under a flower, waiting for the morning warmth."
+   },
+   {
+    "title": "A bumble bee is napping in a flower near {green}",
+    "body": "Too chilly to fly home, so she's curled up in a bloom until the sun comes back."
+   }
+  ]
+ },
+ {
+  "id": "honey-dance",
+  "speciesId": "western-honey-bee",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "flowers",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A honey bee is sipping nectar",
+    "body": "Tongue out, deep in the flower. When she gets home she'll dance to tell her sisters where it is."
+   },
+   {
+    "title": "This flower is getting a good review",
+    "body": "A honey bee will go home and waggle-dance directions to it. Five stars."
+   },
+   {
+    "title": "Honey bees are visiting the flowers near {green}",
+    "body": "Quick and golden, flower to flower, then straight back toward the hive with directions."
+   }
+  ]
+ },
+ {
+  "id": "honey-water",
+  "speciesId": "western-honey-bee",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "water",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A honey bee is taking a drink",
+    "body": "On hot days they carry water home and fan it with their wings to cool the hive. Built-in air conditioning."
+   },
+   {
+    "title": "Bee at the water's edge",
+    "body": "She's collecting water for the hive, very carefully, from a damp spot."
+   },
+   {
+    "title": "A honey bee is sipping water near {water}",
+    "body": "Carrying it home to cool the hive on a hot day."
+   }
+  ]
+ },
+ {
+  "id": "honey-swarm",
+  "speciesId": "western-honey-bee",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A honey bee swarm is resting in a tree",
+    "body": "Thousands of bees hanging in a ball around their queen while scouts look for a new home. They're calm, just moving house."
+   },
+   {
+    "title": "A whole hive is moving house",
+    "body": "A swarm is gentle and busy. Give them space and they'll be gone in a day or two."
+   },
+   {
+    "title": "A honey bee swarm is resting in a tree near {green}",
+    "body": "A buzzing ball of bees, waiting while scouts find a new home."
+   }
+  ]
+ },
+ {
+  "id": "carp-hover",
+  "speciesId": "eastern-carpenter-bee",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "fence",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A carpenter bee is hovering in your face",
+    "body": "That's a male, checking if you're a rival. He can't sting. He's just very committed."
+   },
+   {
+    "title": "Bzzz, who goes there",
+    "body": "A big carpenter bee is on guard duty, hovering, turning, hovering again."
+   },
+   {
+    "title": "A carpenter bee is guarding the wooden fences along {street}",
+    "body": "Hovering mid-air, darting at anyone who comes close. All bluff, no stinger."
+   }
+  ]
+ },
+ {
+  "id": "carp-drill",
+  "speciesId": "eastern-carpenter-bee",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "fence",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A carpenter bee is drilling a tunnel",
+    "body": "Listen close to old wood and you might hear a soft scraping. She's carving a perfect round door."
+   },
+   {
+    "title": "A perfectly round hole just appeared",
+    "body": "A carpenter bee mom is carving a nursery in the wood, one chew at a time."
+   },
+   {
+    "title": "A carpenter bee is carving a tunnel near {green}",
+    "body": "In an old bench or fence, she's chewing a perfect round tunnel for her babies."
+   }
+  ]
+ },
+ {
+  "id": "carp-flowers",
+  "speciesId": "eastern-carpenter-bee",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "flowers",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A carpenter bee is sneaking nectar",
+    "body": "Too big for some flowers, they slit the side and sip right through. Nectar robbery."
+   },
+   {
+    "title": "A big shiny bee is on the flowers",
+    "body": "Carpenter bees look like bumble bees, but their bottoms are bald and shiny."
+   },
+   {
+    "title": "A carpenter bee is visiting flowers near {green}",
+    "body": "Big, black and shiny, slurping nectar from the side of the blooms."
+   }
+  ]
+ },
+ {
+  "id": "firefly-flash",
+  "speciesId": "common-eastern-firefly",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "The fireflies are starting to blink",
+    "body": "Low over the grass, a slow yellow swoop. Then another. Then everywhere."
+   },
+   {
+    "title": "Somebody's flirting in morse code",
+    "body": "Male fireflies flash a J-shaped swoop. If a female in the grass likes it, she flashes back."
+   },
+   {
+    "title": "Fireflies are blinking over {green}",
+    "body": "Slow yellow swoops rising from the grass as the sky goes dark."
+   }
+  ]
+ },
+ {
+  "id": "firefly-night",
+  "speciesId": "common-eastern-firefly",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "night-sky",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "The fireflies are lighting up the dark",
+    "body": "Flash, pause, flash. The whole meadow is twinkling."
+   },
+   {
+    "title": "Tiny lanterns all over the grass",
+    "body": "Each blink is someone saying hi. The answers glow from the grass."
+   },
+   {
+    "title": "Fireflies are glowing along {street}",
+    "body": "Blinking slowly in the dark spots away from the streetlights."
+   }
+  ]
+ },
+ {
+  "id": "firefly-day",
+  "speciesId": "common-eastern-firefly",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A firefly is resting on a grass blade",
+    "body": "By day they just look like small beetles, with a red-and-yellow shield on their head."
+   },
+   {
+    "title": "Fireflies are napping until dark",
+    "body": "They spend the day hidden in tall grass, saving up for tonight's show."
+   },
+   {
+    "title": "A firefly is resting in the grass near {green}",
+    "body": "Waiting for dusk, when the light show begins."
+   }
+  ]
+ },
+ {
+  "id": "dasher-perch",
+  "speciesId": "blue-dasher",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "reeds",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A blue dasher is guarding the best perch",
+    "body": "He zips out, grabs a gnat, and lands back on exactly the same twig. Every time."
+   },
+   {
+    "title": "A powder-blue dragonfly is on duty",
+    "body": "Wings tilted forward, green eyes scanning the water."
+   },
+   {
+    "title": "A blue dasher is patrolling near {water}",
+    "body": "Darting out over the water and back to the same reed, again and again."
+   }
+  ]
+ },
+ {
+  "id": "dasher-heat",
+  "speciesId": "blue-dasher",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "reeds",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A dragonfly is doing a handstand",
+    "body": "On hot days, blue dashers point their tail at the sun so less of their body gets cooked."
+   },
+   {
+    "title": "Dragonfly sun salute",
+    "body": "Tail straight up, toward the sun. It's how they stay cool."
+   },
+   {
+    "title": "A blue dasher is cooling off near {water}",
+    "body": "Tail pointed straight at the sun, keeping their body out of the heat."
+   }
+  ]
+ },
+ {
+  "id": "dasher-dawn",
+  "speciesId": "blue-dasher",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "reeds",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A dragonfly is warming up",
+    "body": "Wings shivering, they can't fly until their muscles are warm."
+   },
+   {
+    "title": "A new dragonfly just hatched",
+    "body": "An empty shell on a reed and a soft new dragonfly, drying their wings in the first light."
+   },
+   {
+    "title": "A blue dasher is warming up near {water}",
+    "body": "Perched on a reed, wings buzzing, waiting for the sun."
+   }
+  ]
+ },
+ {
+  "id": "mwbug-cluster",
+  "speciesId": "large-milkweed-bug",
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "flowers",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "Milkweed bugs are having a family reunion",
+    "body": "Tiny red young, middle-sized kids and grown-ups, all crowded on one seed pod."
+   },
+   {
+    "title": "Orange and black, all together",
+    "body": "A whole cluster on the milkweed pod. The colors say: we taste awful, birds."
+   },
+   {
+    "title": "Milkweed bugs are gathering near {green}",
+    "body": "Clustered on the milkweed pods, all ages together, bright orange and black."
+   }
+  ]
+ },
+ {
+  "id": "mwbug-sun",
+  "speciesId": "large-milkweed-bug",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "flowers",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Milkweed bugs are warming up in the sun",
+    "body": "Cool morning, so everyone's sitting on the sunny side of the pod."
+   },
+   {
+    "title": "A milkweed pod just burst open",
+    "body": "Fluffy seeds drifting away, and the bugs are getting their last snacks."
+   },
+   {
+    "title": "Milkweed bugs are sunning near {green}",
+    "body": "Lined up on the sunny side of a pod, soaking up warmth."
+   }
+  ]
+ },
+ {
+  "id": "slider-bask",
+  "speciesId": "pond-slider",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "water",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The turtles are stacked on a log",
+    "body": "Necks out, legs out, eyes half closed. Pure sun bliss."
+   },
+   {
+    "title": "Turtle sunbathing club",
+    "body": "Every spot on the log is taken. Someone is lying on someone else."
+   },
+   {
+    "title": "Turtles are basking near {water}",
+    "body": "Lined up on a sunny log, legs stretched out, soaking it in."
+   }
+  ]
+ },
+ {
+  "id": "slider-plop",
+  "speciesId": "pond-slider",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "Plop, plop, plop",
+    "body": "Someone walked by, and every turtle on the log slid into the water at once."
+   },
+   {
+    "title": "A turtle's nose just popped up",
+    "body": "A little head with red stripes, peeking up, checking if it's safe."
+   },
+   {
+    "title": "A turtle is peeking up near {water}",
+    "body": "Just a nose and two eyes above the water, checking the coast is clear."
+   }
+  ]
+ },
+ {
+  "id": "slider-nest",
+  "speciesId": "pond-slider",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dusk",
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A turtle mom is digging a nest",
+    "body": "Far from the water, in sandy soil, with her back legs. Very slow. Very determined."
+   },
+   {
+    "title": "A turtle is on a road trip",
+    "body": "Mothers leave the pond to find the perfect sandy spot for eggs."
+   },
+   {
+    "title": "A turtle mom is nesting near {green}",
+    "body": "Digging a hole with her back feet in soft sandy soil."
+   }
+  ]
+ },
+ {
+  "id": "hog-clover",
+  "speciesId": "groundhog",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A groundhog is eating clover",
+    "body": "Head down, cheeks going, no thoughts, only clover."
+   },
+   {
+    "title": "A groundhog just sat up to look around",
+    "body": "Tall and still, like a little furry fire hydrant. All clear. Back to snacks."
+   },
+   {
+    "title": "A groundhog is munching clover near {green}",
+    "body": "Head down in the grass, chewing steadily, never far from the burrow."
+   }
+  ]
+ },
+ {
+  "id": "hog-whistle",
+  "speciesId": "groundhog",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A groundhog just whistled",
+    "body": "A sharp alarm and a dash for the burrow. Some people call them whistle pigs."
+   },
+   {
+    "title": "Groundhog babies are out",
+    "body": "Little ones tumbling by the burrow while mom keeps watch."
+   },
+   {
+    "title": "A groundhog family is out near {green}",
+    "body": "Babies wrestling by the burrow entrance, mom sitting up on watch."
+   }
+  ]
+ },
+ {
+  "id": "hog-fall",
+  "speciesId": "groundhog",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "midday",
+   "dusk"
+  ],
+  "setting": "den",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A very round groundhog is heading underground",
+    "body": "Months of snacks, and now the big sleep. See you in spring."
+   },
+   {
+    "title": "Groundhog bedtime is coming",
+    "body": "They're eating extra and lining the burrow with grass for winter."
+   },
+   {
+    "title": "A groundhog is getting ready for winter near {green}",
+    "body": "Extra round, carrying grass into the burrow for a long sleep."
+   }
+  ]
+ },
+ {
+  "id": "orb-dew",
+  "speciesId": "orb-weavers",
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "web",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A spiderweb is covered in dew",
+    "body": "Every thread is strung with tiny beads of water, glowing in the first light."
+   },
+   {
+    "title": "Somebody built a chandelier overnight",
+    "body": "An orb-weaver's web, sparkling with dew. She's resting in the middle."
+   },
+   {
+    "title": "A dewy spiderweb is sparkling near {water}",
+    "body": "Round and perfect, every thread beaded with water, glowing at dawn."
+   }
+  ]
+ },
+ {
+  "id": "orb-build",
+  "speciesId": "orb-weavers",
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "web",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "An orb-weaver is building tonight's web",
+    "body": "Spokes first, then round and round. About an hour of work, done in the dark."
+   },
+   {
+    "title": "A spider is knitting in the dark",
+    "body": "Round and round, one thread at a time, a brand new web for the night."
+   },
+   {
+    "title": "An orb-weaver is spinning a web along {street}",
+    "body": "On a railing or fence, building a fresh round web as night falls."
+   }
+  ]
+ },
+ {
+  "id": "orb-big",
+  "speciesId": "orb-weavers",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "web",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A garden spider is waiting in her web",
+    "body": "Yellow and black, right in the middle, next to a zigzag of silk. Patient."
+   },
+   {
+    "title": "The biggest webs of the year",
+    "body": "Fall is when orb-weavers are fully grown. Their webs can be a few feet across."
+   },
+   {
+    "title": "A big orb-weaver is waiting near {green}",
+    "body": "In the middle of a huge round web, very still, very patient."
+   }
+  ]
  }
 ]

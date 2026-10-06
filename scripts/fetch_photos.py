@@ -24,7 +24,7 @@ SIZE = 360
 SKIP_PHOTOS = {"monarch": [111043173], "european-starling": [365984069], "herring-gull": [343002826], "canada-goose": [247715952], "double-crested-cormorant": [173884349], "red-winged-blackbird": [275637604]}
 
 # Photos chosen by hand from the candidates: species -> photo id.
-PIN_PHOTOS = {"monarch": 45078365, "canada-goose": 606089370, "double-crested-cormorant": 512439682, "red-winged-blackbird": 617065992, "northern-cardinal": 452211481, "coopers-hawk": 12118242}
+PIN_PHOTOS = {"monarch": 45078365, "canada-goose": 606089370, "double-crested-cormorant": 512439682, "red-winged-blackbird": 617065992, "northern-cardinal": 452211481, "coopers-hawk": 12118242, "common-eastern-bumble-bee": 442676579, "western-honey-bee": 481248861, "orb-weavers": 555702674}
 
 # Groups get one representative species' photo.
 PHOTO_TAXON_OVERRIDES = {"moths": "Dryocampa rubicunda", "orb-weavers": "Argiope aurantia"}

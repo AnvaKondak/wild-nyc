@@ -2368,5 +2368,485 @@
     ],
     "iNatTaxonId": 145245,
     "ebirdCode": "yerwar"
+  },
+  {
+    "id": "common-eastern-bumble-bee",
+    "friendlyName": "Bumble Bees",
+    "commonName": "Common Eastern Bumble Bee",
+    "scientificName": "Bombus impatiens",
+    "collectiveNoun": "a bumble",
+    "group": "bugs",
+    "art": {
+      "body": "bee",
+      "main": "yellow",
+      "second": "ink",
+      "belly": "yellow",
+      "accent": "ink",
+      "features": [
+        "stripes"
+      ]
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Fuzzy Worker",
+      "traits": [
+        "Very fuzzy",
+        "Buzz pollinator",
+        "Gentle"
+      ],
+      "blurb": "Bumble bees are round, fuzzy and busy from the first warm day to the last. They hum so hard that pollen shakes loose from the flowers."
+    },
+    "origin": "Native bees of eastern North America, and the most common bumble bee in New York City.",
+    "home": "Bumbling from flower to flower in the garden beds.",
+    "rightNow": {
+      "spring": "Big queens are waking up alone and searching low for a hole to start a nest.",
+      "summer": "Workers are everywhere, legs loaded with orange pollen baskets.",
+      "fall": "New queens are feeding on asters and goldenrod before winter.",
+      "winter": "Only the new queens survive, asleep underground until spring."
+    },
+    "funFact": {
+      "title": "Buzz pollination",
+      "body": "Bumble bees grab a flower and vibrate their flight muscles so hard that pollen shakes out. Tomatoes love it."
+    },
+    "kindness": {
+      "title": "Leave some bare soil.",
+      "body": "Bumble bee queens nest in old burrows and messy corners. A wild patch is a nursery."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "flowers",
+      "block": "flowerbox",
+      "waterfront": "grass"
+    },
+    "spotHint": "On a warm day, check flowers for a round, fuzzy, black-and-yellow bee, humming loudly.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 118970
+  },
+  {
+    "id": "western-honey-bee",
+    "friendlyName": "Honey Bees",
+    "commonName": "Western Honey Bee",
+    "scientificName": "Apis mellifera",
+    "collectiveNoun": "a swarm",
+    "group": "bugs",
+    "art": {
+      "body": "bee",
+      "main": "orange",
+      "second": "brown",
+      "belly": "orange",
+      "accent": "ink",
+      "features": [
+        "stripes"
+      ]
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Dancer",
+      "traits": [
+        "Waggle dances",
+        "Team player",
+        "Honey maker"
+      ],
+      "blurb": "Honey bees tell their sisters where the best flowers are by dancing, a little figure-eight that points the way."
+    },
+    "origin": "Bees from Europe, Africa and Asia, brought to North America in the 1600s. Many live in rooftop hives around the city.",
+    "home": "Visiting the flower beds, then heading home to a rooftop hive.",
+    "rightNow": {
+      "spring": "Hives are growing fast, and some are swarming: thousands of bees moving house together.",
+      "summer": "Foragers are making trip after trip, bringing nectar home for honey.",
+      "fall": "Gathering the last nectar and getting the hive ready for winter.",
+      "winter": "Huddled in a warm ball inside the hive, shivering to keep the queen cozy."
+    },
+    "funFact": {
+      "title": "The waggle dance",
+      "body": "A honey bee's dance tells the others which direction to fly, measured from the sun, and how far to go."
+    },
+    "kindness": {
+      "title": "Put out a shallow dish of water.",
+      "body": "Add a few pebbles so bees can land and drink safely on hot days."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "flowers",
+      "block": "flowerbox",
+      "waterfront": "grass"
+    },
+    "spotHint": "Look on flowers for a slim, golden-brown bee with stripes, moving quickly from bloom to bloom.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 47219
+  },
+  {
+    "id": "eastern-carpenter-bee",
+    "friendlyName": "Carpenter Bees",
+    "commonName": "Eastern Carpenter Bee",
+    "scientificName": "Xylocopa virginica",
+    "collectiveNoun": "a hum",
+    "group": "bugs",
+    "art": {
+      "body": "bee",
+      "main": "ink",
+      "second": "yellow",
+      "belly": "yellow",
+      "accent": "ink"
+    },
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Woodworker",
+      "traits": [
+        "Shiny bottom",
+        "Hovers to say hi",
+        "All bluff"
+      ],
+      "blurb": "Carpenter bees hover right in front of your face to check you out. That's usually a male, and males don't even have stingers."
+    },
+    "origin": "Native bees of eastern North America who carve their nests in soft, bare wood.",
+    "home": "Hovering by the old wooden bench, guarding their tunnel.",
+    "rightNow": {
+      "spring": "Males are hovering in the air, chasing off anyone who comes near.",
+      "summer": "Mothers are drilling perfectly round tunnels in wood for their young.",
+      "fall": "The new generation is out, sipping nectar before winter.",
+      "winter": "Tucked inside old wooden tunnels, waiting for warmth."
+    },
+    "funFact": {
+      "title": "Bluffing guards",
+      "body": "The carpenter bee who dives at you is a male, and males can't sting. He's all bluff."
+    },
+    "kindness": {
+      "title": "Leave them a bit of old wood.",
+      "body": "A weathered post or untreated scrap of wood gives carpenter bees somewhere to nest that isn't your porch."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "bench",
+      "block": "fence"
+    },
+    "spotHint": "Look for a big black bee with a shiny bald bottom, hovering by wooden benches, fences and porches.",
+    "seasons": [
+      "spring",
+      "summer"
+    ],
+    "iNatTaxonId": 51110
+  },
+  {
+    "id": "common-eastern-firefly",
+    "friendlyName": "Fireflies",
+    "commonName": "Common Eastern Firefly",
+    "scientificName": "Photinus pyralis",
+    "collectiveNoun": "a sparkle",
+    "group": "bugs",
+    "art": {
+      "body": "firefly",
+      "main": "brown",
+      "second": "red",
+      "belly": "yellow",
+      "accent": "ink"
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Night Light",
+      "traits": [
+        "Glows",
+        "Flirts in code",
+        "Summer only"
+      ],
+      "blurb": "On warm June nights, male fireflies fly low and flash a J-shaped swoop of light. Females in the grass flash back when they like what they see."
+    },
+    "origin": "Native beetles of eastern North America, who spend most of their lives as glowing larvae in damp soil.",
+    "home": "Blinking slowly over the dark lawn.",
+    "rightNow": {
+      "spring": "Larvae are glowing faintly in damp soil, eating slugs and getting ready.",
+      "summer": "Flashing over lawns and meadows at dusk.",
+      "fall": "The young are growing underground.",
+      "winter": "Larvae are tucked deep in the soil until spring."
+    },
+    "funFact": {
+      "title": "Cold light",
+      "body": "A firefly's glow is almost pure light with nearly no heat, made by mixing chemicals inside their belly."
+    },
+    "kindness": {
+      "title": "Turn off the porch light.",
+      "body": "Fireflies talk in flashes. Darker yards and unraked corners make it easier for them to find each other."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "sky",
+      "waterfront": "grass",
+      "block": "hedge"
+    },
+    "spotHint": "On a warm summer evening, just after sunset, look low over grass for slow, rising yellow flashes.",
+    "seasons": [
+      "summer"
+    ],
+    "iNatTaxonId": 129350
+  },
+  {
+    "id": "blue-dasher",
+    "friendlyName": "Blue Dashers",
+    "commonName": "Blue Dasher",
+    "scientificName": "Pachydiplax longipennis",
+    "collectiveNoun": "a swarm",
+    "group": "bugs",
+    "art": {
+      "body": "dragonfly",
+      "main": "blue",
+      "second": "teal",
+      "belly": "white",
+      "accent": "ink"
+    },
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Pond Patrol",
+      "traits": [
+        "Powder blue",
+        "Bright green eyes",
+        "Expert hunter"
+      ],
+      "blurb": "Blue dashers perch on a twig by the water, wings forward, then zip off to snatch a mosquito out of the air. They catch almost everything they chase."
+    },
+    "origin": "Native dragonflies of North America who start life underwater as nymphs in ponds and marshes.",
+    "home": "Zipping low over the water, then back to the same perch.",
+    "rightNow": {
+      "spring": "Nymphs are crawling up reed stems to split open and become dragonflies.",
+      "summer": "Males are guarding their favorite perch over the water.",
+      "fall": "The last few are hunting on warm afternoons.",
+      "winter": "Nymphs are waiting underwater, eating and growing."
+    },
+    "funFact": {
+      "title": "Nearly perfect hunters",
+      "body": "Dragonflies catch around 95 percent of the prey they chase, and a blue dasher can eat hundreds of mosquitoes a day."
+    },
+    "kindness": {
+      "title": "Keep ponds clean.",
+      "body": "Dragonflies grow up underwater for months. No pesticides near water means more dragonflies."
+    },
+    "homeScene": "waterfront",
+    "spots": {
+      "waterfront": "water",
+      "park": "pond"
+    },
+    "spotHint": "Near ponds and marshes in summer, look for a powder-blue dragonfly perched on a stick, wings tilted forward.",
+    "seasons": [
+      "summer"
+    ],
+    "iNatTaxonId": 59774
+  },
+  {
+    "id": "large-milkweed-bug",
+    "friendlyName": "Milkweed Bugs",
+    "commonName": "Large Milkweed Bug",
+    "scientificName": "Oncopeltus fasciatus",
+    "collectiveNoun": "a cluster",
+    "group": "bugs",
+    "art": {
+      "body": "bug",
+      "main": "orange",
+      "second": "ink",
+      "belly": "orange",
+      "accent": "ink"
+    },
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Bold Bug",
+      "traits": [
+        "Orange and black",
+        "Tastes bad",
+        "Hangs with friends"
+      ],
+      "blurb": "Milkweed bugs gather in groups on milkweed pods, wearing bright orange as a warning: we taste terrible."
+    },
+    "origin": "Native bugs of North America who live on milkweed, like monarch butterflies.",
+    "home": "Clustered on the milkweed pods in the meadow.",
+    "rightNow": {
+      "spring": "The first ones are arriving from the south.",
+      "summer": "Gathering on milkweed, laying eggs on the pods.",
+      "fall": "Big clusters of all sizes, from tiny red young to grown-ups, on the seed pods.",
+      "winter": "Gone south, or tucked away until spring."
+    },
+    "funFact": {
+      "title": "Borrowed poison",
+      "body": "They drink milkweed seeds, which are toxic, and store the poison in their bodies so birds learn to leave them alone."
+    },
+    "kindness": {
+      "title": "Plant milkweed.",
+      "body": "Milkweed feeds monarchs, milkweed bugs, bees and more. One plant is a whole neighborhood."
+    },
+    "homeScene": "waterfront",
+    "spots": {
+      "waterfront": "grass",
+      "park": "flowers"
+    },
+    "spotHint": "In late summer, check milkweed pods for clusters of bright orange-and-black bugs.",
+    "seasons": [
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 55556
+  },
+  {
+    "id": "pond-slider",
+    "friendlyName": "Pond Sliders",
+    "commonName": "Pond Slider",
+    "scientificName": "Trachemys scripta",
+    "collectiveNoun": "a bale",
+    "group": "furry",
+    "art": {
+      "body": "turtle",
+      "main": "green",
+      "second": "brown",
+      "belly": "yellow",
+      "accent": "yellow"
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Sunbather",
+      "traits": [
+        "Loves a log",
+        "Red cheek stripes",
+        "Slips away fast"
+      ],
+      "blurb": "Sliders stack up on logs to soak up the sun. When anything startles them, they slide into the water, plop, plop, plop."
+    },
+    "origin": "Turtles from the southern US. Many in city ponds were once pets (red-eared sliders), and now they're settled in.",
+    "home": "Basking on the log, legs stretched out.",
+    "rightNow": {
+      "spring": "Waking up and climbing onto logs on the first warm days.",
+      "summer": "Basking in rows, and mothers are digging nests in sandy soil.",
+      "fall": "Soaking up the last warm afternoons before winter.",
+      "winter": "Resting in the mud at the bottom of the pond, barely breathing."
+    },
+    "funFact": {
+      "title": "Breathing through their bottom",
+      "body": "In winter, sliders rest underwater for months and can take in oxygen through skin near their tail."
+    },
+    "kindness": {
+      "title": "Never release pet turtles.",
+      "body": "If you can't keep a turtle, find a rescue. And if you see one crossing a road, help them across in the direction they were going."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "log",
+      "waterfront": "rocks"
+    },
+    "spotHint": "On sunny days, look at logs and rocks in ponds for turtles lined up, basking.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 39782
+  },
+  {
+    "id": "groundhog",
+    "friendlyName": "Groundhogs",
+    "commonName": "Groundhog",
+    "scientificName": "Marmota monax",
+    "collectiveNoun": "a bunch",
+    "group": "furry",
+    "art": {
+      "body": "groundhog",
+      "main": "brown",
+      "second": "tan",
+      "belly": "tan",
+      "accent": "ink"
+    },
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Snacker",
+      "traits": [
+        "Clover lover",
+        "Deep sleeper",
+        "Whistles"
+      ],
+      "blurb": "Groundhogs spend summer eating clover and dandelions with total focus, then sleep the whole winter away. They whistle when they're alarmed."
+    },
+    "origin": "Native rodents of eastern North America, actually a big ground squirrel, living in parks and grassy edges around the city.",
+    "home": "Munching clover on the lawn, close to their burrow.",
+    "rightNow": {
+      "spring": "Just woke up, hungry and looking for a partner.",
+      "summer": "Eating, eating, eating, and teaching babies where the best clover is.",
+      "fall": "Getting very round, then disappearing underground for winter.",
+      "winter": "Hibernating in their burrow, with a heartbeat of just a few beats a minute."
+    },
+    "funFact": {
+      "title": "Champion sleepers",
+      "body": "In hibernation a groundhog's heart slows from about 80 beats a minute to as few as 5, and their body cools almost to freezing."
+    },
+    "kindness": {
+      "title": "Leave the clover.",
+      "body": "A lawn with clover and dandelions feeds groundhogs, rabbits and bees. Keep dogs leashed near burrows."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "lawn",
+      "waterfront": "grass"
+    },
+    "spotHint": "In parks, look on grassy edges for a big brown furry animal sitting up, or munching with their head down.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 46095
+  },
+  {
+    "id": "orb-weavers",
+    "friendlyName": "Orb-weavers",
+    "commonName": "Orb-weaver Spiders",
+    "scientificName": "Araneidae",
+    "collectiveNoun": "a clutter",
+    "group": "bugs",
+    "art": {
+      "body": "spider",
+      "main": "yellow",
+      "second": "ink",
+      "belly": "yellow",
+      "accent": "ink"
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Night Weaver",
+      "traits": [
+        "Builds every night",
+        "Patient",
+        "Recycles silk"
+      ],
+      "blurb": "Orb-weavers spin a fresh round web most evenings, wait in the middle all night, then eat the old silk to make the next one."
+    },
+    "origin": "A big family of spiders found all over the world. Many live in our gardens, railings and window frames.",
+    "home": "In the middle of a web on the railing, glistening.",
+    "rightNow": {
+      "spring": "Tiny spiderlings are hatching and floating away on silk threads.",
+      "summer": "Webs are getting bigger every week.",
+      "fall": "Their biggest season: huge webs everywhere, sparkling with dew at dawn.",
+      "winter": "Eggs wait in silk sacs for spring."
+    },
+    "funFact": {
+      "title": "Silk recyclers",
+      "body": "Many orb-weavers eat their web before making a new one, recycling the silk protein for the next night."
+    },
+    "kindness": {
+      "title": "Walk around the web.",
+      "body": "A web takes about an hour to build. If one's in your way, duck under it. The spider will thank you (quietly)."
+    },
+    "homeScene": "waterfront",
+    "spots": {
+      "waterfront": "railing",
+      "park": "shrubs",
+      "block": "fence"
+    },
+    "spotHint": "In late summer and fall, look for round webs on railings, fences and shrubs, especially at dawn when dew lights them up.",
+    "seasons": [
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 47535
   }
 ]

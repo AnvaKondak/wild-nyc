@@ -23,6 +23,12 @@
     "attribution": "no rights reserved, uploaded by Kyle Nessen",
     "source": "https://www.inaturalist.org/photos/49357930"
   },
+  "blue-dasher": {
+    "file": "blue-dasher.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Michael J. Papay, some rights reserved (CC BY), uploaded by Michael J. Papay",
+    "source": "https://www.inaturalist.org/photos/403764701"
+  },
   "blue-jay": {
     "file": "blue-jay.jpg",
     "license": "CC BY",
@@ -52,6 +58,18 @@
     "license": "CC0",
     "attribution": "no rights reserved, uploaded by Chrissy McClarren and Andy Reago",
     "source": "https://www.inaturalist.org/photos/143746829"
+  },
+  "common-eastern-bumble-bee": {
+    "file": "common-eastern-bumble-bee.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Thomas Boe, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/442676579"
+  },
+  "common-eastern-firefly": {
+    "file": "common-eastern-firefly.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Katja Schulz, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/4202184"
   },
   "common-grackle": {
     "file": "common-grackle.jpg",
@@ -89,6 +107,12 @@
     "attribution": "(c) Alexis Williams, some rights reserved (CC BY), uploaded by Alexis Williams",
     "source": "https://www.inaturalist.org/photos/177108982"
   },
+  "eastern-carpenter-bee": {
+    "file": "eastern-carpenter-bee.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Christopher Eliot, some rights reserved (CC BY), uploaded by Christopher Eliot",
+    "source": "https://www.inaturalist.org/photos/33118717"
+  },
   "eastern-gray-squirrel": {
     "file": "eastern-gray-squirrel.jpg",
     "license": "CC BY-SA",
@@ -113,6 +137,12 @@
     "attribution": "(c) Basar, some rights reserved (CC BY-SA)",
     "source": "https://www.inaturalist.org/photos/452211592"
   },
+  "groundhog": {
+    "file": "groundhog.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Laura Mae, some rights reserved (CC BY), uploaded by Laura Mae",
+    "source": "https://www.inaturalist.org/photos/26211993"
+  },
   "hermit-thrush": {
     "file": "hermit-thrush.jpg",
     "license": "CC BY",
@@ -130,6 +160,12 @@
     "license": "CC BY",
     "attribution": "(c) Esteban Poveda, some rights reserved (CC BY), uploaded by Esteban Poveda",
     "source": "https://www.inaturalist.org/photos/136543105"
+  },
+  "large-milkweed-bug": {
+    "file": "large-milkweed-bug.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Katja Schulz, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/5873797"
   },
   "mallard": {
     "file": "mallard.jpg",
@@ -173,11 +209,23 @@
     "attribution": "(c) Morgan Caygill, some rights reserved (CC BY), uploaded by Morgan Caygill",
     "source": "https://www.inaturalist.org/photos/209802918"
   },
+  "orb-weavers": {
+    "file": "orb-weavers.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Michael J. Papay, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/555702674"
+  },
   "peregrine-falcon": {
     "file": "peregrine-falcon.jpg",
     "license": "CC BY-SA",
     "attribution": "(c) Nicolás Villaseca Merino, some rights reserved (CC BY-SA), uploaded by Nicolás Villaseca Merino",
     "source": "https://www.inaturalist.org/photos/226608554"
+  },
+  "pond-slider": {
+    "file": "pond-slider.jpg",
+    "license": "CC0",
+    "attribution": "no rights reserved, uploaded by Glenn Berry",
+    "source": "https://www.inaturalist.org/photos/120834277"
   },
   "raccoon": {
     "file": "raccoon.jpg",
@@ -232,6 +280,12 @@
     "license": "CC BY",
     "attribution": "(c) Shirley Zundell, some rights reserved (CC BY), uploaded by Shirley Zundell",
     "source": "https://www.inaturalist.org/photos/64550531"
+  },
+  "western-honey-bee": {
+    "file": "western-honey-bee.jpg",
+    "license": "CC0",
+    "attribution": "no rights reserved",
+    "source": "https://www.inaturalist.org/photos/481248861"
   },
   "white-tailed-deer": {
     "file": "white-tailed-deer.jpg",

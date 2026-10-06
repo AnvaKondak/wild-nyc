@@ -989,5 +989,156 @@
    "winter",
    "fall"
   ]
+ },
+ {
+  "speciesId": "common-eastern-bumble-bee",
+  "text": "Bumble bees can fly in cooler weather than most bees because they shiver to warm up."
+ },
+ {
+  "speciesId": "common-eastern-bumble-bee",
+  "text": "Only new queens survive winter, asleep alone underground.",
+  "seasons": [
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "common-eastern-bumble-bee",
+  "text": "A bumble bee's buzz can shake pollen loose from flowers like tomatoes and blueberries."
+ },
+ {
+  "speciesId": "common-eastern-bumble-bee",
+  "text": "Bumble bees sometimes spend the night clinging to a flower if it gets too cold to fly home.",
+  "periods": [
+   "dusk",
+   "night"
+  ]
+ },
+ {
+  "speciesId": "western-honey-bee",
+  "text": "A honey bee makes about a twelfth of a teaspoon of honey in her whole life."
+ },
+ {
+  "speciesId": "western-honey-bee",
+  "text": "Honey bees fan their wings to evaporate nectar into honey and to cool the hive."
+ },
+ {
+  "speciesId": "western-honey-bee",
+  "text": "There are beehives on rooftops all over New York City."
+ },
+ {
+  "speciesId": "western-honey-bee",
+  "text": "In winter, honey bees huddle in a ball and shiver to keep the hive warm.",
+  "seasons": [
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "eastern-carpenter-bee",
+  "text": "Male carpenter bees have a yellow spot on their face and can't sting."
+ },
+ {
+  "speciesId": "eastern-carpenter-bee",
+  "text": "Carpenter bee tunnels can be used by many generations of bees."
+ },
+ {
+  "speciesId": "eastern-carpenter-bee",
+  "text": "Carpenter bees don't eat wood. They just chew it to make a home."
+ },
+ {
+  "speciesId": "common-eastern-firefly",
+  "text": "Each firefly species has its own flash pattern, like a secret code."
+ },
+ {
+  "speciesId": "common-eastern-firefly",
+  "text": "Firefly larvae glow too, and they hunt slugs and snails."
+ },
+ {
+  "speciesId": "common-eastern-firefly",
+  "text": "Fireflies flash most on warm, humid nights in late June and early July.",
+  "periods": [
+   "dusk",
+   "night"
+  ]
+ },
+ {
+  "speciesId": "blue-dasher",
+  "text": "A dragonfly's eyes have up to 30,000 lenses and can see almost all the way around."
+ },
+ {
+  "speciesId": "blue-dasher",
+  "text": "Blue dashers spend most of their lives underwater as nymphs before they ever fly."
+ },
+ {
+  "speciesId": "blue-dasher",
+  "text": "On hot days, dragonflies point their tail at the sun to stay cool.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "speciesId": "large-milkweed-bug",
+  "text": "Young milkweed bugs are bright red and grow up through five stages."
+ },
+ {
+  "speciesId": "large-milkweed-bug",
+  "text": "Milkweed bugs share their plants with monarch caterpillars."
+ },
+ {
+  "speciesId": "large-milkweed-bug",
+  "text": "Some milkweed bugs fly south in fall, like monarchs.",
+  "seasons": [
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "pond-slider",
+  "text": "Sliders get their name from how quickly they slide off logs into the water."
+ },
+ {
+  "speciesId": "pond-slider",
+  "text": "Turtles bask to warm up and to dry their shells, which helps keep them healthy."
+ },
+ {
+  "speciesId": "pond-slider",
+  "text": "Whether a slider egg hatches as male or female depends on how warm the nest is.",
+  "seasons": [
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "groundhog",
+  "text": "Groundhogs are excellent swimmers and can climb trees."
+ },
+ {
+  "speciesId": "groundhog",
+  "text": "A groundhog's burrow can have several rooms, including a separate bathroom."
+ },
+ {
+  "speciesId": "groundhog",
+  "text": "Groundhogs are the biggest members of the squirrel family in our area."
+ },
+ {
+  "speciesId": "groundhog",
+  "text": "Groundhogs are most active in the early morning and late afternoon.",
+  "periods": [
+   "dawn",
+   "dusk"
+  ]
+ },
+ {
+  "speciesId": "orb-weavers",
+  "text": "Orb-weaver silk is stronger than steel of the same thickness."
+ },
+ {
+  "speciesId": "orb-weavers",
+  "text": "The zigzag in a garden spider's web may help birds see it and avoid flying through."
+ },
+ {
+  "speciesId": "orb-weavers",
+  "text": "Many orb-weavers build a brand new web every evening.",
+  "periods": [
+   "dusk",
+   "night"
+  ]
  }
 ]
