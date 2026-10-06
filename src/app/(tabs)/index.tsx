@@ -10,8 +10,9 @@ import { NeighborhoodPills } from '@/components/NeighborhoodPills';
 import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
-import { facts, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, type Period, type StorySlide } from '@/content';
+import { facts, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
+import { arrivalSlide, arrivalsAmong } from '@/lib/arrivals';
 import { buildIntro } from '@/lib/intro';
 import type { Neighborhood } from '@/lib/neighborhood';
 import { aroundSlide, buildArc, pickAround, pickLead, poolFor, type StoryContext, type StoryPlace } from '@/lib/neighborStory';
@@ -86,20 +87,22 @@ export default function RightNow() {
   // today" at the end opens a short story about someone else (visiting).
   const [visiting, setVisiting] = useState<string | null>(null);
   const yesterday = dateKey(new Date(now.getTime() - 24 * 60 * 60 * 1000));
-  const { lead, around, ctx, here } = useMemo(() => {
+  const { lead, around, arrived, ctx, here } = useMemo(() => {
     const ctx: StoryContext = { allSpecies, moments, facts, chapters: seasonChapters, season, period: header.period, live, weather: weather?.tags ?? [] };
     const saved = state.neighborhoods.length > 0 ? state.neighborhoods : [hood];
     const at = Math.max(0, saved.findIndex((n) => n.id === hood.id));
     const placesInOrder = saved.map(storyPlace);
     const here = placesInOrder[at] ?? storyPlace(hood);
     const lead = pickLead(placesInOrder, at, ctx, today, yesterday);
-    return { lead, around: pickAround(here, ctx, lead, `${hood.cell}:${today}:${header.period}`), ctx, here };
+    // Migrants who just got here for the season, newest first.
+    const arrived = arrivalsAmong(poolFor(hood.kind, ctx), now);
+    return { lead, around: pickAround(here, ctx, lead, `${hood.cell}:${today}:${header.period}`, arrived), arrived, ctx, here };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [season, header.period, hood.id, hood.cell, state.neighborhoods, live, today, weatherKey]);
 
   const story = useMemo(() => {
     const random = seededRandom(`${hood.cell}:${today}:${header.period}:${visiting ?? 'lead'}`);
-    const last = aroundSlide(here, ctx, around, lead);
+    const last = aroundSlide(here, ctx, around, lead, arrived);
     const visit = visiting ? getSpecies(visiting) : undefined;
     if (visit) return [...buildArc(visit, here, ctx, 'visit', random), last];
     // The story opens on where we are, how it feels, who's up, and who we're following.
@@ -115,9 +118,13 @@ export default function RightNow() {
       residents: poolFor(hood.kind, ctx),
       random,
     });
-    return [intro, ...(lead ? buildArc(lead, here, ctx, 'lead', random) : []), last];
+    // Whoever just arrived for the season comes first, every time.
+    const phrase = here.placeName ? `near ${here.placeName}` : here.where;
+    const newcomer = arrived.find((s) => s.id === lead?.id) ?? arrived[0];
+    const arrival = newcomer ? arrivalSlide(newcomer, stories, now, phrase, here.local, ctx.weather, random) : undefined;
+    return [intro, ...(arrival ? [arrival] : []), ...(lead ? buildArc(lead, here, ctx, 'lead', random) : []), last];
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lead, around, ctx, here, visiting]);
+  }, [lead, around, arrived, ctx, here, visiting]);
 
   // Switching neighborhood or time of day restarts the story.
   const [index, setIndex] = useState(0);
@@ -277,13 +284,16 @@ export default function RightNow() {
                     key={id}
                     onPress={() => openNeighbor(id)}
                     accessibilityRole="button"
-                    accessibilityLabel={`${s.friendlyName}${isLead ? ', today\'s neighbor' : ''}. See their story`}
+                    accessibilityLabel={`${s.friendlyName}${isLead ? ', today\'s neighbor' : ''}${slide.arrivedSpecies?.includes(id) ? ', just arrived' : ''}. See their story`}
                     style={({ pressed }) => ({ width: 78, alignItems: 'center', gap: 6, opacity: pressed ? 0.6 : 1 })}
                   >
                     <Sticker art={s.art} photo={speciesPhoto(id)} size={66} tint={colors[s.tint]} rotate={n % 2 ? 5 : -4} shadowColor={isLead ? theme.shadow : colors.ink} />
                     <Text numberOfLines={2} style={{ fontFamily: fonts.bodySemi, fontSize: 12, lineHeight: 15, textAlign: 'center', color: theme.ink }}>
                       {isLead ? `★ ${s.friendlyName}` : s.friendlyName}
                     </Text>
+                    {slide.arrivedSpecies?.includes(id) && (
+                      <Text style={{ fontFamily: fonts.bodySemi, fontSize: 10, letterSpacing: 0.8, textTransform: 'uppercase', color: theme.accent }}>Just arrived</Text>
+                    )}
                   </Pressable>
                 );
               })}

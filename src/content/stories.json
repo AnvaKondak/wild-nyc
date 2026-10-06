@@ -341,5 +341,80 @@
   "title": "The swifts are gathering for the big trip",
   "body": "In late summer, chimney swifts gather by the hundreds at dusk and swirl down into one big chimney together, like smoke in reverse. They're getting ready for the long flight to the Amazon.",
   "speciesId": "chimney-swift"
+ },
+ {
+  "id": "fall-arriving-hermit",
+  "season": "fall",
+  "period": "any",
+  "kind": "arriving",
+  "kicker": "Fall chapter · Arriving",
+  "title": "The hermit thrushes are slipping in from the north",
+  "body": "They spent summer in cool evergreen forests, singing like flutes at dusk. Now they're flying south by night and dropping quietly into the leaf litter {where}, shy and spotted, lifting their rusty tails.",
+  "speciesId": "hermit-thrush",
+  "weatherNote": {
+   "wind": "Tonight's north wind is exactly what they wait for. Travelers pour south on the back of a cold front, thousands at a time, in the dark.",
+   "rain": "Rain grounds travelers overnight, so after a wet night the parks can fill with tired, hungry birds, resting before they go on.",
+   "fog": "In fog, migrants fly low and sometimes land to wait it out. Listen for thin calls overhead."
+  }
+ },
+ {
+  "id": "fall-arriving-bufflehead",
+  "season": "fall",
+  "period": "any",
+  "kind": "arriving",
+  "kicker": "Fall chapter · Arriving",
+  "title": "The buffleheads are splashing down",
+  "body": "These tiny ducks raised their families in old woodpecker holes beside northern lakes. Now they're landing on our open water, black and white and round as corks, popping under and up again like they never left.",
+  "speciesId": "bufflehead",
+  "weatherNote": {
+   "wind": "Tonight's north wind is exactly what they wait for. Travelers pour south on the back of a cold front, thousands at a time, in the dark.",
+   "rain": "Rain grounds travelers overnight, so after a wet night the parks can fill with tired, hungry birds, resting before they go on.",
+   "fog": "In fog, migrants fly low and sometimes land to wait it out. Listen for thin calls overhead."
+  }
+ },
+ {
+  "id": "spring-arriving-grackle",
+  "season": "spring",
+  "period": "any",
+  "kind": "arriving",
+  "kicker": "Spring chapter · Arriving",
+  "title": "The grackles are back and squeaking",
+  "body": "They spent winter in big noisy flocks down south, in fields and farm towns. Now they're strutting across the lawns {where} again, shining purple and bronze in the cold spring sun, practicing their rusty-gate songs.",
+  "speciesId": "common-grackle",
+  "weatherNote": {
+   "wind": "A warm south wind tonight is a highway north. Travelers ride it through the dark, high above the streetlights.",
+   "rain": "Rain can stop travelers overnight, and the next morning the trees can be full of birds who weren't there yesterday.",
+   "fog": "In fog, birds on the move fly lower. Some land to wait for the sky to clear."
+  }
+ },
+ {
+  "id": "spring-arriving-cormorant",
+  "season": "spring",
+  "period": "any",
+  "kind": "arriving",
+  "kicker": "Spring chapter · Arriving",
+  "title": "The cormorants are flying in from the south",
+  "body": "They wintered on warm Southern coasts and rivers. Now long dark lines of them are flying up the harbor, low over the cold water, back to the same old pilings to dry their wings.",
+  "speciesId": "double-crested-cormorant",
+  "weatherNote": {
+   "wind": "A warm south wind tonight is a highway north. Travelers ride it through the dark, high above the streetlights.",
+   "rain": "Rain can stop travelers overnight, and the next morning the trees can be full of birds who weren't there yesterday.",
+   "fog": "In fog, birds on the move fly lower. Some land to wait for the sky to clear."
+  }
+ },
+ {
+  "id": "spring-arriving-nightheron",
+  "season": "spring",
+  "period": "any",
+  "kind": "arriving",
+  "kicker": "Spring chapter · Arriving",
+  "title": "The night herons are back on the night shift",
+  "body": "They spent winter along Southern marshes and coasts. Now they're settling into the same trees by the water, hunched and red-eyed by day, flying out to fish {where} as the light fades. Quok!",
+  "speciesId": "black-crowned-night-heron",
+  "weatherNote": {
+   "wind": "A warm south wind tonight is a highway north. Travelers ride it through the dark, high above the streetlights.",
+   "rain": "Rain can stop travelers overnight, and the next morning the trees can be full of birds who weren't there yesterday.",
+   "fog": "In fog, birds on the move fly lower. Some land to wait for the sky to clear."
+  }
  }
 ]

@@ -137,4 +137,13 @@ describe('Also around today', () => {
     expect(slide.kind).toBe('around');
     expect(slide.aroundSpecies![0]).toBe(lead.id);
   });
+
+  it('lists who just arrived first', () => {
+    const ctx = ctxOf('fall', 'midday');
+    const p = placeOf(prospect);
+    const wtsp = getSpecies('white-throated-sparrow')!;
+    const around = pickAround(p, ctx, getSpecies('mallard'), 'seed', [wtsp]);
+    expect(around[0].id).toBe('white-throated-sparrow');
+    expect(aroundSlide(p, ctx, around, getSpecies('mallard'), [wtsp]).arrivedSpecies).toEqual(['white-throated-sparrow']);
+  });
 });

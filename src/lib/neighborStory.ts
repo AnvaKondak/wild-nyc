@@ -205,15 +205,20 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
     setting: first?.setting,
     kind: 'scene',
   });
-  return slides;
+  // A different photo on each slide, so the story doesn't repeat one picture.
+  return slides.map((slide, i) => ({ ...slide, photoIndex: i }));
 }
 
-/** Others around right now, for "Also around today": seen lately first, then a seeded mix that leans local. */
-export function pickAround(place: StoryPlace, ctx: StoryContext, lead: Species | undefined, seed: string): Species[] {
+/**
+ * Others around right now, for "Also around today": anyone who just arrived for the
+ * season first, then those seen lately, then a seeded mix that leans local.
+ */
+export function pickAround(place: StoryPlace, ctx: StoryContext, lead: Species | undefined, seed: string, arrived: Species[] = []): Species[] {
   const random = seededRandom(`${seed}:around`);
   const pool = poolFor(place.kind, ctx).filter((s) => s.id !== lead?.id && leadWeight(s, place.kind, ctx) > 0);
   const seen = pool.filter((s) => (ctx.live.get(s.id)?.recent ?? 0) > 0).sort((a, b) => ctx.live.get(b.id)!.recent - ctx.live.get(a.id)!.recent);
-  const out = seen.slice(0, AROUND);
+  const newcomers = arrived.filter((s) => s.id !== lead?.id && pool.includes(s));
+  const out = [...newcomers, ...seen.filter((s) => !newcomers.includes(s))].slice(0, AROUND);
   let rest = pool.filter((s) => !out.includes(s));
   while (out.length < AROUND && rest.length > 0) {
     const next = weightedPick(rest.map((s) => ({ item: s, w: leadWeight(s, place.kind, ctx) })), random)!;
@@ -224,7 +229,7 @@ export function pickAround(place: StoryPlace, ctx: StoryContext, lead: Species |
 }
 
 /** The last card: who else is around, to tap into. */
-export function aroundSlide(place: StoryPlace, ctx: StoryContext, around: Species[], lead: Species | undefined): StorySlide {
+export function aroundSlide(place: StoryPlace, ctx: StoryContext, around: Species[], lead: Species | undefined, arrived: Species[] = []): StorySlide {
   const phrase = placePhrase(place.placeName, place.where);
   return {
     id: 'around',
@@ -235,6 +240,7 @@ export function aroundSlide(place: StoryPlace, ctx: StoryContext, around: Specie
     title: 'Also around today',
     body: 'Tap someone to see what they\'re up to.',
     aroundSpecies: [...(lead ? [lead.id] : []), ...around.map((s) => s.id)],
+    arrivedSpecies: arrived.map((s) => s.id),
     cta: 'Start over',
   };
 }

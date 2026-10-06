@@ -69,6 +69,8 @@ export type Species = {
   sightingsOnly?: boolean;
   /** Up at night, asleep by day (raccoons, opossums, moths). For the story's intro. */
   nocturnal?: boolean;
+  /** Migrants: when they usually arrive in NYC, "MM-DD". The weeks after are "just arrived". */
+  arrives?: string;
 };
 
 export type StorySlide = {
@@ -94,6 +96,10 @@ export type StorySlide = {
   link?: 'kindness';
   /** "Also around today": the lead first, then others to tap into. */
   aroundSpecies?: string[];
+  /** Of those, who just arrived for the season. */
+  arrivedSpecies?: string[];
+  /** Which of the species' photos to show, so a story doesn't repeat one picture. */
+  photoIndex?: number;
   /** Intro: who's up, for the little group photo. */
   introSpecies?: string[];
   /** Chapters: a line added when the weather fits ("On a north wind like tonight's…"). */

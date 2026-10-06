@@ -505,7 +505,8 @@
       "body": "butterfly",
       "main": "orange",
       "second": "ink"
-    }
+    },
+    "arrives": "06-20"
   },
   {
     "id": "red-tailed-hawk",
@@ -678,7 +679,8 @@
       "second": "gray",
       "belly": "white",
       "accent": "pinkTint"
-    }
+    },
+    "arrives": "10-10"
   },
   {
     "id": "virginia-opossum",
@@ -844,7 +846,8 @@
         "eyestripe",
         "wingbars"
       ]
-    }
+    },
+    "arrives": "09-25"
   },
   {
     "id": "chimney-swift",
@@ -895,7 +898,8 @@
     "art": {
       "body": "swift",
       "main": "gray"
-    }
+    },
+    "arrives": "04-20"
   },
   {
     "id": "moths",
@@ -1123,7 +1127,8 @@
       "spring"
     ],
     "iNatTaxonId": 7087,
-    "ebirdCode": "brant"
+    "ebirdCode": "brant",
+    "arrives": "10-15"
   },
   {
     "id": "double-crested-cormorant",
@@ -1177,7 +1182,8 @@
       "fall"
     ],
     "iNatTaxonId": 1454382,
-    "ebirdCode": "doccor"
+    "ebirdCode": "doccor",
+    "arrives": "04-01"
   },
   {
     "id": "ring-billed-gull",
@@ -1287,7 +1293,8 @@
       "fall"
     ],
     "iNatTaxonId": 4450,
-    "ebirdCode": "comter"
+    "ebirdCode": "comter",
+    "arrives": "05-05"
   },
   {
     "id": "great-blue-heron",
@@ -1395,7 +1402,8 @@
     ],
     "iNatTaxonId": 4981,
     "ebirdCode": "bcnher",
-    "nocturnal": true
+    "nocturnal": true,
+    "arrives": "04-01"
   },
   {
     "id": "bufflehead",
@@ -1452,7 +1460,8 @@
       "spring"
     ],
     "iNatTaxonId": 6993,
-    "ebirdCode": "buffle"
+    "ebirdCode": "buffle",
+    "arrives": "10-25"
   },
   {
     "id": "mute-swan",
@@ -1564,7 +1573,8 @@
       "fall"
     ],
     "iNatTaxonId": 9744,
-    "ebirdCode": "rewbla"
+    "ebirdCode": "rewbla",
+    "arrives": "03-01"
   },
   {
     "id": "white-tailed-deer",
@@ -1790,7 +1800,8 @@
       "fall"
     ],
     "iNatTaxonId": 9602,
-    "ebirdCode": "comgra"
+    "ebirdCode": "comgra",
+    "arrives": "03-05"
   },
   {
     "id": "gray-catbird",
@@ -1847,7 +1858,8 @@
       "fall"
     ],
     "iNatTaxonId": 14995,
-    "ebirdCode": "grycat"
+    "ebirdCode": "grycat",
+    "arrives": "05-01"
   },
   {
     "id": "song-sparrow",
@@ -2313,7 +2325,8 @@
       "spring"
     ],
     "iNatTaxonId": 12890,
-    "ebirdCode": "herthr"
+    "ebirdCode": "herthr",
+    "arrives": "10-05"
   },
   {
     "id": "yellow-rumped-warbler",
@@ -2371,7 +2384,8 @@
       "spring"
     ],
     "iNatTaxonId": 145245,
-    "ebirdCode": "yerwar"
+    "ebirdCode": "yerwar",
+    "arrives": "10-01"
   },
   {
     "id": "common-eastern-bumble-bee",
@@ -2590,7 +2604,8 @@
       "summer"
     ],
     "iNatTaxonId": 129350,
-    "nocturnal": true
+    "nocturnal": true,
+    "arrives": "06-15"
   },
   {
     "id": "blue-dasher",
@@ -2641,7 +2656,8 @@
     "seasons": [
       "summer"
     ],
-    "iNatTaxonId": 59774
+    "iNatTaxonId": 59774,
+    "arrives": "06-01"
   },
   {
     "id": "large-milkweed-bug",
