@@ -273,14 +273,19 @@ export default function RightNow() {
                     onPress={() => openNeighbor(id)}
                     accessibilityRole="button"
                     accessibilityLabel={`${s.friendlyName}${isLead ? ', today\'s neighbor' : ''}${slide.arrivedSpecies?.includes(id) ? ', just arrived' : ''}. See their story`}
-                    style={({ pressed }) => ({ width: 78, alignItems: 'center', gap: 6, opacity: pressed ? 0.6 : 1 })}
+                    style={({ pressed }) => ({ width: 88, alignItems: 'center', gap: 5, opacity: pressed ? 0.6 : 1 })}
                   >
                     <Sticker art={s.art} photo={speciesPhoto(id)} size={66} tint={colors[s.tint]} rotate={n % 2 ? 5 : -4} shadowColor={isLead ? theme.shadow : colors.ink} />
-                    <Text numberOfLines={2} style={{ fontFamily: fonts.bodySemi, fontSize: 12, lineHeight: 15, textAlign: 'center', color: theme.ink }}>
-                      {isLead ? `★ ${s.friendlyName}` : s.friendlyName}
-                    </Text>
+                    {/* Names sit on a solid tag so they read over any scene. */}
+                    <View style={{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 8, borderWidth: 1, borderColor: theme.ink, backgroundColor: theme.card }}>
+                      <Text numberOfLines={2} style={{ fontFamily: fonts.bodySemi, fontSize: 12, lineHeight: 15, textAlign: 'center', color: theme.ink }}>
+                        {isLead ? `★ ${s.friendlyName}` : s.friendlyName}
+                      </Text>
+                    </View>
                     {slide.arrivedSpecies?.includes(id) && (
-                      <Text style={{ fontFamily: fonts.bodySemi, fontSize: 10, letterSpacing: 0.8, textTransform: 'uppercase', color: theme.accent }}>Just arrived</Text>
+                      <View style={{ paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6, backgroundColor: colors.pink }}>
+                        <Text style={{ fontFamily: fonts.bodySemi, fontSize: 10, letterSpacing: 0.6, textTransform: 'uppercase', color: colors.ink }}>Just arrived</Text>
+                      </View>
                     )}
                   </Pressable>
                 );

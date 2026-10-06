@@ -3,7 +3,7 @@
   {"id": "fall-lights", "season": "fall", "who": "Migrating birds", "title": "Lights out on big nights", "why": "Fall migration is on. Dark windows mean fewer birds crashing into glass."},
   {"id": "fall-feet", "season": "fall", "who": "Pigeons", "title": "Check pigeons' feet for string", "why": "String wrapped around toes cuts off circulation. The Wild Bird Fund can help if you spot one."},
   {"id": "fall-bread", "season": "fall", "who": "Ducks + geese", "title": "Skip the bread", "why": "It fills them up without feeding them. Let them forage for what their bodies need."},
-  {"id": "fall-poison", "season": "fall", "who": "Rats + hawks + owls", "title": "Say no to rat poison", "why": "Hawks and owls eat poisoned rats and die too. Sealing up gaps works without the suffering."},
+  {"id": "fall-stems", "season": "fall", "who": "Bees + fireflies", "title": "Leave some hollow stems", "why": "Cut perennials back to knee height instead of the ground. Small native bees sleep through winter inside the hollow stems."},
   {"id": "fall-fledgling", "season": "fall", "who": "Baby birds", "title": "Pause before rescuing a fledgling", "why": "Most babies on the ground are fledglings learning to fly, with parents nearby. Watch from a distance first."},
   {"id": "spring-cats", "season": "spring", "who": "Songbirds + fledglings", "title": "Keep cats inside", "why": "Spring is full of baby birds on the ground. Indoor cats keep them safe, and stay safe from cars themselves."},
   {"id": "spring-fledgling", "season": "spring", "who": "Baby birds", "title": "Pause before rescuing a fledgling", "why": "A feathered baby hopping on the ground is learning to fly, and their parents are nearby. Watch from a distance first."},
@@ -21,6 +21,6 @@
   {"id": "winter-icemelt", "season": "winter", "who": "Paws + feet", "title": "Use pet-safe ice melt", "why": "Rock salt burns paws and feet, and poisons birds who eat it. Pet-safe ice melt or sand is gentler."},
   {"id": "winter-feeders", "season": "winter", "who": "Feeder birds", "title": "Keep feeders clean", "why": "If you feed birds, wash the feeder every couple of weeks so sickness doesn't spread between them."},
   {"id": "winter-trash", "season": "winter", "who": "Raccoons + opossums", "title": "Put a lid on it", "why": "Tight lids keep hungry animals out of sharp cans and spoiled food during the lean months."},
-  {"id": "winter-poison", "season": "winter", "who": "Hawks + owls", "title": "Say no to rat poison", "why": "Hawks and owls eat poisoned rats and die too. Sealing up gaps works without the suffering."},
+  {"id": "winter-bath", "season": "winter", "who": "Every bird on the block", "title": "Keep a bird bath open", "why": "When everything freezes, a shallow dish of fresh water is hard to find. Swap it out on icy mornings and birds will come to drink."},
   {"id": "winter-space", "season": "winter", "who": "Everyone", "title": "Give them room on cold days", "why": "Animals have little energy to spare in winter. Every time one has to flee, it costs them. Watch from a distance."}
 ]
