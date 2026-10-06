@@ -57,7 +57,8 @@
         "patch",
         "redeye"
       ]
-    }
+    },
+    "withPeople": "Pigeons can tell people apart by their faces, and in one study they remembered who had chased them, even after that person changed clothes. They've lived alongside humans for thousands of years, so mostly they treat us like part of the furniture."
   },
   {
     "id": "house-sparrow",
@@ -117,7 +118,8 @@
         "bib",
         "wingbars"
       ]
-    }
+    },
+    "withPeople": "House sparrows have lived beside people for around ten thousand years and almost never nest far from buildings. They're bold at café tables but keep a careful eye on you the whole time."
   },
   {
     "id": "eastern-gray-squirrel",
@@ -170,7 +172,8 @@
       "body": "squirrel",
       "main": "gray",
       "belly": "white"
-    }
+    },
+    "withPeople": "City squirrels are far more relaxed around people than country squirrels, and they learn quickly who carries snacks. They still keep a safe distance and an escape route up the nearest tree."
   },
   {
     "id": "european-starling",
@@ -229,7 +232,8 @@
       "features": [
         "spots"
       ]
-    }
+    },
+    "withPeople": "Starlings keep their distance, but they're listening: they copy human sounds, from phone ringtones to car alarms, and slip them into their songs."
   },
   {
     "id": "mourning-dove",
@@ -287,7 +291,8 @@
       "features": [
         "spots"
       ]
-    }
+    },
+    "withPeople": "Doves are shy and flutter off when people get close, wings whistling. But they'll happily nest in a hanging planter or on a fire escape, right next to us."
   },
   {
     "id": "american-robin",
@@ -343,7 +348,8 @@
       "second": "ink",
       "belly": "orange",
       "accent": "yellow"
-    }
+    },
+    "withPeople": "Robins are comfortable on lawns near people and will follow someone digging in a garden, waiting for the worms to turn up."
   },
   {
     "id": "herring-gull",
@@ -401,7 +407,8 @@
       "features": [
         "spots"
       ]
-    }
+    },
+    "withPeople": "Gulls watch what we eat, and studies found they're much less likely to grab your lunch if you look straight at them. A steady stare protects a sandwich."
   },
   {
     "id": "raccoon",
@@ -454,7 +461,8 @@
       "body": "raccoon",
       "main": "gray"
     },
-    "nocturnal": true
+    "nocturnal": true,
+    "withPeople": "City raccoons are bolder than country ones and have learned to open latches, lids and bins. They're curious about us but wild, and it's best for everyone when we don't feed them."
   },
   {
     "id": "monarch",
@@ -506,7 +514,8 @@
       "main": "orange",
       "second": "ink"
     },
-    "arrives": "06-20"
+    "arrives": "06-20",
+    "withPeople": "Monarchs don't mind people at all, and people love them back: every fall, volunteers put tiny stickers on their wings to track the trip to Mexico."
   },
   {
     "id": "red-tailed-hawk",
@@ -565,7 +574,8 @@
       "features": [
         "stripes"
       ]
-    }
+    },
+    "withPeople": "Red-tailed hawks have made themselves at home in the city, nesting on building ledges above busy avenues. They tolerate people below them, as long as nobody gets too close."
   },
   {
     "id": "blue-jay",
@@ -625,7 +635,8 @@
         "bib",
         "wingbars"
       ]
-    }
+    },
+    "withPeople": "Blue jays notice everything, people included, and will sound the alarm when someone walks by. They learn quickly where the feeders are, and who fills them."
   },
   {
     "id": "dark-eyed-junco",
@@ -680,7 +691,8 @@
       "belly": "white",
       "accent": "pinkTint"
     },
-    "arrives": "10-10"
+    "arrives": "10-10",
+    "withPeople": "Juncos are shy around people and stay close to the safety of a hedge, flashing their white tail feathers as they dart back in."
   },
   {
     "id": "virginia-opossum",
@@ -732,7 +744,8 @@
       "body": "opossum",
       "main": "lightGray"
     },
-    "nocturnal": true
+    "nocturnal": true,
+    "withPeople": "Opossums would rather avoid us entirely. When they're truly terrified they faint, without meaning to, and wake up once things are calm."
   },
   {
     "id": "american-crow",
@@ -788,7 +801,8 @@
       "second": "ink",
       "belly": "ink",
       "accent": "ink"
-    }
+    },
+    "withPeople": "Crows remember human faces for years, and they tell each other about people who bothered them, so a whole flock may scold someone who's never met them. They remember kind people too."
   },
   {
     "id": "white-throated-sparrow",
@@ -847,7 +861,8 @@
         "wingbars"
       ]
     },
-    "arrives": "09-25"
+    "arrives": "09-25",
+    "withPeople": "White-throats are shy and stick close to the shrubs, but if you stand still in a park in winter, they'll go right back to scratching in the leaves near your feet."
   },
   {
     "id": "chimney-swift",
@@ -899,7 +914,8 @@
       "body": "swift",
       "main": "gray"
     },
-    "arrives": "04-20"
+    "arrives": "04-20",
+    "withPeople": "Chimney swifts depend on us now: with few big hollow trees left, they nest and sleep almost entirely in human chimneys."
   },
   {
     "id": "moths",
@@ -954,7 +970,8 @@
       "second": "brown",
       "belly": "tan"
     },
-    "nocturnal": true
+    "nocturnal": true,
+    "withPeople": "Moths aren't interested in us, but our lights trap them, circling until they're exhausted. Turning off outdoor lights is the biggest favor we can do them."
   },
   {
     "id": "canada-goose",
@@ -1012,7 +1029,8 @@
       "winter"
     ],
     "iNatTaxonId": 7089,
-    "ebirdCode": "cangoo"
+    "ebirdCode": "cangoo",
+    "withPeople": "Geese are relaxed in busy parks, but in spring they defend nests and goslings with hissing and spread wings. That's a request for space, not an attack."
   },
   {
     "id": "mallard",
@@ -1071,7 +1089,8 @@
       "winter"
     ],
     "iNatTaxonId": 6930,
-    "ebirdCode": "mallar3"
+    "ebirdCode": "mallar3",
+    "withPeople": "Mallards are at ease around people and will paddle right up. Bread fills them up without feeding them, so the kindest thing is to just enjoy the visit."
   },
   {
     "id": "brant",
@@ -1128,7 +1147,8 @@
     ],
     "iNatTaxonId": 7087,
     "ebirdCode": "brant",
-    "arrives": "10-15"
+    "arrives": "10-15",
+    "withPeople": "Brant are wary and lift off together if someone walks too close, but they've learned to graze on ballfields and lawns by the water, near people."
   },
   {
     "id": "double-crested-cormorant",
@@ -1183,7 +1203,8 @@
     ],
     "iNatTaxonId": 1454382,
     "ebirdCode": "doccor",
-    "arrives": "04-01"
+    "arrives": "04-01",
+    "withPeople": "Cormorants keep their distance from people and fly off if you get close to their piling. From a respectful spot, you can watch them dry their wings for a long time."
   },
   {
     "id": "ring-billed-gull",
@@ -1241,7 +1262,8 @@
       "winter"
     ],
     "iNatTaxonId": 4364,
-    "ebirdCode": "ribgul"
+    "ebirdCode": "ribgul",
+    "withPeople": "Ring-billed gulls are completely at home in parking lots, ballfields and beaches, anywhere people drop a fry or two."
   },
   {
     "id": "common-tern",
@@ -1294,7 +1316,8 @@
     ],
     "iNatTaxonId": 4450,
     "ebirdCode": "comter",
-    "arrives": "05-05"
+    "arrives": "05-05",
+    "withPeople": "Terns are gentle with people until you walk near their nests. Then they dive at your head, calling loudly, until you move along."
   },
   {
     "id": "great-blue-heron",
@@ -1348,7 +1371,8 @@
       "winter"
     ],
     "iNatTaxonId": 4956,
-    "ebirdCode": "grbher3"
+    "ebirdCode": "grbher3",
+    "withPeople": "Herons are wary and lift off with a croak if people come too close, but some city herons get used to joggers on the path and keep fishing."
   },
   {
     "id": "black-crowned-night-heron",
@@ -1403,7 +1427,8 @@
     "iNatTaxonId": 4981,
     "ebirdCode": "bcnher",
     "nocturnal": true,
-    "arrives": "04-01"
+    "arrives": "04-01",
+    "withPeople": "Night herons often sleep in trees right over busy park paths, hunched and still, while people walk underneath without noticing."
   },
   {
     "id": "bufflehead",
@@ -1461,7 +1486,8 @@
     ],
     "iNatTaxonId": 6993,
     "ebirdCode": "buffle",
-    "arrives": "10-25"
+    "arrives": "10-25",
+    "withPeople": "Buffleheads are shy and stay out on the water, diving away from boats and people. Binoculars are the best way to say hello."
   },
   {
     "id": "mute-swan",
@@ -1516,7 +1542,8 @@
       "winter"
     ],
     "iNatTaxonId": 6921,
-    "ebirdCode": "mutswa"
+    "ebirdCode": "mutswa",
+    "withPeople": "Swans are calm most of the year, but near their nest a swan will raise their wings and charge. Give them lots of room in spring."
   },
   {
     "id": "red-winged-blackbird",
@@ -1574,7 +1601,8 @@
     ],
     "iNatTaxonId": 9744,
     "ebirdCode": "rewbla",
-    "arrives": "03-01"
+    "arrives": "03-01",
+    "withPeople": "Red-wings are fine with people most of the year, but in spring a male may dive at your head if you walk too close to the nest."
   },
   {
     "id": "white-tailed-deer",
@@ -1627,7 +1655,8 @@
       "winter"
     ],
     "iNatTaxonId": 42223,
-    "sightingsOnly": true
+    "sightingsOnly": true,
+    "withPeople": "Deer avoid people and freeze or bound away when startled. Where they live near neighborhoods, they get used to the sights and sounds of people, but they stay wild."
   },
   {
     "id": "northern-mockingbird",
@@ -1686,7 +1715,8 @@
       "winter"
     ],
     "iNatTaxonId": 14886,
-    "ebirdCode": "normoc"
+    "ebirdCode": "normoc",
+    "withPeople": "Mockingbirds remember people who come near their nest, and in one study they flew at those same people again days later, while ignoring strangers."
   },
   {
     "id": "northern-cardinal",
@@ -1745,7 +1775,8 @@
       "winter"
     ],
     "iNatTaxonId": 9083,
-    "ebirdCode": "norcar"
+    "ebirdCode": "norcar",
+    "withPeople": "Cardinals are a little shy but happily visit feeders and yards. They sometimes attack their own reflection in a window or car mirror, thinking it's a rival."
   },
   {
     "id": "common-grackle",
@@ -1801,7 +1832,8 @@
     ],
     "iNatTaxonId": 9602,
     "ebirdCode": "comgra",
-    "arrives": "03-05"
+    "arrives": "03-05",
+    "withPeople": "Grackles are bold around people, strutting between café tables and dunking found crackers in puddles to soften them."
   },
   {
     "id": "gray-catbird",
@@ -1859,7 +1891,8 @@
     ],
     "iNatTaxonId": 14995,
     "ebirdCode": "grycat",
-    "arrives": "05-01"
+    "arrives": "05-01",
+    "withPeople": "Catbirds are curious and will often pop out of a bush to see who's there, meowing at you."
   },
   {
     "id": "song-sparrow",
@@ -1918,7 +1951,8 @@
       "winter"
     ],
     "iNatTaxonId": 9100,
-    "ebirdCode": "sonspa"
+    "ebirdCode": "sonspa",
+    "withPeople": "Song sparrows are used to people walking by their shrubs and keep singing anyway, a little soundtrack for anyone near the water."
   },
   {
     "id": "american-kestrel",
@@ -1977,7 +2011,8 @@
       "winter"
     ],
     "iNatTaxonId": 4665,
-    "ebirdCode": "amekes"
+    "ebirdCode": "amekes",
+    "withPeople": "Kestrels are wary of people, and their numbers have dropped. People help by putting up nest boxes, which kestrels readily move into."
   },
   {
     "id": "coopers-hawk",
@@ -2036,7 +2071,8 @@
       "winter"
     ],
     "iNatTaxonId": 1579017,
-    "ebirdCode": "coohaw"
+    "ebirdCode": "coohaw",
+    "withPeople": "Cooper's hawks have learned that backyard bird feeders are good hunting spots, and they're surprisingly at ease in busy neighborhoods."
   },
   {
     "id": "peregrine-falcon",
@@ -2096,7 +2132,8 @@
       "winter"
     ],
     "iNatTaxonId": 4647,
-    "ebirdCode": "perfal"
+    "ebirdCode": "perfal",
+    "withPeople": "Peregrines nest on bridges and skyscrapers, and people help them along: city wildlife staff watch over the nests and band the chicks every year."
   },
   {
     "id": "downy-woodpecker",
@@ -2153,7 +2190,8 @@
       "winter"
     ],
     "iNatTaxonId": 792988,
-    "ebirdCode": "dowwoo"
+    "ebirdCode": "dowwoo",
+    "withPeople": "Downies are easygoing around people and visit backyard suet feeders, hopping around the branch to keep an eye on you."
   },
   {
     "id": "red-bellied-woodpecker",
@@ -2210,7 +2248,8 @@
       "winter"
     ],
     "iNatTaxonId": 18205,
-    "ebirdCode": "rebwoo"
+    "ebirdCode": "rebwoo",
+    "withPeople": "Red-bellied woodpeckers visit feeders and are loud about it. They'll keep an eye on you but rarely fly far."
   },
   {
     "id": "tufted-titmouse",
@@ -2268,7 +2307,8 @@
       "winter"
     ],
     "iNatTaxonId": 13632,
-    "ebirdCode": "tuftit"
+    "ebirdCode": "tuftit",
+    "withPeople": "Titmice are bold and curious, and will come quite close. They've even been filmed plucking hair from people's heads for their nests."
   },
   {
     "id": "hermit-thrush",
@@ -2326,7 +2366,8 @@
     ],
     "iNatTaxonId": 12890,
     "ebirdCode": "herthr",
-    "arrives": "10-05"
+    "arrives": "10-05",
+    "withPeople": "Hermit thrushes are shy and quiet around people, and slip deeper into the bushes when someone comes along the path."
   },
   {
     "id": "yellow-rumped-warbler",
@@ -2385,7 +2426,8 @@
     ],
     "iNatTaxonId": 145245,
     "ebirdCode": "yerwar",
-    "arrives": "10-01"
+    "arrives": "10-01",
+    "withPeople": "Yellow-rumped warblers mostly ignore people, flitting through the trees overhead, busy with bugs and berries."
   },
   {
     "id": "common-eastern-bumble-bee",
@@ -2442,7 +2484,8 @@
       "summer",
       "fall"
     ],
-    "iNatTaxonId": 118970
+    "iNatTaxonId": 118970,
+    "withPeople": "Bumble bees are gentle and very rarely sting, only if they're squeezed or their nest is disturbed. You can watch them up close on a flower."
   },
   {
     "id": "western-honey-bee",
@@ -2499,7 +2542,8 @@
       "summer",
       "fall"
     ],
-    "iNatTaxonId": 47219
+    "iNatTaxonId": 47219,
+    "withPeople": "People have kept honey bees for thousands of years, and New York City has hundreds of rooftop hives. A honey bee on a flower is busy, not looking for trouble."
   },
   {
     "id": "eastern-carpenter-bee",
@@ -2551,7 +2595,8 @@
       "spring",
       "summer"
     ],
-    "iNatTaxonId": 51110
+    "iNatTaxonId": 51110,
+    "withPeople": "Carpenter bees hover right in front of people to check them out. That's usually a male, and males can't sting."
   },
   {
     "id": "common-eastern-firefly",
@@ -2605,7 +2650,8 @@
     ],
     "iNatTaxonId": 129350,
     "nocturnal": true,
-    "arrives": "06-15"
+    "arrives": "06-15",
+    "withPeople": "Fireflies don't mind people, but our lights make it hard for them to see each other's flashes. Dark yards help them find a mate."
   },
   {
     "id": "blue-dasher",
@@ -2657,7 +2703,8 @@
       "summer"
     ],
     "iNatTaxonId": 59774,
-    "arrives": "06-01"
+    "arrives": "06-01",
+    "withPeople": "Dragonflies aren't afraid of people and sometimes land on a hat or a shoulder to rest. They don't bite or sting."
   },
   {
     "id": "large-milkweed-bug",
@@ -2709,7 +2756,8 @@
       "summer",
       "fall"
     ],
-    "iNatTaxonId": 55556
+    "iNatTaxonId": 55556,
+    "withPeople": "Milkweed bugs are harmless to people. Their bright orange is a warning for birds, not for us."
   },
   {
     "id": "pond-slider",
@@ -2762,7 +2810,8 @@
       "summer",
       "fall"
     ],
-    "iNatTaxonId": 39782
+    "iNatTaxonId": 39782,
+    "withPeople": "Many sliders in city ponds were once pets that people let go. They're shy now and slide into the water if someone gets close to their log."
   },
   {
     "id": "groundhog",
@@ -2815,7 +2864,8 @@
       "summer",
       "fall"
     ],
-    "iNatTaxonId": 46095
+    "iNatTaxonId": 46095,
+    "withPeople": "Groundhogs are wary and dash for their burrow when people come close, but in busy parks some get used to walkers and keep munching."
   },
   {
     "id": "orb-weavers",
@@ -2868,6 +2918,7 @@
       "summer",
       "fall"
     ],
-    "iNatTaxonId": 47535
+    "iNatTaxonId": 47535,
+    "withPeople": "Orb-weavers are shy and almost never bite people. They'd much rather wait in their web for a moth."
   }
 ]

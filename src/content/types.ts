@@ -71,6 +71,8 @@ export type Species = {
   nocturnal?: boolean;
   /** Migrants: when they usually arrive in NYC, "MM-DD". The weeks after are "just arrived". */
   arrives?: string;
+  /** How they feel about us: what's known about how they see and treat people. */
+  withPeople: string;
 };
 
 export type StorySlide = {

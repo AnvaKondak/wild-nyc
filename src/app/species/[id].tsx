@@ -1,17 +1,26 @@
-import { Linking, Pressable, ScrollView, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Image, Linking, Pressable, ScrollView, Text, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackButton } from '@/components/BackButton';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { HeartIcon } from '@/components/Icons';
+import { StoryBackdrop } from '@/components/backdrop';
+import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
-import { getSpecies, photoCreditsFor, speciesPhoto, type Species } from '@/content';
+import { encounters, getSpecies, moments, photoCreditsFor, placeKinds, speciesPhoto, speciesPhotos, type Species } from '@/content';
 import { seenLabel } from '@/lib/live';
-import { seasonOf } from '@/lib/time';
+import { decodeGeohash } from '@/lib/geohash';
+import { fillPlace } from '@/lib/localStory';
+import { dayInTheLife, homeSetting } from '@/lib/profile';
+import { dateKey, periodOf, seasonOf } from '@/lib/time';
+import { useAppState } from '@/state/AppState';
 import { useLiveData } from '@/state/LiveData';
+import { currentNeighborhood } from '@/state/selectors';
+import { periodThemes } from '@/theme/periodTheme';
 import { border, colors, fonts } from '@/theme/tokens';
 import { type } from '@/theme/type';
 
@@ -27,25 +36,49 @@ export default function SpeciesProfile() {
 function Profile({ species }: { species: Species }) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const season = seasonOf(new Date());
+  const now = new Date();
+  const season = seasonOf(now);
   const name = species.friendlyName.toLowerCase();
-  const seen = seenLabel(useLiveData().live.get(species.id), new Date());
+  const seen = seenLabel(useLiveData().live.get(species.id), now);
+  const { state } = useAppState();
+  const hood = currentNeighborhood(state);
+  const { lat, lng } = decodeGeohash(hood.cell);
+  const period = periodOf(now, lat, lng);
+  const [width, setWidth] = useState(0);
+  const heroHeight = 400 + insets.top;
+  const photos = speciesPhotos(species.id);
+  const local = placeKinds[species.homeScene].local;
+  const day = dayInTheLife(species, season, moments, placeKinds[species.homeScene].where, local, dateKey(now));
+  const friends = encounters.filter((e) => e.species.includes(species.id));
+  const meet = (id: string) => router.push({ pathname: '/species/[id]', params: { id } });
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.paper }} contentContainerStyle={{ paddingBottom: insets.bottom + 32 }}>
+      {/* Where they live: their kind of place, in today's season and light, with them in it. */}
       <View
-        style={{
-          height: 300 + insets.top,
-          paddingTop: insets.top,
-          backgroundColor: colors[species.tint === 'yellow' ? 'yellowTint' : species.tint === 'pink' ? 'pinkTint' : species.tint],
-          borderBottomWidth: border.width,
-          borderBottomColor: colors.ink,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
+        style={{ height: heroHeight, backgroundColor: periodThemes[period].bg, borderBottomWidth: border.width, borderBottomColor: colors.ink, overflow: 'hidden' }}
       >
+        {/* The scene is composed for a full screen; draw it taller and shift it up so the
+            hero frames its middle band: skyline, trees and their spot. */}
+        {width > 0 && (
+          <View style={{ position: 'absolute', left: 0, top: -heroHeight * 0.4, width, height: heroHeight * 2.2 }}>
+            <StoryBackdrop
+              setting={homeSetting(species)}
+              period={period}
+              season={season}
+              placeKind={species.homeScene}
+              variant={0}
+              moonLit={0.6}
+              width={width}
+              height={heroHeight * 2.2}
+            />
+          </View>
+        )}
         <BackButton style={{ position: 'absolute', left: 16, top: insets.top + 8 }} />
-        <Sticker art={species.art} photo={speciesPhoto(species.id)} size={170} tint={colors.white} rotate={-5} shadowColor={colors.blue} style={{ marginTop: 24 }} />
+        <View style={{ position: 'absolute', left: 0, right: 0, top: insets.top + 60, alignItems: 'center' }}>
+          <Sticker art={species.art} photo={speciesPhoto(species.id)} size={170} tint={colors.white} rotate={-5} shadowColor={colors.blue} />
+        </View>
       </View>
 
       <View style={{ paddingHorizontal: 22, paddingTop: 22, gap: 6 }}>
@@ -59,11 +92,27 @@ function Profile({ species }: { species: Species }) {
           </Text>
         </View>
         {seen && <Text style={{ fontFamily: fonts.bodySemi, fontSize: 14, color: colors.inkSoft, marginTop: 4 }}>{seen}</Text>}
+      </View>
+
+      {/* Their photos, to swipe through. */}
+      {photos.length > 1 && (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 18, gap: 12 }}>
+          {photos.map((p, i) => (
+            <Image
+              key={i}
+              source={p}
+              accessibilityLabel={`${species.friendlyName}, photo ${i + 1} of ${photos.length}`}
+              style={{ width: 150, height: 150, borderRadius: 18, borderWidth: border.width, borderColor: colors.ink, transform: [{ rotate: `${i % 2 ? 2 : -2}deg` }] }}
+            />
+          ))}
+        </ScrollView>
+      )}
+      <View style={{ paddingHorizontal: 22 }}>
         <PhotoCreditLine speciesId={species.id} />
       </View>
 
       <Card style={{ marginHorizontal: 16, marginTop: 24 }}>
-        <Text style={type.kicker}>Personality type</Text>
+        <Text style={type.kicker}>Meet the {name}</Text>
         <Text style={{ fontFamily: fonts.display, fontSize: 28, lineHeight: 31, color: colors.ink }}>{species.personality.type}</Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
           {species.personality.traits.map((t, i) => (
@@ -75,8 +124,71 @@ function Profile({ species }: { species: Species }) {
         <Text style={type.body}>{species.personality.blurb}</Text>
       </Card>
 
+      {/* A day in their life, dawn to night, this season. */}
+      {day.length > 0 && (
+        <View style={{ paddingHorizontal: 22, paddingTop: 28, gap: 14 }}>
+          <Text style={[type.kicker, { color: colors.pink }]}>A {season} day in their life</Text>
+          {day.map((b) => (
+            <View key={b.period} style={{ flexDirection: 'row', gap: 12 }}>
+              <View style={{ alignItems: 'center', gap: 4, width: 34 }}>
+                <PeriodIcon period={b.period} color={colors.ink} size={24} />
+                <Text style={{ fontFamily: fonts.bodySemi, fontSize: 10, letterSpacing: 0.6, textTransform: 'uppercase', color: colors.inkMuted }}>{b.period}</Text>
+              </View>
+              <View style={{ flex: 1, gap: 2 }}>
+                <Text style={{ fontFamily: fonts.displayRegular, fontSize: 18, lineHeight: 23, color: colors.ink }}>{b.title}</Text>
+                <Text style={[type.body, { fontSize: 14, lineHeight: 20 }]}>{b.body}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* How they feel about us. */}
+      <View style={{ marginHorizontal: 16, marginTop: 28, padding: 18, borderRadius: 20, backgroundColor: colors.blueTint, borderWidth: border.width, borderColor: colors.ink, gap: 6 }}>
+        <Text style={[type.kicker, { color: colors.blue }]}>How they feel about us</Text>
+        <Text style={type.serifBody}>{species.withPeople}</Text>
+      </View>
+
+      {/* Who they run into: their encounters, each a door to the other neighbor's page. */}
+      {friends.length > 0 && (
+        <View style={{ paddingHorizontal: 16, paddingTop: 28, gap: 12 }}>
+          <Text style={[type.kicker, { color: colors.pink, paddingHorizontal: 6 }]}>Who they run into</Text>
+          {friends.map((e) => {
+            const other = getSpecies(e.species[0] === species.id ? e.species[1] : e.species[0])!;
+            return (
+              <Pressable
+                key={e.id}
+                onPress={() => meet(other.id)}
+                accessibilityRole="button"
+                accessibilityLabel={`${e.title}. Meet the ${other.friendlyName.toLowerCase()}`}
+                style={({ pressed }) => ({ flexDirection: 'row', gap: 12, padding: 14, borderRadius: 18, borderWidth: border.width, borderColor: colors.ink, backgroundColor: colors.white, opacity: pressed ? 0.7 : 1 })}
+              >
+                <Sticker art={other.art} photo={speciesPhoto(other.id)} size={56} tint={colors[other.tint]} rotate={-4} />
+                <View style={{ flex: 1, gap: 3 }}>
+                  <Text style={{ fontFamily: fonts.displayRegular, fontSize: 17, lineHeight: 21, color: colors.ink }}>{e.title}</Text>
+                  <Text style={[type.body, { fontSize: 13, lineHeight: 19 }]}>{fillPlace(e.body, placeKinds[species.homeScene].where, local)}</Text>
+                  <Text style={{ fontFamily: fonts.bodySemi, fontSize: 13, color: colors.blue }}>Meet the {other.friendlyName.toLowerCase()} ›</Text>
+                </View>
+              </Pressable>
+            );
+          })}
+        </View>
+      )}
+
+      {/* Their year, season by season. */}
+      <View style={{ paddingHorizontal: 22, paddingTop: 28, gap: 12 }}>
+        <Text style={[type.kicker, { color: colors.pink }]}>Their year</Text>
+        {SEASONS.filter((x) => species.seasons.includes(x) || x === season).map((x) => (
+          <View key={x} style={{ flexDirection: 'row', gap: 12, alignItems: 'flex-start' }}>
+            <View style={{ paddingVertical: 4, paddingHorizontal: 10, borderRadius: 12, minWidth: 74, alignItems: 'center', backgroundColor: x === season ? colors.yellow : colors.paper, borderWidth: border.width, borderColor: colors.ink }}>
+              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, color: colors.ink }}>{x === season ? `${cap(x)} · now` : cap(x)}</Text>
+            </View>
+            <Text style={[type.body, { flex: 1, fontSize: 14, lineHeight: 20 }]}>{species.rightNow[x]}</Text>
+          </View>
+        ))}
+      </View>
+
       <Section label="Where they came from" text={species.origin} />
-      <Section label="In their lives right now" text={species.rightNow[season]} />
 
       <View
         style={{
@@ -109,10 +221,12 @@ function Profile({ species }: { species: Species }) {
           style={{ alignSelf: 'flex-start' }}
         />
       </Card>
-
     </ScrollView>
   );
 }
+
+const SEASONS = ['spring', 'summer', 'fall', 'winter'] as const;
+const cap = (x: string) => x.charAt(0).toUpperCase() + x.slice(1);
 
 /** Who took each photo, and its license. Required by CC BY / CC BY-SA. */
 function PhotoCreditLine({ speciesId }: { speciesId: string }) {
