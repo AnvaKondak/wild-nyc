@@ -24,6 +24,8 @@ export type StoryPlace = {
   /** "on your block", for an unnamed spot. */
   where: string;
   local: LocalNames;
+  /** The bundled place this is, if any (some neighbors live only in certain places). */
+  placeId?: string;
 };
 
 export type StoryContext = {
@@ -39,10 +41,15 @@ export type StoryContext = {
   encounters?: Encounter[];
 };
 
-/** Who lives here this season, plus anyone live data has seen nearby lately. */
-export function poolFor(kind: PlaceKind, ctx: Pick<StoryContext, 'allSpecies' | 'season' | 'live'>): Species[] {
+/**
+ * Who lives here this season: everyone at home in this kind of place, plus neighbors
+ * who only live in certain places (deer on Staten Island) when this is one of them,
+ * plus anyone live data has seen nearby lately (when the optional server is running).
+ */
+export function poolFor(kind: PlaceKind, ctx: Pick<StoryContext, 'allSpecies' | 'season' | 'live'>, placeId?: string): Species[] {
   const seen = (s: Species) => (ctx.live.get(s.id)?.recent ?? 0) > 0;
-  return ctx.allSpecies.filter((s) => s.seasons.includes(ctx.season) && ((s.spots[kind] && !s.sightingsOnly) || seen(s)));
+  const lives = (s: Species) => (s.onlyAt ? !!placeId && s.onlyAt.includes(placeId) : !!s.spots[kind] && !s.sightingsOnly);
+  return ctx.allSpecies.filter((s) => s.seasons.includes(ctx.season) && (lives(s) || seen(s)));
 }
 
 /** Moments for this species right now: weather ones when the weather fits, else everyday ones that don't clash. */
@@ -84,7 +91,7 @@ function weightedPick<T>(items: { item: T; w: number }[], random: () => number):
 }
 
 function pickOnce(place: StoryPlace, ctx: StoryContext, date: string, exclude: Set<string>): Species | undefined {
-  const pool = poolFor(place.kind, ctx).filter((s) => !exclude.has(s.id));
+  const pool = poolFor(place.kind, ctx, place.placeId).filter((s) => !exclude.has(s.id));
   const random = seededRandom(`${place.cell}:${date}:${ctx.period}:lead`);
   return weightedPick(pool.map((s) => ({ item: s, w: leadWeight(s, place.kind, ctx) })), random);
 }
@@ -190,7 +197,7 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
   if (first) slides.push(momentSlide(first));
 
   // 2. The middle: they run into a neighbor. Someone around today if possible.
-  const here = new Set(poolFor(place.kind, ctx).map((x) => x.id));
+  const here = new Set(poolFor(place.kind, ctx, place.placeId).map((x) => x.id));
   const today = new Set(opts.today ?? []);
   const meet = pickEncounter(s, ctx, here, today, random, opts.favor);
   if (meet) {
@@ -269,7 +276,7 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
  */
 export function pickAround(place: StoryPlace, ctx: StoryContext, lead: Species | undefined, seed: string, arrived: Species[] = []): Species[] {
   const random = seededRandom(`${seed}:around`);
-  const pool = poolFor(place.kind, ctx).filter((s) => s.id !== lead?.id && leadWeight(s, place.kind, ctx) > 0);
+  const pool = poolFor(place.kind, ctx, place.placeId).filter((s) => s.id !== lead?.id && leadWeight(s, place.kind, ctx) > 0);
   const seen = pool.filter((s) => (ctx.live.get(s.id)?.recent ?? 0) > 0).sort((a, b) => ctx.live.get(b.id)!.recent - ctx.live.get(a.id)!.recent);
   const newcomers = arrived.filter((s) => s.id !== lead?.id && pool.includes(s));
   const out = [...newcomers, ...seen.filter((s) => !newcomers.includes(s))].slice(0, AROUND);

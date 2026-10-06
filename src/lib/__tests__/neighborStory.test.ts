@@ -81,6 +81,13 @@ describe('pickLead', () => {
     );
   });
 
+  it('keeps neighbors who only live in certain places there: deer on Staten Island', () => {
+    const ctx = ctxOf('fall', 'dawn');
+    expect(poolFor('block', ctx, 'st-george').some((s) => s.id === 'white-tailed-deer')).toBe(true);
+    expect(poolFor('block', ctx, 'park-slope').some((s) => s.id === 'white-tailed-deer')).toBe(false);
+    expect(poolFor('park', ctx).some((s) => s.id === 'white-tailed-deer')).toBe(false);
+  });
+
   it('only lets rare visitors lead where they have been seen', () => {
     const ctx = ctxOf('fall', 'dawn');
     expect(poolFor('park', ctx).some((s) => s.id === 'white-tailed-deer')).toBe(false);

@@ -39,7 +39,7 @@ const PERIOD_LABELS: Record<Period, string> = { dawn: 'Dawn', midday: 'Midday', 
 
 function storyPlace(n: Neighborhood): StoryPlace {
   const place = n.placeId ? places.find((p) => p.id === n.placeId) : undefined;
-  return { cell: n.cell, kind: n.kind, placeName: place?.name ?? null, where: placeKinds[n.kind].where, local: place?.local ?? placeKinds[n.kind].local };
+  return { cell: n.cell, kind: n.kind, placeName: place?.name ?? null, where: placeKinds[n.kind].where, local: place?.local ?? placeKinds[n.kind].local, placeId: n.placeId };
 }
 
 function tileFor(slide: StorySlide): string {
@@ -101,7 +101,7 @@ export default function RightNow() {
     const here = placesInOrder[at] ?? storyPlace(hood);
     const lead = pickLead(placesInOrder, at, ctx, today, yesterday);
     // Migrants who just got here for the season, newest first.
-    const arrived = arrivalsAmong(poolFor(hood.kind, ctx), now);
+    const arrived = arrivalsAmong(poolFor(hood.kind, ctx, hood.placeId), now);
     return { lead, around: pickAround(here, ctx, lead, `${hood.cell}:${today}:${header.period}`, arrived), arrived, ctx, here, placesInOrder, at };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [season, header.period, hood.id, hood.cell, state.neighborhoods, live, today, weatherKey]);
@@ -123,7 +123,7 @@ export default function RightNow() {
       local: here.local,
       lead,
       featured: around,
-      residents: poolFor(hood.kind, ctx),
+      residents: poolFor(hood.kind, ctx, hood.placeId),
       random,
     });
     // Whoever just arrived for the season comes first, every time.

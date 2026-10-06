@@ -1,4 +1,9 @@
-# Deploying live data
+# Deploying live data (optional, not used at launch)
+
+> The launch build runs without a server: no hosting costs, and the app works fully on
+> its bundled content. These steps are here for later, if you ever want live
+> iNaturalist and eBird sightings. Turning it on also means adding the API back to
+> `eas.json` (`EXPO_PUBLIC_API_URL`) and to the privacy policy.
 
 The app works on its own, but live sightings ("Seen nearby this week", the neighbors
 seen lately leading the story) come from the Wild Neighbors API in `server/api`. It

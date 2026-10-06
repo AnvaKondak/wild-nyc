@@ -47,7 +47,7 @@ export function buildTomorrow({ places, index, ctx, now, forecast, random }: Tom
   const fill = (text: string) => fillPlace(text, phrase, place.local, random);
   const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
   const season = seasonOf(tomorrow);
-  const pool = poolFor(place.kind, { ...ctx, season });
+  const pool = poolFor(place.kind, { ...ctx, season }, place.placeId);
   const has = (id: string) => ctx.allSpecies.find((s) => s.id === id && s.seasons.includes(season));
   const slide = (title: string, body: string, speciesId?: string): StorySlide => ({
     id: 'tomorrow',
@@ -63,7 +63,7 @@ export function buildTomorrow({ places, index, ctx, now, forecast, random }: Tom
 
   // 1. Someone due this week, who'll live here.
   const due = ctx.allSpecies
-    .filter((s) => s.spots[place.kind] && !s.sightingsOnly)
+    .filter((s) => (s.onlyAt ? !!place.placeId && s.onlyAt.includes(place.placeId) : s.spots[place.kind] && !s.sightingsOnly))
     .map((s) => ({ s, days: arrivingWithin(s, now) }))
     .filter((x): x is { s: Species; days: number } => x.days !== null)
     .sort((a, b) => a.days - b.days)[0];

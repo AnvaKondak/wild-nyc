@@ -1626,7 +1626,7 @@
       ],
       "blurb": "Deer slip through the trees at dawn and dusk. When something startles them, they flip up their white tails like a flag and bound away."
     },
-    "origin": "Native to North America. In the city they live in the bigger wild spaces, especially on Staten Island and in the Bronx, and sometimes wander along wooded edges near the water.",
+    "origin": "Native to North America. In the city they live mostly on Staten Island, where they came back in the last few decades, swimming over from New Jersey. They slip through wooded edges and parks across the island.",
     "home": "Stepping quietly through the edge of the woods at dawn and dusk.",
     "rightNow": {
       "spring": "Moms are looking for quiet spots in tall grass. Spotted fawns arrive in late spring.",
@@ -1656,7 +1656,10 @@
     ],
     "iNatTaxonId": 42223,
     "sightingsOnly": true,
-    "withPeople": "Deer avoid people and freeze or bound away when startled. Where they live near neighborhoods, they get used to the sights and sounds of people, but they stay wild."
+    "withPeople": "Deer avoid people and freeze or bound away when startled. Where they live near neighborhoods, they get used to the sights and sounds of people, but they stay wild.",
+    "onlyAt": [
+      "st-george"
+    ]
   },
   {
     "id": "northern-mockingbird",

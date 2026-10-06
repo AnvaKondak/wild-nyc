@@ -12,7 +12,7 @@ If you choose to use your location, the app asks your phone once, at low accurac
 
 ## What leaves your phone
 
-Only two things, both about your neighborhood, not you. To get recent sightings, the app sends the Wild Neighbors server your neighborhood cell, as part of the web address, with no account, device ID or cookies; the server doesn't record your IP address alongside it. To get the weather, the app sends Open-Meteo the center of your neighborhood cell, rounded to about a kilometer. Open-Meteo's own privacy policy covers their service. Our hosting provider may keep standard network logs for security, as all web hosts do.
+Only one thing: to get the weather, the app sends Open-Meteo the center of your neighborhood cell, rounded to about a kilometer. No account, device ID or cookies go with it. Open-Meteo's own privacy policy covers their service.
 
 ## What stays on your phone
 
@@ -24,7 +24,7 @@ The daily note is off until you turn it on. It's scheduled on your phone, a week
 
 ## The animals' privacy, too
 
-Sightings come from iNaturalist and eBird, counted by neighborhood. We never show where an individual animal is, and any location iNaturalist hides to protect a species stays hidden.
+The app is about species, never individual animals. It never shows where any animal is: it talks about neighborhoods, parks and blocks, not spots.
 
 ## What we don't do
 
