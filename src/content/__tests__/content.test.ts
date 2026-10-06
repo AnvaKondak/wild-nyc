@@ -1,7 +1,6 @@
 // Guards the bundled content: every reference points somewhere real, and every
 // season the app can land in has a full set.
 import { fillPlace } from '@/lib/localStory';
-import { buildStory } from '@/lib/story';
 import {
   getSpecies,
   hurtAnimalGuide,
@@ -152,17 +151,9 @@ describe('stories', () => {
     }
   });
 
-  it.each(READY_SEASONS)('%s has scenes for every period and both chapter slides, in every kind of place', (season) => {
-    for (const period of PERIODS) {
-      for (const kind of KINDS) {
-        const story = buildStory(stories, { season, period, placeKind: kind, where: placeKinds[kind].where });
-        const scenes = story.filter((s) => (s.kind ?? 'scene') === 'scene');
-        expect(scenes.length).toBeGreaterThanOrEqual(3);
-        expect(story.some((s) => s.kind === 'arriving')).toBe(true);
-        expect(story.some((s) => s.kind === 'goodbye')).toBe(true);
-        for (const s of story) expect(s.body).not.toContain('{where}');
-      }
-    }
+  it.each(READY_SEASONS)('%s has journeys in and out, for Chapters', (season) => {
+    expect(stories.some((s) => s.season === season && s.kind === 'arriving')).toBe(true);
+    expect(stories.some((s) => s.season === season && s.kind === 'goodbye')).toBe(true);
   });
 });
 

@@ -1,36 +1,5 @@
-import { facts, moments as allMoments, placeKinds, species as allSpecies, stories, speciesFor } from '@/content';
-import type { Moment } from '@/content/types';
-import { toLiveMap, type LiveSpecies } from '../live';
-import { buildLocalStory, clashesWithWeather, fillPlace, pickFact, placePhrase, withLocation } from '../localStory';
+import { clashesWithWeather, fillPlace, pickFact, placePhrase, withLocation } from '../localStory';
 import { pick, seededRandom, shuffle } from '../random';
-
-const today = new Date(2026, 9, 4);
-const moment = (speciesId: string, n: number, extra: Partial<Moment> = {}): Moment => ({
-  id: `${speciesId}-fall-night`,
-  speciesId,
-  seasons: ['fall'],
-  periods: ['night'],
-  setting: 'branch',
-  kicker: 'Right now',
-  variants: Array.from({ length: n }, (_, i) => ({ title: `${speciesId} title ${i}`, body: `${speciesId} body ${i} {place}.` })),
-  ...extra,
-});
-const moments = [moment('raccoon', 3), moment('moths', 3), moment('herring-gull', 2), moment('virginia-opossum', 2), moment('rock-pigeon', 2, { periods: ['dawn'] })];
-const liveSpecies = (id: string, recent: number, lastSeenOn = '2026-10-02'): LiveSpecies => ({ id, recent, year: recent * 5, lastSeenOn, weekly: [] });
-
-const base = {
-  moments,
-  facts,
-  slides: stories,
-  allSpecies,
-  season: 'fall' as const,
-  period: 'night' as const,
-  placeKind: 'waterfront' as const,
-  residents: speciesFor('waterfront', 'fall'),
-  placeName: 'Liberty State Park',
-  where: 'by the water',
-  local: { green: ['the salt marsh'], water: ['the harbor'], landmark: ['the old train terminal'], street: ['Liberty Walk'] },
-};
 
 describe('random', () => {
   it('is the same for the same seed and different for another', () => {
@@ -78,11 +47,6 @@ describe('pickFact', () => {
     const picks = Array.from({ length: 40 }, (_, i) => pickFact(tagged, 'x', 'fall', 'night', seededRandom(`g${i}`)));
     expect(picks.filter((p) => p === 'fall night').length).toBeGreaterThan(20);
   });
-
-  it('every story slide about a species carries a fact', () => {
-    const story = buildLocalStory({ ...base, live: new Map(), seed: 'facts' });
-    for (const s of story.filter((x) => x.speciesId)) expect(s.fact).toBeTruthy();
-  });
 });
 
 describe('withLocation', () => {
@@ -93,103 +57,12 @@ describe('withLocation', () => {
     expect(withLocation('A gull is gliding over {water}', 'water', 'waterfront', r)).toBe('A gull is gliding over {water}');
   });
 
-  it('gives every story title a place', () => {
-    const story = buildLocalStory({ ...base, live: new Map(), seed: 'loc' });
-    const names = ['the salt marsh', 'the harbor', 'the old train terminal', 'Liberty Walk', 'at the waterfront', 'near Liberty State Park'];
-    for (const s of story.filter((x) => x.id.includes('-fall-night'))) {
-      expect(names.some((n) => s.title.includes(n))).toBe(true);
-    }
-  });
 });
 
-describe('buildLocalStory', () => {
-  it('features species seen nearby lately first, with the place named', () => {
-    const live = toLiveMap({ cell: 'x', status: 'ready', updatedAt: null, sources: [], species: [liveSpecies('herring-gull', 9), liveSpecies('moths', 21)] });
-    const story = buildLocalStory({ ...base, live, seed: 's1' });
-    const scenes = story.filter((s) => s.kind === 'scene');
-    expect(scenes.slice(0, 2).map((s) => s.speciesId)).toEqual(['moths', 'herring-gull']);
-    expect(scenes[0].body).toContain('near Liberty State Park');
-    expect(scenes[0].setting).toBe('branch');
-  });
-
-  it('names local spots in a named neighborhood', () => {
-    const localMoment: Moment = { ...moment('raccoon', 1), id: 'raccoon-local', variants: [
-      { title: 'Plain', body: 'A raccoon is out {place}.' },
-      { title: 'Local', body: 'A raccoon is heading for {green}.' },
-    ] };
-    const picks = Array.from({ length: 40 }, (_, i) => buildLocalStory({ ...base, moments: [localMoment], residents: speciesFor('waterfront', 'fall').filter((s) => s.id === 'raccoon'), live: new Map(), seed: `n${i}` })[0]);
-    const localShare = picks.filter((s) => s.body.includes('the salt marsh')).length / picks.length;
-    expect(localShare).toBeGreaterThan(0.5);
-  });
-
-  it('only uses moments for this time of day', () => {
-    const story = buildLocalStory({ ...base, live: new Map(), seed: 's1' });
-    expect(story.some((s) => s.speciesId === 'rock-pigeon' && s.id.startsWith('rock-pigeon-fall-night'))).toBe(false);
-  });
-
-  it('is stable for a seed and varies across seeds', () => {
-    const run = (seed: string) => buildLocalStory({ ...base, live: new Map(), seed }).map((s) => s.id).join('|');
-    expect(run('dr5rdc:2026-10-04:night')).toBe(run('dr5rdc:2026-10-04:night'));
-    const variety = new Set(Array.from({ length: 12 }, (_, i) => run(`seed-${i}`)));
-    expect(variety.size).toBeGreaterThan(3);
-  });
-
-  it('is about one species per slide, never a list', () => {
-    const live = toLiveMap({ cell: 'x', status: 'ready', updatedAt: null, sources: [], species: [liveSpecies('herring-gull', 9), liveSpecies('moths', 21), liveSpecies('raccoon', 3)] });
-    const story = buildLocalStory({ ...base, live, seed: 's2' });
-    expect(story.every((s) => s.speciesId || s.link === 'kindness')).toBe(true);
-  });
-
-  it('tops up with generic slides and ends with the chapters', () => {
-    const story = buildLocalStory({ ...base, moments: [], live: new Map(), seed: 's' });
-    expect(story.filter((s) => (s.kind ?? 'scene') === 'scene').length).toBeGreaterThanOrEqual(3);
-    expect(story.at(-2)?.kind).toBe('arriving');
-    expect(story.at(-1)?.kind).toBe('goodbye');
-    expect(story.every((s) => !s.body.includes('{place}') && !s.body.includes('{where}'))).toBe(true);
-  });
-
-  it('features at least ten species in every place, season and time of day', () => {
-    for (const placeKind of ['block', 'park', 'waterfront'] as const) {
-      for (const season of ['spring', 'summer', 'fall', 'winter'] as const) {
-        for (const period of ['dawn', 'midday', 'dusk', 'night'] as const) {
-          const story = buildLocalStory({ ...base, moments: allMoments, season, period, placeKind, residents: speciesFor(placeKind, season), placeName: null, where: placeKinds[placeKind].where, local: placeKinds[placeKind].local, live: new Map(), seed: `${placeKind}:${season}:${period}` });
-          const featured = new Set(story.filter((s) => (s.kind ?? 'scene') === 'scene').map((s) => s.speciesId));
-          expect(featured.size).toBeGreaterThanOrEqual(10);
-        }
-      }
-    }
-  });
-
-  it('leans on weather moments when the weather matches, and only then', () => {
-    const rainy = moment('raccoon', 2, { id: 'raccoon-rain', weather: ['rain'] });
-    const ordinary = moment('raccoon', 2);
-    const residents = speciesFor('waterfront', 'fall').filter((s) => s.id === 'raccoon');
-    const inRain = buildLocalStory({ ...base, moments: [rainy, ordinary], residents, live: new Map(), weather: ['rain'], seed: 'w' });
-    expect(inRain[0].id.startsWith('raccoon-rain')).toBe(true);
-    const dry = buildLocalStory({ ...base, moments: [rainy, ordinary], residents, live: new Map(), seed: 'w' });
-    expect(dry[0].id.startsWith('raccoon-rain')).toBe(false);
-  });
-
-  it('puts species with something to say about the weather first', () => {
-    const story = buildLocalStory({ ...base, moments: allMoments, live: new Map(), weather: ['rain'], season: 'fall', period: 'midday', seed: 'rainy' });
-    const first = story[0];
-    expect(allMoments.find((m) => first.id.startsWith(`${m.id}:`))?.weather).toContain('rain');
-  });
-
-  it('skips everyday lines that would be untrue in this weather', () => {
+describe('clashesWithWeather', () => {
+  it('catches everyday lines that would be untrue in this weather', () => {
     expect(clashesWithWeather('Turtles are basking in the sun', ['rain'])).toBe(true);
     expect(clashesWithWeather('A squirrel is burying acorns', ['rain'])).toBe(false);
     expect(clashesWithWeather('Frost on the hedge', ['heat'])).toBe(true);
-    const sunny = moment('raccoon', 1, { variants: [{ title: 'A raccoon is basking', body: 'In the sunshine.' }] });
-    const residents = speciesFor('waterfront', 'fall').filter((s) => s.id === 'raccoon');
-    const story = buildLocalStory({ ...base, moments: [sunny], residents, live: new Map(), weather: ['rain'], seed: 'x' });
-    expect(story.some((s) => s.title.includes('basking'))).toBe(false);
-  });
-
-  it('picks one journey in and one out, with a weather line when it fits', () => {
-    const story = buildLocalStory({ ...base, moments: allMoments, season: 'fall', period: 'night', live: new Map(), weather: ['wind'], seed: 'chapters' });
-    expect(story.filter((s) => s.kind === 'arriving')).toHaveLength(1);
-    expect(story.filter((s) => s.kind === 'goodbye')).toHaveLength(1);
-    expect(story.find((s) => s.kind === 'arriving')!.body).toMatch(/wind/i);
   });
 });

@@ -81,7 +81,7 @@ export type StorySlide = {
   /** May contain {where}. */
   body: string;
   speciesId?: string;
-  kind?: 'intro' | 'scene' | 'arriving' | 'goodbye';
+  kind?: 'intro' | 'scene' | 'arriving' | 'goodbye' | 'around';
   /** Backdrop for the sticker (moments set this). */
   setting?: Setting;
   /** A fun fact about the species, fitting the season and time of day. */
@@ -92,6 +92,8 @@ export type StorySlide = {
   cta?: string;
   /** Button goes to Kindness instead of the species profile. */
   link?: 'kindness';
+  /** "Also around today": the lead first, then others to tap into. */
+  aroundSpecies?: string[];
   /** Intro: who's up, for the little group photo. */
   introSpecies?: string[];
   /** Chapters: a line added when the weather fits ("On a north wind like tonight's…"). */

@@ -49,4 +49,12 @@ describe('buildIntro', () => {
     expect(listNames(sp('raccoon'))).toBe('the raccoons');
     expect(listNames(sp('raccoon', 'moths'))).toBe('the raccoons and the moths');
   });
+
+  it('introduces today\'s neighbor, first in the photo', () => {
+    const intro = buildIntro({ ...base, lead: getSpecies('northern-cardinal')! });
+    expect(intro.body).toMatch(/This morning, let's follow the cardinals\.$/);
+    expect(intro.cta).toBe('Follow the cardinals');
+    expect(intro.introSpecies![0]).toBe('northern-cardinal');
+    expect(intro.body).not.toMatch(/cardinals.*waking up/);
+  });
 });
