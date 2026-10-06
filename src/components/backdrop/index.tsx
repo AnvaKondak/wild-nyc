@@ -14,7 +14,7 @@ export function StoryBackdrop({ width, height, ...rest }: Props) {
   const layers = useMemo(
     () => buildLayers({ ...rest, w: width, h: height }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [width, height, rest.setting, rest.period, rest.season, rest.placeKind, rest.placeId, rest.variant, rest.moonLit, rest.sky, rest.weather?.join()],
+    [width, height, rest.setting, rest.period, rest.season, rest.placeKind, rest.placeId, rest.variant, rest.moonLit, rest.sky, rest.weather?.join(), rest.cameo?.art.body, rest.cameo?.art.main, rest.cameo?.flies],
   );
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="none">

@@ -13,6 +13,7 @@ import { seededRandom } from '@/lib/random';
 import type { Sky, WeatherTag } from '@/lib/weather';
 import type { Layer } from './motion';
 import { sceneLayers } from './scene';
+import { CritterArt, type ArtSpec } from '@/components/art/CritterArt';
 import { HIDDEN_WHEN_GRAY, isGray, replacesSeasonParticles, weatherLayers } from './weather';
 
 const INK = inks.ink;
@@ -31,6 +32,8 @@ export type BackdropInput = {
   /** The weather right now. Unknown: the season's usual look (snow in winter, and so on). */
   sky?: Sky;
   weather?: WeatherTag[];
+  /** A neighbor who shows up in the scene for this slide: flying past, or watching from the edge. */
+  cameo?: { art: ArtSpec; flies: boolean };
 };
 
 type Ctx = BackdropInput & { u: number; rnd: () => number; horizon: number };
@@ -59,6 +62,7 @@ export function buildLayers(input: BackdropInput): Layer[] {
     ...(isDay ? clouds(c) : []),
     ...(isDay ? flock(c) : []),
     ...sceneLayers(c),
+    ...cameoLayers(c),
     ...particles,
     ...weatherLayers(c, sky, weather),
   ];
@@ -281,4 +285,44 @@ function seasonParticles(c: Ctx): Layer[] {
     </G>
   );
   return [{ id: 'fluff', depth: 0.6, opacity: 0.8, motion: { kind: 'travelX', duration: 40000 }, node: scatter(`fl${variant}`, Math.round(count * 0.5), fluff) }];
+}
+
+// ---------------------------------------------------------------- the co-star
+
+/**
+ * The scene reacts to the story: when a slide is about two neighbors meeting (or a big
+ * moment), the other one appears. Flyers cross the sky band behind the photo; the rest
+ * watch from the edge of the ground, just above the story card.
+ */
+function cameoLayers(c: Ctx): Layer[] {
+  if (!c.cameo) return [];
+  const { w, h, u } = c;
+  const size = (c.cameo.flies ? 11 : 14) * u;
+  const k = size / 100; // CritterArt draws on a 100×100 grid
+  if (c.cameo.flies) {
+    return [
+      {
+        id: 'cameo',
+        depth: 0.45,
+        motion: { kind: 'travelX', duration: 16000 },
+        node: (
+          <G transform={`translate(${w * 0.08} ${h * 0.3}) scale(${k})`}>
+            <CritterArt art={c.cameo.art} />
+          </G>
+        ),
+      },
+    ];
+  }
+  return [
+    {
+      id: 'cameo',
+      depth: 0.55,
+      motion: { kind: 'bob', duration: 3000, dx: 0, dy: 0.8 * u },
+      node: (
+        <G transform={`translate(${w * 0.8} ${h * 0.585 - size * 0.85}) scale(${k})`}>
+          <CritterArt art={c.cameo.art} />
+        </G>
+      ),
+    },
+  ];
 }

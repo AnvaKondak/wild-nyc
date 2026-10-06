@@ -79,4 +79,12 @@ describe('buildLayers', () => {
     expect(accent('streetlight', 'park')).toEqual([]); // the park already has a lamp
     expect(accent('lawn')).toEqual([]);
   });
+
+  it('brings the co-star into the scene', () => {
+    const art = { body: 'songbird' as const, main: 'blue' as const };
+    const layer = (flies: boolean) => buildLayers({ w: 390, h: 760, setting: 'lawn', period: 'midday', season: 'fall', placeKind: 'park', variant: 0, moonLit: 1, cameo: { art, flies } }).find((l) => l.id === 'cameo');
+    expect(layer(true)?.motion.kind).toBe('travelX');
+    expect(layer(false)?.motion.kind).toBe('bob');
+    expect(buildLayers({ w: 390, h: 760, setting: 'lawn', period: 'midday', season: 'fall', placeKind: 'park', variant: 0, moonLit: 1 }).some((l) => l.id === 'cameo')).toBe(false);
+  });
 });

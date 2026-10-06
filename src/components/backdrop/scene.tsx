@@ -415,7 +415,7 @@ function accent(c: SceneInput, s: (hex: string) => string, lit: boolean): Layer[
   const sway = { kind: 'bob', duration: 4200, dx: 0.8 * u, dy: 0.4 * u } as const;
   switch (setting) {
     case 'wire': {
-      const y = h * 0.27;
+      const y = h * 0.34;
       return one('wire', (
         <G>
           <Rect x={w * 0.03} y={y - 4 * u} width={1.6 * u} height={h * 0.34} fill={s(TRUNK)} />
@@ -426,7 +426,7 @@ function accent(c: SceneInput, s: (hex: string) => string, lit: boolean): Layer[
       ), { kind: 'bob', duration: 3600, dx: 0, dy: 0.6 * u });
     }
     case 'branch': {
-      const y = h * 0.27;
+      const y = h * 0.35;
       return one('branch', (
         <G>
           <Path d={`M${w * 1.02} ${y} Q${w * 0.86} ${y + 2 * u} ${w * 0.74} ${y - 3 * u}`} stroke={s(TRUNK)} strokeWidth={2.4 * u} strokeLinecap="round" fill="none" />
@@ -440,15 +440,15 @@ function accent(c: SceneInput, s: (hex: string) => string, lit: boolean): Layer[
     case 'trunk':
       return one('trunk', (
         <G>
-          <Rect x={w * 0.88} y={h * 0.2} width={w * 0.14} height={h * 0.45} fill={s(TRUNK)} />
-          {[0.27, 0.36, 0.47].map((y) => <Path key={y} d={`M${w * 0.92} ${h * y} l${u} ${4 * u}`} stroke={s('#6B4A3A')} strokeWidth={0.6 * u} strokeLinecap="round" />)}
+          <Rect x={w * 0.88} y={h * 0.3} width={w * 0.14} height={h * 0.35} fill={s(TRUNK)} />
+          {[0.36, 0.45, 0.54].map((y) => <Path key={y} d={`M${w * 0.92} ${h * y} l${u} ${4 * u}`} stroke={s('#6B4A3A')} strokeWidth={0.6 * u} strokeLinecap="round" />)}
         </G>
       ));
     case 'den':
       return one('den', (
         <G>
-          <Rect x={w * 0.86} y={h * 0.22} width={w * 0.16} height={h * 0.42} fill={s(TRUNK)} />
-          <Ellipse cx={w * 0.92} cy={h * 0.36} rx={3.6 * u} ry={5 * u} fill={s('#3A2A20')} />
+          <Rect x={w * 0.86} y={h * 0.3} width={w * 0.16} height={h * 0.34} fill={s(TRUNK)} />
+          <Ellipse cx={w * 0.92} cy={h * 0.42} rx={3.6 * u} ry={5 * u} fill={s('#3A2A20')} />
         </G>
       ));
     case 'ledge':
@@ -456,17 +456,17 @@ function accent(c: SceneInput, s: (hex: string) => string, lit: boolean): Layer[
       return one(setting, setting === 'ledge' ? (
         <G>
           {/* A stone cornice with brackets under it: the pigeon's favorite seat. */}
-          <Rect x={0} y={h * 0.28 - 1.2 * u} width={w} height={1.2 * u} fill={s('#B9B2C9')} />
-          <Rect x={0} y={h * 0.28} width={w} height={3 * u} fill={s('#D9D3E3')} stroke={s('#9C9AB0')} strokeWidth={0.3 * u} />
+          <Rect x={0} y={h * 0.34 - 1.2 * u} width={w} height={1.2 * u} fill={s('#B9B2C9')} />
+          <Rect x={0} y={h * 0.34} width={w} height={3 * u} fill={s('#D9D3E3')} stroke={s('#9C9AB0')} strokeWidth={0.3 * u} />
           {Array.from({ length: 9 }, (_, i) => (
-            <Path key={i} d={`M${(i / 8) * w - 1.5 * u} ${h * 0.28 + 3 * u} l${3 * u} 0 l${-0.8 * u} ${3 * u} l${-1.4 * u} 0 Z`} fill={s('#C9C2D6')} />
+            <Path key={i} d={`M${(i / 8) * w - 1.5 * u} ${h * 0.34 + 3 * u} l${3 * u} 0 l${-0.8 * u} ${3 * u} l${-1.4 * u} 0 Z`} fill={s('#C9C2D6')} />
           ))}
         </G>
       ) : (
         <G>
-          <Path d={`M${w * 0.86} ${h * 0.31} l0 ${-3 * u} M${w * 0.93} ${h * 0.31} l0 ${-3 * u}`} stroke={s('#6B4A3A')} strokeWidth={0.7 * u} />
-          <Rect x={w * 0.845} y={h * 0.31 - 10 * u} width={w * 0.1} height={7 * u} fill={s('#B88D7A')} />
-          <Path d={`M${w * 0.84} ${h * 0.31 - 10 * u} L${w * 0.895} ${h * 0.31 - 14 * u} L${w * 0.95} ${h * 0.31 - 10 * u} Z`} fill={s('#8A6247')} />
+          <Path d={`M${w * 0.86} ${h * 0.38} l0 ${-3 * u} M${w * 0.93} ${h * 0.38} l0 ${-3 * u}`} stroke={s('#6B4A3A')} strokeWidth={0.7 * u} />
+          <Rect x={w * 0.845} y={h * 0.38 - 10 * u} width={w * 0.1} height={7 * u} fill={s('#B88D7A')} />
+          <Path d={`M${w * 0.84} ${h * 0.38 - 10 * u} L${w * 0.895} ${h * 0.38 - 14 * u} L${w * 0.95} ${h * 0.38 - 10 * u} Z`} fill={s('#8A6247')} />
         </G>
       ));
     case 'streetlight':
@@ -528,7 +528,7 @@ function accent(c: SceneInput, s: (hex: string) => string, lit: boolean): Layer[
       ));
     case 'web': {
       const cx = w * 0.88;
-      const cy = h * 0.29;
+      const cy = h * 0.36;
       const r = 9 * u;
       return one('web', (
         <G opacity={0.85}>

@@ -15,6 +15,7 @@ import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { RoundNav, StoryCard, StoryProgress, useSwipe } from '@/components/story/parts';
 import { getSpecies, region, speciesPhoto, type Period, type Season } from '@/content';
+import { cameoFor } from '@/lib/cameo';
 import { chapterSlides } from '@/lib/chapters';
 import { hashString } from '@/lib/random';
 import { seasonOf } from '@/lib/time';
@@ -67,6 +68,7 @@ export default function Chapters() {
             placeKind={slide.place}
             variant={hashString(slide.id) % 3}
             moonLit={0.6}
+            cameo={cameoFor(slide.species[1] ? getSpecies(slide.species[1]) : undefined)}
             width={area.width}
             height={area.height}
           />

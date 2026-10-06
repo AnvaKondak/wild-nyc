@@ -16,6 +16,7 @@ import { decodeGeohash } from '@/lib/geohash';
 import { arrivalSlide, arrivalsAmong } from '@/lib/arrivals';
 import { dailyNotes } from '@/lib/dailyNote';
 import { activeEvent, eventSlide } from '@/lib/events';
+import { cameoFor } from '@/lib/cameo';
 import { buildIntro } from '@/lib/intro';
 import { buildTomorrow } from '@/lib/tomorrow';
 import type { Neighborhood } from '@/lib/neighborhood';
@@ -143,11 +144,12 @@ export default function RightNow() {
   const [area, setArea] = useState({ width: 0, height: 0 });
   // Dev only: ?slide=3 opens on that slide the first time.
   const startAt = useRef(__DEV__ && params.slide ? Number(params.slide) : 0);
+  // Weather loading or refreshing updates the story in place; it doesn't start it over.
   useEffect(() => {
     setIndex(startAt.current);
     startAt.current = 0;
     setVisiting(null);
-  }, [hood.id, header.period, season, weatherKey]);
+  }, [hood.id, header.period, season]);
   const i = Math.min(index, story.length - 1);
   const slide = story[i];
 
@@ -233,6 +235,7 @@ export default function RightNow() {
             moonLit={moonLitFraction(now)}
             sky={weather?.sky}
             weather={weather?.tags}
+            cameo={cameoFor(slide.cameo ? getSpecies(slide.cameo) : undefined)}
             width={area.width}
             height={area.height}
           />
