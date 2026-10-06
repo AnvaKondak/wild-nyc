@@ -67,6 +67,8 @@ export type Species = {
    * nearby (deer: Staten Island, the Bronx, some waterfront parks), never by default.
    */
   sightingsOnly?: boolean;
+  /** Up at night, asleep by day (raccoons, opossums, moths). For the story's intro. */
+  nocturnal?: boolean;
 };
 
 export type StorySlide = {
@@ -79,7 +81,7 @@ export type StorySlide = {
   /** May contain {where}. */
   body: string;
   speciesId?: string;
-  kind?: 'scene' | 'arriving' | 'goodbye';
+  kind?: 'intro' | 'scene' | 'arriving' | 'goodbye';
   /** Backdrop for the sticker (moments set this). */
   setting?: Setting;
   /** A fun fact about the species, fitting the season and time of day. */
@@ -90,6 +92,8 @@ export type StorySlide = {
   cta?: string;
   /** Button goes to Kindness instead of the species profile. */
   link?: 'kindness';
+  /** Intro: who's up, for the little group photo. */
+  introSpecies?: string[];
   /** Chapters: a line added when the weather fits ("On a north wind like tonight's…"). */
   weatherNote?: Partial<Record<WeatherTag, string>>;
 };

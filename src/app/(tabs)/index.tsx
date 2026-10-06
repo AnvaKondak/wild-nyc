@@ -6,14 +6,16 @@ import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
 import { ChevronLeftIcon, ChevronRightIcon } from '@/components/Icons';
+import { GroupSticker } from '@/components/GroupSticker';
 import { NeighborhoodPills } from '@/components/NeighborhoodPills';
 import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { facts, getSpecies, moments, speciesPhoto, placeKinds, places, species as allSpecies, speciesFor, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
+import { buildIntro } from '@/lib/intro';
 import { buildLocalStory } from '@/lib/localStory';
-import { hashString } from '@/lib/random';
+import { hashString, seededRandom } from '@/lib/random';
 import { dateKey, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
 import { useNow } from '@/lib/useNow';
 import { describeWeather, PREVIEW_WEATHER, type WeatherTag } from '@/lib/weather';
@@ -75,24 +77,39 @@ export default function RightNow() {
   const place = hood.placeId ? places.find((p) => p.id === hood.placeId) : undefined;
   const placeName = place?.name ?? null;
   const today = dateKey(now);
-  const story = useMemo(
-    () =>
-      buildLocalStory({
-        moments,
-        facts,
-        slides: stories,
-        residents: speciesFor(hood.kind, season),
-        allSpecies,
-        season,
-        period: header.period,
-        placeKind: hood.kind,
-        placeName,
-        where: placeKinds[hood.kind].where,
-        local: place?.local ?? placeKinds[hood.kind].local,
-        live,
-        weather: weather?.tags ?? [],
-        seed: `${hood.cell}:${today}:${header.period}`,
-      }),
+  const story = useMemo(() => {
+    const residents = speciesFor(hood.kind, season);
+    const slides = buildLocalStory({
+      moments,
+      facts,
+      slides: stories,
+      residents,
+      allSpecies,
+      season,
+      period: header.period,
+      placeKind: hood.kind,
+      placeName,
+      where: placeKinds[hood.kind].where,
+      local: place?.local ?? placeKinds[hood.kind].local,
+      live,
+      weather: weather?.tags ?? [],
+      seed: `${hood.cell}:${today}:${header.period}`,
+    });
+    // The story opens on where we are, how it feels, and who's up.
+    const featured = slides.flatMap((s) => (s.kind === 'scene' && s.speciesId ? [getSpecies(s.speciesId)!] : []));
+    const intro = buildIntro({
+      period: header.period,
+      season,
+      weather,
+      placeName,
+      where: placeKinds[hood.kind].where,
+      local: place?.local ?? placeKinds[hood.kind].local,
+      featured,
+      residents,
+      random: seededRandom(`${hood.cell}:${today}:${header.period}:intro`),
+    });
+    return [intro, ...slides];
+  },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [season, header.period, hood.kind, hood.cell, place, placeName, live, today, weatherKey],
   );
@@ -140,7 +157,8 @@ export default function RightNow() {
   const species = slide.speciesId ? getSpecies(slide.speciesId) : undefined;
   const ctaLabel = slide.cta ?? (species ? `Meet the ${species.friendlyName.toLowerCase()}` : 'Learn more');
   const onCta = () => {
-    if (slide.link === 'kindness') router.push('/kindness');
+    if (slide.kind === 'intro') next();
+    else if (slide.link === 'kindness') router.push('/kindness');
     else if (species) router.push({ pathname: '/species/[id]', params: { id: species.id } });
   };
 
@@ -205,16 +223,20 @@ export default function RightNow() {
             <Pressable
               onPress={next}
               accessibilityRole="button"
-              accessibilityLabel={`${species?.friendlyName ?? 'Animal'} photo. Next story`}
+              accessibilityLabel={`${slide.kind === 'intro' ? 'Who\'s up' : species?.friendlyName ?? 'Animal'} photo. Next story`}
             >
-              <Sticker
-                art={(species ?? getSpecies('rock-pigeon')!).art}
-                photo={speciesPhoto((species ?? getSpecies('rock-pigeon')!).id)}
-                size={stickerSize}
-                tint={tileFor(slide)}
-                rotate={-5}
-                shadowColor={theme.shadow}
-              />
+              {slide.kind === 'intro' ? (
+                <GroupSticker period={header.period} speciesIds={slide.introSpecies ?? []} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
+              ) : (
+                <Sticker
+                  art={(species ?? getSpecies('rock-pigeon')!).art}
+                  photo={speciesPhoto((species ?? getSpecies('rock-pigeon')!).id)}
+                  size={stickerSize}
+                  tint={tileFor(slide)}
+                  rotate={-5}
+                  shadowColor={theme.shadow}
+                />
+              )}
             </Pressable>
             <RoundNav label="Next story" onPress={next} color={theme.ink} fill={theme.bg}>
               <ChevronRightIcon color={theme.ink} />

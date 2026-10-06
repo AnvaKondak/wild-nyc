@@ -453,7 +453,8 @@
     "art": {
       "body": "raccoon",
       "main": "gray"
-    }
+    },
+    "nocturnal": true
   },
   {
     "id": "monarch",
@@ -728,7 +729,8 @@
     "art": {
       "body": "opossum",
       "main": "lightGray"
-    }
+    },
+    "nocturnal": true
   },
   {
     "id": "american-crow",
@@ -947,7 +949,8 @@
       "main": "tan",
       "second": "brown",
       "belly": "tan"
-    }
+    },
+    "nocturnal": true
   },
   {
     "id": "canada-goose",
@@ -1391,7 +1394,8 @@
       "fall"
     ],
     "iNatTaxonId": 4981,
-    "ebirdCode": "bcnher"
+    "ebirdCode": "bcnher",
+    "nocturnal": true
   },
   {
     "id": "bufflehead",
@@ -2585,7 +2589,8 @@
     "seasons": [
       "summer"
     ],
-    "iNatTaxonId": 129350
+    "iNatTaxonId": 129350,
+    "nocturnal": true
   },
   {
     "id": "blue-dasher",
