@@ -30,7 +30,8 @@ class FetchEbirdCellTest < ActiveSupport::TestCase
     assert_equal({ "2026-09-30" => 1 }, days("rock-pigeon"))   # a flock of 14 is still one sighting
     assert_equal({ "2026-09-29" => 1 }, days("american-robin"))
     assert_equal({}, days("blue-jay"))                        # in Prospect Park, outside the block
-    assert_equal 2, @series.keys.size                         # the cardinal isn't one of our species
+    assert_equal 1, days("northern-cardinal").size             # cardinals joined the app in batch 2
+    assert_equal 3, @series.keys.size
     assert Cell.find("dr5rke").ebird_fetched_at
   end
 

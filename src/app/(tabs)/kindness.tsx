@@ -122,6 +122,13 @@ export default function Kindness() {
 
       {/* Credits for everything we borrowed, as CC BY / CC BY-SA ask. */}
       <View style={{ paddingHorizontal: 22, paddingTop: 8, paddingBottom: 8, gap: 6 }}>
+        <Text
+          accessibilityRole="link"
+          onPress={() => router.push('/privacy')}
+          style={{ fontFamily: fonts.bodySemi, fontSize: 15, color: colors.blue, textDecorationLine: 'underline', paddingVertical: 10 }}
+        >
+          Privacy: we notice, we don't follow
+        </Text>
         <Text style={type.label}>Credits</Text>
         <Text style={credit}>
           Sightings from iNaturalist and eBird, at neighborhood level. Weather from Open-Meteo (CC BY 4.0). Photos are credited on each species page.

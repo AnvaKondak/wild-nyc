@@ -51,6 +51,7 @@ function Navigator() {
           <Stack.Screen name="add-place" options={{ presentation: 'modal' }} />
           <Stack.Screen name="species/[id]" />
           <Stack.Screen name="hurt-animal" />
+          <Stack.Screen name="privacy" />
         </Stack>
       </WeatherProvider>
     </LiveDataProvider>

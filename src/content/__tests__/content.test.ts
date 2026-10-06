@@ -16,6 +16,7 @@ import {
   places,
   species,
   seasonChapters,
+  privacy,
   encounters,
   stories,
   type Period,
@@ -249,5 +250,16 @@ describe('encounters', () => {
   it('give every neighbor someone to run into', () => {
     const met = new Set(encounters.flatMap((e) => e.species));
     expect(species.filter((s) => !s.sightingsOnly && !met.has(s.id)).map((s) => s.id)).toEqual([]);
+  });
+});
+
+describe('privacy policy', () => {
+  it('is complete, and promises what the code does', () => {
+    const text = [privacy.summary, ...privacy.sections.map((s) => s.body)].join(' ');
+    expect(privacy.sections.length).toBeGreaterThanOrEqual(5);
+    expect(text).toMatch(/never stored and never leaves your phone/);
+    expect(text).toMatch(/Open-Meteo/);
+    expect(text).toMatch(/No ads/);
+    expect(text.replace('{contact}', '')).not.toMatch(/[{}]/);
   });
 });
