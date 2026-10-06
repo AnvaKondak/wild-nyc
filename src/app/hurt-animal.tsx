@@ -59,20 +59,23 @@ export default function HurtAnimal() {
             <Text style={[type.label, { fontSize: 11, fontFamily: fonts.bodySemi }]}>{r.area}</Text>
             <Text style={{ fontFamily: fonts.displayRegular, fontSize: 19, color: colors.ink }}>{r.name}</Text>
             <Text style={[type.body, { fontSize: 14, lineHeight: 20 }]}>{r.note}</Text>
-            {r.phone ? (
-              <Button
-                label={`Call ${r.phone}`}
-                variant="ink"
-                size="medium"
-                shadow={null}
-                onPress={() => Linking.openURL(`tel:${r.phone!.replace(/[^\d+]/g, '')}`)}
-                style={{ alignSelf: 'flex-start' }}
-              />
-            ) : (
-              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 14, color: colors.inkMuted }}>Phone number coming soon</Text>
-            )}
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
+              {r.phone && (
+                <Button
+                  label={`Call ${r.phone}`}
+                  variant="ink"
+                  size="medium"
+                  shadow={null}
+                  onPress={() => Linking.openURL(`tel:${r.phone!.replace(/[^\d+]/g, '')}`)}
+                />
+              )}
+              {r.url && (
+                <Button label={r.phone ? 'Website' : 'Find one near you'} size="medium" shadow={null} onPress={() => Linking.openURL(r.url!)} />
+              )}
+            </View>
           </View>
         ))}
+        <Text style={[type.body, { fontSize: 12, lineHeight: 17, color: colors.inkMuted, paddingHorizontal: 6 }]}>{hurtAnimalGuide.checked}</Text>
       </View>
     </Screen>
   );

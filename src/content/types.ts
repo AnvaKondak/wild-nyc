@@ -170,13 +170,17 @@ export type PlaceKindInfo = {
 export type RehabContact = {
   name: string;
   area: string;
-  /** null until confirmed. */
+  /** null when there's no single number (a directory). */
   phone: string | null;
+  /** Their own page, where the details were checked. */
+  url?: string;
   note: string;
 };
 
 export type HurtAnimalGuide = {
   intro: string;
+  /** When and how the contacts were last checked. */
+  checked: string;
   steps: { title: string; body: string }[];
   rehabs: RehabContact[];
 };

@@ -208,6 +208,18 @@ describe('hurt animal guide', () => {
     expect(hurtAnimalGuide.steps.length).toBeGreaterThan(0);
     expect(hurtAnimalGuide.rehabs.length).toBeGreaterThan(0);
   });
+
+  it('is real copy, with help for both cities and a way to reach every contact', () => {
+    const words = [hurtAnimalGuide.intro, ...hurtAnimalGuide.steps.flatMap((x) => [x.title, x.body]), ...hurtAnimalGuide.rehabs.flatMap((r) => [r.name, r.note])].join(' ');
+    expect(words).not.toMatch(/placeholder|\[/i);
+    expect(hurtAnimalGuide.rehabs.some((r) => r.area === 'NYC' && r.phone)).toBe(true);
+    expect(hurtAnimalGuide.rehabs.some((r) => r.area === 'Jersey City' && r.phone)).toBe(true);
+    for (const r of hurtAnimalGuide.rehabs) {
+      expect(r.phone ?? r.url).toBeTruthy();
+      if (r.phone) expect(r.phone).toMatch(/^(311|\d{3}-\d{3}-\d{4})$/);
+      if (r.url) expect(r.url).toMatch(/^https:\/\//);
+    }
+  });
 });
 
 describe('season chapters', () => {
