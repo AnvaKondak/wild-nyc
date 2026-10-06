@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
-import { ChevronLeftIcon, ChevronRightIcon } from '@/components/Icons';
+import { ChevronLeftIcon, ChevronRightIcon, SoundOffIcon, SoundOnIcon } from '@/components/Icons';
 import { GroupSticker } from '@/components/GroupSticker';
 import { NeighborhoodPills } from '@/components/NeighborhoodPills';
 import { PeriodIcon } from '@/components/PeriodIcon';
@@ -17,6 +17,8 @@ import { buildIntro } from '@/lib/intro';
 import { buildLocalStory } from '@/lib/localStory';
 import { hashString, seededRandom } from '@/lib/random';
 import { dateKey, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
+import { pickSoundscape, SOUNDSCAPE_LABEL } from '@/lib/soundscape';
+import { useAmbience } from '@/lib/useAmbience';
 import { useNow } from '@/lib/useNow';
 import { describeWeather, PREVIEW_WEATHER, type WeatherTag } from '@/lib/weather';
 import { useAppState } from '@/state/AppState';
@@ -41,7 +43,7 @@ export default function RightNow() {
   // Smaller phones get a smaller sticker so the story still fits without scrolling.
   const stickerSize = Math.min(190, Math.round(height * 0.21));
   const now = useNow();
-  const { state } = useAppState();
+  const { state, actions } = useAppState();
   const { live } = useLiveData();
   const hood = currentNeighborhood(state);
 
@@ -145,12 +147,21 @@ export default function RightNow() {
     [],
   );
 
+  const [focused, setFocused] = useState(true);
   useFocusEffect(
     useCallback(() => {
       setStatusBarStyle(theme.statusBar);
-      return () => setStatusBarStyle('dark');
+      setFocused(true);
+      return () => {
+        setStatusBarStyle('dark');
+        setFocused(false);
+      };
     }, [theme.statusBar]),
   );
+
+  // What you'd hear out there right now, if sound is on.
+  const soundscape = pickSoundscape(season, header.period, hood.kind, weather?.sky, weather?.tags);
+  useAmbience(soundscape, state.soundOn, focused);
 
   if (!slide) return <Screen background={theme.bg} scroll={false}>{null}</Screen>;
 
@@ -198,22 +209,48 @@ export default function RightNow() {
             <NeighborhoodPills ink={theme.ink} background={theme.bg} />
           </View>
 
-          <Pressable
-            onPress={__DEV__ ? cyclePreview : undefined}
-            onLongPress={__DEV__ ? cycleWeather : undefined}
-            disabled={!__DEV__}
-            accessible
-            accessibilityLabel={`${header.label}, ${header.clock}. ${weatherLine}`}
-            style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 22, paddingTop: 18 }}
-          >
-            <PeriodIcon period={header.period} color={theme.ink} />
-            <View>
-              <Text style={{ fontFamily: fonts.display, fontSize: 20, color: theme.ink }}>
-                {header.label} · {header.clock}
-              </Text>
-              <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>{weatherLine}</Text>
-            </View>
-          </Pressable>
+          <View style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 16 }}>
+            <Pressable
+              onPress={__DEV__ ? cyclePreview : undefined}
+              onLongPress={__DEV__ ? cycleWeather : undefined}
+              disabled={!__DEV__}
+              accessible
+              accessibilityLabel={`${header.label}, ${header.clock}. ${weatherLine}`}
+              style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 10, paddingLeft: 22, paddingRight: 8, paddingTop: 18 }}
+            >
+              <PeriodIcon period={header.period} color={theme.ink} />
+              <View style={{ flex: 1 }}>
+                <Text style={{ fontFamily: fonts.display, fontSize: 20, color: theme.ink }}>
+                  {header.label} · {header.clock}
+                </Text>
+                <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>{weatherLine}</Text>
+                {state.soundOn && (
+                  <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>Listening to {SOUNDSCAPE_LABEL[soundscape]}</Text>
+                )}
+              </View>
+            </Pressable>
+            <Pressable
+              onPress={() => actions.setSound(!state.soundOn)}
+              accessibilityRole="switch"
+              accessibilityState={{ checked: state.soundOn }}
+              accessibilityLabel={`Sounds of the neighborhood: ${SOUNDSCAPE_LABEL[soundscape]}`}
+              hitSlop={6}
+              style={({ pressed }) => ({
+                marginTop: 18,
+                width: 44,
+                height: 44,
+                borderRadius: 22,
+                borderWidth: border.width,
+                borderColor: theme.ink,
+                backgroundColor: state.soundOn ? theme.ink : theme.bg,
+                alignItems: 'center',
+                justifyContent: 'center',
+                opacity: pressed ? 0.6 : 1,
+              })}
+            >
+              {state.soundOn ? <SoundOnIcon color={theme.bg} /> : <SoundOffIcon color={theme.ink} />}
+            </Pressable>
+          </View>
 
           {/* Prev / next sit beside the photo, in the middle of the screen. */}
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, marginTop: 28 }}>

@@ -14,6 +14,7 @@ type Actions = {
   removeNeighborhood: (id: string) => void;
   toggleNoticed: (speciesId: string, date: string, cell: string) => void;
   toggleKindness: (id: string, seasonKey: string) => void;
+  setSound: (on: boolean) => void;
 };
 
 type Value = { state: AppState; actions: Actions; hydrated: boolean };
@@ -48,6 +49,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       removeNeighborhood: (id) => dispatch({ type: 'removeNeighborhood', id }),
       toggleNoticed: (speciesId, date, cell) => dispatch({ type: 'toggleNoticed', speciesId, date, cell }),
       toggleKindness: (id, seasonKey) => dispatch({ type: 'toggleKindness', id, seasonKey }),
+      setSound: (on) => dispatch({ type: 'setSound', on }),
     }),
     [],
   );

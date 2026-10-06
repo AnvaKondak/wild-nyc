@@ -23,6 +23,24 @@ export function BookIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }:
   );
 }
 
+export function SoundOnIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="M4 9v6h4l5 4V5L8 9z" />
+      <Path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" />
+    </Svg>
+  );
+}
+
+export function SoundOffIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="M4 9v6h4l5 4V5L8 9z" />
+      <Path d="M17 10l4 4M21 10l-4 4" />
+    </Svg>
+  );
+}
+
 export function HeartIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: IconProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinejoin="round">

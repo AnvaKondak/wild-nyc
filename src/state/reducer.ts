@@ -18,6 +18,8 @@ export type AppState = {
   noticed: Noticed[];
   /** Checks reset when the season key changes. */
   kindness: { seasonKey: string; done: Record<string, boolean> };
+  /** Ambient sound behind the story. Off until the person turns it on. */
+  soundOn: boolean;
 };
 
 export const initialState: AppState = {
@@ -26,6 +28,7 @@ export const initialState: AppState = {
   currentId: null,
   noticed: [],
   kindness: { seasonKey: '', done: {} },
+  soundOn: false,
 };
 
 export type Action =
@@ -35,7 +38,8 @@ export type Action =
   | { type: 'selectNeighborhood'; id: string }
   | { type: 'removeNeighborhood'; id: string }
   | { type: 'toggleNoticed'; speciesId: string; date: string; cell: string }
-  | { type: 'toggleKindness'; id: string; seasonKey: string };
+  | { type: 'toggleKindness'; id: string; seasonKey: string }
+  | { type: 'setSound'; on: boolean };
 
 export function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
@@ -84,5 +88,8 @@ export function reducer(state: AppState, action: Action): AppState {
         kindness: { seasonKey: action.seasonKey, done: { ...done, [action.id]: !done[action.id] } },
       };
     }
+
+    case 'setSound':
+      return { ...state, soundOn: action.on };
   }
 }

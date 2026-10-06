@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Linking, Pressable, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { PillRow } from '@/components/Pills';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
-import { getSpecies, seasonChapters, speciesPhoto, stories, type Season } from '@/content';
+import { getSpecies, seasonChapters, soundCredits, speciesPhoto, stories, type Season } from '@/content';
 import { seasonOf } from '@/lib/time';
 import { border, colors, fonts, offsetShadow } from '@/theme/tokens';
 import { type } from '@/theme/type';
@@ -18,6 +18,7 @@ const LOOK: Record<Season, { tint: string; shadow: string; accent: string }> = {
   winter: { tint: colors.blueTint, shadow: colors.blue, accent: colors.blue },
 };
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const credit = [type.body, { fontSize: 12, lineHeight: 17, color: colors.inkMuted }];
 
 export default function Chapters() {
   const router = useRouter();
@@ -133,9 +134,17 @@ export default function Chapters() {
         </View>
       )}
 
-      <Text style={[type.body, { fontSize: 12, lineHeight: 17, color: colors.inkMuted, paddingHorizontal: 22, paddingBottom: 8 }]}>
-        Sightings from iNaturalist and eBird, at neighborhood level. Weather from Open-Meteo (CC BY 4.0). Photos are credited on each species page.
-      </Text>
+      <View style={{ paddingHorizontal: 22, paddingBottom: 8, gap: 6 }}>
+        <Text style={credit}>
+          Sightings from iNaturalist and eBird, at neighborhood level. Weather from Open-Meteo (CC BY 4.0). Photos are credited on each species page.
+        </Text>
+        <Text style={credit}>Sounds: wind, rain, waves and city hum are made in code. Recordings via Wikimedia Commons:</Text>
+        {soundCredits.map((c) => (
+          <Text key={c.source} style={[credit, { textDecorationLine: 'underline' }]} accessibilityRole="link" onPress={() => Linking.openURL(c.source)}>
+            {c.title.replace(/\.(mp3|ogg|wav)$/, '')}, by {c.artist} ({c.license})
+          </Text>
+        ))}
+      </View>
     </Screen>
   );
 }

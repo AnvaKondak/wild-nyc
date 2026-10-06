@@ -70,4 +70,13 @@ describe('kindness', () => {
     const winter = reducer(fall, { type: 'toggleKindness', id: 'winter-feeder', seasonKey: '2026-winter' });
     expect(winter.kindness).toEqual({ seasonKey: '2026-winter', done: { 'winter-feeder': true } });
   });
+
+  it('keeps sound off until asked, and remembers the choice', () => {
+    expect(initialState.soundOn).toBe(false);
+    expect(reducer(initialState, { type: 'setSound', on: true }).soundOn).toBe(true);
+    // Saved state from before sound existed still hydrates with sound off.
+    const old = { ...initialState } as Partial<typeof initialState>;
+    delete old.soundOn;
+    expect(reducer(initialState, { type: 'hydrate', state: old as typeof initialState }).soundOn).toBe(false);
+  });
 });

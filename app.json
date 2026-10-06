@@ -33,7 +33,14 @@
           "locationWhenInUsePermission": "Wild Neighbors uses your location once to find your neighborhood. Your exact location never leaves your phone."
         }
       ],
-      "expo-sharing"
+      "expo-sharing",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ]
     ],
     "scheme": "wildneighbors",
     "experiments": {

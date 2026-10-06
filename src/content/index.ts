@@ -9,6 +9,7 @@ import momentsJson from './moments.json';
 import { photoAssets } from './photoAssets';
 import photosJson from './photos.json';
 import placesJson from './places.json';
+import soundsJson from './sounds.json';
 import speciesJson from './species.json';
 import storiesJson from './stories.json';
 import type {
@@ -36,6 +37,10 @@ export const places = placesJson.places as Place[];
 export const placeKinds = placesJson.kinds as Record<PlaceKind, PlaceKindInfo>;
 export const hurtAnimalGuide = hurtAnimalJson as HurtAnimalGuide;
 export const seasonChapters = chaptersJson as SeasonChapter[];
+
+/** Credits for the recordings in the ambient soundscapes (scripts/build_soundscapes.py). */
+export type SoundCredit = { title: string; license: string; artist: string; source: string };
+export const soundCredits = Object.values(soundsJson.recordings as Record<string, SoundCredit>);
 
 const speciesById = new Map(species.map((s) => [s.id, s]));
 
