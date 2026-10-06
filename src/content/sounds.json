@@ -57,6 +57,18 @@
     "wind": [],
     "snow": []
   },
+  "voices": {
+    "american-robin": "robin",
+    "northern-cardinal": "cardinal",
+    "song-sparrow": "song-sparrow",
+    "mourning-dove": "mourning-dove",
+    "blue-jay": "blue-jay",
+    "american-crow": "crow",
+    "white-throated-sparrow": "white-throat",
+    "red-winged-blackbird": "red-wing",
+    "herring-gull": "gull",
+    "ring-billed-gull": "gull"
+  },
   "recordings": {
     "blue-jay": {
       "title": "Cyanocitta cristata - Blue Jay XC179708.mp3",

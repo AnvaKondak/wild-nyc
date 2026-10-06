@@ -18,7 +18,7 @@ import { aroundSlide, buildArc, pickAround, pickLead, poolFor, type StoryContext
 import { hashString, seededRandom } from '@/lib/random';
 import { dateKey, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
 import { pickSoundscape, SOUNDSCAPE_LABEL } from '@/lib/soundscape';
-import { useAmbience } from '@/lib/useAmbience';
+import { useAmbience, voiceFor } from '@/lib/useAmbience';
 import { useNow } from '@/lib/useNow';
 import { describeWeather, PREVIEW_WEATHER, type WeatherTag } from '@/lib/weather';
 import { useAppState } from '@/state/AppState';
@@ -164,7 +164,11 @@ export default function RightNow() {
 
   // What you'd hear out there right now, if sound is on.
   const soundscape = pickSoundscape(season, header.period, hood.kind, weather?.sky, weather?.tags);
-  useAmbience(soundscape, state.soundOn, focused);
+  // The voice follows whoever the story is about, so it only changes when the animal does.
+  const voiceId = visiting ?? lead?.id;
+  useAmbience(soundscape, voiceId, state.soundOn, focused);
+  const voiceName = voiceId && voiceFor(voiceId) ? getSpecies(voiceId)?.friendlyName.toLowerCase() : undefined;
+  const listening = voiceName ? `the ${voiceName}, and ${SOUNDSCAPE_LABEL[soundscape]}` : SOUNDSCAPE_LABEL[soundscape];
 
   if (!slide) return <Screen background={theme.bg} scroll={false}>{null}</Screen>;
 
@@ -235,7 +239,7 @@ export default function RightNow() {
                 </Text>
                 <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>{weatherLine}</Text>
                 {state.soundOn && (
-                  <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>Listening to {SOUNDSCAPE_LABEL[soundscape]}</Text>
+                  <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>Listening to {listening}</Text>
                 )}
               </View>
             </Pressable>
@@ -243,7 +247,7 @@ export default function RightNow() {
               onPress={() => actions.setSound(!state.soundOn)}
               accessibilityRole="switch"
               accessibilityState={{ checked: state.soundOn }}
-              accessibilityLabel={`Sounds of the neighborhood: ${SOUNDSCAPE_LABEL[soundscape]}`}
+              accessibilityLabel={`Sounds of the neighborhood: ${listening}`}
               hitSlop={6}
               style={({ pressed }) => ({
                 marginTop: 18,
