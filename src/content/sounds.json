@@ -49,10 +49,6 @@
       "white-throat"
     ],
     "quiet-night": [],
-    "harbor": [
-      "gull"
-    ],
-    "harbor-night": [],
     "rain": [],
     "wind": [],
     "snow": []
@@ -87,12 +83,6 @@
       "license": "CC BY-SA 3.0",
       "artist": "Jonathon Jongsma",
       "source": "https://commons.wikimedia.org/wiki/File:Corvus_brachyrhynchos_-_American_Crow_XC80525.mp3"
-    },
-    "gull": {
-      "title": "Herring Gull (Larus argentatus) (W1CDR0001420 BD12).ogg",
-      "license": "CC BY-SA 4.0",
-      "artist": "The British Library",
-      "source": "https://commons.wikimedia.org/wiki/File:Herring_Gull_(Larus_argentatus)_(W1CDR0001420_BD12).ogg"
     },
     "insects-nj": {
       "title": "Orthoptera Calls - Wyckoff, New Jersey 2024-08-15.mp3",

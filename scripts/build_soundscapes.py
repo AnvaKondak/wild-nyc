@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Mix the ambient soundscapes: seamless loops of what you'd hear on the block now.
 
-Each loop is a bed (synthesized wind, rain, waves or distant city hum, or a recorded
+Each loop is a bed (synthesized wind, rain or distant city hum, or a recorded
 insect chorus) with real recordings of our neighbors placed on top at seeded random
 times: the dawn chorus in spring, crickets on summer nights, wind and a crow in
-winter. Recordings come from scripts/fetch_sounds.py; everything else is made here.
+winter. Stereo: beds are wide, and each call comes from somewhere left to right.
+Recordings come from scripts/fetch_sounds.py; everything else is made here.
 
 Plain Python (no numpy), so it's slow-ish but has no dependencies. Encodes AAC with
 macOS afconvert and writes src/content/sounds.json (which loop uses which credits)
@@ -126,26 +127,6 @@ def rain(rnd):
     return normalize(out)
 
 
-def waves(rnd):
-    """Water slapping the pilings and sliding up the shore, in slow swells."""
-    n = len(silence())
-    wash = lowpass(brown(rnd, n), 900)
-    fizz = lowpass(highpass(white(rnd, n), 1500), 4000)
-    out = [0.0] * n
-    t = 0.0
-    while t < LOOP + XFADE:
-        period = rnd.uniform(5, 9)
-        start, length = int(t * SR), int(period * SR)
-        for k in range(length):
-            i = start + k
-            if i >= n:
-                break
-            e = math.sin(math.pi * k / length) ** 2
-            out[i] += wash[i] * e + fizz[i] * e ** 3 * 0.35
-        t += period * rnd.uniform(0.6, 0.85)  # swells overlap a little
-    return normalize(out)
-
-
 def bed_from(name, rnd):
     """A recorded chorus (insects) tiled to the loop length with soft joins."""
     src = read(name)
@@ -192,80 +173,98 @@ def calls(name):
     return segs or [fade(src[: 4 * SR])]
 
 
+# ---------------------------------------------------------------- stereo
+
+class Stereo:
+    """Left and right channels. Beds are rendered twice (different noise each side) and
+    blended, so wind and rain feel wide; each call is placed somewhere left to right."""
+
+    def __init__(self):
+        self.l, self.r = silence(), silence()
+
+    def bed(self, make, rnd, gain):
+        a, b = make(rnd), make(rnd)
+        add(self.l, a, gain=gain * 0.75)
+        add(self.l, b, gain=gain * 0.25)
+        add(self.r, a, gain=gain * 0.25)
+        add(self.r, b, gain=gain * 0.75)
+
+    def place(self, seg, at, gain, pan):
+        """pan: -1 (left) … 1 (right), with constant power across the field."""
+        angle = (pan + 1) * math.pi / 4
+        add(self.l, seg, at, gain * math.cos(angle))
+        add(self.r, seg, at, gain * math.sin(angle))
+
+
 def scatter(dst, rnd, sources, every, gain=1.0):
-    """Place calls from these sources at random, about one per `every` seconds."""
+    """Place calls from these sources at random times and places, about one per `every` seconds."""
     pool = {name: calls(name) for name in sources}
     t = rnd.uniform(0, every)
     while t < LOOP:
         name = rnd.choice(sources)
         seg = rnd.choice(pool[name])
-        add(dst, seg, int(t * SR), gain * rnd.uniform(0.35, 1.0))
+        dst.place(seg, int(t * SR), gain * rnd.uniform(0.35, 1.0), rnd.uniform(-0.85, 0.85))
         t += rnd.expovariate(1 / every)
 
 
 # ---------------------------------------------------------------- soundscapes
 
 def mix(name, rnd):
-    out = silence()
+    out = Stereo()
+    bed = lambda make, gain: out.bed(make, rnd, gain)
     birds = lambda srcs, every, g=0.5: scatter(out, rnd, srcs, every, g)
+    insects = lambda r: bed_from("insects-nj", r)
     if name == "dawn-chorus":
-        add(out, hum(rnd), gain=0.05)
+        bed(hum, 0.05)
         birds(["robin", "robin", "cardinal", "song-sparrow", "mourning-dove", "red-wing"], 1.1, 0.55)
     elif name == "day-birds":
-        add(out, hum(rnd), gain=0.08)
+        bed(hum, 0.08)
         birds(["cardinal", "song-sparrow", "blue-jay", "mourning-dove", "crow", "robin"], 3.2)
     elif name == "dusk-birds":
-        add(out, hum(rnd), gain=0.07)
+        bed(hum, 0.07)
         birds(["robin", "robin", "song-sparrow", "cardinal"], 2.8)
     elif name == "summer-dusk":
-        add(out, bed_from("insects-nj", rnd), gain=0.3)
-        add(out, hum(rnd), gain=0.05)
+        bed(insects, 0.3)
+        bed(hum, 0.05)
         birds(["robin", "cardinal"], 4.5, 0.4)
     elif name == "summer-night":
-        add(out, bed_from("insects-nj", rnd), gain=0.55)
-        add(out, bed_from("katydid", rnd), gain=0.18)
-        add(out, hum(rnd), gain=0.04)
+        bed(insects, 0.55)
+        bed(lambda r: bed_from("katydid", r), 0.18)
+        bed(hum, 0.04)
     elif name == "fall-day":
-        add(out, hum(rnd), gain=0.08)
+        bed(hum, 0.08)
         birds(["blue-jay", "crow", "white-throat", "song-sparrow", "blue-jay"], 3.6)
     elif name == "fall-dusk":
-        add(out, bed_from("insects-nj", rnd), gain=0.12)
-        add(out, hum(rnd), gain=0.07)
+        bed(insects, 0.12)
+        bed(hum, 0.07)
         birds(["crow", "crow", "white-throat"], 3.8)
     elif name == "fall-night":
-        add(out, bed_from("insects-nj", rnd), gain=0.25)
-        add(out, hum(rnd), gain=0.06)
+        bed(insects, 0.25)
+        bed(hum, 0.06)
     elif name == "winter-day":
-        add(out, wind(rnd, 0.6), gain=0.1)
-        add(out, hum(rnd), gain=0.05)
+        bed(lambda r: wind(r, 0.6), 0.1)
+        bed(hum, 0.05)
         birds(["crow", "blue-jay", "white-throat"], 4.0, 0.7)
     elif name == "quiet-night":
-        add(out, hum(rnd), gain=0.09)
-        add(out, wind(rnd, 0.4), gain=0.06)
-    elif name == "harbor":
-        add(out, waves(rnd), gain=0.45)
-        add(out, hum(rnd), gain=0.04)
-        birds(["gull"], 4.0, 0.7)
-    elif name == "harbor-night":
-        add(out, waves(rnd), gain=0.4)
-        add(out, hum(rnd), gain=0.06)
+        bed(hum, 0.09)
+        bed(lambda r: wind(r, 0.4), 0.06)
     elif name == "rain":
-        add(out, rain(rnd), gain=0.5)
-        add(out, hum(rnd), gain=0.05)
+        bed(rain, 0.5)
+        bed(hum, 0.05)
     elif name == "wind":
-        add(out, wind(rnd, 1.0), gain=0.6)
+        bed(lambda r: wind(r, 1.0), 0.6)
     elif name == "snow":
         # Snow hushes the city: a soft breath of wind and almost nothing else.
-        add(out, lowpass(wind(rnd, 0.3), 700), gain=0.25)
-        add(out, hum(rnd), gain=0.03)
+        bed(lambda r: lowpass(wind(r, 0.3), 700), 0.25)
+        bed(hum, 0.03)
     else:
         raise ValueError(name)
     return out
 
 
 # Each animal with a recording gets a "voice" loop: just their calls, spaced out, with
-# quiet in between. The app plays it over the ambient loop while the story is about
-# them, so the cardinal story has a cardinal in it.
+# quiet in between, coming from different places left and right. The app layers a few
+# of the neighborhood's voices lightly over the ambient loop.
 VOICES = {
     "american-robin": "robin",
     "northern-cardinal": "cardinal",
@@ -281,8 +280,8 @@ VOICES = {
 
 
 def voice(recording, rnd):
-    out = silence()
-    scatter(out, rnd, [recording], 5.0, 0.9)
+    out = Stereo()
+    scatter(out, rnd, [recording], 7.0, 0.9)
     return out
 
 
@@ -298,35 +297,40 @@ USES = {
     "fall-night": ["insects-nj"],
     "winter-day": ["crow", "blue-jay", "white-throat"],
     "quiet-night": [],
-    "harbor": ["gull"],
-    "harbor-night": [],
     "rain": [],
     "wind": [],
     "snow": [],
 }
 
 
-def fold(xs):
+def fold(st):
     """Crossfade the tail over the head so the loop plays forever without a click."""
     n, x = LOOP * SR, XFADE * SR
-    out = xs[:n]
-    for i in range(x):
-        # Equal-power, so noisy beds (rain, wind) don't dip in the middle of the fade.
-        g = math.pi / 2 * i / x
-        out[i] = out[i] * math.sin(g) + xs[n + i] * math.cos(g)
-    return out
+
+    def one(xs):
+        out = xs[:n]
+        for i in range(x):
+            # Equal-power, so noisy beds (rain, wind) don't dip in the middle of the fade.
+            g = math.pi / 2 * i / x
+            out[i] = out[i] * math.sin(g) + xs[n + i] * math.cos(g)
+        return out
+
+    st.l, st.r = one(st.l), one(st.r)
+    return st
 
 
-def write(name, xs):
+def write(name, st):
     os.makedirs(OUT, exist_ok=True)
-    pcm = array.array("h", (int(max(-1, min(1, x)) * 32767) for x in normalize(xs, 0.7)))
+    peak = max(1e-9, max(abs(x) for x in st.l), max(abs(x) for x in st.r))
+    k = 0.7 / peak
+    pcm = array.array("h", (int(max(-1, min(1, x * k)) * 32767) for pair in zip(st.l, st.r) for x in pair))
     tmp = os.path.join(CACHE, f"{name}.mix.wav")
     with wave.open(tmp, "wb") as w:
-        w.setnchannels(1)
+        w.setnchannels(2)
         w.setsampwidth(2)
         w.setframerate(SR)
         w.writeframes(pcm.tobytes())
-    subprocess.run(["afconvert", "-f", "m4af", "-d", "aac", "-b", "48000", tmp, os.path.join(OUT, f"{name}.m4a")], check=True)
+    subprocess.run(["afconvert", "-f", "m4af", "-d", "aac", "-b", "96000", tmp, os.path.join(OUT, f"{name}.m4a")], check=True)
     os.remove(tmp)
 
 

@@ -11,8 +11,6 @@ export const soundAssets: Record<string, number> = {
   'fall-night': require('../../assets/sounds/fall-night.m4a'),
   'winter-day': require('../../assets/sounds/winter-day.m4a'),
   'quiet-night': require('../../assets/sounds/quiet-night.m4a'),
-  'harbor': require('../../assets/sounds/harbor.m4a'),
-  'harbor-night': require('../../assets/sounds/harbor-night.m4a'),
   'rain': require('../../assets/sounds/rain.m4a'),
   'wind': require('../../assets/sounds/wind.m4a'),
   'snow': require('../../assets/sounds/snow.m4a'),

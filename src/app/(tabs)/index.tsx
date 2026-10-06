@@ -159,12 +159,14 @@ export default function RightNow() {
   );
 
   // What you'd hear out there right now, if sound is on.
-  const soundscape = pickSoundscape(season, header.period, hood.kind, weather?.sky, weather?.tags);
-  // The voice follows whoever the story is about, so it only changes when the animal does.
-  const voiceId = visiting ?? lead?.id;
-  useAmbience(soundscape, voiceId, state.soundOn, focused);
-  const voiceName = voiceId && voiceFor(voiceId) ? getSpecies(voiceId)?.friendlyName.toLowerCase() : undefined;
-  const listening = voiceName ? `the ${voiceName}, and ${SOUNDSCAPE_LABEL[soundscape]}` : SOUNDSCAPE_LABEL[soundscape];
+  const soundscape = pickSoundscape(season, header.period, weather?.sky, weather?.tags);
+  // A light layer of neighbors' voices: the story's animal first, then others around.
+  const voiceIds = useMemo(() => [visiting ?? lead?.id, lead?.id, ...around.map((s) => s.id)].filter((id): id is string => !!id), [visiting, lead, around]);
+  useAmbience(soundscape, voiceIds, state.soundOn, focused);
+  const firstVoice = voiceIds.find((id) => voiceFor(id));
+  const listening = firstVoice
+    ? `${SOUNDSCAPE_LABEL[soundscape]}, with the ${getSpecies(firstVoice)!.friendlyName.toLowerCase()} nearby`
+    : SOUNDSCAPE_LABEL[soundscape];
 
   if (!slide) return <Screen background={theme.bg} scroll={false}>{null}</Screen>;
 
