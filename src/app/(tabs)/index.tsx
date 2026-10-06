@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { PanResponder, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
@@ -123,12 +122,6 @@ export default function RightNow() {
   // Switching neighborhood or time of day restarts the story.
   const [index, setIndex] = useState(0);
   const [area, setArea] = useState({ width: 0, height: 0 });
-  // Where the slide's text ends, so the backdrop's horizon can stay below it.
-  const [textArea, setTextArea] = useState<{ top: number; height: number } | null>(null);
-  const [textHeight, setTextHeight] = useState(0);
-  const insets = useSafeAreaInsets();
-  // Screen pads its content by the safe area + 12 (see Screen.tsx).
-  const textBottom = textArea ? insets.top + 12 + textArea.top + Math.min(textArea.height, textHeight) : undefined;
   // Dev only: ?slide=3 opens on that slide the first time.
   const startAt = useRef(__DEV__ && params.slide ? Number(params.slide) : 0);
   useEffect(() => {
@@ -207,7 +200,6 @@ export default function RightNow() {
             placeId={hood.placeId}
             variant={hashString(`${slide.id}:${today}`) % 3}
             moonLit={moonLitFraction(now)}
-            textBottom={textBottom}
             sky={weather?.sky}
             weather={weather?.tags}
             width={area.width}
@@ -327,8 +319,6 @@ export default function RightNow() {
             style={{ flex: 1 }}
             contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 26, paddingBottom: 16, gap: 10 }}
             showsVerticalScrollIndicator={false}
-            onLayout={(e) => setTextArea({ top: e.nativeEvent.layout.y, height: e.nativeEvent.layout.height })}
-            onContentSizeChange={(_, h) => setTextHeight(h)}
           >
             <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, letterSpacing: 1.4, textTransform: 'uppercase', color: theme.accent }}>
               {slide.kicker}

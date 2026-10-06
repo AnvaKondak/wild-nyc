@@ -1,6 +1,6 @@
 // PLACEHOLDER ART. Builds the layers of a story backdrop, back to front:
-//   time-of-day sky → clouds (far, near) → life in the sky → the neighborhood on the
-//   horizon → the moment's setting → seasonal particles → the weather.
+//   time-of-day sky → clouds (far, near) → life in the sky → the moment's setting →
+//   seasonal particles → the weather.
 // Positions are fractions of the screen and sizes scale with its shorter side, so it
 // fits a phone and a wide browser. `variant` (0–2, seeded per slide) picks different
 // details, so two slides with the same setting don't look identical.
@@ -8,7 +8,6 @@
 import type { ReactNode } from 'react';
 import { Circle, Ellipse, G, Path, Rect } from 'react-native-svg';
 import { inks } from '@/components/art/inks';
-import { Landmark } from '@/components/scenes/Landmark';
 import type { Period, PlaceKind, Season, Setting } from '@/content/types';
 import { seededRandom } from '@/lib/random';
 import type { Sky, WeatherTag } from '@/lib/weather';
@@ -28,35 +27,27 @@ export type BackdropInput = {
   variant: number;
   /** 0 = new moon … 1 = full. */
   moonLit: number;
-  /** Where the story's text ends (pt from the top). The horizon stays below it. */
-  textBottom?: number;
   /** The weather right now. Unknown: the season's usual look (snow in winter, and so on). */
   sky?: Sky;
   weather?: WeatherTag[];
 };
 
-type Ctx = BackdropInput & { u: number; rnd: () => number; horizon: number; landmarkRoom: number };
+type Ctx = BackdropInput & { u: number; rnd: () => number; horizon: number };
 
 /**
- * The horizon (landmark, harbor, city lights) sits just above the story's button, below
- * the text. Sky things stay below the time header: SKY_TOP is the highest they go.
+ * Sky things stay below the time header: SKY_TOP is the highest they go. The ground
+ * line (`horizon`) sits just above the story's button.
  */
 const BUTTON_ZONE = 96; // pt from the bottom: the "Meet the…" button and its padding
-const LANDMARK_MAX = 50; // pt: keeps the landmark in the gap under the text
 const SKY_TOP = 0.28;
 
 export function buildLayers(input: BackdropInput): Layer[] {
   const u = Math.min(input.w, input.h) / 100;
-  // The horizon sits just above the button, but never above the end of the text; the
-  // landmark only gets the room between the two (and is left out if there isn't any).
-  const textBottom = input.textBottom ?? input.h * 0.7;
-  const horizonY = Math.max(input.h - BUTTON_ZONE, textBottom + 14);
   const c: Ctx = {
     ...input,
     u,
     rnd: seededRandom(`${input.setting}:${input.variant}:${input.season}`),
-    horizon: horizonY,
-    landmarkRoom: Math.min(LANDMARK_MAX, horizonY - textBottom - 6),
+    horizon: input.h - BUTTON_ZONE,
   };
   const isDay = c.period !== 'night';
   const { sky, weather = [] } = input;
@@ -66,7 +57,6 @@ export function buildLayers(input: BackdropInput): Layer[] {
     ...timeOfDay(c).filter((l) => !(isGray(sky) && HIDDEN_WHEN_GRAY.test(l.id))),
     ...(isDay ? clouds(c) : []),
     ...(isDay ? flock(c) : []),
-    ...horizon(c),
     ...settingLayers(c),
     ...particles,
     ...weatherLayers(c, sky, weather),
@@ -119,7 +109,7 @@ function timeOfDay(c: Ctx): Layer[] {
       {
         id: 'sun-rays',
         depth: 0.05,
-        motion: { kind: 'spin', duration: 50000, cx: sx, cy: sy },
+        motion: { kind: 'still' }, // fixed to the sun, so they never drift off on their own
         node: (
           <G>
             {Array.from({ length: 10 }, (_, i) => {
@@ -133,31 +123,24 @@ function timeOfDay(c: Ctx): Layer[] {
     ];
   }
 
-  // Dawn and dusk: flat stripes of colored light on the horizon and a big low sun.
+  // Dawn and dusk: a sun low in the sky beside the photo, with a soft halo that breathes.
   const warm = period === 'dusk';
-  const bands = warm ? [inks.yellow, inks.orange, inks.pink] : [inks.yellowTint, inks.pinkTint, inks.pink];
-  const sx = w * [0.25, 0.72, 0.5][variant];
+  const sx = w * [0.86, 0.14, 0.88][variant];
+  const sy = h * (SKY_TOP + 0.07);
+  const r = 7 * u;
   return [
     {
-      id: 'light-bands',
-      depth: 0.02,
-      motion: { kind: 'still' },
-      opacity: warm ? 0.45 : 0.7,
+      id: 'sun-glow',
+      depth: 0.03,
+      motion: { kind: 'pulse', duration: 6000, min: 0.6 },
       node: (
         <G>
-          {bands.map((color, i) => (
-            <Rect key={color} x={0} y={c.horizon - (3 - i) * h * 0.05} width={w} height={h * 0.05} fill={color} />
-          ))}
+          <Circle cx={sx} cy={sy} r={r * 2.4} fill={warm ? inks.pink : inks.pinkTint} opacity={0.45} />
+          <Circle cx={sx} cy={sy} r={r * 1.6} fill={warm ? inks.orange : inks.yellowTint} opacity={0.5} />
         </G>
       ),
     },
-    {
-      id: 'low-sun',
-      depth: 0.04,
-      // Dawn sun creeps up, dusk sun sinks: a very slow bob reads as rising or setting.
-      motion: { kind: 'bob', duration: 40000, dx: 0, dy: 2 * u },
-      node: <Circle cx={sx} cy={c.horizon - 2 * u} r={11 * u} fill={warm ? inks.orange : inks.yellow} />,
-    },
+    { id: 'low-sun', depth: 0.05, motion: { kind: 'still' }, node: <Circle cx={sx} cy={sy} r={r} fill={warm ? inks.orange : inks.yellow} /> },
   ];
 }
 
@@ -237,101 +220,6 @@ function flock(c: Ctx): Layer[] {
   const birds = Array.from({ length: count }, () => bird(w * (0.2 + rnd() * 0.15), y + rnd() * 5 * u, size, u));
   return [{ id: 'flock', depth: 0.3, opacity: 0.75, motion: { kind: 'travelX', duration: [30000, 42000, 26000][variant] }, node: <G>{birds}</G> }];
 }
-
-// ---------------------------------------------------------------- the neighborhood
-
-function horizon(c: Ctx): Layer[] {
-  const { w, h, u, placeId, placeKind, period } = c;
-  const out: Layer[] = [];
-  const dark = period === 'dusk' || period === 'night';
-
-  // The neighborhood's landmark, faint, standing on the horizon.
-  const s = Math.min(w / 358, c.landmarkRoom / 100);
-  const x0 = (w - 358 * s) / 2;
-  if (c.landmarkRoom >= 18) out.push({
-    id: 'landmark',
-    depth: 0.1,
-    opacity: dark ? 0.5 : 0.4,
-    motion: { kind: 'still' },
-    node: (
-      <G transform={`translate(${x0} ${c.horizon - 100 * s}) scale(${s})`}>
-        <Landmark placeId={placeId} horizon={100} />
-      </G>
-    ),
-  });
-
-  if (placeKind === 'waterfront') {
-    const top = c.horizon - 4 * u;
-    out.push({ id: 'harbor', depth: 0.15, motion: { kind: 'still' }, opacity: 0.8, node: <Rect x={0} y={top} width={w} height={c.horizon - top + 1} fill={inks.blue} opacity={0.5} /> });
-    const rnd = seededRandom('sparkle');
-    out.push({
-      id: 'sparkles',
-      depth: 0.15,
-      motion: { kind: 'pulse', duration: 1600, min: 0 },
-      node: <G>{Array.from({ length: 9 }, (_, i) => <Rect key={i} x={w * rnd()} y={top + rnd() * 3 * u} width={2.2 * u} height={0.5 * u} fill={inks.white} />)}</G>,
-    });
-    out.push({ id: 'boat', depth: 0.2, motion: { kind: 'travelX', duration: 90000 }, node: boat(c, top) });
-  } else if (dark) {
-    // A low row of buildings whose windows light up one by one.
-    const rnd = seededRandom(`city${c.variant}`);
-    const buildings: { x: number; bw: number; bh: number }[] = [];
-    for (let x = 0; x < w; ) {
-      const bw = (8 + rnd() * 10) * u;
-      buildings.push({ x, bw, bh: (5 + rnd() * 9) * u });
-      x += bw + rnd() * 3 * u;
-    }
-    out.push({
-      id: 'buildings',
-      depth: 0.15,
-      opacity: 0.55,
-      motion: { kind: 'still' },
-      node: <G>{buildings.map((b) => <Rect key={b.x} x={b.x} y={c.horizon - b.bh} width={b.bw} height={b.bh} fill={INK} />)}</G>,
-    });
-    const windows = (seed: string) => {
-      const r = seededRandom(seed);
-      return (
-        <G>
-          {buildings.flatMap((b) =>
-            Array.from({ length: Math.floor(b.bw / (3 * u)) * Math.floor(b.bh / (3.5 * u)) }, (_, i) => {
-              if (r() < 0.6) return null;
-              const cols = Math.floor(b.bw / (3 * u));
-              return <Rect key={`${b.x}-${i}`} x={b.x + u + (i % cols) * 3 * u} y={c.horizon - b.bh + u + Math.floor(i / cols) * 3.5 * u} width={1.4 * u} height={1.8 * u} fill={inks.yellow} />;
-            }),
-          )}
-        </G>
-      );
-    };
-    out.push({ id: 'windows-a', depth: 0.15, motion: { kind: 'pulse', duration: 6000, min: 0.25 }, node: windows('wa') });
-    out.push({ id: 'windows-b', depth: 0.15, motion: { kind: 'pulse', duration: 8500, min: 0.1 }, node: windows('wb') });
-  }
-  return out;
-}
-
-function boat(c: Ctx, waterTop: number): ReactNode {
-  const { w, u, variant } = c;
-  const x = w * 0.2;
-  const y = waterTop + u;
-  if (variant === 1) {
-    // A little sailboat.
-    return (
-      <G>
-        <Path d={`M${x - 5 * u} ${y} L${x + 5 * u} ${y} L${x + 3.5 * u} ${y + 2 * u} L${x - 3.5 * u} ${y + 2 * u} Z`} fill={inks.white} stroke={INK} strokeWidth={0.4 * u} />
-        <Path d={`M${x} ${y} L${x} ${y - 9 * u} L${x + 5 * u} ${y - u} Z`} fill={inks.white} stroke={INK} strokeWidth={0.4 * u} />
-      </G>
-    );
-  }
-  // The orange ferry, or a tugboat.
-  const color = variant === 0 ? inks.orange : inks.red;
-  return (
-    <G>
-      <Path d={`M${x - 9 * u} ${y} L${x + 9 * u} ${y} L${x + 7 * u} ${y + 2.4 * u} L${x - 7 * u} ${y + 2.4 * u} Z`} fill={color} stroke={INK} strokeWidth={0.4 * u} />
-      <Rect x={x - 5 * u} y={y - 2.6 * u} width={10 * u} height={2.6 * u} fill={color} stroke={INK} strokeWidth={0.4 * u} />
-      <Rect x={x - 2 * u} y={y - 4.4 * u} width={4 * u} height={1.8 * u} fill={inks.white} stroke={INK} strokeWidth={0.4 * u} />
-    </G>
-  );
-}
-
-// ---------------------------------------------------------------- the setting
 
 function ground(c: Ctx, color: string, top = 0.86) {
   const snowy = c.season === 'winter' && (color === inks.green || color === inks.lightGray);
@@ -519,16 +407,32 @@ function settingLayers(c: Ctx): Layer[] {
     }
     case 'lawn':
       return [L('lawn', ground(c, inks.green, 0.84)), L('lawn-grass', tufts(c, 0.84), breeze, 0.75)];
-    case 'sidewalk':
+    case 'sidewalk': {
+      // Paving slabs running back toward a curb, and (sometimes) a fire hydrant.
+      const top = h * 0.84;
+      const hx = w * [0.82, 0.12, 0.86][variant];
       return [
         L('sidewalk', (
           <G>
-            {ground(c, inks.lightGray, 0.86)}
-            {[0.25, 0.6, 0.9].map((x) => <Path key={x} d={`M${w * x} ${h * 0.86} L${w * x} ${h}`} stroke={INK} strokeWidth={0.4 * u} opacity={0.4} />)}
-            {variant === 1 && <Rect x={w * 0.7} y={h * 0.83} width={6 * u} height={3 * u} rx={u} fill={inks.red} />}
+            {ground(c, inks.lightGray, 0.84)}
+            <Rect x={0} y={top} width={w} height={1.6 * u} fill={inks.gray} />
+            <Path d={`M0 ${h * 0.92} L${w} ${h * 0.92}`} stroke={INK} strokeWidth={0.4 * u} opacity={0.35} />
+            {[0.18, 0.42, 0.66, 0.9].map((x) => (
+              <Path key={x} d={`M${w * x} ${top + 1.6 * u} L${w * (x - 0.04)} ${h}`} stroke={INK} strokeWidth={0.4 * u} opacity={0.35} />
+            ))}
+            {variant !== 1 ? (
+              <G>
+                <Rect x={hx - 2 * u} y={top - 7 * u} width={4 * u} height={7.5 * u} rx={0.8 * u} fill={inks.red} stroke={INK} strokeWidth={0.4 * u} />
+                <Rect x={hx - 3 * u} y={top - 5 * u} width={6 * u} height={1.6 * u} rx={0.6 * u} fill={inks.red} stroke={INK} strokeWidth={0.4 * u} />
+                <Circle cx={hx} cy={top - 7.5 * u} r={2 * u} fill={inks.red} stroke={INK} strokeWidth={0.4 * u} />
+              </G>
+            ) : (
+              <Ellipse cx={w * 0.7} cy={h * 0.9} rx={4 * u} ry={1.2 * u} fill={inks.blue} opacity={0.35} />
+            )}
           </G>
         )),
       ];
+    }
     case 'hedge': {
       const n = Math.max(4, Math.round(w / (14 * u)));
       const bumps = Array.from({ length: n + 1 }, (_, i) => `Q${(i - 0.5) * (w / n)} ${h * 0.78} ${i * (w / n)} ${h * 0.84}`).join(' ');

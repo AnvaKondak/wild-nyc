@@ -27,10 +27,19 @@ describe('buildLayers', () => {
   it('shows the sky the time of day calls for', () => {
     const ids = (period: (typeof PERIODS)[number], placeKind: (typeof KINDS)[number] = 'block') =>
       buildLayers({ w: 390, h: 760, setting: 'sky', period, season: 'fall', placeKind, variant: 0, moonLit: 0.5 }).map((l) => l.id);
-    expect(ids('night')).toEqual(expect.arrayContaining(['moon', 'stars-a', 'shooting-star', 'windows-a']));
+    expect(ids('night')).toEqual(expect.arrayContaining(['moon', 'stars-a', 'shooting-star']));
     expect(ids('midday')).toEqual(expect.arrayContaining(['sun', 'sun-rays', 'clouds-near', 'flock']));
-    expect(ids('dawn')).toContain('low-sun');
-    expect(ids('midday', 'waterfront')).toEqual(expect.arrayContaining(['geese', 'boat', 'harbor']));
+    expect(ids('dawn')).toEqual(expect.arrayContaining(['low-sun', 'sun-glow']));
+    expect(ids('midday', 'waterfront')).toContain('geese');
+  });
+
+  it('keeps the strip above the button clear, and the sun rays fixed to the sun', () => {
+    for (const period of PERIODS) for (const placeKind of KINDS) {
+      const layers = buildLayers({ w: 390, h: 760, setting: 'sky', period, season: 'fall', placeKind, placeId: 'williamsburg', variant: 1, moonLit: 0.5 });
+      expect(layers.map((l) => l.id)).not.toEqual(expect.arrayContaining(['landmark']));
+      expect(layers.some((l) => /^(landmark|harbor|boat|buildings|windows-|light-bands)/.test(l.id))).toBe(false);
+      expect(layers.find((l) => l.id === 'sun-rays')?.motion.kind ?? 'still').toBe('still');
+    }
   });
 
   it('shows the weather, and hides the sun under a gray sky', () => {
