@@ -1,9 +1,9 @@
-import { Pressable, Text, View } from 'react-native';
+import { Linking, Pressable, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { ChevronRightIcon, CheckIcon, HelpCrossIcon } from '@/components/Icons';
 import { Screen } from '@/components/Screen';
 import { Title } from '@/components/Title';
-import { kindnessesFor } from '@/content';
+import { kindnessesFor, soundCredits } from '@/content';
 import { seasonKey, seasonOf } from '@/lib/time';
 import { useAppState } from '@/state/AppState';
 import { kindnessDone } from '@/state/selectors';
@@ -119,6 +119,22 @@ export default function Kindness() {
           );
         })}
       </View>
+
+      {/* Credits for everything we borrowed, as CC BY / CC BY-SA ask. */}
+      <View style={{ paddingHorizontal: 22, paddingTop: 8, paddingBottom: 8, gap: 6 }}>
+        <Text style={type.label}>Credits</Text>
+        <Text style={credit}>
+          Sightings from iNaturalist and eBird, at neighborhood level. Weather from Open-Meteo (CC BY 4.0). Photos are credited on each species page.
+        </Text>
+        <Text style={credit}>Sounds: wind, rain, waves and city hum are made in code. Recordings via Wikimedia Commons:</Text>
+        {soundCredits.map((c) => (
+          <Text key={c.source} style={[credit, { textDecorationLine: 'underline' }]} accessibilityRole="link" onPress={() => Linking.openURL(c.source)}>
+            {c.title.replace(/\.(mp3|ogg|wav)$/, '')}, by {c.artist} ({c.license})
+          </Text>
+        ))}
+      </View>
     </Screen>
   );
 }
+
+const credit = [type.body, { fontSize: 12, lineHeight: 17, color: colors.inkMuted }];

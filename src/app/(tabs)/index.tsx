@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { PanResponder, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
@@ -10,7 +10,8 @@ import { NeighborhoodPills } from '@/components/NeighborhoodPills';
 import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
-import { facts, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, stories, type Period, type StorySlide } from '@/content';
+import { RoundNav, StoryCard, StoryProgress, useSwipe } from '@/components/story/parts';
+import { facts, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, speciesPhotos, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
 import { arrivalSlide, arrivalsAmong } from '@/lib/arrivals';
 import { buildIntro } from '@/lib/intro';
@@ -27,7 +28,7 @@ import { useLiveData } from '@/state/LiveData';
 import { useWeather } from '@/state/Weather';
 import { currentNeighborhood } from '@/state/selectors';
 import { periodThemes } from '@/theme/periodTheme';
-import { border, colors, fonts, offsetShadow } from '@/theme/tokens';
+import { border, colors, fonts } from '@/theme/tokens';
 
 const PERIOD_LABELS: Record<Period, string> = { dawn: 'Dawn', midday: 'Midday', dusk: 'Dusk', night: 'Night' };
 
@@ -143,19 +144,7 @@ export default function RightNow() {
   const prev = useCallback(() => setIndex((n) => Math.max(0, n - 1)), []);
 
   // Swipe left/right, like stories.
-  const swipeRef = useRef({ next, prev });
-  swipeRef.current = { next, prev };
-  const pan = useMemo(
-    () =>
-      PanResponder.create({
-        onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dx) > 20 && Math.abs(g.dx) > Math.abs(g.dy) * 1.5,
-        onPanResponderRelease: (_, g) => {
-          if (g.dx < -40) swipeRef.current.next();
-          else if (g.dx > 40) swipeRef.current.prev();
-        },
-      }),
-    [],
-  );
+  const swipe = useSwipe(next, prev);
 
   const [focused, setFocused] = useState(true);
   useFocusEffect(
@@ -196,6 +185,9 @@ export default function RightNow() {
   };
 
   const setting = slide.setting ?? (header.period === 'night' ? 'night-sky' : 'sky');
+  // A different photo of the same animal on each slide of their story.
+  const photos = speciesPhotos((species ?? getSpecies('rock-pigeon')!).id);
+  const slidePhoto = photos[(slide.photoIndex ?? 0) % photos.length];
   const weatherLine = weather ? `${describeWeather(weather)}${previewWeather ? ' (preview)' : ''} · ${header.sub}` : header.sub;
 
   return (
@@ -219,12 +211,8 @@ export default function RightNow() {
         </View>
       )}
       <Screen background="transparent" scroll={false}>
-        <View {...pan.panHandlers} style={{ flex: 1 }}>
-          <View style={{ flexDirection: 'row', gap: 4, paddingHorizontal: 16 }} accessibilityLabel={`Story ${i + 1} of ${story.length}`}>
-            {story.map((s, n) => (
-              <View key={s.id} style={{ flex: 1, height: 4, borderRadius: 2, backgroundColor: n <= i ? theme.barOn : theme.barOff }} />
-            ))}
-          </View>
+        <View {...swipe} style={{ flex: 1 }}>
+          <StoryProgress count={story.length} index={i} theme={theme} />
 
           <View style={{ paddingTop: 14 }}>
             <NeighborhoodPills ink={theme.ink} background={theme.bg} />
@@ -314,7 +302,7 @@ export default function RightNow() {
                 ) : (
                   <Sticker
                     art={(species ?? getSpecies('rock-pigeon')!).art}
-                    photo={speciesPhoto((species ?? getSpecies('rock-pigeon')!).id)}
+                    photo={slidePhoto}
                     size={stickerSize}
                     tint={tileFor(slide)}
                     rotate={-5}
@@ -328,38 +316,7 @@ export default function RightNow() {
             </View>
           )}
 
-          {/* The words sit on a card over the scene, and scroll if they're long, so the button stays put. */}
-          <ScrollView
-            style={{ flex: 1 }}
-            contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 22, paddingBottom: 14 }}
-            showsVerticalScrollIndicator={false}
-          >
-            <View
-              style={{
-                padding: 18,
-                gap: 8,
-                borderRadius: 22,
-                borderWidth: border.width,
-                borderColor: theme.ink,
-                backgroundColor: theme.card,
-                boxShadow: offsetShadow(theme.shadow, 4),
-              }}
-            >
-              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, letterSpacing: 1.4, textTransform: 'uppercase', color: theme.accent }}>
-                {slide.kicker}
-              </Text>
-              <Text accessibilityRole="header" style={{ fontFamily: fonts.display, fontSize: slide.title.length > 44 ? 25 : 29, lineHeight: slide.title.length > 44 ? 29 : 33, color: theme.ink }}>
-                {slide.title}
-              </Text>
-              <Text style={{ fontFamily: fonts.body, fontSize: 16, lineHeight: 23, color: theme.body }}>{slide.body}</Text>
-              {slide.fact && (
-                <View style={{ marginTop: 6, paddingTop: 10, borderTopWidth: 1.5, borderStyle: 'dashed', borderColor: theme.ink, gap: 2 }}>
-                  <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: theme.accent }}>Fun fact</Text>
-                  <Text style={{ fontFamily: fonts.body, fontSize: 14, lineHeight: 20, color: theme.body }}>{slide.fact}</Text>
-                </View>
-              )}
-            </View>
-          </ScrollView>
+          <StoryCard kicker={slide.kicker} title={slide.title} body={slide.body} fact={slide.fact} theme={theme} />
 
           <View style={{ paddingHorizontal: 16, paddingBottom: 20 }}>
             <Button
@@ -373,28 +330,5 @@ export default function RightNow() {
         </View>
       </Screen>
     </View>
-  );
-}
-
-function RoundNav({ label, onPress, color, fill, children }: { label: string; onPress: () => void; color: string; fill: string; children: React.ReactNode }) {
-  return (
-    <Pressable
-      onPress={onPress}
-      accessibilityRole="button"
-      accessibilityLabel={label}
-      style={({ pressed }) => ({
-        width: 52,
-        height: 52,
-        borderRadius: 26,
-        borderWidth: border.width,
-        borderColor: color,
-        backgroundColor: fill, // solid, so the backdrop (a cloud, a branch) never shows through
-        alignItems: 'center',
-        justifyContent: 'center',
-        opacity: pressed ? 0.6 : 1,
-      })}
-    >
-      {children}
-    </Pressable>
   );
 }
