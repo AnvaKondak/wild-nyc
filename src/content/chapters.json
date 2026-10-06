@@ -2,7 +2,7 @@
  {
   "season": "fall",
   "name": "The great getting-ready",
-  "intro": "The light goes gold and the air smells like dry leaves. Everyone in the neighborhood is busy with the same thing: getting ready. Some are packing for long trips, some are filling their pantries, and some are just arriving to spend the winter with us.",
+  "intro": "The light goes gold and the air smells like dry leaves. All over NYC and Jersey City, everyone is busy with the same thing: getting ready. Some are packing for long trips, some are filling their pantries, and some are just arriving to spend the winter with us.",
   "stories": [
    {
     "id": "acorn-race",
@@ -67,7 +67,7 @@
  {
   "season": "winter",
   "name": "The quiet season",
-  "intro": "The trees are bare, so you can finally see everyone. The neighborhood gets quieter, and closer. Small birds team up, water birds from the frozen north settle in, and the night crowd sleeps in on the coldest nights.",
+  "intro": "The trees are bare, so you can finally see everyone. Both cities get quieter, and closer. Small birds team up, water birds from the frozen north settle in, and the night crowd sleeps in on the coldest nights.",
   "stories": [
    {
     "id": "winter-flock",
@@ -155,7 +155,7 @@
      "european-starling",
      "eastern-carpenter-bee"
     ],
-    "body": "Every nook in the neighborhood is being fought over. House sparrows and starlings argue over the same holes in walls and signs. Meanwhile carpenter bees are carving brand new round doorways into old wooden benches, males hovering outside like doormen."
+    "body": "Every nook in the city is being fought over. House sparrows and starlings argue over the same holes in walls and signs. Meanwhile carpenter bees are carving brand new round doorways into old wooden benches, males hovering outside like doormen."
    },
    {
     "id": "marsh-opens",

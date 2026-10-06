@@ -10,6 +10,7 @@ import { extraPhotoAssets, photoAssets } from './photoAssets';
 import extraPhotosJson from './photos-extra.json';
 import photosJson from './photos.json';
 import placesJson from './places.json';
+import regionJson from './region.json';
 import soundsJson from './sounds.json';
 import speciesJson from './species.json';
 import storiesJson from './stories.json';
@@ -22,6 +23,7 @@ import type {
   Place,
   PlaceKind,
   PlaceKindInfo,
+  Region,
   Season,
   Species,
   StorySlide,
@@ -38,6 +40,8 @@ export const places = placesJson.places as Place[];
 export const placeKinds = placesJson.kinds as Record<PlaceKind, PlaceKindInfo>;
 export const hurtAnimalGuide = hurtAnimalJson as HurtAnimalGuide;
 export const seasonChapters = chaptersJson as SeasonChapter[];
+/** The region the app covers today. Chapters are told for all of it. */
+export const region = regionJson as Region;
 
 /** Credits for the recordings in the ambient soundscapes (scripts/build_soundscapes.py). */
 export type SoundCredit = { title: string; license: string; artist: string; source: string };

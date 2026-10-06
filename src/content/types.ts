@@ -123,6 +123,9 @@ export type Moment = {
   weather?: WeatherTag[];
 };
 
+/** A region the app covers, told as one place in Chapters (NYC & Jersey City). */
+export type Region = { id: string; name: string; where: string; about: string };
+
 /** The Chapters tab: one per season, a short overview and stories of neighbors together. */
 export type SeasonChapter = {
   season: Season;

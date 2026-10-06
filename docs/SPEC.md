@@ -60,15 +60,20 @@ Example fall content is in the mock's `S` object. Reuse it as the first content 
 
 ## 3. Chapters
 
-- Title "Season *chapters*", season pills (the current one marked "now", selected first).
-- A tinted card with the season's name ("The great getting-ready") and a short overview.
-- Stories of neighbors together, two to four species each (squirrels and blue jays
-  racing to bury acorns; the mockingbird guarding a berry bush from robins). Overlapping
-  photo stickers, a title, a short story, and a **Meet the …** link per species.
-- **Coming and going**: the season's arriving and goodbye journeys, each linking to the
-  species page.
-- Footer: data and photo credits (iNaturalist, eBird, Open-Meteo).
-- Content: `src/content/chapters.json`.
+Chapters are told for the whole region, not one neighborhood: NYC & Jersey City share
+one harbor, one estuary and one stop on the Atlantic Flyway, and the same neighbors arrive
+and leave within days of each other. (Right now is the neighborhood view.) The region is
+content (`src/content/region.json`), so each future city pack brings its own.
+
+- A story, like Right now: one slide per screen, arrows and swipes, progress bars.
+- Season pills (the current one marked "now"), then the region's name.
+- Each season has its own light and animated scene: spring dawn, summer midday, fall dusk,
+  winter night. The overview stands on the waterfront; each story is drawn where most of
+  its neighbors live.
+- Slides: the season's overview ("The great getting-ready"), the stories of neighbors
+  together (two to four species, photos clustered, a **Meet the …** link each), then
+  who's arriving and who's leaving.
+- Content: `src/content/chapters.json`, journeys from `stories.json`.
 
 ## 4. (removed)
 

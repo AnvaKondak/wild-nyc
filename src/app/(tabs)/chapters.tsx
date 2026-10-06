@@ -14,7 +14,7 @@ import { PillRow } from '@/components/Pills';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { RoundNav, StoryCard, StoryProgress, useSwipe } from '@/components/story/parts';
-import { getSpecies, speciesPhoto, type Period, type Season } from '@/content';
+import { getSpecies, region, speciesPhoto, type Period, type Season } from '@/content';
 import { chapterSlides } from '@/lib/chapters';
 import { hashString } from '@/lib/random';
 import { seasonOf } from '@/lib/time';
@@ -86,7 +86,13 @@ export default function Chapters() {
             />
           </View>
 
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, marginTop: 40 }}>
+          {/* Chapters are told for the whole region, not one neighborhood. */}
+          <View style={{ paddingHorizontal: 22, paddingTop: 16 }} accessible accessibilityLabel={`${cap(season)} in ${region.name}`}>
+            <Text style={{ fontFamily: fonts.display, fontSize: 20, color: theme.ink }}>{region.name}</Text>
+            <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>The {season} chapter, for the whole harbor</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, marginTop: 18 }}>
             <RoundNav label="Previous story" onPress={prev} color={theme.ink} fill={theme.bg}>
               <ChevronLeftIcon color={theme.ink} />
             </RoundNav>

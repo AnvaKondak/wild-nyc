@@ -1,8 +1,9 @@
 // Chapters, as slides: each season's overview, the stories of neighbors together, and
-// who's arriving and leaving. Each slide knows which neighbors it's about and which
-// kind of place to draw behind them.
+// who's arriving and leaving. Chapters are told for the whole region (NYC & Jersey City
+// share one harbor and one flyway), not a single neighborhood: that's Right now's job.
+// Each slide knows which neighbors it's about and which kind of place to draw behind them.
 
-import { getSpecies, seasonChapters, stories } from '@/content';
+import { getSpecies, region, seasonChapters, stories } from '@/content';
 import type { PlaceKind, Season } from '@/content/types';
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -26,7 +27,8 @@ export function chapterSlides(season: Season): ChapterSlide[] {
     .filter((s) => s.season === season && (s.kind === 'arriving' || s.kind === 'goodbye'))
     .sort((a, b) => Number(b.kind === 'arriving') - Number(a.kind === 'arriving'));
   return [
-    { id: `${season}:overview`, kicker: `The ${season} chapter`, title: chapter.name, body: chapter.intro, species: overviewCast, place: 'park' },
+    // The overview stands on the waterfront: the harbor is what ties the region together.
+    { id: `${season}:overview`, kicker: `${cap(season)} in ${region.name}`, title: chapter.name, body: chapter.intro, species: overviewCast, place: 'waterfront' },
     ...chapter.stories.map((st, n) => ({
       id: `${season}:${st.id}`,
       kicker: `${cap(season)} · Story ${n + 1} of ${chapter.stories.length}`,
@@ -39,7 +41,7 @@ export function chapterSlides(season: Season): ChapterSlide[] {
       id: `${season}:${j.id}`,
       kicker: j.kind === 'arriving' ? `${cap(season)} · Arriving` : `${cap(season)} · Goodbye for now`,
       title: j.title,
-      body: j.body.split('{where}').join('near you'),
+      body: j.body.split('{where}').join(region.where),
       species: j.speciesId ? [j.speciesId] : [],
       place: placeFor(j.speciesId ? [j.speciesId] : []),
     })),
