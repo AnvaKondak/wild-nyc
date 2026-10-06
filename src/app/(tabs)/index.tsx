@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { PanResponder, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { PanResponder, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useFocusEffect, useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
@@ -9,7 +10,7 @@ import { NeighborhoodPills } from '@/components/NeighborhoodPills';
 import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
-import { getSpecies, moments, speciesPhoto, placeKinds, places, species as allSpecies, speciesFor, stories, type Period, type StorySlide } from '@/content';
+import { facts, getSpecies, moments, speciesPhoto, placeKinds, places, species as allSpecies, speciesFor, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
 import { buildLocalStory } from '@/lib/localStory';
 import { hashString } from '@/lib/random';
@@ -34,7 +35,7 @@ export default function RightNow() {
   const router = useRouter();
   const { height } = useWindowDimensions();
   // Smaller phones get a smaller sticker so the story still fits without scrolling.
-  const stickerSize = Math.min(210, Math.round(height * 0.24));
+  const stickerSize = Math.min(190, Math.round(height * 0.21));
   const now = useNow();
   const { state } = useAppState();
   const { live } = useLiveData();
@@ -64,6 +65,7 @@ export default function RightNow() {
     () =>
       buildLocalStory({
         moments,
+        facts,
         slides: stories,
         residents: speciesFor(hood.kind, season),
         allSpecies,
@@ -82,6 +84,12 @@ export default function RightNow() {
   // Switching neighborhood or time of day restarts the story.
   const [index, setIndex] = useState(0);
   const [area, setArea] = useState({ width: 0, height: 0 });
+  // Where the slide's text ends, so the backdrop's horizon can stay below it.
+  const [textArea, setTextArea] = useState<{ top: number; height: number } | null>(null);
+  const [textHeight, setTextHeight] = useState(0);
+  const insets = useSafeAreaInsets();
+  // Screen pads its content by the safe area + 12 (see Screen.tsx).
+  const textBottom = textArea ? insets.top + 12 + textArea.top + Math.min(textArea.height, textHeight) : undefined;
   useEffect(() => setIndex(0), [hood.id, header.period, season]);
   const i = Math.min(index, story.length - 1);
   const slide = story[i];
@@ -135,6 +143,7 @@ export default function RightNow() {
             placeId={hood.placeId}
             variant={hashString(`${slide.id}:${today}`) % 3}
             moonLit={moonLitFraction(now)}
+            textBottom={textBottom}
             width={area.width}
             height={area.height}
           />
@@ -192,17 +201,39 @@ export default function RightNow() {
             </RoundNav>
           </View>
 
-          <View style={{ paddingHorizontal: 24, paddingTop: 30, gap: 10 }}>
+          {/* The words scroll if they're long, so the button below always stays in place. */}
+          <ScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 26, paddingBottom: 16, gap: 10 }}
+            showsVerticalScrollIndicator={false}
+            onLayout={(e) => setTextArea({ top: e.nativeEvent.layout.y, height: e.nativeEvent.layout.height })}
+            onContentSizeChange={(_, h) => setTextHeight(h)}
+          >
             <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, letterSpacing: 1.4, textTransform: 'uppercase', color: theme.accent }}>
               {slide.kicker}
             </Text>
-            <Text accessibilityRole="header" style={{ fontFamily: fonts.display, fontSize: 32, lineHeight: 35, color: theme.ink }}>
+            <Text accessibilityRole="header" style={{ fontFamily: fonts.display, fontSize: slide.title.length > 44 ? 27 : 32, lineHeight: slide.title.length > 44 ? 31 : 35, color: theme.ink }}>
               {slide.title}
             </Text>
             <Text style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 25, color: theme.body }}>{slide.body}</Text>
-          </View>
-
-          <View style={{ flex: 1 }} />
+            {slide.fact && (
+              <View
+                style={{
+                  marginTop: 4,
+                  paddingVertical: 10,
+                  paddingHorizontal: 14,
+                  borderRadius: 14,
+                  borderWidth: 1.5,
+                  borderColor: theme.ink,
+                  backgroundColor: theme.card,
+                  gap: 2,
+                }}
+              >
+                <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: theme.accent }}>Fun fact</Text>
+                <Text style={{ fontFamily: fonts.body, fontSize: 14, lineHeight: 20, color: theme.body }}>{slide.fact}</Text>
+              </View>
+            )}
+          </ScrollView>
 
           <View style={{ paddingHorizontal: 16, paddingBottom: 20 }}>
             <Button

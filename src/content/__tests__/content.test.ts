@@ -7,6 +7,7 @@ import {
   hurtAnimalGuide,
   kindnesses,
   kindnessesFor,
+  facts,
   moments,
   photoCredit,
   speciesPhoto,
@@ -66,6 +67,10 @@ describe('moments', () => {
     }
   });
 
+  it('have titles that can take a place on the end (no ?, ! or . endings)', () => {
+    for (const m of moments) for (const v of m.variants) expect(v.title).not.toMatch(/[?!.)]\s*$/);
+  });
+
   it('only use known placeholders', () => {
     for (const m of moments) for (const v of m.variants) {
       expect((v.title + v.body).replace(/\{(place|green|water|landmark|street)\}/g, '')).not.toMatch(/[{}]/);
@@ -75,7 +80,10 @@ describe('moments', () => {
   it('fill in completely for every neighborhood and every unnamed kind of place', () => {
     const locals = [...places.map((p) => p.local), ...KINDS.map((k) => placeKinds[k].local)];
     for (const local of locals) {
-      for (const k of Object.keys(local)) expect((local as Record<string, string>)[k].length).toBeGreaterThan(2);
+      for (const names of Object.values(local)) {
+        expect(names.length).toBeGreaterThan(0);
+        for (const n of names) expect(n.length).toBeGreaterThan(2);
+      }
       for (const m of moments) for (const v of m.variants) {
         expect(fillPlace(v.title + ' ' + v.body, 'near Astoria', local)).not.toMatch(/[{}]/);
       }
@@ -86,6 +94,24 @@ describe('moments', () => {
     for (const period of PERIODS) {
       const speciesWithMoments = new Set(moments.filter((m) => m.seasons.includes(season) && m.periods.includes(period)).map((m) => m.speciesId));
       expect(speciesWithMoments.size).toBeGreaterThanOrEqual(3);
+    }
+  });
+});
+
+describe('facts', () => {
+  it('every species has at least three, for real species, in seasons they are around', () => {
+    for (const s of species) expect(facts.filter((f) => f.speciesId === s.id).length).toBeGreaterThanOrEqual(3);
+    for (const f of facts) {
+      const s = getSpecies(f.speciesId);
+      expect(s).toBeDefined();
+      for (const season of f.seasons ?? []) expect(s!.seasons).toContain(season);
+    }
+  });
+
+  it('every species has a fact for every season and time they show up in', () => {
+    for (const s of species) for (const season of s.seasons) for (const period of PERIODS) {
+      const fits = facts.some((f) => f.speciesId === s.id && (!f.seasons || f.seasons.includes(season)) && (!f.periods || f.periods.includes(period)));
+      expect(fits).toBe(true);
     }
   });
 });

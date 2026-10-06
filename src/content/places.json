@@ -3,28 +3,60 @@
     "block": {
       "where": "on your block",
       "local": {
-        "green": "the little park down the street",
-        "water": "the river",
-        "landmark": "the corner bodega",
-        "street": "the avenue"
+        "green": [
+          "the little park down the street",
+          "the corner garden"
+        ],
+        "water": [
+          "the river"
+        ],
+        "landmark": [
+          "the corner bodega",
+          "the fire escapes"
+        ],
+        "street": [
+          "the avenue",
+          "the side streets"
+        ]
       }
     },
     "park": {
       "where": "in the park",
       "local": {
-        "green": "the big meadow",
-        "water": "the pond",
-        "landmark": "the old stone bridge",
-        "street": "the winding paths"
+        "green": [
+          "the big meadow",
+          "the woods"
+        ],
+        "water": [
+          "the pond"
+        ],
+        "landmark": [
+          "the old stone bridge",
+          "the big oak"
+        ],
+        "street": [
+          "the winding paths"
+        ]
       }
     },
     "waterfront": {
       "where": "by the water",
       "local": {
-        "green": "the grassy edge",
-        "water": "the harbor",
-        "landmark": "the pier",
-        "street": "the waterfront walk"
+        "green": [
+          "the grassy edge",
+          "the waterfront lawn"
+        ],
+        "water": [
+          "the harbor",
+          "the river"
+        ],
+        "landmark": [
+          "the pier",
+          "the old pilings"
+        ],
+        "street": [
+          "the waterfront walk"
+        ]
       }
     }
   },
@@ -37,10 +69,23 @@
       "lat": 40.671,
       "lng": -73.9814,
       "local": {
-        "green": "the Old Stone House garden",
-        "street": "Seventh Avenue",
-        "landmark": "the brownstone stoops",
-        "water": "the Gowanus"
+        "green": [
+          "the Old Stone House garden",
+          "the edge of Prospect Park",
+          "the community gardens"
+        ],
+        "water": [
+          "the Gowanus"
+        ],
+        "landmark": [
+          "the brownstone stoops",
+          "the corner bodega"
+        ],
+        "street": [
+          "Seventh Avenue",
+          "Fifth Avenue",
+          "the tree-lined side streets"
+        ]
       }
     },
     {
@@ -51,10 +96,23 @@
       "lat": 40.6602,
       "lng": -73.969,
       "local": {
-        "green": "the Long Meadow",
-        "water": "Prospect Lake",
-        "landmark": "the Boathouse",
-        "street": "the Ravine paths"
+        "green": [
+          "the Long Meadow",
+          "the Ravine",
+          "the Nethermead"
+        ],
+        "water": [
+          "Prospect Lake",
+          "the Lullwater"
+        ],
+        "landmark": [
+          "the Boathouse",
+          "the Grand Army Plaza arch"
+        ],
+        "street": [
+          "the park drive",
+          "the winding paths"
+        ]
       }
     },
     {
@@ -65,10 +123,21 @@
       "lat": 40.7081,
       "lng": -73.9571,
       "local": {
-        "green": "McCarren Park",
-        "water": "the East River by Domino Park",
-        "landmark": "the Williamsburg Bridge",
-        "street": "Bedford Avenue"
+        "green": [
+          "McCarren Park",
+          "Domino Park"
+        ],
+        "water": [
+          "the East River"
+        ],
+        "landmark": [
+          "the Williamsburg Bridge",
+          "the old water towers"
+        ],
+        "street": [
+          "Bedford Avenue",
+          "Kent Avenue"
+        ]
       }
     },
     {
@@ -79,10 +148,21 @@
       "lat": 40.6872,
       "lng": -73.9418,
       "local": {
-        "green": "Herbert Von King Park",
-        "street": "the brownstone blocks",
-        "landmark": "the rooftop water towers",
-        "water": "the East River"
+        "green": [
+          "Herbert Von King Park",
+          "the block's community garden"
+        ],
+        "water": [
+          "the East River"
+        ],
+        "landmark": [
+          "the rooftop water towers",
+          "the brownstone stoops"
+        ],
+        "street": [
+          "the brownstone blocks",
+          "Stuyvesant Avenue"
+        ]
       }
     },
     {
@@ -93,10 +173,22 @@
       "lat": 40.7003,
       "lng": -73.9967,
       "local": {
-        "green": "the Pier 1 lawns",
-        "water": "the East River",
-        "landmark": "the Brooklyn Bridge",
-        "street": "the waterfront paths"
+        "green": [
+          "the Pier 1 lawns",
+          "the salt marsh at Pier 1"
+        ],
+        "water": [
+          "the East River",
+          "the harbor"
+        ],
+        "landmark": [
+          "the Brooklyn Bridge",
+          "the old piers"
+        ],
+        "street": [
+          "the waterfront paths",
+          "the Promenade"
+        ]
       }
     },
     {
@@ -107,10 +199,21 @@
       "lat": 40.715,
       "lng": -73.9843,
       "local": {
-        "green": "Sara D. Roosevelt Park",
-        "water": "the East River",
-        "landmark": "the Williamsburg Bridge",
-        "street": "Orchard Street"
+        "green": [
+          "Sara D. Roosevelt Park",
+          "the community gardens"
+        ],
+        "water": [
+          "the East River"
+        ],
+        "landmark": [
+          "the Williamsburg Bridge",
+          "the tenement fire escapes"
+        ],
+        "street": [
+          "Orchard Street",
+          "Delancey Street"
+        ]
       }
     },
     {
@@ -121,10 +224,22 @@
       "lat": 40.7116,
       "lng": -74.0158,
       "local": {
-        "green": "Rockefeller Park",
-        "water": "the Hudson",
-        "landmark": "the Esplanade railings",
-        "street": "the Esplanade"
+        "green": [
+          "Rockefeller Park",
+          "Teardrop Park"
+        ],
+        "water": [
+          "the Hudson",
+          "the harbor"
+        ],
+        "landmark": [
+          "the Esplanade railings",
+          "the marina"
+        ],
+        "street": [
+          "the Esplanade",
+          "the river walk"
+        ]
       }
     },
     {
@@ -135,10 +250,24 @@
       "lat": 40.7812,
       "lng": -73.9665,
       "local": {
-        "green": "the Ramble",
-        "water": "Turtle Pond",
-        "landmark": "Belvedere Castle",
-        "street": "the Mall"
+        "green": [
+          "the Ramble",
+          "Sheep Meadow",
+          "the North Woods"
+        ],
+        "water": [
+          "Turtle Pond",
+          "the Lake",
+          "the Reservoir"
+        ],
+        "landmark": [
+          "Belvedere Castle",
+          "Bow Bridge"
+        ],
+        "street": [
+          "the Mall",
+          "the bridle path"
+        ]
       }
     },
     {
@@ -149,10 +278,22 @@
       "lat": 40.8116,
       "lng": -73.9465,
       "local": {
-        "green": "Marcus Garvey Park",
-        "water": "the Harlem Meer",
-        "landmark": "the brownstones of Strivers' Row",
-        "street": "Malcolm X Boulevard"
+        "green": [
+          "Marcus Garvey Park",
+          "the Harlem community gardens"
+        ],
+        "water": [
+          "the Harlem Meer",
+          "the Harlem River"
+        ],
+        "landmark": [
+          "the brownstones of Strivers' Row",
+          "the fire watchtower in Marcus Garvey Park"
+        ],
+        "street": [
+          "Malcolm X Boulevard",
+          "Adam Clayton Powell Jr. Boulevard"
+        ]
       }
     },
     {
@@ -163,10 +304,22 @@
       "lat": 40.8417,
       "lng": -73.9394,
       "local": {
-        "green": "Highbridge Park",
-        "water": "the Hudson",
-        "landmark": "the George Washington Bridge",
-        "street": "Fort Washington Avenue"
+        "green": [
+          "Highbridge Park",
+          "Fort Tryon Park"
+        ],
+        "water": [
+          "the Hudson",
+          "the Harlem River"
+        ],
+        "landmark": [
+          "the George Washington Bridge",
+          "the High Bridge"
+        ],
+        "street": [
+          "Fort Washington Avenue",
+          "the hilly side streets"
+        ]
       }
     },
     {
@@ -177,10 +330,23 @@
       "lat": 40.7644,
       "lng": -73.9235,
       "local": {
-        "green": "Astoria Park",
-        "water": "the East River",
-        "landmark": "the Hell Gate Bridge",
-        "street": "Ditmars Boulevard"
+        "green": [
+          "Astoria Park",
+          "the Athens Square gardens"
+        ],
+        "water": [
+          "the East River",
+          "Hell Gate"
+        ],
+        "landmark": [
+          "the Hell Gate Bridge",
+          "the Triborough Bridge"
+        ],
+        "street": [
+          "Ditmars Boulevard",
+          "Steinway Street",
+          "Shore Boulevard"
+        ]
       }
     },
     {
@@ -191,10 +357,21 @@
       "lat": 40.7557,
       "lng": -73.8831,
       "local": {
-        "green": "Travers Park",
-        "street": "the garden courtyards",
-        "landmark": "the 7 train tracks",
-        "water": "Flushing Bay"
+        "green": [
+          "Travers Park",
+          "the garden courtyards"
+        ],
+        "water": [
+          "Flushing Bay"
+        ],
+        "landmark": [
+          "the 7 train tracks",
+          "the old co-op buildings"
+        ],
+        "street": [
+          "37th Avenue",
+          "Roosevelt Avenue"
+        ]
       }
     },
     {
@@ -205,10 +382,21 @@
       "lat": 40.8091,
       "lng": -73.9229,
       "local": {
-        "green": "St. Mary's Park",
-        "water": "the Harlem River",
-        "landmark": "the rail yards",
-        "street": "Alexander Avenue"
+        "green": [
+          "St. Mary's Park",
+          "the community gardens"
+        ],
+        "water": [
+          "the Harlem River"
+        ],
+        "landmark": [
+          "the rail yards",
+          "the old bridges"
+        ],
+        "street": [
+          "Alexander Avenue",
+          "the brownstone rows"
+        ]
       }
     },
     {
@@ -219,10 +407,22 @@
       "lat": 40.6437,
       "lng": -74.0776,
       "local": {
-        "green": "the hillside gardens",
-        "water": "the harbor",
-        "landmark": "the ferry terminal",
-        "street": "the waterfront esplanade"
+        "green": [
+          "the hillside gardens",
+          "Tompkinsville Park"
+        ],
+        "water": [
+          "the harbor",
+          "the Kill Van Kull"
+        ],
+        "landmark": [
+          "the ferry terminal",
+          "the waterfront esplanade railings"
+        ],
+        "street": [
+          "the waterfront esplanade",
+          "the hilly streets"
+        ]
       }
     },
     {
@@ -233,10 +433,21 @@
       "lat": 40.7178,
       "lng": -74.0431,
       "local": {
-        "green": "Van Vorst Park",
-        "water": "the Hudson",
-        "landmark": "the Colgate clock",
-        "street": "Grove Street"
+        "green": [
+          "Van Vorst Park",
+          "Hamilton Park"
+        ],
+        "water": [
+          "the Hudson"
+        ],
+        "landmark": [
+          "the Colgate clock",
+          "the brownstone rows"
+        ],
+        "street": [
+          "Grove Street",
+          "Newark Avenue"
+        ]
       }
     },
     {
@@ -247,10 +458,21 @@
       "lat": 40.7163,
       "lng": -74.033,
       "local": {
-        "green": "the waterfront lawns",
-        "water": "the Hudson",
-        "landmark": "the Manhattan skyline",
-        "street": "the Hudson River Waterfront Walkway"
+        "green": [
+          "the waterfront lawns",
+          "J. Owen Grundy Park"
+        ],
+        "water": [
+          "the Hudson",
+          "the harbor"
+        ],
+        "landmark": [
+          "the Manhattan skyline",
+          "the old pier pilings"
+        ],
+        "street": [
+          "the Hudson River Waterfront Walkway"
+        ]
       }
     },
     {
@@ -261,10 +483,21 @@
       "lat": 40.7328,
       "lng": -74.0627,
       "local": {
-        "green": "the plaza planters",
-        "street": "Kennedy Boulevard",
-        "landmark": "the Loew's theater",
-        "water": "the Hackensack River"
+        "green": [
+          "the plaza planters",
+          "Lincoln Park nearby"
+        ],
+        "water": [
+          "the Hackensack River"
+        ],
+        "landmark": [
+          "the Loew's theater",
+          "the PATH plaza"
+        ],
+        "street": [
+          "Kennedy Boulevard",
+          "Bergen Avenue"
+        ]
       }
     },
     {
@@ -275,10 +508,21 @@
       "lat": 40.7486,
       "lng": -74.0473,
       "local": {
-        "green": "Riverview-Fisk Park",
-        "street": "Central Avenue",
-        "landmark": "the Palisades cliffs",
-        "water": "the Hackensack River far below"
+        "green": [
+          "Riverview-Fisk Park",
+          "Pershing Field"
+        ],
+        "water": [
+          "the Hackensack River far below"
+        ],
+        "landmark": [
+          "the Palisades cliffs",
+          "the old reservoir"
+        ],
+        "street": [
+          "Central Avenue",
+          "the cliffside blocks"
+        ]
       }
     },
     {
@@ -289,10 +533,21 @@
       "lat": 40.7253,
       "lng": -74.0838,
       "local": {
-        "green": "Lincoln Park's meadows",
-        "water": "the Lincoln Park lake",
-        "landmark": "the big fountain",
-        "street": "the loop path"
+        "green": [
+          "Lincoln Park's meadows",
+          "the wetlands by the river"
+        ],
+        "water": [
+          "the Lincoln Park lake",
+          "the Hackensack River"
+        ],
+        "landmark": [
+          "the big fountain",
+          "the lake's edge"
+        ],
+        "street": [
+          "the loop path"
+        ]
       }
     },
     {
@@ -303,10 +558,24 @@
       "lat": 40.7033,
       "lng": -74.0551,
       "local": {
-        "green": "the salt marsh by the Interpretive Center",
-        "water": "the harbor",
-        "landmark": "the old train terminal",
-        "street": "Liberty Walk"
+        "green": [
+          "the salt marsh",
+          "the Interpretive Center trails",
+          "the big lawns"
+        ],
+        "water": [
+          "the harbor",
+          "the Hudson",
+          "Caven Point cove"
+        ],
+        "landmark": [
+          "the old train terminal",
+          "the Statue of Liberty view"
+        ],
+        "street": [
+          "Liberty Walk",
+          "the waterfront path"
+        ]
       }
     }
   ]

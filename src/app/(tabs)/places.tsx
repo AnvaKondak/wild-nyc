@@ -48,6 +48,11 @@ export default function Places() {
 
       <NeighborhoodPills />
 
+      {/* The picked neighbor's card sits right under the tabs, above the scene. */}
+      {picked && (
+        <RegularCard species={picked} season={season} live={live.get(picked.id)} sourceNames={report?.sources.map((s) => s.name) ?? []} />
+      )}
+
       <View
         style={{
           marginHorizontal: 16,
@@ -85,9 +90,7 @@ export default function Places() {
         })}
       </View>
 
-      {picked && (
-        <RegularCard species={picked} season={season} live={live.get(picked.id)} sourceNames={report?.sources.map((s) => s.name) ?? []} />
-      )}
+
     </Screen>
   );
 }

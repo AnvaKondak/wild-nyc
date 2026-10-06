@@ -1,0 +1,421 @@
+[
+ {
+  "speciesId": "rock-pigeon",
+  "text": "Pigeons can tell people apart by their faces, even when those people change clothes."
+ },
+ {
+  "speciesId": "rock-pigeon",
+  "text": "People have trusted pigeons to carry messages for thousands of years, including during both World Wars."
+ },
+ {
+  "speciesId": "rock-pigeon",
+  "text": "A homing pigeon can find their way home from hundreds of miles away, using the sun and Earth's magnetic field.",
+  "periods": [
+   "dawn",
+   "midday"
+  ]
+ },
+ {
+  "speciesId": "rock-pigeon",
+  "text": "A fluffed-up pigeon is wearing a built-in down jacket: the puffed feathers trap a layer of warm air.",
+  "seasons": [
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "house-sparrow",
+  "text": "House sparrows were brought to Brooklyn in 1852. Today they live on every continent except Antarctica."
+ },
+ {
+  "speciesId": "house-sparrow",
+  "text": "Male sparrows with bigger black bibs tend to be the bosses of the flock."
+ },
+ {
+  "speciesId": "house-sparrow",
+  "text": "Sparrow parents can raise three or even four families in a single summer.",
+  "seasons": [
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "house-sparrow",
+  "text": "Sparrows sleep together in thick bushes, packed in close for warmth and safety.",
+  "periods": [
+   "dusk",
+   "night"
+  ]
+ },
+ {
+  "speciesId": "eastern-gray-squirrel",
+  "text": "One squirrel can bury thousands of nuts in a single fall, each in its own spot.",
+  "seasons": [
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "eastern-gray-squirrel",
+  "text": "A squirrel's front teeth never stop growing, so all that gnawing keeps them trim."
+ },
+ {
+  "speciesId": "eastern-gray-squirrel",
+  "text": "Gray squirrels don't hibernate. On the coldest days they just stay in the drey and nap.",
+  "seasons": [
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "eastern-gray-squirrel",
+  "text": "A squirrel's tail is an umbrella, a blanket, a balance pole and a signal flag, all in one."
+ },
+ {
+  "speciesId": "european-starling",
+  "text": "Every starling in North America comes from about 100 birds released in Central Park in 1890 and 1891."
+ },
+ {
+  "speciesId": "european-starling",
+  "text": "In a swirling murmuration, each starling keeps track of just their seven closest neighbors.",
+  "periods": [
+   "dusk"
+  ]
+ },
+ {
+  "speciesId": "european-starling",
+  "text": "Starlings' white winter spots wear off by spring, revealing glossy purple and green feathers.",
+  "seasons": [
+   "winter",
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "european-starling",
+  "text": "Starlings can copy car alarms, phone ringtones and other birds' songs."
+ },
+ {
+  "speciesId": "mourning-dove",
+  "text": "Doves can sip water like it's through a straw, without tipping their heads back like most birds."
+ },
+ {
+  "speciesId": "mourning-dove",
+  "text": "Both mourning dove parents make a milky food in their throats to feed their chicks."
+ },
+ {
+  "speciesId": "mourning-dove",
+  "text": "In warm places, a pair of mourning doves can raise up to six families in one year.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "mourning-dove",
+  "text": "When a mourning dove takes off, their wings make a whistling sound, which might warn other doves.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "speciesId": "american-robin",
+  "text": "Robins are often the first birds singing in the morning, sometimes before it's light out.",
+  "periods": [
+   "dawn"
+  ]
+ },
+ {
+  "speciesId": "american-robin",
+  "text": "Robin eggs get their famous sky-blue color from a pigment called biliverdin.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "american-robin",
+  "text": "Plenty of robins never fly south. They switch from worms to berries and travel in flocks.",
+  "seasons": [
+   "fall",
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "american-robin",
+  "text": "Robins find worms by sight: that head tilt is them looking at the ground with one eye."
+ },
+ {
+  "speciesId": "herring-gull",
+  "text": "A herring gull takes about four years to grow their grown-up gray and white feathers."
+ },
+ {
+  "speciesId": "herring-gull",
+  "text": "Gulls can drink salt water. Special glands above their eyes get rid of the extra salt."
+ },
+ {
+  "speciesId": "herring-gull",
+  "text": "Gulls often spend the night floating on the water, safe from anything on land.",
+  "periods": [
+   "dusk",
+   "night"
+  ]
+ },
+ {
+  "speciesId": "herring-gull",
+  "text": "Gull chicks tap the red spot on a parent's beak to ask for food.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "raccoon",
+  "text": "A raccoon's front paws have so many touch nerves that they can almost 'see' with their fingers in the dark.",
+  "periods": [
+   "dusk",
+   "night"
+  ]
+ },
+ {
+  "speciesId": "raccoon",
+  "text": "Raccoons are puzzle experts who can remember how to solve a problem for years."
+ },
+ {
+  "speciesId": "raccoon",
+  "text": "Raccoon babies are called kits, and they stay with their mom for nearly a year.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "raccoon",
+  "text": "Raccoons don't hibernate, but in a cold snap they can sleep for days.",
+  "seasons": [
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "monarch",
+  "text": "The monarchs flying south in fall can live eight or nine months. Summer monarchs live about a month.",
+  "seasons": [
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "monarch",
+  "text": "Monarchs from all over the East fly to the same mountain forests in central Mexico.",
+  "seasons": [
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "monarch",
+  "text": "A monarch caterpillar grows about 2,000 times bigger in just two weeks.",
+  "seasons": [
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "monarch",
+  "text": "Monarchs taste with their feet, which is how they check a leaf is milkweed."
+ },
+ {
+  "speciesId": "red-tailed-hawk",
+  "text": "A red-tailed hawk can spot a mouse from 100 feet up."
+ },
+ {
+  "speciesId": "red-tailed-hawk",
+  "text": "Red-tailed hawk pairs often stay together for years and court again every winter.",
+  "seasons": [
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "red-tailed-hawk",
+  "text": "Hawks ride rising columns of warm air, called thermals, to soar without flapping.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "speciesId": "red-tailed-hawk",
+  "text": "Young red-tails don't get their famous rusty-red tail until their second year.",
+  "seasons": [
+   "summer",
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "blue-jay",
+  "text": "A single blue jay can bury thousands of acorns in one fall.",
+  "seasons": [
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "blue-jay",
+  "text": "Blue jays aren't really blue: tiny structures in their feathers scatter light so they look blue."
+ },
+ {
+  "speciesId": "blue-jay",
+  "text": "Blue jays are excellent hawk impersonators."
+ },
+ {
+  "speciesId": "blue-jay",
+  "text": "Near their nest, blue jays go quiet and sneaky, which is very unlike them.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "dark-eyed-junco",
+  "text": "Juncos often come back to the same winter neighborhood year after year.",
+  "seasons": [
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "dark-eyed-junco",
+  "text": "Juncos are nicknamed snowbirds because they tend to show up just as it gets cold.",
+  "seasons": [
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "dark-eyed-junco",
+  "text": "When a junco flies, white feathers flash on both sides of their tail."
+ },
+ {
+  "speciesId": "dark-eyed-junco",
+  "text": "In spring, juncos head north to raise their families in Canada and the mountains.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "virginia-opossum",
+  "text": "Opossums are North America's only marsupial: they carry their babies in a pouch."
+ },
+ {
+  "speciesId": "virginia-opossum",
+  "text": "An opossum has 50 teeth, more than any other North American land mammal."
+ },
+ {
+  "speciesId": "virginia-opossum",
+  "text": "Playing dead isn't a choice for opossums. It's an automatic response when they're very frightened.",
+  "periods": [
+   "dusk",
+   "night"
+  ]
+ },
+ {
+  "speciesId": "virginia-opossum",
+  "text": "A newborn opossum is about the size of a honeybee.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "american-crow",
+  "text": "Crows can recognize individual human faces and remember them for years."
+ },
+ {
+  "speciesId": "american-crow",
+  "text": "In fall and winter, crows gather at night in roosts that can hold thousands of birds.",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ]
+ },
+ {
+  "speciesId": "american-crow",
+  "text": "Young crows often stay with their family for a few years and help raise their younger siblings.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "american-crow",
+  "text": "Crows are clever problem-solvers who can figure out and use simple tools."
+ },
+ {
+  "speciesId": "white-throated-sparrow",
+  "text": "White-throated Sparrows come in two looks, white-striped and tan-striped, and usually pair up with the opposite one."
+ },
+ {
+  "speciesId": "white-throated-sparrow",
+  "text": "Their whistled song is often remembered as 'Oh sweet Canada, Canada, Canada.'",
+  "periods": [
+   "dawn"
+  ]
+ },
+ {
+  "speciesId": "white-throated-sparrow",
+  "text": "They spend the winter in thickets and leafy corners of city parks.",
+  "seasons": [
+   "winter",
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "white-throated-sparrow",
+  "text": "Males start singing in spring, before they fly north to their forests.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "chimney-swift",
+  "text": "Chimney swifts can't perch on branches. Their tiny feet are made for clinging to walls."
+ },
+ {
+  "speciesId": "chimney-swift",
+  "text": "Swifts glue their nests to chimney walls with their own sticky saliva.",
+  "seasons": [
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "chimney-swift",
+  "text": "At dusk, hundreds of swifts can funnel into one chimney to spend the night.",
+  "periods": [
+   "dusk"
+  ]
+ },
+ {
+  "speciesId": "chimney-swift",
+  "text": "Chimney swifts spend the winter far away in the Amazon basin of South America.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "moths",
+  "text": "Moths steer by keeping light above them, which is why a streetlight sends them in circles.",
+  "periods": [
+   "dusk",
+   "night"
+  ]
+ },
+ {
+  "speciesId": "moths",
+  "text": "There are far more kinds of moths than butterflies: thousands in the Northeast alone."
+ },
+ {
+  "speciesId": "moths",
+  "text": "While bees sleep, moths pollinate night-blooming flowers.",
+  "seasons": [
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "moths",
+  "text": "Many moths spend the winter as caterpillars or cocoons tucked in fallen leaves.",
+  "seasons": [
+   "fall"
+  ]
+ }
+]

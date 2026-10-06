@@ -44,9 +44,9 @@ describe('seenLabel', () => {
   it('uses words, never counts', () => {
     expect(seenLabel(live.get('american-robin'), today)).toBe('Seen nearby this week');
     expect(seenLabel(live.get('rock-pigeon'), today)).toBe('Seen nearby this month');
-    expect(seenLabel(live.get('dark-eyed-junco'), today)).toBe('Last seen nearby in April');
+    expect(seenLabel(live.get('dark-eyed-junco'), today)).toBeNull(); // months ago: say nothing
     expect(seenLabel(undefined, today)).toBeNull();
-    for (const s of report.species) expect(seenLabel(s, today)).not.toMatch(/\d/);
+    for (const s of report.species) expect(seenLabel(s, today) ?? '').not.toMatch(/\d/);
   });
 });
 

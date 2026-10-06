@@ -74,6 +74,8 @@ export type StorySlide = {
   kind?: 'scene' | 'arriving' | 'goodbye';
   /** Backdrop for the sticker (moments set this). */
   setting?: Setting;
+  /** A fun fact about the species, fitting the season and time of day. */
+  fact?: string;
   /** Only show in these kinds of places. Omit for everywhere. */
   places?: PlaceKind[];
   /** Button label override. Defaults to "Meet the {friendlyName}". */
@@ -97,6 +99,9 @@ export type Moment = {
   variants: { title: string; body: string }[];
 };
 
+/** A fun fact for the story, optionally only in some seasons or times of day. */
+export type Fact = { speciesId: string; text: string; seasons?: Season[]; periods?: Period[] };
+
 export type Kindness = {
   id: string;
   season: Season | 'all';
@@ -105,8 +110,9 @@ export type Kindness = {
   why: string;
 };
 
-/** Real spots in a neighborhood that story lines can name: {green}, {water}, {landmark}, {street}. */
-export type LocalNames = { green: string; water: string; landmark: string; street: string };
+/** Real spots in a neighborhood that story lines can name: {green}, {water}, {landmark},
+ * {street}. Several per kind, so lines vary; each placeholder picks one at random. */
+export type LocalNames = { green: string[]; water: string[]; landmark: string[]; street: string[] };
 
 export type Place = {
   id: string;

@@ -12,7 +12,7 @@
 // The seed is neighborhood + date + time of day, so the story holds still while
 // you look at it, changes tomorrow, and differs down the street.
 
-import type { LocalNames, Moment, Period, PlaceKind, Season, Species, StorySlide } from '@/content/types';
+import type { Fact, LocalNames, Moment, Period, PlaceKind, Season, Setting, Species, StorySlide } from '@/content/types';
 import type { LiveMap } from './live';
 import { pick, seededRandom, shuffle } from './random';
 import { buildStory } from './story';
@@ -22,6 +22,7 @@ const MIN_SCENES = 3;
 
 export type LocalStoryInput = {
   moments: Moment[];
+  facts: Fact[];
   slides: StorySlide[];
   /** Species who live in this kind of place and are around this season. */
   residents: Species[];
@@ -45,17 +46,45 @@ export function placePhrase(placeName: string | null, where: string): string {
 }
 
 /** Fills {place}/{where} with the place phrase and {green}/{water}/{landmark}/{street}
- * with the neighborhood's real spots. */
-export function fillPlace(text: string, phrase: string, local?: LocalNames): string {
+ * with one of the neighborhood's real spots (picked with `random`, or the first). */
+export function fillPlace(text: string, phrase: string, local?: LocalNames, random?: () => number): string {
   let out = text.split('{place}').join(phrase).split('{where}').join(phrase);
   if (local) {
-    for (const key of ['green', 'water', 'landmark', 'street'] as const) out = out.split(`{${key}}`).join(local[key]);
+    out = out.replace(/\{(green|water|landmark|street)\}/g, (_, key: keyof LocalNames) => {
+      const names = local[key];
+      return random ? pick(names, random) : names[0];
+    });
   }
   return out;
 }
 
+/** Which kind of spot a setting happens at. */
+const SPOT_FOR_SETTING: Record<Setting, 'water' | 'green' | 'street' | 'sky'> = {
+  water: 'water', shore: 'water', pier: 'water', reeds: 'water',
+  lawn: 'green', flowers: 'green', branch: 'green', trunk: 'green', hedge: 'green', den: 'green', web: 'green',
+  ledge: 'street', rooftop: 'street', wire: 'street', streetlight: 'street', sidewalk: 'street', trashcan: 'street', fence: 'street',
+  sky: 'sky', 'night-sky': 'sky',
+};
+
+/**
+ * Every story title names somewhere in the neighborhood. If a title doesn't already,
+ * add a place that fits where the moment happens: water moments get "by the harbor"
+ * or "at the waterfront", rooftop moments "along Seventh Avenue" or "near the Colgate
+ * clock", and so on. Returned with placeholders, for fillPlace to finish.
+ */
+export function withLocation(title: string, setting: Setting, kind: PlaceKind, random: () => number): string {
+  if (/\{(place|where|green|water|landmark|street)\}/.test(title)) return title;
+  const options: Record<'water' | 'green' | 'street' | 'sky', string[]> = {
+    water: ['by {water}', 'out on {water}', ...(kind === 'waterfront' ? ['at the waterfront'] : [])],
+    green: ['near {green}', 'over by {green}', ...(kind === 'park' ? ['in the park'] : [])],
+    street: ['along {street}', 'near {landmark}', ...(kind === 'block' ? ['on the block'] : [])],
+    sky: ['above {street}', 'over {green}', ...(kind === 'waterfront' ? ['over {water}'] : [])],
+  };
+  return `${title} ${pick(options[SPOT_FOR_SETTING[setting]], random)}`;
+}
+
 export function buildLocalStory(input: LocalStoryInput): StorySlide[] {
-  const { moments, slides, residents, allSpecies, season, period, placeKind, placeName, where, local, live, seed } = input;
+  const { moments, facts, slides, residents, allSpecies, season, period, placeKind, placeName, where, local, live, seed } = input;
   const random = seededRandom(seed);
   const phrase = placePhrase(placeName, where);
 
@@ -81,8 +110,8 @@ export function buildLocalStory(input: LocalStoryInput): StorySlide[] {
       season,
       period,
       kicker: moment.kicker,
-      title: fillPlace(variant.title, phrase, local),
-      body: fillPlace(variant.body, phrase, local),
+      title: fillPlace(withLocation(variant.title, moment.setting, placeKind, random), phrase, local, random),
+      body: fillPlace(variant.body, phrase, local, random),
       speciesId: s.id,
       setting: moment.setting,
       kind: 'scene',
@@ -100,7 +129,24 @@ export function buildLocalStory(input: LocalStoryInput): StorySlide[] {
     featured.push(s);
   }
 
-  return [...featured, ...chapters];
+  // A fun fact on every species slide, fitting the season and time of day.
+  return [...featured, ...chapters].map((s) => (s.speciesId ? { ...s, fact: pickFact(facts, s.speciesId, season, period, random) } : s));
+}
+
+/**
+ * A fact that fits right now. Facts tagged for this season and/or time of day beat
+ * general ones; facts tagged for a different season or time never show.
+ */
+export function pickFact(facts: Fact[], speciesId: string, season: Season, period: Period, random: () => number): string | undefined {
+  const fitting = facts.filter(
+    (f) => f.speciesId === speciesId && (!f.seasons || f.seasons.includes(season)) && (!f.periods || f.periods.includes(period)),
+  );
+  if (fitting.length === 0) return undefined;
+  const score = (f: Fact) => (f.seasons ? 1 : 0) + (f.periods ? 1 : 0);
+  const best = Math.max(...fitting.map(score));
+  // The most specific facts win most of the time; general ones still get a turn.
+  const pool = random() < 0.7 ? fitting.filter((f) => score(f) === best) : fitting;
+  return pick(pool, random).text;
 }
 
 const LOCAL_SPOT = /\{(green|water|landmark|street)\}/;

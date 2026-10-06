@@ -13,6 +13,8 @@ export type PeriodTheme = {
   btnInk: string;
   barOn: string;
   barOff: string;
+  /** Solid fill for small cards on the story (the fun fact). */
+  card: string;
   statusBar: 'dark' | 'light';
 };
 
@@ -28,6 +30,7 @@ export const periodThemes: Record<Period, PeriodTheme> = {
     btnInk: colors.white,
     barOn: colors.ink,
     barOff: 'rgba(26,26,46,0.18)',
+    card: '#FFF6F9',
     statusBar: 'dark',
   },
   midday: {
@@ -41,6 +44,7 @@ export const periodThemes: Record<Period, PeriodTheme> = {
     btnInk: colors.white,
     barOn: colors.ink,
     barOff: 'rgba(26,26,46,0.18)',
+    card: '#FFFBEA',
     statusBar: 'dark',
   },
   dusk: {
@@ -54,6 +58,7 @@ export const periodThemes: Record<Period, PeriodTheme> = {
     btnInk: colors.ink,
     barOn: colors.white,
     barOff: 'rgba(255,255,255,0.3)',
+    card: '#4A70F0',
     statusBar: 'light',
   },
   night: {
@@ -67,6 +72,7 @@ export const periodThemes: Record<Period, PeriodTheme> = {
     btnInk: colors.ink,
     barOn: colors.paper,
     barOff: 'rgba(250,247,242,0.25)',
+    card: '#26263F',
     statusBar: 'light',
   },
 };

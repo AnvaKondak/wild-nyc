@@ -26,9 +26,11 @@ export type BackdropInput = {
   variant: number;
   /** 0 = new moon … 1 = full. */
   moonLit: number;
+  /** Where the story's text ends (pt from the top). The horizon stays below it. */
+  textBottom?: number;
 };
 
-type Ctx = BackdropInput & { u: number; rnd: () => number; horizon: number };
+type Ctx = BackdropInput & { u: number; rnd: () => number; horizon: number; landmarkRoom: number };
 
 /**
  * The horizon (landmark, harbor, city lights) sits just above the story's button, below
@@ -40,7 +42,17 @@ const SKY_TOP = 0.28;
 
 export function buildLayers(input: BackdropInput): Layer[] {
   const u = Math.min(input.w, input.h) / 100;
-  const c: Ctx = { ...input, u, rnd: seededRandom(`${input.setting}:${input.variant}:${input.season}`), horizon: Math.max(input.h * 0.7, input.h - BUTTON_ZONE) };
+  // The horizon sits just above the button, but never above the end of the text; the
+  // landmark only gets the room between the two (and is left out if there isn't any).
+  const textBottom = input.textBottom ?? input.h * 0.7;
+  const horizonY = Math.max(input.h - BUTTON_ZONE, textBottom + 14);
+  const c: Ctx = {
+    ...input,
+    u,
+    rnd: seededRandom(`${input.setting}:${input.variant}:${input.season}`),
+    horizon: horizonY,
+    landmarkRoom: Math.min(LANDMARK_MAX, horizonY - textBottom - 6),
+  };
   const isDay = c.period !== 'night';
   return [
     ...timeOfDay(c),
@@ -225,9 +237,9 @@ function horizon(c: Ctx): Layer[] {
   const dark = period === 'dusk' || period === 'night';
 
   // The neighborhood's landmark, faint, standing on the horizon.
-  const s = Math.min(w / 358, LANDMARK_MAX / 100);
+  const s = Math.min(w / 358, c.landmarkRoom / 100);
   const x0 = (w - 358 * s) / 2;
-  out.push({
+  if (c.landmarkRoom >= 18) out.push({
     id: 'landmark',
     depth: 0.1,
     opacity: dark ? 0.5 : 0.4,
@@ -472,14 +484,14 @@ function settingLayers(c: Ctx): Layer[] {
       ];
     }
     case 'streetlight': {
-      const lx = w * 0.21;
-      const ly = h * 0.17;
+      const lx = w * 0.15;
+      const ly = h * 0.3; // beside the photo, below the header
       const layers: Layer[] = [
-        L('lamp-glow', <Circle cx={lx} cy={ly + 3 * u} r={18 * u} fill={inks.yellow} opacity={0.45} />, { kind: 'pulse', duration: 2400, min: 0.55 }, 0.55),
+        L('lamp-glow', <Circle cx={lx} cy={ly + 2 * u} r={11 * u} fill={inks.yellow} opacity={0.4} />, { kind: 'pulse', duration: 2400, min: 0.55 }, 0.55),
         L('lamp', (
           <G>
-            <Path d={`M${w * 0.06} ${h} L${w * 0.06} ${h * 0.18} Q${w * 0.06} ${h * 0.14} ${w * 0.2} ${h * 0.14}`} stroke={INK} strokeWidth={2 * u} fill="none" />
-            <Circle cx={lx} cy={ly} r={3.2 * u} fill={inks.yellow} stroke={INK} strokeWidth={0.6 * u} />
+            <Path d={`M${w * 0.04} ${h} L${w * 0.04} ${ly - 2 * u} Q${w * 0.04} ${ly - 5 * u} ${lx} ${ly - 4 * u}`} stroke={INK} strokeWidth={1.6 * u} fill="none" />
+            <Circle cx={lx} cy={ly} r={2.6 * u} fill={inks.yellow} stroke={INK} strokeWidth={0.6 * u} />
             {ground(c, inks.lightGray, 0.9)}
           </G>
         )),

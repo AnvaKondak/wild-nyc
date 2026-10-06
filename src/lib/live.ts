@@ -64,7 +64,6 @@ export function toLiveMap(report: NeighborhoodReport | null | undefined): LiveMa
 }
 
 const DAY = 24 * 60 * 60 * 1000;
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 function daysBetween(fromKey: string, to: Date): number {
   const [y, m, d] = fromKey.split('-').map(Number);
@@ -74,17 +73,15 @@ function daysBetween(fromKey: string, to: Date): number {
 }
 
 /**
- * A gentle, number-free line about recent sightings nearby:
- * "Seen nearby this week", "Seen nearby this month", "Last seen nearby in May".
- * Words, not counts: the app doesn't show "how many people" numbers.
+ * A gentle, number-free line about recent sightings nearby: "Seen nearby this week"
+ * or "Seen nearby this month". Older sightings say nothing. Words, not counts.
  */
 export function seenLabel(live: LiveSpecies | undefined, today: Date): string | null {
   if (!live || live.year === 0) return null;
   const days = daysBetween(live.lastSeenOn, today);
   if (days <= 7) return 'Seen nearby this week';
   if (days <= 31) return 'Seen nearby this month';
-  const month = MONTHS[Number(live.lastSeenOn.slice(5, 7)) - 1];
-  return `Last seen nearby in ${month}`;
+  return null;
 }
 
 /** Most recently active nearby first; species with no live data keep their order, after. */

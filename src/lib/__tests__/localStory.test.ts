@@ -1,7 +1,7 @@
-import { species as allSpecies, stories, speciesFor } from '@/content';
+import { facts, species as allSpecies, stories, speciesFor } from '@/content';
 import type { Moment } from '@/content/types';
 import { toLiveMap, type LiveSpecies } from '../live';
-import { buildLocalStory, fillPlace, placePhrase } from '../localStory';
+import { buildLocalStory, fillPlace, pickFact, placePhrase, withLocation } from '../localStory';
 import { pick, seededRandom, shuffle } from '../random';
 
 const today = new Date(2026, 9, 4);
@@ -20,6 +20,7 @@ const liveSpecies = (id: string, recent: number, lastSeenOn = '2026-10-02'): Liv
 
 const base = {
   moments,
+  facts,
   slides: stories,
   allSpecies,
   season: 'fall' as const,
@@ -28,7 +29,7 @@ const base = {
   residents: speciesFor('waterfront', 'fall'),
   placeName: 'Liberty State Park',
   where: 'by the water',
-  local: { green: 'the salt marsh', water: 'the harbor', landmark: 'the old train terminal', street: 'Liberty Walk' },
+  local: { green: ['the salt marsh'], water: ['the harbor'], landmark: ['the old train terminal'], street: ['Liberty Walk'] },
 };
 
 describe('random', () => {
@@ -54,10 +55,50 @@ describe('placePhrase', () => {
     expect(placePhrase('Liberty State Park', 'by the water')).toBe('near Liberty State Park');
     expect(placePhrase(null, 'on your block')).toBe('on your block');
     expect(fillPlace('Look {place}. Or {where}.', 'near Astoria')).toBe('Look near Astoria. Or near Astoria.');
-    const local = { green: 'Astoria Park', water: 'the East River', landmark: 'the Hell Gate Bridge', street: 'Ditmars Boulevard' };
+    const local = { green: ['Astoria Park'], water: ['the East River'], landmark: ['the Hell Gate Bridge'], street: ['Ditmars Boulevard'] };
     expect(fillPlace('Down {street}, past {green}, under {landmark}, to {water}.', 'near Astoria', local)).toBe(
       'Down Ditmars Boulevard, past Astoria Park, under the Hell Gate Bridge, to the East River.',
     );
+  });
+});
+
+describe('pickFact', () => {
+  const tagged = [
+    { speciesId: 'x', text: 'any' },
+    { speciesId: 'x', text: 'fall', seasons: ['fall' as const] },
+    { speciesId: 'x', text: 'fall night', seasons: ['fall' as const], periods: ['night' as const] },
+    { speciesId: 'x', text: 'spring', seasons: ['spring' as const] },
+  ];
+
+  it('never shows a fact tagged for another season or time', () => {
+    for (let i = 0; i < 30; i++) expect(pickFact(tagged, 'x', 'fall', 'dawn', seededRandom(`f${i}`))).not.toMatch(/spring|night/);
+  });
+
+  it('prefers the most specific fact', () => {
+    const picks = Array.from({ length: 40 }, (_, i) => pickFact(tagged, 'x', 'fall', 'night', seededRandom(`g${i}`)));
+    expect(picks.filter((p) => p === 'fall night').length).toBeGreaterThan(20);
+  });
+
+  it('every story slide about a species carries a fact', () => {
+    const story = buildLocalStory({ ...base, live: new Map(), seed: 'facts' });
+    for (const s of story.filter((x) => x.speciesId)) expect(s.fact).toBeTruthy();
+  });
+});
+
+describe('withLocation', () => {
+  it('adds a place that fits the setting when the title has none', () => {
+    const r = seededRandom('x');
+    expect(withLocation('A crow is keeping an eye on things', 'rooftop', 'block', r)).toMatch(/ (along \{street\}|near \{landmark\}|on the block)$/);
+    expect(withLocation('A gull is gliding', 'water', 'waterfront', r)).toMatch(/ (by \{water\}|out on \{water\}|at the waterfront)$/);
+    expect(withLocation('A gull is gliding over {water}', 'water', 'waterfront', r)).toBe('A gull is gliding over {water}');
+  });
+
+  it('gives every story title a place', () => {
+    const story = buildLocalStory({ ...base, live: new Map(), seed: 'loc' });
+    const names = ['the salt marsh', 'the harbor', 'the old train terminal', 'Liberty Walk', 'at the waterfront', 'near Liberty State Park'];
+    for (const s of story.filter((x) => x.id.includes('-fall-night'))) {
+      expect(names.some((n) => s.title.includes(n))).toBe(true);
+    }
   });
 });
 
