@@ -240,12 +240,11 @@ export default function RightNow() {
     setVisiting(id === lead?.id ? null : id);
     setIndex(id === lead?.id ? 1 : 0);
   };
+  // The button only ever opens a page: the animal's profile or the kindness list.
+  // Moving through the story is the arrows' job (and swiping).
+  const opensPage = slide.kind !== 'intro' && slide.kind !== 'tomorrow' && slide.kind !== 'around' && (slide.link === 'kindness' || !!species);
   const onCta = () => {
-    if (slide.kind === 'intro' || slide.kind === 'tomorrow') next();
-    else if (slide.kind === 'around') {
-      setVisiting(null);
-      setIndex(0);
-    } else if (slide.link === 'kindness') router.push('/kindness');
+    if (slide.link === 'kindness') router.push('/kindness');
     else if (species) router.push({ pathname: '/species/[id]', params: { id: species.id } });
   };
 
@@ -481,13 +480,15 @@ export default function RightNow() {
               <StoryCard kicker={slide.kicker} title={slide.title} body={slide.body} fact={slide.fact} theme={theme} />
 
               <View style={{ paddingHorizontal: 16, paddingBottom: 20 }}>
-                <Button
-                  label={ctaLabel}
-                  onPress={onCta}
-                  shadow={theme.shadow}
-                  style={{ backgroundColor: theme.btnBg }}
-                  color={theme.btnInk}
-                />
+                {opensPage && (
+                  <Button
+                    label={ctaLabel}
+                    onPress={onCta}
+                    shadow={theme.shadow}
+                    style={{ backgroundColor: theme.btnBg }}
+                    color={theme.btnInk}
+                  />
+                )}
               </View>
             </>
           )}
