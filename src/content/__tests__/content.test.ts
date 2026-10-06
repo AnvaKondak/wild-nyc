@@ -14,6 +14,7 @@ import {
   placeKinds,
   places,
   species,
+  seasonChapters,
   stories,
   type Period,
   type PlaceKind,
@@ -195,5 +196,18 @@ describe('hurt animal guide', () => {
   it('has steps and rehab contacts', () => {
     expect(hurtAnimalGuide.steps.length).toBeGreaterThan(0);
     expect(hurtAnimalGuide.rehabs.length).toBeGreaterThan(0);
+  });
+});
+
+describe('season chapters', () => {
+  it('cover every season, with stories about neighbors together', () => {
+    expect(seasonChapters.map((c) => c.season).sort()).toEqual(['fall', 'spring', 'summer', 'winter']);
+    for (const c of seasonChapters) {
+      expect(c.stories.length).toBeGreaterThanOrEqual(5);
+      for (const st of c.stories) {
+        expect(st.species.length).toBeGreaterThanOrEqual(2);
+        for (const id of st.species) expect(getSpecies(id)).toBeDefined();
+      }
+    }
   });
 });

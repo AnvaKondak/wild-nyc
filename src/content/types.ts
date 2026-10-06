@@ -115,6 +115,15 @@ export type Moment = {
   weather?: WeatherTag[];
 };
 
+/** The Chapters tab: one per season, a short overview and stories of neighbors together. */
+export type SeasonChapter = {
+  season: Season;
+  /** "The great getting-ready" */
+  name: string;
+  intro: string;
+  stories: { id: string; title: string; species: string[]; body: string }[];
+};
+
 /** A fun fact for the story, optionally only in some seasons or times of day. */
 export type Fact = { speciesId: string; text: string; seasons?: Season[]; periods?: Period[] };
 

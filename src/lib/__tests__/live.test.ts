@@ -1,5 +1,4 @@
-import type { StorySlide } from '@/content/types';
-import { fetchNeighborhood, orderStory, rankByLive, seenLabel, toLiveMap, type NeighborhoodReport } from '../live';
+import { fetchNeighborhood, seenLabel, toLiveMap, type NeighborhoodReport } from '../live';
 
 const report: NeighborhoodReport = {
   cell: 'dr5rke',
@@ -47,28 +46,5 @@ describe('seenLabel', () => {
     expect(seenLabel(live.get('dark-eyed-junco'), today)).toBeNull(); // months ago: say nothing
     expect(seenLabel(undefined, today)).toBeNull();
     for (const s of report.species) expect(seenLabel(s, today) ?? '').not.toMatch(/\d/);
-  });
-});
-
-describe('rankByLive', () => {
-  it('puts recently seen species first and keeps the rest in order', () => {
-    const items = [{ id: 'moths' }, { id: 'dark-eyed-junco' }, { id: 'rock-pigeon' }, { id: 'raccoon' }, { id: 'american-robin' }];
-    expect(rankByLive(items, live).map((i) => i.id)).toEqual(['american-robin', 'rock-pigeon', 'dark-eyed-junco', 'moths', 'raccoon']);
-  });
-
-  it('changes nothing without live data', () => {
-    const items = [{ id: 'b' }, { id: 'a' }];
-    expect(rankByLive(items, new Map())).toBe(items);
-  });
-});
-
-describe('orderStory', () => {
-  const slide = (id: string, speciesId?: string, kind?: StorySlide['kind']): StorySlide => ({
-    id, season: 'fall', period: 'dawn', kicker: '', title: '', body: '', speciesId, kind,
-  });
-
-  it('moves locally seen species forward and keeps chapters last', () => {
-    const slides = [slide('squirrels', 'eastern-gray-squirrel'), slide('pigeons', 'rock-pigeon'), slide('chorus', 'american-robin'), slide('arriving', 'dark-eyed-junco', 'arriving'), slide('goodbye', 'chimney-swift', 'goodbye')];
-    expect(orderStory(slides, live).map((s) => s.id)).toEqual(['pigeons', 'chorus', 'squirrels', 'arriving', 'goodbye']);
   });
 });

@@ -1,6 +1,7 @@
 // Typed access to the bundled JSON. Screens import from here, never the JSON directly,
 // so phase 3 can swap the source without touching screens.
 
+import chaptersJson from './chapters.json';
 import factsJson from './facts.json';
 import hurtAnimalJson from './hurt-animal.json';
 import kindnessJson from './kindness.json';
@@ -12,6 +13,7 @@ import speciesJson from './species.json';
 import storiesJson from './stories.json';
 import type {
   Fact,
+  SeasonChapter,
   HurtAnimalGuide,
   Kindness,
   Moment,
@@ -33,6 +35,7 @@ export const facts = factsJson as Fact[];
 export const places = placesJson.places as Place[];
 export const placeKinds = placesJson.kinds as Record<PlaceKind, PlaceKindInfo>;
 export const hurtAnimalGuide = hurtAnimalJson as HurtAnimalGuide;
+export const seasonChapters = chaptersJson as SeasonChapter[];
 
 const speciesById = new Map(species.map((s) => [s.id, s]));
 

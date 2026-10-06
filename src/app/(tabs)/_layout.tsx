@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
 import { Text, type ColorValue } from 'react-native';
 import { Redirect, Tabs } from 'expo-router';
-import { HeartIcon, HouseIcon, PeopleIcon, SunIcon } from '@/components/Icons';
+import { BookIcon, HeartIcon, SunIcon } from '@/components/Icons';
 import { useAppState } from '@/state/AppState';
 import { border, colors, fonts } from '@/theme/tokens';
 
@@ -36,8 +36,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen name="index" options={tab('Right now', SunIcon)} />
-      <Tabs.Screen name="places" options={tab('Places', HouseIcon)} />
-      <Tabs.Screen name="neighbors" options={tab('Neighbors', PeopleIcon)} />
+      <Tabs.Screen name="chapters" options={tab('Chapters', BookIcon)} />
       <Tabs.Screen name="kindness" options={tab('Kindness', HeartIcon)} />
     </Tabs>
   );

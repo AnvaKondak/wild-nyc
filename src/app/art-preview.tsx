@@ -7,8 +7,7 @@ import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
 import { StoryBackdrop } from '@/components/backdrop';
-import { SceneView } from '@/components/scenes';
-import { getSpecies, places, species, speciesPhoto, type Setting } from '@/content';
+import { getSpecies, species, speciesPhoto, type Setting } from '@/content';
 import { colors, fonts } from '@/theme/tokens';
 import { type } from '@/theme/type';
 
@@ -45,24 +44,6 @@ export default function ArtPreview() {
                 <Sticker art={raccoon.art} photo={speciesPhoto('raccoon')} size={thumb * 0.5} rotate={-5} style={{ marginBottom: h * 0.2 }} />
               </View>
               <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, color: colors.ink }}>{setting}</Text>
-            </View>
-          ))}
-        </View>
-      </Screen>
-    );
-  }
-  if (only === 'scenes') {
-    return (
-      <Screen contentStyle={{ gap: 12, paddingHorizontal: 16 }}>
-        <BackButton />
-        <Text style={type.kicker}>Scenes + landmarks</Text>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
-          {places.map((p) => (
-            <View key={p.id} style={{ width: thumb, gap: 4 }}>
-              <View style={{ borderWidth: 1.5, borderColor: colors.ink, borderRadius: 12, overflow: 'hidden' }}>
-                <SceneView kind={p.kind} width={thumb - 3} placeId={p.id} />
-              </View>
-              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, color: colors.ink }}>{p.name}</Text>
             </View>
           ))}
         </View>

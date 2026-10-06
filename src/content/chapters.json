@@ -1,0 +1,271 @@
+[
+ {
+  "season": "fall",
+  "name": "The great getting-ready",
+  "intro": "The light goes gold and the air smells like dry leaves. Everyone in the neighborhood is busy with the same thing: getting ready. Some are packing for long trips, some are filling their pantries, and some are just arriving to spend the winter with us.",
+  "stories": [
+   {
+    "id": "acorn-race",
+    "title": "The acorn race",
+    "species": [
+     "eastern-gray-squirrel",
+     "blue-jay"
+    ],
+    "body": "Squirrels and blue jays are both burying acorns as fast as they can. A jay can carry several at once in a pouch in their throat. And they watch each other: when a squirrel thinks someone's looking, they'll dig a hole, pretend to drop a nut in, and pat it down with nothing inside. Sneaky. The acorns nobody comes back for grow into the next oaks."
+   },
+   {
+    "id": "berry-bouncer",
+    "title": "The berry bouncer",
+    "species": [
+     "northern-mockingbird",
+     "american-robin",
+     "european-starling"
+    ],
+    "body": "A mockingbird has claimed one berry bush for the whole winter and guards it like a bouncer at a club. Robins and starlings keep trying to sneak in for a snack, and get chased right back out. Sometimes a whole flock of robins lands at once, and there's just too many of them to stop. Bush cleared. Mockingbird furious."
+   },
+   {
+    "id": "changing-crews",
+    "title": "Changing crews at the hedge",
+    "species": [
+     "chimney-swift",
+     "dark-eyed-junco",
+     "white-throated-sparrow"
+    ],
+    "body": "On the same chilly nights, two crews pass each other in the dark. The chimney swifts are leaving for the Amazon, and the juncos and white-throated sparrows are flying down from Canada to take over the hedges. One week the sky is full of twittering, the next the leaf piles are full of scratching."
+   },
+   {
+    "id": "harbor-fills",
+    "title": "The harbor fills up",
+    "species": [
+     "brant",
+     "bufflehead",
+     "common-tern"
+    ],
+    "body": "Out on the water, the summer crowd is heading south: the terns are off to South American beaches. In their place come the winter regulars. Brant, little sea geese from the Arctic, bob in rafts and murmur. Buffleheads, tiny black-and-white ducks, pop up and down like corks."
+   },
+   {
+    "id": "monarch-stopover",
+    "title": "The monarch rest stop",
+    "species": [
+     "monarch",
+     "common-eastern-bumble-bee"
+    ],
+    "body": "Monarchs are drifting through on their way to Mexico, stopping to sip from goldenrod and asters. They share the flowers with big bumble bees, who are new queens fattening up before they sleep underground all winter. Everyone on the flower is fueling up for something huge."
+   },
+   {
+    "id": "night-crew-feast",
+    "title": "The night crew feasts",
+    "species": [
+     "raccoon",
+     "virginia-opossum",
+     "orb-weavers"
+    ],
+    "body": "After dark, raccoons and opossums are eating everything they can find, putting on fat for the cold months. Their path takes them past the year's biggest spiderwebs, strung between fences and shrubs. The orb-weavers are fully grown now, waiting in the middle of their silk all night."
+   }
+  ]
+ },
+ {
+  "season": "winter",
+  "name": "The quiet season",
+  "intro": "The trees are bare, so you can finally see everyone. The neighborhood gets quieter, and closer. Small birds team up, water birds from the frozen north settle in, and the night crowd sleeps in on the coldest nights.",
+  "stories": [
+   {
+    "id": "winter-flock",
+    "title": "The winter gang",
+    "species": [
+     "tufted-titmouse",
+     "downy-woodpecker",
+     "red-bellied-woodpecker"
+    ],
+    "body": "In winter, small birds travel together through the trees in mixed flocks. The titmice are usually in charge, loud and bossy and always first to call an alarm. Downy and red-bellied woodpeckers tag along, tapping on bark while the titmice keep watch. More eyes, fewer surprises."
+   },
+   {
+    "id": "pantry-raids",
+    "title": "The pantry raids",
+    "species": [
+     "red-bellied-woodpecker",
+     "blue-jay",
+     "eastern-gray-squirrel"
+    ],
+    "body": "All the acorns hidden in fall are paying off now. Red-bellied woodpeckers pry nuts from the cracks where they wedged them. Squirrels sniff out buried acorns through the snow. And blue jays? Blue jays remember where they hid theirs, and sometimes where someone else hid theirs too."
+   },
+   {
+    "id": "northern-visitors",
+    "title": "Visitors from the frozen north",
+    "species": [
+     "herring-gull",
+     "bufflehead",
+     "brant"
+    ],
+    "body": "When northern lakes freeze, the birds come to our open water. Buffleheads dive for snails, brant graze on eelgrass, and the gulls watch them all. Herring gulls aren't above stealing a snack right out of someone else's beak. Winter on the harbor is a little bit of a soap opera."
+   },
+   {
+    "id": "hawk-watch",
+    "title": "Everyone watches the hawk",
+    "species": [
+     "red-tailed-hawk",
+     "peregrine-falcon",
+     "rock-pigeon"
+    ],
+    "body": "In bare trees and on bright ledges, the hawks are easy to spot. Red-tailed hawk couples sit together on cold mornings, and peregrines perch high on bridges. Below them, the pigeon flocks burst up and wheel around the block whenever a falcon shadow passes. Then they settle back down, a little out of breath."
+   },
+   {
+    "id": "big-roost",
+    "title": "The big sleepover",
+    "species": [
+     "american-crow",
+     "european-starling",
+     "house-sparrow"
+    ],
+    "body": "At dusk, crows from all over fly to one big winter roost, sometimes thousands together, cawing the whole way. Starlings crowd onto warm rooftops near chimneys. House sparrows pile into the thickest hedge on the block. In the cold, nobody sleeps alone."
+   },
+   {
+    "id": "sleeping-in",
+    "title": "The ones sleeping in",
+    "species": [
+     "groundhog",
+     "pond-slider",
+     "raccoon"
+    ],
+    "body": "Some neighbors are skipping winter entirely. Groundhogs are deep in their burrows, hearts slowed to a few beats a minute. Turtles rest in the mud at the bottom of the pond, barely breathing. Raccoons aren't hibernating, but on the coldest nights they just stay in. Very reasonable."
+   }
+  ]
+ },
+ {
+  "season": "spring",
+  "name": "Everyone comes home",
+  "intro": "The air goes soft and smells like wet dirt and blossoms. Every morning there's someone new: travelers back from the south, nests being built, and songs coming from every direction at once.",
+  "stories": [
+   {
+    "id": "dawn-chorus",
+    "title": "The dawn chorus",
+    "species": [
+     "american-robin",
+     "northern-cardinal",
+     "song-sparrow",
+     "northern-mockingbird"
+    ],
+    "body": "Before it's even light, a robin starts. Then a cardinal whistles cheer, cheer, cheer, a song sparrow joins in, and a mockingbird sings everyone's songs back at them. By sunrise it's a whole orchestra. Each bird is saying the same thing, really: this spot is mine, and I'm wonderful."
+   },
+   {
+    "id": "house-hunting",
+    "title": "The great house hunt",
+    "species": [
+     "house-sparrow",
+     "european-starling",
+     "eastern-carpenter-bee"
+    ],
+    "body": "Every nook in the neighborhood is being fought over. House sparrows and starlings argue over the same holes in walls and signs. Meanwhile carpenter bees are carving brand new round doorways into old wooden benches, males hovering outside like doormen."
+   },
+   {
+    "id": "marsh-opens",
+    "title": "The marsh opens for business",
+    "species": [
+     "red-winged-blackbird",
+     "great-blue-heron",
+     "black-crowned-night-heron"
+    ],
+    "body": "The red-winged blackbird males arrive first, while it's still chilly, and each one grabs a cattail and shouts conk-la-ree. A week or two later the females show up to pick the best singer. The herons are back too, fishing the edges, while night herons sleep the day away in the trees."
+   },
+   {
+    "id": "swap-at-the-hedge",
+    "title": "A swap at the hedge",
+    "species": [
+     "dark-eyed-junco",
+     "white-throated-sparrow",
+     "gray-catbird"
+    ],
+    "body": "The winter crew is leaving. Juncos and white-throated sparrows are flying north to the Canadian woods. And right as they go, the catbirds arrive from the Caribbean, meowing from the same bushes. The hedge is never empty for long."
+   },
+   {
+    "id": "wake-up-call",
+    "title": "The wake-up call",
+    "species": [
+     "groundhog",
+     "pond-slider",
+     "common-eastern-bumble-bee"
+    ],
+    "body": "The sleepers are waking up. Groundhogs climb out hungry. Turtles crawl onto the first sunny logs. And big bumble bee queens, who spent the whole winter alone underground, fly low over the lawns looking for a place to start a family."
+   },
+   {
+    "id": "nest-builders",
+    "title": "The nest builders",
+    "species": [
+     "tufted-titmouse",
+     "american-robin",
+     "canada-goose"
+    ],
+    "body": "Everyone has a different style. Titmice line their nests with soft fur, sometimes plucked right off a sleeping raccoon. Robins build with mud and grass, shaping the cup with their chest. Geese just pick a spot on the ground and dare you to come closer. Soon there'll be goslings."
+   }
+  ]
+ },
+ {
+  "season": "summer",
+  "name": "The busy, buzzing months",
+  "intro": "Long days, warm nights, and everything growing. The nests are full, the flowers are humming, the ponds are busy, and after dark the lawns light up.",
+  "stories": [
+   {
+    "id": "fledglings",
+    "title": "Fledgling season",
+    "species": [
+     "american-robin",
+     "house-sparrow",
+     "american-crow"
+    ],
+    "body": "The babies are out of the nest but not quite good at flying yet. Spotty young robins hop on the lawn, fluffy sparrows beg loudly from the hedge, and young crows follow their parents everywhere, squawking. Their parents are nearby, still feeding them. If you find one on the ground, it's usually fine. Give them space."
+   },
+   {
+    "id": "flower-shift",
+    "title": "The flower shift",
+    "species": [
+     "common-eastern-bumble-bee",
+     "western-honey-bee",
+     "monarch",
+     "large-milkweed-bug"
+    ],
+    "body": "The flowers are open for business and the customers are lining up. Bumble bees shake pollen loose with a buzz, honey bees zip home to dance directions, monarch caterpillars munch milkweed leaves, and milkweed bugs cluster on the pods. One milkweed plant is a whole neighborhood."
+   },
+   {
+    "id": "evening-crew",
+    "title": "The evening crew",
+    "species": [
+     "chimney-swift",
+     "common-eastern-firefly",
+     "moths"
+    ],
+    "body": "As the sun goes down, the chimney swifts twitter over the rooftops one last time and drop into their chimneys. Then the fireflies rise from the grass, blinking. And by full dark, the moths are circling the streetlights. The shift change happens in about half an hour."
+   },
+   {
+    "id": "pond-day",
+    "title": "A day at the pond",
+    "species": [
+     "pond-slider",
+     "blue-dasher",
+     "mallard",
+     "great-blue-heron"
+    ],
+    "body": "Turtles stack up on the log to sunbathe. Blue dashers zip out from their perches to snatch mosquitoes. Mallard moms lead lines of ducklings through the shallows. And at the edge, a heron stands perfectly still, and everyone keeps an eye on them."
+   },
+   {
+    "id": "harbor-summer",
+    "title": "Summer on the harbor",
+    "species": [
+     "common-tern",
+     "double-crested-cormorant",
+     "herring-gull"
+    ],
+    "body": "Terns dive headfirst for little silver fish. Cormorants swim with only their necks showing, then stand on pilings with their wings spread out to dry. And the gulls watch everyone, waiting for someone to drop something. Lunch on the harbor is a group activity."
+   },
+   {
+    "id": "hot-afternoon",
+    "title": "The hot afternoon",
+    "species": [
+     "eastern-gray-squirrel",
+     "rock-pigeon",
+     "house-sparrow"
+    ],
+    "body": "When it's really hot, everyone slows down. Squirrels sploot, lying belly-flat on a shady branch. Pigeons line up on the shady side of the building, fluttering their throats to cool off. Sparrows wiggle in dust baths. Nobody is in a hurry until the evening."
+   }
+  ]
+ }
+]

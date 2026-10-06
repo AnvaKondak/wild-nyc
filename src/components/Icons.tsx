@@ -14,21 +14,11 @@ export function SunIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: 
   );
 }
 
-export function HouseIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: IconProps) {
-  return (
-    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinejoin="round">
-      <Path d="M3 11l9-7 9 7v9H3z" />
-      <Path d="M10 20v-5h4v5" />
-    </Svg>
-  );
-}
-
-export function PeopleIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: IconProps) {
+export function BookIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: IconProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
-      <Circle cx={8} cy={9} r={3} />
-      <Circle cx={16} cy={9} r={3} />
-      <Path d="M2 20c0-3 3-5 6-5s6 2 6 5M12 20c0-3 2-5 4-5s6 2 6 5" />
+      <Path d="M12 6c-2-1.5-5-2-9-2v14c4 0 7 .5 9 2 2-1.5 5-2 9-2V4c-4 0-7 .5-9 2z" />
+      <Path d="M12 6v14" />
     </Svg>
   );
 }

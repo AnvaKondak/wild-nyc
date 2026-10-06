@@ -1,7 +1,7 @@
 // Live neighborhood data from the Wild Neighbors API (server/api).
 // The only thing ever sent is the neighborhood cell, in the URL.
 
-import type { Species, StorySlide } from '@/content/types';
+import type { Species } from '@/content/types';
 
 export type LiveSpecies = {
   id: string;
@@ -82,39 +82,6 @@ export function seenLabel(live: LiveSpecies | undefined, today: Date): string | 
   if (days <= 7) return 'Seen nearby this week';
   if (days <= 31) return 'Seen nearby this month';
   return null;
-}
-
-/** Most recently active nearby first; species with no live data keep their order, after. */
-export function rankByLive<T extends { id: string }>(items: T[], live: LiveMap): T[] {
-  if (live.size === 0) return items;
-  const score = (id: string) => {
-    const s = live.get(id);
-    return s ? [s.recent, s.year] : [-1, -1];
-  };
-  return items
-    .map((item, index) => ({ item, index }))
-    .sort((a, b) => {
-      const [ar, ay] = score(a.item.id);
-      const [br, by] = score(b.item.id);
-      return br - ar || by - ay || a.index - b.index;
-    })
-    .map(({ item }) => item);
-}
-
-/**
- * Right now: scene slides about species seen nearby lately come first. Chapter
- * slides (Arriving / Goodbye) stay at the end, in order.
- */
-export function orderStory(slides: StorySlide[], live: LiveMap): StorySlide[] {
-  if (live.size === 0) return slides;
-  const scenes = slides.filter((s) => (s.kind ?? 'scene') === 'scene');
-  const chapters = slides.filter((s) => (s.kind ?? 'scene') !== 'scene');
-  const recent = (s: StorySlide) => (s.speciesId ? live.get(s.speciesId)?.recent ?? 0 : 0);
-  const ranked = scenes
-    .map((slide, index) => ({ slide, index }))
-    .sort((a, b) => Number(recent(b.slide) > 0) - Number(recent(a.slide) > 0) || a.index - b.index)
-    .map(({ slide }) => slide);
-  return [...ranked, ...chapters];
 }
 
 /** Species who are around this season and have actually been seen nearby this year. */

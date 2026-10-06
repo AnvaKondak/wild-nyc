@@ -4,14 +4,15 @@ Read `CLAUDE.md` first for principles, stack and design tokens.
 
 ## Navigation
 
-Bottom tab bar, four tabs, in this order:
+Bottom tab bar, three tabs, in this order:
 
 | Tab | Screen | Icon |
 | --- | --- | --- |
-| Right now | Story of what neighbors are doing now | sun |
-| Places | Neighborhood switcher + illustrated street | house |
-| Neighbors | Illustrated scene of neighbors you've met | two people |
+| Right now | Story of what neighbors are doing now, in this weather | sun |
+| Chapters | Each season's story: overview, neighbors together, comings and goings | open book |
 | Kindness | Small kindnesses + hurt-animal help | heart |
+
+(Places and Neighbors were removed in October 2026; Chapters replaced them.)
 
 Welcome shows once, before the tabs. The neighbor profile is pushed from any screen that
 shows a species.
@@ -57,34 +58,19 @@ A `{where}` placeholder in slide text is replaced per neighborhood ("on your blo
 
 Example fall content is in the mock's `S` object. Reuse it as the first content set.
 
-## 3. Places (`mocks/3-places.html`)
+## 3. Chapters
 
-- Title "Your *block*", neighborhood pills (same as Right now).
-- A hand-drawn street illustration (buildings, bodega awning, tree, lamp post, hedge,
-  curb, street). Species "spots" sit on it as round stickers: pigeons on the ledge,
-  squirrels in the tree, sparrow gang in the hedge.
-- Tap a spot → blue card below: friendly name, "Rock Pigeon · a kit", why they like
-  that spot, "In their lives right now", and buttons **I noticed them today** and
-  **How to help** (→ Kindness).
-- "I noticed them today" toggles to "Noticed today". It records species + date +
-  neighborhood cell only, on the phone.
-- v1: one generic street illustration reused for every neighborhood is fine.
+- Title "Season *chapters*", season pills (the current one marked "now", selected first).
+- A tinted card with the season's name ("The great getting-ready") and a short overview.
+- Stories of neighbors together, two to four species each (squirrels and blue jays
+  racing to bury acorns; the mockingbird guarding a berry bush from robins). Overlapping
+  photo stickers, a title, a short story, and a **Meet the …** link per species.
+- **Coming and going**: the season's arriving and goodbye journeys, each linking to the
+  species page.
+- Footer: data and photo credits (iNaturalist, eBird, Open-Meteo).
+- Content: `src/content/chapters.json`.
 
-## 4. Neighbors you've met (`mocks/4-neighbors.html`)
-
-Replaces a sticker book. One big illustrated riso scene of a neighborhood.
-
-- Header: "9 of 40 have moved in", title "Neighbors *you've met*".
-- The scene: building with ledges, wire, tree, hedge, flower box, trash can, sky, street.
-- **Met** species appear as stickers in their natural spot (pigeons on the ledge,
-  starlings and mourning doves on the wire, squirrels in the tree, sparrows in the hedge,
-  robins on the sidewalk, gulls in the sky, monarchs at the flower box, raccoons in the
-  trash can).
-- **Not met** species show as faint dashed outlines in their spot.
-- Tap any → card. Met: "Your neighbor", name, collective noun, "Moved in Sept 12" + where
-  they live, **Visit their page**. Not met: "Waiting to move in" + a hint on how to find them.
-- **Share your neighborhood** exports the scene as an image.
-- A species "moves in" the first time the user taps "I noticed them" for it.
+## 4. (removed)
 
 ## 5. Neighbor profile (`mocks/5-neighbor-profile.html`)
 
