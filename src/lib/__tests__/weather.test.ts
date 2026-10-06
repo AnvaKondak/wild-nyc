@@ -33,12 +33,16 @@ describe('describeWeather', () => {
 });
 
 describe('fetchWeather', () => {
-  const body = { current: { weather_code: 61, temperature_2m: 51.2, apparent_temperature: 48, wind_speed_10m: 8, wind_gusts_10m: 14 } };
+  const body = {
+    current: { weather_code: 61, temperature_2m: 51.2, apparent_temperature: 48, wind_speed_10m: 8, wind_gusts_10m: 14 },
+    daily: { weather_code: [61, 71], temperature_2m_min: [45, 28], temperature_2m_max: [55, 34], wind_speed_10m_max: [10, 18], wind_direction_10m_dominant: [200, 340] },
+  };
 
   it('sends only the cell center, rounded, and no credentials', async () => {
     const fetchImpl = jest.fn(async () => ({ ok: true, json: async () => body })) as unknown as typeof fetch;
     const w = await fetchWeather('dr5rke', { fetchImpl });
     expect(w?.tags).toEqual(['rain']);
+    expect(w?.tomorrow).toEqual({ sky: 'snow', lowF: 28, highF: 34, windMph: 18, windFrom: 340 });
     const [url, init] = (fetchImpl as unknown as jest.Mock).mock.calls[0];
     const params = new URL(url).searchParams;
     expect(params.get('latitude')).toMatch(/^\d+\.\d{2}$/);

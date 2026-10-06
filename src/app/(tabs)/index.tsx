@@ -16,6 +16,7 @@ import { decodeGeohash } from '@/lib/geohash';
 import { arrivalSlide, arrivalsAmong } from '@/lib/arrivals';
 import { dailyNotes } from '@/lib/dailyNote';
 import { buildIntro } from '@/lib/intro';
+import { buildTomorrow } from '@/lib/tomorrow';
 import type { Neighborhood } from '@/lib/neighborhood';
 import { aroundSlide, buildArc, pickAround, pickLead, poolFor, type StoryContext, type StoryPlace } from '@/lib/neighborStory';
 import { hashString, seededRandom } from '@/lib/random';
@@ -127,9 +128,11 @@ export default function RightNow() {
     const phrase = here.placeName ? `near ${here.placeName}` : here.where;
     const newcomer = arrived.find((s) => s.id === lead?.id) ?? arrived[0];
     const arrival = newcomer ? arrivalSlide(newcomer, stories, now, phrase, here.local, ctx.weather, random) : undefined;
-    return [intro, ...(arrival ? [arrival] : []), ...(lead ? buildArc(lead, here, ctx, 'lead', random, { today: cast }) : []), last];
+    // A reason to come back tomorrow: an arrival, a migration wind, frost, or tomorrow's neighbor.
+    const teaser = buildTomorrow({ places: placesInOrder, index: at, ctx, now, forecast: weather?.tomorrow, random });
+    return [intro, ...(arrival ? [arrival] : []), ...(lead ? buildArc(lead, here, ctx, 'lead', random, { today: cast }) : []), teaser, last];
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lead, around, arrived, ctx, here, visiting]);
+  }, [lead, around, arrived, ctx, here, visiting, placesInOrder, at]);
 
   // Switching neighborhood or time of day restarts the story.
   const [index, setIndex] = useState(0);
@@ -197,7 +200,7 @@ export default function RightNow() {
     setIndex(id === lead?.id ? 1 : 0);
   };
   const onCta = () => {
-    if (slide.kind === 'intro') next();
+    if (slide.kind === 'intro' || slide.kind === 'tomorrow') next();
     else if (slide.kind === 'around') {
       setVisiting(null);
       setIndex(0);

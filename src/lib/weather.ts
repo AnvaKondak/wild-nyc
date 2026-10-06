@@ -21,6 +21,17 @@ export type Weather = {
   gustMph: number;
   /** Strongest first: snow, rain, fog, then wind, heat, cold. */
   tags: WeatherTag[];
+  /** Tomorrow's forecast, for the story's "Tomorrow" teaser. */
+  tomorrow?: Forecast;
+};
+
+export type Forecast = {
+  sky: Sky;
+  lowF: number;
+  highF: number;
+  windMph: number;
+  /** Where the wind comes from, in degrees (0 = north, 90 = east). */
+  windFrom: number;
 };
 
 const HEAT_F = 85; // feels-like at or above
@@ -84,6 +95,9 @@ export async function fetchWeather(
     latitude: lat.toFixed(2),
     longitude: lng.toFixed(2),
     current: 'temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_gusts_10m',
+    daily: 'weather_code,temperature_2m_min,temperature_2m_max,wind_speed_10m_max,wind_direction_10m_dominant',
+    forecast_days: '2',
+    timezone: 'America/New_York',
     temperature_unit: 'fahrenheit',
     wind_speed_unit: 'mph',
   });
@@ -96,9 +110,21 @@ export async function fetchWeather(
       headers: { Accept: 'application/json' },
     });
     if (!res.ok) return null;
-    const c = (await res.json())?.current;
+    const json = await res.json();
+    const c = json?.current;
     if (!c || typeof c.weather_code !== 'number') return null;
-    return makeWeather(c.weather_code, c.temperature_2m, c.apparent_temperature, c.wind_speed_10m, c.wind_gusts_10m ?? 0);
+    const now = makeWeather(c.weather_code, c.temperature_2m, c.apparent_temperature, c.wind_speed_10m, c.wind_gusts_10m ?? 0);
+    const d = json?.daily;
+    if (d?.weather_code?.length > 1) {
+      now.tomorrow = {
+        sky: skyFromCode(d.weather_code[1]),
+        lowF: d.temperature_2m_min[1],
+        highF: d.temperature_2m_max[1],
+        windMph: d.wind_speed_10m_max[1],
+        windFrom: d.wind_direction_10m_dominant[1],
+      };
+    }
+    return now;
   } catch {
     return null; // offline: stories just use the everyday moments
   } finally {
