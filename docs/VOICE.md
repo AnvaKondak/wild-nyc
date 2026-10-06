@@ -27,7 +27,8 @@ stoop. The animals have personalities. We laugh *with* them, never at them.
 - **Cute words sparingly** ("tiny", "little", "pat-pat-pat") so they keep their charm.
 - **Never mocking, gross or scary.** No jokes about animals being dumb, dirty or pests.
 - **True.** The fun sits on top of real behavior. If a fact is shaky, cut it.
-- **"Who", not "that"**, for animals. "They" when we don't know or it doesn't matter.
+- **"Who", not "that"**, for animals, and **"they", never "it"**: "their feathers", "until
+  they give up", "That's a heron" (not "It's a heron"). "It" is fine for things: the rain, an acorn, a web.
 - **No guilt, no numbers.** Kindness nudges are invitations, not chores.
 - **`{place}`** becomes "near Liberty State Park" or "on your block". Use it where
   either reads naturally, at most once per moment.
