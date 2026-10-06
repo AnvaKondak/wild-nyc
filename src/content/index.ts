@@ -3,10 +3,12 @@
 
 import chaptersJson from './chapters.json';
 import encountersJson from './encounters.json';
+import eventsJson from './events.json';
 import factsJson from './facts.json';
 import hurtAnimalJson from './hurt-animal.json';
 import kindnessJson from './kindness.json';
 import momentsJson from './moments.json';
+import type { SeasonEvent } from '@/lib/events';
 import { extraPhotoAssets, photoAssets } from './photoAssets';
 import extraPhotosJson from './photos-extra.json';
 import photosJson from './photos.json';
@@ -43,6 +45,8 @@ export const placeKinds = placesJson.kinds as Record<PlaceKind, PlaceKindInfo>;
 export const hurtAnimalGuide = hurtAnimalJson as HurtAnimalGuide;
 export const seasonChapters = chaptersJson as SeasonChapter[];
 export const encounters = encountersJson as Encounter[];
+/** The big moments of the season (src/lib/events.ts decides when they're happening). */
+export const events = eventsJson as SeasonEvent[];
 /** The region the app covers today. Chapters are told for all of it. */
 export const region = regionJson as Region;
 

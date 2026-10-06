@@ -11,10 +11,11 @@ import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { RoundNav, StoryCard, StoryProgress, useSwipe } from '@/components/story/parts';
-import { encounters, facts, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, speciesPhotos, stories, type Period, type StorySlide } from '@/content';
+import { encounters, events, facts, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, speciesPhotos, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
 import { arrivalSlide, arrivalsAmong } from '@/lib/arrivals';
 import { dailyNotes } from '@/lib/dailyNote';
+import { activeEvent, eventSlide } from '@/lib/events';
 import { buildIntro } from '@/lib/intro';
 import { buildTomorrow } from '@/lib/tomorrow';
 import type { Neighborhood } from '@/lib/neighborhood';
@@ -130,7 +131,10 @@ export default function RightNow() {
     const arrival = newcomer ? arrivalSlide(newcomer, stories, now, phrase, here.local, ctx.weather, random) : undefined;
     // A reason to come back tomorrow: an arrival, a migration wind, frost, or tomorrow's neighbor.
     const teaser = buildTomorrow({ places: placesInOrder, index: at, ctx, now, forecast: weather?.tomorrow, random });
-    return [intro, ...(arrival ? [arrival] : []), ...(lead ? buildArc(lead, here, ctx, 'lead', random, { today: cast }) : []), teaser, last];
+    // A big moment of the season (the dawn chorus, a migration night, a snow day) comes first.
+    const moment = activeEvent(events, now, weather);
+    const big = moment ? [eventSlide(moment, now, phrase, here.local, random)] : [];
+    return [intro, ...big, ...(arrival ? [arrival] : []), ...(lead ? buildArc(lead, here, ctx, 'lead', random, { today: cast }) : []), teaser, last];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lead, around, arrived, ctx, here, visiting, placesInOrder, at]);
 
