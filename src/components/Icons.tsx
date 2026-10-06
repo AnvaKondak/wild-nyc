@@ -14,6 +14,15 @@ export function SunIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: 
   );
 }
 
+export function HomeIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="M4 11l8-7 8 7" />
+      <Path d="M6 9.5V20h12V9.5M10 20v-5h4v5" />
+    </Svg>
+  );
+}
+
 export function BookIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: IconProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">

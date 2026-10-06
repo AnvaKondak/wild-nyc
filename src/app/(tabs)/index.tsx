@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { AppState, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
-import { BellIcon, BellOffIcon, ChevronLeftIcon, ChevronRightIcon, SoundOffIcon, SoundOnIcon } from '@/components/Icons';
+import { FloatingCast } from '@/components/Floating';
+import { BellIcon, BellOffIcon, ChevronLeftIcon, ChevronRightIcon, HomeIcon, SoundOffIcon, SoundOnIcon } from '@/components/Icons';
 import { GroupSticker } from '@/components/GroupSticker';
 import { NeighborhoodPills } from '@/components/NeighborhoodPills';
 import { PeriodIcon } from '@/components/PeriodIcon';
@@ -36,6 +37,17 @@ import { periodThemes } from '@/theme/periodTheme';
 import { border, colors, fonts, offsetShadow } from '@/theme/tokens';
 
 const PERIOD_LABELS: Record<Period, string> = { dawn: 'Dawn', midday: 'Midday', dusk: 'Dusk', night: 'Night' };
+const GREETINGS: Record<Period, string> = { dawn: 'Good morning', midday: 'Good afternoon', dusk: 'Good evening', night: 'Hello, night owl' };
+/** After this long away, opening the app again starts on the home screen. */
+const HOME_AFTER = 30 * 60 * 1000;
+
+/** "the robins, the crows and 3 more" style lists, lowercase. */
+function namesList(names: string[]): string {
+  const shown = names.length <= 4 ? names : names.slice(0, 3);
+  const rest = names.length - shown.length;
+  if (rest > 0) return `${shown.join(', ')} and ${rest} more`;
+  return shown.length > 1 ? `${shown.slice(0, -1).join(', ')} and ${shown[shown.length - 1]}` : shown[0] ?? '';
+}
 
 function storyPlace(n: Neighborhood): StoryPlace {
   const place = n.placeId ? places.find((p) => p.id === n.placeId) : undefined;
@@ -156,8 +168,31 @@ export default function RightNow() {
   const next = useCallback(() => setIndex((n) => (n + 1) % story.length), [story.length]);
   const prev = useCallback(() => setIndex((n) => Math.max(0, n - 1)), []);
 
-  // Swipe left/right, like stories.
-  const swipe = useSwipe(next, prev);
+  // The home screen comes first each time the app opens (and after a while away):
+  // today's neighbors floating over the scene, then into the story or the whole cast.
+  const [home, setHome] = useState(!(__DEV__ && params.slide));
+  const awaySince = useRef(0);
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (s) => {
+      if (s === 'background') awaySince.current = Date.now();
+      else if (s === 'active' && awaySince.current && Date.now() - awaySince.current > HOME_AFTER) setHome(true);
+    });
+    return () => sub.remove();
+  }, []);
+  const startStory = useCallback(() => {
+    setVisiting(null);
+    setIndex(0);
+    setHome(false);
+  }, []);
+  const seeEveryone = () => {
+    setIndex(story.length - 1);
+    setHome(false);
+  };
+  // Back from the first slide goes home.
+  const back = useCallback(() => (i === 0 ? setHome(true) : prev()), [i, prev]);
+
+  // Swipe left/right, like stories. On the home screen, swiping left starts the story.
+  const swipe = useSwipe(home ? startStory : next, home ? () => {} : back);
 
   const [focused, setFocused] = useState(true);
   useFocusEffect(
@@ -214,6 +249,13 @@ export default function RightNow() {
     else if (species) router.push({ pathname: '/species/[id]', params: { id: species.id } });
   };
 
+  const others = around.filter((s) => s.id !== lead?.id);
+  const homeCast = [...(lead ? [lead.id] : []), ...others.map((s) => s.id)];
+  const homeList = namesList(others.map((s) => s.friendlyName.toLowerCase()));
+  const homeBody = lead
+    ? `Today we're following the ${lead.friendlyName.toLowerCase()}.${homeList ? ` The ${homeList} are around too.` : ''}`
+    : 'Come see who\'s around.';
+
   const setting = slide.setting ?? (header.period === 'night' ? 'night-sky' : 'sky');
   // A different photo of the same animal on each slide of their story.
   const photos = speciesPhotos((species ?? getSpecies('rock-pigeon')!).id);
@@ -243,7 +285,7 @@ export default function RightNow() {
       )}
       <Screen background="transparent" scroll={false}>
         <View {...swipe} style={{ flex: 1 }}>
-          <StoryProgress count={story.length} index={i} theme={theme} />
+          {!home && <StoryProgress count={story.length} index={i} theme={theme} />}
 
           <View style={{ paddingTop: 14 }}>
             <NeighborhoodPills ink={theme.ink} background={theme.bg} />
@@ -269,6 +311,17 @@ export default function RightNow() {
                 )}
               </View>
             </Pressable>
+            {!home && (
+              <Pressable
+                onPress={() => setHome(true)}
+                accessibilityRole="button"
+                accessibilityLabel="Home"
+                hitSlop={6}
+                style={({ pressed }) => ({ marginTop: 18, marginRight: 8, width: 44, height: 44, borderRadius: 22, borderWidth: border.width, borderColor: theme.ink, backgroundColor: theme.bg, alignItems: 'center', justifyContent: 'center', opacity: pressed ? 0.6 : 1 })}
+              >
+                <HomeIcon color={theme.ink} />
+              </Pressable>
+            )}
             <Pressable
               onPress={toggleNotes}
               accessibilityRole="switch"
@@ -314,7 +367,29 @@ export default function RightNow() {
             </Pressable>
           </View>
 
-          {slide.kind === 'around' ? (
+          {home ? (
+            <>
+              <Text accessibilityRole="header" style={{ fontFamily: fonts.display, fontSize: 30, color: theme.ink, paddingHorizontal: 22, paddingTop: 14, textShadowColor: header.period === 'dusk' || header.period === 'night' ? colors.ink : colors.yellow, textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 0 }}>
+                Wild <Text style={{ fontFamily: fonts.displayItalic, color: theme.accent }}>Neighbors</Text>
+              </Text>
+              <View style={{ height: 215, marginTop: 10 }} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+                <FloatingCast ids={homeCast} scale={0.86} />
+              </View>
+              <StoryCard kicker={GREETINGS[header.period]} title={placeName ? `Today in ${placeName}` : `Today ${here.where}`} body={homeBody} theme={theme} bottom />
+              <View style={{ paddingHorizontal: 16, paddingBottom: 8 }}>
+                <Button
+                  label={lead ? `Today's story: the ${lead.friendlyName.toLowerCase()}` : "Today's story"}
+                  onPress={startStory}
+                  shadow={theme.shadow}
+                  style={{ backgroundColor: theme.btnBg }}
+                  color={theme.btnInk}
+                />
+                <Pressable onPress={seeEveryone} accessibilityRole="button" style={{ minHeight: 44, alignItems: 'center', justifyContent: 'center' }}>
+                  <Text style={{ fontFamily: fonts.bodySemi, fontSize: 15, color: theme.ink, textDecorationLine: 'underline' }}>See everyone around</Text>
+                </Pressable>
+              </View>
+            </>
+          ) : slide.kind === 'around' ? (
             // Who else is around: tap one for their story. Today's neighbor is first.
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', columnGap: 10, rowGap: 14, paddingHorizontal: 16, marginTop: 24 }}>
               {(slide.aroundSpecies ?? []).map((id, n) => {
@@ -347,7 +422,7 @@ export default function RightNow() {
           ) : (
             /* Prev / next sit beside the photo, in the middle of the screen. */
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, marginTop: 20 }}>
-              <RoundNav label="Previous story" onPress={prev} color={theme.ink} fill={theme.bg}>
+              <RoundNav label={i === 0 ? 'Home' : 'Previous story'} onPress={back} color={theme.ink} fill={theme.bg}>
                 <ChevronLeftIcon color={theme.ink} />
               </RoundNav>
               <Pressable
@@ -377,7 +452,7 @@ export default function RightNow() {
           )}
 
           {/* A shortcut to everyone around, so no one has to tap through the whole story. */}
-          {slide.kind !== 'around' && (
+          {!home && slide.kind !== 'around' && (
             <Pressable
               onPress={() => setIndex(story.length - 1)}
               accessibilityRole="button"
@@ -401,17 +476,21 @@ export default function RightNow() {
             </Pressable>
           )}
 
-          <StoryCard kicker={slide.kicker} title={slide.title} body={slide.body} fact={slide.fact} theme={theme} />
+          {!home && (
+            <>
+              <StoryCard kicker={slide.kicker} title={slide.title} body={slide.body} fact={slide.fact} theme={theme} />
 
-          <View style={{ paddingHorizontal: 16, paddingBottom: 20 }}>
-            <Button
-              label={ctaLabel}
-              onPress={onCta}
-              shadow={theme.shadow}
-              style={{ backgroundColor: theme.btnBg }}
-              color={theme.btnInk}
-            />
-          </View>
+              <View style={{ paddingHorizontal: 16, paddingBottom: 20 }}>
+                <Button
+                  label={ctaLabel}
+                  onPress={onCta}
+                  shadow={theme.shadow}
+                  style={{ backgroundColor: theme.btnBg }}
+                  color={theme.btnInk}
+                />
+              </View>
+            </>
+          )}
         </View>
       </Screen>
     </View>

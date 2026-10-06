@@ -2,13 +2,14 @@
 // park (meet the neighbors), midday on the block (a new story every day), dusk by the
 // water (their own lives while you're busy), then find your neighborhood.
 
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { Animated, Easing, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
 import { useReduceMotion } from '@/components/backdrop/motion';
 import { Button } from '@/components/Button';
+import { Bob, FloatingCast } from '@/components/Floating';
 import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
@@ -105,7 +106,7 @@ export default function Welcome() {
 
           {/* The picture for each page, floating gently in the scene. */}
           <View style={{ height: 250, marginTop: 24 }} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-            {index === 0 && <FloatingCast />}
+            {index === 0 && <FloatingCast ids={CAST} />}
             {index === 1 && <TimesOfDay ink={theme.ink} />}
             {index === 2 && <BusyPair />}
           </View>
@@ -138,30 +139,6 @@ export default function Welcome() {
         </View>
       </Screen>
     </View>
-  );
-}
-
-/** A few neighbors' stickers bobbing gently, each at their own pace. */
-function FloatingCast() {
-  const still = useReduceMotion();
-  const spots = [
-    { left: '6%', top: 40, size: 112, rotate: -8 },
-    { left: '36%', top: 0, size: 104, rotate: 6 },
-    { left: '64%', top: 46, size: 108, rotate: -4 },
-    { left: '16%', top: 140, size: 96, rotate: 9 },
-    { left: '52%', top: 146, size: 92, rotate: -6 },
-  ] as const;
-  return (
-    <>
-      {CAST.map((id, i) => {
-        const s = getSpecies(id)!;
-        return (
-          <Bob key={id} still={still} delay={i * 300} style={{ position: 'absolute', left: spots[i].left, top: spots[i].top }}>
-            <Sticker art={s.art} photo={speciesPhoto(id)} size={spots[i].size} tint={colors[s.tint]} rotate={spots[i].rotate} />
-          </Bob>
-        );
-      })}
-    </>
   );
 }
 
@@ -203,17 +180,4 @@ function BusyPair() {
       })}
     </View>
   );
-}
-
-/** A slow, gentle bob. Still when the person has asked their phone to reduce motion. */
-function Bob({ children, still, delay, style }: { children: React.ReactNode; still: boolean; delay: number; style?: object }) {
-  const y = useRef(new Animated.Value(0)).current;
-  useEffect(() => {
-    if (still) return;
-    const half = { duration: 1800, easing: Easing.inOut(Easing.sin), useNativeDriver: true };
-    const anim = Animated.loop(Animated.sequence([Animated.delay(delay), Animated.timing(y, { ...half, toValue: 1 }), Animated.timing(y, { ...half, toValue: 0 })]));
-    anim.start();
-    return () => anim.stop();
-  }, [still, delay, y]);
-  return <Animated.View style={[style, { transform: [{ translateY: y.interpolate({ inputRange: [0, 1], outputRange: [0, -8] }) }] }]}>{children}</Animated.View>;
 }
