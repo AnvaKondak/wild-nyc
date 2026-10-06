@@ -12,7 +12,6 @@ type Actions = {
   addNeighborhood: (neighborhood: Neighborhood) => void;
   selectNeighborhood: (id: string) => void;
   removeNeighborhood: (id: string) => void;
-  toggleNoticed: (speciesId: string, date: string, cell: string) => void;
   toggleKindness: (id: string, seasonKey: string) => void;
   setSound: (on: boolean) => void;
   setNotes: (on: boolean) => void;
@@ -48,7 +47,6 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       addNeighborhood: (neighborhood) => dispatch({ type: 'addNeighborhood', neighborhood }),
       selectNeighborhood: (id) => dispatch({ type: 'selectNeighborhood', id }),
       removeNeighborhood: (id) => dispatch({ type: 'removeNeighborhood', id }),
-      toggleNoticed: (speciesId, date, cell) => dispatch({ type: 'toggleNoticed', speciesId, date, cell }),
       toggleKindness: (id, seasonKey) => dispatch({ type: 'toggleKindness', id, seasonKey }),
       setSound: (on) => dispatch({ type: 'setSound', on }),
       setNotes: (on) => dispatch({ type: 'setNotes', on }),

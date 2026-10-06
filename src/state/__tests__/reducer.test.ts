@@ -1,6 +1,6 @@
 import type { Neighborhood } from '@/lib/neighborhood';
 import { initialState, reducer, type AppState } from '../reducer';
-import { currentNeighborhood, isNoticedToday, kindnessDone, movedIn } from '../selectors';
+import { currentNeighborhood, kindnessDone } from '../selectors';
 
 const home: Neighborhood = { id: 'home', label: 'Home', cell: 'dr5rsp', kind: 'block' };
 const park: Neighborhood = { id: 'park', label: 'Prospect Park', cell: 'dr5rkw', kind: 'park' };
@@ -37,24 +37,10 @@ describe('neighborhoods', () => {
   });
 });
 
-describe('noticed', () => {
-  const notice = (s: AppState, date: string) =>
-    reducer(s, { type: 'toggleNoticed', speciesId: 'rock-pigeon', date, cell: home.cell });
-
-  it('stores only species, date and cell', () => {
-    const s = notice(initialState, '2026-10-01');
-    expect(s.noticed).toEqual([{ speciesId: 'rock-pigeon', date: '2026-10-01', cell: 'dr5rsp' }]);
-    expect(isNoticedToday(s, 'rock-pigeon', '2026-10-01', 'dr5rsp')).toBe(true);
-    expect(isNoticedToday(s, 'rock-pigeon', '2026-10-02', 'dr5rsp')).toBe(false);
-  });
-
-  it('toggles off the same day', () => {
-    expect(notice(notice(initialState, '2026-10-01'), '2026-10-01').noticed).toEqual([]);
-  });
-
-  it('moves a species in on the first day noticed', () => {
-    const s = notice(notice(initialState, '2026-10-03'), '2026-09-12');
-    expect(movedIn(s).get('rock-pigeon')).toBe('2026-09-12');
+describe('hydrate', () => {
+  it('drops "I noticed them" records from older saves', () => {
+    const old = { ...initialState, noticed: [{ speciesId: 'rock-pigeon', date: '2026-10-01', cell: 'dr5rsp' }] } as AppState;
+    expect('noticed' in reducer(initialState, { type: 'hydrate', state: old })).toBe(false);
   });
 });
 

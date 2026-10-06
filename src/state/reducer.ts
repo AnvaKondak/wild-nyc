@@ -3,19 +3,10 @@
 
 import type { Neighborhood } from '@/lib/neighborhood';
 
-export type Noticed = {
-  speciesId: string;
-  /** Local date, "2026-10-01". */
-  date: string;
-  /** Neighborhood cell, geohash precision 6. Never anything finer. */
-  cell: string;
-};
-
 export type AppState = {
   onboarded: boolean;
   neighborhoods: Neighborhood[];
   currentId: string | null;
-  noticed: Noticed[];
   /** Checks reset when the season key changes. */
   kindness: { seasonKey: string; done: Record<string, boolean> };
   /** Ambient sound behind the story. Off until the person turns it on. */
@@ -28,7 +19,6 @@ export const initialState: AppState = {
   onboarded: false,
   neighborhoods: [],
   currentId: null,
-  noticed: [],
   kindness: { seasonKey: '', done: {} },
   soundOn: false,
   notesOn: false,
@@ -40,15 +30,17 @@ export type Action =
   | { type: 'addNeighborhood'; neighborhood: Neighborhood }
   | { type: 'selectNeighborhood'; id: string }
   | { type: 'removeNeighborhood'; id: string }
-  | { type: 'toggleNoticed'; speciesId: string; date: string; cell: string }
   | { type: 'toggleKindness'; id: string; seasonKey: string }
   | { type: 'setSound'; on: boolean }
   | { type: 'setNotes'; on: boolean };
 
 export function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
-    case 'hydrate':
-      return { ...initialState, ...action.state };
+    case 'hydrate': {
+      // Older saves may still carry "I noticed them" records; that feature is gone.
+      const { noticed: _dropped, ...saved } = action.state as AppState & { noticed?: unknown };
+      return { ...initialState, ...saved };
+    }
 
     case 'finishOnboarding':
       return { ...state, onboarded: true };
@@ -73,15 +65,6 @@ export function reducer(state: AppState, action: Action): AppState {
       const neighborhoods = state.neighborhoods.filter((n) => n.id !== action.id);
       const currentId = state.currentId === action.id ? neighborhoods[0].id : state.currentId;
       return { ...state, neighborhoods, currentId };
-    }
-
-    case 'toggleNoticed': {
-      const { speciesId, date, cell } = action;
-      const match = (n: Noticed) => n.speciesId === speciesId && n.date === date && n.cell === cell;
-      const noticed = state.noticed.some(match)
-        ? state.noticed.filter((n) => !match(n))
-        : [...state.noticed, { speciesId, date, cell }];
-      return { ...state, noticed };
     }
 
     case 'toggleKindness': {

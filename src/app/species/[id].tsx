@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackButton } from '@/components/BackButton';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
-import { CheckIcon, EyeIcon, HeartIcon } from '@/components/Icons';
+import { HeartIcon } from '@/components/Icons';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
@@ -12,7 +12,6 @@ import { getSpecies, photoCreditsFor, speciesPhoto, type Species } from '@/conte
 import { seenLabel } from '@/lib/live';
 import { seasonOf } from '@/lib/time';
 import { useLiveData } from '@/state/LiveData';
-import { useNoticed } from '@/state/useNoticed';
 import { border, colors, fonts } from '@/theme/tokens';
 import { type } from '@/theme/type';
 
@@ -28,7 +27,6 @@ export default function SpeciesProfile() {
 function Profile({ species }: { species: Species }) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { noticedToday, met, toggle } = useNoticed(species.id);
   const season = seasonOf(new Date());
   const name = species.friendlyName.toLowerCase();
   const seen = seenLabel(useLiveData().live.get(species.id), new Date());
@@ -47,23 +45,6 @@ function Profile({ species }: { species: Species }) {
         }}
       >
         <BackButton style={{ position: 'absolute', left: 16, top: insets.top + 8 }} />
-        {met && (
-          <View
-            style={{
-              position: 'absolute',
-              right: 16,
-              top: insets.top + 12,
-              paddingVertical: 6,
-              paddingHorizontal: 12,
-              borderRadius: 14,
-              backgroundColor: colors.yellow,
-              borderWidth: border.width,
-              borderColor: colors.ink,
-            }}
-          >
-            <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, color: colors.ink }}>You've met them</Text>
-          </View>
-        )}
         <Sticker art={species.art} photo={speciesPhoto(species.id)} size={170} tint={colors.white} rotate={-5} shadowColor={colors.blue} style={{ marginTop: 24 }} />
       </View>
 
@@ -129,16 +110,6 @@ function Profile({ species }: { species: Species }) {
         />
       </Card>
 
-      <View style={{ marginHorizontal: 16, marginTop: 16 }}>
-        <Button
-          label={noticedToday ? `Noticed ${name} today` : `I noticed ${name} today`}
-          shadow={colors.yellow}
-          selected={noticedToday}
-          icon={noticedToday ? <CheckIcon size={18} color={colors.white} /> : <EyeIcon color={colors.white} />}
-          accessibilityHint={noticedToday ? 'Tap again to undo' : 'Saves that you noticed them, on this phone only'}
-          onPress={toggle}
-        />
-      </View>
     </ScrollView>
   );
 }

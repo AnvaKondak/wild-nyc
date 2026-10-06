@@ -89,7 +89,6 @@ Where the facts live.
 - **In their lives right now** (current season).
 - **A fun fact** card.
 - **A small kindness** card (pink) → Kindness.
-- **I noticed [them] today** button.
 - Later: seasonal chapters (four pages, one per season) and "Which sparrow?" lookalike cards
   for groups with several species.
 
@@ -144,7 +143,7 @@ type Kindness = {
 };
 ```
 
-On-device state: `noticed: { speciesId, date, cell }[]`, `neighborhoods: { id, name, cell }[]`,
+On-device state ("I noticed them" was removed in October 2026): `neighborhoods: { id, name, cell }[]`,
 `kindnessDone: Record<string, boolean>` per season.
 
 ## Out of scope for v1

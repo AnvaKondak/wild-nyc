@@ -91,15 +91,6 @@ export function ChevronRightIcon({ size = 20, color = 'currentColor', strokeWidt
   );
 }
 
-export function EyeIcon({ size = 18, color = 'currentColor', strokeWidth = 2 }: IconProps) {
-  return (
-    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
-      <Path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" />
-      <Circle cx={12} cy={12} r={3} />
-    </Svg>
-  );
-}
-
 export function CheckIcon({ size = 20, color = 'currentColor', strokeWidth = 2.6 }: IconProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
