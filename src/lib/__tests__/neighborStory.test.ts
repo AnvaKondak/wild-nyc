@@ -71,6 +71,15 @@ describe('pickLead', () => {
     expect(leadWeight(gull, 'waterfront', { ...ctx, weather: ['rain'] })).toBeGreaterThan(leadWeight(gull, 'waterfront', ctx));
   });
 
+  it('follows the night crowd after dark', () => {
+    const night = ctxOf('fall', 'night');
+    const raccoon = getSpecies('raccoon')!;
+    const jay = getSpecies('blue-jay')!;
+    expect(leadWeight(raccoon, 'park', night) / leadWeight(jay, 'park', night)).toBeGreaterThan(
+      leadWeight(raccoon, 'park', ctxOf('fall', 'midday')) / leadWeight(jay, 'park', ctxOf('fall', 'midday')),
+    );
+  });
+
   it('only lets rare visitors lead where they have been seen', () => {
     const ctx = ctxOf('fall', 'dawn');
     expect(poolFor('park', ctx).some((s) => s.id === 'white-tailed-deer')).toBe(false);

@@ -64,6 +64,8 @@ export function leadWeight(s: Species, kind: PlaceKind, ctx: StoryContext): numb
   else if (kinds === 1) w *= 1.6;
   if ((ctx.live.get(s.id)?.recent ?? 0) > 0) w *= 2.5;
   if (weather.length > 0) w *= 1.8;
+  // After dark, follow someone who's up: raccoons and night herons beat a sleeping jay.
+  if (ctx.period === 'night') w *= s.nocturnal ? 3 : 0.6;
   if (count === 1) w *= 0.4; // a thin story; better to lead with someone who has more
   return w;
 }
