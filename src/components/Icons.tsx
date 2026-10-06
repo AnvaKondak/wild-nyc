@@ -41,6 +41,24 @@ export function SoundOffIcon({ size = 22, color = 'currentColor', strokeWidth = 
   );
 }
 
+export function BellIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z" />
+      <Path d="M10 20.5a2 2 0 0 0 4 0" />
+    </Svg>
+  );
+}
+
+export function BellOffIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z" />
+      <Path d="M10 20.5a2 2 0 0 0 4 0M4 4l16 16" />
+    </Svg>
+  );
+}
+
 export function HeartIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: IconProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinejoin="round">

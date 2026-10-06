@@ -4,7 +4,7 @@ import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
-import { ChevronLeftIcon, ChevronRightIcon, SoundOffIcon, SoundOnIcon } from '@/components/Icons';
+import { BellIcon, BellOffIcon, ChevronLeftIcon, ChevronRightIcon, SoundOffIcon, SoundOnIcon } from '@/components/Icons';
 import { GroupSticker } from '@/components/GroupSticker';
 import { NeighborhoodPills } from '@/components/NeighborhoodPills';
 import { PeriodIcon } from '@/components/PeriodIcon';
@@ -14,11 +14,13 @@ import { RoundNav, StoryCard, StoryProgress, useSwipe } from '@/components/story
 import { facts, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, speciesPhotos, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
 import { arrivalSlide, arrivalsAmong } from '@/lib/arrivals';
+import { dailyNotes } from '@/lib/dailyNote';
 import { buildIntro } from '@/lib/intro';
 import type { Neighborhood } from '@/lib/neighborhood';
 import { aroundSlide, buildArc, pickAround, pickLead, poolFor, type StoryContext, type StoryPlace } from '@/lib/neighborStory';
 import { hashString, seededRandom } from '@/lib/random';
 import { dateKey, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
+import { askForNotes, cancelNotes, scheduleNotes } from '@/lib/notifications';
 import { pickSoundscape, SOUNDSCAPE_LABEL } from '@/lib/soundscape';
 import { useAmbience, voiceFor } from '@/lib/useAmbience';
 import { useNow } from '@/lib/useNow';
@@ -88,7 +90,7 @@ export default function RightNow() {
   // today" at the end opens a short story about someone else (visiting).
   const [visiting, setVisiting] = useState<string | null>(null);
   const yesterday = dateKey(new Date(now.getTime() - 24 * 60 * 60 * 1000));
-  const { lead, around, arrived, ctx, here } = useMemo(() => {
+  const { lead, around, arrived, ctx, here, placesInOrder, at } = useMemo(() => {
     const ctx: StoryContext = { allSpecies, moments, facts, chapters: seasonChapters, season, period: header.period, live, weather: weather?.tags ?? [] };
     const saved = state.neighborhoods.length > 0 ? state.neighborhoods : [hood];
     const at = Math.max(0, saved.findIndex((n) => n.id === hood.id));
@@ -97,7 +99,7 @@ export default function RightNow() {
     const lead = pickLead(placesInOrder, at, ctx, today, yesterday);
     // Migrants who just got here for the season, newest first.
     const arrived = arrivalsAmong(poolFor(hood.kind, ctx), now);
-    return { lead, around: pickAround(here, ctx, lead, `${hood.cell}:${today}:${header.period}`, arrived), arrived, ctx, here };
+    return { lead, around: pickAround(here, ctx, lead, `${hood.cell}:${today}:${header.period}`, arrived), arrived, ctx, here, placesInOrder, at };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [season, header.period, hood.id, hood.cell, state.neighborhoods, live, today, weatherKey]);
 
@@ -157,6 +159,21 @@ export default function RightNow() {
       };
     }, [theme.statusBar]),
   );
+
+  // The one-a-day morning note, if it's on: rescheduled for the week ahead whenever the
+  // neighborhood or the day changes, so it always matches where you are.
+  useEffect(() => {
+    if (!state.notesOn) return;
+    scheduleNotes(dailyNotes(placesInOrder, at, { allSpecies, moments, facts, chapters: seasonChapters, live }, new Date())).catch(() => {});
+  }, [state.notesOn, placesInOrder, at, live, today]);
+  const toggleNotes = async () => {
+    if (state.notesOn) {
+      actions.setNotes(false);
+      cancelNotes().catch(() => {});
+    } else if (await askForNotes().catch(() => false)) {
+      actions.setNotes(true);
+    }
+  };
 
   // What you'd hear out there right now, if sound is on.
   const soundscape = pickSoundscape(season, header.period, weather?.sky, weather?.tags);
@@ -239,6 +256,28 @@ export default function RightNow() {
                   <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>Listening to {listening}</Text>
                 )}
               </View>
+            </Pressable>
+            <Pressable
+              onPress={toggleNotes}
+              accessibilityRole="switch"
+              accessibilityState={{ checked: state.notesOn }}
+              accessibilityLabel="A good-morning note each day, with today's neighbor"
+              hitSlop={6}
+              style={({ pressed }) => ({
+                marginTop: 18,
+              marginRight: 8,
+                width: 44,
+                height: 44,
+                borderRadius: 22,
+                borderWidth: border.width,
+                borderColor: theme.ink,
+                backgroundColor: state.notesOn ? theme.ink : theme.bg,
+                alignItems: 'center',
+                justifyContent: 'center',
+                opacity: pressed ? 0.6 : 1,
+              })}
+            >
+              {state.notesOn ? <BellIcon color={theme.bg} /> : <BellOffIcon color={theme.ink} />}
             </Pressable>
             <Pressable
               onPress={() => actions.setSound(!state.soundOn)}

@@ -79,4 +79,9 @@ describe('kindness', () => {
     delete old.soundOn;
     expect(reducer(initialState, { type: 'hydrate', state: old as typeof initialState }).soundOn).toBe(false);
   });
+
+  it('keeps the daily note off until asked', () => {
+    expect(initialState.notesOn).toBe(false);
+    expect(reducer(initialState, { type: 'setNotes', on: true }).notesOn).toBe(true);
+  });
 });
