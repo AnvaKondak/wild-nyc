@@ -19,7 +19,7 @@ const SETTINGS: Setting[] = ['branch', 'trunk', 'den', 'wire', 'ledge', 'rooftop
 
 export default function ArtPreview() {
   const raccoon = getSpecies('raccoon')!;
-  const { only, from } = useLocalSearchParams<{ only?: string; from?: string }>();
+  const { only, from, accents } = useLocalSearchParams<{ only?: string; from?: string; accents?: string }>();
   const { width } = useWindowDimensions();
   const thumb = (width - 32 - 12) / 2;
   if (only === 'backdrops') {
@@ -34,7 +34,7 @@ export default function ArtPreview() {
               <View style={{ width: thumb, height: h, borderRadius: 12, overflow: 'hidden', borderWidth: 1.5, borderColor: colors.ink, backgroundColor: periodThemes[period].bg, alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ position: 'absolute', top: 0, left: 0, width: thumb - 3, height: h - 3 }}>
                   <StoryBackdrop
-                    setting="sky"
+                    setting={accents ? SETTINGS[(i + Number(from ?? 0)) % SETTINGS.length] : 'sky'}
                     period={period}
                     season={season}
                     placeKind={placeKind}
@@ -46,7 +46,7 @@ export default function ArtPreview() {
                 </View>
                 <Sticker art={raccoon.art} photo={speciesPhoto('raccoon')} size={thumb * 0.5} rotate={-5} style={{ marginBottom: h * 0.2 }} />
               </View>
-              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, color: colors.ink }}>{placeKind} · {season} · {period}</Text>
+              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 11, color: colors.ink }}>{placeKind} · {season} · {period}{accents ? ` · ${SETTINGS[(i + Number(from ?? 0)) % SETTINGS.length]}` : ''}</Text>
             </View>
           ))}
         </View>

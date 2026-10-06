@@ -68,4 +68,15 @@ describe('buildLayers', () => {
     expect(ids('block')).toEqual(expect.arrayContaining(['skyline', 'brownstones', 'windows', 'trees']));
     expect(ids('waterfront')).toEqual(expect.arrayContaining(['skyline', 'river', 'boat', 'promenade', 'lamps', 'trees']));
   });
+
+  it('adds a small touch for where the moment happens', () => {
+    const accent = (setting: (typeof SETTINGS)[number], placeKind: (typeof KINDS)[number] = 'park') =>
+      buildLayers({ w: 390, h: 760, setting, period: 'midday', season: 'spring', placeKind, variant: 0, moonLit: 1 }).map((l) => l.id).filter((id) => id.startsWith('accent-'));
+    expect(accent('wire')).toEqual(['accent-wire']);
+    expect(accent('reeds')).toEqual(['accent-reeds']);
+    expect(accent('web')).toEqual(['accent-web']);
+    expect(accent('streetlight', 'block')).toEqual(['accent-lamp']);
+    expect(accent('streetlight', 'park')).toEqual([]); // the park already has a lamp
+    expect(accent('lawn')).toEqual([]);
+  });
 });

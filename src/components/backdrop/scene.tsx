@@ -14,11 +14,11 @@
 import type { ReactNode } from 'react';
 import { Circle, Ellipse, G, Path, Rect } from 'react-native-svg';
 import { inks } from '@/components/art/inks';
-import type { Period, PlaceKind, Season } from '@/content/types';
+import type { Period, PlaceKind, Season, Setting } from '@/content/types';
 import { seededRandom } from '@/lib/random';
 import type { Layer } from './motion';
 
-export type SceneInput = { w: number; h: number; u: number; period: Period; season: Season; placeKind: PlaceKind; variant: number };
+export type SceneInput = { w: number; h: number; u: number; period: Period; season: Season; placeKind: PlaceKind; variant: number; setting?: Setting };
 
 const INK = inks.ink;
 const DARKEN: Record<Period, number> = { dawn: 0.04, midday: 0, dusk: 0.18, night: 0.55 };
@@ -54,6 +54,7 @@ export function sceneLayers(c: SceneInput): Layer[] {
   if (c.placeKind === 'park') layers.push(...park(c, s, lit));
   else if (c.placeKind === 'block') layers.push(...block(c, s, lit));
   else layers.push(...waterfront(c, s, lit));
+  layers.push(...accent(c, s, lit));
   return layers;
 }
 
@@ -397,4 +398,164 @@ function waterfront(c: SceneInput, s: (hex: string) => string, lit: boolean): La
     },
     framingTrees(c, s, rail + 6 * u),
   ];
+}
+
+// ---------------------------------------------------------------- the moment's touch
+
+/**
+ * One small detail for where the moment happens (a wire for a dove on a wire, cattails
+ * for a red-wing in the reeds), placed where it stays visible: in the sky band beside
+ * the photo, or along the ground just above the story card.
+ */
+function accent(c: SceneInput, s: (hex: string) => string, lit: boolean): Layer[] {
+  const { w, h, u, season, setting, variant } = c;
+  const ground = h * 0.585; // just above the story card
+  const one = (id: string, node: ReactNode, motion: Layer['motion'] = { kind: 'still' }): Layer[] => [{ id: `accent-${id}`, depth: 0.55, motion, node }];
+  const leaf = PALETTE[season].canopy[variant % Math.max(1, PALETTE[season].canopy.length)] ?? '#B9B2A8';
+  const sway = { kind: 'bob', duration: 4200, dx: 0.8 * u, dy: 0.4 * u } as const;
+  switch (setting) {
+    case 'wire': {
+      const y = h * 0.27;
+      return one('wire', (
+        <G>
+          <Rect x={w * 0.03} y={y - 4 * u} width={1.6 * u} height={h * 0.34} fill={s(TRUNK)} />
+          <Rect x={w * 0.03 - 2 * u} y={y - 3.5 * u} width={5.6 * u} height={0.9 * u} fill={s(TRUNK)} />
+          <Path d={`M${w * 0.04} ${y - 3 * u} Q${w * 0.5} ${y + 5 * u} ${w * 1.02} ${y - 4 * u}`} stroke={s('#3B3A50')} strokeWidth={0.6 * u} fill="none" />
+          <Path d={`M${w * 0.04} ${y} Q${w * 0.5} ${y + 8 * u} ${w * 1.02} ${y - u}`} stroke={s('#3B3A50')} strokeWidth={0.5 * u} fill="none" />
+        </G>
+      ), { kind: 'bob', duration: 3600, dx: 0, dy: 0.6 * u });
+    }
+    case 'branch': {
+      const y = h * 0.27;
+      return one('branch', (
+        <G>
+          <Path d={`M${w * 1.02} ${y} Q${w * 0.86} ${y + 2 * u} ${w * 0.74} ${y - 3 * u}`} stroke={s(TRUNK)} strokeWidth={2.4 * u} strokeLinecap="round" fill="none" />
+          <Path d={`M${w * 0.86} ${y + u} L${w * 0.82} ${y + 5 * u}`} stroke={s(TRUNK)} strokeWidth={1.2 * u} strokeLinecap="round" />
+          {season !== 'winter' &&
+            [[0.75, -4.5, 3.2], [0.8, -1.5, 2.6], [0.83, 5.5, 2.4], [0.92, -2.5, 3]].map(([x, dy, r]) => <Circle key={x} cx={w * x} cy={y + dy * u} r={r * u} fill={s(leaf)} />)}
+          {season === 'winter' && <Path d={`M${w * 0.76} ${y - 3.6 * u} q${4 * u} ${-u} ${9 * u} ${1.2 * u}`} stroke={inks.white} strokeWidth={0.9 * u} strokeLinecap="round" fill="none" />}
+        </G>
+      ), sway);
+    }
+    case 'trunk':
+      return one('trunk', (
+        <G>
+          <Rect x={w * 0.88} y={h * 0.2} width={w * 0.14} height={h * 0.45} fill={s(TRUNK)} />
+          {[0.27, 0.36, 0.47].map((y) => <Path key={y} d={`M${w * 0.92} ${h * y} l${u} ${4 * u}`} stroke={s('#6B4A3A')} strokeWidth={0.6 * u} strokeLinecap="round" />)}
+        </G>
+      ));
+    case 'den':
+      return one('den', (
+        <G>
+          <Rect x={w * 0.86} y={h * 0.22} width={w * 0.16} height={h * 0.42} fill={s(TRUNK)} />
+          <Ellipse cx={w * 0.92} cy={h * 0.36} rx={3.6 * u} ry={5 * u} fill={s('#3A2A20')} />
+        </G>
+      ));
+    case 'ledge':
+    case 'rooftop':
+      return one(setting, setting === 'ledge' ? (
+        <G>
+          {/* A stone cornice with brackets under it: the pigeon's favorite seat. */}
+          <Rect x={0} y={h * 0.28 - 1.2 * u} width={w} height={1.2 * u} fill={s('#B9B2C9')} />
+          <Rect x={0} y={h * 0.28} width={w} height={3 * u} fill={s('#D9D3E3')} stroke={s('#9C9AB0')} strokeWidth={0.3 * u} />
+          {Array.from({ length: 9 }, (_, i) => (
+            <Path key={i} d={`M${(i / 8) * w - 1.5 * u} ${h * 0.28 + 3 * u} l${3 * u} 0 l${-0.8 * u} ${3 * u} l${-1.4 * u} 0 Z`} fill={s('#C9C2D6')} />
+          ))}
+        </G>
+      ) : (
+        <G>
+          <Path d={`M${w * 0.86} ${h * 0.31} l0 ${-3 * u} M${w * 0.93} ${h * 0.31} l0 ${-3 * u}`} stroke={s('#6B4A3A')} strokeWidth={0.7 * u} />
+          <Rect x={w * 0.845} y={h * 0.31 - 10 * u} width={w * 0.1} height={7 * u} fill={s('#B88D7A')} />
+          <Path d={`M${w * 0.84} ${h * 0.31 - 10 * u} L${w * 0.895} ${h * 0.31 - 14 * u} L${w * 0.95} ${h * 0.31 - 10 * u} Z`} fill={s('#8A6247')} />
+        </G>
+      ));
+    case 'streetlight':
+      return c.placeKind === 'block' ? one('lamp', lampPost(c, s, w * 0.86, ground, lit, 'accent'), lit ? { kind: 'pulse', duration: 2600, min: 0.8 } : { kind: 'still' }) : [];
+    case 'hedge': {
+      const color = s(PALETTE[season].bush);
+      return one('hedge', (
+        <G>
+          {Array.from({ length: 8 }, (_, i) => <Circle key={i} cx={(i / 7) * w} cy={ground} r={5.5 * u} fill={color} />)}
+          <Rect x={0} y={ground} width={w} height={4 * u} fill={color} />
+          {season === 'winter' && <Rect x={0} y={ground - 5.5 * u} width={w} height={u} fill={inks.white} opacity={0.8} />}
+        </G>
+      ));
+    }
+    case 'flowers': {
+      const petals = { spring: ['#FF6B9A', '#FFD23F'], summer: ['#FFFFFF', '#FFD23F'], fall: ['#9B7BD8', '#F28C28'], winter: [] }[season];
+      if (petals.length === 0) return [];
+      const stems = [0.04, 0.09, 0.14, 0.86, 0.91, 0.96];
+      return one('flowers', (
+        <G>
+          {stems.map((x, i) => (
+            <G key={x}>
+              <Path d={`M${w * x} ${ground + 4 * u} l0 ${-7 * u}`} stroke={s('#3FA66B')} strokeWidth={0.6 * u} />
+              <Circle cx={w * x} cy={ground - 3.5 * u} r={1.8 * u} fill={s(petals[i % 2])} stroke={s(INK)} strokeWidth={0.2 * u} />
+              <Circle cx={w * x} cy={ground - 3.5 * u} r={0.6 * u} fill={s('#8A6247')} />
+            </G>
+          ))}
+        </G>
+      ), sway);
+    }
+    case 'reeds':
+      return one('reeds', (
+        <G>
+          {[0.03, 0.07, 0.11, 0.88, 0.92, 0.96].map((x, i) => (
+            <G key={x}>
+              <Path d={`M${w * x} ${ground + 4 * u} l${(i % 2 ? 1 : -1) * u} ${-13 * u}`} stroke={s(season === 'winter' ? '#B9A27A' : '#5FA05A')} strokeWidth={0.6 * u} />
+              <Rect x={w * x + (i % 2 ? 0.4 : -1.4) * u} y={ground - 12 * u} width={1.2 * u} height={4 * u} rx={0.6 * u} fill={s('#7A5236')} />
+            </G>
+          ))}
+        </G>
+      ), sway);
+    case 'fence':
+      return one('fence', (
+        <G>
+          <Rect x={0} y={ground - 6 * u} width={w} height={0.7 * u} fill={s('#3B3A50')} />
+          <Rect x={0} y={ground - 1.5 * u} width={w} height={0.7 * u} fill={s('#3B3A50')} />
+          {Array.from({ length: 24 }, (_, i) => (
+            <Path key={i} d={`M${(i / 23) * w} ${ground + 2 * u} L${(i / 23) * w} ${ground - 7 * u} l${-0.6 * u} ${0.9 * u} M${(i / 23) * w} ${ground - 7 * u} l${0.6 * u} ${0.9 * u}`} stroke={s('#3B3A50')} strokeWidth={0.5 * u} fill="none" />
+          ))}
+        </G>
+      ));
+    case 'trashcan':
+      return one('trashcan', (
+        <G>
+          <Path d={`M${w * 0.84} ${ground - 8 * u} L${w * 0.93} ${ground - 8 * u} L${w * 0.92} ${ground + 2 * u} L${w * 0.85} ${ground + 2 * u} Z`} fill={s('#5E7C6A')} stroke={s(INK)} strokeWidth={0.3 * u} />
+          <Rect x={w * 0.835} y={ground - 9 * u} width={w * 0.1} height={1.4 * u} rx={0.5 * u} fill={s('#4A6556')} />
+          {[0.865, 0.885, 0.905].map((x) => <Path key={x} d={`M${w * x} ${ground - 6 * u} l0 ${6.5 * u}`} stroke={s('#4A6556')} strokeWidth={0.4 * u} />)}
+        </G>
+      ));
+    case 'web': {
+      const cx = w * 0.88;
+      const cy = h * 0.29;
+      const r = 9 * u;
+      return one('web', (
+        <G opacity={0.85}>
+          {Array.from({ length: 8 }, (_, i) => {
+            const a = (i / 8) * Math.PI * 2;
+            return <Path key={i} d={`M${cx} ${cy} L${cx + Math.cos(a) * r} ${cy + Math.sin(a) * r}`} stroke={inks.white} strokeWidth={0.25 * u} />;
+          })}
+          {[0.35, 0.6, 0.85].map((k) => <Circle key={k} cx={cx} cy={cy} r={r * k} stroke={inks.white} strokeWidth={0.25 * u} fill="none" />)}
+          <Circle cx={cx} cy={cy} r={0.9 * u} fill={s(INK)} />
+        </G>
+      ), { kind: 'pulse', duration: 3000, min: 0.7 });
+    }
+    case 'water':
+      return c.placeKind === 'block' ? one('puddle', <Ellipse cx={w * 0.82} cy={ground + u} rx={8 * u} ry={1.6 * u} fill={s(WATER)} />) : [];
+    case 'shore':
+      return one('rocks', (
+        <G>
+          {[[0.06, 4], [0.12, 3], [0.9, 3.6], [0.95, 2.6]].map(([x, r]) => <Ellipse key={x} cx={w * x} cy={ground + u} rx={r * u} ry={r * 0.7 * u} fill={s('#A8A3B4')} stroke={s(INK)} strokeWidth={0.2 * u} />)}
+        </G>
+      ));
+    case 'pier':
+      return one('pilings', (
+        <G>
+          {[0.05, 0.1, 0.9, 0.95].map((x) => <Rect key={x} x={w * x - u} y={ground - 9 * u} width={2 * u} height={11 * u} rx={0.6 * u} fill={s('#7A5A44')} />)}
+        </G>
+      ));
+    default:
+      return []; // lawn, sidewalk, sky, night-sky: the scene already says it
+  }
 }
