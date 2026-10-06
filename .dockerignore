@@ -1,0 +1,11 @@
+# Only the server and the species list go into the API image.
+*
+!server/
+!src/content/species.json
+server/api/vendor/bundle
+server/api/log/*
+server/api/tmp/*
+server/api/storage/*
+server/api/.env*
+server/api/config/master.key
+**/.git

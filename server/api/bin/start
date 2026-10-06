@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Production entrypoint: get the database ready, sync the species list from the app,
+# then run the worker (jobs + schedule) and the web server side by side. They share
+# one time-series directory on the persistent volume ($WILD_SERIES_DIR): the worker
+# is its single writer, the web server reads. If either stops, the machine restarts.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+mkdir -p "${WILD_SERIES_DIR:-storage/series/production}"
+bin/rails db:prepare
+bin/rails db:seed   # Species.sync_from_json!: adds or updates species, safe to repeat
+
+bin/worker &
+WORKER=$!
+bin/rails server -b 0.0.0.0 -p "${PORT:-8080}" -P "${PIDFILE:-tmp/pids/server.pid}" &
+WEB=$!
+
+trap 'kill -TERM $WORKER $WEB 2>/dev/null; wait; exit 0' TERM INT
+# Watch both; if either one exits, stop the other so the machine restarts cleanly.
+while kill -0 $WORKER 2>/dev/null && kill -0 $WEB 2>/dev/null; do sleep 5; done
+echo "A process exited; stopping so the machine restarts cleanly."
+kill -TERM $WORKER $WEB 2>/dev/null || true
+wait
+exit 1
