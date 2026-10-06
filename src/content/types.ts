@@ -83,7 +83,7 @@ export type StorySlide = {
   /** May contain {where}. */
   body: string;
   speciesId?: string;
-  kind?: 'intro' | 'scene' | 'arriving' | 'goodbye' | 'around';
+  kind?: 'intro' | 'scene' | 'arriving' | 'goodbye' | 'around' | 'tomorrow' | 'event';
   /** Backdrop for the sticker (moments set this). */
   setting?: Setting;
   /** A fun fact about the species, fitting the season and time of day. */
@@ -100,6 +100,10 @@ export type StorySlide = {
   arrivedSpecies?: string[];
   /** Which of the species' photos to show, so a story doesn't repeat one picture. */
   photoIndex?: number;
+  /** Two or more neighbors in one moment (an encounter): shown together in the sticker. */
+  cast?: string[];
+  /** A neighbor who appears in the scene behind this slide (flying past, perched nearby). */
+  cameo?: string;
   /** Intro: who's up, for the little group photo. */
   introSpecies?: string[];
   /** Chapters: a line added when the weather fits ("On a north wind like tonight's…"). */
@@ -134,6 +138,9 @@ export type SeasonChapter = {
   intro: string;
   stories: { id: string; title: string; species: string[]; body: string }[];
 };
+
+/** Two neighbors crossing paths: who chases, warns, shares or steals from whom. */
+export type Encounter = { id: string; species: [string, string]; seasons: Season[]; periods?: Period[]; title: string; body: string };
 
 /** A fun fact for the story, optionally only in some seasons or times of day. */
 export type Fact = { speciesId: string; text: string; seasons?: Season[]; periods?: Period[] };

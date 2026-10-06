@@ -8,7 +8,7 @@
 // everywhere; brant are not), who were seen nearby lately, or who have something to
 // say about today's weather.
 
-import type { Fact, LocalNames, Moment, Period, PlaceKind, SeasonChapter, Season, Species, StorySlide, WeatherTag } from '@/content/types';
+import type { Encounter, Fact, LocalNames, Moment, Period, PlaceKind, SeasonChapter, Season, Species, StorySlide, WeatherTag } from '@/content/types';
 import type { LiveMap } from './live';
 import { fillPlace, pickFact, pickVariant, placePhrase, usableVariants, withLocation } from './localStory';
 import { pick, seededRandom, shuffle } from './random';
@@ -35,6 +35,8 @@ export type StoryContext = {
   period: Period;
   live: LiveMap;
   weather: WeatherTag[];
+  /** Two-neighbor encounters, for the middle of a story. */
+  encounters?: Encounter[];
 };
 
 /** Who lives here this season, plus anyone live data has seen nearby lately. */
@@ -113,11 +115,41 @@ export function pickLead(places: StoryPlace[], index: number, ctx: StoryContext,
 }
 
 /**
- * One neighbor's story. A lead gets up to five slides: what they're doing right now
- * (in this weather), maybe a second moment, their season, who they run into, and how
- * to be a good neighbor to them. A visit (from "Also around today") gets three.
+ * The best encounter for this neighbor right now: one with `favor` (the lead, when
+ * visiting someone else) if there is one, else with someone around today, else with
+ * anyone who lives here. Encounters need both neighbors to be around this season.
  */
-export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role: 'lead' | 'visit', random: () => number): StorySlide[] {
+export function pickEncounter(s: Species, ctx: StoryContext, here: Set<string>, today: Set<string>, random: () => number, favor?: string): Encounter | undefined {
+  const fits = (ctx.encounters ?? []).filter(
+    (e) => e.species.includes(s.id) && e.seasons.includes(ctx.season) && (!e.periods || e.periods.includes(ctx.period)),
+  );
+  const other = (e: Encounter) => (e.species[0] === s.id ? e.species[1] : e.species[0]);
+  for (const ok of [(id: string) => id === favor, (id: string) => today.has(id), (id: string) => here.has(id)]) {
+    const best = fits.filter((e) => ok(other(e)));
+    if (best.length > 0) return pick(best, random);
+  }
+  return undefined;
+}
+
+export type ArcOptions = {
+  /** Who's around today (the lead and "Also around today"), so encounters are with them. */
+  today?: string[];
+  /** On a visit: the day's lead, so the two stories mention each other. */
+  favor?: string;
+};
+
+/**
+ * One neighbor's story, with a beginning, a middle and an end:
+ *
+ *   1. Right now: what they're doing (in this weather, when it fits).
+ *   2. Then…: they run into a neighbor who's around today (or a chapter story).
+ *   3. Meanwhile: another moment.
+ *   4. This season: the bigger picture.
+ *   5. Before you go: how to be a good neighbor to them.
+ *
+ * A visit (from "Also around today") gets 1, 2 and 5.
+ */
+export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role: 'lead' | 'visit', random: () => number, opts: ArcOptions = {}): StorySlide[] {
   const { season, period } = ctx;
   const phrase = placePhrase(place.placeName, place.where);
   const fill = (text: string) => fillPlace(text, phrase, place.local, random);
@@ -137,13 +169,13 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
     return undefined;
   };
 
-  const momentSlide = (m: Moment): StorySlide => {
+  const momentSlide = (m: Moment, kicker = m.kicker): StorySlide => {
     const v = pickVariant(usableVariants(m, ctx.weather), named, random);
     return {
       id: `${m.id}:${m.variants.indexOf(v)}`,
       season,
       period,
-      kicker: m.kicker,
+      kicker,
       title: fill(withLocation(v.title, m.setting, place.kind, random)),
       body: fill(v.body),
       speciesId: s.id,
@@ -153,29 +185,30 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
     };
   };
 
-  // 1–2. Right now. Weather first when it fits.
+  // 1. The beginning: right now. Weather first when it fits.
   const first = weather.length > 0 ? pick(weather, random) : everyday.length > 0 ? pick(everyday, random) : undefined;
   if (first) slides.push(momentSlide(first));
-  if (role === 'lead') {
-    const rest = shuffle([...weather, ...everyday].filter((m) => m !== first), random);
-    if (rest[0]) slides.push(momentSlide(rest[0]));
-  }
 
-  // Their season, in this place.
-  slides.push({
-    id: `${s.id}:season`,
-    season,
-    period,
-    kicker: `This ${season}`,
-    title: `The ${friendly}' ${season} ${phrase}`,
-    body: s.rightNow[season],
-    speciesId: s.id,
-    setting: first?.setting,
-    kind: 'scene',
-  });
-
-  // Who they run into: a story from this season's chapter.
-  if (role === 'lead') {
+  // 2. The middle: they run into a neighbor. Someone around today if possible.
+  const here = new Set(poolFor(place.kind, ctx).map((x) => x.id));
+  const today = new Set(opts.today ?? []);
+  const meet = pickEncounter(s, ctx, here, today, random, opts.favor);
+  if (meet) {
+    const other = meet.species[0] === s.id ? meet.species[1] : meet.species[0];
+    slides.push({
+      id: `${s.id}:meets:${meet.id}`,
+      season,
+      period,
+      kicker: 'Then…',
+      title: fill(meet.title),
+      body: fill(meet.body),
+      speciesId: s.id,
+      cast: [s.id, other],
+      cameo: other,
+      setting: first?.setting,
+      kind: 'scene',
+    });
+  } else if (role === 'lead') {
     const together = ctx.chapters.find((c) => c.season === season)?.stories.filter((st) => st.species.includes(s.id)) ?? [];
     if (together.length > 0) {
       const st = pick(together, random);
@@ -183,22 +216,43 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
         id: `${s.id}:together:${st.id}`,
         season,
         period,
-        kicker: `Who they run into ${phrase}`,
+        kicker: 'Then…',
         title: st.title,
         body: st.body,
         speciesId: s.id,
+        cast: st.species.slice(0, 4),
+        cameo: st.species.find((id) => id !== s.id),
         setting: first?.setting,
         kind: 'scene',
       });
     }
   }
 
-  // How to be a good neighbor to them.
+  if (role === 'lead') {
+    // 3. Meanwhile: another moment.
+    const rest = shuffle([...weather, ...everyday].filter((m) => m !== first), random);
+    if (rest[0]) slides.push(momentSlide(rest[0], 'Meanwhile'));
+
+    // 4. The bigger picture: their season, in this place.
+    slides.push({
+      id: `${s.id}:season`,
+      season,
+      period,
+      kicker: `This ${season}`,
+      title: `The ${friendly}' ${season} ${phrase}`,
+      body: s.rightNow[season],
+      speciesId: s.id,
+      setting: first?.setting,
+      kind: 'scene',
+    });
+  }
+
+  // 5. The end: how to be a good neighbor to them.
   slides.push({
     id: `${s.id}:kindness`,
     season,
     period,
-    kicker: `Be a good neighbor ${phrase}`,
+    kicker: `Before you go · Be a good neighbor ${phrase}`,
     title: s.kindness.title.replace(/[.!]$/, ''),
     body: s.kindness.body,
     speciesId: s.id,

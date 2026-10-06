@@ -11,7 +11,7 @@ import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { RoundNav, StoryCard, StoryProgress, useSwipe } from '@/components/story/parts';
-import { facts, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, speciesPhotos, stories, type Period, type StorySlide } from '@/content';
+import { encounters, facts, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, speciesPhotos, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
 import { arrivalSlide, arrivalsAmong } from '@/lib/arrivals';
 import { dailyNotes } from '@/lib/dailyNote';
@@ -91,7 +91,7 @@ export default function RightNow() {
   const [visiting, setVisiting] = useState<string | null>(null);
   const yesterday = dateKey(new Date(now.getTime() - 24 * 60 * 60 * 1000));
   const { lead, around, arrived, ctx, here, placesInOrder, at } = useMemo(() => {
-    const ctx: StoryContext = { allSpecies, moments, facts, chapters: seasonChapters, season, period: header.period, live, weather: weather?.tags ?? [] };
+    const ctx: StoryContext = { allSpecies, moments, facts, chapters: seasonChapters, encounters, season, period: header.period, live, weather: weather?.tags ?? [] };
     const saved = state.neighborhoods.length > 0 ? state.neighborhoods : [hood];
     const at = Math.max(0, saved.findIndex((n) => n.id === hood.id));
     const placesInOrder = saved.map(storyPlace);
@@ -107,7 +107,9 @@ export default function RightNow() {
     const random = seededRandom(`${hood.cell}:${today}:${header.period}:${visiting ?? 'lead'}`);
     const last = aroundSlide(here, ctx, around, lead, arrived);
     const visit = visiting ? getSpecies(visiting) : undefined;
-    if (visit) return [...buildArc(visit, here, ctx, 'visit', random), last];
+    // Today's cast: encounters are with neighbors who are actually around.
+    const cast = [...(lead ? [lead.id] : []), ...around.map((s) => s.id)];
+    if (visit) return [...buildArc(visit, here, ctx, 'visit', random, { today: cast, favor: lead?.id }), last];
     // The story opens on where we are, how it feels, who's up, and who we're following.
     const intro = buildIntro({
       period: header.period,
@@ -125,7 +127,7 @@ export default function RightNow() {
     const phrase = here.placeName ? `near ${here.placeName}` : here.where;
     const newcomer = arrived.find((s) => s.id === lead?.id) ?? arrived[0];
     const arrival = newcomer ? arrivalSlide(newcomer, stories, now, phrase, here.local, ctx.weather, random) : undefined;
-    return [intro, ...(arrival ? [arrival] : []), ...(lead ? buildArc(lead, here, ctx, 'lead', random) : []), last];
+    return [intro, ...(arrival ? [arrival] : []), ...(lead ? buildArc(lead, here, ctx, 'lead', random, { today: cast }) : []), last];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lead, around, arrived, ctx, here, visiting]);
 
@@ -345,6 +347,8 @@ export default function RightNow() {
               >
                 {slide.kind === 'intro' ? (
                   <GroupSticker period={header.period} speciesIds={slide.introSpecies ?? []} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
+                ) : slide.cast ? (
+                  <GroupSticker speciesIds={slide.cast} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
                 ) : (
                   <Sticker
                     art={(species ?? getSpecies('rock-pigeon')!).art}

@@ -2,6 +2,7 @@
 // so phase 3 can swap the source without touching screens.
 
 import chaptersJson from './chapters.json';
+import encountersJson from './encounters.json';
 import factsJson from './facts.json';
 import hurtAnimalJson from './hurt-animal.json';
 import kindnessJson from './kindness.json';
@@ -15,6 +16,7 @@ import soundsJson from './sounds.json';
 import speciesJson from './species.json';
 import storiesJson from './stories.json';
 import type {
+  Encounter,
   Fact,
   SeasonChapter,
   HurtAnimalGuide,
@@ -40,6 +42,7 @@ export const places = placesJson.places as Place[];
 export const placeKinds = placesJson.kinds as Record<PlaceKind, PlaceKindInfo>;
 export const hurtAnimalGuide = hurtAnimalJson as HurtAnimalGuide;
 export const seasonChapters = chaptersJson as SeasonChapter[];
+export const encounters = encountersJson as Encounter[];
 /** The region the app covers today. Chapters are told for all of it. */
 export const region = regionJson as Region;
 

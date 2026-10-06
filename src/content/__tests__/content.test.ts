@@ -16,6 +16,7 @@ import {
   places,
   species,
   seasonChapters,
+  encounters,
   stories,
   type Period,
   type PlaceKind,
@@ -149,7 +150,7 @@ describe('copy', () => {
   it('calls animals "they", never "it"', () => {
     // Loose check: "its" + a body part or family, "it" + something only an animal does,
     // and "It's a heron" style introductions.
-    const text = JSON.stringify([species, stories, kindnesses, moments, facts, seasonChapters, hurtAnimalGuide]);
+    const text = JSON.stringify([species, stories, kindnesses, moments, facts, seasonChapters, hurtAnimalGuide, encounters]);
     expect(text).not.toMatch(/\bits (feathers|wings?|head|nest|own nest|beak|tail|eyes|legs|feet|fur|parents?|babies|chicks|mate|young|way across)\b/i);
     expect(text).not.toMatch(/\bit (may dig|turns to|gives up|just looks|needs help|flies|sings|eats|hops|swims)\b/i);
     expect(text).not.toMatch(/\bIt's an? (heron|catbird|mockingbird|downy|blue jay|hermit thrush|robin|cardinal|sparrow|gull|crow|pigeon|squirrel|raccoon)\b/);
@@ -232,5 +233,21 @@ describe('season chapters', () => {
         for (const id of st.species) expect(getSpecies(id)).toBeDefined();
       }
     }
+  });
+});
+
+describe('encounters', () => {
+  it('pair two real neighbors who are both around in those seasons', () => {
+    for (const e of encounters) {
+      const [a, b] = e.species.map((id) => getSpecies(id)!);
+      expect(a && b).toBeTruthy();
+      for (const season of e.seasons) expect(a.seasons.includes(season) && b.seasons.includes(season)).toBe(true);
+      expect(e.title).not.toMatch(/[.!?]$/);
+    }
+  });
+
+  it('give every neighbor someone to run into', () => {
+    const met = new Set(encounters.flatMap((e) => e.species));
+    expect(species.filter((s) => !s.sightingsOnly && !met.has(s.id)).map((s) => s.id)).toEqual([]);
   });
 });

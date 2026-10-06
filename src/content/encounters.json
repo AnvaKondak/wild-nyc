@@ -1,0 +1,990 @@
+[
+ {
+  "id": "crows-mob-hawk",
+  "species": [
+   "american-crow",
+   "red-tailed-hawk"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "The crows found the hawk",
+  "body": "Three crows are taking turns swooping at a red-tailed hawk on a branch, cawing loudly. The hawk ruffles up, looks very tired of this, and flies off. The crows follow for a while, just to make the point.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "jay-hawk-mimic",
+  "species": [
+   "blue-jay",
+   "red-tailed-hawk"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "The blue jay does a hawk impression",
+  "body": "A blue jay lets out a perfect red-tailed hawk scream. Every small bird scatters. A real red-tail, perched nearby, turns to look. The jay goes quiet, suddenly very interested in an acorn.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "jay-squirrel-acorns",
+  "species": [
+   "blue-jay",
+   "eastern-gray-squirrel"
+  ],
+  "seasons": [
+   "fall"
+  ],
+  "title": "The acorn standoff",
+  "body": "A squirrel and a blue jay arrive at the same oak at the same moment. They stare. The squirrel flicks their tail. The jay grabs three acorns in their throat pouch and leaves. The squirrel buries one, then checks that the jay isn't watching.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "titmouse-downy-flock",
+  "species": [
+   "tufted-titmouse",
+   "downy-woodpecker"
+  ],
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "title": "The winter gang moves through",
+  "body": "A titmouse leads the way through the bare trees, calling loudly. A downy woodpecker follows, tapping on every branch the titmouse passes. More eyes, fewer surprises. They'll do this all day.",
+  "periods": [
+   "midday",
+   "dawn"
+  ]
+ },
+ {
+  "id": "titmouse-rbwo-flock",
+  "species": [
+   "tufted-titmouse",
+   "red-bellied-woodpecker"
+  ],
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "title": "The bossy titmouse and the big woodpecker",
+  "body": "The titmouse is tiny and in charge. The red-bellied woodpecker is three times bigger and follows anyway, because when the titmouse calls an alarm, everyone listens.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "titmouse-coopers-alarm",
+  "species": [
+   "tufted-titmouse",
+   "coopers-hawk"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "The titmouse raises the alarm",
+  "body": "A sharp, high whistle from a titmouse, and every small bird in the trees freezes. Somewhere close, a Cooper's hawk is watching. The hawk waits. Nobody moves. Eventually, the hawk gives up and slides away between the trunks.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "coopers-dove",
+  "species": [
+   "coopers-hawk",
+   "mourning-dove"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "The dove gets away",
+  "body": "A Cooper's hawk bursts out of a tree. A mourning dove bolts, wings whistling, and dives into a thick hedge. The hawk lands on top of the hedge, peers in, and leaves. The dove stays put a long, long time.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "coopers-sparrows",
+  "species": [
+   "coopers-hawk",
+   "house-sparrow"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "The sparrows go silent",
+  "body": "The hedge was loud a second ago. Now nothing. A Cooper's hawk is perched on the fence, very still. The sparrows wait it out deep inside the branches. When the hawk leaves, the chatter comes back all at once.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "peregrine-pigeons",
+  "species": [
+   "peregrine-falcon",
+   "rock-pigeon"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "The pigeons see the falcon",
+  "body": "A peregrine leaves a ledge high above, and the whole pigeon flock bursts up and wheels around the block in a tight swirl. Twisting together makes them hard to pick out. The falcon swings past and climbs back up. Not this time.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "kestrel-sparrows",
+  "species": [
+   "american-kestrel",
+   "house-sparrow"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "The hover and the hush",
+  "body": "A kestrel hangs in the air over the grass, wings blurring, head perfectly still. The sparrows in the hedge go silent. The little falcon drops, misses a grasshopper, and flaps to a light pole looking annoyed. The hedge starts chattering again, louder than before.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "id": "starlings-kestrel",
+  "species": [
+   "european-starling",
+   "american-kestrel"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "The starlings chase the kestrel",
+  "body": "A crowd of starlings spots a kestrel on a wire and swarms it, chattering. The kestrel is a falcon, but a small one, and twenty starlings is a lot. The kestrel leaves. The starlings act like they do this every day. They kind of do.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "mock-robin-bush",
+  "species": [
+   "northern-mockingbird",
+   "american-robin"
+  ],
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "title": "The berry bush showdown",
+  "body": "A mockingbird has claimed one holly bush for the whole winter. A robin lands and grabs a berry. The mockingbird is on them in a second, wings flashing white. The robin leaves. Then six more robins land at once, and the mockingbird can't chase them all.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "mock-jay-copy",
+  "species": [
+   "northern-mockingbird",
+   "blue-jay"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "The mockingbird borrows a jay",
+  "body": "A blue jay yells jay! jay! from a treetop. A minute later, a mockingbird down the block sings it back, perfectly, in the middle of a song that also includes a car alarm.",
+  "periods": [
+   "dawn",
+   "midday"
+  ]
+ },
+ {
+  "id": "starling-sparrow-holes",
+  "species": [
+   "european-starling",
+   "house-sparrow"
+  ],
+  "seasons": [
+   "spring"
+  ],
+  "title": "The great nest-hole argument",
+  "body": "There's one good hole in the old wall, and a starling and a pair of house sparrows both want it. Lots of chattering, some shoving. The starling gets in first. The sparrows move to the gap under the gutter and act like they wanted that one all along.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "starling-rbwo-hole",
+  "species": [
+   "european-starling",
+   "red-bellied-woodpecker"
+  ],
+  "seasons": [
+   "spring"
+  ],
+  "title": "The starling moves into the woodpecker's hole",
+  "body": "A red-bellied woodpecker spent days carving a perfect round nest hole. A starling has been watching. The moment the woodpecker leaves, the starling pops in. The woodpecker comes back to a very rude surprise and starts carving a new one.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "grackle-robin-lawn",
+  "species": [
+   "common-grackle",
+   "american-robin"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "title": "Lawn sharing",
+  "body": "A robin and a grackle are working the same patch of grass. The robin runs, stops, listens. The grackle struts, pokes, struts. When the robin pulls up a worm, the grackle takes a step closer. The robin takes the worm and leaves.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "rwbl-hawk",
+  "species": [
+   "red-winged-blackbird",
+   "red-tailed-hawk"
+  ],
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "title": "The tiny bird chases the big hawk",
+  "body": "A red-tailed hawk flies too close to the marsh, and a red-winged blackbird launches after them, diving at their back, red shoulders flashing. The hawk is ten times bigger. The hawk leaves anyway.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "rwbl-crow",
+  "species": [
+   "red-winged-blackbird",
+   "american-crow"
+  ],
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "title": "Not near the nest",
+  "body": "A crow is walking along the reeds, and every red-wing in the marsh is yelling about it. One dives at the crow's head, then another. The crow hops away, unbothered, looking for something easier.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "gull-bufflehead",
+  "species": [
+   "herring-gull",
+   "bufflehead"
+  ],
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "title": "The gull waits for the bufflehead",
+  "body": "A bufflehead dives. A herring gull floats nearby, watching. The bufflehead pops up with a snail, and the gull lunges for it. The little duck dives again, fast. Sometimes the gull wins. This time, not.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "gull-cormorant",
+  "species": [
+   "herring-gull",
+   "double-crested-cormorant"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "title": "The gull and the cormorant's fish",
+  "body": "A cormorant surfaces with a fish and starts flipping it around to swallow it headfirst. A gull swoops in to steal it. The cormorant dives back under, fish and all. The gull circles, annoyed.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "rbgu-pigeon-bread",
+  "species": [
+   "ring-billed-gull",
+   "rock-pigeon"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "Somebody dropped a pretzel",
+  "body": "Pigeons arrive first, crowding around in a cooing circle. Then a ring-billed gull lands right in the middle, grabs the biggest piece, and walks off. The pigeons go back to the crumbs, which are, honestly, the best part.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "id": "goose-mallard-pond",
+  "species": [
+   "canada-goose",
+   "mallard"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "Pond neighbors",
+  "body": "The geese are grazing at the water's edge. The mallards dabble just offshore. Every so often a goose hisses at a duck who drifts too close, and the duck drifts slightly less close. Peace, mostly.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "swan-goose",
+  "species": [
+   "mute-swan",
+   "canada-goose"
+  ],
+  "seasons": [
+   "spring"
+  ],
+  "title": "The swan claims the pond",
+  "body": "A pair of Canada geese paddle toward the swans' corner of the pond. The male swan raises his wings like sails and powers toward them. The geese turn around, honking about it. Spring is for territory.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "heron-nightheron-shift",
+  "species": [
+   "great-blue-heron",
+   "black-crowned-night-heron"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "title": "The shift change at the pond",
+  "body": "As the light fades, the great blue heron stalks off the shallows and flaps to a tall tree. At the same moment, a night heron wakes up in the willow and drops to the water's edge. Day shift out, night shift in.",
+  "periods": [
+   "dusk",
+   "dawn"
+  ]
+ },
+ {
+  "id": "heron-slider",
+  "species": [
+   "great-blue-heron",
+   "pond-slider"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "title": "The heron and the turtles",
+  "body": "The turtles are stacked on the log. A great blue heron lands at the other end, very tall, very still. Nobody slides off. They've all seen the heron before. The heron only wants fish.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "id": "tern-cormorant",
+  "species": [
+   "common-tern",
+   "double-crested-cormorant"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "title": "Fishing the same school",
+  "body": "A cormorant is chasing fish underwater, and the scared little fish rush to the surface, right where the terns are hovering. The terns dive. Everyone eats. Teamwork, sort of.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "raccoon-opossum",
+  "species": [
+   "raccoon",
+   "virginia-opossum"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "Two night owls, one trash can",
+  "body": "A raccoon and an opossum arrive at the same spilled bag at the same time. They size each other up. The opossum hisses, showing all fifty teeth. The raccoon decides there's another bag down the block.",
+  "periods": [
+   "night",
+   "dusk"
+  ]
+ },
+ {
+  "id": "raccoon-squirrel-shift",
+  "species": [
+   "raccoon",
+   "eastern-gray-squirrel"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "The handover at dawn",
+  "body": "A raccoon is climbing up a tree to sleep just as a squirrel is climbing down to start the day. They pass on the trunk, one going up, one going down. Neither says a word.",
+  "periods": [
+   "dawn"
+  ]
+ },
+ {
+  "id": "groundhog-goose",
+  "species": [
+   "groundhog",
+   "canada-goose"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "title": "Lawn mowers",
+  "body": "A groundhog is munching clover at one end of the lawn. The geese are grazing at the other end. Slowly, bite by bite, they're mowing toward each other. When they meet in the middle, the groundhog sits up, considers it, and goes back to the burrow side.",
+  "periods": [
+   "midday",
+   "dawn"
+  ]
+ },
+ {
+  "id": "groundhog-hawk",
+  "species": [
+   "groundhog",
+   "red-tailed-hawk"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "title": "The whistle pig sounds the alarm",
+  "body": "A red-tailed hawk's shadow crosses the lawn. A groundhog sits up, whistles sharply, and dives into the burrow. Every squirrel nearby freezes. The hawk lands on a light pole and waits. The groundhog does not come out.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "id": "bumble-honey",
+  "species": [
+   "common-eastern-bumble-bee",
+   "western-honey-bee"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "title": "Sharing the flowers",
+  "body": "A honey bee and a bumble bee land on the same coneflower. The honey bee is quick and neat. The bumble bee is round and loud and shakes the whole flower. They work opposite sides without a fuss.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "id": "carp-bumble-lookalike",
+  "species": [
+   "eastern-carpenter-bee",
+   "common-eastern-bumble-bee"
+  ],
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "title": "The lookalikes",
+  "body": "A bumble bee and a carpenter bee are on the same flower, and they look almost the same. The trick is the bottom: the bumble bee's is fuzzy, the carpenter bee's is bald and shiny. The carpenter bee is also stealing nectar through the side of the flower.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "id": "honey-monarch",
+  "species": [
+   "western-honey-bee",
+   "monarch"
+  ],
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "title": "Two travelers on one flower",
+  "body": "A monarch lands on a goldenrod full of honey bees. The bees keep working. The butterfly unrolls a long tongue and sips. One of them is going to Mexico. The others are going back to a rooftop hive two blocks away.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "id": "dasher-swift",
+  "species": [
+   "blue-dasher",
+   "chimney-swift"
+  ],
+  "seasons": [
+   "summer"
+  ],
+  "title": "Bug patrol, two levels",
+  "body": "Down low over the pond, a blue dasher zips out and snatches a mosquito. High above the rooftops, a chimney swift does the same thing at forty miles an hour. Between them, the bugs don't stand a chance.",
+  "periods": [
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "firefly-moths",
+  "species": [
+   "common-eastern-firefly",
+   "moths"
+  ],
+  "seasons": [
+   "summer"
+  ],
+  "title": "Lights, two ways",
+  "body": "The moths are circling the streetlight, dizzy with it. Down in the dark grass, the fireflies make their own light, flashing slow yellow swoops. The fireflies like it darker. The darker it is, the better they can find each other.",
+  "periods": [
+   "dusk",
+   "night"
+  ]
+ },
+ {
+  "id": "orb-moth",
+  "species": [
+   "orb-weavers",
+   "moths"
+  ],
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "title": "The moth and the web",
+  "body": "A moth flutters straight into an orb-weaver's web. The spider rushes over. But moths are covered in loose scales, and this one pulls free, leaving a little dust behind. The spider goes back to the middle to wait, and to fix the hole.",
+  "periods": [
+   "night",
+   "dusk"
+  ]
+ },
+ {
+  "id": "downy-rbwo",
+  "species": [
+   "downy-woodpecker",
+   "red-bellied-woodpecker"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "Big and little woodpecker",
+  "body": "A downy and a red-bellied woodpecker are on the same tree. The little downy works the thin twigs at the top. The big red-belly works the thick trunk below. Same tree, different floors.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "thrush-wtsp",
+  "species": [
+   "hermit-thrush",
+   "white-throated-sparrow"
+  ],
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "title": "Leaf litter neighbors",
+  "body": "Under the same bush, a white-throated sparrow kicks leaves backward with both feet, and a hermit thrush hops quietly beside them, picking up whatever the kicking turns up. A good arrangement.",
+  "periods": [
+   "dawn",
+   "midday"
+  ]
+ },
+ {
+  "id": "junco-wtsp",
+  "species": [
+   "dark-eyed-junco",
+   "white-throated-sparrow"
+  ],
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "title": "Under the hedge together",
+  "body": "The juncos and white-throated sparrows came down from Canada around the same time, and now they spend winter together under the same hedges, hopping and scratching side by side.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "junco-songsparrow",
+  "species": [
+   "dark-eyed-junco",
+   "song-sparrow"
+  ],
+  "seasons": [
+   "winter",
+   "fall"
+  ],
+  "title": "The winter seed crew",
+  "body": "A song sparrow sings on a bright winter morning while a little flock of juncos picks seeds from the frozen ground beneath. Every so often the song sparrow drops down to join them.",
+  "periods": [
+   "dawn",
+   "midday"
+  ]
+ },
+ {
+  "id": "yrwa-thrush-berries",
+  "species": [
+   "yellow-rumped-warbler",
+   "hermit-thrush"
+  ],
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "title": "The winter berry bush",
+  "body": "A yellow-rumped warbler and a hermit thrush are sharing a bayberry bush. The warbler flutters and grabs, quick as anything. The thrush sits quietly and picks one berry at a time. There's enough for both.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "id": "cardinal-jay-feeder",
+  "species": [
+   "northern-cardinal",
+   "blue-jay"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "The feeder pecking order",
+  "body": "A cardinal is cracking seeds at the feeder. A blue jay lands, big and loud, and the cardinal hops to a nearby branch. The jay grabs a mouthful and leaves. The cardinal comes right back, as if nothing happened.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "cardinal-dove",
+  "species": [
+   "northern-cardinal",
+   "mourning-dove"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "Breakfast on the ground",
+  "body": "Under the feeder, a pair of cardinals and a pair of mourning doves pick through the fallen seed. The doves are slow and calm. The cardinals are quick and choosy. Nobody fights. It's a nice breakfast.",
+  "periods": [
+   "dawn",
+   "midday"
+  ]
+ },
+ {
+  "id": "catbird-mock-duel",
+  "species": [
+   "gray-catbird",
+   "northern-mockingbird"
+  ],
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "title": "The mimic-off",
+  "body": "A catbird is rambling from inside a bush: squeaks, whistles, a meow. A mockingbird answers from a rooftop with someone else's songs, each one sung three times. They're cousins, and neither is going to stop first.",
+  "periods": [
+   "dawn",
+   "midday"
+  ]
+ },
+ {
+  "id": "catbird-robin-berries",
+  "species": [
+   "gray-catbird",
+   "american-robin"
+  ],
+  "seasons": [
+   "summer"
+  ],
+  "title": "The serviceberry tree",
+  "body": "A robin and a catbird are in the same serviceberry tree, both eating as fast as they can. The berries are ripe for about a week, and everybody in the neighborhood knows it.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "songsparrow-rwbl",
+  "species": [
+   "song-sparrow",
+   "red-winged-blackbird"
+  ],
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "title": "The marsh-edge neighbors",
+  "body": "A red-winged blackbird sings from the top of a cattail. A song sparrow sings from a shrub just below. Their songs overlap, all morning, like neighbors with their windows open.",
+  "periods": [
+   "dawn",
+   "midday"
+  ]
+ },
+ {
+  "id": "brant-goose",
+  "species": [
+   "brant",
+   "canada-goose"
+  ],
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "title": "Little goose, big goose",
+  "body": "A flock of small, dark brant is grazing on the lawn by the water, right next to a group of much bigger Canada geese. Cousins. The brant stay tightly together and murmur. The Canada geese honk. They mostly ignore each other.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "id": "bufflehead-mallard",
+  "species": [
+   "bufflehead",
+   "mallard"
+  ],
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "title": "Two ways to be a duck",
+  "body": "The mallards tip their bottoms up to nibble plants just under the surface. The buffleheads dive all the way down for snails. Same water, different menus.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "swift-pigeon-roof",
+  "species": [
+   "chimney-swift",
+   "rock-pigeon"
+  ],
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "title": "The rooftop at dusk",
+  "body": "The pigeons are settling onto the roof ledge for the night. Above them, the chimney swifts are swirling, twittering, then dropping one by one into the old chimney beside them.",
+  "periods": [
+   "dusk"
+  ]
+ },
+ {
+  "id": "monarch-mwbug",
+  "species": [
+   "monarch",
+   "large-milkweed-bug"
+  ],
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "title": "Everyone loves milkweed",
+  "body": "On one milkweed plant: a monarch caterpillar munching a leaf, a cluster of orange milkweed bugs sipping from a seed pod, and a bumble bee on the flowers. All of them taste bad to birds, thanks to the milkweed.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "id": "slider-mallard-log",
+  "species": [
+   "pond-slider",
+   "mallard"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "title": "Log sharing",
+  "body": "The turtles have the sunny end of the log. A mallard climbs up the other end to preen. One turtle slides off in protest. Then climbs back on. The duck doesn't notice.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "id": "titmouse-raccoon-fur",
+  "species": [
+   "tufted-titmouse",
+   "raccoon"
+  ],
+  "seasons": [
+   "spring"
+  ],
+  "title": "The titmouse borrows some fur",
+  "body": "A raccoon is sound asleep, curled up on a big branch. A titmouse lands next to them, very carefully, and plucks a beakful of soft fur for the nest. The raccoon doesn't wake up. The nest will be very cozy.",
+  "periods": [
+   "midday"
+  ]
+ },
+ {
+  "id": "peregrine-crow",
+  "species": [
+   "peregrine-falcon",
+   "american-crow"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "title": "The crows and the falcon",
+  "body": "Two crows are bothering a peregrine on a bridge ledge, hopping closer and cawing. The falcon is faster than anything alive and seems to know it. They don't move. The crows eventually wander off to bother someone easier.",
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ]
+ },
+ {
+  "id": "nightheron-raccoon",
+  "species": [
+   "black-crowned-night-heron",
+   "raccoon"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "title": "The night shift on the rocks",
+  "body": "After dark, a night heron is fishing at the water's edge, and a raccoon is feeling around in the shallows a few rocks over, washing something in their paws. Neither looks at the other. Busy night for both.",
+  "periods": [
+   "night"
+  ]
+ },
+ {
+  "id": "groundhog-squirrel",
+  "species": [
+   "groundhog",
+   "eastern-gray-squirrel"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "title": "The cousins",
+  "body": "A groundhog is eating clover on the lawn. A gray squirrel runs past, then stops to look. They're cousins: a groundhog is really a giant ground squirrel. The squirrel seems unimpressed.",
+  "periods": [
+   "midday",
+   "dawn"
+  ]
+ }
+]

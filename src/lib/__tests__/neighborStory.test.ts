@@ -1,4 +1,4 @@
-import { facts, getSpecies, moments, placeKinds, places, seasonChapters, species } from '@/content';
+import { encounters, facts, getSpecies, moments, placeKinds, places, seasonChapters, species } from '@/content';
 import type { Period, PlaceKind, Season } from '@/content/types';
 import { toLiveMap, type LiveSpecies } from '../live';
 import { aroundSlide, buildArc, leadWeight, pickAround, pickLead, poolFor, type StoryPlace, type StoryContext } from '../neighborStory';
@@ -13,6 +13,7 @@ const ctxOf = (season: Season, period: Period, extra: Partial<StoryContext> = {}
   moments,
   facts,
   chapters: seasonChapters,
+  encounters,
   season,
   period,
   live: new Map(),
@@ -97,8 +98,9 @@ describe('buildArc', () => {
     expect(arc.length).toBeGreaterThanOrEqual(3);
     expect(arc.length).toBeLessThanOrEqual(5);
     expect(arc.every((s) => s.speciesId === squirrel.id)).toBe(true);
-    expect(arc.at(-1)!.kicker).toMatch(/^Be a good neighbor near Prospect Park/);
-    expect(arc.some((s) => s.title === 'The acorn race')).toBe(true); // who they run into this fall
+    expect(arc.at(-1)!.kicker).toMatch(/^Before you go · Be a good neighbor near Prospect Park/);
+    expect(arc[1].kicker).toBe('Then…'); // the middle: they run into someone
+    expect(arc[1].cast).toContain(squirrel.id);
     expect(new Set(arc.map((s) => s.id)).size).toBe(arc.length);
     for (const s of arc) expect(s.title + s.body).not.toMatch(/[{}]/);
   });
@@ -145,5 +147,20 @@ describe('Also around today', () => {
     const around = pickAround(p, ctx, getSpecies('mallard'), 'seed', [wtsp]);
     expect(around[0].id).toBe('white-throated-sparrow');
     expect(aroundSlide(p, ctx, around, getSpecies('mallard'), [wtsp]).arrivedSpecies).toEqual(['white-throated-sparrow']);
+  });
+
+  it('has a beginning, a middle and an end', () => {
+    const arc = buildArc(getSpecies('blue-jay')!, placeOf(prospect), ctxOf('fall', 'midday'), 'lead', seededRandom('bme'));
+    expect(arc.map((s) => s.kicker)).toEqual([expect.any(String), 'Then…', 'Meanwhile', 'This fall', expect.stringMatching(/^Before you go/)]);
+  });
+
+  it('runs into someone who is actually around today, and visits mention the lead', () => {
+    const ctx = ctxOf('fall', 'midday');
+    const jay = getSpecies('blue-jay')!;
+    const withSquirrel = buildArc(jay, placeOf(prospect), ctx, 'lead', seededRandom('x'), { today: ['blue-jay', 'eastern-gray-squirrel'] });
+    expect(withSquirrel[1].cast).toEqual(['blue-jay', 'eastern-gray-squirrel']);
+    const visit = buildArc(getSpecies('northern-cardinal')!, placeOf(prospect), ctx, 'visit', seededRandom('y'), { today: ['blue-jay'], favor: 'blue-jay' });
+    expect(visit[1].cast).toEqual(['northern-cardinal', 'blue-jay']);
+    expect(visit[1].cameo).toBe('blue-jay');
   });
 });
