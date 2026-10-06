@@ -52,9 +52,10 @@ export function getSpecies(id: string): Species | undefined {
   return speciesById.get(id);
 }
 
-/** Species who live in this kind of place and are around this season. */
+/** Species who usually live in this kind of place and are around this season.
+ * Sightings-only species (deer) are left out; they join when live data has them. */
 export function speciesFor(kind: PlaceKind, season: Season): Species[] {
-  return species.filter((s) => s.spots[kind] !== undefined && s.seasons.includes(season));
+  return species.filter((s) => s.spots[kind] !== undefined && s.seasons.includes(season) && !s.sightingsOnly);
 }
 
 export function kindnessesFor(season: Season): Kindness[] {

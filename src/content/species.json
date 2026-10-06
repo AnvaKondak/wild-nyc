@@ -948,5 +948,671 @@
       "second": "brown",
       "belly": "tan"
     }
+  },
+  {
+    "id": "canada-goose",
+    "friendlyName": "Canada Geese",
+    "commonName": "Canada Goose",
+    "scientificName": "Branta canadensis",
+    "collectiveNoun": "a gaggle",
+    "group": "birds",
+    "art": {
+      "body": "goose",
+      "main": "ink",
+      "second": "brown",
+      "belly": "tan",
+      "accent": "ink",
+      "features": [
+        "collar"
+      ]
+    },
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Devoted Parent",
+      "traits": [
+        "Mates for life",
+        "Guards the goslings",
+        "Honks with feeling"
+      ],
+      "blurb": "Canada Geese pair up for life and raise their goslings together, one parent grazing while the other keeps watch. Get too close and you'll hear a very clear hiss."
+    },
+    "origin": "Native to North America. Many Canada Geese in the city don't migrate at all anymore. They stay all year wherever the grass is good.",
+    "home": "Grazing the lawns by the water and floating in pairs on the pond.",
+    "rightNow": {
+      "spring": "Goslings are hatching. Both parents walk them to the water and hiss at anyone who gets too close.",
+      "summer": "Molting. For about six weeks they can't fly, so they stay close to the water and keep a low profile.",
+      "fall": "Flocks from the north are passing over in big honking Vs while the locals settle in.",
+      "winter": "Gathered on open water and grassy edges, standing on one foot to keep the other warm."
+    },
+    "funFact": {
+      "title": "Taking turns at the front",
+      "body": "Geese fly in a V so each bird gets a little lift from the one ahead. They take turns doing the hard work at the front."
+    },
+    "kindness": {
+      "title": "Skip the bread.",
+      "body": "Bread fills geese up without feeding them. Let them graze the grass and water plants their bodies actually need."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "lawn",
+      "waterfront": "grass"
+    },
+    "spotHint": "Look on big lawns near water for brown-and-black birds with a white chinstrap.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 7089,
+    "ebirdCode": "cangoo"
+  },
+  {
+    "id": "mallard",
+    "friendlyName": "Mallards",
+    "commonName": "Mallard",
+    "scientificName": "Anas platyrhynchos",
+    "collectiveNoun": "a raft",
+    "group": "birds",
+    "art": {
+      "body": "duck",
+      "main": "green",
+      "second": "gray",
+      "belly": "lightGray",
+      "accent": "yellow",
+      "features": [
+        "patch",
+        "collar"
+      ]
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Easygoing Dabbler",
+      "traits": [
+        "Bottoms up",
+        "She does the quacking",
+        "Always in pairs"
+      ],
+      "blurb": "Mallards feed by tipping forward with their tails in the air. That loud QUACK? Almost always a female. Males make a softer, raspy sound."
+    },
+    "origin": "Native across the Northern Hemisphere, and the wild ancestor of almost every farm duck.",
+    "home": "Paddling on the pond, tipping bottoms-up to snack on water plants.",
+    "rightNow": {
+      "spring": "Ducklings! A mom leads her line of fluffy ducklings around the pond. She does this part on her own.",
+      "summer": "The males are in their 'eclipse' feathers: for a few weeks they look brown like the females while new feathers grow in.",
+      "fall": "Pairs are forming. The males have their shiny green heads back and are showing off on the water.",
+      "winter": "They stay as long as there's open water, dabbling along the edges of the ice."
+    },
+    "funFact": {
+      "title": "Built-in raincoat",
+      "body": "Mallards spread oil from a gland near their tail all over their feathers, so water rolls right off."
+    },
+    "kindness": {
+      "title": "Give the ducklings space.",
+      "body": "Keep dogs leashed near the pond in spring. A duckling who gets separated from mom has a hard time on their own."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "pond",
+      "waterfront": "water"
+    },
+    "spotHint": "Check the edges of any pond for ducks tipping bottoms-up. The males have shiny green heads.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 6930,
+    "ebirdCode": "mallar3"
+  },
+  {
+    "id": "brant",
+    "friendlyName": "Brant",
+    "commonName": "Brant",
+    "scientificName": "Branta bernicla",
+    "collectiveNoun": "a skein",
+    "group": "birds",
+    "art": {
+      "body": "goose",
+      "main": "ink",
+      "second": "brown",
+      "belly": "gray",
+      "accent": "ink",
+      "features": [
+        "bib"
+      ]
+    },
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Arctic Commuter",
+      "traits": [
+        "Long-distance flyer",
+        "Sea lettuce fan",
+        "Chatty in a crowd"
+      ],
+      "blurb": "Brant raise their families in the high Arctic and fly thousands of miles to spend the winter in New York Harbor, grazing sea lettuce and waterfront lawns."
+    },
+    "origin": "Native sea geese who nest on the Arctic tundra and spend the winter along the Atlantic coast.",
+    "home": "Grazing the grassy edge by the water, or bobbing in a flock close to shore.",
+    "rightNow": {
+      "spring": "Fueling up on sea lettuce before flying back to the Arctic in May.",
+      "summer": "Far north on the Arctic tundra, raising goslings under the midnight sun.",
+      "fall": "Just arriving from the Arctic. Listen for their low, rolling cronk calls along the shore.",
+      "winter": "Big flocks are grazing waterfront lawns and bobbing in the harbor, chattering away."
+    },
+    "funFact": {
+      "title": "Salt-water geese",
+      "body": "Brant spend most of their lives on salt water and can drink it, thanks to special glands that get rid of the salt."
+    },
+    "kindness": {
+      "title": "Let them graze in peace.",
+      "body": "Brant need every bite to fuel their trip back to the Arctic. Walk around a grazing flock instead of through it."
+    },
+    "homeScene": "waterfront",
+    "spots": {
+      "waterfront": "grass"
+    },
+    "spotHint": "From fall to spring, look along the shore for small dark geese with a white necklace.",
+    "seasons": [
+      "fall",
+      "winter",
+      "spring"
+    ],
+    "iNatTaxonId": 7087,
+    "ebirdCode": "brant"
+  },
+  {
+    "id": "double-crested-cormorant",
+    "friendlyName": "Cormorants",
+    "commonName": "Double-crested Cormorant",
+    "scientificName": "Nannopterum auritum",
+    "collectiveNoun": "a gulp",
+    "group": "birds",
+    "art": {
+      "body": "cormorant",
+      "main": "ink",
+      "features": [
+        "spread"
+      ]
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Underwater Hunter",
+      "traits": [
+        "Expert diver",
+        "Air-dries their wings",
+        "Orange chin"
+      ],
+      "blurb": "Cormorants chase fish underwater, then stand on a post with their wings spread wide to dry. Their feathers soak up a little water, which actually helps them dive."
+    },
+    "origin": "Native birds who nest in big colonies on the islands of New York Harbor.",
+    "home": "Standing on an old piling with wings spread wide, drying off.",
+    "rightNow": {
+      "spring": "Back on the harbor islands, building messy stick nests in big, noisy colonies.",
+      "summer": "Busy feeding chicks, diving for fish all day and drying off on every post in the harbor.",
+      "fall": "Long lines of cormorants are flying south, low over the water.",
+      "winter": "Most are down south for the winter, though a few tough ones stay on the harbor."
+    },
+    "funFact": {
+      "title": "Why the wing pose",
+      "body": "Cormorant feathers aren't fully waterproof. That makes them heavier and better at diving, but it means they have to stand and dry off."
+    },
+    "kindness": {
+      "title": "Pick up fishing line.",
+      "body": "Cormorants dive after fish and can get tangled in lost line and hooks. Bin any you find by the water."
+    },
+    "homeScene": "waterfront",
+    "spots": {
+      "waterfront": "piling",
+      "park": "pond"
+    },
+    "spotHint": "Look at posts and pilings in the water for a dark bird standing with wings held out.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 1454382,
+    "ebirdCode": "doccor"
+  },
+  {
+    "id": "ring-billed-gull",
+    "friendlyName": "Ring-billed Gulls",
+    "commonName": "Ring-billed Gull",
+    "scientificName": "Larus delawarensis",
+    "collectiveNoun": "a squabble",
+    "group": "birds",
+    "art": {
+      "body": "gull",
+      "main": "white",
+      "second": "lightGray",
+      "accent": "yellow",
+      "features": [
+        "collar"
+      ]
+    },
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Ballfield Regular",
+      "traits": [
+        "Ring on the beak",
+        "Snack spotter",
+        "Follows the crowd"
+      ],
+      "blurb": "Smaller and neater than herring gulls, ring-billed gulls are as at home on a ballfield or a parking lot as on the beach."
+    },
+    "origin": "Native birds who nest around the Great Lakes and in Canada and spend the cooler months here.",
+    "home": "Standing around the shore and open lawns, keeping an eye on everything.",
+    "rightNow": {
+      "spring": "Most are heading north to nest by the Great Lakes, but a few stay behind.",
+      "summer": "Fewer around, mostly young gulls who aren't nesting yet.",
+      "fall": "Arriving back in big numbers, filling the shore, the ballfields and the parking lots.",
+      "winter": "Everywhere: on the piers, on the ice and on every open lawn near the water."
+    },
+    "funFact": {
+      "title": "Read the ring",
+      "body": "That neat black ring near the tip of the yellow beak is how you tell them apart from the bigger herring gulls."
+    },
+    "kindness": {
+      "title": "Don't share your fries.",
+      "body": "Salty, greasy food isn't good for gulls, and feeding them teaches them to crowd people. Let them find their own lunch."
+    },
+    "homeScene": "waterfront",
+    "spots": {
+      "waterfront": "shore",
+      "park": "lawn",
+      "block": "sky"
+    },
+    "spotHint": "Look for neat white-and-gray gulls with a black ring around a yellow beak.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 4364,
+    "ebirdCode": "ribgul"
+  },
+  {
+    "id": "common-tern",
+    "friendlyName": "Common Terns",
+    "commonName": "Common Tern",
+    "scientificName": "Sterna hirundo",
+    "collectiveNoun": "a colony",
+    "group": "birds",
+    "art": {
+      "body": "tern",
+      "main": "white",
+      "second": "lightGray",
+      "accent": "red"
+    },
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Dive-Bomber",
+      "traits": [
+        "Headfirst diver",
+        "Forked tail",
+        "Fierce parent"
+      ],
+      "blurb": "Terns hover over the water, then plunge headfirst after small fish. Near their nests they'll swoop at anyone who wanders too close."
+    },
+    "origin": "Native seabirds who nest on beaches and islands around the harbor and spend the winter in South America.",
+    "home": "Hovering over the water, then splash, diving for a fish.",
+    "rightNow": {
+      "spring": "Back from South America and courting with gifts of fish.",
+      "summer": "Raising chicks on harbor islands and beaches, diving for tiny fish all day long.",
+      "fall": "Heading south to spend the winter in South America.",
+      "winter": "Far away on the coasts of South America."
+    },
+    "funFact": {
+      "title": "Fish for a date",
+      "body": "A male tern courts by flying around with a small fish in his beak, then offering it to the female."
+    },
+    "kindness": {
+      "title": "Give nesting beaches room.",
+      "body": "Terns nest right on the sand. Stay out of roped-off beach areas in summer so the eggs and chicks stay safe."
+    },
+    "homeScene": "waterfront",
+    "spots": {
+      "waterfront": "water"
+    },
+    "spotHint": "In summer, watch over the water for slim white birds with black caps who hover, then dive.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 4450,
+    "ebirdCode": "comter"
+  },
+  {
+    "id": "great-blue-heron",
+    "friendlyName": "Great Blue Herons",
+    "commonName": "Great Blue Heron",
+    "scientificName": "Ardea herodias",
+    "collectiveNoun": "a siege",
+    "group": "birds",
+    "art": {
+      "body": "heron",
+      "main": "gray",
+      "second": "blueTint",
+      "belly": "white"
+    },
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Patient Fisher",
+      "traits": [
+        "Stands very still",
+        "Lightning-fast strike",
+        "Tall and elegant"
+      ],
+      "blurb": "A great blue heron can stand motionless in the shallows for ages, then strike at a fish faster than you can blink."
+    },
+    "origin": "Native across North America, nesting together in tree colonies called rookeries.",
+    "home": "Standing still at the water's edge, tall among the reeds.",
+    "rightNow": {
+      "spring": "Nesting high in trees on harbor islands, adding sticks to big old nests.",
+      "summer": "Fishing the shallows of every pond and shore, feeding hungry chicks.",
+      "fall": "Young herons are out on their own, trying out fishing spots all over the city.",
+      "winter": "Some stay all winter, hunched by open water, waiting for a fish."
+    },
+    "funFact": {
+      "title": "The folded neck",
+      "body": "Herons fly with their necks folded into an S. Cranes fly with their necks stretched straight out."
+    },
+    "kindness": {
+      "title": "Watch from a distance.",
+      "body": "A heron who flies off loses energy and a good fishing spot. Stop, enjoy, and let them keep fishing."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "reeds",
+      "waterfront": "shore"
+    },
+    "spotHint": "Scan the edges of ponds and shores for a tall gray-blue bird standing perfectly still.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 4956,
+    "ebirdCode": "grbher3"
+  },
+  {
+    "id": "black-crowned-night-heron",
+    "friendlyName": "Night Herons",
+    "commonName": "Black-crowned Night Heron",
+    "scientificName": "Nycticorax nycticorax",
+    "collectiveNoun": "a siege",
+    "group": "birds",
+    "art": {
+      "body": "night-heron",
+      "main": "ink",
+      "second": "gray",
+      "belly": "white"
+    },
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Night Shift Fisher",
+      "traits": [
+        "Red eyes",
+        "Hunched posture",
+        "Works late"
+      ],
+      "blurb": "Black-crowned night herons nap in the trees by day and fish at dusk and through the night, hunched at the water's edge."
+    },
+    "origin": "Native herons who nest in colonies on harbor islands and around city ponds.",
+    "home": "Hunched on the rocks at the water's edge, waiting for dusk.",
+    "rightNow": {
+      "spring": "Back at their nesting colonies, crowded into the trees on the harbor islands.",
+      "summer": "Fishing the ponds and shores at dusk and through the night.",
+      "fall": "Young night herons, brown with white spots, are exploring new fishing spots.",
+      "winter": "Most have gone south, but a few stay, roosting in evergreens near open water."
+    },
+    "funFact": {
+      "title": "Built for the dark",
+      "body": "Those big red eyes help night herons see in low light, so they can fish while most herons are asleep."
+    },
+    "kindness": {
+      "title": "Let the roost rest.",
+      "body": "By day they sleep in trees near water. Keep your voice low near a roost so they're rested for the night shift."
+    },
+    "homeScene": "waterfront",
+    "spots": {
+      "waterfront": "rocks",
+      "park": "reeds"
+    },
+    "spotHint": "At dusk, look along the water's edge for a stocky, hunched bird with a black cap and red eyes.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 4981,
+    "ebirdCode": "bcnher"
+  },
+  {
+    "id": "bufflehead",
+    "friendlyName": "Buffleheads",
+    "commonName": "Bufflehead",
+    "scientificName": "Bucephala albeola",
+    "collectiveNoun": "a raft",
+    "group": "birds",
+    "art": {
+      "body": "duck",
+      "main": "ink",
+      "second": "ink",
+      "belly": "white",
+      "accent": "gray",
+      "features": [
+        "patch"
+      ]
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Tiny Diver",
+      "traits": [
+        "Small but bold",
+        "Big white head patch",
+        "Pops up anywhere"
+      ],
+      "blurb": "One of the smallest ducks around, buffleheads dive over and over, popping back up somewhere you didn't expect."
+    },
+    "origin": "Native ducks who nest in old woodpecker holes in northern forests and spend the winter on our bays and rivers.",
+    "home": "Diving and popping up again out on the water.",
+    "rightNow": {
+      "spring": "Heading north to the forests of Canada to nest in old woodpecker holes.",
+      "summer": "Far north, raising ducklings in tree holes by forest lakes.",
+      "fall": "Just arriving on the harbor and rivers for the winter.",
+      "winter": "Small flocks are diving all day out on the water, the males' white head patches flashing."
+    },
+    "funFact": {
+      "title": "Nests in a tree",
+      "body": "Buffleheads nest in old woodpecker holes. The ducklings jump down to the ground the day after they hatch."
+    },
+    "kindness": {
+      "title": "Keep the water clean.",
+      "body": "Diving ducks swallow what they find. Trash and fishing line in the water are real hazards for them."
+    },
+    "homeScene": "waterfront",
+    "spots": {
+      "waterfront": "water",
+      "park": "pond"
+    },
+    "spotHint": "In winter, look out on the water for tiny black-and-white ducks who keep diving.",
+    "seasons": [
+      "fall",
+      "winter",
+      "spring"
+    ],
+    "iNatTaxonId": 6993,
+    "ebirdCode": "buffle"
+  },
+  {
+    "id": "mute-swan",
+    "friendlyName": "Mute Swans",
+    "commonName": "Mute Swan",
+    "scientificName": "Cygnus olor",
+    "collectiveNoun": "a bevy",
+    "group": "birds",
+    "art": {
+      "body": "swan",
+      "main": "white",
+      "second": "white",
+      "belly": "white",
+      "accent": "orange"
+    },
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Fierce Romantic",
+      "traits": [
+        "Not actually mute",
+        "Loyal partner",
+        "Fierce protector"
+      ],
+      "blurb": "Mute swans hiss, snort and whoosh their wings loudly. Pairs stay together for years and defend their nest and cygnets fiercely."
+    },
+    "origin": "Brought over from Europe in the 1800s to decorate parks and estates. Today they live wild on our ponds and bays.",
+    "home": "Gliding on the pond, neck curved in a graceful S.",
+    "rightNow": {
+      "spring": "Sitting on a huge nest at the pond's edge. Give them lots of room: they're very protective.",
+      "summer": "Fluffy gray cygnets are paddling behind their parents, sometimes riding on their backs.",
+      "fall": "The cygnets are growing up, still gray-brown, still following their parents around.",
+      "winter": "Gathered on open water, sometimes in big groups when the ponds freeze."
+    },
+    "funFact": {
+      "title": "Listen to the wings",
+      "body": "You can hear a flying mute swan coming: their wings make a loud, rhythmic whooshing hum."
+    },
+    "kindness": {
+      "title": "Admire from a distance.",
+      "body": "Swans defending a nest will hiss and charge. Keep back, keep dogs leashed, and everyone stays calm."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "pond",
+      "waterfront": "water"
+    },
+    "spotHint": "Look on ponds and quiet bays for a big white bird with an orange beak and an S-curved neck.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 6921,
+    "ebirdCode": "mutswa"
+  },
+  {
+    "id": "red-winged-blackbird",
+    "friendlyName": "Red-winged Blackbirds",
+    "commonName": "Red-winged Blackbird",
+    "scientificName": "Agelaius phoeniceus",
+    "collectiveNoun": "a cloud",
+    "group": "birds",
+    "art": {
+      "body": "songbird",
+      "main": "ink",
+      "second": "ink",
+      "belly": "ink",
+      "accent": "ink",
+      "features": [
+        "epaulet"
+      ]
+    },
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Spring Announcer",
+      "traits": [
+        "Red shoulder patches",
+        "Conk-la-ree!",
+        "Guards the cattails"
+      ],
+      "blurb": "Male red-winged blackbirds puff up their red-and-yellow shoulders and belt out conk-la-ree! from the tops of the cattails."
+    },
+    "origin": "Native across North America and one of the most common birds on the continent, at home in any marsh.",
+    "home": "Clinging to the top of a cattail, singing his heart out.",
+    "rightNow": {
+      "spring": "Among the first birds back. The males arrive early to claim their cattails and sing.",
+      "summer": "Busy feeding chicks in the reeds and chasing off anyone who flies too close to the nest.",
+      "fall": "Gathering in big flocks, sometimes with grackles and starlings, before heading south.",
+      "winter": "Most have gone south, but a few tough ones stick around the marshes."
+    },
+    "funFact": {
+      "title": "The brown ones are the girls",
+      "body": "Female red-winged blackbirds are streaky brown and look like big sparrows. They do most of the nest building."
+    },
+    "kindness": {
+      "title": "Leave the wild edges.",
+      "body": "Cattails and reeds by ponds are their home. Leaving those edges uncut gives them somewhere to nest."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "reeds",
+      "waterfront": "grass"
+    },
+    "spotHint": "Near ponds in spring and summer, listen for conk-la-ree! and look for a black bird with red shoulders on a cattail.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 9744,
+    "ebirdCode": "rewbla"
+  },
+  {
+    "id": "white-tailed-deer",
+    "friendlyName": "White-tailed Deer",
+    "commonName": "White-tailed Deer",
+    "scientificName": "Odocoileus virginianus",
+    "collectiveNoun": "a herd",
+    "group": "furry",
+    "art": {
+      "body": "deer",
+      "main": "tan",
+      "belly": "white"
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Quiet Wanderer",
+      "traits": [
+        "Big listening ears",
+        "White-flag tail",
+        "Shy at dusk"
+      ],
+      "blurb": "Deer slip through the trees at dawn and dusk. When something startles them, they flip up their white tails like a flag and bound away."
+    },
+    "origin": "Native to North America. In the city they live in the bigger wild spaces, especially on Staten Island and in the Bronx, and sometimes wander along wooded edges near the water.",
+    "home": "Stepping quietly through the edge of the woods at dawn and dusk.",
+    "rightNow": {
+      "spring": "Moms are looking for quiet spots in tall grass. Spotted fawns arrive in late spring.",
+      "summer": "Spotted fawns are lying hidden in the grass while mom feeds nearby. A fawn alone is usually just fine.",
+      "fall": "Bucks have their antlers, and everyone is bulking up on acorns before winter.",
+      "winter": "Deer gather in small groups, nibbling twigs and staying close to shelter."
+    },
+    "funFact": {
+      "title": "Fawns hide by staying still",
+      "body": "Newborn fawns have very little scent, so mom leaves them tucked away and motionless while she feeds, then comes back to nurse."
+    },
+    "kindness": {
+      "title": "Leave the fawn.",
+      "body": "A fawn alone in the grass hasn't been abandoned. Mom is nearby. Look, smile, and walk away quietly."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "lawn",
+      "waterfront": "grass"
+    },
+    "spotHint": "At dawn or dusk, look along the wooded edges of big parks for a brown deer with a white-flagged tail.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 42223,
+    "sightingsOnly": true
   }
 ]

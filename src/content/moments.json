@@ -2504,5 +2504,1143 @@
     "body": "Fresh in from South America after a very long trip. Listen for their high twittering over the rooftops: summer is on its way."
    }
   ]
+ },
+ {
+  "id": "goose-goslings",
+  "speciesId": "canada-goose",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A goose family is out for a walk",
+    "body": "Mom in front, dad at the back, and a line of fuzzy yellow goslings in between. Nobody is allowed to cut in."
+   },
+   {
+    "title": "The goslings are learning to graze",
+    "body": "Tiny beaks, very serious faces, one blade of grass at a time. A parent stands guard with a stare that says keep walking."
+   },
+   {
+    "title": "A goose family is parading toward {water}",
+    "body": "Two grown-ups and a wobbly line of goslings, crossing the grass near {green} like they own it. In a way, they do."
+   }
+  ]
+ },
+ {
+  "id": "goose-molt",
+  "speciesId": "canada-goose",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "water",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The geese are grounded for a few weeks",
+    "body": "Every summer they drop their flight feathers and grow new ones. Until then, it's floating, grazing and laying low."
+   },
+   {
+    "title": "Geese are taking a summer break from flying",
+    "body": "No feathers, no flights. They stick close to the water, where a quick paddle away keeps them safe."
+   },
+   {
+    "title": "The geese are spending the summer by {water}",
+    "body": "While their new flight feathers grow in, they stay close to the water's edge, grazing and floating and keeping a low profile."
+   }
+  ]
+ },
+ {
+  "id": "goose-v",
+  "speciesId": "canada-goose",
+  "seasons": [
+   "fall",
+   "spring"
+  ],
+  "periods": [
+   "dawn",
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A V of geese is honking overhead",
+    "body": "They take turns at the front, where the flying is hardest. The honking is how they keep the line together."
+   },
+   {
+    "title": "Geese are flying in formation",
+    "body": "That big wobbly V is a flock on the move, chatting the whole way. Listen before you look."
+   },
+   {
+    "title": "A honking V is passing over {green}",
+    "body": "High and loud, a flock is crossing the sky above the neighborhood, taking turns at the front and talking the whole way."
+   }
+  ]
+ },
+ {
+  "id": "goose-one-foot",
+  "speciesId": "canada-goose",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "midday",
+   "dusk"
+  ],
+  "setting": "shore",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A goose is standing on one foot",
+    "body": "The other foot is tucked up in their warm belly feathers. They'll switch feet when this one gets cold."
+   },
+   {
+    "title": "Geese are lined up along the frozen edge",
+    "body": "Feathers fluffed, heads tucked, one foot up. Winter strategy: stay together, stay still, stay warm."
+   },
+   {
+    "title": "The geese are wintering by {water}",
+    "body": "A flock is resting at the edge of the water, heads tucked and one foot up, waiting out the cold together."
+   }
+  ]
+ },
+ {
+  "id": "mallard-ducklings",
+  "speciesId": "mallard",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "water",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A mallard mom has a line of ducklings",
+    "body": "Paddle, paddle, peep. They follow her everywhere, and she keeps a very close count."
+   },
+   {
+    "title": "Ducklings are speed-paddling to keep up",
+    "body": "Tiny feet going like crazy, mom gliding along like it's nothing. Every so often one zooms off and zooms right back."
+   },
+   {
+    "title": "A mallard mom is leading her ducklings around {water}",
+    "body": "Single file, a little fluffy parade, past the reeds and along the edge. She's showing them every good snack spot."
+   }
+  ]
+ },
+ {
+  "id": "mallard-tipping",
+  "speciesId": "mallard",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "water",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A mallard is doing a perfect handstand",
+    "body": "Head underwater, tail straight up, feet paddling the air. It's how they reach the good plants at the bottom."
+   },
+   {
+    "title": "Bottoms up at the pond",
+    "body": "A row of duck tails pointing at the sky. Lunch is down there somewhere."
+   },
+   {
+    "title": "The mallards are dabbling at {water}",
+    "body": "Tip forward, tail up, nibble, pop back up. They're snacking on the water plants along the edge, very pleased with themselves."
+   }
+  ]
+ },
+ {
+  "id": "mallard-pairs",
+  "speciesId": "mallard",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Two mallards are paddling side by side",
+    "body": "Mallards pair up in fall and winter. He's in his shiny green head; she's in her cozy brown."
+   },
+   {
+    "title": "The mallard with the green head is showing off",
+    "body": "Head bob, tail flick, a little whistle. Courting season on the pond has begun."
+   },
+   {
+    "title": "Mallard couples are floating on {water}",
+    "body": "Two by two, paddling slowly together. They'll stay paired through the winter."
+   }
+  ]
+ },
+ {
+  "id": "mallard-night",
+  "speciesId": "mallard",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "reeds",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "The mallards are asleep at the water's edge",
+    "body": "Heads tucked over their backs, bills under a wing, tucked in among the reeds."
+   },
+   {
+    "title": "Mallards are napping on the water",
+    "body": "Some sleep floating, with one eye open just in case. Very relaxing, very alert."
+   },
+   {
+    "title": "The ducks are sleeping by {water}",
+    "body": "Tucked into the reeds, heads turned back, bills under their wings. A few soft quacks now and then."
+   }
+  ]
+ },
+ {
+  "id": "brant-arrive",
+  "speciesId": "brant",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "shore",
+  "kicker": "Just arrived",
+  "variants": [
+   {
+    "title": "The brant just flew in from the Arctic",
+    "body": "Thousands of miles, and now they're here for the winter. Listen for their low, rolling cronk."
+   },
+   {
+    "title": "Small dark geese are back on the shore",
+    "body": "Brant are here! They spend the summer on the Arctic tundra and the winter right here."
+   },
+   {
+    "title": "The brant have landed by {water}",
+    "body": "Fresh in from the Arctic, a flock is grazing along the shore. They'll stay till spring."
+   }
+  ]
+ },
+ {
+  "id": "brant-grazing",
+  "speciesId": "brant",
+  "seasons": [
+   "winter",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Look down",
+  "variants": [
+   {
+    "title": "A flock of brant is grazing the lawn",
+    "body": "Little dark geese with white necklaces, chatting away and nibbling grass by the water."
+   },
+   {
+    "title": "The brant are munching sea lettuce",
+    "body": "Their favorite winter snack grows right along the rocks at low tide. Crunchy, salty, perfect."
+   },
+   {
+    "title": "Brant are grazing near {green}",
+    "body": "A chatty flock is working its way across the grass by the water, one nibble at a time, little white necklaces bobbing."
+   }
+  ]
+ },
+ {
+  "id": "brant-leave",
+  "speciesId": "brant",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The brant are fueling up for the Arctic",
+    "body": "Eating as much as they can. In May they'll fly thousands of miles north."
+   },
+   {
+    "title": "Brant are getting restless",
+    "body": "More chatter, more flying around. Any day now they'll head for the Arctic."
+   },
+   {
+    "title": "The brant are saying goodbye to {water}",
+    "body": "A noisy flock is bobbing near the shore, getting ready for the long flight back to the Arctic."
+   }
+  ]
+ },
+ {
+  "id": "cormorant-drying",
+  "speciesId": "double-crested-cormorant",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "pier",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A cormorant is drying their wings",
+    "body": "Standing on a post, wings held wide like a little cape. Their feathers soak up water, so they air-dry after every swim."
+   },
+   {
+    "title": "A cormorant is striking a pose",
+    "body": "Wings out, chin up, very dramatic. It's not showing off. It's laundry day."
+   },
+   {
+    "title": "A cormorant is drying off on a post in {water}",
+    "body": "Wings spread wide in the sun, perfectly still, after a long swim chasing fish."
+   }
+  ]
+ },
+ {
+  "id": "cormorant-diving",
+  "speciesId": "double-crested-cormorant",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "water",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A cormorant just disappeared underwater",
+    "body": "They swim after fish using their feet, sometimes for half a minute. Watch where they pop back up."
+   },
+   {
+    "title": "Cormorant on a fishing trip",
+    "body": "Dive, chase, gulp. They swallow fish headfirst, right at the surface."
+   },
+   {
+    "title": "A cormorant is fishing in {water}",
+    "body": "Bob, dive, gone. Somewhere under the surface, a cormorant is chasing lunch."
+   }
+  ]
+ },
+ {
+  "id": "cormorant-line",
+  "speciesId": "double-crested-cormorant",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "dusk",
+   "dawn"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A line of cormorants is flying south",
+    "body": "Low over the water in a long, loose line. Winter plans: somewhere warmer."
+   },
+   {
+    "title": "Cormorants are heading out",
+    "body": "A string of dark birds skims over the water, wing beats steady, on their way south."
+   },
+   {
+    "title": "Cormorants are flying low over {water}",
+    "body": "A long line of dark birds, heading south for the winter."
+   }
+  ]
+ },
+ {
+  "id": "ringbill-ballfield",
+  "speciesId": "ring-billed-gull",
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Ring-billed gulls have taken over the field",
+    "body": "Dozens of them, standing around facing into the wind. Very organized, for gulls."
+   },
+   {
+    "title": "A ring-billed gull is checking the picnic area",
+    "body": "Not begging. Just... supervising. Very closely."
+   },
+   {
+    "title": "Ring-billed gulls are lounging near {green}",
+    "body": "A whole crowd of neat gray-and-white gulls, all facing the same way into the breeze, chatting."
+   }
+  ]
+ },
+ {
+  "id": "ringbill-shore",
+  "speciesId": "ring-billed-gull",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "dusk"
+  ],
+  "setting": "shore",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A ring-billed gull is patrolling the shore",
+    "body": "Walking the waterline, checking what the tide brought in. Every morning, same job."
+   },
+   {
+    "title": "Gull squabble on the beach",
+    "body": "Two ring-bills, one snack, lots of opinions. The snack wins."
+   },
+   {
+    "title": "Ring-billed gulls are walking the edge of {water}",
+    "body": "Up and down the waterline, peeking at everything the tide left behind."
+   }
+  ]
+ },
+ {
+  "id": "ringbill-asleep",
+  "speciesId": "ring-billed-gull",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "water",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "The ring-billed gulls are sleeping on the water",
+    "body": "Rafts of them, floating together out where it's safe. Even gulls need a quiet night."
+   },
+   {
+    "title": "A floating gull slumber party",
+    "body": "Hundreds of gulls, bobbing on the dark water, heads tucked in."
+   },
+   {
+    "title": "The gulls are asleep out on {water}",
+    "body": "Floating together far from shore, tucked in and quiet for once."
+   }
+  ]
+ },
+ {
+  "id": "tern-diving",
+  "speciesId": "common-tern",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "water",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A tern is dive-bombing for fish",
+    "body": "Hover, hover, SPLASH. They plunge headfirst after tiny fish and pop right back up."
+   },
+   {
+    "title": "A tern is hovering in place",
+    "body": "Wings flicking, eyes locked on the water. Any second now..."
+   },
+   {
+    "title": "A tern is diving into {water}",
+    "body": "Hovering high, then straight down headfirst. A tiny splash, and up they come with a silver fish."
+   }
+  ]
+ },
+ {
+  "id": "tern-gift",
+  "speciesId": "common-tern",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "sky",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A tern is bringing a fish as a gift",
+    "body": "He flies around showing it off, then offers it to her. Romance, tern style."
+   },
+   {
+    "title": "Tern courtship is in the air",
+    "body": "A fish in his beak, a little parade flight. She's considering it."
+   },
+   {
+    "title": "A tern is courting over {water}",
+    "body": "He swoops past with a fish in his beak, hoping she'll accept it."
+   }
+  ]
+ },
+ {
+  "id": "tern-chicks",
+  "speciesId": "common-tern",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday",
+   "dusk"
+  ],
+  "setting": "shore",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Tern parents are on a nonstop fish run",
+    "body": "Dive, catch, fly to the chicks, repeat. All day long."
+   },
+   {
+    "title": "Fluffy tern chicks are waiting on the beach",
+    "body": "Mom and dad keep the fish coming. Everyone else should keep their distance."
+   },
+   {
+    "title": "Tern parents are fishing all day off {water}",
+    "body": "Back and forth from the water to the chicks, one tiny fish at a time."
+   }
+  ]
+ },
+ {
+  "id": "tern-leaving",
+  "speciesId": "common-tern",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "sky",
+  "kicker": "Goodbye",
+  "variants": [
+   {
+    "title": "The terns are heading to South America",
+    "body": "A long trip for a slim little seabird. They'll be back next spring."
+   },
+   {
+    "title": "Last call for the terns",
+    "body": "A few are still diving before the big flight south."
+   },
+   {
+    "title": "The last terns are leaving {water}",
+    "body": "One more dive, then off to South America for the winter."
+   }
+  ]
+ },
+ {
+  "id": "gbh-statue",
+  "speciesId": "great-blue-heron",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "reeds",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A great blue heron is standing perfectly still",
+    "body": "Not a statue. A very patient fisher. Watch long enough and... strike!"
+   },
+   {
+    "title": "A heron is fishing in slow motion",
+    "body": "One step. Pause. One step. Then a lightning-fast stab at a fish."
+   },
+   {
+    "title": "A great blue heron is fishing at {water}",
+    "body": "Knee-deep in the shallows, still as a fence post, waiting for the perfect moment."
+   }
+  ]
+ },
+ {
+  "id": "gbh-flight",
+  "speciesId": "great-blue-heron",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A great blue heron is flying home",
+    "body": "Huge wings, slow beats, neck folded into an S, legs trailing behind. Like a tiny dinosaur."
+   },
+   {
+    "title": "Big gray bird, slow wingbeats",
+    "body": "That's a heron heading to roost. Graceful, a little prehistoric."
+   },
+   {
+    "title": "A heron is flapping slowly over {water}",
+    "body": "Neck tucked, legs trailing, heading home for the night."
+   }
+  ]
+ },
+ {
+  "id": "gbh-winter",
+  "speciesId": "great-blue-heron",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "shore",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A heron is hunched by open water",
+    "body": "Neck pulled in, feathers fluffed. Winter fishing takes patience."
+   },
+   {
+    "title": "A heron stayed for winter",
+    "body": "Not all herons fly south. This one is waiting by the open water."
+   },
+   {
+    "title": "A heron is waiting out the cold by {water}",
+    "body": "Hunched and fluffed up at the water's edge, still fishing."
+   }
+  ]
+ },
+ {
+  "id": "bcnh-dusk",
+  "speciesId": "black-crowned-night-heron",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "reeds",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The night herons are clocking in",
+    "body": "As everyone else heads to bed, they wake up, stretch, and head for the water."
+   },
+   {
+    "title": "A night heron just woke up",
+    "body": "Red eyes open, a big stretch, and off to work. Their shift starts at sundown."
+   },
+   {
+    "title": "Night herons are heading out to {water}",
+    "body": "As the light fades, they leave their daytime trees and settle in at the water's edge to fish."
+   }
+  ]
+ },
+ {
+  "id": "bcnh-night",
+  "speciesId": "black-crowned-night-heron",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "shore",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "A night heron is fishing in the dark",
+    "body": "Hunched, still, red eyes watching the water. Very spooky, very cute."
+   },
+   {
+    "title": "Night shift at the water's edge",
+    "body": "A stocky little heron with a black cap is waiting for something to swim by."
+   },
+   {
+    "title": "A night heron is fishing along {water}",
+    "body": "Under the streetlights and the moon, waiting patiently at the edge."
+   }
+  ]
+ },
+ {
+  "id": "bcnh-roost",
+  "speciesId": "black-crowned-night-heron",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "branch",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "Night herons are napping in the trees",
+    "body": "By day they doze on branches over the water, hunched up like little gray loaves."
+   },
+   {
+    "title": "Shh, the night herons are sleeping",
+    "body": "They worked all night. Let them nap."
+   },
+   {
+    "title": "Night herons are dozing in the trees near {water}",
+    "body": "A row of hunched little herons on a branch, catching up on sleep."
+   }
+  ]
+ },
+ {
+  "id": "bufflehead-diving",
+  "speciesId": "bufflehead",
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "water",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Buffleheads are playing hide and seek",
+    "body": "Dive, vanish, pop up somewhere else. They're tiny ducks with a lot of energy."
+   },
+   {
+    "title": "A bufflehead is bobbing like a bath toy",
+    "body": "Little black-and-white duck, big white head patch, back underwater in three, two, one."
+   },
+   {
+    "title": "Buffleheads are diving out on {water}",
+    "body": "A little flock keeps vanishing and popping back up, white head patches flashing."
+   }
+  ]
+ },
+ {
+  "id": "bufflehead-arrive",
+  "speciesId": "bufflehead",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "water",
+  "kicker": "Just arrived",
+  "variants": [
+   {
+    "title": "The buffleheads are back for the winter",
+    "body": "Tiny diving ducks, fresh in from the forests of Canada."
+   },
+   {
+    "title": "Winter ducks have arrived",
+    "body": "Little black-and-white buffleheads are back on the water."
+   },
+   {
+    "title": "Buffleheads have arrived on {water}",
+    "body": "Fresh from northern forests, they'll be diving here all winter."
+   }
+  ]
+ },
+ {
+  "id": "bufflehead-night",
+  "speciesId": "bufflehead",
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "water",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "The buffleheads are tucked in on the water",
+    "body": "A small raft, floating together, heads tucked back for the night."
+   },
+   {
+    "title": "Buffleheads are drifting off to sleep",
+    "body": "Bobbing in a little group, close together, out on the dark water."
+   },
+   {
+    "title": "Buffleheads are resting on {water}",
+    "body": "Floating together in a tight little raft for the night."
+   }
+  ]
+ },
+ {
+  "id": "swan-glide",
+  "speciesId": "mute-swan",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "water",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A swan is gliding across the pond",
+    "body": "Neck in a perfect S, barely a ripple. Under the water, the feet are working hard."
+   },
+   {
+    "title": "A swan is preening very carefully",
+    "body": "Every feather, one at a time. Looking that elegant takes work."
+   },
+   {
+    "title": "A mute swan is gliding on {water}",
+    "body": "Slow and graceful, neck curved, leaving a long soft wake behind."
+   }
+  ]
+ },
+ {
+  "id": "swan-nest",
+  "speciesId": "mute-swan",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "reeds",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A swan is sitting on a giant nest",
+    "body": "A huge pile of reeds at the water's edge. Their partner patrols nearby. Give them lots of room."
+   },
+   {
+    "title": "Swan on guard duty",
+    "body": "Wings slightly raised, watching everyone. They're protecting their eggs."
+   },
+   {
+    "title": "A swan is guarding a nest by {water}",
+    "body": "A big mound of reeds at the edge, and a very watchful swan on top."
+   }
+  ]
+ },
+ {
+  "id": "swan-cygnets",
+  "speciesId": "mute-swan",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Swan cygnets are riding on a parent's back",
+    "body": "Fluffy and gray, tucked between the wings, cruising across the pond in style."
+   },
+   {
+    "title": "A swan family is out for a paddle",
+    "body": "Two big white parents, a row of fuzzy gray cygnets. Picture perfect."
+   },
+   {
+    "title": "A swan family is paddling on {water}",
+    "body": "Fluffy gray cygnets following their parents in a little line."
+   }
+  ]
+ },
+ {
+  "id": "swan-wings",
+  "speciesId": "mute-swan",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "sky",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "Whoosh, whoosh, a swan is flying past",
+    "body": "Their wings make a loud, rhythmic hum. You can hear them before you see them."
+   },
+   {
+    "title": "A mute swan is taking off",
+    "body": "A long running start across the water, then big, loud, whooshing wings."
+   },
+   {
+    "title": "A swan is flying low over {water}",
+    "body": "Listen for the whoosh of those big wings."
+   }
+  ]
+ },
+ {
+  "id": "rwbl-song",
+  "speciesId": "red-winged-blackbird",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "reeds",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A red-winged blackbird is shouting conk-la-ree",
+    "body": "Shoulders puffed, red patches flashing, perched on top of a cattail. Spring is officially here."
+   },
+   {
+    "title": "Conk-la-ree! from the cattails",
+    "body": "A male is singing his heart out, showing off his red shoulders."
+   },
+   {
+    "title": "A red-winged blackbird is singing by {water}",
+    "body": "Perched on a cattail, red shoulders flashing, announcing spring to everyone nearby."
+   }
+  ]
+ },
+ {
+  "id": "rwbl-arrive",
+  "speciesId": "red-winged-blackbird",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "reeds",
+  "kicker": "Just arrived",
+  "variants": [
+   {
+    "title": "The red-winged blackbirds are back",
+    "body": "Among the very first birds of spring, here to claim the best cattails."
+   },
+   {
+    "title": "First sign of spring: conk-la-ree",
+    "body": "The blackbirds are back and very loud about it."
+   },
+   {
+    "title": "Red-winged blackbirds just arrived at {water}",
+    "body": "Early spring, and they're already claiming their cattails."
+   }
+  ]
+ },
+ {
+  "id": "rwbl-flock",
+  "speciesId": "red-winged-blackbird",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "dusk",
+   "midday"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A cloud of blackbirds is swirling overhead",
+    "body": "Hundreds flying together before heading south."
+   },
+   {
+    "title": "Blackbird flocks are gathering",
+    "body": "Red-wings, grackles and starlings mixing together in big, noisy flocks."
+   },
+   {
+    "title": "Blackbirds are swirling over {green}",
+    "body": "A big noisy flock, gathering up before the trip south."
+   }
+  ]
+ },
+ {
+  "id": "deer-dawn",
+  "speciesId": "white-tailed-deer",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A deer is stepping out of the trees",
+    "body": "Ears forward, nose working, one slow step at a time. Dawn and dusk are their favorite hours."
+   },
+   {
+    "title": "A deer is nibbling at the edge of the woods",
+    "body": "Big ears turning like satellite dishes, listening to everything."
+   },
+   {
+    "title": "A deer is grazing at the edge of {green}",
+    "body": "Quiet and careful, just inside the trees, ears turning toward every sound."
+   }
+  ]
+ },
+ {
+  "id": "deer-fawn",
+  "speciesId": "white-tailed-deer",
+  "seasons": [
+   "summer",
+   "spring"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A spotted fawn is hiding in the tall grass",
+    "body": "Mom is nearby eating. The fawn stays perfectly still and almost scent-free. If you see one, smile and walk away."
+   },
+   {
+    "title": "A deer mom and her fawn are out together",
+    "body": "The fawn wobbles after her on very long legs, white spots and all."
+   },
+   {
+    "title": "A deer mom is feeding near {green}",
+    "body": "Her spotted fawn is tucked away nearby in the tall grass, waiting perfectly still for her to come back."
+   }
+  ]
+ },
+ {
+  "id": "deer-flag",
+  "speciesId": "white-tailed-deer",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk",
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A deer just flipped up their white tail",
+    "body": "That white flag says: something startled me, I'm out of here. Bound, bound, gone."
+   },
+   {
+    "title": "White tails bouncing into the woods",
+    "body": "A little group of deer, startled by something, bounding away with tails up."
+   },
+   {
+    "title": "A deer is bounding back into the trees near {green}",
+    "body": "White tail up like a flag, three big leaps, and gone."
+   }
+  ]
+ },
+ {
+  "id": "deer-fall",
+  "speciesId": "white-tailed-deer",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A deer is munching acorns",
+    "body": "Fall is snack season. Bucks have their antlers, and everyone is bulking up for winter."
+   },
+   {
+    "title": "A buck with new antlers is out",
+    "body": "He's careful and quiet, nibbling acorns under the oaks."
+   },
+   {
+    "title": "Deer are eating acorns near {green}",
+    "body": "Fall means acorns, and a few deer are making the most of them."
+   }
+  ]
  }
 ]

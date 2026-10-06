@@ -11,11 +11,35 @@
     "attribution": "(c) Judy Gallagher, some rights reserved (CC BY)",
     "source": "https://www.inaturalist.org/photos/111891996"
   },
+  "black-crowned-night-heron": {
+    "file": "black-crowned-night-heron.jpg",
+    "license": "CC0",
+    "attribution": "no rights reserved, uploaded by Kyle Nessen",
+    "source": "https://www.inaturalist.org/photos/49357930"
+  },
   "blue-jay": {
     "file": "blue-jay.jpg",
     "license": "CC BY",
     "attribution": "(c) Judy Gallagher, some rights reserved (CC BY)",
     "source": "https://www.inaturalist.org/photos/530721418"
+  },
+  "brant": {
+    "file": "brant.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Liam Steele, some rights reserved (CC BY), uploaded by Liam Steele",
+    "source": "https://www.inaturalist.org/photos/184003261"
+  },
+  "bufflehead": {
+    "file": "bufflehead.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Judy Gallagher, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/156288227"
+  },
+  "canada-goose": {
+    "file": "canada-goose.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Tser, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/606089370"
   },
   "chimney-swift": {
     "file": "chimney-swift.jpg",
@@ -23,11 +47,23 @@
     "attribution": "no rights reserved, uploaded by Chrissy McClarren and Andy Reago",
     "source": "https://www.inaturalist.org/photos/143746829"
   },
+  "common-tern": {
+    "file": "common-tern.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Bill Keim, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/8318331"
+  },
   "dark-eyed-junco": {
     "file": "dark-eyed-junco.jpg",
     "license": "CC BY",
     "attribution": "(c) Becky Matsubara, some rights reserved (CC BY)",
     "source": "https://www.inaturalist.org/photos/462900958"
+  },
+  "double-crested-cormorant": {
+    "file": "double-crested-cormorant.jpg",
+    "license": "CC0",
+    "attribution": "no rights reserved",
+    "source": "https://www.inaturalist.org/photos/512439682"
   },
   "eastern-gray-squirrel": {
     "file": "eastern-gray-squirrel.jpg",
@@ -41,6 +77,12 @@
     "attribution": "(c) Timothy Lindsey, some rights reserved (CC BY), uploaded by Timothy Lindsey",
     "source": "https://www.inaturalist.org/photos/488854941"
   },
+  "great-blue-heron": {
+    "file": "great-blue-heron.jpg",
+    "license": "CC BY-SA",
+    "attribution": "(c) Basar, some rights reserved (CC BY-SA)",
+    "source": "https://www.inaturalist.org/photos/452211592"
+  },
   "herring-gull": {
     "file": "herring-gull.jpg",
     "license": "CC BY",
@@ -52,6 +94,12 @@
     "license": "CC BY",
     "attribution": "(c) Esteban Poveda, some rights reserved (CC BY), uploaded by Esteban Poveda",
     "source": "https://www.inaturalist.org/photos/136543105"
+  },
+  "mallard": {
+    "file": "mallard.jpg",
+    "license": "CC BY-SA",
+    "attribution": "(c) anonymous, some rights reserved (CC BY-SA)",
+    "source": "https://www.inaturalist.org/photos/95268822"
   },
   "monarch": {
     "file": "monarch.jpg",
@@ -71,6 +119,12 @@
     "attribution": "(c) Timothy Lindsey, some rights reserved (CC BY), uploaded by Timothy Lindsey",
     "source": "https://www.inaturalist.org/photos/488854845"
   },
+  "mute-swan": {
+    "file": "mute-swan.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Laura Mae, some rights reserved (CC BY), uploaded by Laura Mae",
+    "source": "https://www.inaturalist.org/photos/283242966"
+  },
   "raccoon": {
     "file": "raccoon.jpg",
     "license": "CC0",
@@ -83,6 +137,18 @@
     "attribution": "no rights reserved, uploaded by Claude Lyneis",
     "source": "https://www.inaturalist.org/photos/319785046"
   },
+  "red-winged-blackbird": {
+    "file": "red-winged-blackbird.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Michael, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/617065992"
+  },
+  "ring-billed-gull": {
+    "file": "ring-billed-gull.jpg",
+    "license": "CC BY-SA",
+    "attribution": "(c) Judy Gallagher, some rights reserved (CC BY-SA), uploaded by Judy Gallagher",
+    "source": "https://www.inaturalist.org/photos/255075587"
+  },
   "rock-pigeon": {
     "file": "rock-pigeon.jpg",
     "license": "CC BY-SA",
@@ -94,6 +160,12 @@
     "license": "CC BY",
     "attribution": "(c) Shirley Zundell, some rights reserved (CC BY), uploaded by Shirley Zundell",
     "source": "https://www.inaturalist.org/photos/64550531"
+  },
+  "white-tailed-deer": {
+    "file": "white-tailed-deer.jpg",
+    "license": "CC BY",
+    "attribution": "(c) James St. John, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/452215485"
   },
   "white-throated-sparrow": {
     "file": "white-throated-sparrow.jpg",

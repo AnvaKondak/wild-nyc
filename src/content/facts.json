@@ -417,5 +417,294 @@
   "seasons": [
    "fall"
   ]
+ },
+ {
+  "speciesId": "canada-goose",
+  "text": "Canada Geese usually mate for life and raise their goslings as a team."
+ },
+ {
+  "speciesId": "canada-goose",
+  "text": "Goslings can walk, swim and feed themselves within a day of hatching.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "canada-goose",
+  "text": "Every summer, geese lose all their flight feathers at once and can't fly for about six weeks.",
+  "seasons": [
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "canada-goose",
+  "text": "In a V, each goose rides the lift from the bird ahead, and they take turns leading.",
+  "seasons": [
+   "fall",
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "mallard",
+  "text": "The loud QUACK you know is almost always a female mallard. Males make a soft, raspy sound."
+ },
+ {
+  "speciesId": "mallard",
+  "text": "Mallards are the wild ancestors of almost every farm duck."
+ },
+ {
+  "speciesId": "mallard",
+  "text": "Mallard ducklings can swim and find their own food within hours of hatching.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "mallard",
+  "text": "In summer, male mallards trade their green heads for brown 'eclipse' feathers for a few weeks.",
+  "seasons": [
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "brant",
+  "text": "Brant fly thousands of miles from the Arctic tundra to spend the winter in New York Harbor."
+ },
+ {
+  "speciesId": "brant",
+  "text": "Brant love sea lettuce, a bright green seaweed that grows on rocks along the shore.",
+  "seasons": [
+   "fall",
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "brant",
+  "text": "Brant can drink salt water thanks to special glands that filter out the salt."
+ },
+ {
+  "speciesId": "brant",
+  "text": "In spring, brant fatten up before a nonstop flight of thousands of miles back to the Arctic.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "double-crested-cormorant",
+  "text": "Cormorant feathers aren't fully waterproof, which helps them sink and dive after fish."
+ },
+ {
+  "speciesId": "double-crested-cormorant",
+  "text": "Cormorants swim underwater using their big webbed feet."
+ },
+ {
+  "speciesId": "double-crested-cormorant",
+  "text": "The 'double crest' is two little tufts of feathers that only show in breeding season.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "double-crested-cormorant",
+  "text": "Cormorants nest together in noisy colonies on the islands of New York Harbor.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "ring-billed-gull",
+  "text": "The black ring near the tip of their beak is how you tell a ring-billed gull from a herring gull."
+ },
+ {
+  "speciesId": "ring-billed-gull",
+  "text": "Ring-billed gulls often return to the same wintering spots year after year.",
+  "seasons": [
+   "fall",
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "ring-billed-gull",
+  "text": "Young ring-billed gulls are mottled brown and take about three years to get their gray adult feathers."
+ },
+ {
+  "speciesId": "ring-billed-gull",
+  "text": "At night, ring-billed gulls often sleep floating together on open water.",
+  "periods": [
+   "dusk",
+   "night"
+  ]
+ },
+ {
+  "speciesId": "common-tern",
+  "text": "Common terns fly to South America and back every year."
+ },
+ {
+  "speciesId": "common-tern",
+  "text": "A male tern courts with a gift: he offers the female a fresh fish.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "common-tern",
+  "text": "Terns will swoop at people who get too close to their nests. Very brave for a small bird.",
+  "seasons": [
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "common-tern",
+  "text": "Terns hover in place over the water before diving headfirst for fish.",
+  "periods": [
+   "dawn",
+   "midday"
+  ]
+ },
+ {
+  "speciesId": "great-blue-heron",
+  "text": "Great blue herons can stand still for a very long time, then strike at a fish in a split second."
+ },
+ {
+  "speciesId": "great-blue-heron",
+  "text": "Herons fly with their necks folded into an S; cranes fly with necks straight out."
+ },
+ {
+  "speciesId": "great-blue-heron",
+  "text": "Great blue herons nest together in tree colonies called rookeries.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "great-blue-heron",
+  "text": "A great blue heron can be over four feet tall but weighs only about five or six pounds."
+ },
+ {
+  "speciesId": "black-crowned-night-heron",
+  "text": "Night herons' big red eyes help them see well enough to fish in the dark."
+ },
+ {
+  "speciesId": "black-crowned-night-heron",
+  "text": "Young night herons are brown with white spots and look like a different bird entirely.",
+  "seasons": [
+   "summer",
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "black-crowned-night-heron",
+  "text": "By day, night herons sleep in trees near the water, often in groups.",
+  "periods": [
+   "dawn",
+   "midday"
+  ]
+ },
+ {
+  "speciesId": "black-crowned-night-heron",
+  "text": "Black-crowned night herons live on every continent except Australia and Antarctica."
+ },
+ {
+  "speciesId": "bufflehead",
+  "text": "Buffleheads are one of the smallest ducks in North America."
+ },
+ {
+  "speciesId": "bufflehead",
+  "text": "Buffleheads nest in old woodpecker holes, and the ducklings jump down to the ground the day after they hatch."
+ },
+ {
+  "speciesId": "bufflehead",
+  "text": "A diving bufflehead can stay underwater for about 12 seconds, then pop up somewhere new.",
+  "periods": [
+   "dawn",
+   "midday"
+  ]
+ },
+ {
+  "speciesId": "bufflehead",
+  "text": "Buffleheads arrive on our waters in late fall and stay until spring.",
+  "seasons": [
+   "fall",
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "mute-swan",
+  "text": "Mute swans aren't mute: they hiss, snort and grunt, and their wings whoosh loudly in flight."
+ },
+ {
+  "speciesId": "mute-swan",
+  "text": "Mute swans were brought from Europe in the 1800s to decorate parks and estates."
+ },
+ {
+  "speciesId": "mute-swan",
+  "text": "Cygnets sometimes ride on a parent's back, tucked between the wings.",
+  "seasons": [
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "mute-swan",
+  "text": "A mute swan's nest can be a huge mound of reeds several feet across.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "red-winged-blackbird",
+  "text": "Male red-winged blackbirds can hide their red shoulder patches when they want to keep a low profile."
+ },
+ {
+  "speciesId": "red-winged-blackbird",
+  "text": "Red-winged blackbirds are one of the first birds to come back in spring.",
+  "seasons": [
+   "spring"
+  ]
+ },
+ {
+  "speciesId": "red-winged-blackbird",
+  "text": "Females are streaky brown and do most of the nest building, weaving nests into the reeds.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "red-winged-blackbird",
+  "text": "In fall, red-winged blackbirds gather in huge mixed flocks with grackles and starlings.",
+  "seasons": [
+   "fall"
+  ]
+ },
+ {
+  "speciesId": "white-tailed-deer",
+  "text": "A deer's big ears can turn independently, like satellite dishes, to pick up sounds."
+ },
+ {
+  "speciesId": "white-tailed-deer",
+  "text": "Fawns have very little scent, so mom leaves them hidden and still while she feeds nearby.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "white-tailed-deer",
+  "text": "Bucks grow a new set of antlers every year and shed them in winter.",
+  "seasons": [
+   "fall",
+   "winter"
+  ]
+ },
+ {
+  "speciesId": "white-tailed-deer",
+  "text": "Deer are most active at dawn and dusk.",
+  "periods": [
+   "dawn",
+   "dusk"
+  ]
  }
 ]

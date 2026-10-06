@@ -24,3 +24,20 @@ describe('Neighbors scenes', () => {
     }
   });
 });
+
+describe('scene slots', () => {
+  it('are far enough apart that stickers never overlap', () => {
+    const MIN = 44; // a sticker is 46–48 units across; allow a hair of touching
+    const clashes: string[] = [];
+    for (const [kind, scene] of Object.entries(SCENES)) {
+      const all = Object.entries(scene.slots).flatMap(([spot, list]) => (list ?? []).map((s) => ({ spot, ...s })));
+      for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) {
+        const a = all[i];
+        const b = all[j];
+        const apart = Math.max(Math.abs(a.x - b.x), Math.abs(a.y - b.y));
+        if (apart < MIN) clashes.push(`${kind}: ${a.spot} (${a.x},${a.y}) / ${b.spot} (${b.x},${b.y})`);
+      }
+    }
+    expect(clashes).toEqual([]);
+  });
+});

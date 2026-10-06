@@ -59,6 +59,11 @@ export type Species = {
   iNatExcludeTaxonId?: number;
   /** eBird species code, for birds. */
   ebirdCode?: string;
+  /**
+   * Rare enough that we only feature them where live data says they've been seen
+   * nearby (deer: Staten Island, the Bronx, some waterfront parks), never by default.
+   */
+  sightingsOnly?: boolean;
 };
 
 export type StorySlide = {

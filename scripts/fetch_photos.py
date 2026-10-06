@@ -21,10 +21,10 @@ OK_LICENSES = {"cc0", "cc-by", "cc-by-sa"}
 SIZE = 360
 
 # Photos passed over after a look (wrong life stage, a silhouette...): species -> photo ids.
-SKIP_PHOTOS = {"monarch": [111043173], "european-starling": [365984069], "herring-gull": [343002826]}
+SKIP_PHOTOS = {"monarch": [111043173], "european-starling": [365984069], "herring-gull": [343002826], "canada-goose": [247715952], "double-crested-cormorant": [173884349], "red-winged-blackbird": [275637604]}
 
 # Photos chosen by hand from the candidates: species -> photo id.
-PIN_PHOTOS = {"monarch": 45078365}
+PIN_PHOTOS = {"monarch": 45078365, "canada-goose": 606089370, "double-crested-cormorant": 512439682, "red-winged-blackbird": 617065992}
 
 # Groups get one representative species' photo.
 PHOTO_TAXON_OVERRIDES = {"moths": "Dryocampa rubicunda", "orb-weavers": "Argiope aurantia"}
@@ -46,6 +46,9 @@ def taxon_id_for(species):
 def pick_photo(taxon_id, skip=(), pin=None):
     taxon = get_json(f"https://api.inaturalist.org/v1/taxa/{taxon_id}")["results"][0]
     if pin:
+        for tp in taxon.get("taxon_photos", []):
+            if tp["photo"]["id"] == pin:
+                return tp["photo"]
         return pick_from_observations(taxon_id, skip, pin)
     for tp in taxon.get("taxon_photos", []):
         p = tp["photo"]

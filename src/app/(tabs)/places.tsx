@@ -7,7 +7,7 @@ import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { placeRegulars, SCENE_WIDTH, SceneView } from '@/components/scenes';
 import { Title } from '@/components/Title';
-import { places, speciesFor, speciesPhoto, type Season, type Species } from '@/content';
+import { places, species as allSpecies, speciesFor, speciesPhoto, type Season, type Species } from '@/content';
 import { rankByLive, seenLabel, type LiveSpecies } from '@/lib/live';
 import { seasonOf } from '@/lib/time';
 import { useAppState } from '@/state/AppState';
@@ -30,7 +30,11 @@ export default function Places() {
 
   // The scene for this kind of place (block, park or waterfront), one regular per
   // spot. With live data, whoever's been seen nearby most lately gets the spot.
-  const regulars = useMemo(() => placeRegulars(hood.kind, rankByLive(speciesFor(hood.kind, season), live)), [hood.kind, season, live]);
+  const regulars = useMemo(() => {
+    // Rare neighbors (deer) join only when they've actually been seen nearby.
+    const seenRare = allSpecies.filter((s) => s.sightingsOnly && s.spots[hood.kind] && (live.get(s.id)?.recent ?? 0) > 0);
+    return placeRegulars(hood.kind, rankByLive([...speciesFor(hood.kind, season), ...seenRare], live));
+  }, [hood.kind, season, live]);
 
   const [pickedId, setPickedId] = useState<string | null>(null);
   const picked = regulars.find((p) => p.species.id === pickedId)?.species ?? regulars[0]?.species;

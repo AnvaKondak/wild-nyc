@@ -9,7 +9,7 @@ import { inks, type Ink } from './inks';
 export type ArtBody =
   | 'songbird' | 'pigeon' | 'crow' | 'raptor' | 'woodpecker' | 'swift' | 'gull' | 'tern'
   | 'duck' | 'goose' | 'swan' | 'heron' | 'night-heron' | 'cormorant'
-  | 'squirrel' | 'raccoon' | 'opossum' | 'groundhog' | 'turtle'
+  | 'squirrel' | 'raccoon' | 'opossum' | 'groundhog' | 'turtle' | 'deer'
   | 'bee' | 'butterfly' | 'moth' | 'firefly' | 'dragonfly' | 'bug' | 'spider';
 
 export type ArtFeature =
@@ -272,6 +272,24 @@ function Squirrel({ c }: P) {
   );
 }
 
+function Deer({ c }: P) {
+  return (
+    <G>
+      <Path d="M30 66 L28 92 M38 68 L37 92 M60 68 L62 92 M68 66 L70 92" stroke={ink(c.main)} strokeWidth={5} strokeLinecap="round" />
+      <Path d="M30 66 L28 92 M38 68 L37 92 M60 68 L62 92 M68 66 L70 92" stroke={INK} strokeWidth={1.6} strokeLinecap="round" opacity={0.6} />
+      <Ellipse cx={50} cy={60} rx={24} ry={13} fill={ink(c.main)} stroke={INK} strokeWidth={S} />
+      <Path d="M26 54 Q20 50 22 46 Q28 48 28 54 Z" fill={inks.white} stroke={INK} strokeWidth={1.6} />
+      <Path d="M68 54 Q72 38 76 30" stroke={INK} strokeWidth={10} strokeLinecap="round" fill="none" />
+      <Path d="M68 54 Q72 38 76 30" stroke={ink(c.main)} strokeWidth={6.5} strokeLinecap="round" fill="none" />
+      <Ellipse cx={80} cy={28} rx={9} ry={7} fill={ink(c.main)} stroke={INK} strokeWidth={S} transform="rotate(20 80 28)" />
+      <Path d="M74 22 L70 12 L77 19 Z M82 20 L84 10 L86 20 Z" fill={ink(c.main)} stroke={INK} strokeWidth={1.6} strokeLinejoin="round" />
+      <Circle cx={88} cy={32} r={2} fill={INK} />
+      <Eye x={80} y={26} r={2.2} />
+      <Path d="M54 62 Q58 66 62 62" stroke={ink(c.belly)} strokeWidth={3} strokeLinecap="round" fill="none" />
+    </G>
+  );
+}
+
 function Raccoon({ c }: P) {
   return (
     <G>
@@ -469,6 +487,7 @@ const DRAW: Record<ArtBody, (p: P) => ReactNode> = {
   opossum: Opossum,
   groundhog: Groundhog,
   turtle: Turtle,
+  deer: Deer,
   bee: Bee,
   butterfly: Butterfly,
   moth: Moth,
