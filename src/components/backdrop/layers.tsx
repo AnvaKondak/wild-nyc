@@ -1,6 +1,6 @@
 // PLACEHOLDER ART. Builds the layers of a story backdrop, back to front:
 //   time-of-day sky → clouds (far, near) → life in the sky → the neighborhood on the
-//   horizon → the moment's setting → seasonal particles.
+//   horizon → the moment's setting → seasonal particles → the weather.
 // Positions are fractions of the screen and sizes scale with its shorter side, so it
 // fits a phone and a wide browser. `variant` (0–2, seeded per slide) picks different
 // details, so two slides with the same setting don't look identical.
@@ -11,7 +11,9 @@ import { inks } from '@/components/art/inks';
 import { Landmark } from '@/components/scenes/Landmark';
 import type { Period, PlaceKind, Season, Setting } from '@/content/types';
 import { seededRandom } from '@/lib/random';
+import type { Sky, WeatherTag } from '@/lib/weather';
 import type { Layer } from './motion';
+import { HIDDEN_WHEN_GRAY, isGray, replacesSeasonParticles, weatherLayers } from './weather';
 
 const INK = inks.ink;
 
@@ -28,6 +30,9 @@ export type BackdropInput = {
   moonLit: number;
   /** Where the story's text ends (pt from the top). The horizon stays below it. */
   textBottom?: number;
+  /** The weather right now. Unknown: the season's usual look (snow in winter, and so on). */
+  sky?: Sky;
+  weather?: WeatherTag[];
 };
 
 type Ctx = BackdropInput & { u: number; rnd: () => number; horizon: number; landmarkRoom: number };
@@ -54,13 +59,17 @@ export function buildLayers(input: BackdropInput): Layer[] {
     landmarkRoom: Math.min(LANDMARK_MAX, horizonY - textBottom - 6),
   };
   const isDay = c.period !== 'night';
+  const { sky, weather = [] } = input;
+  // Known weather decides the particles: no winter snow on a clear day, rain instead of petals.
+  const particles = sky === undefined ? seasonParticles(c) : replacesSeasonParticles(sky) ? [] : seasonParticles(c).filter((l) => !l.id.startsWith('snow'));
   return [
-    ...timeOfDay(c),
+    ...timeOfDay(c).filter((l) => !(isGray(sky) && HIDDEN_WHEN_GRAY.test(l.id))),
     ...(isDay ? clouds(c) : []),
     ...(isDay ? flock(c) : []),
     ...horizon(c),
     ...settingLayers(c),
-    ...seasonParticles(c),
+    ...particles,
+    ...weatherLayers(c, sky, weather),
   ];
 }
 
@@ -666,17 +675,8 @@ function seasonParticles(c: Ctx): Layer[] {
   };
   const count = Math.round(Math.min(18, Math.max(8, (c.w * c.h) / 30000)));
 
-  if (season === 'fall') {
-    const colors = [inks.orange, inks.red, inks.yellow, inks.brown];
-    const leaf = (x: number, y: number, i: number, rnd: () => number) => {
-      const s = (1.4 + rnd() * 1.2) * u;
-      return <Path key={i} d={`M${x} ${y - s} Q${x + s} ${y} ${x} ${y + s} Q${x - s} ${y} ${x} ${y - s} Z`} fill={colors[i % 4]} transform={`rotate(${rnd() * 180} ${x} ${y})`} />;
-    };
-    return [
-      { id: 'leaves-far', depth: 0.4, opacity: 0.6, motion: { kind: 'fall', duration: 26000, sway: 4 * u }, node: scatter(`lf${variant}`, Math.round(count * 0.6), leaf) },
-      { id: 'leaves-near', depth: 0.9, motion: { kind: 'fall', duration: 15000, sway: 7 * u }, node: scatter(`ln${variant}`, Math.round(count * 0.4), leaf) },
-    ];
-  }
+  // Fall has no falling particles: the season shows in the trees and the sky.
+  if (season === 'fall') return [];
   if (season === 'winter') {
     const flake = (x: number, y: number, i: number, rnd: () => number) => <Circle key={i} cx={x} cy={y} r={(0.5 + rnd() * 0.9) * u} fill={inks.white} />;
     return [

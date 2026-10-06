@@ -3,16 +3,18 @@
 //   1. Rank the species who live in this kind of place this season: seen nearby
 //      lately first (live data), the rest in a seeded shuffle.
 //   2. Take the first few who have a moment for this season and time of day, and
-//      pick one variant of each, again seeded.
+//      pick one variant of each, again seeded. In rain, snow, wind, heat, cold or
+//      fog, species with a moment for that weather go first and use it, and
+//      everyday lines that would clash (sunbathing in the rain) are skipped.
 //   3. Top up with the generic slides if there aren't enough.
-//   4. The season's Arriving and Goodbye chapters.
+//   4. One Arriving and one Goodbye chapter for the season.
 //
 // Every slide is about one species; the story never lists species.
 //
 // The seed is neighborhood + date + time of day, so the story holds still while
 // you look at it, changes tomorrow, and differs down the street.
 
-import type { Fact, LocalNames, Moment, Period, PlaceKind, Season, Setting, Species, StorySlide } from '@/content/types';
+import type { Fact, LocalNames, Moment, Period, PlaceKind, Season, Setting, Species, StorySlide, WeatherTag } from '@/content/types';
 import type { LiveMap } from './live';
 import { pick, seededRandom, shuffle } from './random';
 import { buildStory } from './story';
@@ -37,6 +39,8 @@ export type LocalStoryInput = {
   /** Real local spots ({green}, {water}, {landmark}, {street}), or generic stand-ins. */
   local: LocalNames;
   live: LiveMap;
+  /** What the weather is doing right now, strongest first. Empty on an ordinary day. */
+  weather?: WeatherTag[];
   seed: string;
 };
 
@@ -85,8 +89,13 @@ export function withLocation(title: string, setting: Setting, kind: PlaceKind, r
 
 export function buildLocalStory(input: LocalStoryInput): StorySlide[] {
   const { moments, facts, slides, residents, allSpecies, season, period, placeKind, placeName, where, local, live, seed } = input;
+  const weather = input.weather ?? [];
   const random = seededRandom(seed);
   const phrase = placePhrase(placeName, where);
+
+  const nowMoments = moments.filter((m) => m.seasons.includes(season) && m.periods.includes(period));
+  const weatherFor = (id: string) => nowMoments.filter((m) => m.speciesId === id && m.weather?.some((t) => weather.includes(t)));
+  const everydayFor = (id: string) => nowMoments.filter((m) => m.speciesId === id && !m.weather && usableVariants(m, weather).length > 0);
 
   // 1. Who to feature. Live data can add species the place list doesn't expect.
   const liveExtras = allSpecies.filter((s) => s.seasons.includes(season) && (live.get(s.id)?.recent ?? 0) > 0);
@@ -95,16 +104,19 @@ export function buildLocalStory(input: LocalStoryInput): StorySlide[] {
     .filter((s) => (live.get(s.id)?.recent ?? 0) > 0)
     .sort((a, b) => live.get(b.id)!.recent - live.get(a.id)!.recent);
   const rest = shuffle(pool.filter((s) => !seenLately.includes(s)), random);
-  const ranked = [...seenLately, ...rest];
+  let ranked = [...seenLately, ...rest];
+  // In weather, the ones who have something to say about it go first.
+  if (weather.length > 0) ranked = [...ranked.filter((s) => weatherFor(s.id).length > 0), ...ranked.filter((s) => weatherFor(s.id).length === 0)];
 
-  // 2. One moment each, for this season and time of day.
+  // 2. One moment each, for this season, time of day and weather.
   const featured: StorySlide[] = [];
   for (const s of ranked) {
     if (featured.length >= FEATURED) break;
-    const options = moments.filter((m) => m.speciesId === s.id && m.seasons.includes(season) && m.periods.includes(period));
+    const forWeather = weatherFor(s.id);
+    const options = forWeather.length > 0 ? forWeather : everydayFor(s.id);
     if (options.length === 0) continue;
     const moment = pick(options, random);
-    const variant = pickVariant(moment, placeName !== null, random);
+    const variant = pickVariant(usableVariants(moment, weather), placeName !== null, random);
     featured.push({
       id: `${moment.id}:${moment.variants.indexOf(variant)}`,
       season,
@@ -121,7 +133,6 @@ export function buildLocalStory(input: LocalStoryInput): StorySlide[] {
   // 3. Generic slides top up a thin story (and cover species without moments yet).
   const generic = buildStory(slides, { season, period, placeKind, where: phrase });
   const genericScenes = generic.filter((s) => (s.kind ?? 'scene') === 'scene');
-  const chapters = generic.filter((s) => s.kind === 'arriving' || s.kind === 'goodbye');
   const featuredSpecies = new Set(featured.map((s) => s.speciesId));
   for (const s of genericScenes) {
     if (featured.length >= MIN_SCENES) break;
@@ -129,8 +140,43 @@ export function buildLocalStory(input: LocalStoryInput): StorySlide[] {
     featured.push(s);
   }
 
+  // 4. One journey in, one journey out. Prefer travelers who belong to this place.
+  const here = new Set(pool.map((s) => s.id));
+  const chapter = (kind: 'arriving' | 'goodbye') => {
+    const all = generic.filter((s) => s.kind === kind);
+    const belong = all.filter((s) => s.speciesId && here.has(s.speciesId));
+    const options = belong.length > 0 ? belong : all;
+    if (options.length === 0) return [];
+    const c = pick(options, random);
+    const note = weather.map((t) => c.weatherNote?.[t]).find(Boolean);
+    return [{ ...c, body: note ? `${c.body} ${fillPlace(note, phrase, local, random)}` : c.body }];
+  };
+  const chapters = [...chapter('arriving'), ...chapter('goodbye')];
+
   // A fun fact on every species slide, fitting the season and time of day.
   return [...featured, ...chapters].map((s) => (s.speciesId ? { ...s, fact: pickFact(facts, s.speciesId, season, period, random) } : s));
+}
+
+/**
+ * Words that would make an everyday line untrue in this weather: no sunbathing
+ * turtles in the rain, no frosty hedges in a heat wave.
+ */
+const CLASHES: Record<WeatherTag, RegExp> = {
+  rain: /\b(sun|sunny|sunshine|sunlight|sunbath\w*|bask\w*|dry|dust)\b/i,
+  snow: /\b(sun|sunny|sunshine|sunbath\w*|bask\w*|hot|heat|warm day|mild|flowers?|blooms?)\b/i,
+  fog: /\b(sunny|sunshine|sunlight|sunbath\w*|bask\w*|bright)\b/i,
+  wind: /\b(still air|calm water|glassy)\b/i,
+  heat: /\b(snow\w*|frost\w*|freez\w*|icy|ice|cold|chilly|shiver\w*)\b/i,
+  cold: /\b(hot|heat|warm day|mild|sweat\w*)\b/i,
+};
+
+export function clashesWithWeather(text: string, weather: WeatherTag[]): boolean {
+  return weather.some((t) => CLASHES[t].test(text));
+}
+
+function usableVariants(moment: Moment, weather: WeatherTag[]) {
+  if (moment.weather) return moment.variants;
+  return moment.variants.filter((v) => !clashesWithWeather(`${v.title} ${v.body}`, weather));
 }
 
 /**
@@ -152,10 +198,10 @@ export function pickFact(facts: Fact[], speciesId: string, season: Season, perio
 const LOCAL_SPOT = /\{(green|water|landmark|street)\}/;
 
 /** In a named neighborhood, lean toward versions that mention its real spots. */
-function pickVariant(moment: Moment, named: boolean, random: () => number) {
-  const local = moment.variants.filter((v) => LOCAL_SPOT.test(v.title + v.body));
+function pickVariant(variants: Moment['variants'], named: boolean, random: () => number) {
+  const local = variants.filter((v) => LOCAL_SPOT.test(v.title + v.body));
   if (named && local.length > 0 && random() < 0.65) return pick(local, random);
-  return pick(moment.variants, random);
+  return pick(variants, random);
 }
 
 function uniqueById(list: Species[]): Species[] {

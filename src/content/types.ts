@@ -2,6 +2,9 @@
 // (icon, tint, home). All content is bundled JSON in phase 2.
 
 import type { ArtSpec } from '@/components/art/CritterArt';
+import type { WeatherTag } from '@/lib/weather';
+
+export type { WeatherTag };
 
 export type Season = 'spring' | 'summer' | 'fall' | 'winter';
 export type Period = 'dawn' | 'midday' | 'dusk' | 'night';
@@ -87,6 +90,8 @@ export type StorySlide = {
   cta?: string;
   /** Button goes to Kindness instead of the species profile. */
   link?: 'kindness';
+  /** Chapters: a line added when the weather fits ("On a north wind like tonight's…"). */
+  weatherNote?: Partial<Record<WeatherTag, string>>;
 };
 
 /**
@@ -102,6 +107,8 @@ export type Moment = {
   setting: Setting;
   kicker: string;
   variants: { title: string; body: string }[];
+  /** Only in this weather (rain on feathers, snow on the hedge). Omit for any day. */
+  weather?: WeatherTag[];
 };
 
 /** A fun fact for the story, optionally only in some seasons or times of day. */

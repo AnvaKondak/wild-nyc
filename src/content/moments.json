@@ -5458,5 +5458,3970 @@
     "body": "In the middle of a huge round web, very still, very patient."
    }
   ]
+ },
+ {
+  "id": "wx-rain-pigeon-shower",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "ledge",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A pigeon is taking a rain shower",
+    "body": "One wing lifted high, leaning into the drops so the rain soaks right underneath. Eyes half closed. This is spa day."
+   },
+   {
+    "title": "The pigeons are puffed up under the ledge",
+    "body": "Rain drumming on the awning, feathers fluffed into gray pillows, everyone pressed shoulder to shoulder and dry."
+   },
+   {
+    "title": "A pigeon is rain-bathing along {street}",
+    "body": "Wing up, head tilted, letting the cold drops run down to the skin while the sidewalk smells like wet stone."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-sparrow-eaves",
+  "speciesId": "house-sparrow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "The sparrows are gossiping under the eaves",
+    "body": "Packed in a dry corner, listening to the rain hiss on the street, chirping about it nonstop."
+   },
+   {
+    "title": "A sparrow is shaking off like a tiny dog",
+    "body": "Brrrrp. A spray of drops, a fluff, a very offended look at the sky."
+   },
+   {
+    "title": "Sparrows are sheltering deep in the hedges along {street}",
+    "body": "Every leaf is dripping, but in the middle of the hedge it's dry and full of chatter."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-robin-worms",
+  "speciesId": "american-robin",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A robin is hunting worms in the rain",
+    "body": "The soaked lawn smells like earth and the worms are coming up. Run, stop, head tilt. Tug."
+   },
+   {
+    "title": "Worm o'clock for the robins",
+    "body": "Rain softens the ground and pulls worms to the surface. The robins look delighted, if damp."
+   },
+   {
+    "title": "A robin is pulling worms from the wet grass near {green}",
+    "body": "Drops on their orange chest, a stretchy worm in their beak, the whole lawn smelling green and new."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-squirrel-umbrella",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A squirrel is using their tail as an umbrella",
+    "body": "Curled up over their back and head, fluffy side out. It mostly works."
+   },
+   {
+    "title": "A squirrel is waiting out the rain",
+    "body": "Tucked in a fork of the tree, tail wrapped around, watching the drops slide down the bark."
+   },
+   {
+    "title": "A squirrel is holding their tail over their head near {green}",
+    "body": "A soggy little umbrella, dripping at the tip, while they nibble a snack under the leaves."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-squirrel-drey",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "den",
+  "kicker": "Tonight",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A squirrel is snug in their leaf nest",
+    "body": "Rain pattering on the roof of leaves, everyone curled up warm inside."
+   },
+   {
+    "title": "The squirrels are listening to the rain",
+    "body": "Inside a ball of leaves high in the tree, dry and cozy, tails wrapped like blankets."
+   },
+   {
+    "title": "A squirrel is dry in a leaf nest near {green}",
+    "body": "The rain taps on the leaves outside. Inside, it's warm and smells like oak."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-mallard-beads",
+  "speciesId": "mallard",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk",
+   "night"
+  ],
+  "setting": "water",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "Rain is rolling right off the ducks",
+    "body": "Their feathers are oiled, so drops bead up and slide off like tiny marbles. Perfect duck weather, honestly."
+   },
+   {
+    "title": "A mallard is dabbling in the drizzle",
+    "body": "Every raindrop rings the pond, and the duck doesn't care at all."
+   },
+   {
+    "title": "The ducks are paddling through the rain on {water}",
+    "body": "Raindrops dancing all around them, beads of water rolling off their backs."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-gull-dance",
+  "speciesId": "herring-gull",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A gull is doing the worm dance",
+    "body": "Paddling their feet fast on the wet grass, which brings the worms up. Ridiculous. Effective."
+   },
+   {
+    "title": "The gulls are facing into the rain",
+    "body": "All pointed the same way, like weathervanes, so the drops slide down their feathers, not under them."
+   },
+   {
+    "title": "A gull is stomping for worms near {water}",
+    "body": "Little webbed feet tapping on the soaked grass, head cocked, waiting for a worm to pop up."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-crow-hunch",
+  "speciesId": "american-crow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A crow is sitting out the rain",
+    "body": "Hunched, feathers slicked dark and shiny, water dripping from the tip of their beak. Unimpressed."
+   },
+   {
+    "title": "The crows are complaining about the weather",
+    "body": "A few grumpy caws from inside a tree. Same, crows. Same."
+   },
+   {
+    "title": "A crow is waiting out the rain near {landmark}",
+    "body": "Hunched on a high perch, black feathers gleaming wet, watching the street below."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-dove-bath",
+  "speciesId": "mourning-dove",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "wire",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A mourning dove is rain-bathing",
+    "body": "Leaning over sideways with one wing raised to the sky, letting the gentle rain fall into their feathers."
+   },
+   {
+    "title": "Two doves are sharing a wet wire",
+    "body": "Side by side, rain dripping off the wire between them, softly cooing anyway."
+   },
+   {
+    "title": "A dove is lifting a wing to the rain along {street}",
+    "body": "Tipped over sideways, wing up, soaking in a warm drizzle like it's a bath."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-heron-still",
+  "speciesId": "great-blue-heron",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "reeds",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A heron is standing perfectly still in the rain",
+    "body": "Neck tucked, shoulders hunched, rain dimpling the water around their legs. Waiting."
+   },
+   {
+    "title": "The heron does not mind the rain",
+    "body": "Rain makes the fish come up to the surface. Patience is paying off."
+   },
+   {
+    "title": "A great blue heron is fishing in the rain near {water}",
+    "body": "Gray on gray, unmoving, while drops ring the water all around."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-goose-graze",
+  "speciesId": "canada-goose",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "The geese are grazing in the rain",
+    "body": "Wet grass is the sweetest grass. Water sliding off their backs, heads down, munching."
+   },
+   {
+    "title": "A goose is shaking the rain off",
+    "body": "A big ruffle from neck to tail, a spray of droplets, then right back to eating."
+   },
+   {
+    "title": "Geese are grazing on the wet grass near {green}",
+    "body": "Shining with raindrops, honking softly, completely unbothered."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-cardinal-hedge",
+  "speciesId": "northern-cardinal",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A cardinal is tucked into the dripping hedge",
+    "body": "Bright red against the dark wet leaves, crest flattened, waiting for the shower to pass."
+   },
+   {
+    "title": "Chip, chip from the wet bushes",
+    "body": "The cardinals are keeping in touch while the rain comes down."
+   },
+   {
+    "title": "A cardinal is sheltering in the hedges along {street}",
+    "body": "A red flash deep in the dripping green, dry and patient."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-moths-leaf",
+  "speciesId": "moths",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "hedge",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "The moths are hiding under leaves",
+    "body": "A raindrop is a big deal when you're a moth. They're clinging to the underside of a leaf, waiting."
+   },
+   {
+    "title": "No moths at the porch light tonight",
+    "body": "They're tucked under leaves and eaves, dry, waiting for the rain to stop."
+   },
+   {
+    "title": "Moths are hiding from the rain near {green}",
+    "body": "Clinging upside down under the leaves while the drops patter on top."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-songsparrow-after",
+  "speciesId": "song-sparrow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A song sparrow is singing the rain away",
+    "body": "The shower is easing, the air smells like wet earth, and a song sparrow is the first to start up again."
+   },
+   {
+    "title": "A wet little sparrow is singing anyway",
+    "body": "Dripping on top of a shrub, singing their whole song in the drizzle."
+   },
+   {
+    "title": "A song sparrow is singing after the rain near {water}",
+    "body": "Wet feathers, bright voice, the first song of the clearing sky."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-bumble-shelter",
+  "speciesId": "common-eastern-bumble-bee",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "flowers",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A bumble bee is hiding under a flower",
+    "body": "Rain is too heavy to fly in, so she's tucked beneath a petal, waiting it out."
+   },
+   {
+    "title": "A wet bumble bee is warming up",
+    "body": "When the rain stops, she'll shiver her flight muscles until she's warm enough to buzz off."
+   },
+   {
+    "title": "A bumble bee is sheltering under the flowers near {green}",
+    "body": "Clinging under a petal, fuzzy and a little damp, waiting for a break in the rain."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-starling-gloss",
+  "speciesId": "european-starling",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "The starlings are shining in the rain",
+    "body": "Wet feathers flash purple and green. They're poking the soggy lawn for grubs."
+   },
+   {
+    "title": "Starlings are chattering on the wet lawn",
+    "body": "Rain brings bugs up, and the starlings are probing the grass like little sewing machines."
+   },
+   {
+    "title": "Starlings are probing the wet lawn near {green}",
+    "body": "Glossy and rain-speckled, stabbing the soft ground for grubs."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-swift-low",
+  "speciesId": "chimney-swift",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "The chimney swifts are flying low",
+    "body": "Rain pushes the bugs down, so the swifts are swooping just over the rooftops, twittering."
+   },
+   {
+    "title": "Swifts are skimming through the drizzle",
+    "body": "They eat only in flight, so they're out in it, darting under the clouds."
+   },
+   {
+    "title": "Chimney swifts are swooping low above {street}",
+    "body": "Chasing bugs the rain knocked out of the sky."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-slider-drops",
+  "speciesId": "pond-slider",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A turtle is watching the rain from underwater",
+    "body": "Just a nose poking up between the raindrop rings, breathing, then gone."
+   },
+   {
+    "title": "No sunbathing today",
+    "body": "The turtles are all in the pond, where the rain sounds like soft tapping on a roof."
+   },
+   {
+    "title": "A turtle is peeking up through the rain on {water}",
+    "body": "A tiny head among the raindrop rings, then a slow sink back down."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-groundhog-burrow",
+  "speciesId": "groundhog",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "den",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A groundhog is staying in today",
+    "body": "Curled up in the burrow, dry and warm. The clover will still be there tomorrow."
+   },
+   {
+    "title": "A groundhog is peeking out at the rain",
+    "body": "Nose twitching at the smell of wet earth, deciding: nope."
+   },
+   {
+    "title": "A groundhog is waiting out the rain near {green}",
+    "body": "Just a whiskery nose in the burrow entrance, sniffing the wet air."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-opossum-slugs",
+  "speciesId": "virginia-opossum",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "lawn",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "An opossum is on a slug buffet",
+    "body": "Rainy nights bring out the slugs and snails. The opossum is strolling through the wet leaves, very pleased."
+   },
+   {
+    "title": "An opossum is out in the drizzle",
+    "body": "Pink nose glistening, tail dragging through the wet grass, snuffling for snacks."
+   },
+   {
+    "title": "An opossum is snacking in the rain near {green}",
+    "body": "Snuffling slowly through the wet leaves for slugs, nose first."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-raccoon-in",
+  "speciesId": "raccoon",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "den",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "The raccoons are staying in tonight",
+    "body": "Curled up in a tree hollow, listening to the rain, maybe skipping the trash run."
+   },
+   {
+    "title": "A raccoon is washing their paws in a puddle",
+    "body": "Fresh rain, fresh puddles. They love feeling things with wet hands."
+   },
+   {
+    "title": "A raccoon is splashing in a puddle along {street}",
+    "body": "Little hands patting the water, feeling for anything interesting."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-orb-beads",
+  "speciesId": "orb-weavers",
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk",
+   "night"
+  ],
+  "setting": "web",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A spider is hiding at the edge of her web",
+    "body": "Raindrops are hanging on every thread like glass beads. She'll fix it when it stops."
+   },
+   {
+    "title": "A web is full of raindrops",
+    "body": "Every strand sagging with shining drops. The spider is tucked in a leaf nearby."
+   },
+   {
+    "title": "A spiderweb is beaded with rain near {green}",
+    "body": "Hundreds of tiny drops along every thread, while the spider waits it out."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-brant-rain",
+  "speciesId": "brant",
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "The brant are bobbing in the rain",
+    "body": "Small dark geese riding the gray swells, murmuring to each other, rain on their backs."
+   },
+   {
+    "title": "A raft of brant is drifting in the drizzle",
+    "body": "Gentle grunts, rising and falling with the waves, totally at home."
+   },
+   {
+    "title": "Brant are bobbing out on {water} in the rain",
+    "body": "A dark raft of little geese, rising and falling on the gray water."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-grackle-wet",
+  "speciesId": "common-grackle",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A grackle is stomping through puddles",
+    "body": "Yellow eyes on the soaked lawn, purple head slick with rain, looking for worms."
+   },
+   {
+    "title": "A grackle is shaking off the rain",
+    "body": "Puff, shake, smooth. Back to strutting."
+   },
+   {
+    "title": "A grackle is hunting worms on the wet grass near {green}",
+    "body": "Strutting through the puddles, shiny and dripping."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-downy-lee",
+  "speciesId": "downy-woodpecker",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "trunk",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A woodpecker is hiding on the dry side of the tree",
+    "body": "Pressed against the bark where the rain can't reach, waiting."
+   },
+   {
+    "title": "A downy is tapping in the drizzle",
+    "body": "Wet bark is softer, and the bugs are right there."
+   },
+   {
+    "title": "A downy woodpecker is sheltering on a trunk near {green}",
+    "body": "On the dry side of the bark, little and patient, listening to the rain."
+   }
+  ]
+ },
+ {
+  "id": "wx-rain-blackbird-reeds",
+  "speciesId": "red-winged-blackbird",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "reeds",
+  "kicker": "In the rain",
+  "weather": [
+   "rain"
+  ],
+  "variants": [
+   {
+    "title": "A red-winged blackbird is clinging to a wet reed",
+    "body": "The reed bends in the rain, and they ride it down and up again."
+   },
+   {
+    "title": "Conk-la-ree in the drizzle",
+    "body": "A blackbird singing from a dripping cattail, red shoulders bright as ever."
+   },
+   {
+    "title": "A red-winged blackbird is singing in the rain near {water}",
+    "body": "Swaying on a wet reed, shoulders flashing red."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-junco-snow",
+  "speciesId": "dark-eyed-junco",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "The snowbirds are in their element",
+    "body": "Juncos hopping on fresh snow, kicking it back with both feet to find seeds underneath. This is what they're named for."
+   },
+   {
+    "title": "A junco is scratching in the snow",
+    "body": "Hop, kick-kick, peck. A tiny gray bird making tiny tracks."
+   },
+   {
+    "title": "Juncos are hopping through the snow near {green}",
+    "body": "Little white tail feathers flashing, kicking up snow for buried seeds."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-cardinal-snow",
+  "speciesId": "northern-cardinal",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A cardinal is glowing in the falling snow",
+    "body": "Bright red on a white branch, snowflakes landing on their crest. Basically a holiday card."
+   },
+   {
+    "title": "A cardinal is fluffed into a red snowball",
+    "body": "Puffed up round, a few flakes on their back, crunching a seed."
+   },
+   {
+    "title": "A cardinal is sitting in the snowy hedges along {street}",
+    "body": "Red against white, flakes drifting past, perfectly still."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-squirrel-snow",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A squirrel is digging for buried nuts in the snow",
+    "body": "Nose first, snow flying, then a triumphant pop up with an acorn. They remember by smell."
+   },
+   {
+    "title": "A squirrel is bounding through the snow",
+    "body": "Little leaps, tail up, a trail of paw prints in fours behind them."
+   },
+   {
+    "title": "A squirrel is digging through the snow near {green}",
+    "body": "Snow on their nose, digging for a nut they buried in fall. Found it."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-jay-snow",
+  "speciesId": "blue-jay",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A blue jay is shouting in the snow",
+    "body": "Bright blue on a white branch, yelling jay! jay! at the quiet. Somebody has to."
+   },
+   {
+    "title": "A blue jay is shaking snow off a branch",
+    "body": "Lands, wobbles, and a little avalanche falls. Very dramatic."
+   },
+   {
+    "title": "A blue jay is calling from a snowy branch near {green}",
+    "body": "Blue, white and loud, knocking snow off the twigs."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-crow-snow",
+  "speciesId": "american-crow",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "rooftop",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A crow is sliding down a snowy roof",
+    "body": "Crows have been seen sledding on snowy roofs, again and again, just for fun."
+   },
+   {
+    "title": "Black crows on white snow",
+    "body": "Walking on fresh snow, leaving big three-toed prints, cawing at the quiet."
+   },
+   {
+    "title": "A crow is playing in the snow near {landmark}",
+    "body": "Hopping, sliding, poking the fresh snow with their beak, clearly enjoying it."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-pigeon-snow",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "ledge",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "The pigeons are huddled on a snowy ledge",
+    "body": "Snow piling up on the stone, birds puffed up in a row, standing on their own warm feet."
+   },
+   {
+    "title": "A pigeon is catching a snowflake on their head",
+    "body": "Then another. They're just sitting there, getting gently frosted."
+   },
+   {
+    "title": "Pigeons are huddled in the snow along {street}",
+    "body": "Puffed up together under a ledge, watching the flakes fall past."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-sparrow-snow",
+  "speciesId": "house-sparrow",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "The sparrows are throwing a snow party",
+    "body": "Hopping in and out of the hedge, kicking up powder, chirping the whole time."
+   },
+   {
+    "title": "A sparrow is perched on a snowy twig",
+    "body": "Fluffed round, tiny feet, flakes landing all around."
+   },
+   {
+    "title": "Sparrows are chattering in the snowy hedges along {street}",
+    "body": "A whole crowd inside the bush, snow on top, noise inside."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-wtsp-snow",
+  "speciesId": "white-throated-sparrow",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A white-throated sparrow is scratching under the snowy shrubs",
+    "body": "Two-footed hops, kicking snow aside, looking for seeds. White throat, yellow eyebrows, very dapper."
+   },
+   {
+    "title": "Someone is whistling in the snow",
+    "body": "Oh sweet Canada, Canada, Canada. A white-throat, singing from under a frosted bush."
+   },
+   {
+    "title": "A white-throated sparrow is hopping under the snowy bushes near {green}",
+    "body": "Kicking away the snow to get to the seeds underneath."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-dove-snow",
+  "speciesId": "mourning-dove",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "wire",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "The doves are lined up on a snowy wire",
+    "body": "Snow on their backs, fluffed into soft brown loaves, cooing quietly."
+   },
+   {
+    "title": "A mourning dove is pecking seeds from the snow",
+    "body": "Soft and slow, little red feet in the white."
+   },
+   {
+    "title": "Mourning doves are huddled on a snowy wire along {street}",
+    "body": "Fluffed up side by side, snow collecting on their backs."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-mallard-snow",
+  "speciesId": "mallard",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk",
+   "night"
+  ],
+  "setting": "water",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "Snow is falling on the ducks",
+    "body": "Flakes landing on their backs and melting. The water is warmer than the air, so they're right where they want to be."
+   },
+   {
+    "title": "A duck is asleep in the snow",
+    "body": "Head tucked into their back, snow collecting on top, cozy in their down jacket."
+   },
+   {
+    "title": "Mallards are paddling through the snowfall on {water}",
+    "body": "Snowflakes vanishing into the dark water all around them."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-goose-snow",
+  "speciesId": "canada-goose",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "The geese are digging through snow for grass",
+    "body": "Pushing their bills through the white to find the green underneath."
+   },
+   {
+    "title": "Geese are standing in the snow on one leg",
+    "body": "The other foot is tucked up into their warm feathers. Switch. Repeat."
+   },
+   {
+    "title": "Geese are grazing through the snow near {green}",
+    "body": "Bills in the snow, snow on their backs, honking softly."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-hawk-snow",
+  "speciesId": "red-tailed-hawk",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A red-tailed hawk is watching the snow fall",
+    "body": "Perched high, feathers fluffed, snow on their shoulders. Fresh snow shows every mouse track."
+   },
+   {
+    "title": "A hawk is hunting over the snow",
+    "body": "Fresh white ground makes everything easy to see from up high."
+   },
+   {
+    "title": "A red-tailed hawk is perched in the snow near {landmark}",
+    "body": "High up, snow on their shoulders, eyes on the white ground below."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-raccoon-snow",
+  "speciesId": "raccoon",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "den",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "The raccoons are sleeping through the snow",
+    "body": "Not hibernating, just staying in, curled up warm for days if they need to."
+   },
+   {
+    "title": "Raccoon tracks in the fresh snow",
+    "body": "Little handprints, like a tiny person walked by. Someone went out for a snack."
+   },
+   {
+    "title": "A raccoon is curled up while it snows near {green}",
+    "body": "Tucked in a hollow tree, tail wrapped around their nose, snow piling up outside."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-titmouse-snow",
+  "speciesId": "tufted-titmouse",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A titmouse is hiding seeds in the snowy bark",
+    "body": "Tucking a seed into a crack for later, crest up, snow on the branch."
+   },
+   {
+    "title": "A titmouse is shaking snow off their crest",
+    "body": "A tiny gray bird, a big puff of flakes, then peter, peter!"
+   },
+   {
+    "title": "A titmouse is flitting through the snowy trees near {green}",
+    "body": "Big dark eyes, pointy crest, little flakes falling all around."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-gull-snow",
+  "speciesId": "herring-gull",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "shore",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "The gulls are standing in the snow",
+    "body": "Pink feet on white sand, snow on their gray backs, all facing the wind."
+   },
+   {
+    "title": "A gull is catching snowflakes",
+    "body": "Snapping at the falling flakes, maybe for fun. Probably for fun."
+   },
+   {
+    "title": "Gulls are standing in the falling snow near {water}",
+    "body": "Pale gray birds, pale gray sky, snow drifting over the waves."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-brant-snow",
+  "speciesId": "brant",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "The brant are bobbing in the snowfall",
+    "body": "Snowflakes melting on the waves as the little geese drift, murmuring."
+   },
+   {
+    "title": "Brant are grazing on snowy grass",
+    "body": "Nibbling the green tips poking up through the snow."
+   },
+   {
+    "title": "Brant are floating in the snow on {water}",
+    "body": "A dark raft of little geese, snowflakes falling all around them."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-bufflehead-snow",
+  "speciesId": "bufflehead",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A bufflehead is diving through the snowfall",
+    "body": "Pop up, shake off the snow, dive again. Tiny duck, big attitude."
+   },
+   {
+    "title": "Buffleheads are bobbing like corks in the snow",
+    "body": "White patches and snowflakes, everything bright on the dark water."
+   },
+   {
+    "title": "Buffleheads are diving in the snow on {water}",
+    "body": "Disappearing and popping back up as the flakes fall."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-swan-snow",
+  "speciesId": "mute-swan",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A swan is gliding through the snowfall",
+    "body": "White on white on gray water. Very quiet. Very elegant."
+   },
+   {
+    "title": "A swan has snow on their back",
+    "body": "They're not bothered. They have a down coat."
+   },
+   {
+    "title": "A swan is drifting through the snow on {water}",
+    "body": "Snowflakes landing on white feathers, the water dark and still."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-heron-snow",
+  "speciesId": "great-blue-heron",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "shore",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A heron is standing in the snow",
+    "body": "Neck pulled in, snow on their shoulders, staring at the open water like they own it."
+   },
+   {
+    "title": "A great blue heron is fishing in the falling snow",
+    "body": "Still as a statue, snowflakes landing on their back."
+   },
+   {
+    "title": "A heron is waiting in the snow near {water}",
+    "body": "Hunched and patient, flakes on their gray back, eyes on the water."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-woodpecker-snow",
+  "speciesId": "red-bellied-woodpecker",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "trunk",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A woodpecker is drumming in the snow",
+    "body": "Red cap bright against the white, tapping on a snowy trunk."
+   },
+   {
+    "title": "A red-bellied woodpecker is raiding their pantry in the snow",
+    "body": "Snow on the branches, but the acorns they hid in the bark are right where they left them."
+   },
+   {
+    "title": "A red-bellied woodpecker is tapping on a snowy tree near {green}",
+    "body": "Zebra stripes and a red cap, snow falling all around."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-thrush-snow",
+  "speciesId": "hermit-thrush",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A hermit thrush is tucked under the snowy branches",
+    "body": "Shy and gentle, picking berries from the bushes while snow falls outside."
+   },
+   {
+    "title": "A quiet thrush in a white world",
+    "body": "Lifting their rusty tail slowly, snowflakes drifting past."
+   },
+   {
+    "title": "A hermit thrush is sheltering from the snow near {green}",
+    "body": "Under the thick bushes, picking at winter berries."
+   }
+  ]
+ },
+ {
+  "id": "wx-snow-mock-snow",
+  "speciesId": "northern-mockingbird",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "In the snow",
+  "weather": [
+   "snow"
+  ],
+  "variants": [
+   {
+    "title": "A mockingbird is guarding their berries in the snow",
+    "body": "Snow on the holly, red berries, and one gray bird who will not share."
+   },
+   {
+    "title": "A mockingbird is flashing white wings in the snow",
+    "body": "Gray, white and snow. Very wintry. Very territorial."
+   },
+   {
+    "title": "A mockingbird is defending a snowy berry bush along {street}",
+    "body": "Chasing off anyone who comes near the berries, snow flying."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-sparrow-huddle",
+  "speciesId": "house-sparrow",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk",
+   "night"
+  ],
+  "setting": "hedge",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "The sparrows are huddled in a feathery pile",
+    "body": "Cold air bites, so they press together inside the hedge and fluff up until they're round."
+   },
+   {
+    "title": "A sparrow is a tiny puffball",
+    "body": "Feathers fluffed to trap warm air. They look twice their size."
+   },
+   {
+    "title": "Sparrows are huddled together in the hedges along {street}",
+    "body": "Squeezed side by side, fluffed into balls, keeping each other warm."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-pigeon-foot",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "ledge",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "A pigeon is standing on one foot",
+    "body": "The other one is tucked up into warm feathers. Then they'll switch."
+   },
+   {
+    "title": "The pigeons found the warm vent",
+    "body": "Lined up where the warm air puffs out of a building. Smart birds."
+   },
+   {
+    "title": "A pigeon is warming their feet near {landmark}",
+    "body": "One foot up, puffed round, perched where the sun hits the stone."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-dove-pair",
+  "speciesId": "mourning-dove",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "wire",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "Two doves are pressed together on a wire",
+    "body": "Fluffed, close, keeping each other warm in the cold air."
+   },
+   {
+    "title": "A mourning dove is sunning in the cold",
+    "body": "Tilted toward the sun, one wing open, soaking up every bit of warmth."
+   },
+   {
+    "title": "A pair of doves is huddled on a wire along {street}",
+    "body": "Close together, round and quiet, waiting for the sun to warm the air."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-cardinal-cold",
+  "speciesId": "northern-cardinal",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "A cardinal is puffed into a red ball",
+    "body": "Feathers out, beak tucked, a tiny red heater in the bare hedge."
+   },
+   {
+    "title": "A cardinal is first at the feeder",
+    "body": "Cold mornings mean big appetites. Seed, crack, swallow, again."
+   },
+   {
+    "title": "A cardinal is fluffed up in the cold near {green}",
+    "body": "Round and red, feathers puffed against the cold air."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-squirrel-drey",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk",
+   "night"
+  ],
+  "setting": "den",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "The squirrels are sharing a nest to stay warm",
+    "body": "On freezing days, squirrels curl up together in a leafy nest, tails wrapped like scarves."
+   },
+   {
+    "title": "A squirrel is sleeping in today",
+    "body": "Too cold to bother. Snuggled in a ball of leaves high in the tree."
+   },
+   {
+    "title": "Squirrels are curled up together near {green}",
+    "body": "Inside a ball of leaves in the treetops, tails wrapped around each other."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-titmouse-shiver",
+  "speciesId": "tufted-titmouse",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "A titmouse is shivering to stay warm",
+    "body": "Tiny muscles working, feathers fluffed. They'll eat a lot of seeds today."
+   },
+   {
+    "title": "A titmouse is grabbing seeds fast",
+    "body": "Cold days burn energy. Grab, fly, crack, back."
+   },
+   {
+    "title": "A titmouse is busy in the cold near {green}",
+    "body": "Fluffed and fast, grabbing seeds to stay warm."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-downy-roost",
+  "speciesId": "downy-woodpecker",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "den",
+  "kicker": "Tonight",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "A downy woodpecker is tucked into a tree hole",
+    "body": "Out of the wind, feathers fluffed, warm enough until morning."
+   },
+   {
+    "title": "A woodpecker is going to bed early",
+    "body": "In winter, small birds sleep long nights and save their energy."
+   },
+   {
+    "title": "A downy woodpecker is sleeping in a tree hole near {green}",
+    "body": "A cozy little cave out of the freezing air."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-mallard-ice",
+  "speciesId": "mallard",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk",
+   "night"
+  ],
+  "setting": "water",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "A duck is standing on the ice",
+    "body": "Their feet stay just warm enough. Warm blood heats the cold blood coming back up their legs."
+   },
+   {
+    "title": "The ducks are crowded in the open water",
+    "body": "Where the ice hasn't formed, everyone is paddling together."
+   },
+   {
+    "title": "Mallards are gathered at the open water on {water}",
+    "body": "Paddling in the one ice-free patch, breath steaming in the cold."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-goose-cold",
+  "speciesId": "canada-goose",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "The geese are sitting on their feet",
+    "body": "Tucked down, bills in their back feathers, a lawn full of feathery loaves."
+   },
+   {
+    "title": "Geese are standing on the frozen grass",
+    "body": "Breath puffing, nibbling frosty blades, honking low."
+   },
+   {
+    "title": "Geese are hunkered down on the frosty grass near {green}",
+    "body": "Sitting on their feet, bills tucked, keeping warm together."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-bufflehead-cold",
+  "speciesId": "bufflehead",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "A bufflehead is diving into icy water",
+    "body": "Tiny duck, freezing water, totally fine. Thick down keeps them toasty."
+   },
+   {
+    "title": "Buffleheads are bobbing in the cold",
+    "body": "Pop up, shake, dive again, as if it's a summer day."
+   },
+   {
+    "title": "Buffleheads are diving in the icy water on {water}",
+    "body": "Little black-and-white ducks, diving and bobbing in the cold."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-raccoon-cold",
+  "speciesId": "raccoon",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "den",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "The raccoons are staying in where it's warm",
+    "body": "On freezing nights they sleep for days in a cozy den, living off their fall fat."
+   },
+   {
+    "title": "A raccoon is too cozy to go out",
+    "body": "Curled up with their tail over their nose. Trash can wait."
+   },
+   {
+    "title": "A raccoon is tucked away from the cold near {green}",
+    "body": "Curled up warm in a hollow tree, tail wrapped like a scarf."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-opossum-cold",
+  "speciesId": "virginia-opossum",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "den",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "An opossum is staying warm inside",
+    "body": "Opossums don't hibernate, but on very cold nights they stay tucked in a cozy den."
+   },
+   {
+    "title": "An opossum is waiting for a warmer night",
+    "body": "Curled up in leaves under a porch, pink nose tucked away."
+   },
+   {
+    "title": "An opossum is sheltering from the cold near {green}",
+    "body": "Snug in a leafy den, waiting for the night to warm up."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-hawk-cold",
+  "speciesId": "red-tailed-hawk",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "rooftop",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "A red-tailed hawk is sunning on a rooftop",
+    "body": "Back to the sun, feathers fluffed, soaking up warmth on a freezing morning."
+   },
+   {
+    "title": "A hawk is fluffed up on the cold air",
+    "body": "Twice their size, perfectly still, watching the ground."
+   },
+   {
+    "title": "A red-tailed hawk is warming up in the sun near {landmark}",
+    "body": "Feathers fluffed, facing the sun, very still."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-junco-cold",
+  "speciesId": "dark-eyed-junco",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "The juncos are fluffed up under the hedge",
+    "body": "Little gray balls hopping on the frozen ground, flicking white tail feathers."
+   },
+   {
+    "title": "A junco is pecking seeds in the frost",
+    "body": "Tiny pink beak, frosted ground, steady little hops."
+   },
+   {
+    "title": "Juncos are hopping on the frozen ground near {green}",
+    "body": "Fluffed and round, picking seeds from the frost."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-wtsp-cold",
+  "speciesId": "white-throated-sparrow",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "A white-throated sparrow is scratching in the frosty leaves",
+    "body": "Two little hops back, scratching for seeds. Cold doesn't stop breakfast."
+   },
+   {
+    "title": "A sparrow is singing a thin, cold song",
+    "body": "Even in the cold, a white-throat whistles a few clear notes."
+   },
+   {
+    "title": "A white-throated sparrow is scratching in the frost near {green}",
+    "body": "Kicking up frozen leaves, looking for seeds."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-gull-ice",
+  "speciesId": "ring-billed-gull",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "shore",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "The gulls are standing on the ice",
+    "body": "Feet on frozen ground, totally comfortable. Their legs have a built-in heat exchanger."
+   },
+   {
+    "title": "A gull is sitting down on cold sand",
+    "body": "Belly feathers over their feet, like a tea cozy."
+   },
+   {
+    "title": "Gulls are standing on the icy shore near {water}",
+    "body": "Pale gray birds in a frozen world, facing the wind."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-brant-cold",
+  "speciesId": "brant",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "shore",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "The brant are grazing on frosty grass",
+    "body": "Little geese with white necklaces, nibbling frozen blades by the water."
+   },
+   {
+    "title": "Brant are murmuring in the cold",
+    "body": "Low gentle calls across the icy water."
+   },
+   {
+    "title": "Brant are grazing in the cold near {water}",
+    "body": "Little geese nibbling the frosty grass, murmuring to each other."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-starling-chimney",
+  "speciesId": "european-starling",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "rooftop",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "The starlings are crowding near a chimney",
+    "body": "Warm air rising from the roof, and a row of speckled birds soaking it up."
+   },
+   {
+    "title": "Starlings are fluffed up on the cold wire",
+    "body": "Spotted with white winter speckles, huddled and chattering."
+   },
+   {
+    "title": "Starlings are warming up on a rooftop near {landmark}",
+    "body": "Lined up where the warm air rises, speckled and fluffed."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-crow-roost",
+  "speciesId": "american-crow",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "The crows are heading to a big winter roost",
+    "body": "Hundreds flying the same way in the cold, to sleep together in the trees for warmth and safety."
+   },
+   {
+    "title": "A stream of crows is crossing the cold sky",
+    "body": "All going home together, cawing, black against the pink."
+   },
+   {
+    "title": "Crows are streaming above {street} to their winter roost",
+    "body": "Long lines of black wings in the cold evening air."
+   }
+  ]
+ },
+ {
+  "id": "wx-cold-peregrine-cold",
+  "speciesId": "peregrine-falcon",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "ledge",
+  "kicker": "In the cold",
+  "weather": [
+   "cold"
+  ],
+  "variants": [
+   {
+    "title": "A peregrine is perched in the cold wind",
+    "body": "High on a ledge, feathers puffed, unbothered. They've seen worse on Arctic cliffs."
+   },
+   {
+    "title": "The falcons are sitting together on a cold ledge",
+    "body": "Winter pairs perch close on bright, freezing days."
+   },
+   {
+    "title": "A peregrine is perched high in the cold above {street}",
+    "body": "Puffed up on a stone ledge, sharp eyes on the sky."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-gull-hang",
+  "speciesId": "herring-gull",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "A gull is hanging in the wind without flapping",
+    "body": "Wings out, tiny tilts, floating in place like a kite. They're not going anywhere. They're having fun."
+   },
+   {
+    "title": "The gulls are surfing the gusts",
+    "body": "Swooping up, sliding sideways, calling into the wind."
+   },
+   {
+    "title": "A gull is floating on the wind above {water}",
+    "body": "Wings wide, barely moving, held up by the gusts."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-rbgu-wind",
+  "speciesId": "ring-billed-gull",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "shore",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "The gulls are all facing into the wind",
+    "body": "Lined up on the sand like little weathervanes, so their feathers stay smooth."
+   },
+   {
+    "title": "A gull is leaning into a gust",
+    "body": "Feathers ruffling, feet planted, eyes squinting. Hold. Hold."
+   },
+   {
+    "title": "Gulls are facing the wind near {water}",
+    "body": "All pointed the same way, feathers flat, waves splashing behind them."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-pigeon-flock",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "A pigeon flock is swirling in the gusts",
+    "body": "Tilting all together, flashing white and gray, riding the wind around the block."
+   },
+   {
+    "title": "The pigeons are hunkered down out of the wind",
+    "body": "Tucked in the lee of a building, feathers ruffling at the edges."
+   },
+   {
+    "title": "Pigeons are wheeling through the wind above {street}",
+    "body": "The whole flock tipping and sliding as the gusts push them around."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-rth-kite",
+  "speciesId": "red-tailed-hawk",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "A red-tailed hawk is kiting in the wind",
+    "body": "Hanging still in the sky, wings flexed, letting the wind hold them up while they watch the ground."
+   },
+   {
+    "title": "A hawk is riding the gusts",
+    "body": "Barely flapping, sliding along the edge of the wind, red tail glowing."
+   },
+   {
+    "title": "A red-tailed hawk is floating on the wind above {green}",
+    "body": "Hovering in place on the gusts, eyes on the grass below."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-kestrel-wind",
+  "speciesId": "american-kestrel",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "A kestrel is hovering into the wind",
+    "body": "Facing straight into the gusts, wings fluttering, head perfectly still. Wind makes hovering easier."
+   },
+   {
+    "title": "A tiny falcon is hanging on the breeze",
+    "body": "Tail fanned, wings blurring, eyes locked on the ground."
+   },
+   {
+    "title": "A kestrel is hovering into the wind above {green}",
+    "body": "Tiny falcon, big wind, head perfectly still."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-squirrel-sway",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "A squirrel is riding a swaying branch",
+    "body": "The tree is rocking, and they're holding on with all four feet, tail flicking for balance."
+   },
+   {
+    "title": "A squirrel's tail is blowing sideways",
+    "body": "Fluff everywhere. They're not thrilled about it."
+   },
+   {
+    "title": "A squirrel is holding on tight to a swaying branch near {green}",
+    "body": "The whole tree rocking, tail streaming sideways in the wind."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-crow-play",
+  "speciesId": "american-crow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "The crows are playing in the wind",
+    "body": "Tumbling, rolling, letting the gusts toss them, then flying back up to do it again."
+   },
+   {
+    "title": "A crow is hanging on a gust",
+    "body": "Wings out, almost still, then whoosh, swept away. Cawing happily, it seems."
+   },
+   {
+    "title": "Crows are tumbling on the wind above {street}",
+    "body": "Flipping and swooping on the gusts, clearly just for fun."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-sparrow-wind",
+  "speciesId": "house-sparrow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "The sparrows are hiding from the wind",
+    "body": "Deep inside the hedge, where the gusts can't reach, feathers ruffled at the edges."
+   },
+   {
+    "title": "A sparrow just got blown sideways",
+    "body": "Lands, recovers, pretends that was on purpose."
+   },
+   {
+    "title": "Sparrows are sheltering from the wind in the hedges along {street}",
+    "body": "Tucked deep inside, chirping over the sound of the gusts."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-goose-wind",
+  "speciesId": "canada-goose",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "The geese are facing into the wind",
+    "body": "Heads low, all lined up, feathers smooth. Turn around and the wind gets under everything."
+   },
+   {
+    "title": "Geese are taking off into the wind",
+    "body": "Running, flapping, and the gust lifts them up like a hand."
+   },
+   {
+    "title": "Geese are taking off into the wind near {green}",
+    "body": "Running into the gusts and lifting off, honking."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-mallard-bob",
+  "speciesId": "mallard",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "The ducks are bobbing on choppy water",
+    "body": "Up, down, up, down, little waves slapping their sides. They don't mind."
+   },
+   {
+    "title": "A duck is tucked in behind the reeds",
+    "body": "Out of the wind, in the calm, napping."
+   },
+   {
+    "title": "Mallards are bobbing on the choppy water on {water}",
+    "body": "Riding the little waves, feathers ruffled by the gusts."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-monarch-wind",
+  "speciesId": "monarch",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "flowers",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "A monarch is waiting out the wind",
+    "body": "Holding onto a flower, wings folded, waiting for a calmer moment to keep flying south."
+   },
+   {
+    "title": "The monarchs are riding a tailwind",
+    "body": "On a north wind, monarchs ride the breeze south, gliding a long way without flapping."
+   },
+   {
+    "title": "A monarch is clinging to a flower in the wind near {green}",
+    "body": "Wings folded tight, swaying with the stem, waiting for a calmer moment."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-tern-wind",
+  "speciesId": "common-tern",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "A tern is hovering into the wind",
+    "body": "Facing the gusts, hanging still over the waves, then folding up and diving."
+   },
+   {
+    "title": "The terns are dancing on the wind",
+    "body": "Light and pointy, tipping and turning over the water."
+   },
+   {
+    "title": "A tern is hovering in the wind above {water}",
+    "body": "Pointed wings, forked tail, hanging over the waves, then splash."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-cormorant-wind",
+  "speciesId": "double-crested-cormorant",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "pier",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "A cormorant is drying their wings in the wind",
+    "body": "Wings spread wide like a flag, and the wind is doing the work."
+   },
+   {
+    "title": "A cormorant is gripping a windy piling",
+    "body": "Feathers ruffled, wings out, balancing in the gusts."
+   },
+   {
+    "title": "A cormorant is spreading their wings in the wind near {water}",
+    "body": "Wings held out wide, drying fast in the breeze."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-rwbl-wind",
+  "speciesId": "red-winged-blackbird",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "reeds",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "A blackbird is riding a swaying cattail",
+    "body": "The reeds are bending in the gusts, and the blackbird is going along for the ride."
+   },
+   {
+    "title": "Conk-la-ree, over the wind",
+    "body": "Swinging on a reed, shoulders flashing, singing anyway."
+   },
+   {
+    "title": "A red-winged blackbird is clinging to a windy reed near {water}",
+    "body": "The whole marsh swaying, red shoulders flashing."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-songsparrow-wind",
+  "speciesId": "song-sparrow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "reeds",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "A song sparrow is clinging to a bending weed",
+    "body": "Swaying in the wind, feathers ruffled, still trying to sing."
+   },
+   {
+    "title": "A sparrow is staying low in the wind",
+    "body": "Flitting from tangle to tangle close to the ground, out of the gusts."
+   },
+   {
+    "title": "A song sparrow is swaying on a weed in the wind near {water}",
+    "body": "Holding on tight, feathers ruffled, singing in pieces."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-dove-wind",
+  "speciesId": "mourning-dove",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "wire",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "A dove's wings are whistling in the wind",
+    "body": "Mourning doves' wings make a soft whistle when they take off. Today it carries."
+   },
+   {
+    "title": "The doves are swaying on the wire",
+    "body": "The whole wire swinging, two doves riding it like a hammock."
+   },
+   {
+    "title": "Doves are swinging on a windy wire along {street}",
+    "body": "The wire swaying, feathers ruffled, cooing anyway."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-honeybee-wind",
+  "speciesId": "western-honey-bee",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "flowers",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "The honey bees are staying close to home",
+    "body": "Strong wind makes flying hard, so they're visiting flowers right by the hive."
+   },
+   {
+    "title": "A honey bee is clinging to a bobbing flower",
+    "body": "The flower whips back and forth. She holds on and keeps sipping."
+   },
+   {
+    "title": "A honey bee is holding on to a windy flower near {green}",
+    "body": "Swinging back and forth, still sipping nectar."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-swift-wind",
+  "speciesId": "chimney-swift",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "The swifts are racing the wind",
+    "body": "Zipping and banking on the gusts, twittering, faster than ever."
+   },
+   {
+    "title": "Swifts are riding the gusts above the rooftops",
+    "body": "Flickering wings, sharp turns, catching bugs blown up by the wind."
+   },
+   {
+    "title": "Chimney swifts are racing on the wind above {street}",
+    "body": "Twittering and zigzagging in the gusts."
+   }
+  ]
+ },
+ {
+  "id": "wx-wind-jay-wind",
+  "speciesId": "blue-jay",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "In the wind",
+  "weather": [
+   "wind"
+  ],
+  "variants": [
+   {
+    "title": "A blue jay is shouting over the wind",
+    "body": "The trees are roaring, and the jay is louder."
+   },
+   {
+    "title": "A blue jay just got blown off course",
+    "body": "A flash of blue, a sideways swerve, a very annoyed jay! jay!"
+   },
+   {
+    "title": "A blue jay is calling over the wind near {green}",
+    "body": "Branches tossing, leaves flying, one loud blue bird."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-squirrel-sploot",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A squirrel is splooting",
+    "body": "Belly flat on a shady branch, legs stretched out behind. It's too hot to be a squirrel right now."
+   },
+   {
+    "title": "A squirrel is lying flat as a pancake",
+    "body": "Pressing their belly to the cool bark or stone to shed some heat."
+   },
+   {
+    "title": "A squirrel is splooting in the shade near {green}",
+    "body": "Flattened out on a cool branch, legs splayed, eyes half shut."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-pigeon-flutter",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "ledge",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A pigeon is fluttering their throat",
+    "body": "Birds can't sweat, so pigeons flutter their throat to cool off. It's a quick little pulse."
+   },
+   {
+    "title": "The pigeons found the shady side",
+    "body": "Every pigeon on the block is on the north side of the building."
+   },
+   {
+    "title": "Pigeons are cooling off in the shade along {street}",
+    "body": "Lined up in the shade, beaks open, throats fluttering."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-sparrow-dust",
+  "speciesId": "house-sparrow",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "sidewalk",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "The sparrows are taking dust baths",
+    "body": "Wriggling in a dry patch of dirt, wings flapping, dust everywhere. Cleans their feathers and cools them off."
+   },
+   {
+    "title": "A sparrow is panting in the shade",
+    "body": "Beak open, wings held out a little from their body to let the heat escape."
+   },
+   {
+    "title": "Sparrows are dust-bathing in the hot dirt along {street}",
+    "body": "Little puffs of dust, flapping wings, very happy chirps."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-robin-pant",
+  "speciesId": "american-robin",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A robin is holding their beak open in the heat",
+    "body": "Like panting. Wings drooped a little to let the air in."
+   },
+   {
+    "title": "A robin is splashing in a puddle",
+    "body": "Dunk, shake, splash, dunk again. A bird bath on a hot day is the best."
+   },
+   {
+    "title": "A robin is cooling off in the shade near {green}",
+    "body": "Beak open, wings drooped, standing in the cool grass."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-starling-bath",
+  "speciesId": "european-starling",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "The starlings are taking turns in the fountain",
+    "body": "Splash, flap, spray. It's a pool party."
+   },
+   {
+    "title": "A starling is soaking wet and loving it",
+    "body": "Dripping, feathers sticking up, shaking off and diving back in."
+   },
+   {
+    "title": "Starlings are splashing in the water near {green}",
+    "body": "A whole crowd bathing, splashing and chattering."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-crow-wings",
+  "speciesId": "american-crow",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A crow is holding their wings out to cool off",
+    "body": "Black feathers soak up the sun, so they're letting air flow underneath."
+   },
+   {
+    "title": "A crow is sitting with beak wide open",
+    "body": "Panting in the heat, a little ridiculous, totally reasonable."
+   },
+   {
+    "title": "A crow is cooling off in the shade near {landmark}",
+    "body": "Wings held out, beak open, letting the breeze through."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-mallard-shade",
+  "speciesId": "mallard",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "The ducks are napping in the shade",
+    "body": "Floating under overhanging branches where the water is cooler."
+   },
+   {
+    "title": "A duck is dunking their whole head",
+    "body": "Splash. Water running down their back. Ahh."
+   },
+   {
+    "title": "Mallards are resting in the shade on {water}",
+    "body": "Floating quietly under the trees, out of the heat."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-goose-shade",
+  "speciesId": "canada-goose",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "The geese are resting in the shade",
+    "body": "Lying down under a tree, beaks open, waiting for the day to cool."
+   },
+   {
+    "title": "Geese are cooling off in the water",
+    "body": "Paddling slow, splashing water over their backs."
+   },
+   {
+    "title": "Geese are resting in the shade near {green}",
+    "body": "Lying in the cool grass under a tree, beaks a little open."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-gull-pant",
+  "speciesId": "herring-gull",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "pier",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A gull is panting on the pier",
+    "body": "Beak open, standing in the breeze off the water. Even gulls get hot."
+   },
+   {
+    "title": "The gulls are bathing in the shallows",
+    "body": "Splashing, ducking, flapping, then sitting in the water to cool off."
+   },
+   {
+    "title": "A gull is cooling off in the breeze near {water}",
+    "body": "Beak open, feathers lifted, catching the sea air."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-raccoon-shade",
+  "speciesId": "raccoon",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "den",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A raccoon is sleeping through the heat",
+    "body": "Sprawled out in a shady tree hollow, waiting for the cool of night."
+   },
+   {
+    "title": "Too hot for raccoons",
+    "body": "They'll come out later, when the sidewalks cool off."
+   },
+   {
+    "title": "A raccoon is napping in the shade near {green}",
+    "body": "Stretched out in a cool tree hollow, snoring, probably."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-honeybee-fan",
+  "speciesId": "western-honey-bee",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "flowers",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "Honey bees are air-conditioning their hive",
+    "body": "Some carry water home, others line up at the door fanning their wings to blow cool air inside."
+   },
+   {
+    "title": "A honey bee is drinking from a damp spot",
+    "body": "Collecting water to carry home and cool the hive."
+   },
+   {
+    "title": "Honey bees are gathering water near {water}",
+    "body": "Sipping at the wet edges, then flying home to cool the hive."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-bumble-shade",
+  "speciesId": "common-eastern-bumble-bee",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "flowers",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A bumble bee is resting in the shade",
+    "body": "Fuzzy coats are great for cold mornings, not so much for heat waves. She's taking a break."
+   },
+   {
+    "title": "The bumble bees came out early",
+    "body": "They're doing their shopping in the cool morning, before the heat."
+   },
+   {
+    "title": "A bumble bee is resting in a shady flower near {green}",
+    "body": "Taking a break from the heat, tucked in a cool bloom."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-dasher-obelisk",
+  "speciesId": "blue-dasher",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "reeds",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A dragonfly is pointing their tail at the sun",
+    "body": "It's called the obelisk pose. Less body facing the sun means less heat."
+   },
+   {
+    "title": "A blue dasher is doing a handstand",
+    "body": "Tail straight up, perfectly still, on top of a reed."
+   },
+   {
+    "title": "A blue dasher is striking a pose near {water}",
+    "body": "Tail pointed straight at the sun, keeping cool."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-slider-deep",
+  "speciesId": "pond-slider",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "The turtles are staying underwater",
+    "body": "Too hot for the log. The pond is cool and green down there."
+   },
+   {
+    "title": "A turtle is floating just below the surface",
+    "body": "Nose up, legs out, staying cool in the water."
+   },
+   {
+    "title": "The turtles are cooling off in {water}",
+    "body": "Floating just under the surface, noses poking up."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-groundhog-burrow",
+  "speciesId": "groundhog",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "den",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A groundhog is staying cool underground",
+    "body": "Burrows stay cool even on hot days. They'll come out to eat at dusk."
+   },
+   {
+    "title": "Groundhog siesta",
+    "body": "Too hot for clover. Napping underground until evening."
+   },
+   {
+    "title": "A groundhog is waiting out the heat near {green}",
+    "body": "Down in the cool burrow, waiting for the evening."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-dove-flutter",
+  "speciesId": "mourning-dove",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "wire",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A dove is fluttering their throat to cool off",
+    "body": "A soft little pulse in their neck. It's how doves stay cool."
+   },
+   {
+    "title": "The doves are in the shade",
+    "body": "Even the wires are hot. They moved to a shady branch."
+   },
+   {
+    "title": "A mourning dove is cooling off in the shade along {street}",
+    "body": "Throat fluttering, feathers flat, perched out of the sun."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-heron-shallow",
+  "speciesId": "great-blue-heron",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "reeds",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A heron is standing in the cool shallows",
+    "body": "Long legs in the water, throat fluttering in the heat."
+   },
+   {
+    "title": "A heron is fishing in the heat",
+    "body": "Still as ever, the water shimmering around their legs."
+   },
+   {
+    "title": "A great blue heron is standing in the cool water near {water}",
+    "body": "Long legs in the shallows, throat fluttering."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-cardinal-bath",
+  "speciesId": "northern-cardinal",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A cardinal is taking a bath",
+    "body": "Dunk, shake, splash. A red bird in a sparkle of water."
+   },
+   {
+    "title": "A cardinal is panting in the hedge",
+    "body": "Beak open, wings out a little, waiting for shade."
+   },
+   {
+    "title": "A cardinal is cooling off in a bird bath along {street}",
+    "body": "Splashing and shaking, red feathers all wet."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-swift-high",
+  "speciesId": "chimney-swift",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "The chimney swifts are flying high",
+    "body": "Warm air rises, and the bugs rise with it. The swifts follow."
+   },
+   {
+    "title": "The swifts are way up high today",
+    "body": "Tiny dots chattering in the hot sky, eating as they go."
+   },
+   {
+    "title": "Chimney swifts are flying high above {street}",
+    "body": "Way up in the hot air, chasing the bugs who rose with the heat."
+   }
+  ]
+ },
+ {
+  "id": "wx-heat-catbird-bath",
+  "speciesId": "gray-catbird",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the heat",
+  "weather": [
+   "heat"
+  ],
+  "variants": [
+   {
+    "title": "A catbird is splashing in a puddle",
+    "body": "Ducking, fluttering, then a soggy little meow."
+   },
+   {
+    "title": "A catbird is hiding in the cool bushes",
+    "body": "Deep in the shade, quieter than usual."
+   },
+   {
+    "title": "A catbird is taking a bath in the shade near {green}",
+    "body": "Splashing in a cool puddle, then a happy meow."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-gull-fog",
+  "speciesId": "herring-gull",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "Gulls are calling somewhere in the fog",
+    "body": "You can hear them laughing out over the water but you can't see a thing. Then a gray shape glides past."
+   },
+   {
+    "title": "A gull just appeared out of the mist",
+    "body": "Gray bird, gray fog, gone again."
+   },
+   {
+    "title": "Gulls are calling in the fog over {water}",
+    "body": "Laughing out in the mist, invisible, close."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-goose-fog",
+  "speciesId": "canada-goose",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "Geese are honking in the fog",
+    "body": "You hear them before you see them, then a V of dark shapes slides out of the gray."
+   },
+   {
+    "title": "The geese look like ghosts on the lawn",
+    "body": "Dark shapes in the mist, nibbling the wet grass."
+   },
+   {
+    "title": "Geese are honking somewhere in the fog near {green}",
+    "body": "Calls getting closer, then a row of wings slips out of the gray."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-heron-fog",
+  "speciesId": "great-blue-heron",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "reeds",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "A heron is standing in the mist like a ghost",
+    "body": "Gray on gray, perfectly still, the water soft and silver around them."
+   },
+   {
+    "title": "A great blue heron just lifted out of the fog",
+    "body": "Slow, huge wings, a croak, then gone into the gray."
+   },
+   {
+    "title": "A heron is fishing in the fog near {water}",
+    "body": "Barely there in the mist, still as a reed."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-crow-fog",
+  "speciesId": "american-crow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "Crows are cawing in the fog",
+    "body": "The whole neighborhood is soft and gray, and the crows are calling to keep track of each other."
+   },
+   {
+    "title": "A crow is a black shape in the mist",
+    "body": "Perched on a bare branch, the street fading out behind them."
+   },
+   {
+    "title": "Crows are calling through the fog near {landmark}",
+    "body": "Voices in the gray, keeping in touch."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-dove-fog",
+  "speciesId": "mourning-dove",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "wire",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "A mourning dove is cooing in the fog",
+    "body": "Ooo-ahh, ooo, ooo. Softer than ever in the gray morning."
+   },
+   {
+    "title": "Two doves on a wire, half in the mist",
+    "body": "The wire fades into fog on both sides."
+   },
+   {
+    "title": "A dove is cooing softly in the fog along {street}",
+    "body": "The softest sound in the gray, damp air."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-robin-fog",
+  "speciesId": "american-robin",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "A robin is singing in the fog",
+    "body": "Cheerily, cheer-up, from somewhere in the gray. The wet grass is full of worms."
+   },
+   {
+    "title": "A robin is hopping on the misty lawn",
+    "body": "Every blade of grass beaded with droplets."
+   },
+   {
+    "title": "A robin is singing somewhere in the fog near {green}",
+    "body": "A bright voice in a gray world."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-orb-fog",
+  "speciesId": "orb-weavers",
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "web",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "The fog is showing off every spiderweb",
+    "body": "Mist beads on the silk, and suddenly webs are everywhere: on railings, in shrubs, on fences."
+   },
+   {
+    "title": "A web is glowing silver in the mist",
+    "body": "Every thread lined with tiny drops, and a spider in the middle."
+   },
+   {
+    "title": "Spiderwebs are glowing in the fog near {green}",
+    "body": "Silver circles in every shrub, each one beaded with mist."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-cormorant-fog",
+  "speciesId": "double-crested-cormorant",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "pier",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "A cormorant is a dark shape in the fog",
+    "body": "Perched on a piling, wings half open, the water disappearing into gray."
+   },
+   {
+    "title": "A cormorant just dove into the misty water",
+    "body": "A ripple, then nothing, then a head pops up far away."
+   },
+   {
+    "title": "A cormorant is perched in the fog near {water}",
+    "body": "A dark shape on a piling, wings half out."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-mallard-fog",
+  "speciesId": "mallard",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "Ducks are quacking in the fog",
+    "body": "Quacks drifting across the water, ducks invisible, then a soft wake."
+   },
+   {
+    "title": "A duck is paddling out of the mist",
+    "body": "A little V of ripples on silver water."
+   },
+   {
+    "title": "Mallards are drifting through the fog on {water}",
+    "body": "Soft quacks and silver ripples in the mist."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-bcnh-fog",
+  "speciesId": "black-crowned-night-heron",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "dusk"
+  ],
+  "setting": "shore",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "A night heron is hunched in the mist",
+    "body": "Red eyes glowing through the gray, perfectly still on the rocks."
+   },
+   {
+    "title": "Quok! from somewhere in the fog",
+    "body": "A night heron, calling as they fly to the water."
+   },
+   {
+    "title": "A night heron is waiting in the fog near {water}",
+    "body": "Hunched on the rocks, red-eyed, patient."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-swan-fog",
+  "speciesId": "mute-swan",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "A swan is gliding out of the fog",
+    "body": "White bird, white mist. Almost invisible, then there."
+   },
+   {
+    "title": "A swan is drifting on the silver water",
+    "body": "The fog makes everything quiet. The swan fits right in."
+   },
+   {
+    "title": "A swan is gliding through the fog on {water}",
+    "body": "A white shape slowly appearing out of the white mist."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-tern-fog",
+  "speciesId": "common-tern",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "Terns are calling in the fog",
+    "body": "Sharp kee-arr calls from the mist over the water."
+   },
+   {
+    "title": "A tern just dove out of the fog",
+    "body": "Splash, then a little silver fish in their beak."
+   },
+   {
+    "title": "Terns are calling through the fog over {water}",
+    "body": "Sharp voices, quick wings, everything soft and gray."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-brant-fog",
+  "speciesId": "brant",
+  "seasons": [
+   "fall",
+   "winter",
+   "spring"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "Brant are murmuring in the fog",
+    "body": "Low grunting calls, a raft of little geese, half lost in the mist."
+   },
+   {
+    "title": "A line of brant just appeared in the mist",
+    "body": "Flying low over the water, soft calls, then gone."
+   },
+   {
+    "title": "Brant are murmuring in the fog on {water}",
+    "body": "A dark raft of little geese, fading in and out of the mist."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-squirrel-fog",
+  "speciesId": "eastern-gray-squirrel",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "trunk",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "A squirrel is spiraling down a misty tree",
+    "body": "Damp bark, a flick of a wet tail, and they vanish into the gray."
+   },
+   {
+    "title": "A squirrel's fur is beaded with mist",
+    "body": "Every hair holding a tiny drop. Shake. Better."
+   },
+   {
+    "title": "A squirrel is scampering through the fog near {green}",
+    "body": "A gray tail disappearing into gray air."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-pigeon-fog",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "rooftop",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "The pigeons are sitting out the fog",
+    "body": "Rooftops fading into mist, and a row of quiet pigeons waiting for it to lift."
+   },
+   {
+    "title": "A pigeon flock just vanished into the fog",
+    "body": "Wings clapping, then nothing but gray."
+   },
+   {
+    "title": "Pigeons are waiting on a foggy rooftop near {landmark}",
+    "body": "The skyline gone, just a row of puffed-up birds."
+   }
+  ]
+ },
+ {
+  "id": "wx-fog-songsparrow-fog",
+  "speciesId": "song-sparrow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "setting": "hedge",
+  "kicker": "In the fog",
+  "weather": [
+   "fog"
+  ],
+  "variants": [
+   {
+    "title": "A song sparrow is singing in the mist",
+    "body": "The marsh is gone in the gray, but one sparrow is singing like nothing's different."
+   },
+   {
+    "title": "A wet sparrow on a misty shrub",
+    "body": "Beads of fog on every twig, one small bird among them."
+   },
+   {
+    "title": "A song sparrow is singing in the fog near {water}",
+    "body": "A clear little song from somewhere in the gray."
+   }
+  ]
  }
 ]

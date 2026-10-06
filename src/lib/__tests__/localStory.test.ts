@@ -1,7 +1,7 @@
 import { facts, moments as allMoments, placeKinds, species as allSpecies, stories, speciesFor } from '@/content';
 import type { Moment } from '@/content/types';
 import { toLiveMap, type LiveSpecies } from '../live';
-import { buildLocalStory, fillPlace, pickFact, placePhrase, withLocation } from '../localStory';
+import { buildLocalStory, clashesWithWeather, fillPlace, pickFact, placePhrase, withLocation } from '../localStory';
 import { pick, seededRandom, shuffle } from '../random';
 
 const today = new Date(2026, 9, 4);
@@ -158,5 +158,38 @@ describe('buildLocalStory', () => {
         }
       }
     }
+  });
+
+  it('leans on weather moments when the weather matches, and only then', () => {
+    const rainy = moment('raccoon', 2, { id: 'raccoon-rain', weather: ['rain'] });
+    const ordinary = moment('raccoon', 2);
+    const residents = speciesFor('waterfront', 'fall').filter((s) => s.id === 'raccoon');
+    const inRain = buildLocalStory({ ...base, moments: [rainy, ordinary], residents, live: new Map(), weather: ['rain'], seed: 'w' });
+    expect(inRain[0].id.startsWith('raccoon-rain')).toBe(true);
+    const dry = buildLocalStory({ ...base, moments: [rainy, ordinary], residents, live: new Map(), seed: 'w' });
+    expect(dry[0].id.startsWith('raccoon-rain')).toBe(false);
+  });
+
+  it('puts species with something to say about the weather first', () => {
+    const story = buildLocalStory({ ...base, moments: allMoments, live: new Map(), weather: ['rain'], season: 'fall', period: 'midday', seed: 'rainy' });
+    const first = story[0];
+    expect(allMoments.find((m) => first.id.startsWith(`${m.id}:`))?.weather).toContain('rain');
+  });
+
+  it('skips everyday lines that would be untrue in this weather', () => {
+    expect(clashesWithWeather('Turtles are basking in the sun', ['rain'])).toBe(true);
+    expect(clashesWithWeather('A squirrel is burying acorns', ['rain'])).toBe(false);
+    expect(clashesWithWeather('Frost on the hedge', ['heat'])).toBe(true);
+    const sunny = moment('raccoon', 1, { variants: [{ title: 'A raccoon is basking', body: 'In the sunshine.' }] });
+    const residents = speciesFor('waterfront', 'fall').filter((s) => s.id === 'raccoon');
+    const story = buildLocalStory({ ...base, moments: [sunny], residents, live: new Map(), weather: ['rain'], seed: 'x' });
+    expect(story.some((s) => s.title.includes('basking'))).toBe(false);
+  });
+
+  it('picks one journey in and one out, with a weather line when it fits', () => {
+    const story = buildLocalStory({ ...base, moments: allMoments, season: 'fall', period: 'night', live: new Map(), weather: ['wind'], seed: 'chapters' });
+    expect(story.filter((s) => s.kind === 'arriving')).toHaveLength(1);
+    expect(story.filter((s) => s.kind === 'goodbye')).toHaveLength(1);
+    expect(story.find((s) => s.kind === 'arriving')!.body).toMatch(/wind/i);
   });
 });

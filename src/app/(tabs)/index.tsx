@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { PanResponder, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { useFocusEffect, useRouter } from 'expo-router';
+import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
@@ -16,8 +16,10 @@ import { buildLocalStory } from '@/lib/localStory';
 import { hashString } from '@/lib/random';
 import { dateKey, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
 import { useNow } from '@/lib/useNow';
+import { describeWeather, PREVIEW_WEATHER, type WeatherTag } from '@/lib/weather';
 import { useAppState } from '@/state/AppState';
 import { useLiveData } from '@/state/LiveData';
+import { useWeather } from '@/state/Weather';
 import { currentNeighborhood } from '@/state/selectors';
 import { periodThemes } from '@/theme/periodTheme';
 import { border, colors, fonts } from '@/theme/tokens';
@@ -45,7 +47,9 @@ export default function RightNow() {
   const { lat, lng } = decodeGeohash(hood.cell);
   const realHeader = timeHeader(now, lat, lng);
   // Dev only: tap the time header to preview each time-of-day theme.
-  const [previewPeriod, setPreviewPeriod] = useState<Period | null>(null);
+  // Dev only: ?period=dusk&weather=rain in the URL starts on a preview too.
+  const params = useLocalSearchParams<{ period?: Period; weather?: WeatherTag }>();
+  const [previewPeriod, setPreviewPeriod] = useState<Period | null>(__DEV__ && params.period ? params.period : null);
   const header = previewPeriod
     ? { ...realHeader, period: previewPeriod, label: `${PERIOD_LABELS[previewPeriod]} (preview)` }
     : realHeader;
@@ -55,6 +59,16 @@ export default function RightNow() {
   };
   const season = seasonOf(now);
   const theme = periodThemes[header.period];
+
+  // Dev only: long-press the time header to preview each kind of weather.
+  const realWeather = useWeather();
+  const [previewWeather, setPreviewWeather] = useState<WeatherTag | null>(__DEV__ && params.weather && params.weather in PREVIEW_WEATHER ? params.weather : null);
+  const weather = previewWeather ? PREVIEW_WEATHER[previewWeather] : realWeather;
+  const cycleWeather = () => {
+    const order: (WeatherTag | null)[] = [null, 'rain', 'snow', 'wind', 'heat', 'cold', 'fog'];
+    setPreviewWeather((w) => order[(order.indexOf(w) + 1) % order.length]);
+  };
+  const weatherKey = weather ? `${weather.sky}:${weather.tags.join(',')}` : 'none';
 
   // Built around who's been seen near this neighborhood (live), with a seeded pick of
   // moments: steady while you look, different tomorrow and down the street.
@@ -76,9 +90,11 @@ export default function RightNow() {
         where: placeKinds[hood.kind].where,
         local: place?.local ?? placeKinds[hood.kind].local,
         live,
+        weather: weather?.tags ?? [],
         seed: `${hood.cell}:${today}:${header.period}`,
       }),
-    [season, header.period, hood.kind, hood.cell, place, placeName, live, today],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [season, header.period, hood.kind, hood.cell, place, placeName, live, today, weatherKey],
   );
 
   // Switching neighborhood or time of day restarts the story.
@@ -90,7 +106,7 @@ export default function RightNow() {
   const insets = useSafeAreaInsets();
   // Screen pads its content by the safe area + 12 (see Screen.tsx).
   const textBottom = textArea ? insets.top + 12 + textArea.top + Math.min(textArea.height, textHeight) : undefined;
-  useEffect(() => setIndex(0), [hood.id, header.period, season]);
+  useEffect(() => setIndex(0), [hood.id, header.period, season, weatherKey]);
   const i = Math.min(index, story.length - 1);
   const slide = story[i];
 
@@ -129,6 +145,7 @@ export default function RightNow() {
   };
 
   const setting = slide.setting ?? (header.period === 'night' ? 'night-sky' : 'sky');
+  const weatherLine = weather ? `${describeWeather(weather)}${previewWeather ? ' (preview)' : ''} · ${header.sub}` : header.sub;
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.bg }} onLayout={(e) => setArea(e.nativeEvent.layout)}>
@@ -144,6 +161,8 @@ export default function RightNow() {
             variant={hashString(`${slide.id}:${today}`) % 3}
             moonLit={moonLitFraction(now)}
             textBottom={textBottom}
+            sky={weather?.sky}
+            weather={weather?.tags}
             width={area.width}
             height={area.height}
           />
@@ -163,9 +182,10 @@ export default function RightNow() {
 
           <Pressable
             onPress={__DEV__ ? cyclePreview : undefined}
+            onLongPress={__DEV__ ? cycleWeather : undefined}
             disabled={!__DEV__}
             accessible
-            accessibilityLabel={`${header.label}, ${header.clock}. ${header.sub}`}
+            accessibilityLabel={`${header.label}, ${header.clock}. ${weatherLine}`}
             style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 22, paddingTop: 18 }}
           >
             <PeriodIcon period={header.period} color={theme.ink} />
@@ -173,7 +193,7 @@ export default function RightNow() {
               <Text style={{ fontFamily: fonts.display, fontSize: 20, color: theme.ink }}>
                 {header.label} · {header.clock}
               </Text>
-              <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>{header.sub}</Text>
+              <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>{weatherLine}</Text>
             </View>
           </Pressable>
 
