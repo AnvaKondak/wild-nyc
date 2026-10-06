@@ -56,7 +56,7 @@ export const photoAssets: Record<string, number> = {
 
 /** More photos of each species, for variety across a story. */
 export const extraPhotoAssets: Record<string, number[]> = {
-  'american-crow': [require('../../assets/photos/american-crow-4.jpg')],
+  'american-crow': [require('../../assets/photos/american-crow-2.jpg'), require('../../assets/photos/american-crow-3.jpg'), require('../../assets/photos/american-crow-4.jpg')],
   'american-kestrel': [require('../../assets/photos/american-kestrel-2.jpg'), require('../../assets/photos/american-kestrel-3.jpg'), require('../../assets/photos/american-kestrel-4.jpg')],
   'american-robin': [require('../../assets/photos/american-robin-2.jpg'), require('../../assets/photos/american-robin-3.jpg'), require('../../assets/photos/american-robin-4.jpg')],
   'black-crowned-night-heron': [require('../../assets/photos/black-crowned-night-heron-2.jpg'), require('../../assets/photos/black-crowned-night-heron-3.jpg')],

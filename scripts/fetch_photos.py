@@ -30,10 +30,14 @@ EXTRA = 3
 SKIP_PHOTOS = {"monarch": [111043173], "european-starling": [365984069], "herring-gull": [343002826], "canada-goose": [247715952], "double-crested-cormorant": [173884349], "red-winged-blackbird": [275637604]}
 
 # Photos chosen by hand from the candidates: species -> photo id.
-PIN_PHOTOS = {"monarch": 45078365, "canada-goose": 606089370, "double-crested-cormorant": 512439682, "red-winged-blackbird": 617065992, "northern-cardinal": 452211481, "coopers-hawk": 12118242, "common-eastern-bumble-bee": 442676579, "western-honey-bee": 481248861, "orb-weavers": 555702674}
+PIN_PHOTOS = {"monarch": 45078365, "canada-goose": 606089370, "double-crested-cormorant": 512439682, "red-winged-blackbird": 617065992, "northern-cardinal": 452211481, "coopers-hawk": 12118242, "american-crow": 601452466, "common-eastern-bumble-bee": 442676579, "western-honey-bee": 481248861, "orb-weavers": 555702674}
 
 # Extra photos passed over after a look at the contact sheet: species -> photo ids.
 SKIP_EXTRA = {"american-crow": [250510620, 53516042, 238951261], "black-crowned-night-heron": [565990241], "canada-goose": [37800057], "chimney-swift": [521705215, 384222882, 86950957], "common-eastern-bumble-bee": [17767241, 580690822, 327060771], "common-tern": [172940581], "dark-eyed-junco": [52405060], "double-crested-cormorant": [369136154, 255454786], "downy-woodpecker": [175723344, 634989842], "great-blue-heron": [134213334], "groundhog": [131610251], "mallard": [32774133], "monarch": [20535817, 1187530], "mute-swan": [13855998], "orb-weavers": [208881445, 324918466], "peregrine-falcon": [243839915, 35648686], "pond-slider": [5518581], "raccoon": [340830624, 292820239], "red-bellied-woodpecker": [657402075, 159444620], "red-tailed-hawk": [272209965, 55307530, 12266847], "red-winged-blackbird": [278246194], "ring-billed-gull": [57372242, 597860429], "virginia-opossum": [173131417], "western-honey-bee": [217394043, 485263880], "white-tailed-deer": [58166047, 24624866], "yellow-rumped-warbler": [252031775]}
+
+# Extra photos chosen by hand (the round sticker trims the edges, so the animal should
+# sit near the middle): species -> photo ids, used before any automatic picks.
+PIN_EXTRA = {"american-crow": [481984104, 372468385, 347867401]}
 
 # Groups get one representative species' photo.
 PHOTO_TAXON_OVERRIDES = {"moths": "Dryocampa rubicunda", "orb-weavers": "Argiope aurantia"}
@@ -109,12 +113,30 @@ def save_square(p, file):
     square(img).save(os.path.join(OUT, file), "JPEG", quality=82, optimize=True)
 
 
-def pick_extras(taxon_id, avoid, n):
+def find_photos(taxon, taxon_id, ids):
+    """Pinned photos, looked up among the taxon photos and the top observations."""
+    found = {tp["photo"]["id"]: tp["photo"] for tp in taxon.get("taxon_photos", [])}
+    base = {"taxon_id": taxon_id, "photo_license": ",".join(OK_LICENSES), "quality_grade": "research", "order_by": "votes", "per_page": 30}
+    for page in (1, 2, 3):
+        if all(i in found for i in ids):
+            break
+        time.sleep(1.1)
+        for o in get_json("https://api.inaturalist.org/v1/observations?" + urllib.parse.urlencode({**base, "page": page, "term_id": 1, "term_value_id": 2}))["results"]:
+            for p in o.get("photos", []):
+                found.setdefault(p["id"], p)
+    return [found[i] for i in ids if i in found]
+
+
+def pick_extras(taxon_id, avoid, n, pinned=()):
     """The species' curated taxon photos first (chosen to represent the species, so no
     odd ones), then the best-loved research-grade observations, one per observer,
     adults first. Skips `avoid` and anything without a license we can ship."""
     picks, observers = [], set()
     taxon = get_json(f"https://api.inaturalist.org/v1/taxa/{taxon_id}")["results"][0]
+    if pinned:
+        picks = find_photos(taxon, taxon_id, pinned)
+        if len(picks) >= n:
+            return picks[:n]
     for tp in taxon.get("taxon_photos", []):
         p = tp["photo"]
         if p["id"] in avoid or (p.get("license_code") or "").lower() not in OK_LICENSES:
@@ -143,10 +165,12 @@ def extras(only):
     out = json.load(open(EXTRA_JSON)) if os.path.exists(EXTRA_JSON) else {}
     for s in species:
         sid = s["id"]
-        if sid in out and sid not in only and len(out[sid]) >= EXTRA:
+        # Only species you name, or ones with no extras yet: a species may have fewer than
+        # EXTRA on purpose, after weeding out photos that didn't work.
+        if sid not in only and sid in out:
             continue
         main_id = int(main_photos[sid]["source"].rsplit("/", 1)[1])
-        picks = pick_extras(taxon_id_for(s), {main_id, *SKIP_EXTRA.get(sid, [])}, EXTRA)
+        picks = pick_extras(taxon_id_for(s), {main_id, *SKIP_EXTRA.get(sid, [])}, EXTRA, PIN_EXTRA.get(sid, ()))
         out[sid] = []
         for i, p in enumerate(picks, start=2):
             file = f"{sid}-{i}.jpg"

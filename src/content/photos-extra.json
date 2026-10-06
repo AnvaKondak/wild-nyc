@@ -1,10 +1,22 @@
 {
   "american-crow": [
     {
-      "file": "american-crow-4.jpg",
+      "file": "american-crow-2.jpg",
       "license": "CC0",
       "attribution": "no rights reserved",
-      "source": "https://www.inaturalist.org/photos/117581830"
+      "source": "https://www.inaturalist.org/photos/481984104"
+    },
+    {
+      "file": "american-crow-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Colin Croft, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/372468385"
+    },
+    {
+      "file": "american-crow-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Joseph Rojas, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/347867401"
     }
   ],
   "american-kestrel": [
