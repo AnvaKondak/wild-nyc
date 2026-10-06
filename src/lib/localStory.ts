@@ -17,7 +17,7 @@ import type { LiveMap } from './live';
 import { pick, seededRandom, shuffle } from './random';
 import { buildStory } from './story';
 
-const FEATURED = 4; // species moments per story
+const FEATURED = 10; // species moments per story
 const MIN_SCENES = 3;
 
 export type LocalStoryInput = {

@@ -1,4 +1,4 @@
-import { facts, species as allSpecies, stories, speciesFor } from '@/content';
+import { facts, moments as allMoments, placeKinds, species as allSpecies, stories, speciesFor } from '@/content';
 import type { Moment } from '@/content/types';
 import { toLiveMap, type LiveSpecies } from '../live';
 import { buildLocalStory, fillPlace, pickFact, placePhrase, withLocation } from '../localStory';
@@ -146,5 +146,17 @@ describe('buildLocalStory', () => {
     expect(story.at(-2)?.kind).toBe('arriving');
     expect(story.at(-1)?.kind).toBe('goodbye');
     expect(story.every((s) => !s.body.includes('{place}') && !s.body.includes('{where}'))).toBe(true);
+  });
+
+  it('features at least ten species in every place, season and time of day', () => {
+    for (const placeKind of ['block', 'park', 'waterfront'] as const) {
+      for (const season of ['spring', 'summer', 'fall', 'winter'] as const) {
+        for (const period of ['dawn', 'midday', 'dusk', 'night'] as const) {
+          const story = buildLocalStory({ ...base, moments: allMoments, season, period, placeKind, residents: speciesFor(placeKind, season), placeName: null, where: placeKinds[placeKind].where, local: placeKinds[placeKind].local, live: new Map(), seed: `${placeKind}:${season}:${period}` });
+          const featured = new Set(story.filter((s) => (s.kind ?? 'scene') === 'scene').map((s) => s.speciesId));
+          expect(featured.size).toBeGreaterThanOrEqual(10);
+        }
+      }
+    }
   });
 });
