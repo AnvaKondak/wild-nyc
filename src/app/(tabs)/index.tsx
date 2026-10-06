@@ -33,7 +33,7 @@ import { useLiveData } from '@/state/LiveData';
 import { useWeather } from '@/state/Weather';
 import { currentNeighborhood } from '@/state/selectors';
 import { periodThemes } from '@/theme/periodTheme';
-import { border, colors, fonts } from '@/theme/tokens';
+import { border, colors, fonts, offsetShadow } from '@/theme/tokens';
 
 const PERIOD_LABELS: Record<Period, string> = { dawn: 'Dawn', midday: 'Midday', dusk: 'Dusk', night: 'Night' };
 
@@ -346,7 +346,7 @@ export default function RightNow() {
             </View>
           ) : (
             /* Prev / next sit beside the photo, in the middle of the screen. */
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, marginTop: 28 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, marginTop: 20 }}>
               <RoundNav label="Previous story" onPress={prev} color={theme.ink} fill={theme.bg}>
                 <ChevronLeftIcon color={theme.ink} />
               </RoundNav>
@@ -374,6 +374,31 @@ export default function RightNow() {
                 <ChevronRightIcon color={theme.ink} />
               </RoundNav>
             </View>
+          )}
+
+          {/* A shortcut to everyone around, so no one has to tap through the whole story. */}
+          {slide.kind !== 'around' && (
+            <Pressable
+              onPress={() => setIndex(story.length - 1)}
+              accessibilityRole="button"
+              accessibilityLabel="See everyone around today"
+              hitSlop={8}
+              style={({ pressed }) => ({
+                alignSelf: 'center',
+                marginTop: 14,
+                minHeight: 34,
+                paddingHorizontal: 14,
+                borderRadius: 17,
+                borderWidth: border.width,
+                borderColor: theme.ink,
+                backgroundColor: theme.card,
+                boxShadow: offsetShadow(theme.shadow, 2),
+                justifyContent: 'center',
+                opacity: pressed ? 0.6 : 1,
+              })}
+            >
+              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 13, color: theme.ink }}>See everyone around ›</Text>
+            </Pressable>
           )}
 
           <StoryCard kicker={slide.kicker} title={slide.title} body={slide.body} fact={slide.fact} theme={theme} />
