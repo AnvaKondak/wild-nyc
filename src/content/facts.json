@@ -138,7 +138,7 @@
  },
  {
   "speciesId": "american-robin",
-  "text": "Robins find worms by sight: that head tilt is them looking at the ground with one eye."
+  "text": "Robins mostly find worms by sight: that head tilt is them looking at the ground with one eye."
  },
  {
   "speciesId": "herring-gull",
@@ -207,7 +207,7 @@
  },
  {
   "speciesId": "monarch",
-  "text": "A monarch caterpillar grows about 2,000 times bigger in just two weeks.",
+  "text": "A monarch caterpillar gets about 2,000 times heavier in about two weeks.",
   "seasons": [
    "summer"
   ]
@@ -581,7 +581,7 @@
  },
  {
   "speciesId": "great-blue-heron",
-  "text": "A great blue heron can be over four feet tall but weighs only about five or six pounds."
+  "text": "A great blue heron can stand over four feet tall but weighs only about five pounds."
  },
  {
   "speciesId": "black-crowned-night-heron",
@@ -885,7 +885,7 @@
  },
  {
   "speciesId": "downy-woodpecker",
-  "text": "Woodpeckers have a long tongue that wraps around the inside of their skull."
+  "text": "When it's tucked away, a woodpecker's long tongue wraps around the back of their skull."
  },
  {
   "speciesId": "downy-woodpecker",
@@ -955,7 +955,7 @@
  },
  {
   "speciesId": "hermit-thrush",
-  "text": "Hermit thrushes are the only thrushes in our area likely to stay through winter.",
+  "text": "Besides robins, hermit thrushes are the only thrushes in our area likely to stay through winter.",
   "seasons": [
    "winter"
   ]
@@ -977,7 +977,7 @@
  },
  {
   "speciesId": "yellow-rumped-warbler",
-  "text": "Yellow-rumped warblers are often the first warblers to arrive in spring.",
+  "text": "Yellow-rumped warblers are among the first warblers to arrive in spring.",
   "seasons": [
    "spring"
   ]
@@ -1046,7 +1046,7 @@
  },
  {
   "speciesId": "common-eastern-firefly",
-  "text": "Every kind of firefly has their own flash pattern, like a secret code."
+  "text": "Many kinds of fireflies have their own flash pattern, like a secret code."
  },
  {
   "speciesId": "common-eastern-firefly",
@@ -1127,7 +1127,7 @@
  },
  {
   "speciesId": "orb-weavers",
-  "text": "Orb-weaver silk is stronger than steel of the same thickness."
+  "text": "Pound for pound, orb-weaver silk is stronger than steel."
  },
  {
   "speciesId": "orb-weavers",

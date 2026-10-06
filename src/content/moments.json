@@ -526,7 +526,7 @@
   "variants": [
    {
     "title": "The pigeons are back on the ledge",
-    "body": "Pairs settle in side by side. Same ledge, same partner, every single night."
+    "body": "Pairs settle in side by side. Same ledge, same partner, night after night."
    },
    {
     "title": "Pigeon bedtime is starting",
@@ -1681,7 +1681,7 @@
   "variants": [
    {
     "title": "A monarch is laying eggs on milkweed",
-    "body": "One tiny egg per leaf. Milkweed is the only plant their caterpillars can eat. Picky, but loyal."
+    "body": "One tiny egg per leaf. Milkweeds are the only plants their caterpillars can eat. Picky, but loyal."
    },
    {
     "title": "Monarch mom, very particular about milkweed",
@@ -1689,7 +1689,7 @@
    },
    {
     "title": "A monarch is leaving eggs on milkweed near {green}",
-    "body": "She tastes each leaf with her feet before leaving one tiny egg. Milkweed is the only plant her caterpillars can eat, so she's very particular."
+    "body": "She tastes each leaf with her feet before leaving one tiny egg. Milkweeds are the only plants her caterpillars can eat, so she's very particular."
    }
   ]
  },
@@ -2041,7 +2041,7 @@
    },
    {
     "title": "Tiny snowbirds, hop-hop-hopping",
-    "body": "Juncos never walk. They hop. Everywhere. Under every bush {place}."
+    "body": "Juncos hardly ever walk. They hop. Everywhere. Under every bush {place}."
    },
    {
     "title": "Juncos are hopping under the hedges on {street}",
@@ -2226,7 +2226,7 @@
   "variants": [
    {
     "title": "A crow is keeping an eye on things",
-    "body": "Crows remember faces. Be friendly and you might get a nod back. They're excellent judges of character."
+    "body": "Crows remember faces, and they remember kindness too. Excellent judges of character."
    },
    {
     "title": "The neighborhood watch is on duty",
@@ -2234,7 +2234,7 @@
    },
    {
     "title": "A crow is keeping an eye on {street}",
-    "body": "Perched on {landmark}, watching who comes and goes. Crows remember faces for years. Be kind, and you might get a nod back someday."
+    "body": "Perched on {landmark}, watching who comes and goes. Crows remember faces for years. Be kind: they'll remember that too."
    }
   ]
  },
@@ -4750,7 +4750,7 @@
    },
    {
     "title": "A wave of warblers is moving through",
-    "body": "Spring migration! Yellow-rumps are first to arrive and most common."
+    "body": "Spring migration! Yellow-rumps are among the first to arrive, and the most common."
    },
    {
     "title": "Spring warblers are moving through {green}",
@@ -6409,7 +6409,7 @@
   "variants": [
    {
     "title": "A squirrel is digging for buried nuts in the snow",
-    "body": "Nose first, snow flying, then a triumphant pop up with an acorn. They remember by smell."
+    "body": "Nose first, snow flying, then a triumphant pop up with an acorn. Memory gets them close; their nose finds the rest."
    },
    {
     "title": "A squirrel is bounding through the snow",
@@ -6470,8 +6470,8 @@
   ],
   "variants": [
    {
-    "title": "A crow is sliding down a snowy roof",
-    "body": "Crows have been seen sledding on snowy roofs, again and again, just for fun."
+    "title": "A crow is playing in the fresh snow",
+    "body": "Crows are famous for playing. Snow gets poked, tossed and hopped through, just for fun."
    },
    {
     "title": "Black crows on white snow",

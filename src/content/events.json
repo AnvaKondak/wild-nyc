@@ -1,7 +1,7 @@
 [
  {"id": "groundhog-day", "from": "02-01", "to": "02-03", "species": ["groundhog"], "kicker": "Big moment · Groundhog Day",
-  "title": "It's Groundhog Day, and the real groundhogs are asleep",
-  "body": "Every groundhog {place} is curled up underground right now, hearts beating just a few times a minute. They won't come out to check for shadows until the ground warms up in March. Let them sleep."},
+  "title": "It's Groundhog Day, and the real groundhogs are mostly asleep",
+  "body": "Most groundhogs {place} are still curled up underground, hearts beating just a few times a minute. Some males wake for a quick look around this month, but most stay put until March. Let them sleep."},
  {"id": "redwings-return", "from": "03-01", "to": "03-20", "species": ["red-winged-blackbird", "common-grackle"], "kicker": "Big moment · First sign of spring",
   "title": "The red-wings are back",
   "body": "It's still cold, but the first red-winged blackbirds are already shouting conk-la-ree from last year's cattails near {water}. To a lot of birders, that sound is the real first day of spring."},
@@ -40,7 +40,7 @@
   "body": "The grass is crunchy and white this morning. The last crickets have gone quiet, the sparrows are fluffed into round little balls, and the squirrels are digging up acorns they buried last month."},
  {"id": "longest-night", "from": "12-19", "to": "12-23", "species": ["raccoon", "virginia-opossum", "american-crow"], "kicker": "Big moment · The longest night",
   "title": "The longest night of the year",
-  "body": "Tonight is the winter solstice. The crows head to their big roost early, the day birds sleep for fifteen hours, and the raccoons and opossums get their longest night out. From tomorrow, the days start growing again."},
+  "body": "Tonight is the winter solstice. The crows head to their big roost early, the day birds rest through a night about fifteen hours long, and the raccoons and opossums get their longest night out. From tomorrow, the days start growing again."},
  {"id": "snow-day", "snow": true, "species": ["dark-eyed-junco", "northern-cardinal", "eastern-gray-squirrel"], "kicker": "Big moment · Snow day",
   "title": "It's a snow day",
   "body": "Everything {place} is hushed and white. The juncos are hopping in it, the cardinals are glowing red against it, and the squirrels are digging through it for acorns. Look for tracks: tiny hops, little hands, birds' feet."},

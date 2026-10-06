@@ -138,7 +138,7 @@
       ],
       "blurb": "A squirrel can bury thousands of nuts in a fall, each in its own spot, and find many of them again months later by memory and smell."
     },
-    "origin": "Gray squirrels are from here. The forests that once covered the city were their home, and they came back to the parks in the 1800s once trees were planted again.",
+    "origin": "Gray squirrels are from here. The forests that once covered the city were their home, and in the 1800s people brought them back to the parks once trees were planted again.",
     "home": "The big tree is home base. They nest high up in a ball of leaves called a drey.",
     "rightNow": {
       "spring": "New babies are tucked in the drey. Moms dash back and forth between feeding and keeping watch.",
@@ -192,7 +192,7 @@
       ],
       "blurb": "Starlings pick up sounds from the world around them: other birds, whistles, even car alarms and phone ringtones, and mix them into their songs."
     },
-    "origin": "About a hundred were let go in Central Park in 1890. Today there are millions across North America, all from that one small group.",
+    "origin": "About a hundred were let go in Central Park in 1890 and 1891. Today there are millions across North America, all from that one small group.",
     "home": "They hang out on the wire, chattering and doing impressions of car alarms.",
     "rightNow": {
       "spring": "Dressed up in glossy purple and green with bright yellow beaks, singing from rooftops to impress a mate.",
@@ -320,8 +320,8 @@
       "winter": "Many stay all winter. They go quiet, travel in flocks and eat berries left on the trees."
     },
     "funFact": {
-      "title": "They hunt by sight",
-      "body": "That head tilt isn't listening. A robin's eyes are on the sides of their head, so they turn to look at the ground with one eye."
+      "title": "That head tilt",
+      "body": "A robin's eyes are on the sides of their head, so they tilt to look at the ground with one eye. Scientists think they may listen for worms too."
     },
     "kindness": {
       "title": "Skip lawn chemicals.",
@@ -408,7 +408,7 @@
         "spots"
       ]
     },
-    "withPeople": "Gulls watch what we eat, and studies found they're much less likely to grab your lunch if you look straight at them. A steady stare protects a sandwich."
+    "withPeople": "Gulls watch what we eat. In one study, gulls took much longer to go for a bag of chips when a person was looking right at them. A steady stare helps protect a sandwich."
   },
   {
     "id": "raccoon",
@@ -437,7 +437,7 @@
     },
     "funFact": {
       "title": "Daytime doesn't mean sick",
-      "body": "A raccoon out in daylight is usually just a busy mom or a hungry youngster. Give them space and let them go about their day."
+      "body": "A raccoon out in daylight is usually just a busy mom or a hungry youngster. Give them space. If one is stumbling, circling or acting strange, keep away and call 311 in NYC or Animal Control in Jersey City."
     },
     "kindness": {
       "title": "Put a lid on it.",
@@ -485,7 +485,7 @@
     "home": "Just passing through, stopping at every flower box on the way.",
     "rightNow": {
       "spring": "Working their way north, generation by generation. The first ones reach the city in late spring.",
-      "summer": "Laying eggs on milkweed, the only plant their caterpillars can eat.",
+      "summer": "Laying eggs on milkweed, the only kind of plant their caterpillars can eat.",
       "fall": "Passing through on the way to Mexico, stopping to drink from late flowers.",
       "winter": "Far away in Mexico, clustered by the millions on fir trees in the mountains."
     },
@@ -1397,7 +1397,7 @@
       ],
       "blurb": "Black-crowned night herons nap in the trees by day and fish at dusk and through the night, hunched at the water's edge."
     },
-    "origin": "Native herons who nest in colonies on harbor islands and around city ponds.",
+    "origin": "Native herons who nest in colonies on the harbor islands and roost in the trees around city ponds.",
     "home": "Hunched on the rocks at the water's edge, waiting for dusk.",
     "rightNow": {
       "spring": "Back at their nesting colonies, crowded into the trees on the harbor islands.",
@@ -1991,7 +1991,7 @@
     },
     "funFact": {
       "title": "They see invisible trails",
-      "body": "Kestrels can see ultraviolet light, which may help them spot the trails that mice and voles leave behind."
+      "body": "Kestrels can see ultraviolet light. Experiments with their European cousins suggest it might help them spot the trails voles leave behind, though scientists still debate how much."
     },
     "kindness": {
       "title": "Skip the pesticides.",
@@ -2170,8 +2170,8 @@
       "winter": "Tapping through the cold, tucked into a tree hole at night."
     },
     "funFact": {
-      "title": "A built-in helmet",
-      "body": "Woodpeckers have a spongy skull and a long tongue that wraps around their head, cushioning every peck."
+      "title": "A tongue that wraps around their head",
+      "body": "When it's tucked away, a woodpecker's long tongue wraps around the back of their skull. Strong neck muscles power all that pecking."
     },
     "kindness": {
       "title": "Leave dead branches.",
@@ -2687,7 +2687,7 @@
     },
     "funFact": {
       "title": "Nearly perfect hunters",
-      "body": "Dragonflies catch around 95 percent of the prey they chase, and a blue dasher can eat hundreds of mosquitoes a day."
+      "body": "Dragonflies catch around 95 percent of the prey they chase, so a blue dasher eats a lot of mosquitoes and other small insects."
     },
     "kindness": {
       "title": "Keep ponds clean.",
