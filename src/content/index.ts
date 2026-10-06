@@ -6,7 +6,8 @@ import factsJson from './facts.json';
 import hurtAnimalJson from './hurt-animal.json';
 import kindnessJson from './kindness.json';
 import momentsJson from './moments.json';
-import { photoAssets } from './photoAssets';
+import { extraPhotoAssets, photoAssets } from './photoAssets';
+import extraPhotosJson from './photos-extra.json';
 import photosJson from './photos.json';
 import placesJson from './places.json';
 import soundsJson from './sounds.json';
@@ -46,6 +47,7 @@ const speciesById = new Map(species.map((s) => [s.id, s]));
 
 export type PhotoCredit = { file: string; license: string; attribution: string; source: string };
 const photoCredits = photosJson as Record<string, PhotoCredit>;
+const extraPhotoCredits = extraPhotosJson as Record<string, PhotoCredit[]>;
 
 /** The bundled photo for a species (an image asset), if there is one. */
 export function speciesPhoto(id: string): number | undefined {
@@ -54,6 +56,16 @@ export function speciesPhoto(id: string): number | undefined {
 
 export function photoCredit(id: string): PhotoCredit | undefined {
   return photoCredits[id];
+}
+
+/** All the bundled photos of a species: the main one first, then a few more for variety. */
+export function speciesPhotos(id: string): number[] {
+  return [photoAssets[id], ...(extraPhotoAssets[id] ?? [])].filter((p): p is number => p !== undefined);
+}
+
+/** Credits for every bundled photo of a species, in the same order as speciesPhotos. */
+export function photoCreditsFor(id: string): PhotoCredit[] {
+  return [photoCredits[id], ...(extraPhotoCredits[id] ?? [])].filter((c): c is PhotoCredit => c !== undefined);
 }
 
 export function getSpecies(id: string): Species | undefined {

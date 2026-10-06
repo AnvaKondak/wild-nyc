@@ -1,0 +1,944 @@
+{
+  "american-crow": [
+    {
+      "file": "american-crow-4.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/117581830"
+    }
+  ],
+  "american-kestrel": [
+    {
+      "file": "american-kestrel-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Jonathan Eisen, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/75920516"
+    },
+    {
+      "file": "american-kestrel-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) MarvalPhotography19, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/236762045"
+    },
+    {
+      "file": "american-kestrel-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Daughter Dad, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/615613932"
+    }
+  ],
+  "american-robin": [
+    {
+      "file": "american-robin-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Judy Gallagher, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/111891993"
+    },
+    {
+      "file": "american-robin-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Kathy Richardson, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/190120595"
+    },
+    {
+      "file": "american-robin-4.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) psweet, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/184255332"
+    }
+  ],
+  "black-crowned-night-heron": [
+    {
+      "file": "black-crowned-night-heron-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Алина Урусова, some rights reserved (CC BY), uploaded by Алина Урусова",
+      "source": "https://www.inaturalist.org/photos/59830074"
+    },
+    {
+      "file": "black-crowned-night-heron-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) MIMI, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/732334229"
+    }
+  ],
+  "blue-dasher": [
+    {
+      "file": "blue-dasher-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Michael J. Papay, some rights reserved (CC BY), uploaded by Michael J. Papay",
+      "source": "https://www.inaturalist.org/photos/420424519"
+    },
+    {
+      "file": "blue-dasher-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Michael J. Papay, some rights reserved (CC BY), uploaded by Michael J. Papay",
+      "source": "https://www.inaturalist.org/photos/420424912"
+    },
+    {
+      "file": "blue-dasher-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Michael J. Papay, some rights reserved (CC BY), uploaded by Michael J. Papay",
+      "source": "https://www.inaturalist.org/photos/403764196"
+    }
+  ],
+  "blue-jay": [
+    {
+      "file": "blue-jay-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Blake Ross, some rights reserved (CC BY), uploaded by Blake Ross",
+      "source": "https://www.inaturalist.org/photos/248588410"
+    },
+    {
+      "file": "blue-jay-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Blake Ross, some rights reserved (CC BY), uploaded by Blake Ross",
+      "source": "https://www.inaturalist.org/photos/243875927"
+    },
+    {
+      "file": "blue-jay-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Texas Bird Family, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/617105003"
+    }
+  ],
+  "brant": [
+    {
+      "file": "brant-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Donald Hobern, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/6822790"
+    },
+    {
+      "file": "brant-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Christina Moresi, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/28515725"
+    },
+    {
+      "file": "brant-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Andrew Hrycyna, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/110982856"
+    }
+  ],
+  "bufflehead": [
+    {
+      "file": "bufflehead-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Andrew Lai, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/459828601"
+    },
+    {
+      "file": "bufflehead-3.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Victor Brans, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/181141798"
+    },
+    {
+      "file": "bufflehead-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Kevin Krebs, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/487995981"
+    }
+  ],
+  "canada-goose": [
+    {
+      "file": "canada-goose-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Meghan Waldon, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/624611475"
+    },
+    {
+      "file": "canada-goose-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Tom Field, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/546325643"
+    }
+  ],
+  "chimney-swift": [
+    {
+      "file": "chimney-swift-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Matthew Gerke, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/281631854"
+    },
+    {
+      "file": "chimney-swift-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Helen J, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/693430012"
+    },
+    {
+      "file": "chimney-swift-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Court Harding, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/284974211"
+    }
+  ],
+  "common-eastern-bumble-bee": [
+    {
+      "file": "common-eastern-bumble-bee-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Timothy Lindsey, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/585737616"
+    },
+    {
+      "file": "common-eastern-bumble-bee-3.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/287620545"
+    },
+    {
+      "file": "common-eastern-bumble-bee-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Loïc Mathieu, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/500979242"
+    }
+  ],
+  "common-eastern-firefly": [
+    {
+      "file": "common-eastern-firefly-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Katja Schulz, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/139632"
+    },
+    {
+      "file": "common-eastern-firefly-3.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Kim H, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/302090929"
+    },
+    {
+      "file": "common-eastern-firefly-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) John Brew, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/41798465"
+    }
+  ],
+  "common-grackle": [
+    {
+      "file": "common-grackle-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Daughter Dad, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/624589265"
+    },
+    {
+      "file": "common-grackle-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Derek Spencer, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/577407132"
+    },
+    {
+      "file": "common-grackle-4.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/59705686"
+    }
+  ],
+  "common-tern": [
+    {
+      "file": "common-tern-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Alan Bell, some rights reserved (CC BY), uploaded by Alan Bell",
+      "source": "https://www.inaturalist.org/photos/337231799"
+    },
+    {
+      "file": "common-tern-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Bill Keim, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/533458379"
+    }
+  ],
+  "coopers-hawk": [
+    {
+      "file": "coopers-hawk-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Becky Matsubara, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/43282408"
+    },
+    {
+      "file": "coopers-hawk-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Annika Lindqvist, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/32948726"
+    },
+    {
+      "file": "coopers-hawk-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Shirley Zundell, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/52268108"
+    }
+  ],
+  "dark-eyed-junco": [
+    {
+      "file": "dark-eyed-junco-2.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) anonymous, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/1049485"
+    },
+    {
+      "file": "dark-eyed-junco-3.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Mykola Swarnyk, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/168808060"
+    },
+    {
+      "file": "dark-eyed-junco-4.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Stephen M., some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/371026690"
+    }
+  ],
+  "double-crested-cormorant": [
+    {
+      "file": "double-crested-cormorant-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Eridan Xharahi, some rights reserved (CC BY), uploaded by Eridan Xharahi",
+      "source": "https://www.inaturalist.org/photos/173884349"
+    },
+    {
+      "file": "double-crested-cormorant-3.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/289101793"
+    },
+    {
+      "file": "double-crested-cormorant-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) greensophie, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/151253482"
+    }
+  ],
+  "downy-woodpecker": [
+    {
+      "file": "downy-woodpecker-2.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/635214136"
+    },
+    {
+      "file": "downy-woodpecker-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) northerly, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/643767292"
+    },
+    {
+      "file": "downy-woodpecker-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Irina Mitine, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/340128559"
+    }
+  ],
+  "eastern-carpenter-bee": [
+    {
+      "file": "eastern-carpenter-bee-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Desiree Narango, some rights reserved (CC BY), uploaded by Desiree Narango",
+      "source": "https://www.inaturalist.org/photos/4913884"
+    },
+    {
+      "file": "eastern-carpenter-bee-3.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Bob Peterson, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/272015069"
+    },
+    {
+      "file": "eastern-carpenter-bee-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Leila Dasher, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/263996725"
+    }
+  ],
+  "eastern-gray-squirrel": [
+    {
+      "file": "eastern-gray-squirrel-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) BirdPhotos.com, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/452280117"
+    },
+    {
+      "file": "eastern-gray-squirrel-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) lwolfartist, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/452280124"
+    },
+    {
+      "file": "eastern-gray-squirrel-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) lwolfartist, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/452280426"
+    }
+  ],
+  "european-starling": [
+    {
+      "file": "european-starling-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Shiva Shenoy, some rights reserved (CC BY), uploaded by Shiva Shenoy",
+      "source": "https://www.inaturalist.org/photos/365984069"
+    },
+    {
+      "file": "european-starling-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Paolo Zucca, some rights reserved (CC BY), uploaded by Paolo Zucca",
+      "source": "https://www.inaturalist.org/photos/9368838"
+    },
+    {
+      "file": "european-starling-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) egorbirder, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/118675313"
+    }
+  ],
+  "gray-catbird": [
+    {
+      "file": "gray-catbird-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/382027885"
+    },
+    {
+      "file": "gray-catbird-3.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/116349792"
+    },
+    {
+      "file": "gray-catbird-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Daughter Dad, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/508527142"
+    }
+  ],
+  "great-blue-heron": [
+    {
+      "file": "great-blue-heron-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Michael J. Papay, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/507422703"
+    },
+    {
+      "file": "great-blue-heron-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Daughter Dad, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/620065684"
+    },
+    {
+      "file": "great-blue-heron-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Brooke J., some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/671997918"
+    }
+  ],
+  "groundhog": [
+    {
+      "file": "groundhog-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Jennifer Aitkens, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/131171794"
+    },
+    {
+      "file": "groundhog-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) William J. Deml, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/244659179"
+    },
+    {
+      "file": "groundhog-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Laura Mae, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/26211942"
+    }
+  ],
+  "hermit-thrush": [
+    {
+      "file": "hermit-thrush-2.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Gonzalo Zepeda Martínez, some rights reserved (CC BY-SA), uploaded by Gonzalo Zepeda Martínez",
+      "source": "https://www.inaturalist.org/photos/2846286"
+    },
+    {
+      "file": "hermit-thrush-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Nigel Voaden, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/2029375"
+    },
+    {
+      "file": "hermit-thrush-4.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved, uploaded by Dario Taraborelli",
+      "source": "https://www.inaturalist.org/photos/109422424"
+    }
+  ],
+  "herring-gull": [
+    {
+      "file": "herring-gull-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Quinn, some rights reserved (CC BY), uploaded by Quinn",
+      "source": "https://www.inaturalist.org/photos/343002826"
+    },
+    {
+      "file": "herring-gull-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Jo Roberts, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/468485887"
+    },
+    {
+      "file": "herring-gull-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Jonathan Layman, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/5356635"
+    }
+  ],
+  "house-sparrow": [
+    {
+      "file": "house-sparrow-2.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) jirau, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/454836800"
+    },
+    {
+      "file": "house-sparrow-3.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) hedera.baltica, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/181802756"
+    },
+    {
+      "file": "house-sparrow-4.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Deepak Sundar, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/181802760"
+    }
+  ],
+  "large-milkweed-bug": [
+    {
+      "file": "large-milkweed-bug-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) aarongunnar, some rights reserved (CC BY), uploaded by aarongunnar",
+      "source": "https://www.inaturalist.org/photos/162732404"
+    },
+    {
+      "file": "large-milkweed-bug-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Katja Schulz, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/11024073"
+    },
+    {
+      "file": "large-milkweed-bug-4.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Ryan Hodnett, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/8590920"
+    }
+  ],
+  "mallard": [
+    {
+      "file": "mallard-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Ron Pasieczna, some rights reserved (CC BY), uploaded by Ron Pasieczna",
+      "source": "https://www.inaturalist.org/photos/45796333"
+    },
+    {
+      "file": "mallard-3.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) hedera.baltica, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/94471985"
+    },
+    {
+      "file": "mallard-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Michel Langeveld, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/116793572"
+    }
+  ],
+  "monarch": [
+    {
+      "file": "monarch-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Christine Young, some rights reserved (CC BY), uploaded by Christine Young",
+      "source": "https://www.inaturalist.org/photos/111043173"
+    },
+    {
+      "file": "monarch-3.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/169360078"
+    },
+    {
+      "file": "monarch-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Leila Dasher, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/322926715"
+    }
+  ],
+  "moths": [
+    {
+      "file": "moths-2.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved, uploaded by Bruce Cook",
+      "source": "https://www.inaturalist.org/photos/286292708"
+    },
+    {
+      "file": "moths-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Christine Young, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/98010356"
+    },
+    {
+      "file": "moths-4.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/180398317"
+    }
+  ],
+  "mourning-dove": [
+    {
+      "file": "mourning-dove-2.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Paul Danese, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/452211337"
+    },
+    {
+      "file": "mourning-dove-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) froggymum, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/598891594"
+    },
+    {
+      "file": "mourning-dove-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Texas Bird Family, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/603804532"
+    }
+  ],
+  "mute-swan": [
+    {
+      "file": "mute-swan-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Codrin Bucur, some rights reserved (CC BY), uploaded by Codrin Bucur",
+      "source": "https://www.inaturalist.org/photos/113908808"
+    },
+    {
+      "file": "mute-swan-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Radu Teodoreanu, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/620271335"
+    },
+    {
+      "file": "mute-swan-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) SteveM4560, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/260166629"
+    }
+  ],
+  "northern-cardinal": [
+    {
+      "file": "northern-cardinal-2.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Paul Danese, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/452211474"
+    },
+    {
+      "file": "northern-cardinal-3.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Paul Danese, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/452211470"
+    },
+    {
+      "file": "northern-cardinal-4.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Mykola Swarnyk, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/452211478"
+    }
+  ],
+  "northern-mockingbird": [
+    {
+      "file": "northern-mockingbird-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) hr_dragonfly, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/606201427"
+    },
+    {
+      "file": "northern-mockingbird-3.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/246376554"
+    },
+    {
+      "file": "northern-mockingbird-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Bill Keim, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/473869541"
+    }
+  ],
+  "orb-weavers": [
+    {
+      "file": "orb-weavers-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Joseph Rucker, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/153725432"
+    },
+    {
+      "file": "orb-weavers-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Lexi Destria, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/94050638"
+    },
+    {
+      "file": "orb-weavers-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Andrew GottWorth, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/84883523"
+    }
+  ],
+  "peregrine-falcon": [
+    {
+      "file": "peregrine-falcon-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Andrea Poggi, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/180819760"
+    },
+    {
+      "file": "peregrine-falcon-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Shirley Zundell, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/17316283"
+    }
+  ],
+  "pond-slider": [
+    {
+      "file": "pond-slider-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Roberto Daniel Avila, some rights reserved (CC BY), uploaded by Roberto Daniel Avila",
+      "source": "https://www.inaturalist.org/photos/456199522"
+    },
+    {
+      "file": "pond-slider-3.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/177836196"
+    },
+    {
+      "file": "pond-slider-4.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Oscar Alejandro Morales Juárez, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/64373762"
+    }
+  ],
+  "raccoon": [
+    {
+      "file": "raccoon-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Michael D Fox, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/2679010"
+    },
+    {
+      "file": "raccoon-3.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Gordon Johnston, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/115673384"
+    }
+  ],
+  "red-bellied-woodpecker": [
+    {
+      "file": "red-bellied-woodpecker-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Joey M, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/502918277"
+    },
+    {
+      "file": "red-bellied-woodpecker-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Lyndsey, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/178610027"
+    }
+  ],
+  "red-tailed-hawk": [
+    {
+      "file": "red-tailed-hawk-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Henrik Kibak, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/133716791"
+    }
+  ],
+  "red-winged-blackbird": [
+    {
+      "file": "red-winged-blackbird-2.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) anonymous, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/275637604"
+    },
+    {
+      "file": "red-winged-blackbird-3.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved, uploaded by ChrisMcV",
+      "source": "https://www.inaturalist.org/photos/137233980"
+    },
+    {
+      "file": "red-winged-blackbird-4.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/31553950"
+    }
+  ],
+  "ring-billed-gull": [
+    {
+      "file": "ring-billed-gull-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Eric Schmidt, some rights reserved (CC BY), uploaded by Eric Schmidt",
+      "source": "https://www.inaturalist.org/photos/192061480"
+    },
+    {
+      "file": "ring-billed-gull-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Diego González Dopico, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/603653510"
+    },
+    {
+      "file": "ring-billed-gull-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Robert Harris, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/257487779"
+    }
+  ],
+  "rock-pigeon": [
+    {
+      "file": "rock-pigeon-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Andrew Bazdyrev, some rights reserved (CC BY), uploaded by Andrew Bazdyrev",
+      "source": "https://www.inaturalist.org/photos/66637915"
+    },
+    {
+      "file": "rock-pigeon-3.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Birds of Gilgit-Baltistan, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/466776981"
+    },
+    {
+      "file": "rock-pigeon-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Christoph Moning, some rights reserved (CC BY), uploaded by Christoph Moning",
+      "source": "https://www.inaturalist.org/photos/95506387"
+    }
+  ],
+  "song-sparrow": [
+    {
+      "file": "song-sparrow-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Steve Taylor, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/269698723"
+    },
+    {
+      "file": "song-sparrow-3.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/546060381"
+    },
+    {
+      "file": "song-sparrow-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Ken Clark, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/621966628"
+    }
+  ],
+  "tufted-titmouse": [
+    {
+      "file": "tufted-titmouse-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Shiva Shenoy, some rights reserved (CC BY), uploaded by Shiva Shenoy",
+      "source": "https://www.inaturalist.org/photos/265175973"
+    },
+    {
+      "file": "tufted-titmouse-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) froggymum, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/660441686"
+    },
+    {
+      "file": "tufted-titmouse-4.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/11998344"
+    }
+  ],
+  "virginia-opossum": [
+    {
+      "file": "virginia-opossum-2.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/2443002"
+    },
+    {
+      "file": "virginia-opossum-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Millie Basden, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/9085008"
+    }
+  ],
+  "western-honey-bee": [
+    {
+      "file": "western-honey-bee-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Albertus Horn, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/67970909"
+    },
+    {
+      "file": "western-honey-bee-4.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/82354387"
+    }
+  ],
+  "white-tailed-deer": [
+    {
+      "file": "white-tailed-deer-2.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Cos, some rights reserved (CC BY-SA), uploaded by Cos",
+      "source": "https://www.inaturalist.org/photos/253693071"
+    },
+    {
+      "file": "white-tailed-deer-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Blake Ross, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/156595284"
+    }
+  ],
+  "white-throated-sparrow": [
+    {
+      "file": "white-throated-sparrow-2.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) Fyn Kynd, some rights reserved (CC BY-SA), uploaded by Fyn Kynd",
+      "source": "https://www.inaturalist.org/photos/2811248"
+    },
+    {
+      "file": "white-throated-sparrow-3.jpg",
+      "license": "CC BY-SA",
+      "attribution": "(c) VJAnderson, some rights reserved (CC BY-SA)",
+      "source": "https://www.inaturalist.org/photos/136261387"
+    },
+    {
+      "file": "white-throated-sparrow-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Michael Newlon, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/472001169"
+    }
+  ],
+  "yellow-rumped-warbler": [
+    {
+      "file": "yellow-rumped-warbler-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Willem Span, some rights reserved (CC BY), uploaded by Willem Span",
+      "source": "https://www.inaturalist.org/photos/271210824"
+    },
+    {
+      "file": "yellow-rumped-warbler-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) georgiakharper, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/248974762"
+    },
+    {
+      "file": "yellow-rumped-warbler-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Chris O'Donoghue, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/371363332"
+    }
+  ]
+}

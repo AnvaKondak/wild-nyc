@@ -8,7 +8,7 @@ import { CheckIcon, EyeIcon, HeartIcon } from '@/components/Icons';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
-import { getSpecies, photoCredit, speciesPhoto, type Species } from '@/content';
+import { getSpecies, photoCreditsFor, speciesPhoto, type Species } from '@/content';
 import { seenLabel } from '@/lib/live';
 import { seasonOf } from '@/lib/time';
 import { useLiveData } from '@/state/LiveData';
@@ -143,16 +143,19 @@ function Profile({ species }: { species: Species }) {
   );
 }
 
-/** Who took the photo, and its license. Required by CC BY / CC BY-SA. */
+/** Who took each photo, and its license. Required by CC BY / CC BY-SA. */
 function PhotoCreditLine({ speciesId }: { speciesId: string }) {
-  const credit = photoCredit(speciesId);
-  if (!credit) return null;
+  const credits = photoCreditsFor(speciesId);
+  if (credits.length === 0) return null;
   return (
-    <Pressable onPress={() => Linking.openURL(credit.source)} accessibilityRole="link" accessibilityHint="Opens the photo on iNaturalist" hitSlop={6}>
-      <Text style={{ fontFamily: fonts.body, fontSize: 11, color: colors.inkMuted, marginTop: 6 }}>
-        Photo: {credit.attribution}. Cropped. Via iNaturalist.
-      </Text>
-    </Pressable>
+    <View style={{ marginTop: 6, gap: 2 }}>
+      <Text style={{ fontFamily: fonts.body, fontSize: 11, color: colors.inkMuted }}>{credits.length > 1 ? 'Photos (cropped), via iNaturalist:' : 'Photo (cropped), via iNaturalist:'}</Text>
+      {credits.map((c) => (
+        <Pressable key={c.source} onPress={() => Linking.openURL(c.source)} accessibilityRole="link" accessibilityHint="Opens the photo on iNaturalist" hitSlop={4}>
+          <Text style={{ fontFamily: fonts.body, fontSize: 11, color: colors.inkMuted, textDecorationLine: 'underline' }}>{c.attribution}</Text>
+        </Pressable>
+      ))}
+    </View>
   );
 }
 

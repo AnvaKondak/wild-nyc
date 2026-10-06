@@ -9,6 +9,8 @@ import {
   facts,
   moments,
   photoCredit,
+  photoCreditsFor,
+  speciesPhotos,
   speciesPhoto,
   placeKinds,
   places,
@@ -124,6 +126,15 @@ describe('photos', () => {
       expect(['CC0', 'CC BY', 'CC BY-SA']).toContain(credit.license);
       expect(credit.attribution.length).toBeGreaterThan(5);
       expect(credit.source).toMatch(/^https:\/\/www\.inaturalist\.org\/photos\/\d+$/);
+    }
+  });
+
+  it('every extra photo has a license we can ship and a credit, and none repeats', () => {
+    for (const s of species) {
+      const credits = photoCreditsFor(s.id);
+      expect(speciesPhotos(s.id)).toHaveLength(credits.length);
+      expect(new Set(credits.map((c) => c.source)).size).toBe(credits.length);
+      for (const c of credits) expect(['CC0', 'CC BY', 'CC BY-SA']).toContain(c.license);
     }
   });
 });
