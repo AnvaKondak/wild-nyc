@@ -916,6 +916,211 @@ ART.turtle = {
   },
 };
 
+// ── Bugs: big eyes, little feelers.
+const feelers = (paths, ball = true) => `<path d="${paths.join(' ')}" fill="none" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>${ball ? paths.map((d) => { const pts = d.trim().split(/[ ,]+/); return `<circle cx="${pts[pts.length - 2]}" cy="${pts[pts.length - 1]}" r="7" fill="${C.ink}"/>`; }).join('') : ''}`;
+const nectar = (x, y) => `<path d="M${x} ${y - 16} C${x + 12} ${y} ${x + 12} ${y + 10} ${x} ${y + 12} C${x - 12} ${y + 10} ${x - 12} ${y} ${x} ${y - 16} Z" fill="#F2C94C" stroke="${C.ink}" stroke-width="5"/>`;
+const FLOWER = `<g stroke="${C.ink}" stroke-width="7">${[0, 60, 120, 180, 240, 300].map((a) => `<ellipse cx="${200 + 46 * Math.cos((a * Math.PI) / 180)}" cy="${352 + 30 * Math.sin((a * Math.PI) / 180)}" rx="42" ry="24" fill="#FF8FB0" transform="rotate(${a} ${200 + 46 * Math.cos((a * Math.PI) / 180)} ${352 + 30 * Math.sin((a * Math.PI) / 180)})"/>`).join('')}<circle cx="200" cy="352" r="28" fill="#F2C94C"/></g>`;
+
+const bee = (p) => ({
+  tint: p.tint,
+  tilt: 0,
+  svg: (m) => {
+    const abd = `<ellipse cx="270" cy="226" rx="${p.abd[0]}" ry="${p.abd[1]}"/>`;
+    const thorax = '<circle cx="186" cy="204" r="52"/>';
+    const head = '<circle cx="116" cy="200" r="54"/>';
+    const wings = '<ellipse cx="206" cy="122" rx="52" ry="30" transform="rotate(-32 206 122)"/><ellipse cx="252" cy="140" rx="44" ry="26" transform="rotate(-12 252 140)"/>';
+    return `${FLOWER}
+      <path d="M168 252 L158 300 M196 256 L198 302 M224 252 L240 296" stroke="${C.ink}" stroke-width="9" stroke-linecap="round"/>
+      ${shadow([abd, thorax, head])}
+      ${shape(abd, p.abdColor)}
+      <clipPath id="${p.id}-abd">${abd}</clipPath>
+      <g clip-path="url(#${p.id}-abd)">${p.abdMarks}</g>
+      ${abd.replace('/>', ` fill="none" ${OL}/>`)}
+      ${shape(thorax, p.thorax)}
+      <path d="M156 176 l-6 -10 M176 166 l0 -12 M200 166 l4 -12 M222 178 l8 -8" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>
+      <g fill="#EAF2FF" stroke="${C.ink}" stroke-width="6">${wings}</g>
+      ${shape(head, p.head)}
+      ${feelers(['M98 152 C88 114 70 100 54 96', 'M128 148 C128 108 118 88 104 78'])}
+      ${eye(m.eyes, 96, 194, 17, { dark: true })}${eye(m.eyes, 140, 190, 17, { dark: true })}
+      <ellipse cx="116" cy="230" rx="13" ry="8" fill="${C.pink}"/>
+      ${m.snack ? nectar(70, 236) : ''}
+      ${UP_RIGHT(m)}`;
+  },
+});
+
+ART.bumblebee = bee({
+  id: 'bumblebee', tint: C.blueT, abd: [88, 76],
+  abdColor: '#F2D23C', thorax: '#F2D23C', head: C.ink,
+  abdMarks: `<rect x="236" y="140" width="34" height="180" fill="${C.ink}"/><rect x="306" y="140" width="80" height="180" fill="${C.ink}"/>`,
+});
+ART.honeybee = bee({
+  id: 'honeybee', tint: C.yellowT, abd: [86, 54],
+  abdColor: '#E8A23C', thorax: '#9A6A44', head: '#4A3422',
+  abdMarks: '<rect x="226" y="160" width="20" height="140" fill="#4A3422"/><rect x="268" y="160" width="20" height="140" fill="#4A3422"/><rect x="310" y="160" width="20" height="140" fill="#4A3422"/><rect x="346" y="160" width="40" height="140" fill="#4A3422"/>',
+});
+ART.carpenterbee = bee({
+  id: 'carpenterbee', tint: C.pinkT, abd: [90, 66],
+  abdColor: '#2A2A3E', thorax: '#F2D23C', head: C.ink,
+  abdMarks: '<path d="M226 190 C260 172 300 172 330 186" fill="none" stroke="#6E8BE0" stroke-width="12" stroke-linecap="round"/>',
+});
+
+ART.monarch = {
+  tint: C.blueT,
+  tilt: 0,
+  svg: (m) => {
+    const upL = '<path d="M194 196 C150 116 70 84 38 126 C18 166 58 218 194 224 Z"/>';
+    const upR = '<path d="M206 196 C250 116 330 84 362 126 C382 166 342 218 206 224 Z"/>';
+    const loL = '<path d="M194 230 C120 232 68 262 78 302 C94 342 160 332 194 262 Z"/>';
+    const loR = '<path d="M206 230 C280 232 332 262 322 302 C306 342 240 332 206 262 Z"/>';
+    const wings = [upL, upR, loL, loR];
+    return `<g fill="#F2A0C8" stroke="${C.ink}" stroke-width="6">${[[170, 360], [200, 350], [230, 360], [185, 380], [215, 380], [200, 372]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="14"/>`).join('')}</g>
+      ${shadow(wings)}
+      <g fill="${C.ink}" stroke="${C.ink}" stroke-width="16" stroke-linejoin="round">${wings.join('')}</g>
+      <g fill="#F28C28">${wings.join('')}</g>
+      <path d="M190 210 L64 132 M190 214 L84 200 M190 238 L102 292 M190 246 L150 320 M210 210 L336 132 M210 214 L316 200 M210 238 L298 292 M210 246 L250 320" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>
+      ${dots([[50, 140], [44, 168], [62, 198], [86, 302], [104, 324], [134, 330], [350, 140], [356, 168], [338, 198], [314, 302], [296, 324], [266, 330]], 5, '#F7F5F2')}
+      <ellipse cx="200" cy="246" rx="16" ry="68" fill="${C.ink}"/>${dots([[200, 214], [200, 240], [200, 266]], 4, '#F7F5F2')}
+      ${shape('<circle cx="200" cy="152" r="40"/>', C.ink)}
+      ${feelers(['M188 116 C178 82 166 66 146 60', 'M212 116 C222 82 234 66 254 60'])}
+      ${eye(m.eyes, 184, 150, 14, { dark: true })}${eye(m.eyes, 216, 150, 14, { dark: true })}
+      <ellipse cx="176" cy="174" rx="9" ry="6" fill="${C.pink}"/><ellipse cx="224" cy="174" rx="9" ry="6" fill="${C.pink}"/>
+      ${m.snack ? nectar(200, 206) : ''}
+      ${m.hearts ? heart(296, 46, 28) + heart(84, 60, 22) : ''}
+      ${m.zees ? zee(236, 70, 24) + zee(262, 50, 16) : ''}`;
+  },
+};
+
+ART.moth = {
+  // A fluffy pink-and-yellow moth (like the rosy maple moth) with feathery feelers.
+  tint: C.blueT,
+  tilt: 0,
+  svg: (m) => {
+    const upL = '<path d="M194 186 C140 126 60 126 44 186 C40 236 120 246 194 232 Z"/>';
+    const upR = '<path d="M206 186 C260 126 340 126 356 186 C360 236 280 246 206 232 Z"/>';
+    const loL = '<path d="M194 238 C140 248 80 278 96 318 C120 348 170 318 194 278 Z"/>';
+    const loR = '<path d="M206 238 C260 248 320 278 304 318 C280 348 230 318 206 278 Z"/>';
+    const feather = (d, flip) => `<path d="${d}" fill="none" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>${[0, 1, 2, 3].map((i) => { const x = flip ? 214 + i * 12 : 186 - i * 12; const y = 118 - i * 12; return `<path d="M${x} ${y} l${flip ? 10 : -10} -2 M${x} ${y} l${flip ? 4 : -4} -10" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>`; }).join('')}`;
+    return `<circle cx="330" cy="70" r="34" fill="#FFF4C7" stroke="${C.ink}" stroke-width="7"/>
+      ${shadow([upL, upR, loL, loR])}
+      ${shape(loL + loR, '#F7D55A')}
+      ${shape(upL + upR, '#F2A0B8')}
+      <path d="M70 190 C110 178 160 186 190 206 M330 190 C290 178 240 186 210 206" fill="none" stroke="#F7D55A" stroke-width="16" stroke-linecap="round"/>
+      ${shape('<ellipse cx="200" cy="252" rx="26" ry="72"/>', '#F7D55A')}
+      <path d="M184 220 q16 8 32 0 M184 250 q16 8 32 0 M184 280 q16 8 32 0" fill="none" stroke="#E0B83A" stroke-width="5" stroke-linecap="round"/>
+      ${feather('M188 126 C170 92 150 76 128 72', false)}${feather('M212 126 C230 92 250 76 272 72', true)}
+      ${shape('<circle cx="200" cy="162" r="44"/>', '#F7D55A')}
+      <path d="M160 190 q10 12 20 0 q10 12 20 0 q10 12 20 0 q10 12 20 0" fill="#F7F5F2" stroke="${C.ink}" stroke-width="5"/>
+      ${eye(m.eyes, 182, 158, 15, { lid: '#F7D55A' })}${eye(m.eyes, 218, 158, 15, { lid: '#F7D55A' })}
+      <ellipse cx="172" cy="180" rx="9" ry="6" fill="${C.pink}"/><ellipse cx="228" cy="180" rx="9" ry="6" fill="${C.pink}"/>
+      ${m.snack ? nectar(200, 222) : ''}
+      ${m.hearts ? heart(84, 64, 26) + heart(120, 40, 18) : ''}
+      ${m.zees ? zee(84, 62, 24) + zee(114, 42, 16) : ''}`;
+  },
+};
+
+ART.firefly = {
+  tint: C.blueT,
+  tilt: -6,
+  svg: (m) => {
+    const abd = '<ellipse cx="250" cy="240" rx="92" ry="40"/>';
+    const head = '<circle cx="108" cy="228" r="34"/>';
+    const shield = '<ellipse cx="152" cy="214" rx="40" ry="34"/>';
+    return `<circle cx="320" cy="250" r="78" fill="#FFF4A8"/><circle cx="320" cy="250" r="52" fill="#FFE97A"/>
+      <path d="M180 270 L170 300 M220 276 L216 306 M260 276 L266 306" stroke="${C.ink}" stroke-width="8" stroke-linecap="round"/>
+      ${shadow([abd, head, shield])}
+      ${shape(abd, '#2E2E44')}
+      <clipPath id="firefly-abd">${abd}</clipPath>
+      <g clip-path="url(#firefly-abd)"><rect x="294" y="190" width="60" height="100" fill="#FFE45C"/></g>
+      ${abd.replace('/>', ` fill="none" ${OL}/>`)}
+      <path d="M150 208 C200 186 282 192 322 218 C282 236 200 240 150 230 Z" fill="#3B3A50" stroke="#E8D26A" stroke-width="6" stroke-linejoin="round"/>
+      ${shape(head, C.ink)}
+      ${shape(shield, '#E8603C')}
+      <ellipse cx="156" cy="212" rx="14" ry="11" fill="${C.ink}"/><ellipse cx="140" cy="204" rx="6" ry="4" fill="#F2C94C"/>
+      ${feelers(['M96 200 C78 168 58 158 38 156', 'M112 196 C104 158 90 144 72 138'], false)}
+      ${eye(m.eyes, 94, 228, 12, { dark: true })}${eye(m.eyes, 120, 224, 12, { dark: true })}
+      <ellipse cx="108" cy="250" rx="9" ry="6" fill="${C.pink}"/>
+      ${m.snack ? `<path d="M64 250 C70 262 70 270 64 274 C58 270 58 262 64 250 Z" fill="#B4D6F2" stroke="${C.ink}" stroke-width="4"/>` : ''}
+      ${m.hearts ? heart(80, 70, 34) + heart(124, 44, 22) : ''}
+      ${m.zees ? zee(76, 76, 28) + zee(112, 50, 18) : ''}`;
+  },
+};
+
+ART.dasher = {
+  // Blue dasher dragonfly, from above: huge green eyes, powder-blue tail.
+  tint: C.yellowT,
+  tilt: -8,
+  svg: (m) => {
+    const wings = '<ellipse cx="110" cy="146" rx="96" ry="20" transform="rotate(-6 110 146)"/><ellipse cx="290" cy="146" rx="96" ry="20" transform="rotate(6 290 146)"/><ellipse cx="114" cy="182" rx="90" ry="20" transform="rotate(8 114 182)"/><ellipse cx="286" cy="182" rx="90" ry="20" transform="rotate(-8 286 182)"/>';
+    const abd = '<rect x="188" y="170" width="24" height="206" rx="12"/>';
+    return `<g fill="#EAF2FF" stroke="${C.ink}" stroke-width="6">${wings}</g>
+      <path d="M30 148 H190 M210 148 H370 M40 184 H190 M210 184 H360" stroke="#B4C3D6" stroke-width="3"/>
+      <g fill="${C.ink}"><ellipse cx="22" cy="140" rx="8" ry="5"/><ellipse cx="378" cy="140" rx="8" ry="5"/><ellipse cx="30" cy="192" rx="8" ry="5"/><ellipse cx="370" cy="192" rx="8" ry="5"/></g>
+      ${shadow([abd, '<ellipse cx="200" cy="150" rx="28" ry="32"/>', '<circle cx="200" cy="96" r="44"/>'])}
+      ${shape(abd, '#7FB0E0')}
+      <path d="M190 220 H210 M190 250 H210 M190 280 H210 M190 310 H210" stroke="#5E8EC0" stroke-width="4"/>
+      <rect x="188" y="340" width="24" height="36" rx="12" fill="${C.ink}"/>
+      ${shape('<ellipse cx="200" cy="150" rx="28" ry="32"/>', '#5E7A5A')}
+      <path d="M186 136 L214 136 M184 156 L216 156" stroke="#E8D26A" stroke-width="6" stroke-linecap="round"/>
+      ${shape('<circle cx="200" cy="96" r="44"/>', '#E8D26A')}
+      ${eye(m.eyes, 176, 84, 18, { ring: '#3BB58A', lid: '#3BB58A' })}${eye(m.eyes, 224, 84, 18, { ring: '#3BB58A', lid: '#3BB58A' })}
+      <ellipse cx="182" cy="118" rx="8" ry="5" fill="${C.pink}"/><ellipse cx="218" cy="118" rx="8" ry="5" fill="${C.pink}"/>
+      <path d="M192 122 Q200 128 208 122" fill="none" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>
+      ${m.snack ? `<circle cx="252" cy="118" r="6" fill="${C.ink}"/><path d="M248 112 C240 100 232 104 236 114 M256 112 C264 100 272 104 268 114" fill="#F4F2F0" stroke="${C.ink}" stroke-width="3"/>` : ''}
+      ${m.hearts ? heart(300, 40, 36) + heart(344, 92, 24) : ''}
+      ${m.zees ? zee(260, 60, 26) + zee(292, 40, 16) : ''}`;
+  },
+};
+
+ART.milkweedbug = {
+  tint: C.pinkT,
+  tilt: 8,
+  svg: (m) => {
+    const body = '<ellipse cx="200" cy="246" rx="80" ry="108"/>';
+    return `<path d="M60 420 C40 300 120 140 240 120 C340 110 400 200 380 420 Z" fill="#7FBF5A" stroke="${C.ink}" stroke-width="8"/><path d="M110 400 C150 300 220 200 320 150" fill="none" stroke="#3E8E4E" stroke-width="6"/>
+      <path d="M130 200 L80 180 M126 250 L70 254 M134 300 L86 330 M270 200 L320 180 M274 250 L330 254 M266 300 L314 330" stroke="${C.ink}" stroke-width="8" stroke-linecap="round"/>
+      ${shadow([body, '<circle cx="200" cy="112" r="40"/>'])}
+      ${shape(body, '#F28C28')}
+      <clipPath id="mwb-body">${body}</clipPath>
+      <g clip-path="url(#mwb-body)"><path d="M110 210 L200 250 L290 210 L290 236 L200 290 L110 236 Z" fill="${C.ink}"/><path d="M110 310 L200 330 L290 310 L290 380 L110 380 Z" fill="${C.ink}"/><path d="M200 160 V250" stroke="${C.ink}" stroke-width="5"/></g>
+      ${body.replace('/>', ` fill="none" ${OL}/>`)}
+      ${shape('<ellipse cx="200" cy="156" rx="56" ry="26"/>', '#F28C28')}
+      <g fill="${C.ink}"><ellipse cx="180" cy="156" rx="12" ry="9"/><ellipse cx="220" cy="156" rx="12" ry="9"/></g>
+      ${shape('<circle cx="200" cy="112" r="40"/>', C.ink)}
+      ${feelers(['M188 78 C176 46 160 30 136 22', 'M212 78 C224 46 240 30 264 22'], false)}
+      ${eye(m.eyes, 184, 108, 13, { dark: true })}${eye(m.eyes, 216, 108, 13, { dark: true })}
+      <ellipse cx="200" cy="132" rx="9" ry="6" fill="${C.pink}"/>
+      ${m.snack ? `<path d="M120 100 C110 110 112 126 122 128 C132 126 134 110 120 100 Z" fill="#8A5A3A" stroke="${C.ink}" stroke-width="5"/><path d="M120 100 C112 84 100 76 90 74 M120 100 C120 84 116 70 110 62 M120 100 C128 86 134 74 142 68" fill="none" stroke="#F7F5F2" stroke-width="4" stroke-linecap="round"/>` : ''}
+      ${m.hearts ? heart(300, 50, 36) + heart(340, 104, 24) : ''}
+      ${m.zees ? zee(262, 62, 26) + zee(294, 42, 16) : ''}`;
+  },
+};
+
+ART.orbweaver = {
+  // A friendly round spider at the middle of her web.
+  tint: C.yellowT,
+  tilt: 0,
+  svg: (m) => {
+    const abd = '<circle cx="200" cy="250" r="78"/>';
+    const ceph = '<circle cx="200" cy="152" r="42"/>';
+    const legs = 'M170 150 C120 110 90 100 60 60 M164 166 C110 150 70 150 30 130 M164 184 C110 200 74 220 40 260 M172 200 C130 240 110 270 90 320 M230 150 C280 110 310 100 340 60 M236 166 C290 150 330 150 370 130 M236 184 C290 200 326 220 360 260 M228 200 C270 240 290 270 310 320';
+    return `<g fill="none" stroke="#C9C1B4" stroke-width="3">${[0, 30, 60, 90, 120, 150].map((a) => `<path d="M${200 - 260 * Math.cos((a * Math.PI) / 180)} ${200 - 260 * Math.sin((a * Math.PI) / 180)} L${200 + 260 * Math.cos((a * Math.PI) / 180)} ${200 + 260 * Math.sin((a * Math.PI) / 180)}"/>`).join('')}${[50, 90, 130, 170].map((r) => `<circle cx="200" cy="200" r="${r}"/>`).join('')}</g>
+      <path d="M200 -10 V110" stroke="#C9C1B4" stroke-width="3"/>
+      <path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${legs}" fill="none" stroke="#B88A5E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="14 8"/>
+      ${shadow([abd, ceph])}
+      ${shape(abd, '#C9A06A')}
+      <path d="M200 192 C240 220 240 290 200 316 C160 290 160 220 200 192 Z" fill="#8A6A44"/>
+      ${dots([[200, 210], [178, 246], [222, 246], [190, 286], [210, 286]], 6, '#F7F5F2')}
+      ${shape(ceph, '#B88A5E')}
+      ${dots([[188, 122], [200, 118], [212, 122]], 4, C.ink)}
+      ${eye(m.eyes, 184, 150, 13, { lid: '#B88A5E' })}${eye(m.eyes, 216, 150, 13, { lid: '#B88A5E' })}
+      <ellipse cx="200" cy="176" rx="9" ry="6" fill="${C.pink}"/>
+      ${m.snack ? `<ellipse cx="200" cy="208" rx="16" ry="22" fill="#F7F5F2" stroke="${C.ink}" stroke-width="5"/><path d="M186 198 L214 206 M186 212 L214 220" stroke="#C9C1B4" stroke-width="3"/>` : ''}
+      ${m.hearts ? heart(290, 52, 32) + heart(80, 60, 26) : ''}
+      ${m.zees ? zee(256, 56, 26) + zee(288, 36, 16) : ''}`;
+  },
+};
+
 // Species id → drawing.
 const SPECIES = {
   'rock-pigeon': 'pigeon',
@@ -960,6 +1165,15 @@ const SPECIES = {
   'white-tailed-deer': 'deer',
   groundhog: 'groundhog',
   'pond-slider': 'turtle',
+  'common-eastern-bumble-bee': 'bumblebee',
+  'western-honey-bee': 'honeybee',
+  'eastern-carpenter-bee': 'carpenterbee',
+  monarch: 'monarch',
+  moths: 'moth',
+  'common-eastern-firefly': 'firefly',
+  'blue-dasher': 'dasher',
+  'large-milkweed-bug': 'milkweedbug',
+  'orb-weavers': 'orbweaver',
 };
 
 const draw = (a, m) =>
