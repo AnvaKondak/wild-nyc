@@ -158,8 +158,10 @@ const perched = (p) => ({
     const head = `<circle cx="${hx}" cy="${hy}" r="${hr}"/>`;
     const legs = 'M196 326 L186 364 M252 322 L264 364 M170 368 L186 360 L200 370 M248 368 L264 360 L278 370';
     const [bx, by] = p.blushAt ?? [160, 186];
-    return `<path d="M0 334 C120 326 280 326 400 338" fill="none" stroke="${C.ink}" stroke-width="30" stroke-linecap="round"/>
-      <path d="M0 334 C120 326 280 326 400 338" fill="none" stroke="#9A6A44" stroke-width="12" stroke-linecap="round"/>
+    const perch = p.rail
+      ? `<path d="M-10 344 H410" stroke="${C.ink}" stroke-width="44"/><path d="M-10 344 H410" stroke="#C9B48E" stroke-width="26"/><path d="M40 338 H120 M200 350 H300" stroke="#9E8B6E" stroke-width="4" stroke-linecap="round"/>`
+      : `<path d="M0 334 C120 326 280 326 400 338" fill="none" stroke="${C.ink}" stroke-width="30" stroke-linecap="round"/><path d="M0 334 C120 326 280 326 400 338" fill="none" stroke="#9A6A44" stroke-width="12" stroke-linecap="round"/>`;
+    return `${perch}
       <g transform="translate(40 30) scale(0.8)">
       <path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="${legs}" fill="none" stroke="${p.legs}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -260,6 +262,120 @@ ART.crow = perched({
   snack: `<g transform="translate(-196 -122)"><path d="M176 290 C176 276 196 274 200 286 C204 274 224 276 224 290 C224 306 204 308 200 298 C196 308 176 306 176 290 Z" fill="#E2B878" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/></g>`,
 });
 
+ART.jay = perched({
+  id: 'jay', tint: C.yellowT,
+  back: '#4A7FD6', breast: '#E9EAF0', wing: '#3E6FC6', tail: '#3E6FC6', head: '#4A7FD6', darkEye: true,
+  crest: '<path d="M108 92 C100 44 126 10 182 6 C164 30 172 50 200 76 Z"/>',
+  tailMarks: `<path d="M330 276 l-6 22 M352 284 l-6 22 M374 292 l-6 22" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`,
+  wingMarks: `<path d="M240 200 l-8 26 M266 196 l-8 28 M292 204 l-8 28 M316 216 l-8 28 M256 246 l-6 24 M284 252 l-6 24 M310 262 l-6 22" stroke="${C.ink}" stroke-width="7" stroke-linecap="round"/>${dots([[262, 286], [290, 290], [316, 286]], 8, '#F4F2F0')}`,
+  headMarks: `<path d="M56 130 C100 120 140 140 152 172 C152 212 122 244 56 244 Z" fill="#F4F2F0"/><path d="M96 128 C110 132 120 138 126 146" stroke="${C.ink}" stroke-width="8" stroke-linecap="round"/>`,
+  face: `<path d="M80 226 C118 252 172 246 210 214" fill="none" stroke="${C.ink}" stroke-width="13" stroke-linecap="round"/>`,
+  beak: '#2E2E44', legs: '#5E6378',
+  snack: `<path d="M24 162 C24 150 40 148 44 158 C48 148 64 150 64 162 C64 176 48 178 44 170 C40 178 24 176 24 162 Z" fill="#E2B878" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>`,
+});
+
+ART.gull = perched({
+  id: 'gull', tint: C.blueT, rail: true,
+  headAt: [150, 150, 80], eyeAt: [132, 140, 17], eyeRing: '#F2E28C', lid: '#F7F5F2',
+  back: '#F7F5F2', wing: '#B4B8C6', tail: '#F7F5F2', head: '#F7F5F2',
+  wingMarks: `<path d="M296 236 L366 300 L336 322 L278 292 Z" fill="${C.ink}"/>${dots([[318, 276], [338, 296]], 7, '#F7F5F2')}<path d="M228 196 C266 204 300 222 322 248" fill="none" stroke="#9A9EAE" stroke-width="7" stroke-linecap="round"/>`,
+  beakShape: 'M98 130 C84 126 54 132 26 146 C24 154 30 160 38 162 C62 164 86 166 98 164 Z', beak: '#F2C94C',
+  beakMarks: '<circle cx="46" cy="158" r="6" fill="#E5484D"/>',
+  legs: '#F2A0A0',
+  snack: `<g transform="rotate(-14 30 176)"><path d="M6 176 C16 164 40 164 52 176 C40 188 16 188 6 176 Z M52 176 L66 166 L66 186 Z" fill="#B4C3D6" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/><circle cx="16" cy="174" r="3" fill="${C.ink}"/></g>`,
+});
+
+ART.junco = perched({
+  id: 'junco', tint: C.pinkT,
+  back: '#5E6378', wing: '#535869', tail: '#4B5062', head: '#5E6378', darkEye: true,
+  underside: '<path d="M110 268 C170 256 262 276 306 330 L110 370 Z" fill="#F4F2F0"/>',
+  tailMarks: '<path d="M310 298 L380 316" stroke="#F4F2F0" stroke-width="8" stroke-linecap="round"/>',
+  wingMarks: `<path d="M236 196 C270 206 300 226 320 256 M250 238 C280 248 304 264 318 288" fill="none" stroke="#454A5A" stroke-width="8" stroke-linecap="round"/>`,
+  beakShape: 'M96 132 C88 122 68 132 52 150 C68 162 88 168 98 162 Z', beak: '#F2B8C6', legs: '#C9A08E',
+  snack: `<ellipse cx="50" cy="160" rx="12" ry="8" transform="rotate(-20 50 160)" fill="#E8C27A" stroke="${C.ink}" stroke-width="6"/>`,
+});
+
+ART.whitethroat = perched({
+  id: 'whitethroat', tint: C.yellowT,
+  back: '#B88A5E', breast: '#C9C7D0', wing: '#A86B3E', tail: '#7A5236', head: '#A8A6B2',
+  wingMarks: `<path d="M236 186 l22 22 M266 180 l24 24 M296 196 l22 22 M250 226 l22 22 M282 230 l22 20" stroke="${C.ink}" stroke-width="9" stroke-linecap="round"/><path d="M226 262 C262 278 300 280 336 270" fill="none" stroke="#FAF7F2" stroke-width="10" stroke-linecap="round"/>`,
+  headMarks: `<path d="M50 50 H260 V104 C200 92 140 92 60 112 Z" fill="${C.ink}"/><path d="M92 80 C140 66 200 68 250 86" fill="none" stroke="#F7F5F2" stroke-width="13" stroke-linecap="round"/><path d="M88 120 C122 108 172 108 226 122" fill="none" stroke="#F7F5F2" stroke-width="12" stroke-linecap="round"/><path d="M150 152 C180 154 206 162 230 176" fill="none" stroke="${C.ink}" stroke-width="9" stroke-linecap="round"/>`,
+  face: `<ellipse cx="100" cy="124" rx="11" ry="8" fill="#F2C94C"/><path d="M84 174 C100 168 128 172 140 186 C142 206 128 218 108 218 C92 210 84 194 84 174 Z" fill="#F7F5F2" stroke="${C.ink}" stroke-width="5"/>`,
+  blushAt: [166, 196], darkEye: false,
+  beak: '#8F8D9C', legs: '#E0A68A',
+  snack: `<ellipse cx="50" cy="156" rx="13" ry="8" transform="rotate(-20 50 156)" fill="#E8C27A" stroke="${C.ink}" stroke-width="6"/>`,
+});
+
+// ── Water birds with their own poses.
+ART.goose = {
+  // Standing on the grass: plump brown body, long black neck, white chin strap.
+  tint: C.blueT,
+  tilt: 0,
+  svg: (m) => {
+    const body = '<path d="M120 262 C120 202 200 178 280 188 C350 198 386 242 372 288 C358 328 290 342 220 336 C160 330 120 306 120 262 Z"/>';
+    const tail = '<path d="M352 230 L392 214 L396 250 L366 262 Z"/>';
+    const neck = '<path d="M126 256 C108 204 102 150 112 108 L166 110 C156 150 160 200 180 238 Z"/>';
+    const head = '<ellipse cx="128" cy="96" rx="54" ry="44"/>';
+    return `<rect x="-10" y="336" width="420" height="80" fill="#8BC27A"/><path d="M-10 336 H410" stroke="${C.ink}" stroke-width="10"/>
+      <path d="M206 330 L200 366 M262 330 L268 366" stroke="${C.ink}" stroke-width="16" stroke-linecap="round"/>
+      <path d="M176 372 L200 360 L216 374 Z M248 374 L268 360 L290 372 Z" fill="${C.ink}" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/>
+      ${shadow([tail, body, neck, head])}
+      ${shape(tail, '#2E2E44')}
+      ${shape(body, '#8A6E58')}
+      <clipPath id="goose-body"><path d="M120 262 C120 202 200 178 280 188 C350 198 386 242 372 288 C358 328 290 342 220 336 C160 330 120 306 120 262 Z"/></clipPath>
+      <g clip-path="url(#goose-body)">
+        <path d="M100 230 C160 240 190 300 200 360 L100 360 Z" fill="#D9CBB8"/>
+        <path d="M212 210 C290 200 360 236 366 286 C330 316 270 316 228 300 C210 270 204 240 212 210 Z" fill="#6E5644"/>
+        <path d="M240 236 q14 10 28 0 M276 232 q14 10 28 0 M312 242 q14 10 28 0 M252 268 q14 10 28 0 M290 270 q14 10 28 0" fill="none" stroke="#B9A48E" stroke-width="6" stroke-linecap="round"/>
+        <path d="M300 330 C330 320 356 304 372 288 L372 340 Z" fill="#F4F2F0"/>
+      </g>
+      <path d="M120 262 C120 202 200 178 280 188 C350 198 386 242 372 288 C358 328 290 342 220 336 C160 330 120 306 120 262 Z" fill="none" ${OL}/>
+      ${shape(neck, '#2E2E44')}
+      ${shape(head, '#2E2E44')}
+      <path d="M118 98 C136 86 166 94 176 116 C168 134 142 140 124 130 C116 122 114 108 118 98 Z" fill="#F7F5F2"/>
+      ${eye(m.eyes, 108, 82, 14, { dark: true })}
+      <ellipse cx="152" cy="124" rx="16" ry="9" fill="${C.pink}"/>
+      ${m.snack ? `<path d="M50 112 C40 126 34 142 36 160 M60 112 C58 128 60 144 66 156" fill="none" stroke="#3E8E4E" stroke-width="7" stroke-linecap="round"/>` : ''}
+      <path d="M80 88 C66 86 48 94 34 106 C48 112 68 112 82 108 Z" fill="${C.ink}" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/>
+      ${m.hearts ? heart(300, 50, 46) + heart(352, 112, 30) : ''}
+      ${m.zees ? zee(250, 64, 34) + zee(292, 34, 22) : ''}`;
+  },
+};
+
+ART.mallard = {
+  // Floating: green head, yellow bill, white neck ring, chestnut breast, curly tail.
+  tint: C.yellowT,
+  tilt: 0,
+  svg: (m) => {
+    const bodyPath = 'M86 252 C86 200 170 186 250 192 C330 198 382 226 374 264 C366 304 300 316 220 314 C150 312 86 300 86 252 Z';
+    const body = `<path d="${bodyPath}"/>`;
+    const head = '<ellipse cx="126" cy="146" rx="58" ry="52"/>';
+    return `${shadow([body, head])}
+      ${shape(body, '#C9CCD6')}
+      <clipPath id="mallard-body"><path d="${bodyPath}"/></clipPath>
+      <g clip-path="url(#mallard-body)">
+        <path d="M70 180 C140 186 180 240 176 330 L70 330 Z" fill="#8E4A3A"/>
+        <path d="M330 190 L400 190 L400 330 L320 330 C340 290 344 240 330 190 Z" fill="#2E2E44"/>
+        <path d="M210 214 C270 206 330 220 350 246 C320 270 260 272 220 262 Z" fill="#A9ACB8"/>
+        <path d="M262 246 L322 246 L318 262 L258 262 Z" fill="#4A4FD6" stroke="#F7F5F2" stroke-width="5"/>
+      </g>
+      <path d="${bodyPath}" fill="none" ${OL}/>
+      <path d="M346 206 C350 186 372 182 372 198 C372 210 358 210 358 200" fill="none" stroke="${C.ink}" stroke-width="8" stroke-linecap="round"/>
+      ${shape(head, '#1F8A5A')}
+      <path d="M88 116 C110 100 150 98 172 112" fill="none" stroke="#5FC48E" stroke-width="10" stroke-linecap="round"/>
+      <path d="M96 192 C118 204 152 204 172 192" fill="none" stroke="#F7F5F2" stroke-width="10" stroke-linecap="round"/>
+      ${eye(m.eyes, 112, 136, 15, { dark: true })}
+      <ellipse cx="140" cy="170" rx="16" ry="9" fill="${C.pink}"/>
+      <path d="M74 146 C58 144 36 152 26 164 C40 174 62 174 78 166 Z" fill="#F2C94C" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/>
+      <circle cx="34" cy="163" r="4" fill="${C.ink}"/>
+      ${m.snack ? `<path d="M34 170 C30 186 40 196 34 212 M44 172 C46 188 56 194 54 210" fill="none" stroke="#3E8E4E" stroke-width="6" stroke-linecap="round"/>` : ''}
+      <path d="M-10 296 Q40 282 90 296 T190 296 T290 296 T390 296 T490 296 V420 H-10 Z" fill="#8FB3E8" stroke="${C.ink}" stroke-width="8"/>
+      <path d="M40 330 q20 -10 40 0 M180 346 q20 -10 40 0 M300 328 q20 -10 40 0" fill="none" stroke="#F7F5F2" stroke-width="6" stroke-linecap="round"/>
+      ${m.hearts ? heart(300, 50, 46) + heart(352, 112, 30) : ''}
+      ${m.zees ? zee(250, 64, 34) + zee(292, 34, 22) : ''}`;
+  },
+};
+
 // ── Bigger neighbors: close-up selfies, waving.
 ART.squirrel = {
   tint: C.yellowT,
@@ -302,6 +418,12 @@ const SPECIES = {
   'northern-cardinal': 'cardinal',
   'mourning-dove': 'dove',
   'european-starling': 'starling',
+  'canada-goose': 'goose',
+  mallard: 'mallard',
+  'blue-jay': 'jay',
+  'herring-gull': 'gull',
+  'dark-eyed-junco': 'junco',
+  'white-throated-sparrow': 'whitethroat',
 };
 
 const draw = (a, m) =>
