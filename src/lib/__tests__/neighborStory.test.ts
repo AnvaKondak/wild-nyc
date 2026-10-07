@@ -136,6 +136,13 @@ describe('buildArc', () => {
 });
 
 describe('Also around today', () => {
+  it('always includes the neighbors who live only here: deer at Liberty State Park', () => {
+    for (const period of ['dawn', 'midday', 'dusk', 'night'] as const) {
+      const around = pickAround(placeOf(lsp), ctxOf('fall', period), getSpecies('herring-gull'), `seed:${period}`);
+      expect(around.map((s) => s.id)).toContain('white-tailed-deer');
+    }
+  });
+
   it('offers a handful of others, seen lately first, never the lead twice', () => {
     const ctx = ctxOf('fall', 'midday', { live: toLiveMap({ cell: 'x', status: 'ready', updatedAt: null, sources: [], species: [seen('brant', 9)] }) });
     const p = placeOf(lsp);

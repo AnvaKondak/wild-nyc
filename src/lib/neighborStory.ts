@@ -273,14 +273,17 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
 
 /**
  * Others around right now, for "Also around today": anyone who just arrived for the
- * season first, then those seen lately, then a seeded mix that leans local.
+ * season first, then the ones who live only in a few special places (the deer at
+ * Liberty State Park), then those seen lately, then a seeded mix that leans local.
  */
 export function pickAround(place: StoryPlace, ctx: StoryContext, lead: Species | undefined, seed: string, arrived: Species[] = []): Species[] {
   const random = seededRandom(`${seed}:around`);
   const pool = poolFor(place.kind, ctx, place.placeId).filter((s) => s.id !== lead?.id && leadWeight(s, place.kind, ctx) > 0);
   const seen = pool.filter((s) => (ctx.live.get(s.id)?.recent ?? 0) > 0).sort((a, b) => ctx.live.get(b.id)!.recent - ctx.live.get(a.id)!.recent);
   const newcomers = arrived.filter((s) => s.id !== lead?.id && pool.includes(s));
-  const out = [...newcomers, ...seen.filter((s) => !newcomers.includes(s))].slice(0, AROUND);
+  const locals = pool.filter((s) => !!place.placeId && s.onlyAt?.includes(place.placeId) && !newcomers.includes(s));
+  const first = [...newcomers, ...locals];
+  const out = [...first, ...seen.filter((s) => !first.includes(s))].slice(0, AROUND);
   let rest = pool.filter((s) => !out.includes(s));
   while (out.length < AROUND && rest.length > 0) {
     const next = weightedPick(rest.map((s) => ({ item: s, w: leadWeight(s, place.kind, ctx) })), random)!;
