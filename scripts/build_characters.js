@@ -749,7 +749,9 @@ ART.heron = {
     const tail = '<path d="M336 226 L386 252 L344 262 Z"/>';
     const head = '<ellipse cx="128" cy="92" rx="40" ry="30"/>';
     const neckLine = 'M176 210 C138 176 172 136 152 108';
-    return `<path d="M222 276 L214 346 M252 278 L258 346" stroke="${C.ink}" stroke-width="16" stroke-linecap="round"/>
+    // Drawn a little smaller and to the right, so the long beak stays inside the circle.
+    return `<g transform="translate(44 38) scale(0.84)">
+      <path d="M222 276 L214 346 M252 278 L258 346" stroke="${C.ink}" stroke-width="16" stroke-linecap="round"/>
       <path d="M222 276 L214 346 M252 278 L258 346" stroke="#8A7356" stroke-width="7" stroke-linecap="round"/>
       ${shadow([tail, body, head])}
       ${shape(tail, '#5E6E8E')}
@@ -766,6 +768,7 @@ ART.heron = {
       <ellipse cx="140" cy="108" rx="12" ry="7" fill="${C.pink}"/>
       <path d="M96 88 C80 86 46 92 8 102 C46 108 80 108 98 102 Z" fill="#F2C94C" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
       ${m.snack ? fishSnack(24, 116) : ''}
+      </g>
       <path d="M-10 330 Q40 318 90 330 T190 330 T290 330 T390 330 T490 330 V420 H-10 Z" fill="#8FB3E8" stroke="${C.ink}" stroke-width="8"/>
       <path d="M60 360 q20 -10 40 0 M260 366 q20 -10 40 0" fill="none" stroke="#F7F5F2" stroke-width="6" stroke-linecap="round"/>
       ${UP_RIGHT(m)}`;
