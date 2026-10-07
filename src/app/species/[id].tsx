@@ -8,6 +8,7 @@ import { Card } from '@/components/Card';
 import { HeartIcon } from '@/components/Icons';
 import { StoryBackdrop } from '@/components/backdrop';
 import { PeriodIcon } from '@/components/PeriodIcon';
+import { PhotoViewer } from '@/components/PhotoViewer';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
@@ -27,13 +28,14 @@ import { type } from '@/theme/type';
 const CHIP_TINTS = [colors.pinkTint, colors.yellowTint, colors.blueTint];
 
 export default function SpeciesProfile() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  // Dev only: ?photo=1 opens on that photo, big.
+  const { id, photo } = useLocalSearchParams<{ id: string; photo?: string }>();
   const species = getSpecies(id);
   if (!species) return <NotFound />;
-  return <Profile species={species} />;
+  return <Profile species={species} startPhoto={__DEV__ && photo ? Number(photo) : null} />;
 }
 
-function Profile({ species }: { species: Species }) {
+function Profile({ species, startPhoto }: { species: Species; startPhoto: number | null }) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const now = new Date();
@@ -47,6 +49,8 @@ function Profile({ species }: { species: Species }) {
   const [width, setWidth] = useState(0);
   const heroHeight = 400 + insets.top;
   const photos = speciesPhotos(species.id);
+  // Tap any photo to see it big.
+  const [viewing, setViewing] = useState<number | null>(startPhoto);
   const local = placeKinds[species.homeScene].local;
   const day = dayInTheLife(species, season, moments, placeKinds[species.homeScene].where, local, dateKey(now));
   const friends = encounters.filter((e) => e.species.includes(species.id));
@@ -77,7 +81,9 @@ function Profile({ species }: { species: Species }) {
         )}
         <BackButton style={{ position: 'absolute', left: 16, top: insets.top + 8 }} />
         <View style={{ position: 'absolute', left: 0, right: 0, top: insets.top + 60, alignItems: 'center' }}>
-          <Sticker art={species.art} photo={speciesPhoto(species.id)} size={170} tint={colors.white} rotate={-5} shadowColor={colors.blue} />
+          <Pressable onPress={() => photos.length && setViewing(0)} disabled={!photos.length} accessibilityRole="imagebutton" accessibilityLabel={`${species.friendlyName} photo. Open it big`}>
+            <Sticker art={species.art} photo={speciesPhoto(species.id)} size={170} tint={colors.white} rotate={-5} shadowColor={colors.blue} />
+          </Pressable>
         </View>
       </View>
 
@@ -98,12 +104,12 @@ function Profile({ species }: { species: Species }) {
       {photos.length > 1 && (
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 18, gap: 12 }}>
           {photos.map((p, i) => (
-            <Image
-              key={i}
-              source={p}
-              accessibilityLabel={`${species.friendlyName}, photo ${i + 1} of ${photos.length}`}
-              style={{ width: 150, height: 150, borderRadius: 18, borderWidth: border.width, borderColor: colors.ink, transform: [{ rotate: `${i % 2 ? 2 : -2}deg` }] }}
-            />
+            <Pressable key={i} onPress={() => setViewing(i)} accessibilityRole="imagebutton" accessibilityLabel={`${species.friendlyName}, photo ${i + 1} of ${photos.length}. Open it big`}>
+              <Image
+                source={p}
+                style={{ width: 150, height: 150, borderRadius: 18, borderWidth: border.width, borderColor: colors.ink, transform: [{ rotate: `${i % 2 ? 2 : -2}deg` }] }}
+              />
+            </Pressable>
           ))}
         </ScrollView>
       )}
@@ -221,6 +227,7 @@ function Profile({ species }: { species: Species }) {
           style={{ alignSelf: 'flex-start' }}
         />
       </Card>
+      <PhotoViewer photos={photos} credits={photoCreditsFor(species.id)} name={species.friendlyName} index={viewing} onClose={() => setViewing(null)} />
     </ScrollView>
   );
 }
