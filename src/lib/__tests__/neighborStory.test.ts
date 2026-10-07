@@ -147,6 +147,7 @@ describe('Also around today', () => {
     const slide = aroundSlide(p, ctx, around, lead);
     expect(slide.kind).toBe('around');
     expect(slide.aroundSpecies![0]).toBe(lead.id);
+    expect(slide.aroundSpecies).toHaveLength(9);
   });
 
   it('lists who just arrived first', () => {

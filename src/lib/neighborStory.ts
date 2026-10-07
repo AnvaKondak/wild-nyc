@@ -14,7 +14,8 @@ import { fillPlace, pickFact, pickVariant, placePhrase, usableVariants, withLoca
 import { pick, seededRandom, shuffle } from './random';
 
 const PERIODS: Period[] = ['dawn', 'midday', 'dusk', 'night'];
-const AROUND = 6;
+// "Also around today": today's neighbor plus eight others, nine in all (a 3 × 3 grid).
+const AROUND = 8;
 
 export type StoryPlace = {
   cell: string;
