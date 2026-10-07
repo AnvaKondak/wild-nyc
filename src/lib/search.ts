@@ -38,7 +38,7 @@ const plain = (text: string) =>
   text
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
+    .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, ' ');
 
 /** Neighbors matching every word of the query (in any order), A to Z. An empty query matches everyone. */
