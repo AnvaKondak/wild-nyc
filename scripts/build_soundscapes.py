@@ -115,16 +115,15 @@ def wind(rnd, strength=1.0):
 
 
 def rain(rnd):
-    """A steady hiss with drops pattering on leaves and sidewalks."""
+    """Light rain: a soft, quiet hiss with gentle drops pattering on leaves and sidewalks."""
     n = len(silence())
-    hiss = lowpass(highpass(white(rnd, n), 800), 5000)
-    body = lowpass(white(rnd, n), 600)
-    out = [h * 0.5 + b * 0.5 for h, b in zip(hiss, body)]
-    for _ in range(int(LOOP * 60)):  # about 60 drops a second
+    hiss = lowpass(highpass(white(rnd, n), 1200), 3500)
+    out = [h * 0.12 for h in hiss]
+    for _ in range(int(LOOP * 14)):  # about 14 drops a second: a patter, not a downpour
         at = rnd.randrange(n - 600)
-        f, g = rnd.uniform(1500, 4500), rnd.uniform(0.05, 0.25)
-        for k in range(400):
-            out[at + k] += g * math.sin(2 * math.pi * f * k / SR) * math.exp(-k / 60)
+        f, g = rnd.uniform(1800, 4200), rnd.uniform(0.04, 0.16)
+        for k in range(320):
+            out[at + k] += g * math.sin(2 * math.pi * f * k / SR) * math.exp(-k / 45)
     return normalize(out)
 
 
@@ -259,8 +258,8 @@ def mix(name, rnd):
         bed(traffic, 0.3)
         birds(["cardinal", "mourning-dove", "robin", "song-sparrow"], 4.5, 0.45)
     elif name == "rain":
-        bed(rain, 0.5)
-        bed(hum, 0.04)
+        bed(rain, 0.4)
+        bed(hum, 0.03)
     else:
         raise ValueError(name)
     return out
