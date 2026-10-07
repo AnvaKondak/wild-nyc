@@ -60,13 +60,8 @@ export function useSwipe(next: () => void, prev: () => void) {
  * The words of a slide on a riso card over the scene. Scrolls when long, so the button
  * below always stays in place. `children` go at the bottom of the card (links, chips).
  */
-export function StoryCard({ kicker, title, body, fact, theme, children, bottom = false }: { kicker: string; title: string; body: string; fact?: string; theme: PeriodTheme; children?: ReactNode; /** Sit at the bottom, just above the button, when there's room to spare. */ bottom?: boolean }) {
-  return (
-    <ScrollView
-      style={{ flex: 1 }}
-      contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 22, paddingBottom: 14, ...(bottom ? { flexGrow: 1, justifyContent: 'flex-end' } : {}) }}
-      showsVerticalScrollIndicator={false}
-    >
+export function StoryCard({ kicker, title, body, fact, theme, children, bottom = false, scroll = true }: { kicker: string; title: string; body: string; fact?: string; theme: PeriodTheme; children?: ReactNode; /** Sit at the bottom, just above the button, when there's room to spare. */ bottom?: boolean; /** False when it already sits inside something that scrolls. */ scroll?: boolean }) {
+  const card = (
       <View
         style={{
           padding: 18,
@@ -91,6 +86,15 @@ export function StoryCard({ kicker, title, body, fact, theme, children, bottom =
         )}
         {children}
       </View>
+  );
+  if (!scroll) return <View style={{ paddingHorizontal: 16, paddingTop: 22, paddingBottom: 14 }}>{card}</View>;
+  return (
+    <ScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 22, paddingBottom: 14, ...(bottom ? { flexGrow: 1, justifyContent: 'flex-end' } : {}) }}
+      showsVerticalScrollIndicator={false}
+    >
+      {card}
     </ScrollView>
   );
 }

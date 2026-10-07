@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { AppState, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { AppState, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
@@ -390,98 +390,102 @@ export default function RightNow() {
                 </Pressable>
               </View>
             </>
-          ) : slide.kind === 'around' ? (
-            // Who else is around: tap one for their story. Today's neighbor is first.
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', columnGap: 10, rowGap: 14, paddingHorizontal: 16, marginTop: 24 }}>
-              {(slide.aroundSpecies ?? []).map((id, n) => {
-                const s = getSpecies(id)!;
-                const isLead = id === lead?.id;
-                return (
+          ) : (
+            <>
+              {/* The middle of the slide scrolls as one: picture, shortcut and words. The
+                  bars, places and time stay put above; the button stays put below. */}
+              <ScrollView key={`${visiting ?? 'lead'}:${slide.id}`} style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 6 }} showsVerticalScrollIndicator={false}>
+              {slide.kind === 'around' ? (
+                // Who else is around: tap one for their story. Today's neighbor is first.
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', columnGap: 10, rowGap: 14, paddingHorizontal: 16, marginTop: 24 }}>
+                  {(slide.aroundSpecies ?? []).map((id, n) => {
+                    const s = getSpecies(id)!;
+                    const isLead = id === lead?.id;
+                    return (
+                      <Pressable
+                        key={id}
+                        onPress={() => openNeighbor(id)}
+                        accessibilityRole="button"
+                        accessibilityLabel={`${s.friendlyName}${isLead ? ', today\'s neighbor' : ''}${slide.arrivedSpecies?.includes(id) ? ', just arrived' : ''}. See their story`}
+                        style={({ pressed }) => ({ width: 88, alignItems: 'center', gap: 5, opacity: pressed ? 0.6 : 1 })}
+                      >
+                        <Sticker art={s.art} photo={speciesPhoto(id)} speciesId={id} size={66} tint={colors[s.tint]} rotate={n % 2 ? 5 : -4} shadowColor={isLead ? theme.shadow : colors.ink} />
+                        {/* Names sit on a solid tag so they read over any scene. */}
+                        <View style={{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 8, borderWidth: 1, borderColor: theme.ink, backgroundColor: theme.card }}>
+                          <Text numberOfLines={2} style={{ fontFamily: fonts.bodySemi, fontSize: 12, lineHeight: 15, textAlign: 'center', color: theme.ink }}>
+                            {isLead ? `★ ${s.friendlyName}` : s.friendlyName}
+                          </Text>
+                        </View>
+                        {slide.arrivedSpecies?.includes(id) && (
+                          <View style={{ paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6, backgroundColor: colors.pink }}>
+                            <Text style={{ fontFamily: fonts.bodySemi, fontSize: 10, letterSpacing: 0.6, textTransform: 'uppercase', color: colors.ink }}>Just arrived</Text>
+                          </View>
+                        )}
+                      </Pressable>
+                    );
+                  })}
+                </View>
+              ) : (
+                /* Prev / next sit beside the photo, in the middle of the screen. */
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, marginTop: 20 }}>
+                  <RoundNav label={i === 0 ? 'Home' : 'Previous story'} onPress={back} color={theme.ink} fill={theme.bg}>
+                    <ChevronLeftIcon color={theme.ink} />
+                  </RoundNav>
                   <Pressable
-                    key={id}
-                    onPress={() => openNeighbor(id)}
+                    onPress={next}
                     accessibilityRole="button"
-                    accessibilityLabel={`${s.friendlyName}${isLead ? ', today\'s neighbor' : ''}${slide.arrivedSpecies?.includes(id) ? ', just arrived' : ''}. See their story`}
-                    style={({ pressed }) => ({ width: 88, alignItems: 'center', gap: 5, opacity: pressed ? 0.6 : 1 })}
+                    accessibilityLabel={`${slide.kind === 'intro' ? 'Who\'s up' : species?.friendlyName ?? 'Animal'} photo. Next story`}
                   >
-                    <Sticker art={s.art} photo={speciesPhoto(id)} speciesId={id} size={66} tint={colors[s.tint]} rotate={n % 2 ? 5 : -4} shadowColor={isLead ? theme.shadow : colors.ink} />
-                    {/* Names sit on a solid tag so they read over any scene. */}
-                    <View style={{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 8, borderWidth: 1, borderColor: theme.ink, backgroundColor: theme.card }}>
-                      <Text numberOfLines={2} style={{ fontFamily: fonts.bodySemi, fontSize: 12, lineHeight: 15, textAlign: 'center', color: theme.ink }}>
-                        {isLead ? `★ ${s.friendlyName}` : s.friendlyName}
-                      </Text>
-                    </View>
-                    {slide.arrivedSpecies?.includes(id) && (
-                      <View style={{ paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6, backgroundColor: colors.pink }}>
-                        <Text style={{ fontFamily: fonts.bodySemi, fontSize: 10, letterSpacing: 0.6, textTransform: 'uppercase', color: colors.ink }}>Just arrived</Text>
-                      </View>
+                    {slide.kind === 'intro' ? (
+                      <GroupSticker period={header.period} speciesIds={slide.introSpecies ?? []} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
+                    ) : slide.cast ? (
+                      <GroupSticker speciesIds={slide.cast} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
+                    ) : (
+                      <Sticker
+                        art={(species ?? getSpecies('rock-pigeon')!).art}
+                        photo={slidePhoto}
+                        speciesId={species?.id}
+                        mood={slide.mood ?? slide.photoIndex ?? 0}
+                        size={stickerSize}
+                        tint={tileFor(slide)}
+                        rotate={-5}
+                        shadowColor={theme.shadow}
+                      />
                     )}
                   </Pressable>
-                );
-              })}
-            </View>
-          ) : (
-            /* Prev / next sit beside the photo, in the middle of the screen. */
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, marginTop: 20 }}>
-              <RoundNav label={i === 0 ? 'Home' : 'Previous story'} onPress={back} color={theme.ink} fill={theme.bg}>
-                <ChevronLeftIcon color={theme.ink} />
-              </RoundNav>
-              <Pressable
-                onPress={next}
-                accessibilityRole="button"
-                accessibilityLabel={`${slide.kind === 'intro' ? 'Who\'s up' : species?.friendlyName ?? 'Animal'} photo. Next story`}
-              >
-                {slide.kind === 'intro' ? (
-                  <GroupSticker period={header.period} speciesIds={slide.introSpecies ?? []} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
-                ) : slide.cast ? (
-                  <GroupSticker speciesIds={slide.cast} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
-                ) : (
-                  <Sticker
-                    art={(species ?? getSpecies('rock-pigeon')!).art}
-                    photo={slidePhoto}
-                    speciesId={species?.id}
-                    mood={slide.mood ?? slide.photoIndex ?? 0}
-                    size={stickerSize}
-                    tint={tileFor(slide)}
-                    rotate={-5}
-                    shadowColor={theme.shadow}
-                  />
-                )}
-              </Pressable>
-              <RoundNav label="Next story" onPress={next} color={theme.ink} fill={theme.bg}>
-                <ChevronRightIcon color={theme.ink} />
-              </RoundNav>
-            </View>
-          )}
+                  <RoundNav label="Next story" onPress={next} color={theme.ink} fill={theme.bg}>
+                    <ChevronRightIcon color={theme.ink} />
+                  </RoundNav>
+                </View>
+              )}
 
-          {/* A shortcut to everyone around, so no one has to tap through the whole story. */}
-          {!home && slide.kind !== 'around' && (
-            <Pressable
-              onPress={() => setIndex(story.length - 1)}
-              accessibilityRole="button"
-              accessibilityLabel="See everyone around today"
-              hitSlop={8}
-              style={({ pressed }) => ({
-                alignSelf: 'center',
-                marginTop: 14,
-                minHeight: 34,
-                paddingHorizontal: 14,
-                borderRadius: 17,
-                borderWidth: border.width,
-                borderColor: theme.ink,
-                backgroundColor: theme.card,
-                boxShadow: offsetShadow(theme.shadow, 2),
-                justifyContent: 'center',
-                opacity: pressed ? 0.6 : 1,
-              })}
-            >
-              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 13, color: theme.ink }}>See everyone around ›</Text>
-            </Pressable>
-          )}
+              {/* A shortcut to everyone around, so no one has to tap through the whole story. */}
+              {slide.kind !== 'around' && (
+                <Pressable
+                  onPress={() => setIndex(story.length - 1)}
+                  accessibilityRole="button"
+                  accessibilityLabel="See everyone around today"
+                  hitSlop={8}
+                  style={({ pressed }) => ({
+                    alignSelf: 'center',
+                    marginTop: 14,
+                    minHeight: 34,
+                    paddingHorizontal: 14,
+                    borderRadius: 17,
+                    borderWidth: border.width,
+                    borderColor: theme.ink,
+                    backgroundColor: theme.card,
+                    boxShadow: offsetShadow(theme.shadow, 2),
+                    justifyContent: 'center',
+                    opacity: pressed ? 0.6 : 1,
+                  })}
+                >
+                  <Text style={{ fontFamily: fonts.bodySemi, fontSize: 13, color: theme.ink }}>See everyone around ›</Text>
+                </Pressable>
+              )}
 
-          {!home && (
-            <>
-              <StoryCard kicker={slide.kicker} title={slide.title} body={slide.body} fact={slide.fact} theme={theme} />
+              <StoryCard kicker={slide.kicker} title={slide.title} body={slide.body} fact={slide.fact} theme={theme} scroll={false} />
+              </ScrollView>
 
               <View style={{ paddingHorizontal: 16, paddingBottom: 20 }}>
                 {opensPage && (
