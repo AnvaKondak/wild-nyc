@@ -3,7 +3,7 @@
 // share one harbor and one flyway), not a single neighborhood: that's Right now's job.
 // Each slide knows which neighbors it's about and which kind of place to draw behind them.
 
-import { getSpecies, region, seasonChapters, stories } from '@/content';
+import { families, getSpecies, region, seasonChapters, stories } from '@/content';
 import type { PlaceKind, Season } from '@/content/types';
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -19,6 +19,15 @@ export function placeFor(ids: string[]): PlaceKind {
   }
   return (Object.entries(count).sort((a, b) => b[1] - a[1])[0]?.[0] as PlaceKind) ?? 'park';
 }
+
+// Whose family life each season's chapter tells: who's raising babies, who's out on
+// their own, who sticks together.
+const FAMILY_PICKS: Record<Season, string[]> = {
+  spring: ['canada-goose', 'raccoon', 'red-tailed-hawk', 'american-crow'],
+  summer: ['white-tailed-deer', 'mallard', 'mute-swan', 'chimney-swift'],
+  fall: ['canada-goose', 'white-tailed-deer', 'eastern-gray-squirrel', 'monarch'],
+  winter: ['raccoon', 'mute-swan', 'western-honey-bee', 'white-throated-sparrow'],
+};
 
 export function chapterSlides(season: Season): ChapterSlide[] {
   const chapter = seasonChapters.find((c) => c.season === season)!;
@@ -37,6 +46,16 @@ export function chapterSlides(season: Season): ChapterSlide[] {
       species: st.species,
       place: placeFor(st.species),
     })),
+    ...FAMILY_PICKS[season]
+      .filter((id) => families[id] && getSpecies(id))
+      .map((id) => ({
+        id: `${season}:family:${id}`,
+        kicker: `${cap(season)} · Family life`,
+        title: families[id].seasons[season].title,
+        body: families[id].seasons[season].body,
+        species: [id],
+        place: placeFor([id]),
+      })),
     ...journeys.map((j) => ({
       id: `${season}:${j.id}`,
       kicker: j.kind === 'arriving' ? `${cap(season)} · Arriving` : `${cap(season)} · Goodbye for now`,

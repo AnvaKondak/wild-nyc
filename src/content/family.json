@@ -1,0 +1,1124 @@
+{
+  "rock-pigeon": {
+    "young": "Both parents raise one or two squabs, feeding them \"crop milk\" they make in their own throats. The squabs leave the nest at about a month old, already pigeon-sized.",
+    "social": "Couples usually stay together for life and do everything as a pair. They live in easygoing flocks where sharing a sidewalk snack is normal.",
+    "seasons": {
+      "spring": {
+        "title": "A nest on the ledge",
+        "body": "Pigeon couples are raising squabs on ledges and under bridges. Dad usually sits on the eggs by day, Mom takes the night shift."
+      },
+      "summer": {
+        "title": "Brood after brood",
+        "body": "City pigeons can raise babies all year. Last month's squabs are already out walking the sidewalk with the flock."
+      },
+      "fall": {
+        "title": "Teens in the flock",
+        "body": "Young pigeons have blended into the flock. You can tell them by their duller necks and the way they still flutter at their parents now and then."
+      },
+      "winter": {
+        "title": "Cozy couples",
+        "body": "Pairs stay side by side through the cold, puffed up on sunny ledges. Some even start a winter nest."
+      }
+    }
+  },
+  "house-sparrow": {
+    "young": "Both parents feed the chicks bugs (seeds are too tough for babies). Chicks leave the nest after about two weeks and beg from the hedge for a while longer.",
+    "social": "Very social: they nest close together in loose colonies and chatter in the same hedge all day. Many pairs stay together year after year.",
+    "seasons": {
+      "spring": {
+        "title": "House hunting",
+        "body": "Couples are claiming nooks in walls, signs and vents and stuffing them with grass, feathers and the odd bit of string."
+      },
+      "summer": {
+        "title": "Bug delivery",
+        "body": "Parents are running nonstop bug deliveries to fluffy fledglings who sit in the hedge flapping and yelling. Many raise two or three broods."
+      },
+      "fall": {
+        "title": "The gang",
+        "body": "This year's young have joined big chattering flocks. Family ties loosen, but nobody's ever alone in a sparrow hedge."
+      },
+      "winter": {
+        "title": "Group huddle",
+        "body": "Flocks roost together in thick ivy and evergreens, puffed up for warmth. Couples often stick together through the winter."
+      }
+    }
+  },
+  "eastern-gray-squirrel": {
+    "young": "Mom raises the babies alone in a leafy nest or a tree hole. They open their eyes at about a month and are out on their own around three months old.",
+    "social": "Mostly solo, but easygoing about sharing a tree. On cold nights a few may even pile into one nest together.",
+    "seasons": {
+      "spring": {
+        "title": "Babies in the nest",
+        "body": "Late-winter babies are peeking out of their leafy nests. Mom does all the work; Dad isn't part of the picture."
+      },
+      "summer": {
+        "title": "A second litter",
+        "body": "Many moms have a second litter now, while spring's kids practice leaping and burying things not quite right."
+      },
+      "fall": {
+        "title": "Out on their own",
+        "body": "This year's young are on their own, burying acorns like pros and looking for a spot to call home."
+      },
+      "winter": {
+        "title": "Chase season",
+        "body": "Midwinter is courting time: you'll see dizzy chases spiraling up the trunks. Some squirrels share a nest to stay warm."
+      }
+    }
+  },
+  "european-starling": {
+    "young": "Both parents feed the chicks in a hole or a cranny. Fledglings follow their parents around the lawn, begging loudly with their beaks wide open.",
+    "social": "About as social as birds get: they feed in crowds, sleep in crowds and fly in the swirling crowds called murmurations.",
+    "seasons": {
+      "spring": {
+        "title": "Decorating the nest",
+        "body": "Starling couples are nesting in holes and crannies. The males tuck in fresh green leaves and petals, which may help keep bugs away."
+      },
+      "summer": {
+        "title": "Brown teenagers",
+        "body": "This year's young are plain brown and travel in noisy gangs of their own, probing lawns together."
+      },
+      "fall": {
+        "title": "The big swirl",
+        "body": "Families melt into huge flocks. At dusk they swirl over the marshes in murmurations before settling in to sleep."
+      },
+      "winter": {
+        "title": "Thousands to a roost",
+        "body": "They sleep packed together by the thousands under bridges and in thick trees, then head out in groups at sunrise."
+      }
+    }
+  },
+  "mourning-dove": {
+    "young": "Both parents raise two squabs on crop milk in a famously flimsy nest. The babies leave at about two weeks, and the parents may start the next pair right away.",
+    "social": "Couples stay close and preen each other. In winter they gather in quiet flocks on wires and feeders.",
+    "seasons": {
+      "spring": {
+        "title": "A wobbly nest",
+        "body": "Couples are building nests so thin you can see the eggs through them. It works anyway: both parents take turns sitting."
+      },
+      "summer": {
+        "title": "Round after round",
+        "body": "Doves can raise five or more broods a year here. The parents barely pause between pairs of squabs."
+      },
+      "fall": {
+        "title": "Young on the wire",
+        "body": "This year's young sit in rows on the wires with the grown-ups. You can tell them by the pale edges on their feathers."
+      },
+      "winter": {
+        "title": "Quiet flocks",
+        "body": "Doves gather in calm little flocks, fluffed up side by side on a sunny branch."
+      }
+    }
+  },
+  "american-robin": {
+    "young": "Mom builds a mud-lined cup and sits on the eggs; both parents feed the chicks worms. When the chicks leave, Dad often takes them under his wing while Mom starts the next nest.",
+    "social": "Territorial singers in spring, but in fall and winter they join flocks that roam for berries together.",
+    "seasons": {
+      "spring": {
+        "title": "Blue eggs",
+        "body": "Robins are building mud cups in trees and on ledges. Inside: three or four eggs in the famous robin's-egg blue."
+      },
+      "summer": {
+        "title": "Dad's in charge",
+        "body": "Spotty-breasted fledglings hop after their dad on the lawn while Mom works on the next nest."
+      },
+      "fall": {
+        "title": "Berry flocks",
+        "body": "Robins drop their territories and team up in flocks, moving from tree to tree to eat the berries."
+      },
+      "winter": {
+        "title": "Winter crew",
+        "body": "Many robins stay all winter in roaming flocks. They're quieter now, eating fruit in the treetops instead of worms."
+      }
+    }
+  },
+  "herring-gull": {
+    "young": "Both parents raise two or three chicks, often on rooftops here. A chick taps the red spot on a parent's bill to ask for food. Young gulls stay brown for years.",
+    "social": "They nest in colonies and many couples reunite every spring. Out of breeding season they loaf in big mixed groups.",
+    "seasons": {
+      "spring": {
+        "title": "Rooftop colonies",
+        "body": "Gull couples are reuniting and claiming nesting spots on islands and flat roofs."
+      },
+      "summer": {
+        "title": "Fuzzy chicks",
+        "body": "Speckled chicks are tapping the red spot on their parents' bills: the gull way of saying \"feed me, please.\""
+      },
+      "fall": {
+        "title": "Brown kids",
+        "body": "The young are flying now, all brown and mottled. It takes them about four years to grow into the gray-and-white grown-up look."
+      },
+      "winter": {
+        "title": "Big hangouts",
+        "body": "Gulls of every age gather in big, noisy groups on the piers and parking lots."
+      }
+    }
+  },
+  "raccoon": {
+    "young": "Mom raises the kits alone in a hollow tree, chimney or attic. They follow her out at night by early summer and usually stay with her through their first winter.",
+    "social": "Mostly solo grown-ups, but moms and kits are a tight team, and neighbors' ranges overlap without much fuss.",
+    "seasons": {
+      "spring": {
+        "title": "Kits in the den",
+        "body": "Raccoon kits are being born in hollow trees and the odd attic. Mom stays close; Dad isn't involved."
+      },
+      "summer": {
+        "title": "Night school",
+        "body": "Moms lead their kits out at night, often in single file, teaching them what's good to eat and where to climb."
+      },
+      "fall": {
+        "title": "Almost grown",
+        "body": "The kits are nearly as big as Mom now, but many still tag along with her on her rounds."
+      },
+      "winter": {
+        "title": "Family den",
+        "body": "On the coldest nights, a mom and her grown kits often curl up together in one den. The kits head off on their own in spring."
+      }
+    }
+  },
+  "monarch": {
+    "young": "No babysitting: Mom lays her eggs one at a time on milkweed and flies on. Each caterpillar is on its own from the moment it hatches.",
+    "social": "Solo most of the year, but on migration they gather by the dozens or hundreds to sleep in the same trees.",
+    "seasons": {
+      "spring": {
+        "title": "First eggs",
+        "body": "The first monarchs arrive from the south and lay eggs, one per milkweed leaf. The caterpillars never meet their mom."
+      },
+      "summer": {
+        "title": "Generation after generation",
+        "body": "Several short-lived generations are born here, each laying eggs for the next."
+      },
+      "fall": {
+        "title": "The great trip south",
+        "body": "This fall's monarchs are a special generation that flies all the way to Mexico. They stop to sleep in clusters along the way."
+      },
+      "winter": {
+        "title": "Together in the mountains",
+        "body": "Millions spend the winter packed together on fir trees in Mexico's mountains, waiting for spring."
+      }
+    }
+  },
+  "red-tailed-hawk": {
+    "young": "Both parents raise two or three chicks in a big stick nest high on a tree or building. After the young fly, they stay near their parents for weeks learning to hunt.",
+    "social": "Couples often stay together for years and share a territory all year. Mostly they keep to themselves.",
+    "seasons": {
+      "spring": {
+        "title": "High-rise nest",
+        "body": "Hawk couples are fixing up big stick nests on ledges and tall trees. One parent is almost always sitting."
+      },
+      "summer": {
+        "title": "Flying lessons",
+        "body": "The young are out of the nest, loud and clumsy, following their parents and begging for food."
+      },
+      "fall": {
+        "title": "On their own",
+        "body": "This year's young head off to find their own place. You can tell them by their brown, banded tails: no red until next year."
+      },
+      "winter": {
+        "title": "Couple's territory",
+        "body": "Pairs stay on their home turf all winter, perched together on the same tall spots."
+      }
+    }
+  },
+  "blue-jay": {
+    "young": "Both parents raise the chicks, and the family keeps traveling together for weeks after they leave the nest.",
+    "social": "Loud, chatty families. Some couples stay together for life, and jays team up to mob hawks and owls.",
+    "seasons": {
+      "spring": {
+        "title": "Quiet nesting",
+        "body": "Usually noisy jays go strangely quiet near their nests, so no one finds them."
+      },
+      "summer": {
+        "title": "Family outings",
+        "body": "Families travel together through the trees, the young still begging from their parents."
+      },
+      "fall": {
+        "title": "Flocks on the move",
+        "body": "Some jays fly south in loose flocks along the coast; others stay. Everyone's burying acorns."
+      },
+      "winter": {
+        "title": "The neighborhood watch",
+        "body": "Jays stay in small groups and shout a warning together when a hawk shows up."
+      }
+    }
+  },
+  "dark-eyed-junco": {
+    "young": "Juncos raise their chicks in nests on the ground in northern forests and mountains, far from here. We only meet them in winter.",
+    "social": "In winter they live in flocks with a pecking order: everyone knows who gets the best seeds first.",
+    "seasons": {
+      "spring": {
+        "title": "Heading north",
+        "body": "The flocks break up and the juncos fly north to nest. The males start singing before they leave."
+      },
+      "summer": {
+        "title": "Far away",
+        "body": "Our juncos are raising chicks in nests tucked on the ground in northern forests."
+      },
+      "fall": {
+        "title": "Back with friends",
+        "body": "They arrive in flocks, flashing their white tail feathers as they hop under the hedges."
+      },
+      "winter": {
+        "title": "Pecking order",
+        "body": "Each flock has a pecking order. The top juncos get the best spots under the feeder; the rest wait their turn."
+      }
+    }
+  },
+  "virginia-opossum": {
+    "young": "Babies the size of a honeybee crawl into Mom's pouch. After about two months they ride on her back, then go off on their own at three or four months.",
+    "social": "Solo wanderers. They don't keep territories and mostly just mind their own business.",
+    "seasons": {
+      "spring": {
+        "title": "Pouch babies",
+        "body": "Moms are carrying tiny babies in their pouches. Some have more than a dozen in there."
+      },
+      "summer": {
+        "title": "Piggyback rides",
+        "body": "Bigger babies ride on Mom's back, holding on to her fur as she shuffles along."
+      },
+      "fall": {
+        "title": "Off they go",
+        "body": "The young are on their own now, each wandering off to find a place to live."
+      },
+      "winter": {
+        "title": "Solo and snug",
+        "body": "Opossums sleep alone in a cozy den on the coldest days, coming out on milder nights."
+      }
+    }
+  },
+  "american-crow": {
+    "young": "Both parents raise the chicks, and often last year's kids stay home to help: bringing food and standing guard for their new brothers and sisters.",
+    "social": "Crows live in close family groups and know each other well. In winter, families join huge evening roosts with thousands of other crows.",
+    "seasons": {
+      "spring": {
+        "title": "Big siblings help",
+        "body": "Crow families are building nests, and older siblings often pitch in with the twigs and the snacks."
+      },
+      "summer": {
+        "title": "Blue-eyed kids",
+        "body": "Fledglings follow their family around, begging loudly. Young crows have blue-gray eyes that turn dark later."
+      },
+      "fall": {
+        "title": "The evening commute",
+        "body": "At dusk, families fly together toward big group roosts, calling the whole way."
+      },
+      "winter": {
+        "title": "Thousands together",
+        "body": "Crows sleep in roosts of thousands, but each family still sticks close together inside the crowd."
+      }
+    }
+  },
+  "white-throated-sparrow": {
+    "young": "They nest on the ground up north in Canada's forests. Here, we only see them in fall, winter and spring.",
+    "social": "Winter flocks. They come in white-striped and tan-striped versions, and pairs are almost always one of each.",
+    "seasons": {
+      "spring": {
+        "title": "Singing to leave",
+        "body": "They practice their \"Oh sweet Canada\" song before flying north to nest."
+      },
+      "summer": {
+        "title": "Up north",
+        "body": "They're raising chicks on the ground in northern forests, far from the city."
+      },
+      "fall": {
+        "title": "Back in flocks",
+        "body": "Flocks arrive and settle under hedges and in park edges, scratching through the leaves together."
+      },
+      "winter": {
+        "title": "One of each",
+        "body": "Winter flocks mix white-striped and tan-striped birds. When they pair up in spring, it's almost always one of each."
+      }
+    }
+  },
+  "chimney-swift": {
+    "young": "Both parents raise the chicks in a little nest glued to the inside of a chimney with spit. Sometimes extra grown-ups pitch in to help feed them.",
+    "social": "Very social: in late summer they roost by the hundreds in one big chimney, swirling in at dusk.",
+    "seasons": {
+      "spring": {
+        "title": "Back from South America",
+        "body": "Swifts return and pair up, gluing twig nests to chimney walls with their own spit."
+      },
+      "summer": {
+        "title": "Chimney babies",
+        "body": "Chicks cling to the chimney wall and the parents zip in and out with balls of bugs."
+      },
+      "fall": {
+        "title": "The big roost",
+        "body": "Families gather by the hundreds and pour into one chimney at dusk, like smoke in reverse, before flying south."
+      },
+      "winter": {
+        "title": "Far, far away",
+        "body": "They're spending winter in the Amazon basin, thousands of miles south."
+      }
+    }
+  },
+  "moths": {
+    "young": "No parenting at all: Mom lays her eggs on the right plant and the caterpillars take it from there.",
+    "social": "Solo. Grown-ups find each other by scent, sometimes from far away.",
+    "seasons": {
+      "spring": {
+        "title": "Waking up",
+        "body": "Caterpillars and cocoons that waited out the winter are getting going again."
+      },
+      "summer": {
+        "title": "Moth nights",
+        "body": "Warm nights are moth season. Females send out scents, and males follow them with their feathery antennae."
+      },
+      "fall": {
+        "title": "Last flights",
+        "body": "The last moths of the year lay eggs that will wait out the winter."
+      },
+      "winter": {
+        "title": "Waiting it out",
+        "body": "Most moths spend winter as eggs, caterpillars or cocoons, tucked in bark and leaf litter."
+      }
+    }
+  },
+  "canada-goose": {
+    "young": "Both parents guard the goslings fiercely. The family stays together for their whole first year, and even migrates together.",
+    "social": "Couples usually stay together for life. Families group up in bigger flocks, and goslings sometimes join big \"day cares\" watched by a few adults.",
+    "seasons": {
+      "spring": {
+        "title": "On guard",
+        "body": "Mom sits on the nest while Dad stands guard nearby. Hissing is his whole job right now."
+      },
+      "summer": {
+        "title": "Gosling parade",
+        "body": "Fuzzy goslings walk in a line between their parents, sometimes in big groups watched by a few grown-ups."
+      },
+      "fall": {
+        "title": "Family flights",
+        "body": "This year's young fly with their parents now. Families stick together inside the big flocks."
+      },
+      "winter": {
+        "title": "Still a family",
+        "body": "Families stay together all winter and split up next spring, when the parents nest again."
+      }
+    }
+  },
+  "mallard": {
+    "young": "Mom raises the ducklings alone; the drakes leave once she's sitting on the eggs. Ducklings swim and find their own food within hours of hatching.",
+    "social": "Couples form in fall and winter, then split up after nesting. Off-season, they're easygoing flock birds.",
+    "seasons": {
+      "spring": {
+        "title": "Mom's on the nest",
+        "body": "Females are sitting on eggs, hidden in tall grass. The bright green-headed males hang out together without them."
+      },
+      "summer": {
+        "title": "Duckling school",
+        "body": "Ducklings paddle after their mom in a row, learning where the good snacks are."
+      },
+      "fall": {
+        "title": "Dating season",
+        "body": "Males are back in their bright colors and showing off to the females. Couples start forming now."
+      },
+      "winter": {
+        "title": "Pairs on the pond",
+        "body": "Mallards swim around in pairs within the flock, ready to nest when spring comes."
+      }
+    }
+  },
+  "brant": {
+    "young": "Brant nest in the Arctic tundra. Both parents tend the goslings, and families fly south together.",
+    "social": "Families stick together inside big winter flocks on the bays.",
+    "seasons": {
+      "spring": {
+        "title": "Heading to the Arctic",
+        "body": "Brant fill up on sea lettuce before their long flight to nest in the Arctic."
+      },
+      "summer": {
+        "title": "Tundra families",
+        "body": "They're raising goslings on the Arctic tundra, near the top of the world."
+      },
+      "fall": {
+        "title": "Families arrive",
+        "body": "Brant families fly into the harbor together, parents and young side by side."
+      },
+      "winter": {
+        "title": "Family groups",
+        "body": "In the big flocks on the bays, each family stays close together all winter."
+      }
+    }
+  },
+  "double-crested-cormorant": {
+    "young": "Both parents raise the chicks in colonies on harbor islands. Chicks reach into a parent's throat to get their food.",
+    "social": "Colony birds: they nest together, fish together and dry their wings side by side on posts.",
+    "seasons": {
+      "spring": {
+        "title": "Island colonies",
+        "body": "Cormorants are building stick nests together on the harbor's islands."
+      },
+      "summer": {
+        "title": "Chicks in the colony",
+        "body": "Chicks reach right into their parents' throats for fish. It's messy, but it works."
+      },
+      "fall": {
+        "title": "Flying south",
+        "body": "Long lines of cormorants fly south along the coast, families and all."
+      },
+      "winter": {
+        "title": "A few stay",
+        "body": "Most head south, but a few stick around and fish the harbor together."
+      }
+    }
+  },
+  "ring-billed-gull": {
+    "young": "Both parents raise the chicks in big colonies. Many of the gulls you see here in summer are young ones not ready to nest yet.",
+    "social": "Colony birds and flock birds: always in a group.",
+    "seasons": {
+      "spring": {
+        "title": "Off to the colonies",
+        "body": "Grown-ups head to nesting colonies inland and up north, often back to the same spot."
+      },
+      "summer": {
+        "title": "The young ones stay",
+        "body": "Most ring-bills here in summer are teenagers, too young to nest, just hanging out."
+      },
+      "fall": {
+        "title": "Everyone's back",
+        "body": "Grown-ups and this year's speckled young arrive in big flocks."
+      },
+      "winter": {
+        "title": "Parking-lot crowds",
+        "body": "Ring-billed gulls gather by the hundreds on fields, beaches and parking lots."
+      }
+    }
+  },
+  "common-tern": {
+    "young": "Both parents raise the chicks in noisy beach colonies. During courtship, the male brings the female a fish as a gift.",
+    "social": "Colony birds: they nest close together and all swoop together at anything that gets too close.",
+    "seasons": {
+      "spring": {
+        "title": "Fish as gifts",
+        "body": "Males parade around the colony holding a little fish to impress a female."
+      },
+      "summer": {
+        "title": "Beach babies",
+        "body": "Fluffy chicks hide in the sand while their parents dive for fish all day."
+      },
+      "fall": {
+        "title": "Heading south",
+        "body": "Families leave together for South America. The young keep learning to fish along the way."
+      },
+      "winter": {
+        "title": "Southern summer",
+        "body": "They're spending our winter on the coasts of South America."
+      }
+    }
+  },
+  "great-blue-heron": {
+    "young": "Both parents raise the chicks in colonies of big stick nests high in the trees. The young leave the nest at around two months.",
+    "social": "They nest together but hunt alone, each heron guarding their own stretch of shore.",
+    "seasons": {
+      "spring": {
+        "title": "The heronry",
+        "body": "Herons are nesting together in treetop colonies on quiet islands."
+      },
+      "summer": {
+        "title": "Tall chicks",
+        "body": "Gangly chicks wait in the nest, loudly greeting each parent who comes back with fish."
+      },
+      "fall": {
+        "title": "Solo fishing",
+        "body": "The young are on their own, each heron standing alone at the water's edge."
+      },
+      "winter": {
+        "title": "Hardy loners",
+        "body": "Some herons stay all winter, hunting alone in any water that isn't frozen."
+      }
+    }
+  },
+  "black-crowned-night-heron": {
+    "young": "Both parents raise the chicks in colonies in the trees of the harbor islands. Chicks leave the nest in about six weeks.",
+    "social": "Social sleepers: they roost together in trees by day and go out to fish at dusk.",
+    "seasons": {
+      "spring": {
+        "title": "Island colonies",
+        "body": "Night herons are nesting together in the trees of the harbor's little islands."
+      },
+      "summer": {
+        "title": "Speckled young",
+        "body": "The young are brown and speckled, and look nothing like their parents yet."
+      },
+      "fall": {
+        "title": "Sleepy groups",
+        "body": "Groups doze together in the trees by day and head out to fish at dusk."
+      },
+      "winter": {
+        "title": "A few stay",
+        "body": "Most go south, but a few hunch together in the trees by the water all winter."
+      }
+    }
+  },
+  "bufflehead": {
+    "young": "Buffleheads nest up north in old woodpecker holes. The ducklings jump out of the tree hole a day or two after hatching.",
+    "social": "In winter they swim in small groups, diving at the same time like a little team.",
+    "seasons": {
+      "spring": {
+        "title": "Off to the north",
+        "body": "Pairs fly north to nest in old woodpecker holes in northern forests."
+      },
+      "summer": {
+        "title": "The big jump",
+        "body": "Up north, day-old ducklings leap out of their tree holes to follow their mom to water."
+      },
+      "fall": {
+        "title": "Back in the harbor",
+        "body": "Small groups arrive and start diving together in the bays."
+      },
+      "winter": {
+        "title": "Diving teams",
+        "body": "Little groups dive in near-unison and pop back up together."
+      }
+    }
+  },
+  "mute-swan": {
+    "young": "Both parents raise the cygnets, who often ride on their parents' backs. The young usually stay with their parents through their first winter.",
+    "social": "Couples usually stay together for years and defend their patch of water fiercely.",
+    "seasons": {
+      "spring": {
+        "title": "The big nest",
+        "body": "Swan couples are building huge nests at the water's edge. The male guards it, wings raised."
+      },
+      "summer": {
+        "title": "Back rides",
+        "body": "Fuzzy gray cygnets ride on their parents' backs and paddle close behind them."
+      },
+      "fall": {
+        "title": "Gray teenagers",
+        "body": "The cygnets are almost full-size but still grayish brown, swimming with their parents."
+      },
+      "winter": {
+        "title": "Family on the water",
+        "body": "Families often stay together all winter. In spring the parents send the young off to make their own way."
+      }
+    }
+  },
+  "red-winged-blackbird": {
+    "young": "Females build nests in the cattails and do most of the work. A male may have several mates nesting in the territory he defends.",
+    "social": "Bold singers in spring, then flock birds the rest of the year, often with grackles and starlings.",
+    "seasons": {
+      "spring": {
+        "title": "The boss of the marsh",
+        "body": "Males sing from the cattails and flash their red patches to defend their territory."
+      },
+      "summer": {
+        "title": "Cattail nests",
+        "body": "Females are raising chicks in nests woven between the reeds, while the males keep watch."
+      },
+      "fall": {
+        "title": "Joining the flocks",
+        "body": "Families join big mixed flocks with grackles and starlings."
+      },
+      "winter": {
+        "title": "Mostly south",
+        "body": "Most head south in giant flocks, but a few stay in the marshes."
+      }
+    }
+  },
+  "white-tailed-deer": {
+    "young": "Fawns are born in late spring. Mom hides her spotted fawn in tall grass and comes back to nurse it. Fawns stay with their mom about a year, and daughters often stay longer.",
+    "social": "Moms, daughters and fawns live in family groups. Bucks hang out in bachelor groups in summer and go solo in the fall.",
+    "seasons": {
+      "spring": {
+        "title": "Hidden fawns",
+        "body": "Fawns are being born. Mom hides each one in tall grass, where its spots help it stay still and unseen."
+      },
+      "summer": {
+        "title": "Spotted kids",
+        "body": "Fawns follow their moms now. The bucks hang out together in bachelor groups, growing new antlers."
+      },
+      "fall": {
+        "title": "Losing the spots",
+        "body": "Fawns trade their spots for a winter coat. The bucks split up and start sparring over the does."
+      },
+      "winter": {
+        "title": "Family herds",
+        "body": "Moms, daughters and fawns stay together in small herds, sharing trails through the snow."
+      }
+    }
+  },
+  "northern-mockingbird": {
+    "young": "Both parents raise the chicks. Dad often looks after the fledglings while Mom starts the next nest.",
+    "social": "They fiercely defend their territory all year, sometimes as a couple, sometimes on their own.",
+    "seasons": {
+      "spring": {
+        "title": "Singing all night",
+        "body": "Single males sing their whole songbook, sometimes all night, to find a mate."
+      },
+      "summer": {
+        "title": "Dad's turn",
+        "body": "Dad looks after the fledglings while Mom builds the next nest."
+      },
+      "fall": {
+        "title": "Guarding the berries",
+        "body": "Each mockingbird claims a berry bush for the winter and chases everyone else away."
+      },
+      "winter": {
+        "title": "Holding their ground",
+        "body": "Mockingbirds stay on their territory all winter, defending their berries."
+      }
+    }
+  },
+  "northern-cardinal": {
+    "young": "Mom builds the nest and both parents feed the chicks. Dad often keeps feeding the fledglings while Mom starts another nest.",
+    "social": "Couples often stay together all year. When courting, the male feeds the female seeds, beak to beak.",
+    "seasons": {
+      "spring": {
+        "title": "Beak to beak",
+        "body": "Males are feeding their mates seeds beak to beak. It's how cardinals say \"we're a team.\""
+      },
+      "summer": {
+        "title": "Brown kids",
+        "body": "Young cardinals are brownish with dark beaks, following their red dad around and begging."
+      },
+      "fall": {
+        "title": "Settling in",
+        "body": "The young find their own place, and couples settle in for the winter together."
+      },
+      "winter": {
+        "title": "Winter flocks",
+        "body": "Cardinals sometimes gather in small flocks, bright red against the snow, couples still sticking close."
+      }
+    }
+  },
+  "common-grackle": {
+    "young": "They nest in colonies in evergreens. Mom builds and sits on the nest; both parents feed the chicks.",
+    "social": "Very social: they nest in groups and sleep in huge winter roosts.",
+    "seasons": {
+      "spring": {
+        "title": "Puffed and squeaky",
+        "body": "Males puff up their glossy feathers and squeak like a rusty gate to impress the females."
+      },
+      "summer": {
+        "title": "Family groups",
+        "body": "Fledglings follow their parents across the lawns, begging loudly."
+      },
+      "fall": {
+        "title": "Giant flocks",
+        "body": "Grackles join huge mixed flocks with blackbirds and starlings."
+      },
+      "winter": {
+        "title": "Mostly south",
+        "body": "Most head south in big flocks, but a few hang on through the winter."
+      }
+    }
+  },
+  "gray-catbird": {
+    "young": "Both parents raise the chicks in a nest hidden deep in a thicket.",
+    "social": "Couples keep to their thicket and talk to each other in mews and long rambling songs.",
+    "seasons": {
+      "spring": {
+        "title": "Back in the bushes",
+        "body": "Catbirds return and pair up, filling the thickets with long, rambling songs."
+      },
+      "summer": {
+        "title": "Hidden nests",
+        "body": "They're raising chicks deep inside tangles and thickets."
+      },
+      "fall": {
+        "title": "Berry fuel",
+        "body": "Catbirds fill up on berries before flying south."
+      },
+      "winter": {
+        "title": "Down south",
+        "body": "Most spend winter in the southern U.S. and Central America."
+      }
+    }
+  },
+  "song-sparrow": {
+    "young": "Both parents raise the chicks, often two or three broods a year.",
+    "social": "Neighbors learn each other's songs, and they answer a rival with a song both of them know.",
+    "seasons": {
+      "spring": {
+        "title": "Song battles",
+        "body": "Neighboring males sing back and forth, matching each other's songs."
+      },
+      "summer": {
+        "title": "Busy parents",
+        "body": "Parents raise brood after brood in nests low in the bushes."
+      },
+      "fall": {
+        "title": "The young move out",
+        "body": "Young sparrows look for territories of their own, and some fly south for the winter."
+      },
+      "winter": {
+        "title": "Hanging on",
+        "body": "Plenty stay all winter in brushy park edges, sometimes in loose groups."
+      }
+    }
+  },
+  "american-kestrel": {
+    "young": "Both parents raise the chicks in a hole: a tree cavity, a nest box or a nook in a building. After leaving, the young hunt together near their parents for a while.",
+    "social": "Couples nest together, then mostly go solo for the winter.",
+    "seasons": {
+      "spring": {
+        "title": "Nest holes",
+        "body": "Kestrel couples are moving into holes in trees, buildings and nest boxes."
+      },
+      "summer": {
+        "title": "Hunting practice",
+        "body": "The fledglings hunt grasshoppers together near their parents."
+      },
+      "fall": {
+        "title": "Heading out",
+        "body": "The young go off on their own, and many kestrels migrate south along the coast."
+      },
+      "winter": {
+        "title": "Solo season",
+        "body": "Kestrels that stay spend the winter alone, each on their own hunting spot."
+      }
+    }
+  },
+  "coopers-hawk": {
+    "young": "Both parents raise the chicks. The male brings almost all the food while the female, who's much bigger, guards the nest.",
+    "social": "Couples nest together but hunt alone.",
+    "seasons": {
+      "spring": {
+        "title": "Food delivery",
+        "body": "Males are bringing their mates food while the females build the nest and sit on the eggs."
+      },
+      "summer": {
+        "title": "Loud youngsters",
+        "body": "The young leave the nest and screech for food from their parents."
+      },
+      "fall": {
+        "title": "On their own",
+        "body": "This year's young are out hunting on their own, some migrating along the coast."
+      },
+      "winter": {
+        "title": "Solo hunters",
+        "body": "Cooper's hawks spend winter alone, patrolling yards and parks."
+      }
+    }
+  },
+  "peregrine-falcon": {
+    "young": "Both parents raise the chicks on a bare ledge high on a bridge or tower. The young practice flying and catching food from their parents in midair.",
+    "social": "Couples often stay together for life and keep their ledge for years.",
+    "seasons": {
+      "spring": {
+        "title": "Ledge life",
+        "body": "Peregrine couples are sitting on eggs on bridges and skyscraper ledges."
+      },
+      "summer": {
+        "title": "Midair handoffs",
+        "body": "Parents drop food to their young in midair to teach them to catch it."
+      },
+      "fall": {
+        "title": "Leaving home",
+        "body": "The young head off on their own. Some travel a long way."
+      },
+      "winter": {
+        "title": "Couples stay",
+        "body": "Most city pairs stay on their ledge all winter, together."
+      }
+    }
+  },
+  "downy-woodpecker": {
+    "young": "Both parents carve the nest hole and feed the chicks. Dad often sits on the eggs at night.",
+    "social": "In winter they join little mixed flocks with titmice and nuthatches.",
+    "seasons": {
+      "spring": {
+        "title": "Drumming",
+        "body": "Couples are drumming on branches and carving out a new nest hole together."
+      },
+      "summer": {
+        "title": "Noisy holes",
+        "body": "Chicks chatter from inside the tree hole whenever a parent comes back with food."
+      },
+      "fall": {
+        "title": "On their own",
+        "body": "The young go off alone, and each woodpecker carves a hole just for sleeping."
+      },
+      "winter": {
+        "title": "Mixed flocks",
+        "body": "Downies travel with titmice and other little birds, all keeping an eye out together."
+      }
+    }
+  },
+  "red-bellied-woodpecker": {
+    "young": "Both parents carve the nest hole and feed the chicks, who stay with them for a few weeks after leaving.",
+    "social": "Couples share a territory and call to each other with rolling churrs.",
+    "seasons": {
+      "spring": {
+        "title": "Tapping together",
+        "body": "The male drums and taps to show the female a good spot for a nest hole."
+      },
+      "summer": {
+        "title": "Family weeks",
+        "body": "Fledglings follow their parents around for a few weeks, learning where the food is."
+      },
+      "fall": {
+        "title": "Stashing food",
+        "body": "Each woodpecker hides nuts and seeds in bark cracks for later."
+      },
+      "winter": {
+        "title": "Staying put",
+        "body": "Couples stay on their territory all winter, living on their stashes."
+      }
+    }
+  },
+  "tufted-titmouse": {
+    "young": "Both parents raise the chicks, and sometimes last year's young stay to help with the new brood.",
+    "social": "Families stay together into winter and often lead little mixed flocks of other small birds.",
+    "seasons": {
+      "spring": {
+        "title": "Fur for the nest",
+        "body": "Titmice line their nests with soft hair, sometimes plucked right off a sleeping raccoon or dog."
+      },
+      "summer": {
+        "title": "Big family",
+        "body": "Families travel together, sometimes with a helper from last year."
+      },
+      "fall": {
+        "title": "Flock leaders",
+        "body": "Families team up with chickadees and nuthatches, and the titmice often lead."
+      },
+      "winter": {
+        "title": "Staying together",
+        "body": "Families stay together all winter, sounding the alarm when a hawk is near."
+      }
+    }
+  },
+  "hermit-thrush": {
+    "young": "They nest on or near the ground in northern forests. Here, we meet them on migration and in winter.",
+    "social": "Quiet loners: each thrush keeps to its own patch of forest floor.",
+    "seasons": {
+      "spring": {
+        "title": "Passing through",
+        "body": "Thrushes stop in the parks on their way north to nest."
+      },
+      "summer": {
+        "title": "Up north",
+        "body": "They're raising chicks in northern forests and singing their flute-like songs."
+      },
+      "fall": {
+        "title": "Passing through again",
+        "body": "They stop by on the way south, each one quietly flipping leaves on its own."
+      },
+      "winter": {
+        "title": "Winter loners",
+        "body": "A few stay all winter, each guarding its own berry tree."
+      }
+    }
+  },
+  "yellow-rumped-warbler": {
+    "young": "They nest up north in evergreen forests. We meet them on migration and in winter.",
+    "social": "Flock birds outside nesting season, often feeding in big groups.",
+    "seasons": {
+      "spring": {
+        "title": "Passing through",
+        "body": "Warblers in fresh yellow-patched feathers pass through on their way north."
+      },
+      "summer": {
+        "title": "Up north",
+        "body": "They're raising chicks in evergreen forests far north of the city."
+      },
+      "fall": {
+        "title": "Big flocks",
+        "body": "Flocks pour through the parks, eating bugs and berries together."
+      },
+      "winter": {
+        "title": "Berry flocks",
+        "body": "Some stay all winter in small flocks, living on waxy bayberries."
+      }
+    }
+  },
+  "common-eastern-bumble-bee": {
+    "young": "A queen starts her colony alone in spring. Her first daughters grow up to be workers who raise the rest.",
+    "social": "A family of sisters that lasts just one summer. Only the new queens survive the winter, alone.",
+    "seasons": {
+      "spring": {
+        "title": "Queen on her own",
+        "body": "Big queen bumble bees fly low, looking for a hole to start a new colony all by herself."
+      },
+      "summer": {
+        "title": "Sister workers",
+        "body": "The queen's daughters do all the flower runs while she stays home and lays eggs."
+      },
+      "fall": {
+        "title": "New queens",
+        "body": "The colony raises new queens. The old colony fades away as the weather cools."
+      },
+      "winter": {
+        "title": "Solo sleepers",
+        "body": "Only the new queens survive, sleeping alone underground until spring."
+      }
+    }
+  },
+  "western-honey-bee": {
+    "young": "One queen lays all the eggs. Her worker daughters feed the babies and run the hive.",
+    "social": "Tens of thousands of sisters working together. They share news with a waggle dance.",
+    "seasons": {
+      "spring": {
+        "title": "Swarm time",
+        "body": "Crowded hives split in two: the old queen leaves with half the bees to find a new home."
+      },
+      "summer": {
+        "title": "Honey season",
+        "body": "The workers are making and storing honey for winter as fast as they can."
+      },
+      "fall": {
+        "title": "Drones out",
+        "body": "The workers push the male bees out of the hive. There's not enough honey to go around."
+      },
+      "winter": {
+        "title": "The cluster",
+        "body": "The bees huddle in a ball around their queen, shivering their muscles to keep warm."
+      }
+    }
+  },
+  "eastern-carpenter-bee": {
+    "young": "Mom drills tunnels in wood and leaves pollen in each little room for her babies. She often stays near the nest as they grow.",
+    "social": "Mostly solo, but some moms share their nest, and the young may spend winter in the tunnels together.",
+    "seasons": {
+      "spring": {
+        "title": "Drilling",
+        "body": "Females are drilling perfectly round holes in wood. The males hover nearby, all buzz and no sting."
+      },
+      "summer": {
+        "title": "Baby rooms",
+        "body": "Inside each tunnel, the babies grow in rooms stocked with pollen."
+      },
+      "fall": {
+        "title": "Family tunnel",
+        "body": "The new adults stay close to the tunnel where they grew up."
+      },
+      "winter": {
+        "title": "Snug in the wood",
+        "body": "They spend winter tucked inside the wood, sometimes several in one tunnel."
+      }
+    }
+  },
+  "common-eastern-firefly": {
+    "young": "No parenting: firefly larvae hatch in the soil and spend a year or two growing up on their own.",
+    "social": "Grown-ups talk in flashes: the male flashes a pattern, and the female answers from the grass.",
+    "seasons": {
+      "spring": {
+        "title": "Underground",
+        "body": "Firefly larvae are finishing growing up in the soil. Some of them glow, too."
+      },
+      "summer": {
+        "title": "Flash dating",
+        "body": "Males fly and flash their pattern; females answer from the grass. That's a firefly date."
+      },
+      "fall": {
+        "title": "Larvae again",
+        "body": "This summer's eggs have hatched into larvae, hunting slugs in the soil."
+      },
+      "winter": {
+        "title": "Waiting below",
+        "body": "Larvae wait out the winter underground."
+      }
+    }
+  },
+  "blue-dasher": {
+    "young": "No parenting: Mom lays eggs in the water and the nymphs grow up underwater on their own.",
+    "social": "Males guard a sunny perch by the water and chase away other males.",
+    "seasons": {
+      "spring": {
+        "title": "Underwater",
+        "body": "Nymphs are growing underwater in ponds, hunting tiny creatures."
+      },
+      "summer": {
+        "title": "Perch guards",
+        "body": "Males guard their favorite perch by the pond, darting out to chase rivals away."
+      },
+      "fall": {
+        "title": "Last flyers",
+        "body": "The last blue dashers of the year are out on warm days."
+      },
+      "winter": {
+        "title": "Waiting in the pond",
+        "body": "Nymphs spend winter underwater, growing slowly until next summer."
+      }
+    }
+  },
+  "large-milkweed-bug": {
+    "young": "No parenting: eggs hatch on milkweed and the bright young bugs feed together on the seed pods.",
+    "social": "They gather in groups, often on the same milkweed pod.",
+    "seasons": {
+      "spring": {
+        "title": "Back north",
+        "body": "The first milkweed bugs arrive from the south as the milkweed grows."
+      },
+      "summer": {
+        "title": "Pod parties",
+        "body": "Groups of orange-and-black young and grown-ups cluster together on the milkweed pods."
+      },
+      "fall": {
+        "title": "Crowded pods",
+        "body": "Groups crowd the open pods, and many fly south as it gets cold."
+      },
+      "winter": {
+        "title": "Gone south",
+        "body": "Most head south for the winter. Few, if any, survive the cold here."
+      }
+    }
+  },
+  "pond-slider": {
+    "young": "No parenting: Mom digs a nest on land and lays her eggs. The hatchlings dig their way out and head for water on their own.",
+    "social": "Easygoing baskers: they pile up on logs together, sometimes stacked on each other's shells.",
+    "seasons": {
+      "spring": {
+        "title": "Basking piles",
+        "body": "Turtles pile onto sunny logs together to warm up after winter."
+      },
+      "summer": {
+        "title": "Nest digging",
+        "body": "Moms climb out of the pond to dig nests in soft ground, then head back to the water."
+      },
+      "fall": {
+        "title": "Hatchlings",
+        "body": "Tiny hatchlings dig out and head for the water, all on their own."
+      },
+      "winter": {
+        "title": "Pond-bottom nap",
+        "body": "They spend winter resting on the pond bottom, barely moving."
+      }
+    }
+  },
+  "groundhog": {
+    "young": "Mom raises the pups alone in a burrow. They come out in late spring and move into burrows of their own by late summer.",
+    "social": "Solo, but neighbors often share the same big burrow systems over the years.",
+    "seasons": {
+      "spring": {
+        "title": "Pups in the burrow",
+        "body": "Moms are raising pups underground. Dad isn't involved."
+      },
+      "summer": {
+        "title": "Moving out",
+        "body": "Pups pop out and munch clover near the burrow, then dig homes of their own."
+      },
+      "fall": {
+        "title": "Eating for winter",
+        "body": "Every groundhog is eating as much as possible before hibernating alone."
+      },
+      "winter": {
+        "title": "Hibernating",
+        "body": "Groundhogs hibernate alone in their burrows, their hearts beating only a few times a minute."
+      }
+    }
+  },
+  "orb-weavers": {
+    "young": "Mom wraps her eggs in a silk sac in the fall. The spiderlings hatch in spring and drift away on silk threads.",
+    "social": "Solo: each spider spins and guards her own web.",
+    "seasons": {
+      "spring": {
+        "title": "Spiderling balloons",
+        "body": "Tiny spiderlings hatch and float away on silk threads to find their own spots."
+      },
+      "summer": {
+        "title": "Growing webs",
+        "body": "Each spider builds a bigger web as she grows, often rebuilding it every night."
+      },
+      "fall": {
+        "title": "Egg sacs",
+        "body": "Big grown-up spiders wrap their eggs in silk sacs before winter."
+      },
+      "winter": {
+        "title": "Waiting in the sac",
+        "body": "The eggs wait out the winter in their silk sacs, tucked in safe spots."
+      }
+    }
+  }
+}

@@ -77,6 +77,13 @@ export type Species = {
   withPeople: string;
 };
 
+/** Family life: how the young grow up, how they get on with their own kind, and what that looks like each season. */
+export type Family = {
+  young: string;
+  social: string;
+  seasons: Record<Season, { title: string; body: string }>;
+};
+
 export type Mood = 'hello' | 'snack' | 'happy' | 'sleepy';
 
 export type StorySlide = {

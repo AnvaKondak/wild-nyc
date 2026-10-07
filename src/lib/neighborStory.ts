@@ -8,7 +8,7 @@
 // everywhere; brant are not), who were seen nearby lately, or who have something to
 // say about today's weather.
 
-import type { Encounter, Fact, LocalNames, Moment, Period, PlaceKind, SeasonChapter, Season, Species, StorySlide, WeatherTag } from '@/content/types';
+import type { Family, Encounter, Fact, LocalNames, Moment, Period, PlaceKind, SeasonChapter, Season, Species, StorySlide, WeatherTag } from '@/content/types';
 import type { LiveMap } from './live';
 import { fillPlace, pickFact, pickVariant, placePhrase, usableVariants, withLocation } from './localStory';
 import { pick, seededRandom, shuffle } from './random';
@@ -41,6 +41,8 @@ export type StoryContext = {
   weather: WeatherTag[];
   /** Two-neighbor encounters, for the middle of a story. */
   encounters?: Encounter[];
+  /** Family life by species: what the young and the grown-ups are up to this season. */
+  families?: Record<string, Family>;
 };
 
 /**
@@ -255,6 +257,22 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
     setting: first?.setting,
     kind: 'scene',
   });
+
+  // 4½. Family and friends: are the young with their parents, on their own, in a flock?
+  const family = ctx.families?.[s.id]?.seasons[season];
+  if (family) {
+    slides.push({
+      id: `${s.id}:family`,
+      season,
+      period,
+      kicker: 'Family and friends',
+      title: family.title,
+      body: family.body,
+      speciesId: s.id,
+      setting: first?.setting,
+      kind: 'scene',
+    });
+  }
 
   // 5. The end: how to be a good neighbor to them.
   slides.push({

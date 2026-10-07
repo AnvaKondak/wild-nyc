@@ -5,6 +5,7 @@ import chaptersJson from './chapters.json';
 import encountersJson from './encounters.json';
 import eventsJson from './events.json';
 import factsJson from './facts.json';
+import familyJson from './family.json';
 import hurtAnimalJson from './hurt-animal.json';
 import kindnessJson from './kindness.json';
 import momentsJson from './moments.json';
@@ -19,6 +20,7 @@ import soundsJson from './sounds.json';
 import speciesJson from './species.json';
 import storiesJson from './stories.json';
 import type {
+  Family,
   Encounter,
   Fact,
   SeasonChapter,
@@ -41,6 +43,7 @@ export const stories = storiesJson as StorySlide[];
 export const kindnesses = kindnessJson as Kindness[];
 export const moments = momentsJson as Moment[];
 export const facts = factsJson as Fact[];
+export const families = familyJson as Record<string, Family>;
 export const places = placesJson.places as Place[];
 export const placeKinds = placesJson.kinds as Record<PlaceKind, PlaceKindInfo>;
 export const hurtAnimalGuide = hurtAnimalJson as HurtAnimalGuide;

@@ -1,4 +1,4 @@
-import { encounters, facts, getSpecies, moments, placeKinds, places, seasonChapters, species } from '@/content';
+import { families, encounters, facts, getSpecies, moments, placeKinds, places, seasonChapters, species } from '@/content';
 import type { Period, PlaceKind, Season } from '@/content/types';
 import { toLiveMap, type LiveSpecies } from '../live';
 import { aroundSlide, buildArc, leadWeight, pickAround, pickLead, poolFor, type StoryPlace, type StoryContext } from '../neighborStory';
@@ -14,6 +14,7 @@ const ctxOf = (season: Season, period: Period, extra: Partial<StoryContext> = {}
   facts,
   chapters: seasonChapters,
   encounters,
+  families,
   season,
   period,
   live: new Map(),
@@ -101,10 +102,10 @@ describe('buildArc', () => {
   const ctx = ctxOf('fall', 'midday');
   const squirrel = getSpecies('eastern-gray-squirrel')!;
 
-  it('tells one neighbor\'s story in three to five slides, all about them', () => {
+  it('tells one neighbor\'s story in three to six slides, all about them', () => {
     const arc = buildArc(squirrel, placeOf(prospect), ctx, 'lead', seededRandom('a'));
     expect(arc.length).toBeGreaterThanOrEqual(3);
-    expect(arc.length).toBeLessThanOrEqual(5);
+    expect(arc.length).toBeLessThanOrEqual(6);
     expect(arc.every((s) => s.speciesId === squirrel.id)).toBe(true);
     expect(arc.at(-1)!.kicker).toMatch(/^Before you go · Be a good neighbor near Prospect Park/);
     expect(arc[1].kicker).toBe('Then…'); // the middle: they run into someone
@@ -168,7 +169,7 @@ describe('Also around today', () => {
 
   it('has a beginning, a middle and an end', () => {
     const arc = buildArc(getSpecies('blue-jay')!, placeOf(prospect), ctxOf('fall', 'midday'), 'lead', seededRandom('bme'));
-    expect(arc.map((s) => s.kicker)).toEqual([expect.any(String), 'Then…', 'Meanwhile', 'This fall', expect.stringMatching(/^Before you go/)]);
+    expect(arc.map((s) => s.kicker)).toEqual([expect.any(String), 'Then…', 'Meanwhile', 'This fall', 'Family and friends', expect.stringMatching(/^Before you go/)]);
   });
 
   it('runs into someone who is actually around today, and visits mention the lead', () => {
@@ -179,5 +180,15 @@ describe('Also around today', () => {
     const visit = buildArc(getSpecies('northern-cardinal')!, placeOf(prospect), ctx, 'visit', seededRandom('y'), { today: ['blue-jay'], favor: 'blue-jay' });
     expect(visit[1].cast).toEqual(['northern-cardinal', 'blue-jay']);
     expect(visit[1].cameo).toBe('blue-jay');
+  });
+});
+
+describe('Family and friends', () => {
+  it('gives every story a family slide, just before the goodbye', () => {
+    const arc = buildArc(getSpecies('white-tailed-deer')!, placeOf(lsp), ctxOf('summer', 'dawn'), 'lead', seededRandom('fam'));
+    const at = arc.findIndex((s) => s.id === 'white-tailed-deer:family');
+    expect(arc[at].kicker).toBe('Family and friends');
+    expect(arc[at].body).toBe(families['white-tailed-deer'].seasons.summer.body);
+    expect(arc[at + 1].id).toBe('white-tailed-deer:kindness');
   });
 });

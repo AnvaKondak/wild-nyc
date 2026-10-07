@@ -12,7 +12,7 @@ import { PhotoViewer } from '@/components/PhotoViewer';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
-import { encounters, getSpecies, moments, photoCreditsFor, placeKinds, speciesPhoto, speciesPhotos, type Species } from '@/content';
+import { encounters, families, getSpecies, moments, photoCreditsFor, placeKinds, speciesPhoto, speciesPhotos, type Species } from '@/content';
 import { seenLabel } from '@/lib/live';
 import { decodeGeohash } from '@/lib/geohash';
 import { fillPlace } from '@/lib/localStory';
@@ -155,6 +155,21 @@ function Profile({ species, startPhoto }: { species: Species; startPhoto: number
         <Text style={[type.kicker, { color: colors.blue }]}>How they feel about us</Text>
         <Text style={type.serifBody}>{species.withPeople}</Text>
       </View>
+
+      {/* Family and friends: growing up, their own kind, and this season. */}
+      {families[species.id] && (
+        <Card style={{ marginHorizontal: 16, marginTop: 28 }}>
+          <Text style={type.kicker}>Family and friends</Text>
+          <Text style={{ fontFamily: fonts.displayRegular, fontSize: 18, color: colors.ink }}>Growing up</Text>
+          <Text style={type.body}>{families[species.id].young}</Text>
+          <Text style={{ fontFamily: fonts.displayRegular, fontSize: 18, color: colors.ink, marginTop: 4 }}>With their own kind</Text>
+          <Text style={type.body}>{families[species.id].social}</Text>
+          <View style={{ marginTop: 6, padding: 14, borderRadius: 16, backgroundColor: colors.yellowTint, gap: 4 }}>
+            <Text style={[type.kicker, { color: colors.pink }]}>This {season} · {families[species.id].seasons[season].title}</Text>
+            <Text style={[type.body, { fontSize: 15 }]}>{families[species.id].seasons[season].body}</Text>
+          </View>
+        </Card>
+      )}
 
       {/* Who they run into: their encounters, each a door to the other neighbor's page. */}
       {friends.length > 0 && (

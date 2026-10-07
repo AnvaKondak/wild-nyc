@@ -2,6 +2,7 @@
 // season the app can land in has a full set.
 import { fillPlace } from '@/lib/localStory';
 import {
+  families,
   getSpecies,
   hurtAnimalGuide,
   kindnesses,
@@ -261,5 +262,21 @@ describe('privacy policy', () => {
     expect(text).toMatch(/Open-Meteo/);
     expect(text).toMatch(/No ads/);
     expect(text.replace('{contact}', '')).not.toMatch(/[{}]/);
+  });
+});
+
+describe('family life', () => {
+  it('tells every neighbor\'s family story, every season', () => {
+    for (const s of species) {
+      const f = families[s.id];
+      expect(f).toBeDefined();
+      expect(f.young.length).toBeGreaterThan(20);
+      expect(f.social.length).toBeGreaterThan(20);
+      for (const season of ['spring', 'summer', 'fall', 'winter'] as const) {
+        expect(f.seasons[season].title.length).toBeGreaterThan(3);
+        expect(f.seasons[season].body.length).toBeGreaterThan(20);
+      }
+    }
+    expect(Object.keys(families).every((id) => getSpecies(id))).toBe(true);
   });
 });

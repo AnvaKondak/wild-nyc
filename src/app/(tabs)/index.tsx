@@ -12,7 +12,7 @@ import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { RoundNav, StoryCard, StoryProgress, useSwipe } from '@/components/story/parts';
-import { encounters, events, facts, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, speciesPhotos, stories, type Period, type StorySlide } from '@/content';
+import { encounters, events, facts, families, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, speciesPhotos, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
 import { arrivalSlide, arrivalsAmong } from '@/lib/arrivals';
 import { dailyNotes } from '@/lib/dailyNote';
@@ -110,7 +110,7 @@ export default function RightNow() {
   const [visiting, setVisiting] = useState<string | null>(null);
   const yesterday = dateKey(new Date(now.getTime() - 24 * 60 * 60 * 1000));
   const { lead, around, arrived, ctx, here, placesInOrder, at } = useMemo(() => {
-    const ctx: StoryContext = { allSpecies, moments, facts, chapters: seasonChapters, encounters, season, period: header.period, live, weather: weather?.tags ?? [] };
+    const ctx: StoryContext = { allSpecies, moments, facts, chapters: seasonChapters, encounters, families, season, period: header.period, live, weather: weather?.tags ?? [] };
     const saved = state.neighborhoods.length > 0 ? state.neighborhoods : [hood];
     const at = Math.max(0, saved.findIndex((n) => n.id === hood.id));
     const placesInOrder = saved.map(storyPlace);

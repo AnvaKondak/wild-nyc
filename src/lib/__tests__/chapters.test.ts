@@ -30,3 +30,11 @@ describe('chapterSlides', () => {
     expect(chapterSlides('fall').some((s) => s.body.includes('around NYC and Jersey City'))).toBe(true);
   });
 });
+
+describe('family life in chapters', () => {
+  it.each(['spring', 'summer', 'fall', 'winter'] as const)('tells a few families\' %s', (season) => {
+    const family = chapterSlides(season).filter((s) => s.kicker.endsWith('Family life'));
+    expect(family.length).toBeGreaterThanOrEqual(3);
+    expect(family.every((s) => s.species.length === 1)).toBe(true);
+  });
+});
