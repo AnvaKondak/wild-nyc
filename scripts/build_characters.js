@@ -375,6 +375,115 @@ ART.titmouse = perched({
   beak: '#7E8090', legs: '#7E8090', snack: seed(),
 });
 
+ART.thrush = perched({
+  id: 'thrush', tint: C.pinkT,
+  back: '#9C8466', breast: '#F1ECE4', wing: '#8A7356', tail: '#B5643A', head: '#9C8466', eyeRing: '#F7F5F2',
+  underside: dots([[112, 226], [138, 216], [126, 250], [154, 244], [140, 276], [168, 270], [110, 280], [176, 232]], 7, '#5E4A3A'),
+  wingMarks: `<path d="M236 196 C270 206 300 226 320 256 M250 238 C280 248 304 264 318 288" fill="none" stroke="#6E5A44" stroke-width="8" stroke-linecap="round"/>`,
+  face: '<path d="M102 182 C112 194 124 200 136 202" fill="none" stroke="#6E5A44" stroke-width="7" stroke-linecap="round"/>',
+  blushAt: [168, 192],
+  beakShape: 'M96 136 C86 132 66 140 46 152 C66 158 86 162 96 160 Z', beak: '#6E6C80', beakMarks: '<path d="M90 156 L70 156" stroke="#E8C27A" stroke-width="6" stroke-linecap="round"/>',
+  legs: '#E0A68A', snack: berry('#5B3E8E', 38, 162),
+});
+
+ART.warbler = perched({
+  // Yellow-rumped warbler: the yellow patches on the rump, sides and crown.
+  id: 'warbler', tint: C.blueT,
+  back: '#7E8AA0', breast: '#F4F2F0', wing: '#5E6A80', tail: '#4E5A70', head: '#7E8AA0',
+  underside: `<path d="M110 230 l8 18 M134 240 l8 18 M118 266 l8 18 M146 268 l6 16" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`,
+  wingMarks: `<path d="M240 190 l20 18 M270 186 l22 20 M296 200 l20 18" stroke="${C.ink}" stroke-width="7" stroke-linecap="round"/><path d="M230 250 C262 262 296 264 326 256 M236 278 C266 288 300 288 330 280" fill="none" stroke="#F4F2F0" stroke-width="7" stroke-linecap="round"/>`,
+  over: `<path d="M176 230 C196 220 214 232 214 252 C200 264 180 260 176 230 Z" fill="#F2D23C" stroke="${C.ink}" stroke-width="6"/><path d="M290 286 C306 278 324 284 330 298 C316 310 298 306 290 286 Z" fill="#F2D23C" stroke="${C.ink}" stroke-width="6"/>`,
+  headMarks: '<ellipse cx="170" cy="70" rx="22" ry="12" fill="#F2D23C"/>',
+  face: `<path d="M112 120 C124 114 138 116 146 124 M112 160 C124 166 138 166 146 158" fill="none" stroke="#F7F5F2" stroke-width="6" stroke-linecap="round"/><path d="M92 178 C104 172 126 174 138 186 C136 200 120 208 104 204 C96 196 92 188 92 178 Z" fill="#F7F5F2"/>`,
+  blushAt: [168, 186],
+  beakShape: 'M96 138 C86 134 68 142 50 152 C68 158 86 160 96 158 Z', beak: '#2E2E44', legs: '#3B3A50',
+  snack: berry('#9FB3D9', 38, 160),
+});
+
+ART.ringbill = perched({
+  id: 'ringbill', tint: C.yellowT, rail: true,
+  headAt: [150, 150, 80], eyeAt: [132, 140, 17], eyeRing: '#F2E28C', lid: '#F7F5F2',
+  back: '#F7F5F2', wing: '#C3C7D3', tail: '#F7F5F2', head: '#F7F5F2',
+  wingMarks: `<path d="M296 236 L366 300 L336 322 L278 292 Z" fill="${C.ink}"/>${dots([[320, 278]], 7, '#F7F5F2')}`,
+  beakShape: 'M98 132 C84 128 56 134 32 146 C30 152 34 158 40 160 C62 162 86 164 98 162 Z', beak: '#F2C94C',
+  beakMarks: `<path d="M56 136 L60 162" stroke="${C.ink}" stroke-width="9"/>`,
+  legs: '#F2C94C',
+  snack: `<g transform="rotate(-14 30 178)"><path d="M6 178 C16 166 40 166 52 178 C40 190 16 190 6 178 Z M52 178 L66 168 L66 188 Z" fill="#B4C3D6" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/><circle cx="16" cy="176" r="3" fill="${C.ink}"/></g>`,
+});
+
+// Woodpeckers: clinging upright to a trunk, stiff tail braced against the bark.
+const woodpecker = (p) => ({
+  tint: p.tint,
+  tilt: 0,
+  svg: (m) => {
+    const bodyPath = 'M150 230 C140 160 176 118 220 124 C268 132 290 190 282 262 C276 318 246 350 210 344 C176 338 156 300 150 230 Z';
+    const body = `<path d="${bodyPath}"/>`;
+    const head = '<circle cx="176" cy="126" r="70"/>';
+    const tail = '<path d="M238 320 L276 392 L252 400 L214 330 Z"/>';
+    return `<rect x="276" y="-10" width="140" height="420" fill="#9A6A44"/><path d="M276 -10 V410" stroke="${C.ink}" stroke-width="10"/>
+      <path d="M320 40 C316 90 326 130 318 180 M360 200 C354 250 366 290 356 350 M338 300 V380" fill="none" stroke="#7A4E2A" stroke-width="8" stroke-linecap="round"/>
+      ${shadow([tail, body, head])}
+      ${shape(tail, C.ink)}
+      ${shape(body, p.back)}
+      <clipPath id="${p.id}-body"><path d="${bodyPath}"/></clipPath>
+      <g clip-path="url(#${p.id}-body)">
+        <path d="M120 150 C180 160 210 240 200 360 L120 360 Z" fill="${p.breast}"/>
+        ${p.backMarks}
+      </g>
+      <path d="${bodyPath}" fill="none" ${OL}/>
+      <path d="M262 222 l22 -8 M262 222 l20 10 M258 272 l24 -6 M258 272 l20 12" stroke="${C.ink}" stroke-width="8" stroke-linecap="round"/>
+      ${shape(head, p.head)}
+      <clipPath id="${p.id}-head">${head}</clipPath>
+      <g clip-path="url(#${p.id}-head)">${p.headMarks}</g>
+      <circle cx="176" cy="126" r="70" fill="none" ${OL}/>
+      ${eye(m.eyes, 154, 118, 18, { lid: p.lid })}
+      <ellipse cx="178" cy="160" rx="16" ry="9" fill="${C.pink}"/>
+      <path d="M112 118 L64 130 L112 142 Z" fill="#6E6C80" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/>
+      ${m.snack ? `<path d="M64 140 C54 146 52 160 62 166 C72 172 82 164 78 154" fill="none" stroke="${C.ink}" stroke-width="16" stroke-linecap="round"/><path d="M64 140 C54 146 52 160 62 166 C72 172 82 164 78 154" fill="none" stroke="#F4E7C8" stroke-width="8" stroke-linecap="round"/>` : ''}
+      ${m.hearts ? heart(60, 56, 40) + heart(108, 26, 28) : ''}
+      ${m.zees ? zee(48, 62, 32) + zee(92, 34, 22) : ''}`;
+  },
+});
+
+ART.downy = woodpecker({
+  id: 'downy', tint: C.yellowT,
+  back: C.ink, breast: '#F4F2F0', head: '#F4F2F0', lid: '#F4F2F0',
+  backMarks: `<path d="M236 130 C250 190 254 250 248 330" fill="none" stroke="#F4F2F0" stroke-width="22" stroke-linecap="round"/>${dots([[214, 210], [222, 244], [270, 214], [276, 250], [218, 280], [270, 290]], 7, '#F4F2F0')}`,
+  headMarks: `<path d="M100 40 H260 V96 C220 82 170 80 110 92 Z" fill="${C.ink}"/><path d="M172 130 C200 130 226 122 250 110 L250 150 C222 158 196 158 172 148 Z" fill="${C.ink}"/><path d="M226 72 C240 76 250 88 252 102 L222 104 Z" fill="#E5383B"/><path d="M120 166 C144 174 168 176 192 172" fill="none" stroke="${C.ink}" stroke-width="10" stroke-linecap="round"/>`,
+});
+
+ART.redbelly = woodpecker({
+  id: 'redbelly', tint: C.pinkT,
+  back: '#F4F2F0', breast: '#EADFD2', head: '#EADFD2', lid: '#EADFD2',
+  backMarks: `<path d="M210 150 H300 M206 176 H300 M206 202 H300 M206 228 H300 M208 254 H300 M212 280 H300 M218 306 H300" stroke="${C.ink}" stroke-width="12"/><path d="M150 300 C170 320 196 330 220 330" fill="none" stroke="#F2A0A0" stroke-width="16" stroke-linecap="round"/>`,
+  headMarks: `<path d="M106 96 C120 60 170 40 220 50 C246 60 256 90 252 130 C230 110 200 96 160 96 C140 96 120 100 106 106 Z" fill="#E5383B"/>`,
+});
+
+// Chimney swift: a little "cigar with wings", always flying.
+ART.swift = {
+  tint: C.blueT,
+  tilt: -6,
+  svg: (m) => {
+    const wingUp = '<path d="M214 186 C276 116 340 74 404 62 C352 108 300 160 248 214 Z"/>';
+    const wingDown = '<path d="M176 230 C120 290 62 324 -4 336 C46 292 104 250 150 210 Z"/>';
+    const body = '<path d="M70 214 C70 176 120 160 200 166 C270 172 322 190 336 212 C322 236 270 252 200 256 C120 260 70 250 70 214 Z"/>';
+    const tail = '<path d="M326 204 L366 192 L354 214 L366 236 L326 224 Z"/>';
+    return `${shadow([wingUp, wingDown, tail, body])}
+      ${shape(wingDown, '#3E3A44')}
+      ${shape(tail, '#3E3A44')}
+      ${shape(body, '#4E4A54')}
+      ${shape(wingUp, '#3E3A44')}
+      <path d="M240 196 C290 140 340 104 384 86" fill="none" stroke="#5E5A66" stroke-width="7" stroke-linecap="round"/>
+      <path d="M80 222 C92 240 112 246 132 244" fill="none" stroke="#8A8690" stroke-width="12" stroke-linecap="round"/>
+      ${eye(m.eyes, 112, 204, 20, { dark: true })}
+      <ellipse cx="146" cy="226" rx="15" ry="9" fill="${C.pink}"/>
+      <path d="M74 206 L56 214 L74 222 Z" fill="${C.ink}" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round"/>
+      ${m.snack ? `<circle cx="34" cy="210" r="7" fill="${C.ink}"/><path d="M30 204 C22 192 14 196 18 206 M38 204 C46 192 54 196 50 206" fill="#F4F2F0" stroke="${C.ink}" stroke-width="4"/>` : ''}
+      ${m.hearts ? heart(70, 70, 42) + heart(130, 40, 28) : ''}
+      ${m.zees ? zee(80, 80, 34) + zee(124, 50, 22) : ''}`;
+  },
+};
+
 // ── Water birds with their own poses.
 ART.goose = {
   // Standing on the grass: plump brown body, long black neck, white chin strap.
@@ -499,6 +608,12 @@ const SPECIES = {
   'red-winged-blackbird': 'redwing',
   'common-grackle': 'grackle',
   'tufted-titmouse': 'titmouse',
+  'hermit-thrush': 'thrush',
+  'yellow-rumped-warbler': 'warbler',
+  'ring-billed-gull': 'ringbill',
+  'downy-woodpecker': 'downy',
+  'red-bellied-woodpecker': 'redbelly',
+  'chimney-swift': 'swift',
 };
 
 const draw = (a, m) =>
