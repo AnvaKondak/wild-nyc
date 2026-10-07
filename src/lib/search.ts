@@ -1,14 +1,7 @@
 // Search: find a neighbor by name (common, friendly or scientific) or by kind ("hawk",
-// "duck", "bee"), optionally only those who live in one of your neighborhoods.
+// "duck", "bee").
 
-import type { PlaceKind, Species } from '@/content/types';
-
-export type SearchPlace = { kind: PlaceKind; placeId?: string };
-
-/** Who lives in a place at some point in the year. Rare visitors (sightings only) don't count. */
-export function livesIn(s: Species, place: SearchPlace): boolean {
-  return s.onlyAt ? !!place.placeId && s.onlyAt.includes(place.placeId) : !!s.spots[place.kind] && !s.sightingsOnly;
-}
+import type { Species } from '@/content/types';
 
 // Everyday words people search with, by kind of animal.
 const KIND_WORDS: Record<string, string[]> = {
@@ -49,10 +42,9 @@ const plain = (text: string) =>
     .replace(/[^a-z0-9]+/g, ' ');
 
 /** Neighbors matching every word of the query (in any order), A to Z. An empty query matches everyone. */
-export function searchSpecies(all: Species[], query: string, place?: SearchPlace): Species[] {
+export function searchSpecies(all: Species[], query: string): Species[] {
   const words = plain(query).split(' ').filter(Boolean);
   return all
-    .filter((s) => !place || livesIn(s, place))
     .filter((s) => {
       const hay = plain([s.friendlyName, s.commonName, s.scientificName, s.collectiveNoun, s.art.body, ...(KIND_WORDS[s.art.body] ?? [])].join(' '));
       return words.every((w) => hay.includes(w));

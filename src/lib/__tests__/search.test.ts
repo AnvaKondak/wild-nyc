@@ -1,5 +1,5 @@
 import { species } from '@/content';
-import { livesIn, searchSpecies } from '../search';
+import { searchSpecies } from '../search';
 
 const ids = (list: { id: string }[]) => list.map((s) => s.id);
 
@@ -20,12 +20,5 @@ describe('searchSpecies', () => {
 
   it('needs every word to match', () => {
     expect(ids(searchSpecies(species, 'blue jay'))).toEqual(['blue-jay']);
-  });
-
-  it('filters to who lives in a neighborhood', () => {
-    const park = searchSpecies(species, '', { kind: 'park' });
-    expect(park.every((s) => livesIn(s, { kind: 'park' }))).toBe(true);
-    expect(ids(searchSpecies(species, 'deer', { kind: 'block', placeId: 'st-george' }))).toEqual(['white-tailed-deer']);
-    expect(searchSpecies(species, 'deer', { kind: 'block', placeId: 'park-slope' })).toEqual([]);
   });
 });

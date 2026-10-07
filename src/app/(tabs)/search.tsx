@@ -1,38 +1,29 @@
-// Search: every neighbor in the app, by name or kind, or just the ones who live in one
-// of your neighborhoods. Tap one for their page.
+// Search: every neighbor in the app, by name or kind. Tap one for their page.
 
 import { useMemo, useState } from 'react';
 import { FlatList, Pressable, Text, TextInput, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ChevronRightIcon, SearchIcon } from '@/components/Icons';
-import { PillRow } from '@/components/Pills';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
 import { species, speciesPhoto } from '@/content';
 import { searchSpecies } from '@/lib/search';
-import { useAppState } from '@/state/AppState';
 import { border, colors, fonts, offsetShadow } from '@/theme/tokens';
 import { type } from '@/theme/type';
 
-const EVERYWHERE = 'everywhere';
-
 export default function Search() {
   const router = useRouter();
-  const { state } = useAppState();
   // Dev only: ?q=hawk starts with a search typed in.
   const params = useLocalSearchParams<{ q?: string }>();
   const [query, setQuery] = useState(__DEV__ && params.q ? params.q : '');
-  const [where, setWhere] = useState(EVERYWHERE);
-  const place = state.neighborhoods.find((n) => n.id === where);
-  const results = useMemo(() => searchSpecies(species, query, place ? { kind: place.kind, placeId: place.placeId } : undefined), [query, place]);
-  const pills = [{ id: EVERYWHERE, label: 'Everywhere' }, ...state.neighborhoods.map((n) => ({ id: n.id, label: n.label }))];
+  const results = useMemo(() => searchSpecies(species, query), [query]);
 
   return (
     <Screen scroll={false} contentStyle={{ gap: 14 }}>
       <View style={{ paddingHorizontal: 22, gap: 6 }}>
         <Title accent="neighbor" size={38}>Find a</Title>
-        <Text style={type.body}>Everyone in the app, A to Z. Or just who lives near you.</Text>
+        <Text style={type.body}>Everyone in the app, A to Z. Look someone up by name, or try "hawk" or "bee".</Text>
       </View>
 
       <View
@@ -65,14 +56,8 @@ export default function Search() {
         />
       </View>
 
-      {/* Kept at full height; the long list below would otherwise squeeze it. */}
-      <View style={{ flexShrink: 0 }}>
-        <PillRow items={pills} selectedId={where} onSelect={setWhere} />
-      </View>
-
       <Text style={{ paddingHorizontal: 22, fontFamily: fonts.bodySemi, fontSize: 13, color: colors.inkMuted }} accessibilityLiveRegion="polite">
         {results.length} {results.length === 1 ? 'neighbor' : 'neighbors'}
-        {place ? ` around ${place.label}` : ''}
       </Text>
 
       <FlatList
@@ -112,7 +97,7 @@ export default function Search() {
         ListEmptyComponent={
           <Text style={[type.body, { textAlign: 'center', paddingTop: 24, paddingHorizontal: 12 }]}>
             {query.trim()
-              ? `No one called "${query.trim()}"${place ? ` lives around ${place.label}` : ' lives here'}. Try "sparrow" or "bee".`
+              ? `No one called "${query.trim()}" lives here. Try "sparrow" or "bee".`
               : 'No one to show here yet.'}
           </Text>
         }
