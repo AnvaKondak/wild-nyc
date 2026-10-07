@@ -1,23 +1,32 @@
 {
   "loops": {
-    "waterfront": [
+    "waterfront-day": [
       "gull",
       "song-sparrow",
       "red-wing"
     ],
-    "park": [
-      "insects-nj",
+    "waterfront-night": [
+      "insects-nj"
+    ],
+    "park-day": [
       "robin",
       "cardinal",
       "song-sparrow",
       "blue-jay",
       "mourning-dove"
     ],
-    "block": [
+    "park-night": [
+      "insects-nj",
+      "katydid"
+    ],
+    "block-day": [
       "cardinal",
       "mourning-dove",
       "robin",
       "song-sparrow"
+    ],
+    "block-night": [
+      "insects-nj"
     ],
     "rain": []
   },
@@ -45,6 +54,12 @@
       "license": "CC BY-SA 4.0",
       "artist": "Ryan Hodnett",
       "source": "https://commons.wikimedia.org/wiki/File:Orthoptera_Calls_-_Wyckoff,_New_Jersey_2024-08-15.mp3"
+    },
+    "katydid": {
+      "title": "Pterophylla camellifolia singing.wav",
+      "license": "CC BY 4.0",
+      "artist": "peterwchen",
+      "source": "https://commons.wikimedia.org/wiki/File:Pterophylla_camellifolia_singing.wav"
     },
     "mourning-dove": {
       "title": "Zenaida macroura - Mourning Dove XC128006.ogg",

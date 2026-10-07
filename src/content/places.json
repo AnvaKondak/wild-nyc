@@ -682,7 +682,8 @@
           "Liberty Walk",
           "the waterfront path"
         ]
-      }
+      },
+      "scene": "park"
     }
   ]
 }

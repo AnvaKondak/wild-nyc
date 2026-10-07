@@ -174,6 +174,11 @@ export type Place = {
   lat: number;
   lng: number;
   local: LocalNames;
+  /**
+   * How it looks and sounds, when that differs from who lives there. Liberty State
+   * Park's neighbors are waterfront birds, but walking its wooded trails feels like a park.
+   */
+  scene?: PlaceKind;
 };
 
 export type PlaceKindInfo = {

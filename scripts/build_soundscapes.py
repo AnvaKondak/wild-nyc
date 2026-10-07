@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Mix the ambient soundscapes: a gentle, seamless loop for each kind of place.
 
-By the water: water lapping, a gull now and then. In the park: crickets and birdsong.
-On the block: a calm street with the odd car rolling by, and birds. When it rains:
-rain. Each loop is a bed (synthesized water, traffic or rain, or a recorded insect
+Birds by day, crickets by night. By the water: water lapping. In the park: birdsong,
+or crickets after dark. On the block: a calm street with the odd car rolling by. When
+it rains: rain. Each loop is a bed (synthesized water, traffic or rain, or a recorded insect
 chorus) with real bird recordings placed on top at seeded random times. Stereo: beds
 are wide, and each call comes from somewhere left to right. Recordings come from
 scripts/fetch_sounds.py; everything else is made here.
@@ -247,16 +247,26 @@ def mix(name, rnd):
     out = Stereo()
     bed = lambda make, gain: out.bed(make, rnd, gain)
     birds = lambda srcs, every, g=0.5: scatter(out, rnd, srcs, every, g)
-    if name == "waterfront":
+    crickets = lambda r: bed_from("insects-nj", r)
+    if name == "waterfront-day":
         bed(water, 0.45)
         bed(hum, 0.03)
         birds(["gull", "gull", "song-sparrow", "red-wing"], 5.0, 0.45)
-    elif name == "park":
-        bed(lambda r: bed_from("insects-nj", r), 0.3)
-        birds(["robin", "cardinal", "song-sparrow", "blue-jay", "mourning-dove"], 3.0)
-    elif name == "block":
+    elif name == "waterfront-night":
+        bed(water, 0.4)
+        bed(crickets, 0.18)
+    elif name == "park-day":
+        bed(hum, 0.03)
+        birds(["robin", "cardinal", "song-sparrow", "blue-jay", "mourning-dove"], 2.6)
+    elif name == "park-night":
+        bed(crickets, 0.4)
+        bed(lambda r: bed_from("katydid", r), 0.12)
+    elif name == "block-day":
         bed(traffic, 0.3)
         birds(["cardinal", "mourning-dove", "robin", "song-sparrow"], 4.5, 0.45)
+    elif name == "block-night":
+        bed(traffic, 0.18)
+        bed(crickets, 0.25)
     elif name == "rain":
         bed(rain, 0.4)
         bed(hum, 0.03)
@@ -265,11 +275,14 @@ def mix(name, rnd):
     return out
 
 
-# Which recordings each loop uses, for credits.
+# Which recordings each loop uses, for credits. Birds by day, crickets by night.
 USES = {
-    "waterfront": ["gull", "song-sparrow", "red-wing"],
-    "park": ["insects-nj", "robin", "cardinal", "song-sparrow", "blue-jay", "mourning-dove"],
-    "block": ["cardinal", "mourning-dove", "robin", "song-sparrow"],
+    "waterfront-day": ["gull", "song-sparrow", "red-wing"],
+    "waterfront-night": ["insects-nj"],
+    "park-day": ["robin", "cardinal", "song-sparrow", "blue-jay", "mourning-dove"],
+    "park-night": ["insects-nj", "katydid"],
+    "block-day": ["cardinal", "mourning-dove", "robin", "song-sparrow"],
+    "block-night": ["insects-nj"],
     "rain": [],
 }
 

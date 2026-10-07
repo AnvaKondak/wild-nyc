@@ -101,6 +101,8 @@ export default function RightNow() {
   // moments: steady while you look, different tomorrow and down the street.
   const place = hood.placeId ? places.find((p) => p.id === hood.placeId) : undefined;
   const placeName = place?.name ?? null;
+  // How the place looks and sounds (usually its kind; Liberty State Park looks like a park).
+  const scene = place?.scene ?? hood.kind;
   const today = dateKey(now);
   // The story follows one neighbor: today's lead here at this time of day. "Also around
   // today" at the end opens a short story about someone else (visiting).
@@ -224,7 +226,7 @@ export default function RightNow() {
   };
 
   // A gentle sound of the kind of place (or the rain), if sound is on.
-  const soundscape = pickSoundscape(hood.kind, weather?.tags);
+  const soundscape = pickSoundscape(scene, header.period, weather?.tags);
   useAmbience(soundscape, state.soundOn, focused);
   const listening = SOUNDSCAPE_LABEL[soundscape];
 
@@ -267,7 +269,7 @@ export default function RightNow() {
             setting={setting}
             period={header.period}
             season={season}
-            placeKind={hood.kind}
+            placeKind={scene}
             placeId={hood.placeId}
             variant={hashString(`${slide.id}:${today}`) % 3}
             moonLit={moonLitFraction(now)}
