@@ -30,13 +30,14 @@ const CHIP_TINTS = [colors.pinkTint, colors.yellowTint, colors.blueTint];
 
 export default function SpeciesProfile() {
   // Dev only: ?photo=1 opens on that photo, big.
-  const { id, photo } = useLocalSearchParams<{ id: string; photo?: string }>();
+  // Dev only: ?y=1400 opens scrolled down that far.
+  const { id, photo, y } = useLocalSearchParams<{ id: string; photo?: string; y?: string }>();
   const species = getSpecies(id);
   if (!species) return <NotFound />;
-  return <Profile species={species} startPhoto={__DEV__ && photo ? Number(photo) : null} />;
+  return <Profile species={species} startPhoto={__DEV__ && photo ? Number(photo) : null} startY={__DEV__ && y ? Number(y) : 0} />;
 }
 
-function Profile({ species, startPhoto }: { species: Species; startPhoto: number | null }) {
+function Profile({ species, startPhoto, startY }: { species: Species; startPhoto: number | null; startY: number }) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const now = new Date();
@@ -58,7 +59,7 @@ function Profile({ species, startPhoto }: { species: Species; startPhoto: number
   const meet = (id: string) => router.push({ pathname: '/species/[id]', params: { id } });
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: colors.paper }} contentContainerStyle={{ paddingBottom: insets.bottom + 32 }}>
+    <ScrollView style={{ flex: 1, backgroundColor: colors.paper }} contentContainerStyle={{ paddingBottom: insets.bottom + 32 }} contentOffset={{ x: 0, y: startY }}>
       {/* Where they live: their kind of place, in today's season and light, with them in it. */}
       <View
         onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
@@ -161,9 +162,11 @@ function Profile({ species, startPhoto }: { species: Species; startPhoto: number
         <Card style={{ marginHorizontal: 16, marginTop: 28 }}>
           <Text style={type.kicker}>Family and friends</Text>
           <Text style={{ fontFamily: fonts.displayRegular, fontSize: 18, color: colors.ink }}>Growing up</Text>
-          <Text style={type.body}>{families[species.id].young}</Text>
+          {/* No fixed line height here: on iOS a paragraph with one can be measured at
+              four lines and drawn at three, cutting off the end ("…around three mo"). */}
+          <Text style={[type.body, { lineHeight: undefined }]}>{families[species.id].young}</Text>
           <Text style={{ fontFamily: fonts.displayRegular, fontSize: 18, color: colors.ink, marginTop: 4 }}>With their own kind</Text>
-          <Text style={type.body}>{families[species.id].social}</Text>
+          <Text style={[type.body, { lineHeight: undefined }]}>{families[species.id].social}</Text>
           <View style={{ marginTop: 6, padding: 14, borderRadius: 16, backgroundColor: colors.yellowTint, gap: 4 }}>
             <Text style={[type.kicker, { color: colors.pink }]}>This {season} · {families[species.id].seasons[season].title}</Text>
             <Text style={[type.body, { fontSize: 15 }]}>{families[species.id].seasons[season].body}</Text>

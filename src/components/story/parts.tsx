@@ -64,7 +64,8 @@ export function StoryCard({ kicker, title, body, fact, theme, children, bottom =
   const card = (
       <View
         style={{
-          padding: 18,
+          // 18.5 + the 1.5 border: text starts on a whole point (see Card).
+          padding: 18 + (Math.ceil(border.width) - border.width),
           gap: 8,
           borderRadius: 22,
           borderWidth: border.width,

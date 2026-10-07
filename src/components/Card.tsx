@@ -28,7 +28,10 @@ export function Card({
           padding: 20,
           gap: 12,
         },
-        bordered && { borderWidth: border.width, borderColor: colors.ink },
+        // Padding that makes up the border's half point, so text inside starts on a whole
+        // point. Otherwise iOS can measure a paragraph at one width and draw it a hair
+        // wider, and a line that just fits spills past the edge.
+        bordered && { borderWidth: border.width, borderColor: colors.ink, padding: 20 + (Math.ceil(border.width) - border.width) },
         shadow && { boxShadow: offsetShadow(shadow, 4) },
         style,
       ]}
