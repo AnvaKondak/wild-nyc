@@ -24,6 +24,7 @@ import { currentNeighborhood } from '@/state/selectors';
 import { periodThemes } from '@/theme/periodTheme';
 import { border, colors, fonts } from '@/theme/tokens';
 import { type } from '@/theme/type';
+import { lowerName } from '@/lib/names';
 
 const CHIP_TINTS = [colors.pinkTint, colors.yellowTint, colors.blueTint];
 
@@ -40,7 +41,7 @@ function Profile({ species, startPhoto }: { species: Species; startPhoto: number
   const insets = useSafeAreaInsets();
   const now = new Date();
   const season = seasonOf(now);
-  const name = species.friendlyName.toLowerCase();
+  const name = lowerName(species.friendlyName);
   const seen = seenLabel(useLiveData().live.get(species.id), now);
   const { state } = useAppState();
   const hood = currentNeighborhood(state);
@@ -166,14 +167,14 @@ function Profile({ species, startPhoto }: { species: Species; startPhoto: number
                 key={e.id}
                 onPress={() => meet(other.id)}
                 accessibilityRole="button"
-                accessibilityLabel={`${e.title}. Meet the ${other.friendlyName.toLowerCase()}`}
+                accessibilityLabel={`${e.title}. Meet the ${lowerName(other.friendlyName)}`}
                 style={({ pressed }) => ({ flexDirection: 'row', gap: 12, padding: 14, borderRadius: 18, borderWidth: border.width, borderColor: colors.ink, backgroundColor: colors.white, opacity: pressed ? 0.7 : 1 })}
               >
                 <Sticker art={other.art} photo={speciesPhoto(other.id)} speciesId={other.id} size={56} tint={colors[other.tint]} rotate={-4} />
                 <View style={{ flex: 1, gap: 3 }}>
                   <Text style={{ fontFamily: fonts.displayRegular, fontSize: 17, lineHeight: 21, color: colors.ink }}>{e.title}</Text>
                   <Text style={[type.body, { fontSize: 13, lineHeight: 19 }]}>{fillPlace(e.body, placeKinds[species.homeScene].where, local)}</Text>
-                  <Text style={{ fontFamily: fonts.bodySemi, fontSize: 13, color: colors.blue }}>Meet the {other.friendlyName.toLowerCase()} ›</Text>
+                  <Text style={{ fontFamily: fonts.bodySemi, fontSize: 13, color: colors.blue }}>Meet the {lowerName(other.friendlyName)} ›</Text>
                 </View>
               </Pressable>
             );

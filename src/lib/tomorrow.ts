@@ -12,6 +12,7 @@ import { fillPlace, placePhrase } from './localStory';
 import { pickLead, poolFor, type StoryContext, type StoryPlace } from './neighborStory';
 import { dateKey, seasonOf } from './time';
 import type { Forecast } from './weather';
+import { lowerName } from './names';
 
 const DAY = 24 * 60 * 60 * 1000;
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -69,7 +70,7 @@ export function buildTomorrow({ places, index, ctx, now, forecast, random }: Tom
     .sort((a, b) => a.days - b.days)[0];
   if (due) {
     const [m, d] = due.s.arrives!.split('-').map(Number);
-    const name = due.s.friendlyName.toLowerCase();
+    const name = lowerName(due.s.friendlyName);
     const spot = due.s.homeScene === 'waterfront' ? '{water}' : due.s.homeScene === 'park' ? '{green}' : '{street}';
     return slide(
       due.days === 1 ? `The ${name} are due any day now` : `The ${name} are due this week`,
@@ -104,7 +105,7 @@ export function buildTomorrow({ places, index, ctx, now, forecast, random }: Tom
   const yesterday = dateKey(now);
   const lead = pickLead(places, index, morning, dateKey(tomorrow), yesterday) ?? pool[0];
   return slide(
-    `Tomorrow morning: the ${lead.friendlyName.toLowerCase()}`,
+    `Tomorrow morning: the ${lowerName(lead.friendlyName)}`,
     `${lead.rightNow[season]} Come say good morning ${phrase}.`,
     lead.id,
   );

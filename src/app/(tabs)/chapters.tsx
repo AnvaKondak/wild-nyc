@@ -21,6 +21,7 @@ import { hashString } from '@/lib/random';
 import { seasonOf } from '@/lib/time';
 import { periodThemes } from '@/theme/periodTheme';
 import { border, colors, fonts } from '@/theme/tokens';
+import { lowerName } from '@/lib/names';
 
 const SEASONS: Season[] = ['spring', 'summer', 'fall', 'winter'];
 /** Each season gets its own light: spring mornings, summer middays, fall evenings, winter nights. */
@@ -114,7 +115,7 @@ export default function Chapters() {
             {i > 0 && (
               <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 6 }}>
                 {slide.species.map((id) => (
-                  <Chip key={id} label={`Meet the ${getSpecies(id)!.friendlyName.toLowerCase()}`} onPress={() => meet(id)} ink={theme.ink} fill={theme.bg} />
+                  <Chip key={id} label={`Meet the ${lowerName(getSpecies(id)!.friendlyName)}`} onPress={() => meet(id)} ink={theme.ink} fill={theme.bg} />
                 ))}
               </View>
             )}

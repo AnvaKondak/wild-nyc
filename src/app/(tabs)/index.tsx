@@ -36,6 +36,7 @@ import { useWeather } from '@/state/Weather';
 import { currentNeighborhood } from '@/state/selectors';
 import { periodThemes } from '@/theme/periodTheme';
 import { border, colors, fonts, offsetShadow } from '@/theme/tokens';
+import { lowerName } from '@/lib/names';
 
 const PERIOD_LABELS: Record<Period, string> = { dawn: 'Dawn', midday: 'Midday', dusk: 'Dusk', night: 'Night' };
 const GREETINGS: Record<Period, string> = { dawn: 'Good morning', midday: 'Good afternoon', dusk: 'Good evening', night: 'Hello, night owl' };
@@ -233,7 +234,7 @@ export default function RightNow() {
   if (!slide) return <Screen background={theme.bg} scroll={false}>{null}</Screen>;
 
   const species = slide.speciesId ? getSpecies(slide.speciesId) : undefined;
-  const ctaLabel = slide.cta ?? (species ? `Meet the ${species.friendlyName.toLowerCase()}` : 'Learn more');
+  const ctaLabel = slide.cta ?? (species ? `Meet the ${lowerName(species.friendlyName)}` : 'Learn more');
   // From "Also around today": someone else's short story, or back to today's lead.
   const openNeighbor = (id: string) => {
     setVisiting(id === lead?.id ? null : id);
@@ -249,9 +250,9 @@ export default function RightNow() {
 
   const others = around.filter((s) => s.id !== lead?.id);
   const homeCast = [...(lead ? [lead.id] : []), ...others.map((s) => s.id)];
-  const homeList = namesList(others.map((s) => s.friendlyName.toLowerCase()));
+  const homeList = namesList(others.map((s) => lowerName(s.friendlyName)));
   const homeBody = lead
-    ? `Today we're following the ${lead.friendlyName.toLowerCase()}.${homeList ? ` The ${homeList} are around too.` : ''}`
+    ? `Today we're following the ${lowerName(lead.friendlyName)}.${homeList ? ` The ${homeList} are around too.` : ''}`
     : 'Come see who\'s around.';
 
   const setting = slide.setting ?? (header.period === 'night' ? 'night-sky' : 'sky');
@@ -376,7 +377,7 @@ export default function RightNow() {
               <StoryCard kicker={GREETINGS[header.period]} title={placeName ? `Today in ${placeName}` : `Today ${here.where}`} body={homeBody} theme={theme} bottom />
               <View style={{ paddingHorizontal: 16, paddingBottom: 8 }}>
                 <Button
-                  label={lead ? `Today's story: the ${lead.friendlyName.toLowerCase()}` : "Today's story"}
+                  label={lead ? `Today's story: the ${lowerName(lead.friendlyName)}` : "Today's story"}
                   onPress={startStory}
                   shadow={theme.shadow}
                   style={{ backgroundColor: theme.btnBg }}

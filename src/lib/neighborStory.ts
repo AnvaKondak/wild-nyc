@@ -12,6 +12,7 @@ import type { Encounter, Fact, LocalNames, Moment, Period, PlaceKind, SeasonChap
 import type { LiveMap } from './live';
 import { fillPlace, pickFact, pickVariant, placePhrase, usableVariants, withLocation } from './localStory';
 import { pick, seededRandom, shuffle } from './random';
+import { lowerName, possessive } from './names';
 
 const PERIODS: Period[] = ['dawn', 'midday', 'dusk', 'night'];
 // "Also around today": today's neighbor plus eight others, nine in all (a 3 × 3 grid).
@@ -163,7 +164,7 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
   const fill = (text: string) => fillPlace(text, phrase, place.local, random);
   const { weather, everyday } = momentsNow(s.id, ctx);
   const named = place.placeName !== null;
-  const friendly = s.friendlyName.toLowerCase();
+  const friendly = lowerName(s.friendlyName);
   const slides: StorySlide[] = [];
   const usedFacts = new Set<string>();
   const fact = () => {
@@ -248,7 +249,7 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
     season,
     period,
     kicker: `This ${season}`,
-    title: `The ${friendly}' ${season} ${phrase}`,
+    title: `The ${possessive(friendly)} ${season} ${phrase}`,
     body: s.rightNow[season],
     speciesId: s.id,
     setting: first?.setting,

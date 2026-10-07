@@ -7,6 +7,7 @@ import type { LocalNames, Period, Season, Species, StorySlide } from '@/content/
 import { fillPlace, placePhrase } from './localStory';
 import { pick } from './random';
 import { describeWeather, type Sky, type Weather } from './weather';
+import { lowerName } from './names';
 
 type SkyGroup = 'clear' | 'gray' | 'rain' | 'snow' | 'fog' | 'unknown';
 
@@ -66,7 +67,7 @@ const WHEN: Record<Period, string> = { dawn: 'This morning', midday: 'Today', du
 
 /** "the robins, the sparrows and the squirrels". Friendly names are plural, so it's always "are". */
 export function listNames(list: Species[]): string {
-  const names = list.map((s) => `the ${s.friendlyName.toLowerCase()}`);
+  const names = list.map((s) => `the ${lowerName(s.friendlyName)}`);
   return names.length <= 1 ? (names[0] ?? '') : `${names.slice(0, -1).join(', ')} and ${names.at(-1)}`;
 }
 
