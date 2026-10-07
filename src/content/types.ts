@@ -77,6 +77,8 @@ export type Species = {
   withPeople: string;
 };
 
+export type Mood = 'hello' | 'snack' | 'happy' | 'sleepy';
+
 export type StorySlide = {
   id: string;
   season: Season;
@@ -104,6 +106,8 @@ export type StorySlide = {
   arrivedSpecies?: string[];
   /** Which of the species' photos to show, so a story doesn't repeat one picture. */
   photoIndex?: number;
+  /** Which drawing of the animal fits what the slide says: sleeping, eating, delighted or just saying hello. */
+  mood?: Mood;
   /** Two or more neighbors in one moment (an encounter): shown together in the sticker. */
   cast?: string[];
   /** A neighbor who appears in the scene behind this slide (flying past, perched nearby). */

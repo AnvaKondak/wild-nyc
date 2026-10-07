@@ -215,7 +215,7 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
       setting: first?.setting,
       kind: 'scene',
     });
-  } else if (role === 'lead') {
+  } else {
     const together = ctx.chapters.find((c) => c.season === season)?.stories.filter((st) => st.species.includes(s.id)) ?? [];
     if (together.length > 0) {
       const st = pick(together, random);
@@ -235,24 +235,24 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
     }
   }
 
-  if (role === 'lead') {
-    // 3. Meanwhile: another moment.
-    const rest = shuffle([...weather, ...everyday].filter((m) => m !== first), random);
-    if (rest[0]) slides.push(momentSlide(rest[0], 'Meanwhile'));
+  // 3. Meanwhile: another moment. Every neighbor gets a whole story, lead or not.
+  const rest = shuffle([...weather, ...everyday].filter((m) => m !== first), random);
+  if (rest[0]) slides.push(momentSlide(rest[0], 'Meanwhile'));
+  // A visit gets one more moment when there is one, so it isn't over in a blink.
+  if (role === 'visit' && !meet && rest[1]) slides.push(momentSlide(rest[1], 'Later'));
 
-    // 4. The bigger picture: their season, in this place.
-    slides.push({
-      id: `${s.id}:season`,
-      season,
-      period,
-      kicker: `This ${season}`,
-      title: `The ${friendly}' ${season} ${phrase}`,
-      body: s.rightNow[season],
-      speciesId: s.id,
-      setting: first?.setting,
-      kind: 'scene',
-    });
-  }
+  // 4. The bigger picture: their season, in this place.
+  slides.push({
+    id: `${s.id}:season`,
+    season,
+    period,
+    kicker: `This ${season}`,
+    title: `The ${friendly}' ${season} ${phrase}`,
+    body: s.rightNow[season],
+    speciesId: s.id,
+    setting: first?.setting,
+    kind: 'scene',
+  });
 
   // 5. The end: how to be a good neighbor to them.
   slides.push({

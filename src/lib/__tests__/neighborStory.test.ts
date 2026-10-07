@@ -118,9 +118,10 @@ describe('buildArc', () => {
     expect(arc[0].kicker).toBe('In the rain');
   });
 
-  it('keeps a visit short', () => {
+  it('gives a visit a whole story too', () => {
     const arc = buildArc(squirrel, unnamed('block'), ctx, 'visit', seededRandom('c'));
-    expect(arc).toHaveLength(3);
+    expect(arc.length).toBeGreaterThanOrEqual(4);
+    expect(arc[arc.length - 1].id).toBe('eastern-gray-squirrel:kindness');
   });
 
   it('has a story for every lead, everywhere, all year', () => {

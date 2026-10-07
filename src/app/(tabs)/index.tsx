@@ -22,6 +22,7 @@ import { buildIntro } from '@/lib/intro';
 import { buildTomorrow } from '@/lib/tomorrow';
 import type { Neighborhood } from '@/lib/neighborhood';
 import { aroundSlide, buildArc, pickAround, pickLead, poolFor, type StoryContext, type StoryPlace } from '@/lib/neighborStory';
+import { withMoods } from '@/lib/mood';
 import { hashString, seededRandom } from '@/lib/random';
 import { dateKey, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
 import { askForNotes, cancelNotes, scheduleNotes } from '@/lib/notifications';
@@ -124,7 +125,7 @@ export default function RightNow() {
     const visit = visiting ? getSpecies(visiting) : undefined;
     // Today's cast: encounters are with neighbors who are actually around.
     const cast = [...(lead ? [lead.id] : []), ...around.map((s) => s.id)];
-    if (visit) return [...buildArc(visit, here, ctx, 'visit', random, { today: cast, favor: lead?.id }), last];
+    if (visit) return withMoods([...buildArc(visit, here, ctx, 'visit', random, { today: cast, favor: lead?.id }), last]);
     // The story opens on where we are, how it feels, who's up, and who we're following.
     const intro = buildIntro({
       period: header.period,
@@ -147,7 +148,8 @@ export default function RightNow() {
     // A big moment of the season (the dawn chorus, a migration night, a snow day) comes first.
     const moment = activeEvent(events, now, weather);
     const big = moment ? [eventSlide(moment, now, phrase, here.local, random)] : [];
-    return [intro, ...big, ...(arrival ? [arrival] : []), ...(lead ? buildArc(lead, here, ctx, 'lead', random, { today: cast }) : []), teaser, last];
+    // Each drawing matches what its slide says: asleep, snacking, delighted or saying hello.
+    return withMoods([intro, ...big, ...(arrival ? [arrival] : []), ...(lead ? buildArc(lead, here, ctx, 'lead', random, { today: cast }) : []), teaser, last]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lead, around, arrived, ctx, here, visiting, placesInOrder, at]);
 
@@ -438,7 +440,7 @@ export default function RightNow() {
                     art={(species ?? getSpecies('rock-pigeon')!).art}
                     photo={slidePhoto}
                     speciesId={species?.id}
-                    mood={slide.photoIndex ?? 0}
+                    mood={slide.mood ?? slide.photoIndex ?? 0}
                     size={stickerSize}
                     tint={tileFor(slide)}
                     rotate={-5}

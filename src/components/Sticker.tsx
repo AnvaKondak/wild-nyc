@@ -1,6 +1,6 @@
 import { Image, View, type StyleProp, type ViewStyle } from 'react-native';
 import Svg, { G } from 'react-native-svg';
-import type { Setting } from '@/content/types';
+import type { Mood, Setting } from '@/content/types';
 import { colors, offsetShadow } from '@/theme/tokens';
 import { CritterArt, type ArtSpec } from './art/CritterArt';
 import { Character, hasCharacter } from './characters/Character';
@@ -22,7 +22,7 @@ type Props = {
   /** Whose sticker. When they've been drawn, the drawing is used instead of the photo. */
   speciesId?: string;
   /** Which of their drawings (moods), so each slide of a story shows a different one. */
-  mood?: number;
+  mood?: number | Mood;
   style?: StyleProp<ViewStyle>;
 };
 

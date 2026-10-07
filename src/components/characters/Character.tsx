@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
+import type { Mood } from '@/content/types';
 import { useReduceMotion } from '../backdrop/motion';
 import { characterXml } from './xml';
 
@@ -20,13 +21,14 @@ export function moodCount(speciesId: string): number {
 type Props = {
   speciesId: string;
   size: number;
-  /** Which drawing: hello, snack, happy, sleepy… Wraps around, like photo indexes. */
-  mood?: number;
+  /** Which drawing: a mood by name, or an index that wraps around like photo indexes. */
+  mood?: number | Mood;
 };
 
 export function Character({ speciesId, size, mood = 0 }: Props) {
   const frames = characterXml[speciesId];
-  const frame = frames[((mood % frames.length) + frames.length) % frames.length];
+  const at = typeof mood === 'string' ? Math.max(0, frames.findIndex((f) => f.mood === mood)) : ((mood % frames.length) + frames.length) % frames.length;
+  const frame = frames[at];
   const still = useReduceMotion();
 
   // Blink: eyes shut for a moment every few seconds, at a slightly different pace each time.
