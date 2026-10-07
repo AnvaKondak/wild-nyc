@@ -484,6 +484,84 @@ ART.swift = {
   },
 };
 
+// Hawks and falcons: hooked beak with a yellow base. Their snack is a feather for the
+// nest (or, for kestrels, a grasshopper), never prey.
+const HOOK = 'M98 126 C84 118 60 126 50 146 C48 160 58 168 66 162 C66 152 76 150 98 162 Z';
+const CERE = '<path d="M98 128 C92 126 86 130 84 140 C88 150 94 156 98 158 Z" fill="#F2C94C" stroke="#1A1A2E" stroke-width="6"/>';
+const feather = (x = 44, y = 168) => `<g transform="rotate(-30 ${x} ${y})"><path d="M${x - 30} ${y} C${x - 10} ${y - 14} ${x + 14} ${y - 12} ${x + 30} ${y} C${x + 14} ${y + 12} ${x - 10} ${y + 14} ${x - 30} ${y} Z" fill="#F4F2F0" stroke="#1A1A2E" stroke-width="6"/><path d="M${x - 34} ${y} H${x + 30}" stroke="#1A1A2E" stroke-width="4"/></g>`;
+const fishSnack = (x = 30, y = 178) => `<g transform="rotate(-14 ${x} ${y})"><path d="M${x - 24} ${y} C${x - 14} ${y - 12} ${x + 10} ${y - 12} ${x + 22} ${y} C${x + 10} ${y + 12} ${x - 14} ${y + 12} ${x - 24} ${y} Z M${x + 22} ${y} L${x + 36} ${y - 10} L${x + 36} ${y + 10} Z" fill="#B4C3D6" stroke="#1A1A2E" stroke-width="6" stroke-linejoin="round"/><circle cx="${x - 14}" cy="${y - 2}" r="3" fill="#1A1A2E"/></g>`;
+
+ART.redtail = perched({
+  id: 'redtail', tint: C.yellowT,
+  headAt: [150, 150, 86], eyeAt: [134, 138, 22],
+  back: '#7A5236', breast: '#F4EDE4', wing: '#6A4630', tail: '#C0532E', head: '#8A5E40',
+  underside: dots([[104, 286], [124, 296], [146, 302], [168, 306], [116, 312], [140, 318], [190, 308]], 8, '#6A4630'),
+  tailMarks: `<path d="M318 300 L384 318" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`,
+  wingMarks: dots([[246, 210], [276, 204], [262, 244], [294, 238], [282, 274]], 7, '#B9946E'),
+  face: '<path d="M90 176 C104 170 128 174 140 188 C138 204 120 212 104 208 C96 200 92 190 90 176 Z" fill="#F4EDE4"/>',
+  beakShape: HOOK, beak: '#5E5E6E', beakMarks: CERE, legs: '#F2C94C', snack: feather(),
+});
+
+ART.coopers = perched({
+  id: 'coopers', tint: C.blueT,
+  headAt: [150, 150, 84], eyeAt: [134, 138, 18], eyeRing: '#E5484D',
+  back: '#5E6A80', breast: '#F4EDE4', wing: '#556075', tail: '#5E6A80', head: '#C9B8AE',
+  tailShape: '<path d="M300 256 L404 284 L400 318 L294 302 Z"/>',
+  tailMarks: `<path d="M330 268 l-6 30 M356 276 l-6 30 M382 284 l-6 28" stroke="${C.ink}" stroke-width="7" stroke-linecap="round"/><path d="M398 290 L394 314" stroke="#F4F2F0" stroke-width="7"/>`,
+  underside: `<path d="M96 224 H210 M92 248 H210 M94 272 H210 M100 296 H210 M110 320 H210" stroke="#D9774A" stroke-width="9" stroke-linecap="round"/>`,
+  headMarks: '<path d="M50 50 H260 V118 C210 100 160 96 60 112 Z" fill="#3B4256"/>',
+  beakShape: HOOK, beak: '#3B3A50', beakMarks: CERE, legs: '#F2C94C', snack: feather(),
+});
+
+ART.kestrel = perched({
+  id: 'kestrel', tint: C.pinkT,
+  back: '#C76A3A', breast: '#F2D3B5', wing: '#8FA0C0', tail: '#C76A3A', head: '#F4EDE4',
+  underside: dots([[112, 236], [134, 258], [118, 280], [150, 286], [170, 246], [96, 262]], 6, C.ink),
+  wingMarks: dots([[246, 210], [276, 206], [262, 244], [296, 240], [284, 276]], 7, C.ink),
+  tailMarks: `<path d="M352 280 l-6 30" stroke="${C.ink}" stroke-width="12"/>`,
+  headMarks: '<path d="M50 50 H260 V110 C210 92 160 88 60 104 Z" fill="#8FA0C0"/><circle cx="196" cy="80" r="14" fill="#C76A3A"/>',
+  face: `<path d="M124 162 L118 202 M190 148 L186 194" stroke="${C.ink}" stroke-width="11" stroke-linecap="round"/>`,
+  blushAt: [156, 192],
+  beakShape: HOOK, beak: '#5E6A80', beakMarks: CERE, legs: '#F2C94C',
+  snack: `<g transform="rotate(-24 40 170)"><ellipse cx="40" cy="170" rx="26" ry="9" fill="#7FBF5A" stroke="${C.ink}" stroke-width="6"/><path d="M50 166 L68 150 L74 170 M30 174 L22 190" fill="none" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/></g>`,
+});
+
+ART.peregrine = perched({
+  id: 'peregrine', tint: C.yellowT, rail: true,
+  headAt: [150, 150, 84], eyeAt: [132, 138, 19], eyeRing: '#F2C94C', lid: C.ink,
+  back: '#5E6A80', breast: '#F4F2F0', wing: '#4E5A70', tail: '#4E5A70', head: '#F4F2F0',
+  underside: `<path d="M100 270 H220 M104 292 H220 M112 314 H220" stroke="#3B4256" stroke-width="7" stroke-linecap="round" stroke-dasharray="14 10"/>`,
+  tailMarks: `<path d="M330 268 l-6 28 M358 276 l-6 28" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`,
+  headMarks: `<path d="M40 40 H260 V200 C230 180 214 150 196 140 C170 130 140 128 110 132 L40 140 Z" fill="${C.ink}"/>`,
+  face: `<path d="M116 150 C128 170 132 196 126 222 L150 216 C154 192 150 166 140 148 Z" fill="${C.ink}"/>`,
+  blushAt: [172, 196],
+  beakShape: HOOK, beak: '#3B3A50', beakMarks: CERE, legs: '#F2C94C', snack: feather(),
+});
+
+ART.tern = perched({
+  id: 'tern', tint: C.blueT, rail: true,
+  headAt: [150, 150, 78], eyeAt: [134, 136, 18], darkEye: true,
+  back: '#F7F5F2', wing: '#C3C7D3', tail: '#F7F5F2', head: '#F7F5F2',
+  tailShape: '<path d="M300 262 L408 266 L364 292 L408 314 L294 306 Z"/>',
+  wingMarks: `<path d="M300 250 L366 300" stroke="${C.ink}" stroke-width="12" stroke-linecap="round"/>`,
+  headMarks: `<path d="M40 40 H260 V150 C210 124 160 116 60 132 Z" fill="${C.ink}"/>`,
+  beakShape: 'M98 134 C82 130 52 140 16 154 C52 160 82 164 98 162 Z', beak: '#E8603C',
+  beakMarks: `<path d="M34 148 L16 154 L34 158 Z" fill="${C.ink}"/>`,
+  legs: '#E5484D', snack: fishSnack(26, 176),
+});
+
+ART.nightheron = perched({
+  // Stocky, hunched, black cap and back, big red eye, white plumes.
+  id: 'nightheron', tint: C.blueT,
+  headAt: [146, 152, 92], eyeAt: [126, 142, 20], eyeRing: '#E5484D',
+  back: '#2E3448', wing: '#A9ACB8', tail: '#8A8E9C', head: '#F4F2F0', breast: '#F4F2F0',
+  headMarks: '<path d="M40 40 H260 V124 C210 104 160 100 60 118 Z" fill="#2E3448"/>',
+  face: `<path d="M216 112 C266 132 296 172 306 222" fill="none" stroke="${C.ink}" stroke-width="14" stroke-linecap="round"/><path d="M216 112 C266 132 296 172 306 222" fill="none" stroke="#F4F2F0" stroke-width="6" stroke-linecap="round"/>`,
+  blushAt: [158, 192],
+  beakShape: 'M94 128 C78 122 48 132 18 150 C48 160 78 166 96 162 Z', beak: C.ink, legs: '#E8C86A',
+  snack: fishSnack(22, 174),
+});
+
 // ── Water birds with their own poses.
 ART.goose = {
   // Standing on the grass: plump brown body, long black neck, white chin strap.
@@ -614,6 +692,12 @@ const SPECIES = {
   'downy-woodpecker': 'downy',
   'red-bellied-woodpecker': 'redbelly',
   'chimney-swift': 'swift',
+  'red-tailed-hawk': 'redtail',
+  'coopers-hawk': 'coopers',
+  'american-kestrel': 'kestrel',
+  'peregrine-falcon': 'peregrine',
+  'common-tern': 'tern',
+  'black-crowned-night-heron': 'nightheron',
 };
 
 const draw = (a, m) =>
