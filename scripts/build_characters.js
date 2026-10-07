@@ -178,6 +178,7 @@ const perched = (p) => ({
         <path d="${p.wingSeam ?? 'M206 150 C198 214 214 272 236 306'}" fill="none" stroke="${C.ink}" stroke-width="7"/>
       </g>
       <path d="${bodyPath}" fill="none" ${OL}/>
+      ${p.over ?? ''}
       ${p.crest ? shape(p.crest, p.head) : ''}
       ${shape(head, p.head)}
       <clipPath id="${p.id}-head">${head}</clipPath>
@@ -306,6 +307,74 @@ ART.whitethroat = perched({
   snack: `<ellipse cx="50" cy="156" rx="13" ry="8" transform="rotate(-20 50 156)" fill="#E8C27A" stroke="${C.ink}" stroke-width="6"/>`,
 });
 
+// Small snacks at the beak tip.
+const seed = (x = 50, y = 158) => `<ellipse cx="${x}" cy="${y}" rx="13" ry="8" transform="rotate(-20 ${x} ${y})" fill="#E8C27A" stroke="${C.ink}" stroke-width="6"/>`;
+const berry = (color, x = 40, y = 160) => `<circle cx="${x}" cy="${y}" r="15" fill="${color}" stroke="${C.ink}" stroke-width="6"/><circle cx="${x - 5}" cy="${y - 5}" r="4" fill="#fff"/>`;
+
+ART.songsparrow = perched({
+  id: 'songsparrow', tint: C.pinkT,
+  back: '#B88A5E', breast: '#F1ECE4', wing: '#9A6440', tail: '#7A5236', head: '#C9BFB4',
+  underside: `<path d="M110 220 l10 22 M136 230 l8 22 M120 262 l10 22 M150 270 l8 20 M170 240 l8 22 M100 290 l10 20 M140 300 l8 18" stroke="#7A4E2A" stroke-width="8" stroke-linecap="round"/><circle cx="150" cy="254" r="13" fill="#7A4E2A"/>`,
+  wingMarks: `<path d="M236 186 l22 22 M266 180 l24 24 M296 196 l22 22 M250 226 l22 22 M282 230 l22 20" stroke="${C.ink}" stroke-width="9" stroke-linecap="round"/>`,
+  headMarks: `<path d="M50 50 H260 V108 C200 94 140 94 60 114 Z" fill="#8A5A3A"/><path d="M100 82 C150 70 200 72 250 90" fill="none" stroke="#C9BFB4" stroke-width="12" stroke-linecap="round"/><path d="M150 150 C180 152 206 160 230 174" fill="none" stroke="#8A5A3A" stroke-width="10" stroke-linecap="round"/>`,
+  face: `<path d="M100 178 C112 192 126 200 140 204" fill="none" stroke="#7A4E2A" stroke-width="9" stroke-linecap="round"/>`,
+  blushAt: [168, 192],
+  beak: '#A89A90', legs: '#E0A68A', snack: seed(),
+});
+
+ART.mockingbird = perched({
+  id: 'mockingbird', tint: C.blueT,
+  back: '#A9A9B4', breast: '#ECECEF', wing: '#5E5E6E', tail: '#4E4E5E', head: '#A9A9B4', eyeRing: '#F2E28C',
+  tailShape: '<path d="M300 256 L404 282 L400 316 L294 302 Z"/>',
+  tailMarks: '<path d="M318 292 L396 310" stroke="#F4F2F0" stroke-width="8" stroke-linecap="round"/>',
+  wingMarks: `<path d="M262 232 C286 226 306 238 314 256 C298 268 276 266 262 256 Z" fill="#F4F2F0"/><path d="M230 200 C262 206 292 220 314 240 M236 284 C266 292 300 292 330 282" fill="none" stroke="#F4F2F0" stroke-width="7" stroke-linecap="round"/>`,
+  face: `<path d="M98 134 C120 132 140 138 160 148" fill="none" stroke="#5E5E6E" stroke-width="8" stroke-linecap="round"/>`,
+  beakShape: 'M96 136 C86 132 64 140 40 152 C64 158 86 162 96 160 Z', beak: '#2E2E44', legs: '#3B3A50',
+  snack: berry('#E5484D', 34, 162),
+});
+
+ART.catbird = perched({
+  id: 'catbird', tint: C.yellowT,
+  back: '#7E8296', wing: '#6E7286', tail: '#2E2E44', head: '#7E8296', darkEye: true,
+  // The rusty patch under the tail.
+  over: `<path d="M286 304 C310 300 334 306 348 320 C328 336 302 336 282 326 Z" fill="#A9472F" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>`,
+  wingMarks: `<path d="M236 196 C270 206 300 226 320 256 M250 238 C280 248 304 264 318 288" fill="none" stroke="#5E6276" stroke-width="8" stroke-linecap="round"/>`,
+  headMarks: `<path d="M50 50 H260 V112 C200 96 140 96 60 116 Z" fill="${C.ink}"/>`,
+  beakShape: 'M96 136 C86 132 64 140 42 152 C64 158 86 162 96 160 Z', beak: '#2E2E44', legs: '#3B3A50',
+  snack: berry('#5B3E8E', 36, 162),
+});
+
+ART.redwing = perched({
+  id: 'redwing', tint: C.blueT,
+  back: '#232338', wing: '#1F1F33', tail: '#1F1F33', head: '#2A2A3E', darkEye: true,
+  wingMarks: `<path d="M210 166 C246 156 274 168 280 196 C264 216 236 216 210 206 Z" fill="#E5383B"/><path d="M214 208 C240 220 266 220 284 206" fill="none" stroke="#F2C94C" stroke-width="10" stroke-linecap="round"/><path d="M244 250 L300 266 M252 276 L306 292" stroke="#3B3A50" stroke-width="6" stroke-linecap="round"/>`,
+  headMarks: `<path d="M98 96 C130 78 180 78 214 100" fill="none" stroke="#4B5A9E" stroke-width="10" stroke-linecap="round"/>`,
+  beakShape: 'M96 130 C84 126 60 136 34 152 C60 160 84 164 96 162 Z', beak: '#1A1A2E', legs: '#3B3A50',
+  snack: seed(38, 162),
+});
+
+ART.grackle = perched({
+  // Iridescent purple-blue head, bronze body, pale yellow eye, long keel tail.
+  id: 'grackle', tint: C.pinkT,
+  back: '#3A3326', wing: '#2E2A26', tail: '#2B2A3A', head: '#3B3870', eyeRing: '#F2E28C', lid: '#3B3870',
+  tailShape: '<path d="M298 252 L404 278 L398 332 L290 306 Z"/>',
+  tailMarks: '<path d="M318 276 L392 296" stroke="#5B4B9E" stroke-width="6" stroke-linecap="round"/>',
+  wingMarks: `<path d="M226 186 C270 196 310 222 332 256" fill="none" stroke="#8C6E3A" stroke-width="9" stroke-linecap="round"/><path d="M244 240 L296 256 M252 268 L304 284" stroke="#4A4236" stroke-width="6" stroke-linecap="round"/>`,
+  headMarks: `<path d="M94 100 C130 80 184 82 218 108" fill="none" stroke="#6E8BE0" stroke-width="12" stroke-linecap="round"/><path d="M180 200 C200 212 216 226 222 244" fill="none" stroke="#7B4BB5" stroke-width="12" stroke-linecap="round"/>`,
+  beakShape: 'M100 126 C78 120 44 130 10 150 C44 160 78 166 100 164 Z', beak: '#1A1A2E', legs: '#3B3A50',
+  snack: `<g transform="rotate(-20 20 166)"><ellipse cx="20" cy="166" rx="16" ry="11" fill="#3E8E4E" stroke="${C.ink}" stroke-width="6"/><path d="M20 156 V176" stroke="${C.ink}" stroke-width="4"/></g>`,
+});
+
+ART.titmouse = perched({
+  id: 'titmouse', tint: C.yellowT,
+  back: '#A7A9B8', breast: '#F4F2F0', wing: '#9496A6', tail: '#868898', head: '#A7A9B8',
+  crest: '<path d="M110 90 C104 46 130 14 184 8 C166 32 174 52 200 78 Z"/>',
+  underside: '<path d="M150 250 C190 260 220 300 230 360 L150 360 Z" fill="#E8B48E"/>',
+  wingMarks: `<path d="M236 196 C270 206 300 226 320 256 M250 238 C280 248 304 264 318 288" fill="none" stroke="#7E8090" stroke-width="8" stroke-linecap="round"/>`,
+  face: `<ellipse cx="104" cy="112" rx="19" ry="14" fill="${C.ink}"/>`,
+  beak: '#7E8090', legs: '#7E8090', snack: seed(),
+});
+
 // ── Water birds with their own poses.
 ART.goose = {
   // Standing on the grass: plump brown body, long black neck, white chin strap.
@@ -424,6 +493,12 @@ const SPECIES = {
   'herring-gull': 'gull',
   'dark-eyed-junco': 'junco',
   'white-throated-sparrow': 'whitethroat',
+  'song-sparrow': 'songsparrow',
+  'northern-mockingbird': 'mockingbird',
+  'gray-catbird': 'catbird',
+  'red-winged-blackbird': 'redwing',
+  'common-grackle': 'grackle',
+  'tufted-titmouse': 'titmouse',
 };
 
 const draw = (a, m) =>
