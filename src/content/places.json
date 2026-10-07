@@ -141,6 +141,32 @@
       }
     },
     {
+      "id": "greenpoint",
+      "name": "Greenpoint",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.73,
+      "lng": -73.954,
+      "local": {
+        "green": [
+          "McGolrick Park",
+          "Transmitter Park"
+        ],
+        "water": [
+          "the East River",
+          "Newtown Creek"
+        ],
+        "landmark": [
+          "the silver digester eggs",
+          "the old church spires"
+        ],
+        "street": [
+          "Manhattan Avenue",
+          "Franklin Street"
+        ]
+      }
+    },
+    {
       "id": "bed-stuy",
       "name": "Bed-Stuy",
       "city": "NYC",
@@ -219,6 +245,33 @@
       }
     },
     {
+      "id": "coney-island",
+      "name": "Coney Island",
+      "city": "NYC",
+      "kind": "waterfront",
+      "lat": 40.5749,
+      "lng": -73.9859,
+      "local": {
+        "green": [
+          "the beach grass",
+          "Kaiser Park"
+        ],
+        "water": [
+          "the Atlantic",
+          "Coney Island Creek"
+        ],
+        "landmark": [
+          "the boardwalk",
+          "the Wonder Wheel",
+          "the old Parachute Jump"
+        ],
+        "street": [
+          "Surf Avenue",
+          "Mermaid Avenue"
+        ]
+      }
+    },
+    {
       "id": "brooklyn-bridge-park",
       "name": "Brooklyn Bridge Park",
       "city": "NYC",
@@ -245,6 +298,32 @@
       }
     },
     {
+      "id": "red-hook",
+      "name": "Red Hook",
+      "city": "NYC",
+      "kind": "waterfront",
+      "lat": 40.676,
+      "lng": -74.011,
+      "local": {
+        "green": [
+          "Valentino Pier",
+          "the community farm"
+        ],
+        "water": [
+          "the harbor",
+          "the Erie Basin"
+        ],
+        "landmark": [
+          "the old warehouses",
+          "the view of the Statue of Liberty"
+        ],
+        "street": [
+          "Van Brunt Street",
+          "the cobblestone piers"
+        ]
+      }
+    },
+    {
       "id": "lower-east-side",
       "name": "Lower East Side",
       "city": "NYC",
@@ -266,6 +345,32 @@
         "street": [
           "Orchard Street",
           "Delancey Street"
+        ]
+      }
+    },
+    {
+      "id": "east-village",
+      "name": "East Village",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.7265,
+      "lng": -73.9815,
+      "local": {
+        "green": [
+          "Tompkins Square Park",
+          "the community gardens"
+        ],
+        "water": [
+          "the East River"
+        ],
+        "landmark": [
+          "the fire escapes",
+          "the old tenements"
+        ],
+        "street": [
+          "Avenue A",
+          "St. Marks Place",
+          "the side streets"
         ]
       }
     },
@@ -377,6 +482,32 @@
       }
     },
     {
+      "id": "upper-west-side",
+      "name": "Upper West Side",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.787,
+      "lng": -73.9754,
+      "local": {
+        "green": [
+          "Riverside Park",
+          "the edge of Central Park"
+        ],
+        "water": [
+          "the Hudson River"
+        ],
+        "landmark": [
+          "the Museum of Natural History",
+          "the brownstone stoops"
+        ],
+        "street": [
+          "Broadway",
+          "Columbus Avenue",
+          "the side streets"
+        ]
+      }
+    },
+    {
       "id": "harlem",
       "name": "Harlem",
       "city": "NYC",
@@ -425,6 +556,33 @@
         "street": [
           "Fort Washington Avenue",
           "the hilly side streets"
+        ]
+      }
+    },
+    {
+      "id": "inwood-hill-park",
+      "name": "Inwood Hill Park",
+      "city": "NYC",
+      "kind": "park",
+      "lat": 40.8722,
+      "lng": -73.9255,
+      "local": {
+        "green": [
+          "the old forest",
+          "the tall tulip trees"
+        ],
+        "water": [
+          "the salt marsh",
+          "Spuyten Duyvil Creek",
+          "the Hudson River"
+        ],
+        "landmark": [
+          "the Henry Hudson Bridge",
+          "the old rock shelters"
+        ],
+        "street": [
+          "the forest paths",
+          "Dyckman Street"
         ]
       }
     },
@@ -481,6 +639,137 @@
       }
     },
     {
+      "id": "long-island-city",
+      "name": "Long Island City",
+      "city": "NYC",
+      "kind": "waterfront",
+      "lat": 40.7447,
+      "lng": -73.9585,
+      "local": {
+        "green": [
+          "Gantry Plaza State Park",
+          "Hunters Point South Park"
+        ],
+        "water": [
+          "the East River",
+          "Newtown Creek"
+        ],
+        "landmark": [
+          "the Pepsi-Cola sign",
+          "the old gantries"
+        ],
+        "street": [
+          "Vernon Boulevard",
+          "Center Boulevard"
+        ]
+      }
+    },
+    {
+      "id": "flushing-meadows",
+      "name": "Flushing Meadows",
+      "city": "NYC",
+      "kind": "park",
+      "lat": 40.74,
+      "lng": -73.8407,
+      "local": {
+        "green": [
+          "the Queens Botanical Garden",
+          "the big lawns"
+        ],
+        "water": [
+          "Meadow Lake",
+          "Willow Lake",
+          "the Flushing River"
+        ],
+        "landmark": [
+          "the Unisphere",
+          "the New York State Pavilion"
+        ],
+        "street": [
+          "the park promenade",
+          "Roosevelt Avenue"
+        ]
+      }
+    },
+    {
+      "id": "forest-hills",
+      "name": "Forest Hills",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.718,
+      "lng": -73.8448,
+      "local": {
+        "green": [
+          "Forest Park",
+          "the gardens of Forest Hills Gardens"
+        ],
+        "water": [
+          "Strack Pond"
+        ],
+        "landmark": [
+          "the Station Square clock tower",
+          "the old tennis stadium"
+        ],
+        "street": [
+          "Austin Street",
+          "Queens Boulevard"
+        ]
+      }
+    },
+    {
+      "id": "jamaica-bay",
+      "name": "Jamaica Bay Wildlife Refuge",
+      "city": "NYC",
+      "kind": "waterfront",
+      "lat": 40.617,
+      "lng": -73.825,
+      "local": {
+        "green": [
+          "the West Pond trail",
+          "the salt marsh"
+        ],
+        "water": [
+          "Jamaica Bay",
+          "the West Pond",
+          "the East Pond"
+        ],
+        "landmark": [
+          "the refuge visitor center",
+          "the bird blinds"
+        ],
+        "street": [
+          "Cross Bay Boulevard",
+          "the refuge trails"
+        ]
+      }
+    },
+    {
+      "id": "rockaway-beach",
+      "name": "Rockaway Beach",
+      "city": "NYC",
+      "kind": "waterfront",
+      "lat": 40.583,
+      "lng": -73.816,
+      "local": {
+        "green": [
+          "the dunes",
+          "the beach grass"
+        ],
+        "water": [
+          "the Atlantic",
+          "Jamaica Bay"
+        ],
+        "landmark": [
+          "the boardwalk",
+          "the jetties"
+        ],
+        "street": [
+          "Shore Front Parkway",
+          "Beach 116th Street"
+        ]
+      }
+    },
+    {
       "id": "mott-haven",
       "name": "Mott Haven",
       "city": "NYC",
@@ -502,6 +791,84 @@
         "street": [
           "Alexander Avenue",
           "the brownstone rows"
+        ]
+      }
+    },
+    {
+      "id": "bronx-park",
+      "name": "Bronx Park",
+      "city": "NYC",
+      "kind": "park",
+      "lat": 40.856,
+      "lng": -73.877,
+      "local": {
+        "green": [
+          "the Thain Family Forest",
+          "the Bronx River Forest"
+        ],
+        "water": [
+          "the Bronx River"
+        ],
+        "landmark": [
+          "the old stone mill",
+          "the glass conservatory"
+        ],
+        "street": [
+          "Fordham Road",
+          "Southern Boulevard"
+        ]
+      }
+    },
+    {
+      "id": "van-cortlandt-park",
+      "name": "Van Cortlandt Park",
+      "city": "NYC",
+      "kind": "park",
+      "lat": 40.8977,
+      "lng": -73.8862,
+      "local": {
+        "green": [
+          "the Northwest Forest",
+          "the Parade Ground"
+        ],
+        "water": [
+          "Van Cortlandt Lake",
+          "Tibbetts Brook"
+        ],
+        "landmark": [
+          "the Van Cortlandt House",
+          "the old rail trail"
+        ],
+        "street": [
+          "Broadway",
+          "the John Muir Trail"
+        ]
+      }
+    },
+    {
+      "id": "pelham-bay-park",
+      "name": "Pelham Bay Park",
+      "city": "NYC",
+      "kind": "park",
+      "lat": 40.865,
+      "lng": -73.808,
+      "local": {
+        "green": [
+          "the Thomas Pell Wildlife Sanctuary",
+          "the Kazimiroff Nature Trail"
+        ],
+        "water": [
+          "Eastchester Bay",
+          "Long Island Sound",
+          "the lagoon"
+        ],
+        "landmark": [
+          "Orchard Beach",
+          "the Bartow-Pell Mansion"
+        ],
+        "street": [
+          "the bridle path",
+          "Shore Road"
         ]
       }
     },
@@ -528,6 +895,59 @@
         "street": [
           "the waterfront esplanade",
           "the hilly streets"
+        ]
+      }
+    },
+    {
+      "id": "clove-lakes-park",
+      "name": "Clove Lakes Park",
+      "city": "NYC",
+      "kind": "park",
+      "lat": 40.62,
+      "lng": -74.115,
+      "local": {
+        "green": [
+          "the woods around the lakes",
+          "the giant old tulip tree"
+        ],
+        "water": [
+          "Clove Lake",
+          "Brooks Lake",
+          "Martling's Pond"
+        ],
+        "landmark": [
+          "the stone bridge",
+          "the boathouse"
+        ],
+        "street": [
+          "Clove Road",
+          "Victory Boulevard"
+        ]
+      }
+    },
+    {
+      "id": "great-kills-park",
+      "name": "Great Kills Park",
+      "city": "NYC",
+      "kind": "waterfront",
+      "lat": 40.547,
+      "lng": -74.127,
+      "local": {
+        "green": [
+          "the dune trails",
+          "the meadows"
+        ],
+        "water": [
+          "Great Kills Harbor",
+          "Lower New York Bay"
+        ],
+        "landmark": [
+          "Crooke's Point",
+          "the marina"
+        ],
+        "street": [
+          "Hylan Boulevard",
+          "the park road"
         ]
       }
     },
