@@ -1,0 +1,82 @@
+// A drawn neighbor (see scripts/build_characters.js): blinks now and then and bobs
+// gently, unless the person has asked their phone to reduce motion.
+
+import { useEffect, useRef, useState } from 'react';
+import { Animated, Easing, View } from 'react-native';
+import { SvgXml } from 'react-native-svg';
+import { useReduceMotion } from '../backdrop/motion';
+import { characterXml } from './xml';
+
+/** Is there a drawing of this species yet? Photos fill in for the rest. */
+export function hasCharacter(speciesId?: string): speciesId is string {
+  return !!speciesId && speciesId in characterXml;
+}
+
+/** How many moods (different drawings) a species has. */
+export function moodCount(speciesId: string): number {
+  return characterXml[speciesId]?.length ?? 0;
+}
+
+type Props = {
+  speciesId: string;
+  size: number;
+  /** Which drawing: hello, snack, happy, sleepy… Wraps around, like photo indexes. */
+  mood?: number;
+};
+
+export function Character({ speciesId, size, mood = 0 }: Props) {
+  const frames = characterXml[speciesId];
+  const frame = frames[((mood % frames.length) + frames.length) % frames.length];
+  const still = useReduceMotion();
+
+  // Blink: eyes shut for a moment every few seconds, at a slightly different pace each time.
+  const [shut, setShut] = useState(false);
+  useEffect(() => {
+    if (still || !frame.shut) return;
+    let timer: ReturnType<typeof setTimeout>;
+    const next = () => {
+      timer = setTimeout(() => {
+        setShut(true);
+        timer = setTimeout(() => {
+          setShut(false);
+          next();
+        }, 140);
+      }, 2500 + Math.random() * 3500);
+    };
+    next();
+    return () => clearTimeout(timer);
+  }, [still, frame.shut]);
+
+  // Bob: a slow breath up and down.
+  const y = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    if (still) return;
+    const half = { duration: 1600, easing: Easing.inOut(Easing.sin), useNativeDriver: true };
+    const anim = Animated.loop(Animated.sequence([Animated.timing(y, { ...half, toValue: 1 }), Animated.timing(y, { ...half, toValue: 0 })]));
+    anim.start();
+    return () => anim.stop();
+  }, [still, y]);
+
+  // Drawn a little larger than the circle, so the bob never shows an edge.
+  const big = Math.round(size * 1.08);
+  const offset = -(big - size) / 2;
+  return (
+    <View style={{ width: size, height: size, overflow: 'hidden' }}>
+      <Animated.View
+        style={{
+          position: 'absolute',
+          left: offset,
+          top: offset,
+          transform: [{ translateY: y.interpolate({ inputRange: [0, 1], outputRange: [0, -size * 0.025] }) }],
+        }}
+      >
+        <SvgXml xml={frame.open} width={big} height={big} />
+        {frame.shut && (
+          <View style={{ position: 'absolute', top: 0, left: 0, opacity: shut ? 1 : 0 }}>
+            <SvgXml xml={frame.shut} width={big} height={big} />
+          </View>
+        )}
+      </Animated.View>
+    </View>
+  );
+}

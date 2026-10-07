@@ -3,6 +3,7 @@ import Svg, { G } from 'react-native-svg';
 import type { Setting } from '@/content/types';
 import { colors, offsetShadow } from '@/theme/tokens';
 import { CritterArt, type ArtSpec } from './art/CritterArt';
+import { Character, hasCharacter } from './characters/Character';
 import { SettingArt } from './art/SettingArt';
 
 type Props = {
@@ -18,6 +19,10 @@ type Props = {
   setting?: Setting;
   /** A faint dashed outline, for neighbors who haven't moved in yet. */
   ghost?: boolean;
+  /** Whose sticker. When they've been drawn, the drawing is used instead of the photo. */
+  speciesId?: string;
+  /** Which of their drawings (moods), so each slide of a story shows a different one. */
+  mood?: number;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -31,6 +36,8 @@ export function Sticker({
   shadowColor = colors.ink,
   setting,
   ghost = false,
+  speciesId,
+  mood = 0,
   style,
 }: Props) {
   const borderWidth = size >= 150 ? 6 : size >= 80 ? 4 : 3;
@@ -65,7 +72,9 @@ export function Sticker({
         style,
       ]}
     >
-      {photo && setting && !ghost ? (
+      {hasCharacter(speciesId) && !ghost ? (
+        <Character speciesId={speciesId} size={inner} mood={mood} />
+      ) : photo && setting && !ghost ? (
         <PhotoOnSetting photo={photo} setting={setting} inner={inner} />
       ) : photo ? (
         <Image

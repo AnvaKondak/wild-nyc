@@ -82,7 +82,7 @@ function Profile({ species, startPhoto }: { species: Species; startPhoto: number
         <BackButton style={{ position: 'absolute', left: 16, top: insets.top + 8 }} />
         <View style={{ position: 'absolute', left: 0, right: 0, top: insets.top + 60, alignItems: 'center' }}>
           <Pressable onPress={() => photos.length && setViewing(0)} disabled={!photos.length} accessibilityRole="imagebutton" accessibilityLabel={`${species.friendlyName} photo. Open it big`}>
-            <Sticker art={species.art} photo={speciesPhoto(species.id)} size={170} tint={colors.white} rotate={-5} shadowColor={colors.blue} />
+            <Sticker art={species.art} photo={speciesPhoto(species.id)} speciesId={species.id} size={170} tint={colors.white} rotate={-5} shadowColor={colors.blue} />
           </Pressable>
         </View>
       </View>
@@ -169,7 +169,7 @@ function Profile({ species, startPhoto }: { species: Species; startPhoto: number
                 accessibilityLabel={`${e.title}. Meet the ${other.friendlyName.toLowerCase()}`}
                 style={({ pressed }) => ({ flexDirection: 'row', gap: 12, padding: 14, borderRadius: 18, borderWidth: border.width, borderColor: colors.ink, backgroundColor: colors.white, opacity: pressed ? 0.7 : 1 })}
               >
-                <Sticker art={other.art} photo={speciesPhoto(other.id)} size={56} tint={colors[other.tint]} rotate={-4} />
+                <Sticker art={other.art} photo={speciesPhoto(other.id)} speciesId={other.id} size={56} tint={colors[other.tint]} rotate={-4} />
                 <View style={{ flex: 1, gap: 3 }}>
                   <Text style={{ fontFamily: fonts.displayRegular, fontSize: 17, lineHeight: 21, color: colors.ink }}>{e.title}</Text>
                   <Text style={[type.body, { fontSize: 13, lineHeight: 19 }]}>{fillPlace(e.body, placeKinds[species.homeScene].where, local)}</Text>

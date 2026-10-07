@@ -174,7 +174,7 @@ function BusyPair() {
         const s = getSpecies(id)!;
         return (
           <Bob key={id} still={still} delay={i * 400}>
-            <Sticker art={s.art} photo={speciesPhoto(id)} size={i === 0 ? 112 : 124} tint={colors[s.tint]} rotate={i === 0 ? -6 : 6} />
+            <Sticker art={s.art} photo={speciesPhoto(id)} speciesId={id} size={i === 0 ? 112 : 124} tint={colors[s.tint]} rotate={i === 0 ? -6 : 6} />
           </Bob>
         );
       })}

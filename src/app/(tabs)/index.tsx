@@ -402,7 +402,7 @@ export default function RightNow() {
                     accessibilityLabel={`${s.friendlyName}${isLead ? ', today\'s neighbor' : ''}${slide.arrivedSpecies?.includes(id) ? ', just arrived' : ''}. See their story`}
                     style={({ pressed }) => ({ width: 88, alignItems: 'center', gap: 5, opacity: pressed ? 0.6 : 1 })}
                   >
-                    <Sticker art={s.art} photo={speciesPhoto(id)} size={66} tint={colors[s.tint]} rotate={n % 2 ? 5 : -4} shadowColor={isLead ? theme.shadow : colors.ink} />
+                    <Sticker art={s.art} photo={speciesPhoto(id)} speciesId={id} size={66} tint={colors[s.tint]} rotate={n % 2 ? 5 : -4} shadowColor={isLead ? theme.shadow : colors.ink} />
                     {/* Names sit on a solid tag so they read over any scene. */}
                     <View style={{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 8, borderWidth: 1, borderColor: theme.ink, backgroundColor: theme.card }}>
                       <Text numberOfLines={2} style={{ fontFamily: fonts.bodySemi, fontSize: 12, lineHeight: 15, textAlign: 'center', color: theme.ink }}>
@@ -437,6 +437,8 @@ export default function RightNow() {
                   <Sticker
                     art={(species ?? getSpecies('rock-pigeon')!).art}
                     photo={slidePhoto}
+                    speciesId={species?.id}
+                    mood={slide.photoIndex ?? 0}
                     size={stickerSize}
                     tint={tileFor(slide)}
                     rotate={-5}

@@ -1,6 +1,7 @@
 import { Image, View } from 'react-native';
 import { getSpecies, speciesPhoto, type Period } from '@/content';
 import { colors, offsetShadow } from '@/theme/tokens';
+import { Character, hasCharacter } from './characters/Character';
 import { PeriodIcon } from './PeriodIcon';
 
 type Props = { period?: Period; speciesIds: string[]; size: number; tint: string; ink: string; shadowColor: string };
@@ -54,7 +55,8 @@ export function GroupSticker({ period, speciesIds, size, tint, ink, shadowColor 
       )}
       {ids.map((id, i) => {
         const photo = speciesPhoto(id);
-        if (!photo) return null;
+        const drawn = hasCharacter(id);
+        if (!photo && !drawn) return null;
         return (
           <View
             key={id}
@@ -70,7 +72,11 @@ export function GroupSticker({ period, speciesIds, size, tint, ink, shadowColor 
               transform: [{ rotate: `${spots[i].rotate}deg` }],
             }}
           >
-            <Image source={photo} accessibilityLabel={getSpecies(id)?.friendlyName} style={{ width: '100%', height: '100%' }} />
+            {drawn ? (
+              <Character speciesId={id} size={small - 6} />
+            ) : (
+              <Image source={photo} accessibilityLabel={getSpecies(id)?.friendlyName} style={{ width: '100%', height: '100%' }} />
+            )}
           </View>
         );
       })}

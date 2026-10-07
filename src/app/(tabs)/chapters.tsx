@@ -100,7 +100,7 @@ export default function Chapters() {
             </RoundNav>
             <Pressable onPress={next} accessibilityRole="button" accessibilityLabel="Next story">
               {one ? (
-                <Sticker art={one.art} photo={speciesPhoto(one.id)} size={stickerSize} tint={colors[one.tint]} rotate={-5} shadowColor={theme.shadow} />
+                <Sticker art={one.art} photo={speciesPhoto(one.id)} speciesId={one.id} size={stickerSize} tint={colors[one.tint]} rotate={-5} shadowColor={theme.shadow} />
               ) : (
                 <GroupSticker speciesIds={slide.species} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
               )}

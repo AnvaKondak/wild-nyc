@@ -25,7 +25,7 @@ export function FloatingCast({ ids, scale = 1 }: { ids: string[]; scale?: number
         const s = getSpecies(id)!;
         return (
           <Bob key={id} still={still} delay={i * 300} style={{ position: 'absolute', left: SPOTS[i].left, top: Math.round(SPOTS[i].top * scale) }}>
-            <Sticker art={s.art} photo={speciesPhoto(id)} size={Math.round(SPOTS[i].size * scale)} tint={colors[s.tint]} rotate={SPOTS[i].rotate} />
+            <Sticker art={s.art} photo={speciesPhoto(id)} speciesId={id} size={Math.round(SPOTS[i].size * scale)} tint={colors[s.tint]} rotate={SPOTS[i].rotate} />
           </Bob>
         );
       })}
