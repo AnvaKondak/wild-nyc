@@ -97,7 +97,7 @@
       },
       "summer": {
         "title": "Round after round",
-        "body": "Doves can raise five or more broods a year here. The parents barely pause between pairs of squabs."
+        "body": "Here they raise two or three broods a summer, sometimes more, and the parents barely pause between pairs of squabs."
       },
       "fall": {
         "title": "Young on the wire",
@@ -176,7 +176,7 @@
     }
   },
   "monarch": {
-    "young": "No babysitting: Mom lays her eggs one at a time on milkweed and flies on. Each caterpillar is on its own from the moment it hatches.",
+    "young": "No babysitting: Mom lays her eggs one at a time on milkweed and flies on. Every caterpillar is on their own from the moment it hatches.",
     "social": "Solo most of the year, but on migration they gather by the dozens or hundreds to sleep in the same trees.",
     "seasons": {
       "spring": {
@@ -497,7 +497,7 @@
       },
       "fall": {
         "title": "Heading south",
-        "body": "Families leave together for South America. The young keep learning to fish along the way."
+        "body": "Terns head for South America. Many young ones travel with a parent who keeps feeding them while they learn to fish."
       },
       "winter": {
         "title": "Southern summer",
@@ -621,7 +621,7 @@
     "seasons": {
       "spring": {
         "title": "Hidden fawns",
-        "body": "Fawns are being born. Mom hides each one in tall grass, where its spots help it stay still and unseen."
+        "body": "Fawns are being born. Mom hides each one in tall grass, where their spots help them stay still and unseen."
       },
       "summer": {
         "title": "Spotted kids",
@@ -881,7 +881,7 @@
   },
   "hermit-thrush": {
     "young": "They nest on or near the ground in northern forests. Here, we meet them on migration and in winter.",
-    "social": "Quiet loners: each thrush keeps to its own patch of forest floor.",
+    "social": "Quiet loners: each thrush keeps to their own patch of forest floor.",
     "seasons": {
       "spring": {
         "title": "Passing through",
@@ -893,11 +893,11 @@
       },
       "fall": {
         "title": "Passing through again",
-        "body": "They stop by on the way south, each one quietly flipping leaves on its own."
+        "body": "They stop by on the way south, each one quietly flipping leaves on their own."
       },
       "winter": {
         "title": "Winter loners",
-        "body": "A few stay all winter, each guarding its own berry tree."
+        "body": "A few stay all winter, each keeping quietly to their own patch of woods and berries."
       }
     }
   },
@@ -995,7 +995,7 @@
     "seasons": {
       "spring": {
         "title": "Underground",
-        "body": "Firefly larvae are finishing growing up in the soil. Some of them glow, too."
+        "body": "Firefly larvae are finishing growing up in the soil. Like all firefly larvae, they glow too."
       },
       "summer": {
         "title": "Flash dating",
@@ -1056,7 +1056,7 @@
     }
   },
   "pond-slider": {
-    "young": "No parenting: Mom digs a nest on land and lays her eggs. The hatchlings dig their way out and head for water on their own.",
+    "young": "No parenting: Mom digs a nest on land and lays her eggs. The hatchlings dig their way out, sometimes not until the next spring, and head for water on their own.",
     "social": "Easygoing baskers: they pile up on logs together, sometimes stacked on each other's shells.",
     "seasons": {
       "spring": {
@@ -1069,7 +1069,7 @@
       },
       "fall": {
         "title": "Hatchlings",
-        "body": "Tiny hatchlings dig out and head for the water, all on their own."
+        "body": "Eggs laid in summer hatch about now. Some hatchlings head for the water on their own; many stay snug in the nest until spring."
       },
       "winter": {
         "title": "Pond-bottom nap",
@@ -1079,7 +1079,7 @@
   },
   "groundhog": {
     "young": "Mom raises the pups alone in a burrow. They come out in late spring and move into burrows of their own by late summer.",
-    "social": "Solo, but neighbors often share the same big burrow systems over the years.",
+    "social": "Solo. Their old burrows get reused, though: an empty groundhog tunnel often becomes home for the next groundhog, or a skunk, fox or rabbit.",
     "seasons": {
       "spring": {
         "title": "Pups in the burrow",

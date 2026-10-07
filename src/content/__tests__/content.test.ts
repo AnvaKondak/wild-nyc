@@ -152,8 +152,8 @@ describe('copy', () => {
   it('calls animals "they", never "it"', () => {
     // Loose check: "its" + a body part or family, "it" + something only an animal does,
     // and "It's a heron" style introductions.
-    const text = JSON.stringify([species, stories, kindnesses, moments, facts, seasonChapters, hurtAnimalGuide, encounters]);
-    expect(text).not.toMatch(/\bits (feathers|wings?|head|nest|own nest|beak|tail|eyes|legs|feet|fur|parents?|babies|chicks|mate|young|way across)\b/i);
+    const text = JSON.stringify([species, stories, kindnesses, moments, facts, seasonChapters, hurtAnimalGuide, encounters, families]);
+    expect(text).not.toMatch(/\bits (feathers|wings?|head|nest|own (nest|patch|way)|beak|tail|eyes|legs|feet|fur|spots|parents?|babies|chicks|mate|young|way across)\b/i);
     expect(text).not.toMatch(/\bit (may dig|turns to|gives up|just looks|needs help|flies|sings|eats|hops|swims)\b/i);
     expect(text).not.toMatch(/\bIt's an? (heron|catbird|mockingbird|downy|blue jay|hermit thrush|robin|cardinal|sparrow|gull|crow|pigeon|squirrel|raccoon)\b/);
   });
