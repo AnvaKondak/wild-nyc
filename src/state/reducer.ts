@@ -30,6 +30,7 @@ export type Action =
   | { type: 'addNeighborhood'; neighborhood: Neighborhood }
   | { type: 'selectNeighborhood'; id: string }
   | { type: 'removeNeighborhood'; id: string }
+  | { type: 'replaceHome'; neighborhood: Neighborhood }
   | { type: 'toggleKindness'; id: string; seasonKey: string }
   | { type: 'setSound'; on: boolean }
   | { type: 'setNotes'; on: boolean };
@@ -65,6 +66,16 @@ export function reducer(state: AppState, action: Action): AppState {
       const neighborhoods = state.neighborhoods.filter((n) => n.id !== action.id);
       const currentId = state.currentId === action.id ? neighborhoods[0].id : state.currentId;
       return { ...state, neighborhoods, currentId };
+    }
+
+    case 'replaceHome': {
+      // Home moves somewhere else: same name, same first place in the row. If the new
+      // spot was already saved under its own name, it folds into Home.
+      const at = Math.max(0, state.neighborhoods.findIndex((n) => n.label === 'Home'));
+      const next = { ...action.neighborhood, label: 'Home' };
+      const others = state.neighborhoods.filter((n, i) => i !== at && n.id !== next.id);
+      const neighborhoods = state.neighborhoods.length === 0 ? [next] : [...others.slice(0, at), next, ...others.slice(at)];
+      return { ...state, neighborhoods, currentId: next.id };
     }
 
     case 'toggleKindness': {

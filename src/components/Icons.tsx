@@ -32,6 +32,23 @@ export function SearchIcon({ size = 22, color = 'currentColor', strokeWidth = 2 
   );
 }
 
+export function PencilIcon({ size = 16, color = 'currentColor', strokeWidth = 2.2 }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="M4 20l1-5L16 4l4 4L9 19z" />
+      <Path d="M14 6l4 4" />
+    </Svg>
+  );
+}
+
+export function CloseIcon({ size = 14, color = 'currentColor', strokeWidth = 2.6 }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round">
+      <Path d="M6 6l12 12M18 6L6 18" />
+    </Svg>
+  );
+}
+
 export function BookIcon({ size = 22, color = 'currentColor', strokeWidth = 2 }: IconProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">

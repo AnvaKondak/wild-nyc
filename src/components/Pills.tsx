@@ -1,4 +1,5 @@
-import { Pressable, ScrollView, Text } from 'react-native';
+import type { ReactNode } from 'react';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 import { border, colors, fonts } from '@/theme/tokens';
 import { PlusIcon } from './Icons';
 
@@ -14,10 +15,12 @@ type Props = {
   ink?: string;
   /** Background behind the row; used as the selected pill's text color. */
   background?: string;
+  /** A small button inside a pill, after its name (remove, edit). */
+  trailing?: (id: string, selected: boolean) => ReactNode;
 };
 
 /** Neighborhood pills with a dashed "+" at the end. Scrolls sideways when long. */
-export function PillRow({ items, selectedId, onSelect, onLongPress, onAdd, ink = colors.ink, background = colors.paper }: Props) {
+export function PillRow({ items, selectedId, onSelect, onLongPress, onAdd, ink = colors.ink, background = colors.paper, trailing }: Props) {
   return (
     <ScrollView
       horizontal
@@ -49,7 +52,10 @@ export function PillRow({ items, selectedId, onSelect, onLongPress, onAdd, ink =
               justifyContent: 'center',
             }}
           >
-            <Text style={{ fontFamily: fonts.bodySemi, fontSize: 14, color: on ? background : ink }}>{item.label}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+              <Text style={{ fontFamily: fonts.bodySemi, fontSize: 14, color: on ? background : ink }}>{item.label}</Text>
+              {trailing?.(item.id, on)}
+            </View>
           </Pressable>
         );
       })}

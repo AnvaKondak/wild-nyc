@@ -16,8 +16,10 @@ const KIND_LABEL = { block: 'Blocks', park: 'Parks', waterfront: 'Waterfront' } 
 
 export default function AddPlace() {
   const router = useRouter();
-  const { from } = useLocalSearchParams<{ from?: string }>();
+  // `edit=home`: moving Home somewhere else, rather than adding a new place.
+  const { from, edit } = useLocalSearchParams<{ from?: string; edit?: string }>();
   const fromWelcome = from === 'welcome';
+  const editingHome = edit === 'home';
   const { state, actions } = useAppState();
   const [locating, setLocating] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -33,19 +35,20 @@ export default function AddPlace() {
   };
 
   const pick = (place: Place) => {
+    if (editingHome) actions.replaceHome(neighborhoodFromPlace(place, 'Home'));
     // The first neighborhood someone adds is "Home".
-    const label = state.neighborhoods.length === 0 ? 'Home' : place.name;
-    actions.addNeighborhood(neighborhoodFromPlace(place, label));
+    else actions.addNeighborhood(neighborhoodFromPlace(place, state.neighborhoods.length === 0 ? 'Home' : place.name));
     done();
   };
 
   const useLocation = async () => {
     setLocating(true);
     setMessage(null);
-    const result = await locateNeighborhood(state.neighborhoods.length === 0 ? 'Home' : 'Here');
+    const result = await locateNeighborhood(editingHome || state.neighborhoods.length === 0 ? 'Home' : 'Here');
     setLocating(false);
     if (result.ok) {
-      actions.addNeighborhood(result.neighborhood);
+      if (editingHome) actions.replaceHome(result.neighborhood);
+      else actions.addNeighborhood(result.neighborhood);
       done();
     } else {
       setMessage(
@@ -65,7 +68,7 @@ export default function AddPlace() {
       </View>
 
       <View style={{ paddingHorizontal: 22, gap: 8 }}>
-        <Title accent="neighborhood">Pick a</Title>
+        {editingHome ? <Title accent="Home">Move</Title> : <Title accent="neighborhood">Pick a</Title>}
         <Text style={type.body}>
           We only ever use your neighborhood, about ten blocks across. Your exact spot never leaves your phone.
         </Text>

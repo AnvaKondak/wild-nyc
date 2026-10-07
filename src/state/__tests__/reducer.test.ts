@@ -32,6 +32,16 @@ describe('neighborhoods', () => {
     expect(reducer(one, { type: 'removeNeighborhood', id: 'home' })).toBe(one);
   });
 
+  it('moves Home somewhere else, keeping its name and place in the row', () => {
+    const bayRidge: Neighborhood = { id: 'bay-ridge', label: 'Bay Ridge', cell: 'dr5r2q', kind: 'block' };
+    const s = reducer(withBoth(), { type: 'replaceHome', neighborhood: bayRidge });
+    expect(s.neighborhoods.map((n) => [n.id, n.label])).toEqual([['bay-ridge', 'Home'], ['park', 'Prospect Park']]);
+    expect(s.currentId).toBe('bay-ridge');
+    // Moving Home to a place already saved folds the two together.
+    const folded = reducer(withBoth(), { type: 'replaceHome', neighborhood: park });
+    expect(folded.neighborhoods.map((n) => [n.id, n.label])).toEqual([['park', 'Home']]);
+  });
+
   it('falls back to a default before anything is picked', () => {
     expect(currentNeighborhood(initialState).id).toBe('default');
   });
