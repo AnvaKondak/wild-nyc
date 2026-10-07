@@ -13,6 +13,7 @@ import type { LiveMap } from './live';
 import { fillPlace, pickFact, pickVariant, placePhrase, usableVariants, withLocation } from './localStory';
 import { pick, seededRandom, shuffle } from './random';
 import { lowerName, possessive } from './names';
+import { recordedHere, THIN, type Sightings } from './sightings';
 
 const PERIODS: Period[] = ['dawn', 'midday', 'dusk', 'night'];
 // "Also around today": today's neighbor plus eight others, nine in all (a 3 × 3 grid).
@@ -43,17 +44,25 @@ export type StoryContext = {
   encounters?: Encounter[];
   /** Family life by species: what the young and the grown-ups are up to this season. */
   families?: Record<string, Family>;
+  /** Real records near each named place, by season (the sightings snapshot). */
+  sightings?: Sightings;
 };
 
 /**
- * Who lives here this season: everyone at home in this kind of place, plus neighbors
- * who only live in certain places (deer on Staten Island) when this is one of them,
- * plus anyone live data has seen nearby lately (when the optional server is running).
+ * Who lives here this season. For a named place, whoever has really been recorded
+ * nearby this season (the sightings snapshot); where the records are thin, the usual
+ * neighbors of this kind of place fill in. For anywhere else, the usual neighbors of
+ * this kind of place, plus those who only live in certain places when this is one.
+ * Anyone live data has seen nearby lately joins too (when the optional server runs).
  */
-export function poolFor(kind: PlaceKind, ctx: Pick<StoryContext, 'allSpecies' | 'season' | 'live'>, placeId?: string): Species[] {
+export function poolFor(kind: PlaceKind, ctx: Pick<StoryContext, 'allSpecies' | 'season' | 'live' | 'sightings'>, placeId?: string): Species[] {
   const seen = (s: Species) => (ctx.live.get(s.id)?.recent ?? 0) > 0;
-  const lives = (s: Species) => (s.onlyAt ? !!placeId && s.onlyAt.includes(placeId) : !!s.spots[kind] && !s.sightingsOnly);
-  return ctx.allSpecies.filter((s) => s.seasons.includes(ctx.season) && (lives(s) || seen(s)));
+  const usual = (s: Species) => (s.onlyAt ? !!placeId && s.onlyAt.includes(placeId) : !!s.spots[kind] && !s.sightingsOnly);
+  const around = ctx.allSpecies.filter((s) => s.seasons.includes(ctx.season));
+  const recorded = around.filter((s) => recordedHere(s, ctx.sightings, placeId, ctx.season) === true);
+  if (!placeId || !ctx.sightings?.[placeId]) return around.filter((s) => usual(s) || seen(s));
+  if (recorded.length >= THIN) return around.filter((s) => recorded.includes(s) || seen(s));
+  return around.filter((s) => recorded.includes(s) || usual(s) || seen(s));
 }
 
 /** Moments for this species right now: weather ones when the weather fits, else everyday ones that don't clash. */
@@ -292,15 +301,16 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
 
 /**
  * Others around right now, for "Also around today": anyone who just arrived for the
- * season first, then the ones who live only in a few special places (the deer at
- * Liberty State Park), then those seen lately, then a seeded mix that leans local.
+ * season first, then rare neighbors really recorded here (the deer at Liberty State
+ * Park), then those seen lately, then a seeded mix that leans local.
  */
 export function pickAround(place: StoryPlace, ctx: StoryContext, lead: Species | undefined, seed: string, arrived: Species[] = []): Species[] {
   const random = seededRandom(`${seed}:around`);
   const pool = poolFor(place.kind, ctx, place.placeId).filter((s) => s.id !== lead?.id && leadWeight(s, place.kind, ctx) > 0);
   const seen = pool.filter((s) => (ctx.live.get(s.id)?.recent ?? 0) > 0).sort((a, b) => ctx.live.get(b.id)!.recent - ctx.live.get(a.id)!.recent);
   const newcomers = arrived.filter((s) => s.id !== lead?.id && pool.includes(s));
-  const locals = pool.filter((s) => !!place.placeId && s.onlyAt?.includes(place.placeId) && !newcomers.includes(s));
+  // Rare neighbors really recorded here (deer at Liberty State Park) always make the grid.
+  const locals = pool.filter((s) => s.sightingsOnly && recordedHere(s, ctx.sightings, place.placeId, ctx.season) && !newcomers.includes(s));
   const first = [...newcomers, ...locals];
   const out = [...first, ...seen.filter((s) => !first.includes(s))].slice(0, AROUND);
   let rest = pool.filter((s) => !out.includes(s));

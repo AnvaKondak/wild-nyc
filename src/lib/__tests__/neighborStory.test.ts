@@ -82,10 +82,8 @@ describe('pickLead', () => {
     );
   });
 
-  it('keeps neighbors who only live in certain places there: deer on Staten Island and in Liberty State Park', () => {
+  it('leaves rare neighbors (deer) out of places without records', () => {
     const ctx = ctxOf('fall', 'dawn');
-    expect(poolFor('block', ctx, 'st-george').some((s) => s.id === 'white-tailed-deer')).toBe(true);
-    expect(poolFor(lsp.kind, ctx, 'liberty-state-park').some((s) => s.id === 'white-tailed-deer')).toBe(true);
     expect(poolFor('block', ctx, 'park-slope').some((s) => s.id === 'white-tailed-deer')).toBe(false);
     expect(poolFor('park', ctx).some((s) => s.id === 'white-tailed-deer')).toBe(false);
   });
@@ -137,20 +135,13 @@ describe('buildArc', () => {
 });
 
 describe('Also around today', () => {
-  it('always includes the neighbors who live only here: deer at Liberty State Park', () => {
-    for (const period of ['dawn', 'midday', 'dusk', 'night'] as const) {
-      const around = pickAround(placeOf(lsp), ctxOf('fall', period), getSpecies('herring-gull'), `seed:${period}`);
-      expect(around.map((s) => s.id)).toContain('white-tailed-deer');
-    }
-  });
-
-  it("offers a handful of others, the place's own first, then seen lately, never the lead twice", () => {
+  it('offers a handful of others, seen lately first, never the lead twice', () => {
     const ctx = ctxOf('fall', 'midday', { live: toLiveMap({ cell: 'x', status: 'ready', updatedAt: null, sources: [], species: [seen('brant', 9)] }) });
     const p = placeOf(lsp);
     const lead = getSpecies('herring-gull')!;
     const around = pickAround(p, ctx, lead, 'seed');
     expect(around.length).toBeGreaterThanOrEqual(4);
-    expect(around.slice(0, 2).map((s) => s.id)).toEqual(['white-tailed-deer', 'brant']);
+    expect(around[0].id).toBe('brant');
     expect(around.some((s) => s.id === lead.id)).toBe(false);
     const slide = aroundSlide(p, ctx, around, lead);
     expect(slide.kind).toBe('around');

@@ -10,12 +10,14 @@ import hurtAnimalJson from './hurt-animal.json';
 import kindnessJson from './kindness.json';
 import momentsJson from './moments.json';
 import type { SeasonEvent } from '@/lib/events';
+import type { Sightings } from '@/lib/sightings';
 import { extraPhotoAssets, photoAssets } from './photoAssets';
 import extraPhotosJson from './photos-extra.json';
 import photosJson from './photos.json';
 import placesJson from './places.json';
 import privacyJson from './privacy.json';
 import regionJson from './region.json';
+import sightingsJson from './sightings.json';
 import soundsJson from './sounds.json';
 import speciesJson from './species.json';
 import storiesJson from './stories.json';
@@ -53,6 +55,8 @@ export const encounters = encountersJson as Encounter[];
 export const events = eventsJson as SeasonEvent[];
 /** The region the app covers today. Chapters are told for all of it. */
 export const region = regionJson as Region;
+/** Real records near each named place, by season: see scripts/build_sightings.py. */
+export const sightings = sightingsJson.places as unknown as Sightings;
 
 /** The privacy policy (the app's Privacy screen and docs/PRIVACY.md). */
 export type PrivacyPolicy = { contact: string | null; title: string; updated: string; summary: string; sections: { heading: string; body: string }[] };

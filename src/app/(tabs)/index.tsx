@@ -12,7 +12,7 @@ import { PeriodIcon } from '@/components/PeriodIcon';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { RoundNav, StoryCard, StoryProgress, useSwipe } from '@/components/story/parts';
-import { encounters, events, facts, families, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, speciesPhotos, stories, type Period, type StorySlide } from '@/content';
+import { encounters, events, facts, families, sightings, getSpecies, moments, placeKinds, places, seasonChapters, species as allSpecies, speciesPhoto, speciesPhotos, stories, type Period, type StorySlide } from '@/content';
 import { decodeGeohash } from '@/lib/geohash';
 import { arrivalSlide, arrivalsAmong } from '@/lib/arrivals';
 import { dailyNotes } from '@/lib/dailyNote';
@@ -110,7 +110,7 @@ export default function RightNow() {
   const [visiting, setVisiting] = useState<string | null>(null);
   const yesterday = dateKey(new Date(now.getTime() - 24 * 60 * 60 * 1000));
   const { lead, around, arrived, ctx, here, placesInOrder, at } = useMemo(() => {
-    const ctx: StoryContext = { allSpecies, moments, facts, chapters: seasonChapters, encounters, families, season, period: header.period, live, weather: weather?.tags ?? [] };
+    const ctx: StoryContext = { allSpecies, moments, facts, chapters: seasonChapters, encounters, families, sightings, season, period: header.period, live, weather: weather?.tags ?? [] };
     const saved = state.neighborhoods.length > 0 ? state.neighborhoods : [hood];
     const at = Math.max(0, saved.findIndex((n) => n.id === hood.id));
     const placesInOrder = saved.map(storyPlace);
@@ -215,7 +215,7 @@ export default function RightNow() {
   // neighborhood or the day changes, so it always matches where you are.
   useEffect(() => {
     if (!state.notesOn) return;
-    scheduleNotes(dailyNotes(placesInOrder, at, { allSpecies, moments, facts, chapters: seasonChapters, live }, new Date())).catch(() => {});
+    scheduleNotes(dailyNotes(placesInOrder, at, { allSpecies, moments, facts, chapters: seasonChapters, live, sightings }, new Date())).catch(() => {});
   }, [state.notesOn, placesInOrder, at, live, today]);
   const toggleNotes = async () => {
     if (state.notesOn) {
@@ -395,7 +395,7 @@ export default function RightNow() {
               <ScrollView key={`${visiting ?? 'lead'}:${slide.id}`} style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 6 }} showsVerticalScrollIndicator={false}>
               {slide.kind === 'around' ? (
                 // Who else is around: tap one for their story. Today's neighbor is first.
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', columnGap: 10, rowGap: 14, paddingHorizontal: 16, marginTop: 24 }}>
+<View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', columnGap: 10, rowGap: 14, paddingHorizontal: 16, marginTop: 24 }}>
                   {(slide.aroundSpecies ?? []).map((id, n) => {
                     const s = getSpecies(id)!;
                     const isLead = id === lead?.id;

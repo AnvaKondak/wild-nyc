@@ -10,6 +10,7 @@
 import type { Species, StorySlide } from '@/content/types';
 import { fillPlace, placePhrase } from './localStory';
 import { pickLead, poolFor, type StoryContext, type StoryPlace } from './neighborStory';
+import { recordedAnySeason } from './sightings';
 import { dateKey, seasonOf } from './time';
 import type { Forecast } from './weather';
 import { lowerName } from './names';
@@ -62,9 +63,9 @@ export function buildTomorrow({ places, index, ctx, now, forecast, random }: Tom
     cta: 'See you tomorrow',
   });
 
-  // 1. Someone due this week, who'll live here.
+  // 1. Someone due this week, who'll live here (recorded here in some season, or usual for this kind of place).
   const due = ctx.allSpecies
-    .filter((s) => (s.onlyAt ? !!place.placeId && s.onlyAt.includes(place.placeId) : s.spots[place.kind] && !s.sightingsOnly))
+    .filter((s) => recordedAnySeason(s, ctx.sightings, place.placeId) ?? (s.onlyAt ? !!place.placeId && s.onlyAt.includes(place.placeId) : s.spots[place.kind] && !s.sightingsOnly))
     .map((s) => ({ s, days: arrivingWithin(s, now) }))
     .filter((x): x is { s: Species; days: number } => x.days !== null)
     .sort((a, b) => a.days - b.days)[0];
