@@ -491,28 +491,6 @@ const CERE = '<path d="M98 128 C92 126 86 130 84 140 C88 150 94 156 98 158 Z" fi
 const feather = (x = 44, y = 168) => `<g transform="rotate(-30 ${x} ${y})"><path d="M${x - 30} ${y} C${x - 10} ${y - 14} ${x + 14} ${y - 12} ${x + 30} ${y} C${x + 14} ${y + 12} ${x - 10} ${y + 14} ${x - 30} ${y} Z" fill="#F4F2F0" stroke="#1A1A2E" stroke-width="6"/><path d="M${x - 34} ${y} H${x + 30}" stroke="#1A1A2E" stroke-width="4"/></g>`;
 const fishSnack = (x = 30, y = 178) => `<g transform="rotate(-14 ${x} ${y})"><path d="M${x - 24} ${y} C${x - 14} ${y - 12} ${x + 10} ${y - 12} ${x + 22} ${y} C${x + 10} ${y + 12} ${x - 14} ${y + 12} ${x - 24} ${y} Z M${x + 22} ${y} L${x + 36} ${y - 10} L${x + 36} ${y + 10} Z" fill="#B4C3D6" stroke="#1A1A2E" stroke-width="6" stroke-linejoin="round"/><circle cx="${x - 14}" cy="${y - 2}" r="3" fill="#1A1A2E"/></g>`;
 
-ART.redtail = perched({
-  id: 'redtail', tint: C.yellowT,
-  headAt: [150, 150, 86], eyeAt: [134, 138, 22],
-  back: '#7A5236', breast: '#F4EDE4', wing: '#6A4630', tail: '#C0532E', head: '#8A5E40',
-  underside: dots([[104, 286], [124, 296], [146, 302], [168, 306], [116, 312], [140, 318], [190, 308]], 8, '#6A4630'),
-  tailMarks: `<path d="M318 300 L384 318" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`,
-  wingMarks: dots([[246, 210], [276, 204], [262, 244], [294, 238], [282, 274]], 7, '#B9946E'),
-  face: '<path d="M90 176 C104 170 128 174 140 188 C138 204 120 212 104 208 C96 200 92 190 90 176 Z" fill="#F4EDE4"/>',
-  beakShape: HOOK, beak: '#5E5E6E', beakMarks: CERE, legs: '#F2C94C', snack: feather(),
-});
-
-ART.coopers = perched({
-  id: 'coopers', tint: C.blueT,
-  headAt: [150, 150, 84], eyeAt: [134, 138, 18], eyeRing: '#E5484D',
-  back: '#5E6A80', breast: '#F4EDE4', wing: '#556075', tail: '#5E6A80', head: '#C9B8AE',
-  tailShape: '<path d="M300 256 L404 284 L400 318 L294 302 Z"/>',
-  tailMarks: `<path d="M330 268 l-6 30 M356 276 l-6 30 M382 284 l-6 28" stroke="${C.ink}" stroke-width="7" stroke-linecap="round"/><path d="M398 290 L394 314" stroke="#F4F2F0" stroke-width="7"/>`,
-  underside: `<path d="M96 224 H210 M92 248 H210 M94 272 H210 M100 296 H210 M110 320 H210" stroke="#D9774A" stroke-width="9" stroke-linecap="round"/>`,
-  headMarks: '<path d="M50 50 H260 V118 C210 100 160 96 60 112 Z" fill="#3B4256"/>',
-  beakShape: HOOK, beak: '#3B3A50', beakMarks: CERE, legs: '#F2C94C', snack: feather(),
-});
-
 ART.kestrel = perched({
   id: 'kestrel', tint: C.pinkT,
   back: '#C76A3A', breast: '#F2D3B5', wing: '#8FA0C0', tail: '#C76A3A', head: '#F4EDE4',
@@ -524,18 +502,6 @@ ART.kestrel = perched({
   blushAt: [156, 192],
   beakShape: HOOK, beak: '#5E6A80', beakMarks: CERE, legs: '#F2C94C',
   snack: `<g transform="rotate(-24 40 170)"><ellipse cx="40" cy="170" rx="26" ry="9" fill="#7FBF5A" stroke="${C.ink}" stroke-width="6"/><path d="M50 166 L68 150 L74 170 M30 174 L22 190" fill="none" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/></g>`,
-});
-
-ART.peregrine = perched({
-  id: 'peregrine', tint: C.yellowT, rail: true,
-  headAt: [150, 150, 84], eyeAt: [132, 138, 19], eyeRing: '#F2C94C', lid: C.ink,
-  back: '#5E6A80', breast: '#F4F2F0', wing: '#4E5A70', tail: '#4E5A70', head: '#F4F2F0',
-  underside: `<path d="M100 270 H220 M104 292 H220 M112 314 H220" stroke="#3B4256" stroke-width="7" stroke-linecap="round" stroke-dasharray="14 10"/>`,
-  tailMarks: `<path d="M330 268 l-6 28 M358 276 l-6 28" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`,
-  headMarks: `<path d="M40 40 H260 V200 C230 180 214 150 196 140 C170 130 140 128 110 132 L40 140 Z" fill="${C.ink}"/>`,
-  face: `<path d="M116 150 C128 170 132 196 126 222 L150 216 C154 192 150 166 140 148 Z" fill="${C.ink}"/>`,
-  blushAt: [172, 196],
-  beakShape: HOOK, beak: '#3B3A50', beakMarks: CERE, legs: '#F2C94C', snack: feather(),
 });
 
 ART.tern = perched({
@@ -1120,6 +1086,56 @@ ART.orbweaver = {
       ${m.zees ? zee(256, 56, 26) + zee(288, 36, 16) : ''}`;
   },
 };
+
+// ── Hawks up close: a big hooked beak and a heavy brow make the stare.
+const raptorSelfie = (p) => ({
+  tint: p.tint,
+  tilt: p.tilt ?? -4,
+  svg: (m) => {
+    const head = '<ellipse cx="200" cy="182" rx="142" ry="132"/>';
+    const look = { ring: p.eyeRing, lid: p.head };
+    return `${shadow([SHOULDERS, head])}
+      ${shape(SHOULDERS, p.chest)}
+      <clipPath id="${p.id}-chest">${SHOULDERS}</clipPath>
+      <g clip-path="url(#${p.id}-chest)">${p.chestMarks ?? ''}</g>
+      ${SHOULDERS.replace('/>', ` fill="none" ${OL}/>`)}
+      ${shape(head, p.head)}
+      <clipPath id="${p.id}-face">${head}</clipPath>
+      <g clip-path="url(#${p.id}-face)">${p.headMarks ?? ''}</g>
+      <ellipse cx="200" cy="182" rx="142" ry="132" fill="none" ${OL}/>
+      ${eye(m.eyes, 140, 186, 24, look)}${eye(m.eyes, 260, 186, 24, look)}
+      <path d="M84 150 L180 170 L176 186 L90 168 Z M316 150 L220 170 L224 186 L310 168 Z" fill="${p.brow}" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>
+      ${blush([[104, 240], [296, 240]])}
+      <path d="M168 204 Q200 190 232 204 L228 222 Q200 212 172 222 Z" fill="#F2C94C" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
+      <path d="M172 220 Q200 210 228 220 C230 256 216 284 200 300 C190 290 182 276 178 262 C174 248 170 234 172 220 Z" fill="${p.beak}" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/>
+      <path d="M190 228 C190 250 194 266 200 280" fill="none" stroke="#8A8A9A" stroke-width="5" stroke-linecap="round"/>
+      ${m.snack ? feather(250, 290) : ''}
+      ${m.hearts ? heart(334, 54, 40) + heart(68, 84, 28) : ''}
+      ${m.zees ? zee(240, 70, 28) + zee(278, 46, 20) : ''}`;
+  },
+});
+
+ART.redtail = raptorSelfie({
+  id: 'redtail', tint: C.yellowT,
+  head: '#8A5E40', chest: '#F4EDE4', brow: '#5E3E28', beak: '#4E4E5E',
+  chestMarks: dots([[110, 380], [140, 392], [170, 398], [230, 398], [260, 392], [290, 380], [126, 410], [274, 410]], 9, '#6A4630'),
+  headMarks: '<ellipse cx="200" cy="296" rx="70" ry="46" fill="#F4EDE4"/><path d="M80 120 C120 96 280 96 320 120" fill="none" stroke="#B9946E" stroke-width="10" stroke-linecap="round"/>',
+});
+
+ART.coopers = raptorSelfie({
+  id: 'coopers', tint: C.blueT, eyeRing: '#E5484D',
+  head: '#C9B8AE', chest: '#F4EDE4', brow: '#3B4256', beak: '#3B3A50',
+  chestMarks: `<path d="M60 360 H340 M50 384 H350 M44 408 H356" stroke="#D9774A" stroke-width="10" stroke-linecap="round"/>`,
+  headMarks: '<path d="M40 40 H360 V150 C300 132 250 128 200 128 C150 128 100 132 40 150 Z" fill="#3B4256"/>',
+});
+
+ART.peregrine = raptorSelfie({
+  id: 'peregrine', tint: C.yellowT, eyeRing: '#F2C94C',
+  head: '#F4F2F0', chest: '#F4F2F0', brow: C.ink, beak: '#3B3A50',
+  chestMarks: `<path d="M70 380 H330 M60 404 H340" stroke="#3B4256" stroke-width="7" stroke-linecap="round" stroke-dasharray="16 10"/>`,
+  headMarks: `<path d="M40 40 H360 V150 C300 138 250 146 200 146 C150 146 100 138 40 150 Z" fill="${C.ink}"/><path d="M40 150 C62 172 72 204 78 250 L40 250 Z M360 150 C338 172 328 204 322 250 L360 250 Z" fill="${C.ink}"/><path d="M112 212 C112 240 116 266 110 296 L148 288 C152 262 152 236 146 212 Z M288 212 C288 240 284 266 290 296 L252 288 C248 262 248 236 254 212 Z" fill="${C.ink}"/>`,
+  tilt: 4,
+});
 
 // Species id → drawing.
 const SPECIES = {
