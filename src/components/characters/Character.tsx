@@ -1,7 +1,7 @@
 // A drawn neighbor (see scripts/build_characters.js): blinks now and then and bobs
 // gently, unless the person has asked their phone to reduce motion.
 
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { Animated, Easing, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import type { Mood } from '@/content/types';
@@ -18,18 +18,24 @@ export function moodCount(speciesId: string): number {
   return characterXml[speciesId]?.length ?? 0;
 }
 
+// The drawings themselves never change between blinks, so they're drawn once: a blink
+// only flips which one is showing.
+const Drawing = memo(SvgXml);
+
 type Props = {
   speciesId: string;
   size: number;
+  /** Hold still: no blink, no bob (long lists). */
+  still?: boolean;
   /** Which drawing: a mood by name, or an index that wraps around like photo indexes. */
   mood?: number | Mood;
 };
 
-export function Character({ speciesId, size, mood = 0 }: Props) {
+export function Character({ speciesId, size, mood = 0, still: holdStill = false }: Props) {
   const frames = characterXml[speciesId];
   const at = typeof mood === 'string' ? Math.max(0, frames.findIndex((f) => f.mood === mood)) : ((mood % frames.length) + frames.length) % frames.length;
   const frame = frames[at];
-  const still = useReduceMotion();
+  const still = useReduceMotion() || holdStill;
 
   // Blink: eyes shut for a moment every few seconds, at a slightly different pace each time.
   const [shut, setShut] = useState(false);
@@ -72,10 +78,10 @@ export function Character({ speciesId, size, mood = 0 }: Props) {
           transform: [{ translateY: y.interpolate({ inputRange: [0, 1], outputRange: [0, -size * 0.025] }) }],
         }}
       >
-        <SvgXml xml={frame.open} width={big} height={big} />
+        <Drawing xml={frame.open} width={big} height={big} />
         {frame.shut && (
           <View style={{ position: 'absolute', top: 0, left: 0, opacity: shut ? 1 : 0 }}>
-            <SvgXml xml={frame.shut} width={big} height={big} />
+            <Drawing xml={frame.shut} width={big} height={big} />
           </View>
         )}
       </Animated.View>

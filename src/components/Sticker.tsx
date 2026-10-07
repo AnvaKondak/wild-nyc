@@ -23,6 +23,8 @@ type Props = {
   speciesId?: string;
   /** Which of their drawings (moods), so each slide of a story shows a different one. */
   mood?: number | Mood;
+  /** Hold the drawing still (no blink or bob), for long lists. */
+  still?: boolean;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -38,6 +40,7 @@ export function Sticker({
   ghost = false,
   speciesId,
   mood = 0,
+  still = false,
   style,
 }: Props) {
   const borderWidth = size >= 150 ? 6 : size >= 80 ? 4 : 3;
@@ -73,7 +76,7 @@ export function Sticker({
       ]}
     >
       {hasCharacter(speciesId) && !ghost ? (
-        <Character speciesId={speciesId} size={inner} mood={mood} />
+        <Character speciesId={speciesId} size={inner} mood={mood} still={still} />
       ) : photo && setting && !ghost ? (
         <PhotoOnSetting photo={photo} setting={setting} inner={inner} />
       ) : photo ? (

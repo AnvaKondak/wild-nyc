@@ -1,13 +1,13 @@
 // Search: every neighbor in the app, by name or kind. Tap one for their page.
 
-import { useMemo, useState } from 'react';
+import { memo, useCallback, useDeferredValue, useMemo, useState } from 'react';
 import { FlatList, Pressable, Text, TextInput, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ChevronRightIcon, SearchIcon } from '@/components/Icons';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
-import { species, speciesPhoto } from '@/content';
+import { species, speciesPhoto, type Species } from '@/content';
 import { searchSpecies } from '@/lib/search';
 import { border, colors, fonts, offsetShadow } from '@/theme/tokens';
 import { type } from '@/theme/type';
@@ -17,7 +17,10 @@ export default function Search() {
   // Dev only: ?q=hawk starts with a search typed in.
   const params = useLocalSearchParams<{ q?: string }>();
   const [query, setQuery] = useState(__DEV__ && params.q ? params.q : '');
-  const results = useMemo(() => searchSpecies(species, query), [query]);
+  // The box answers every keystroke right away; the list catches up a beat later.
+  const deferred = useDeferredValue(query);
+  const results = useMemo(() => searchSpecies(species, deferred), [deferred]);
+  const open = useCallback((id: string) => router.push({ pathname: '/species/[id]', params: { id } }), [router]);
 
   return (
     <Screen scroll={false} contentStyle={{ gap: 14 }}>
@@ -43,7 +46,7 @@ export default function Search() {
       >
         <SearchIcon color={colors.inkMuted} />
         <TextInput
-          value={query}
+          defaultValue={query}
           onChangeText={setQuery}
           placeholder={`Search all ${species.length} neighbors`}
           placeholderTextColor={colors.inkMuted}
@@ -66,34 +69,7 @@ export default function Search() {
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 4, paddingBottom: 32, gap: 12 }}
-        renderItem={({ item, index }) => (
-          <Pressable
-            onPress={() => router.push({ pathname: '/species/[id]', params: { id: item.id } })}
-            accessibilityRole="button"
-            accessibilityLabel={`${item.friendlyName}, ${item.commonName}. Open their page`}
-            style={({ pressed }) => ({
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: 14,
-              padding: 12,
-              borderRadius: 20,
-              borderWidth: border.width,
-              borderColor: colors.ink,
-              backgroundColor: colors.white,
-              boxShadow: offsetShadow(colors.ink, 3),
-              opacity: pressed ? 0.7 : 1,
-            })}
-          >
-            <Sticker art={item.art} photo={speciesPhoto(item.id)} speciesId={item.id} size={60} tint={colors[item.tint]} rotate={index % 2 ? 4 : -4} />
-            <View style={{ flex: 1, gap: 2 }}>
-              <Text style={{ fontFamily: fonts.display, fontSize: 19, color: colors.ink }}>{item.friendlyName}</Text>
-              <Text style={{ fontFamily: fonts.body, fontSize: 13, color: colors.inkMuted }}>
-                {item.commonName} · <Text style={{ fontFamily: fonts.displayItalic }}>{item.scientificName}</Text>
-              </Text>
-            </View>
-            <ChevronRightIcon color={colors.inkMuted} />
-          </Pressable>
-        )}
+        renderItem={({ item, index }) => <Row item={item} index={index} onOpen={open} />}
         ListEmptyComponent={
           <Text style={[type.body, { textAlign: 'center', paddingTop: 24, paddingHorizontal: 12 }]}>
             {query.trim()
@@ -105,3 +81,35 @@ export default function Search() {
     </Screen>
   );
 }
+
+/** One neighbor in the list. Drawn once and left alone while you type. */
+const Row = memo(function Row({ item, index, onOpen }: { item: Species; index: number; onOpen: (id: string) => void }) {
+  return (
+    <Pressable
+      onPress={() => onOpen(item.id)}
+      accessibilityRole="button"
+      accessibilityLabel={`${item.friendlyName}, ${item.commonName}. Open their page`}
+      style={({ pressed }) => ({
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 14,
+        padding: 12,
+        borderRadius: 20,
+        borderWidth: border.width,
+        borderColor: colors.ink,
+        backgroundColor: colors.white,
+        boxShadow: offsetShadow(colors.ink, 3),
+        opacity: pressed ? 0.7 : 1,
+      })}
+    >
+      <Sticker art={item.art} photo={speciesPhoto(item.id)} speciesId={item.id} size={60} tint={colors[item.tint]} rotate={index % 2 ? 4 : -4} still />
+      <View style={{ flex: 1, gap: 2 }}>
+        <Text style={{ fontFamily: fonts.display, fontSize: 19, color: colors.ink }}>{item.friendlyName}</Text>
+        <Text style={{ fontFamily: fonts.body, fontSize: 13, color: colors.inkMuted }}>
+          {item.commonName} · <Text style={{ fontFamily: fonts.displayItalic }}>{item.scientificName}</Text>
+        </Text>
+      </View>
+      <ChevronRightIcon color={colors.inkMuted} />
+    </Pressable>
+  );
+});
