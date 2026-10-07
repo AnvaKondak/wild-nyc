@@ -166,6 +166,59 @@
       }
     },
     {
+      "id": "bensonhurst",
+      "name": "Bensonhurst",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.6025,
+      "lng": -73.995,
+      "local": {
+        "green": [
+          "Bensonhurst Park",
+          "the backyard fig trees",
+          "Dyker Beach Park"
+        ],
+        "water": [
+          "Gravesend Bay"
+        ],
+        "landmark": [
+          "the elevated tracks over 86th Street",
+          "the corner bakeries"
+        ],
+        "street": [
+          "86th Street",
+          "18th Avenue",
+          "Bay Parkway"
+        ]
+      }
+    },
+    {
+      "id": "bay-ridge",
+      "name": "Bay Ridge",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.6264,
+      "lng": -74.0299,
+      "local": {
+        "green": [
+          "Shore Road Park",
+          "Owl's Head Park"
+        ],
+        "water": [
+          "the Narrows"
+        ],
+        "landmark": [
+          "the Verrazzano Bridge",
+          "the Shore Road promenade"
+        ],
+        "street": [
+          "Third Avenue",
+          "Fifth Avenue",
+          "Shore Road"
+        ]
+      }
+    },
+    {
       "id": "brooklyn-bridge-park",
       "name": "Brooklyn Bridge Park",
       "city": "NYC",
@@ -213,6 +266,59 @@
         "street": [
           "Orchard Street",
           "Delancey Street"
+        ]
+      }
+    },
+    {
+      "id": "chelsea",
+      "name": "Chelsea",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.7465,
+      "lng": -74.0014,
+      "local": {
+        "green": [
+          "the High Line",
+          "Chelsea Waterside Park",
+          "the brownstone gardens"
+        ],
+        "water": [
+          "the Hudson River"
+        ],
+        "landmark": [
+          "the old rail viaduct",
+          "the gallery blocks"
+        ],
+        "street": [
+          "Tenth Avenue",
+          "Eighth Avenue",
+          "West 23rd Street"
+        ]
+      }
+    },
+    {
+      "id": "soho",
+      "name": "SoHo",
+      "city": "NYC",
+      "kind": "block",
+      "lat": 40.7233,
+      "lng": -74.003,
+      "local": {
+        "green": [
+          "the planted tree pits",
+          "the rooftop gardens"
+        ],
+        "water": [
+          "the Hudson River"
+        ],
+        "landmark": [
+          "the cast-iron buildings",
+          "the fire escapes"
+        ],
+        "street": [
+          "Broadway",
+          "Prince Street",
+          "the cobblestone side streets"
         ]
       }
     },
