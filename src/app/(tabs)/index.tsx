@@ -227,7 +227,7 @@ export default function RightNow() {
   };
 
   // A gentle sound of the kind of place (or the rain), if sound is on.
-  const soundscape = pickSoundscape(scene, header.period, weather?.tags);
+  const soundscape = pickSoundscape(scene, header.period, season, weather?.tags);
   useAmbience(soundscape, state.soundOn, focused);
   const listening = SOUNDSCAPE_LABEL[soundscape];
 
@@ -395,7 +395,14 @@ export default function RightNow() {
               <ScrollView key={`${visiting ?? 'lead'}:${slide.id}`} style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 6 }} showsVerticalScrollIndicator={false}>
               {slide.kind === 'around' ? (
                 // Who else is around: tap one for their story. Today's neighbor is first.
-<View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', columnGap: 10, rowGap: 14, paddingHorizontal: 16, marginTop: 24 }}>
+                <>
+                {/* Back to the story, without having to swipe. */}
+                <View style={{ paddingHorizontal: 16, marginTop: 16 }}>
+                  <RoundNav label="Back to the story" onPress={prev} color={theme.ink} fill={theme.bg}>
+                    <ChevronLeftIcon color={theme.ink} />
+                  </RoundNav>
+                </View>
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', columnGap: 10, rowGap: 14, paddingHorizontal: 16, marginTop: 8 }}>
                   {(slide.aroundSpecies ?? []).map((id, n) => {
                     const s = getSpecies(id)!;
                     const isLead = id === lead?.id;
@@ -423,6 +430,7 @@ export default function RightNow() {
                     );
                   })}
                 </View>
+                </>
               ) : (
                 /* Prev / next sit beside the photo, in the middle of the screen. */
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, marginTop: 20 }}>

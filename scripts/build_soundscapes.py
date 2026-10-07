@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Mix the ambient soundscapes: a gentle, seamless loop for each kind of place.
 
-Birds by day, crickets by night. By the water: water lapping. In the park: birdsong,
-or crickets after dark. On the block: a calm street with the odd car rolling by. When
-it rains: rain. Each loop is a bed (synthesized water, traffic or rain, or a recorded insect
+Birds by day, crickets by night, and no crickets on winter nights. By the water: water
+lapping. In the park: birdsong, or crickets after dark. On the block: a calm street with
+the odd car rolling by. When it rains: rain. Each loop is a bed (synthesized water, traffic or rain, or a recorded insect
 chorus) with real bird recordings placed on top at seeded random times. Stereo: beds
 are wide, and each call comes from somewhere left to right. Recordings come from
 scripts/fetch_sounds.py; everything else is made here.
@@ -267,6 +267,15 @@ def mix(name, rnd):
     elif name == "block-night":
         bed(traffic, 0.18)
         bed(crickets, 0.25)
+    elif name == "waterfront-winter-night":
+        bed(water, 0.4)
+        bed(hum, 0.04)
+    elif name == "park-winter-night":
+        bed(lambda r: wind(r, 0.4), 0.18)
+        bed(hum, 0.03)
+    elif name == "block-winter-night":
+        bed(traffic, 0.16)
+        bed(lambda r: wind(r, 0.3), 0.05)
     elif name == "rain":
         bed(rain, 0.4)
         bed(hum, 0.03)
@@ -283,6 +292,10 @@ USES = {
     "park-night": ["insects-nj", "katydid"],
     "block-day": ["cardinal", "mourning-dove", "robin", "song-sparrow"],
     "block-night": ["insects-nj"],
+    # Crickets go quiet in winter.
+    "waterfront-winter-night": [],
+    "park-winter-night": [],
+    "block-winter-night": [],
     "rain": [],
 }
 

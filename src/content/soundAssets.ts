@@ -7,5 +7,8 @@ export const soundAssets: Record<string, number> = {
   'park-night': require('../../assets/sounds/park-night.m4a'),
   'block-day': require('../../assets/sounds/block-day.m4a'),
   'block-night': require('../../assets/sounds/block-night.m4a'),
+  'waterfront-winter-night': require('../../assets/sounds/waterfront-winter-night.m4a'),
+  'park-winter-night': require('../../assets/sounds/park-winter-night.m4a'),
+  'block-winter-night': require('../../assets/sounds/block-winter-night.m4a'),
   'rain': require('../../assets/sounds/rain.m4a'),
 };
