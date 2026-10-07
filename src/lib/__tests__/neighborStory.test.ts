@@ -6,7 +6,7 @@ import { seededRandom } from '../random';
 
 const lsp = places.find((p) => p.id === 'liberty-state-park')!;
 const prospect = places.find((p) => p.id === 'prospect-park')!;
-const placeOf = (p: typeof lsp): StoryPlace => ({ cell: p.id, kind: p.kind, placeName: p.name, where: placeKinds[p.kind].where, local: p.local });
+const placeOf = (p: typeof lsp): StoryPlace => ({ cell: p.id, kind: p.kind, placeName: p.name, where: placeKinds[p.kind].where, local: p.local, placeId: p.id });
 const unnamed = (kind: PlaceKind, cell = `x-${kind}`): StoryPlace => ({ cell, kind, placeName: null, where: placeKinds[kind].where, local: placeKinds[kind].local });
 const ctxOf = (season: Season, period: Period, extra: Partial<StoryContext> = {}): StoryContext => ({
   allSpecies: species,
@@ -143,13 +143,13 @@ describe('Also around today', () => {
     }
   });
 
-  it('offers a handful of others, seen lately first, never the lead twice', () => {
+  it("offers a handful of others, the place's own first, then seen lately, never the lead twice", () => {
     const ctx = ctxOf('fall', 'midday', { live: toLiveMap({ cell: 'x', status: 'ready', updatedAt: null, sources: [], species: [seen('brant', 9)] }) });
     const p = placeOf(lsp);
     const lead = getSpecies('herring-gull')!;
     const around = pickAround(p, ctx, lead, 'seed');
     expect(around.length).toBeGreaterThanOrEqual(4);
-    expect(around[0].id).toBe('brant');
+    expect(around.slice(0, 2).map((s) => s.id)).toEqual(['white-tailed-deer', 'brant']);
     expect(around.some((s) => s.id === lead.id)).toBe(false);
     const slide = aroundSlide(p, ctx, around, lead);
     expect(slide.kind).toBe('around');
