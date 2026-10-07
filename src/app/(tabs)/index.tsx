@@ -27,7 +27,7 @@ import { hashString, seededRandom } from '@/lib/random';
 import { dateKey, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
 import { askForNotes, cancelNotes, scheduleNotes } from '@/lib/notifications';
 import { pickSoundscape, SOUNDSCAPE_LABEL } from '@/lib/soundscape';
-import { useAmbience, voiceFor } from '@/lib/useAmbience';
+import { useAmbience } from '@/lib/useAmbience';
 import { useNow } from '@/lib/useNow';
 import { describeWeather, PREVIEW_WEATHER, type WeatherTag } from '@/lib/weather';
 import { useAppState } from '@/state/AppState';
@@ -223,15 +223,10 @@ export default function RightNow() {
     }
   };
 
-  // What you'd hear out there right now, if sound is on.
-  const soundscape = pickSoundscape(season, header.period, weather?.sky, weather?.tags);
-  // A light layer of neighbors' voices: the story's animal first, then others around.
-  const voiceIds = useMemo(() => [visiting ?? lead?.id, lead?.id, ...around.map((s) => s.id)].filter((id): id is string => !!id), [visiting, lead, around]);
-  useAmbience(soundscape, voiceIds, state.soundOn, focused);
-  const firstVoice = voiceIds.find((id) => voiceFor(id));
-  const listening = firstVoice
-    ? `${SOUNDSCAPE_LABEL[soundscape]}, with the ${getSpecies(firstVoice)!.friendlyName.toLowerCase()} nearby`
-    : SOUNDSCAPE_LABEL[soundscape];
+  // A gentle sound of the kind of place (or the rain), if sound is on.
+  const soundscape = pickSoundscape(hood.kind, weather?.tags);
+  useAmbience(soundscape, state.soundOn, focused);
+  const listening = SOUNDSCAPE_LABEL[soundscape];
 
   if (!slide) return <Screen background={theme.bg} scroll={false}>{null}</Screen>;
 

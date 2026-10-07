@@ -1,69 +1,25 @@
 {
   "loops": {
-    "dawn-chorus": [
-      "robin",
-      "cardinal",
+    "waterfront": [
+      "gull",
       "song-sparrow",
-      "mourning-dove",
       "red-wing"
     ],
-    "day-birds": [
+    "park": [
+      "insects-nj",
+      "robin",
       "cardinal",
       "song-sparrow",
       "blue-jay",
+      "mourning-dove"
+    ],
+    "block": [
+      "cardinal",
       "mourning-dove",
-      "crow",
-      "robin"
-    ],
-    "dusk-birds": [
       "robin",
-      "song-sparrow",
-      "cardinal"
-    ],
-    "summer-dusk": [
-      "insects-nj",
-      "robin",
-      "cardinal"
-    ],
-    "summer-night": [
-      "insects-nj",
-      "katydid"
-    ],
-    "fall-day": [
-      "blue-jay",
-      "crow",
-      "white-throat",
       "song-sparrow"
     ],
-    "fall-dusk": [
-      "insects-nj",
-      "crow",
-      "white-throat"
-    ],
-    "fall-night": [
-      "insects-nj"
-    ],
-    "winter-day": [
-      "crow",
-      "blue-jay",
-      "white-throat"
-    ],
-    "quiet-night": [],
-    "rain": [],
-    "wind": [],
-    "snow": []
-  },
-  "voices": {
-    "american-robin": "robin",
-    "northern-cardinal": "cardinal",
-    "song-sparrow": "song-sparrow",
-    "mourning-dove": "mourning-dove",
-    "blue-jay": "blue-jay",
-    "american-crow": "crow",
-    "white-throated-sparrow": "white-throat",
-    "red-winged-blackbird": "red-wing",
-    "herring-gull": "gull",
-    "ring-billed-gull": "gull"
+    "rain": []
   },
   "recordings": {
     "blue-jay": {
@@ -78,23 +34,17 @@
       "artist": "Jonathon Jongsma",
       "source": "https://commons.wikimedia.org/wiki/File:Cardinalis_cardinalis_-_Northern_Cardinal_XC175226.mp3"
     },
-    "crow": {
-      "title": "Corvus brachyrhynchos - American Crow XC80525.mp3",
-      "license": "CC BY-SA 3.0",
-      "artist": "Jonathon Jongsma",
-      "source": "https://commons.wikimedia.org/wiki/File:Corvus_brachyrhynchos_-_American_Crow_XC80525.mp3"
+    "gull": {
+      "title": "Herring Gull (Larus argentatus) (W1CDR0001420 BD12).ogg",
+      "license": "CC BY-SA 4.0",
+      "artist": "The British Library",
+      "source": "https://commons.wikimedia.org/wiki/File:Herring_Gull_(Larus_argentatus)_(W1CDR0001420_BD12).ogg"
     },
     "insects-nj": {
       "title": "Orthoptera Calls - Wyckoff, New Jersey 2024-08-15.mp3",
       "license": "CC BY-SA 4.0",
       "artist": "Ryan Hodnett",
       "source": "https://commons.wikimedia.org/wiki/File:Orthoptera_Calls_-_Wyckoff,_New_Jersey_2024-08-15.mp3"
-    },
-    "katydid": {
-      "title": "Pterophylla camellifolia singing.wav",
-      "license": "CC BY 4.0",
-      "artist": "peterwchen",
-      "source": "https://commons.wikimedia.org/wiki/File:Pterophylla_camellifolia_singing.wav"
     },
     "mourning-dove": {
       "title": "Zenaida macroura - Mourning Dove XC128006.ogg",
@@ -119,12 +69,6 @@
       "license": "CC BY-SA 4.0",
       "artist": "Jonathon Jongsma",
       "source": "https://commons.wikimedia.org/wiki/File:Melospiza_melodia_-_Song_Sparrow_XC175236.mp3"
-    },
-    "white-throat": {
-      "title": "Zonotrichia albicollis - White-throated Sparrow XC177726.mp3",
-      "license": "CC BY-SA 4.0",
-      "artist": "Jonathon Jongsma",
-      "source": "https://commons.wikimedia.org/wiki/File:Zonotrichia_albicollis_-_White-throated_Sparrow_XC177726.mp3"
     }
   }
 }

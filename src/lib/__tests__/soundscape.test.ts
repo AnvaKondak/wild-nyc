@@ -1,17 +1,14 @@
 import { pickSoundscape } from '../soundscape';
 
 describe('pickSoundscape', () => {
-  it('follows the season and time of day', () => {
-    expect(pickSoundscape('spring', 'dawn')).toBe('dawn-chorus');
-    expect(pickSoundscape('summer', 'night')).toBe('summer-night');
-    expect(pickSoundscape('winter', 'midday')).toBe('winter-day');
-    expect(pickSoundscape('fall', 'night')).toBe('fall-night');
+  it('sounds like the kind of place', () => {
+    expect(pickSoundscape('waterfront')).toBe('waterfront');
+    expect(pickSoundscape('park', ['cold'])).toBe('park');
+    expect(pickSoundscape('block', ['wind'])).toBe('block');
   });
 
-  it('lets weather you can hear win', () => {
-    expect(pickSoundscape('summer', 'night', 'rain', ['rain', 'wind'])).toBe('rain');
-    expect(pickSoundscape('winter', 'dawn', 'snow', ['snow'])).toBe('snow');
-    expect(pickSoundscape('fall', 'midday', 'clear', ['wind'])).toBe('wind');
-    expect(pickSoundscape('fall', 'midday', 'fog', ['fog'])).toBe('fall-day');
+  it('plays the rain when it rains, wherever you are', () => {
+    expect(pickSoundscape('park', ['rain', 'wind'])).toBe('rain');
+    expect(pickSoundscape('waterfront', ['rain'])).toBe('rain');
   });
 });

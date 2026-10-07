@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Mix the ambient soundscapes: seamless loops of what you'd hear on the block now.
+"""Mix the ambient soundscapes: a gentle, seamless loop for each kind of place.
 
-Each loop is a bed (synthesized wind, rain or distant city hum, or a recorded
-insect chorus) with real recordings of our neighbors placed on top at seeded random
-times: the dawn chorus in spring, crickets on summer nights, wind and a crow in
-winter. Stereo: beds are wide, and each call comes from somewhere left to right.
-Recordings come from scripts/fetch_sounds.py; everything else is made here.
+By the water: water lapping, a gull now and then. In the park: crickets and birdsong.
+On the block: a calm street with the odd car rolling by, and birds. When it rains:
+rain. Each loop is a bed (synthesized water, traffic or rain, or a recorded insect
+chorus) with real bird recordings placed on top at seeded random times. Stereo: beds
+are wide, and each call comes from somewhere left to right. Recordings come from
+scripts/fetch_sounds.py; everything else is made here.
 
 Plain Python (no numpy), so it's slow-ish but has no dependencies. Encodes AAC with
 macOS afconvert and writes src/content/sounds.json (which loop uses which credits)
@@ -127,6 +128,40 @@ def rain(rnd):
     return normalize(out)
 
 
+def water(rnd):
+    """Water lapping at a pier: low sloshes that rise and fall, a soft slap at each wave's top."""
+    n = len(silence())
+    body = lowpass(brown(rnd, n), 420)
+    fizz = lowpass(highpass(white(rnd, n), 900), 3000)
+    p1, p2 = rnd.uniform(2.6, 3.4), rnd.uniform(4.5, 6.0)
+    out = []
+    for i in range(n):
+        t = i / SR
+        wave_ = 0.5 + 0.5 * math.sin(2 * math.pi * t / p1)
+        swell = 0.5 + 0.5 * math.sin(2 * math.pi * t / p2 + 0.7)
+        out.append(body[i] * (0.4 + 0.6 * swell) + fizz[i] * wave_ ** 3 * 0.5)
+    return normalize(out)
+
+
+def traffic(rnd):
+    """A calm street: a low hum, and every so often a car rolling softly by."""
+    n = len(silence())
+    out = [x * 0.35 for x in lowpass(brown(rnd, n), 160)]
+    t = rnd.uniform(0, 3)
+    while t < LOOP + XFADE:
+        m, at = int(rnd.uniform(3.5, 5.5) * SR), int(t * SR)
+        tire = lowpass(highpass(white(rnd, m), 200), 900)
+        rumble = lowpass(brown(rnd, m), 220)
+        g = rnd.uniform(0.35, 0.7)
+        for k in range(m):
+            if at + k >= n:
+                break
+            env = math.sin(math.pi * k / m) ** 2  # louder as it nears, softer as it goes
+            out[at + k] += g * env * (tire[k] * 0.6 + rumble[k] * 0.8)
+        t += rnd.uniform(5, 9)
+    return normalize(out)
+
+
 def bed_from(name, rnd):
     """A recorded chorus (insects) tiled to the loop length with soft joins."""
     src = read(name)
@@ -213,93 +248,30 @@ def mix(name, rnd):
     out = Stereo()
     bed = lambda make, gain: out.bed(make, rnd, gain)
     birds = lambda srcs, every, g=0.5: scatter(out, rnd, srcs, every, g)
-    insects = lambda r: bed_from("insects-nj", r)
-    if name == "dawn-chorus":
-        bed(hum, 0.05)
-        birds(["robin", "robin", "cardinal", "song-sparrow", "mourning-dove", "red-wing"], 1.1, 0.55)
-    elif name == "day-birds":
-        bed(hum, 0.08)
-        birds(["cardinal", "song-sparrow", "blue-jay", "mourning-dove", "crow", "robin"], 3.2)
-    elif name == "dusk-birds":
-        bed(hum, 0.07)
-        birds(["robin", "robin", "song-sparrow", "cardinal"], 2.8)
-    elif name == "summer-dusk":
-        bed(insects, 0.3)
-        bed(hum, 0.05)
-        birds(["robin", "cardinal"], 4.5, 0.4)
-    elif name == "summer-night":
-        bed(insects, 0.55)
-        bed(lambda r: bed_from("katydid", r), 0.18)
-        bed(hum, 0.04)
-    elif name == "fall-day":
-        bed(hum, 0.08)
-        birds(["blue-jay", "crow", "white-throat", "song-sparrow", "blue-jay"], 3.6)
-    elif name == "fall-dusk":
-        bed(insects, 0.12)
-        bed(hum, 0.07)
-        birds(["crow", "crow", "white-throat"], 3.8)
-    elif name == "fall-night":
-        bed(insects, 0.25)
-        bed(hum, 0.06)
-    elif name == "winter-day":
-        bed(lambda r: wind(r, 0.6), 0.1)
-        bed(hum, 0.05)
-        birds(["crow", "blue-jay", "white-throat"], 4.0, 0.7)
-    elif name == "quiet-night":
-        bed(hum, 0.09)
-        bed(lambda r: wind(r, 0.4), 0.06)
+    if name == "waterfront":
+        bed(water, 0.45)
+        bed(hum, 0.03)
+        birds(["gull", "gull", "song-sparrow", "red-wing"], 5.0, 0.45)
+    elif name == "park":
+        bed(lambda r: bed_from("insects-nj", r), 0.3)
+        birds(["robin", "cardinal", "song-sparrow", "blue-jay", "mourning-dove"], 3.0)
+    elif name == "block":
+        bed(traffic, 0.3)
+        birds(["cardinal", "mourning-dove", "robin", "song-sparrow"], 4.5, 0.45)
     elif name == "rain":
         bed(rain, 0.5)
-        bed(hum, 0.05)
-    elif name == "wind":
-        bed(lambda r: wind(r, 1.0), 0.6)
-    elif name == "snow":
-        # Snow hushes the city: a soft breath of wind and almost nothing else.
-        bed(lambda r: lowpass(wind(r, 0.3), 700), 0.25)
-        bed(hum, 0.03)
+        bed(hum, 0.04)
     else:
         raise ValueError(name)
     return out
 
 
-# Each animal with a recording gets a "voice" loop: just their calls, spaced out, with
-# quiet in between, coming from different places left and right. The app layers a few
-# of the neighborhood's voices lightly over the ambient loop.
-VOICES = {
-    "american-robin": "robin",
-    "northern-cardinal": "cardinal",
-    "song-sparrow": "song-sparrow",
-    "mourning-dove": "mourning-dove",
-    "blue-jay": "blue-jay",
-    "american-crow": "crow",
-    "white-throated-sparrow": "white-throat",
-    "red-winged-blackbird": "red-wing",
-    "herring-gull": "gull",
-    "ring-billed-gull": "gull",
-}
-
-
-def voice(recording, rnd):
-    out = Stereo()
-    scatter(out, rnd, [recording], 7.0, 0.9)
-    return out
-
-
 # Which recordings each loop uses, for credits.
 USES = {
-    "dawn-chorus": ["robin", "cardinal", "song-sparrow", "mourning-dove", "red-wing"],
-    "day-birds": ["cardinal", "song-sparrow", "blue-jay", "mourning-dove", "crow", "robin"],
-    "dusk-birds": ["robin", "song-sparrow", "cardinal"],
-    "summer-dusk": ["insects-nj", "robin", "cardinal"],
-    "summer-night": ["insects-nj", "katydid"],
-    "fall-day": ["blue-jay", "crow", "white-throat", "song-sparrow"],
-    "fall-dusk": ["insects-nj", "crow", "white-throat"],
-    "fall-night": ["insects-nj"],
-    "winter-day": ["crow", "blue-jay", "white-throat"],
-    "quiet-night": [],
+    "waterfront": ["gull", "song-sparrow", "red-wing"],
+    "park": ["insects-nj", "robin", "cardinal", "song-sparrow", "blue-jay", "mourning-dove"],
+    "block": ["cardinal", "mourning-dove", "robin", "song-sparrow"],
     "rain": [],
-    "wind": [],
-    "snow": [],
 }
 
 
@@ -339,19 +311,15 @@ def main():
     for name in USES:
         write(name, fold(mix(name, random.Random(name))))
         print(f"  {name}", flush=True)
-    for species_id, recording in VOICES.items():
-        write(f"voice-{species_id}", fold(voice(recording, random.Random(species_id))))
-        print(f"  voice-{species_id}", flush=True)
     used = sorted({r for rs in USES.values() for r in rs})
     json.dump(
-        {"loops": USES, "voices": VOICES, "recordings": {r: credits[r] for r in used}},
+        {"loops": USES, "recordings": {r: credits[r] for r in used}},
         open(os.path.join(ROOT, "src/content/sounds.json"), "w"),
         indent=2,
         ensure_ascii=False,
     )
     lines = ["// Generated by scripts/build_soundscapes.py. Do not edit by hand.", "", "export const soundAssets: Record<string, number> = {"]
     lines += [f"  '{name}': require('../../assets/sounds/{name}.m4a')," for name in USES]
-    lines += [f"  'voice-{sid}': require('../../assets/sounds/voice-{sid}.m4a')," for sid in VOICES]
     lines += ["};", ""]
     open(os.path.join(ROOT, "src/content/soundAssets.ts"), "w").write("\n".join(lines))
     print(f"{len(USES)} loops")

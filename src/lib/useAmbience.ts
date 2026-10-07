@@ -1,9 +1,6 @@
-// The story's sound, continuous across the whole Right now screen: an ambient loop for
-// the season, time and weather (the dawn chorus, crickets, rain), plus a light layer of
-// up to three neighbors' own voices: the story's animal first, then others around.
-// Nothing restarts when you move between stories or neighborhoods. The ambient loop
-// changes only when the light or weather does; each voice keeps its slot, so only an
-// animal who actually changes fades out and in.
+// The story's sound, continuous across the whole Right now screen: one gentle loop for
+// the kind of place (water, park or street, with birds) or the rain. It changes only
+// when you switch to a different kind of place or the rain starts or stops.
 //
 // Respects the silent switch, mixes with whatever else is playing (your podcast keeps
 // going), and stops when the app goes to the background.
@@ -15,8 +12,6 @@ import { soundAssets } from '@/content/soundAssets';
 import type { Soundscape } from './soundscape';
 
 const AMBIENT_VOLUME = 0.5;
-const VOICE_VOLUME = 0.45;
-const VOICE_SLOTS = 3;
 const FADE_MS = 1200;
 const SWAP_MS = 500;
 const STEPS = 12;
@@ -27,43 +22,13 @@ let mode: Promise<void> | null = null;
 const audioReady = () =>
   (mode ??= setAudioModeAsync({ playsInSilentMode: false, interruptionMode: 'mixWithOthers', shouldPlayInBackground: false }).catch(() => {}));
 
-/** The voice loop for a species, if we have a recording of them. */
-export function voiceFor(speciesId: string | undefined): number | null {
-  return (speciesId && soundAssets[`voice-${speciesId}`]) || null;
-}
-
-/**
- * Which voice plays in which slot. Animals who are still wanted keep their slot (so
- * they don't restart); the newly wanted fill the free ones, story animal first.
- */
-export function assignSlots(previous: (string | null)[], wanted: string[], slots = VOICE_SLOTS): (string | null)[] {
-  const want = wanted.slice(0, slots);
-  const next = Array.from({ length: slots }, (_, i) => (previous[i] && want.includes(previous[i]!) ? previous[i] : null));
-  for (const id of want) {
-    if (next.includes(id)) continue;
-    const free = next.indexOf(null);
-    if (free >= 0) next[free] = id;
-  }
-  return next;
-}
-
-/** `voiceIds`: the story's animal first, then others around, best first. Only those with recordings play. */
-export function useAmbience(soundscape: Soundscape, voiceIds: string[], on: boolean, focused: boolean) {
+export function useAmbience(soundscape: Soundscape, on: boolean, focused: boolean) {
   const [active, setActive] = useState(RNAppState.currentState === 'active');
   useEffect(() => {
     const sub = RNAppState.addEventListener('change', (s) => setActive(s === 'active'));
     return () => sub.remove();
   }, []);
-  const playing = on && focused && active;
-  useLoop(soundAssets[soundscape], playing, AMBIENT_VOLUME);
-
-  const slots = useRef<(string | null)[]>([]);
-  const withVoice = voiceIds.filter((id, i) => voiceFor(id) !== null && voiceIds.indexOf(id) === i);
-  slots.current = assignSlots(slots.current, withVoice);
-  const [a, b, c] = slots.current;
-  useLoop(voiceFor(a ?? undefined), playing, VOICE_VOLUME);
-  useLoop(voiceFor(b ?? undefined), playing, VOICE_VOLUME);
-  useLoop(voiceFor(c ?? undefined), playing, VOICE_VOLUME);
+  useLoop(soundAssets[soundscape] ?? null, on && focused && active, AMBIENT_VOLUME);
 }
 
 /** One looping layer. The player lives as long as the screen; sources swap with a fade. */
