@@ -49,21 +49,20 @@ export function Character({ speciesId, size, mood = 0, still: holdStill = false,
   const frame = frames[at];
   const still = useReduceMotion() || holdStill;
 
-  // Blink: eyes shut for a moment every few seconds, at a slightly different pace each time.
+  // Blink: three quick blinks in a row (blink-blink-blink), then a pause of a few
+  // seconds, then three more. The pause varies a little so it never feels mechanical.
   const [shut, setShut] = useState(false);
   useEffect(() => {
     if (still || !frame.shut) return;
     let timer: ReturnType<typeof setTimeout>;
-    const next = () => {
+    const blink = (left: number) => {
+      setShut(true);
       timer = setTimeout(() => {
-        setShut(true);
-        timer = setTimeout(() => {
-          setShut(false);
-          next();
-        }, 140);
-      }, 2500 + Math.random() * 3500);
+        setShut(false);
+        timer = left > 1 ? setTimeout(() => blink(left - 1), 160) : setTimeout(() => blink(3), 3000 + Math.random() * 2500);
+      }, 110);
     };
-    next();
+    timer = setTimeout(() => blink(3), 800 + Math.random() * 2000);
     return () => clearTimeout(timer);
   }, [still, frame.shut]);
 
