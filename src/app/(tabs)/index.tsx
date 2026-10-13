@@ -178,6 +178,10 @@ export default function RightNow() {
   // Switching neighborhood or time of day restarts the story.
   const [index, setIndex] = useState(0);
   const [area, setArea] = useState({ width: 0, height: 0 });
+  // Where the animal goes in a full-screen close-up: the spot the sticker would take,
+  // measured on screen.
+  const [band, setBand] = useState<{ top: number; height: number } | null>(null);
+  const bandRef = useRef<View>(null);
   // Dev only: ?slide=3 opens on that slide the first time.
   const startAt = useRef(__DEV__ && params.slide ? Number(params.slide) : 0);
   // Weather loading or refreshing updates the story in place; it doesn't start it over.
@@ -289,15 +293,29 @@ export default function RightNow() {
   // Pilot: some animals appear right in their setting (on a branch, a sidewalk, the
   // water) instead of on a round sticker.
   const closeUp = slide.kind === 'intro' || slide.cast ? undefined : closeUpFor(species?.id, slide.setting);
-  const sceneW = screenWidth - 32;
-  const sceneH = Math.round(stickerSize * 1.15);
+  const sceneH = Math.round(stickerSize * 1.1);
   // From the favorites grid: jump back to that favorite's slide.
   const openFavorite = (id: string) => setIndex(Math.max(0, story.findIndex((s) => s.speciesId === id)));
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.bg }} onLayout={(e) => setArea(e.nativeEvent.layout)}>
       {/* The moment's setting fills the whole story; the animal is the one circle on top. */}
-      {area.width > 0 && (
+      {area.width > 0 && closeUp && species && band ? (
+        // A close-up fills the whole screen: the animal right in their setting.
+        <View style={StyleSheet.absoluteFill} pointerEvents="none">
+          <CloseUp
+            setting={closeUp}
+            speciesId={species.id}
+            mood={slide.kind === 'favorite' ? slide.mood : (slide.mood ?? slide.photoIndex ?? 0)}
+            width={area.width}
+            height={area.height}
+            band={band}
+            period={header.period}
+            season={season}
+            sky={theme.bg}
+          />
+        </View>
+      ) : area.width > 0 && !closeUp ? (
         <View style={StyleSheet.absoluteFill} pointerEvents="none">
           <StoryBackdrop
             setting={setting}
@@ -314,7 +332,7 @@ export default function RightNow() {
             height={area.height}
           />
         </View>
-      )}
+      ) : null}
       <Screen background="transparent" scroll={false}>
         <View {...swipe} style={{ flex: 1 }}>
           {!showHome && <StoryProgress count={story.length} index={i} theme={theme} />}
@@ -471,28 +489,25 @@ export default function RightNow() {
                 </View>
                 </>
               ) : closeUp && species ? (
-                // The animal in their setting, framed; prev / next sit on the frame's edges.
-                <View style={{ paddingHorizontal: 16, marginTop: 16 }}>
-                  <Pressable onPress={next} accessibilityRole="button" accessibilityLabel={`${species.friendlyName}. Next story`}>
-                    {slide.kind === 'favorite' ? (
-                      <PopIn key={slide.id}>
-                        <CloseUp setting={closeUp} speciesId={species.id} mood={slide.mood} width={sceneW} height={sceneH} period={header.period} season={season} shadow={theme.shadow} />
-                      </PopIn>
-                    ) : (
-                      <CloseUp setting={closeUp} speciesId={species.id} mood={slide.mood ?? slide.photoIndex ?? 0} width={sceneW} height={sceneH} period={header.period} season={season} shadow={theme.shadow} />
-                    )}
-                  </Pressable>
-                  <View style={{ position: 'absolute', left: 8, top: sceneH / 2 - 26 }}>
+                // The scene behind draws the animal here; this keeps their spot, with
+                // prev / next beside them and the ♥ at their feet.
+                <View
+                  ref={bandRef}
+                  onLayout={() => bandRef.current?.measureInWindow((_x, y, _w, h) => setBand((b) => (b && b.top === y && b.height === h ? b : { top: y, height: h })))}
+                  style={{ height: sceneH, marginTop: 16 }}
+                >
+                  <Pressable onPress={next} accessibilityRole="button" accessibilityLabel={`${species.friendlyName}. Next story`} style={{ position: 'absolute', left: 70, right: 70, top: 0, bottom: 0 }} />
+                  <View style={{ position: 'absolute', left: 16, top: sceneH / 2 - 26 }}>
                     <RoundNav label={i === 0 && !faves ? 'Home' : 'Previous story'} onPress={back} color={theme.ink} fill={theme.bg}>
                       <ChevronLeftIcon color={theme.ink} />
                     </RoundNav>
                   </View>
-                  <View style={{ position: 'absolute', right: 8, top: sceneH / 2 - 26 }}>
+                  <View style={{ position: 'absolute', right: 16, top: sceneH / 2 - 26 }}>
                     <RoundNav label="Next story" onPress={next} color={theme.ink} fill={theme.bg}>
                       <ChevronRightIcon color={theme.ink} />
                     </RoundNav>
                   </View>
-                  <View style={{ position: 'absolute', right: 26, top: sceneH - 54 }}>
+                  <View style={{ position: 'absolute', right: 24, bottom: -6 }}>
                     <FavoriteButton speciesId={species.id} size="round" ink={theme.ink} background={theme.bg} />
                   </View>
                 </View>
