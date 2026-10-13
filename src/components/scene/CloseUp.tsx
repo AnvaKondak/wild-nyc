@@ -85,10 +85,22 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
       {/* Sun, moon and clouds need open sky: not over the brick wall. Rain and snow still fall. */}
       {setting !== 'sidewalk' && setting !== 'puddle' && <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} behind />}
       <Svg width={w} height={h} style={{ position: 'absolute' }}>
+        {(setting === 'sidewalk' || setting === 'puddle') && weather === 'clear' && (period === 'dawn' || period === 'midday') && (
+          // On a clear day the sun peeks over the roof at the far left, clear of the text.
+          <G>
+            {[-0.9, -0.5, 0, 0.5, 0.9].map((a, i) => (
+              <Path key={i} d={`M${24 + Math.sin(a) * 22} ${bt - 12 - Math.cos(a) * 22} L${24 + Math.sin(a) * 29} ${bt - 12 - Math.cos(a) * 29}`} stroke={colors.yellow} strokeWidth={3.5} strokeLinecap="round" />
+            ))}
+            <Circle cx={24} cy={bt - 12} r={16} fill={colors.yellow} stroke={INK} strokeWidth={1.5} />
+          </G>
+        )}
+        {(setting === 'sidewalk' || setting === 'puddle') && <Rooftops w={w} y={bt} period={period} />}
         {setting === 'sidewalk' || setting === 'puddle' ? (
           <>
             {/* The wall starts just below the header, so the time and weather stay on sky. */}
             <Wall w={w} top={bt} bottom={pavement} band={band} period={period} />
+            <Cornice w={w} y={bt} period={period} />
+            <WallBranch y={bt} bh={bh} w={w} />
             <Sidewalk w={w} h={h} top={pavement} period={period} />
           </>
         ) : setting === 'water' ? (
@@ -107,6 +119,7 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
         )}
       </Svg>
 
+      {(setting === 'sidewalk' || setting === 'puddle') && leaves.length > 0 && WALL_LEAVES.map((l, i) => <Leaf key={`w${i}`} {...l} w={w} y={bt} bh={bh} color={leaves[i % leaves.length]} />)}
       {setting === 'branch' && leaves.length > 0 && BACK_LEAVES.map((l, i) => <Leaf key={i} {...l} w={w} y={ground} bh={bh} color={leaves[i % leaves.length]} />)}
       {setting === 'water' && <Ripples w={w} from={horizon} to={ground} />}
       {animal}
@@ -180,6 +193,14 @@ const BACK_LEAVES = [
   { x: 0.9, dy: -0.31, len: 0.15, angle: -60 },
   { x: 0.95, dy: -0.12, len: 0.13, angle: 10 },
   { x: 0.86, dy: -0.04, len: 0.12, angle: 150 },
+];
+// Leaves on the branch reaching over the wall, measured from the top of the wall.
+const WALL_LEAVES = [
+  { x: 0.05, dy: 0.02, len: 0.12, angle: -20 },
+  { x: 0.12, dy: 0.12, len: 0.11, angle: 120 },
+  { x: 0.19, dy: -0.01, len: 0.11, angle: -40 },
+  { x: 0.25, dy: 0.1, len: 0.1, angle: 140 },
+  { x: 0.31, dy: 0.03, len: 0.1, angle: 10 },
 ];
 const FRONT_LEAVES = [
   { x: 0.27, dy: 0.06, len: 0.12, angle: 160 },
@@ -371,6 +392,55 @@ function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom
       <Rect x={w * 0.68} y={winTop} width={w * 0.24} height={winH} rx={4} fill={lit ? '#FFD23F' : '#BFD0F5'} stroke={INK} strokeWidth={1.5} />
       <Path d={`M${w * 0.8} ${winTop} V${winTop + winH} M${w * 0.68} ${winTop + winH / 2} H${w * 0.92}`} stroke={INK} strokeWidth={1.5} />
       <Rect x={w * 0.66} y={winTop + winH} width={w * 0.28} height={10} fill="#C9C1B4" stroke={INK} strokeWidth={1.5} />
+    </G>
+  );
+}
+
+/** Soft rooftops peeking over the wall: a water tower and a few chimneys, kept low and muted so the header reads over them. */
+function Rooftops({ w, y, period }: { w: number; y: number; period: Period }) {
+  const roof = period === 'night' ? '#3B3A50' : period === 'dusk' ? '#4A6FE0' : period === 'dawn' ? '#F2C4D4' : '#F2DFA0';
+  const line = period === 'night' || period === 'dusk' ? '#1A1A2E' : '#C9B98A';
+  const base = y - 10;
+  return (
+    <G>
+      {/* Only on the right, under the buttons: the time and "Listening to…" lines run across the left. */}
+      <Rect x={w * 0.68} y={base - 10} width={w * 0.34} height={10} fill={roof} />
+      {/* A water tower on stilts. */}
+      <Path d={`M${w * 0.74} ${base} L${w * 0.75} ${base - 10} M${w * 0.8} ${base} L${w * 0.79} ${base - 10}`} stroke={line} strokeWidth={2} />
+      <Rect x={w * 0.735} y={base - 26} width={w * 0.07} height={16} rx={2} fill={roof} stroke={line} strokeWidth={1} />
+      <Path d={`M${w * 0.73} ${base - 26} L${w * 0.77} ${base - 34} L${w * 0.81} ${base - 26} Z`} fill={roof} stroke={line} strokeWidth={1} />
+      <Rect x={w * 0.88} y={base - 18} width={8} height={10} fill={roof} stroke={line} strokeWidth={1} />
+    </G>
+  );
+}
+
+/** A stone cornice along the top of the wall, with little blocks under the ledge. */
+function Cornice({ w, y, period }: { w: number; y: number; period: Period }) {
+  const stone = period === 'night' ? '#6E6A80' : period === 'dusk' ? '#B3ABA0' : '#D9D1C4';
+  const shade = period === 'night' ? '#55546A' : '#B9AE9E';
+  return (
+    <G>
+      <Rect x={-2} y={y - 12} width={w + 4} height={12} fill={stone} stroke={INK} strokeWidth={1.5} />
+      <Rect x={-2} y={y} width={w + 4} height={6} fill={shade} stroke={INK} strokeWidth={1.2} />
+      {Array.from({ length: Math.ceil(w / 22) }, (_, i) => (
+        <Rect key={i} x={i * 22 + 6} y={y + 6} width={10} height={7} fill={shade} stroke={INK} strokeWidth={1} />
+      ))}
+    </G>
+  );
+}
+
+/** A tree branch reaching over the wall from the left (its leaves are drawn separately, so they can flutter). */
+function WallBranch({ w, y, bh }: { w: number; y: number; bh: number }) {
+  const d = `M${-10} ${y + bh * 0.1} C${w * 0.1} ${y + bh * 0.04} ${w * 0.22} ${y + bh * 0.06} ${w * 0.34} ${y + bh * 0.02}`;
+  const twig = `M${w * 0.14} ${y + bh * 0.06} C${w * 0.17} ${y + bh * 0.12} ${w * 0.22} ${y + bh * 0.15} ${w * 0.27} ${y + bh * 0.13}`;
+  return (
+    <G>
+      {[d, twig].map((p, i) => (
+        <G key={i}>
+          <Path d={p} stroke={INK} strokeWidth={(i ? 5 : 9) + 3} strokeLinecap="round" fill="none" />
+          <Path d={p} stroke={BARK} strokeWidth={i ? 5 : 9} strokeLinecap="round" fill="none" />
+        </G>
+      ))}
     </G>
   );
 }
