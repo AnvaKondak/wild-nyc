@@ -1341,8 +1341,9 @@ ART.deerBody = {
   tilt: 0,
   svg: (m) => {
     const body = '<path d="M150 210 C150 176 210 164 280 170 C340 176 362 206 356 236 C350 266 310 272 250 270 C190 268 150 254 150 210 Z"/>';
-    const neck = '<path d="M150 214 C138 182 136 150 146 118 L188 120 C182 150 186 180 196 204 Z"/>';
-    const head = '<path d="M180 120 C190 92 160 70 128 74 C96 78 72 98 60 120 C56 132 64 140 76 140 C110 146 160 146 180 120 Z"/>';
+    // Head and neck as one smooth shape: nose, round forehead, the back of the neck curving
+    // down into the shoulders, then the throat back up to the chin.
+    const headNeck = '<path d="M60 120 C62 94 96 74 132 74 C166 74 188 94 188 120 C188 152 196 180 214 198 L156 216 C140 194 130 170 124 148 C100 148 76 144 64 136 C57 131 56 125 60 120 Z"/>';
     const ears = '<ellipse cx="160" cy="70" rx="14" ry="30" transform="rotate(30 160 70)"/><ellipse cx="128" cy="66" rx="13" ry="28" transform="rotate(-8 128 66)"/>';
     const legs = 'M186 262 L184 356 M220 266 L222 356 M300 264 L302 356 M330 258 L336 352';
     return `<path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="20" stroke-linecap="round"/>
@@ -1352,8 +1353,8 @@ ART.deerBody = {
       ${'' /* Body and neck as one shape: outline both, then fill both on top, so there's no seam between them. */}
       ${shape(ears, '#B9875E')}
       <ellipse cx="161" cy="72" rx="7" ry="18" transform="rotate(30 161 72)" fill="#F4EDE4"/><ellipse cx="128" cy="69" rx="6" ry="16" transform="rotate(-8 128 69)" fill="#F4EDE4"/>
-      <g fill="none" ${OL}>${body}${neck}${head}</g>
-      <g fill="#B9875E">${body}${neck}${head}</g>
+      <g fill="none" ${OL}>${body}${headNeck}</g>
+      <g fill="#B9875E">${body}${headNeck}</g>
       <clipPath id="db-body">${body}</clipPath>
       <g clip-path="url(#db-body)"><ellipse cx="262" cy="276" rx="96" ry="26" fill="#F4EDE4"/></g>
       <path d="M352 210 C372 198 382 214 368 230 C362 236 354 232 354 226 Z" fill="#F4EDE4" stroke="${C.ink}" stroke-width="6"/>
