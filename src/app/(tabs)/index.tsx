@@ -175,7 +175,8 @@ export default function RightNow() {
   );
   const story = faves ? favStory : hoodStory;
 
-  // Switching neighborhood or time of day restarts the story.
+  // Switching neighborhood (or between a neighborhood and favorites) starts the story
+  // over. A new time of day, weather or season updates it in place: you stay on your slide.
   const [index, setIndex] = useState(0);
   const [area, setArea] = useState({ width: 0, height: 0 });
   // Where the animal goes in a full-screen close-up: the spot the sticker would take,
@@ -184,12 +185,11 @@ export default function RightNow() {
   const bandRef = useRef<View>(null);
   // Dev only: ?slide=3 opens on that slide the first time.
   const startAt = useRef(__DEV__ && params.slide ? Number(params.slide) : 0);
-  // Weather loading or refreshing updates the story in place; it doesn't start it over.
   useEffect(() => {
     setIndex(startAt.current);
     startAt.current = 0;
     setVisiting(null);
-  }, [hood.id, header.period, season, faves]);
+  }, [hood.id, faves]);
   const i = Math.min(index, story.length - 1);
   const slide = story[i];
 
