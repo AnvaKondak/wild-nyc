@@ -170,6 +170,8 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
           <>
             {/* Up close, the brownstone fills the whole screen. */}
             <Facade look={look.building} w={w} bottom={pavement} band={band} period={period} />
+            {/* A soft wash of the time of day over the wall behind the header, so the text reads on any building. */}
+            <Rect x={0} y={0} width={w} height={bt - 4} fill={sky} opacity={0.72} />
             <Cornice w={w} y={4} period={period} brackets={false} />
             <WallBranch y={bt} bh={bh} w={w} />
             <Sidewalk w={w} h={h} top={pavement} period={period} />
@@ -852,8 +854,6 @@ function Wall({ w, top, bottom, band, period, style = 'brownstone' }: { w: numbe
   const landing = floor + FH * 0.58;
   const stepCount = 4;
   const stepH = (bottom - landing) / stepCount;
-  // Windows on the floor above, peeking out under the header.
-  const upper = [w * 0.17, w * 0.66];
 
   const archWindow = (x: number, y: number, ww: number, wh: number, k: string) => (
     <G key={k}>
@@ -894,15 +894,14 @@ function Wall({ w, top, bottom, band, period, style = 'brownstone' }: { w: numbe
       {/* Ivy climbs the brick: up the left side, along the top, around the door. Windows sit on top of it. */}
       {ivy && (
         <G>
-          {ivyAlong([[w * 0.03, bottom], [w * 0.07, floor + FH * 0.5], [w * 0.04, floor], [w * 0.1, floor - FH * 0.6], [w * 0.05, top]], period, 7, 20)}
-          {ivyAlong([[w * 0.06, floor - FH * 0.08], [w * 0.28, floor - FH * 0.02], [w * 0.48, floor - FH * 0.1], [w * 0.6, floor - FH * 0.03]], period, 11, 14)}
-          {ivyAlong([[w * 0.0, top + 26], [w * 0.3, top + 44], [w * 0.56, top + 30], [w * 0.8, top + 48]], period, 13, 18)}
-          {ivyAlong([[w * 0.46, top + 40], [w * 0.5, floor - FH * 0.4], [w * 0.44, floor + FH * 0.1], [w * 0.5, floor + FH * 0.5]], period, 19, 14)}
-          {ivyAlong([[w * 0.97, bottom - 20], [w * 0.93, landing], [w * 0.95, dTop - 10], [w * 0.86, dTop - 30], [w * 0.96, top + 60]], period, 17, 16)}
+          {/* Ivy stays below the header, so the time and weather always read. */}
+          {ivyAlong([[w * 0.03, bottom], [w * 0.07, floor + FH * 0.5], [w * 0.04, floor + FH * 0.05], [w * 0.1, floor - 4]], period, 7, 18)}
+          {ivyAlong([[w * 0.06, floor + 4], [w * 0.28, floor + 10], [w * 0.48, floor + 2], [w * 0.6, floor + 8]], period, 11, 12)}
+          {ivyAlong([[w * 0.46, floor + 10], [w * 0.44, floor + FH * 0.3], [w * 0.5, floor + FH * 0.55]], period, 19, 12)}
+          {ivyAlong([[w * 0.97, bottom - 20], [w * 0.93, landing], [w * 0.95, dTop + 6], [w * 0.88, floor + 4]], period, 17, 14)}
         </G>
       )}
 
-      {upper.map((x, i) => window(x, floor - FH * 0.78, winW, FH * 0.5, `u${i}`))}
       {window(winX, winTop, winW, winH, 'main')}
       {/* A flower box under the ground-floor window. */}
       {[0.15, 0.35, 0.55, 0.75, 0.92].map((f, i) => (
