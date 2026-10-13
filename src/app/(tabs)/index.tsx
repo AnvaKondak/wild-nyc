@@ -293,7 +293,7 @@ export default function RightNow() {
   const isGrid = slide.kind === 'around' || slide.kind === 'favorites';
   // Pilot: some animals appear right in their setting (on a branch, a sidewalk, the
   // water) instead of on a round sticker.
-  const closeUp = slide.kind === 'intro' || slide.cast ? undefined : closeUpFor(species?.id, slide.setting);
+  const closeUp = slide.kind === 'intro' || slide.cast ? undefined : closeUpFor(species?.id, slide.setting, slide.action);
   // The time and weather sit on a little card over a close-up scene.
   const onCard = !!closeUp && !showHome;
   const sceneH = Math.round(stickerSize * 1.1);

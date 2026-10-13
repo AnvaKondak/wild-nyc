@@ -720,8 +720,9 @@ ART.cormorant = {
   tint: C.yellowT,
   tilt: 0,
   svg: (m) => {
-    const wingL = '<path d="M164 206 C114 156 54 156 12 196 C42 214 62 252 72 292 C112 272 150 262 172 252 Z"/>';
-    const wingR = '<path d="M236 206 C286 156 346 156 388 196 C358 214 338 252 328 292 C288 272 250 262 228 252 Z"/>';
+    // Wings spread to dry: a curved leading edge and long feather tips along the trailing edge.
+    const wingL = '<path d="M168 212 C132 170 74 150 22 166 L32 182 L16 194 L36 204 L24 220 L46 226 L38 244 L62 248 L60 268 L86 262 L94 282 L118 266 L172 254 Z"/>';
+    const wingR = '<path d="M 232 212 C 268 170 326 150 378 166 L 368 182 L 384 194 L 364 204 L 376 220 L 354 226 L 362 244 L 338 248 L 340 268 L 314 262 L 306 282 L 282 266 L 228 254 Z"/>';
     const body = '<ellipse cx="200" cy="250" rx="58" ry="88"/>';
     const head = '<ellipse cx="170" cy="100" rx="40" ry="32"/>';
     const neckLine = 'M200 186 C196 156 186 132 176 112';

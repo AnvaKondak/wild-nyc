@@ -35,10 +35,58 @@ export type CloseUpSetting =
 const CITY_WALKERS = ['rock-pigeon', 'house-sparrow', 'european-starling', 'raccoon', 'eastern-gray-squirrel', 'american-robin', 'northern-cardinal'];
 // Who lives in burrows and dens on the ground.
 const BURROWERS = ['groundhog', 'virginia-opossum'];
+// Where each city walker's mouth is on their drawing (fractions), for the drinking straw.
+const MOUTH: Record<string, [number, number]> = {
+  'rock-pigeon': [0.12, 0.34],
+  'eastern-gray-squirrel': [0.4, 0.49],
+  raccoon: [0.45, 0.5],
+};
 
 /** The close-up scene for this animal in this setting, or nothing (then the sticker shows). */
-export function closeUpFor(speciesId: string | undefined, setting: Setting | undefined): CloseUpSetting | undefined {
+// Who really does what. Only these get drawn doing it; for anyone else the action is ignored.
+const SWIFT = 'chimney-swift';
+// Sleep inside tree cavities: everyone else sleeps where they normally rest.
+const HOLLOW_SLEEPERS = ['raccoon', 'eastern-gray-squirrel', 'downy-woodpecker', 'red-bellied-woodpecker', 'tufted-titmouse', 'european-starling'];
+// Real dust-bathers.
+const DUST_BATHERS = ['house-sparrow', 'song-sparrow', 'white-throated-sparrow'];
+
+/** Does this neighbor really do this? (Squirrels don't fly; deer don't dust-bathe.) */
+export function canDo(speciesId: string, action: Action): boolean {
+  if (!hasCutout(speciesId)) return false;
+  const pose = cutoutPose(speciesId);
+  const bird = getSpecies(speciesId)?.group === 'birds';
+  switch (action) {
+    case 'fly':
+      // Birds who are drawn perched or standing get wings; swimmers and fliers are drawn as they are.
+      return bird && pose !== 'swim' && pose !== 'fly';
+    case 'sleep':
+      return speciesId !== SWIFT && pose !== 'web';
+    case 'dust':
+      return DUST_BATHERS.includes(speciesId);
+    case 'drink':
+      return CITY_WALKERS.includes(speciesId);
+  }
+}
+
+/** Where they go to do it: a nap happens wherever that animal really sleeps. */
+function sceneForAction(speciesId: string, action: Action): CloseUpSetting | undefined {
+  const pose = cutoutPose(speciesId);
+  if (action === 'fly') return 'sky';
+  if (action === 'dust') return 'building';
+  if (action === 'drink') return 'puddle';
+  if (HOLLOW_SLEEPERS.includes(speciesId)) return 'hollow';
+  if (BURROWERS.includes(speciesId) || speciesId === 'groundhog') return 'burrow';
+  if (pose === 'swim') return 'water';
+  if (pose === 'stand' && getSpecies(speciesId)?.group !== 'birds') return 'lawn';
+  return 'branch';
+}
+
+/** The close-up scene for this animal in this setting (and action), or nothing (then the sticker shows). */
+export function closeUpFor(speciesId: string | undefined, setting: Setting | undefined, action?: Action): CloseUpSetting | undefined {
   if (!hasCutout(speciesId) || !setting) return undefined;
+  // Swifts sleep clinging inside chimneys, which we don't draw: their sleeping slides keep the sticker.
+  if (speciesId === SWIFT && action === 'sleep') return undefined;
+  if (action && canDo(speciesId, action)) return sceneForAction(speciesId, action);
   const pose = cutoutPose(speciesId);
   if (pose === 'web') return 'web';
   if (pose === 'cling') return 'trunk';
@@ -56,7 +104,7 @@ export function closeUpFor(speciesId: string | undefined, setting: Setting | und
     case 'trunk':
       return 'branch';
     case 'den':
-      return BURROWERS.includes(speciesId) ? 'burrow' : 'hollow';
+      return BURROWERS.includes(speciesId) ? 'burrow' : HOLLOW_SLEEPERS.includes(speciesId) ? 'hollow' : 'branch';
     case 'hedge':
       return 'hedge';
     case 'lawn':
@@ -253,6 +301,26 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
           <Reeds w={w} ground={ground + bh * 0.2} bh={bh} />
         </Svg>
       )}
+      {setting === 'puddle' && action === 'drink' && canDo(speciesId, 'drink') && (
+        // Standing tall, sipping through a bendy straw. (Pure silliness: they really just dip their beaks.)
+        <Svg width={w} height={h} style={{ position: 'absolute' }} pointerEvents="none">
+          {(() => {
+            const [mx, my] = MOUTH[speciesId] ?? [0.2, 0.37];
+            const sx = left + size * mx;
+            const sy = top + size * my;
+            const px = w * 0.3;
+            const py = ground + bh * 0.03;
+            const d = `M${sx} ${sy} L${sx - 14} ${sy + 6} Q${sx - 26} ${sy + 10} ${sx - 26} ${sy + 22} L${px + 6} ${py}`;
+            return (
+              <G>
+                <Path d={d} stroke={INK} strokeWidth={9} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                <Path d={d} stroke="#FFFFFF" strokeWidth={6} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                <Path d={d} stroke={colors.pink} strokeWidth={6} fill="none" strokeDasharray="6 6" strokeLinejoin="round" />
+              </G>
+            );
+          })()}
+        </Svg>
+      )}
       {setting === 'hollow' && (
         <Svg width={w} height={h} style={{ position: 'absolute' }} pointerEvents="none">
           {/* The lower lip of the hollow, in front, so they're snug inside. */}
@@ -276,77 +344,63 @@ const wave = (t: Animated.Value, a: number | string, b: number | string) =>
   t.interpolate({ inputRange: [0, 0.25, 0.5, 0.75, 1], outputRange: [a, b, a, b, a] as never });
 
 /**
- * Wraps the animal in what they're doing. Flying: wings flap (birds who are drawn
- * perched get a pair of soft wings) and they float gently. Sleeping: fluffed up into a
- * round little ball. Dust bathing: a happy wiggle in a puff of dust. Drinking: beak
- * dipped down to the water.
+ * Wraps the animal in what they're doing, if they really do it (see canDo). Flying: both
+ * wings flap and they float gently, legs tucked. Sleeping: fluffed up into a round ball.
+ * Dust bathing: settled low in the dust, wiggling their tail and fluttering their wings,
+ * dust puffing up. Drinking: standing tall, sipping through a straw (drawn by the scene).
  */
-function Acting({ action, speciesId, size, setting, children }: { action?: Action; speciesId: string; size: number; setting: CloseUpSetting; children: React.ReactNode }) {
+function Acting({ action: wanted, speciesId, size, setting, children }: { action?: Action; speciesId: string; size: number; setting: CloseUpSetting; children: React.ReactNode }) {
   const still = useReduceMotion();
-  const t = useSine(action === 'fly' ? 1400 : action === 'dust' ? 900 : 3000, still || !action);
-  const pose = cutoutPose(speciesId);
+  const action = wanted && canDo(speciesId, wanted) ? wanted : undefined;
+  const t = useSine(action === 'fly' ? 900 : action === 'dust' ? 520 : 3000, still || !action || action === 'drink');
+  const species = getSpecies(speciesId);
+  const wingColor = inks[(species?.art.second ?? species?.art.main ?? 'gray') as Ink] ?? '#9C9AB0';
+  const wing = (k: number, flutter: boolean) => (
+    <Animated.View
+      key={k}
+      style={{
+        position: 'absolute',
+        left: size * (flutter ? 0.5 : k ? 0.42 : 0.34),
+        top: size * (flutter ? 0.46 : 0.28),
+        width: size * (flutter ? 0.34 : 0.6),
+        height: size * (flutter ? 0.2 : 0.34),
+        transformOrigin: 'left bottom',
+        transform: [{ rotate: wave(t, flutter ? '-10deg' : k ? '-30deg' : '-22deg', flutter ? '-45deg' : k ? '20deg' : '26deg') as never }],
+      }}
+    >
+      <Svg width="100%" height="100%" viewBox="0 0 100 56">
+        <Path d="M4 52 C10 10 60 0 96 8 C88 16 92 22 84 26 C82 34 76 38 70 40 C64 46 40 50 4 52 Z" fill={wingColor} stroke={INK} strokeWidth={5} strokeLinejoin="round" opacity={k === 0 && !flutter ? 0.8 : 1} />
+        <Path d="M30 40 C46 28 64 20 84 14 M22 46 C40 38 56 32 74 28" stroke={INK} strokeWidth={3} fill="none" opacity={0.45} />
+      </Svg>
+    </Animated.View>
+  );
   if (action === 'fly' && (setting === 'sky' || setting === 'wire')) {
-    const species = getSpecies(speciesId);
-    const wing = inks[(species?.art.second ?? species?.art.main ?? 'gray') as Ink] ?? '#9C9AB0';
-    const drawnFlying = pose === 'fly' || pose === 'swim' || species?.group !== 'birds';
+    // The far wing behind the body, the near wing in front: both flap together.
     return (
-      <Animated.View style={{ transform: [{ translateY: wave(t, 0, -size * 0.05) }] }}>
-        {!drawnFlying && (
-          <>
-            {/* Two soft wings, flapping from the shoulders. */}
-            {[0, 1].map((k) => (
-              <Animated.View
-                key={k}
-                style={{
-                  position: 'absolute',
-                  left: size * (k ? 0.46 : 0.36),
-                  top: size * 0.26,
-                  width: size * 0.62,
-                  height: size * 0.36,
-                  transformOrigin: 'left bottom',
-                  transform: [{ rotate: wave(t, k ? '-28deg' : '-18deg', k ? '14deg' : '22deg') as never }],
-                }}
-              >
-                <Svg width={size * 0.62} height={size * 0.36} viewBox="0 0 100 56">
-                  <Path d="M4 52 C10 10 60 0 96 8 C80 22 70 40 4 52 Z" fill={wing} stroke={INK} strokeWidth={5} strokeLinejoin="round" opacity={k ? 1 : 0.85} />
-                  <Path d="M30 40 C46 28 64 20 84 14 M22 46 C40 38 56 32 74 28" stroke={INK} strokeWidth={3} fill="none" opacity={0.5} />
-                </Svg>
-              </Animated.View>
-            ))}
-          </>
-        )}
-        {drawnFlying ? (
-          children
-        ) : (
-          // Legs tucked up in flight: show them down to just above their feet.
-          <View style={{ width: size, height: size * (cutoutFeet(speciesId) - 0.07), overflow: 'hidden' }}>{children}</View>
-        )}
+      <Animated.View style={{ transform: [{ translateY: wave(t, 0, -size * 0.04) }] }}>
+        {wing(0, false)}
+        <View style={{ width: size, height: size * (cutoutFeet(speciesId) - 0.07), overflow: 'hidden' }}>{children}</View>
+        {wing(1, false)}
       </Animated.View>
     );
   }
   if (action === 'sleep') {
-    // Fluffed up into a round little ball, breathing slowly.
-    return (
-      <Animated.View style={{ transformOrigin: 'center bottom', transform: [{ scaleX: wave(t, 1.08, 1.11) }, { scaleY: wave(t, 0.88, 0.86) }] }}>{children}</Animated.View>
-    );
+    return <Animated.View style={{ transformOrigin: 'center bottom', transform: [{ scaleX: 1.08 }, { scaleY: 0.88 }] }}>{children}</Animated.View>;
   }
   if (action === 'dust') {
-    // A happy wiggle, low to the ground, in a puff of dust.
+    // Settled low in a dusty dip: a quick tail wiggle and fluttering wings, dust puffing up.
     return (
       <View>
         <Svg width={size} height={size} style={{ position: 'absolute' }}>
           <Ellipse cx={size * 0.5} cy={size * cutoutFeet(speciesId)} rx={size * 0.46} ry={size * 0.07} fill="#C9A87A" stroke={INK} strokeWidth={1.5} />
         </Svg>
-        <Animated.View style={{ transformOrigin: 'center bottom', transform: [{ scaleY: 0.9 }, { rotate: wave(t, '-7deg', '7deg') as never }] }}>{children}</Animated.View>
+        <Animated.View style={{ transformOrigin: 'left bottom', transform: [{ translateY: size * 0.06 }, { scaleY: 0.86 }, { skewX: wave(t, '0deg', '-8deg') as never }] }}>{children}</Animated.View>
+        {wing(1, true)}
         {[0, 1, 2, 3, 4].map((k) => (
           <DustPuff key={k} k={k} size={size} still={still} />
         ))}
       </View>
     );
-  }
-  if (action === 'drink') {
-    // Beak dipped down to the water, then a little lift, then down again.
-    return <Animated.View style={{ transformOrigin: 'center bottom', transform: [{ rotate: wave(t, '-30deg', '-20deg') as never }] }}>{children}</Animated.View>;
   }
   return <>{children}</>;
 }
@@ -1104,7 +1158,7 @@ function ivyAlong(points: [number, number][], period: Period, seed: number, spre
   for (let i = 0; i < points.length - 1; i++) {
     const [x1, y1] = points[i];
     const [x2, y2] = points[i + 1];
-    const steps = Math.max(1, Math.round(Math.hypot(x2 - x1, y2 - y1) / 4));
+    const steps = Math.max(1, Math.round(Math.hypot(x2 - x1, y2 - y1) / 7));
     for (let k = 0; k < steps; k++) {
       const f = k / steps;
       const x = x1 + (x2 - x1) * f + (rnd() - 0.5) * spread * 2.2;

@@ -9,7 +9,7 @@ import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
 import { StoryBackdrop } from '@/components/backdrop';
 import { getSpecies, moments, places, species, speciesPhoto, type Period, type Setting } from '@/content';
-import { CloseUp, closeUpFor, type CloseUpSetting } from '@/components/scene/CloseUp';
+import { canDo, CloseUp, closeUpFor, type CloseUpSetting } from '@/components/scene/CloseUp';
 import { colors, fonts } from '@/theme/tokens';
 import { periodThemes } from '@/theme/periodTheme';
 import { type } from '@/theme/type';
@@ -96,7 +96,6 @@ export default function ArtPreview() {
 
 // Dev only: every close-up, scrollable, with buttons to try each action, time of day and look.
 type Act = 'fly' | 'sleep' | 'dust' | 'drink' | undefined;
-const ACTION_SCENES: Record<string, CloseUpSetting> = { fly: 'sky', sleep: 'hollow', dust: 'building', drink: 'puddle' };
 const LOOKS = ['park-slope', 'chelsea', 'coney-island', 'battery-park-city', 'bay-ridge'];
 
 function CloseUpGallery({ width, initial }: { width: number; initial: { period?: Period; place?: string; scene?: CloseUpSetting; action?: Act } }) {
@@ -110,7 +109,9 @@ function CloseUpGallery({ width, initial }: { width: number; initial: { period?:
       <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, color: on ? colors.white : colors.ink }}>{label}</Text>
     </Pressable>
   );
-  const scene = (own: CloseUpSetting) => initial.scene ?? (action ? ACTION_SCENES[action] : own);
+  const scene = (id: string, own: CloseUpSetting) => initial.scene ?? (action ? (closeUpFor(id, 'lawn', action) ?? own) : own);
+  // With an action picked, only the neighbors who really do it.
+  const list = action ? species.filter((s) => canDo(s.id, action)).map((s) => ({ s, scene: 'lawn' as CloseUpSetting })) : CLOSEUPS;
   return (
     <View style={{ flex: 1, backgroundColor: colors.paper, paddingTop: 54 }}>
       <View style={{ paddingHorizontal: 8, gap: 6, paddingBottom: 6 }}>
@@ -124,22 +125,25 @@ function CloseUpGallery({ width, initial }: { width: number; initial: { period?:
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>{LOOKS.map((x) => chip(x, place === x, () => setPlace(x)))}</View>
       </View>
       <FlatList
-        data={CLOSEUPS}
+        data={list}
+        key={action ?? 'none'}
         numColumns={3}
         keyExtractor={(_, i) => String(i)}
         contentContainerStyle={{ paddingHorizontal: 8, paddingBottom: 40, gap: 4 }}
         columnWrapperStyle={{ gap: 4 }}
-        initialNumToRender={9}
-        windowSize={3}
+        initialNumToRender={6}
+        maxToRenderPerBatch={3}
+        windowSize={2}
+        removeClippedSubviews
         renderItem={({ item: { s, scene: own }, index }) => (
           <View style={{ width: cw, gap: 2 }}>
             <View style={{ width: cw, height: ch, overflow: 'hidden', borderRadius: 8 }}>
               <View style={{ width, height: width * 1.65, transformOrigin: 'top left', transform: [{ scale: cw / width }] }}>
-                <CloseUp setting={scene(own)} speciesId={s.id} mood={action === 'sleep' ? 'sleepy' : 'hello'} width={width} height={width * 1.65} band={{ top: 228, height: 195 }} period={period} season="fall" sky={periodThemes[period].bg} weather="clear" placeId={place} placeKind={places.find((x) => x.id === place)?.kind} variant={index} action={action} />
+                <CloseUp setting={scene(s.id, own)} speciesId={s.id} mood={action === 'sleep' ? 'sleepy' : 'hello'} width={width} height={width * 1.65} band={{ top: 228, height: 195 }} period={period} season="fall" sky={periodThemes[period].bg} weather="clear" placeId={place} placeKind={places.find((x) => x.id === place)?.kind} variant={index} action={action} />
               </View>
             </View>
             <Text numberOfLines={1} style={{ fontFamily: fonts.bodySemi, fontSize: 9, color: colors.ink }}>
-              {index + 1}. {s.friendlyName} · {scene(own)}
+              {index + 1}. {s.friendlyName} · {scene(s.id, own)}
             </Text>
           </View>
         )}
