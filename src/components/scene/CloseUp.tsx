@@ -266,15 +266,16 @@ function HighLedge({ w, h, y, bh, bt, period, look, variant }: { w: number; h: n
       {/* The city's rooftops far below. */}
       <Skyline w={w} h={h} base={y + bh * 1.05} bh={bh} period={period} />
       {/* The building this ledge belongs to, rising at the right: stone blocks, arched windows with hoods, a flower box. */}
-      <Rect x={wallX} y={0} width={w - wallX} height={y + 10} fill={stone} />
-      {Array.from({ length: Math.ceil(y / 30) }, (_, r) => (
+      {/* It runs all the way down: the ledge juts out from a real building, not a floating one. */}
+      <Rect x={wallX} y={0} width={w - wallX} height={h} fill={stone} />
+      {Array.from({ length: Math.ceil(h / 30) }, (_, r) => (
         <G key={r}>
           <Path d={`M${wallX} ${30 * (r + 1)} H${w}`} stroke={line} strokeWidth={1.2} />
           <Path d={`M${wallX + ((w - wallX) * (r % 2 ? 0.5 : 0.25))} ${30 * r} V${30 * (r + 1)}`} stroke={line} strokeWidth={1.2} />
         </G>
       ))}
-      <Path d={`M${wallX} 0 V${y}`} stroke={INK} strokeWidth={1.5} />
-      {[bt - bh * 0.1, bt + bh * 0.42].map((wy, i) => {
+      <Path d={`M${wallX} 0 V${h}`} stroke={INK} strokeWidth={1.5} />
+      {[bt - bh * 0.1, bt + bh * 0.42, y + bh * 0.5, y + bh * 1.05].map((wy, i) => {
         const wx = wallX + (w - wallX) * 0.2;
         const ww = (w - wallX) * 0.6;
         const wh = bh * 0.4;
@@ -334,8 +335,7 @@ function WaterTowerRoof({ w, h, y, bh, period }: { w: number; h: number; y: numb
   const tw = w * 0.26;
   return (
     <G>
-      <FarCity w={w} base={y - bh * 0.05} period={period} />
-      <LandmarkShape kind="empire" x={w * 0.28} base={y - bh * 0.05} size={bh * 0.9} period={period} />
+      <FarCity w={w} base={y - bh * 0.05} period={period} tower />
       {/* The water tower. */}
       <Path d={`M${tx + 8} ${y} L${tx + 14} ${y - bh * 0.3} M${tx + tw - 8} ${y} L${tx + tw - 14} ${y - bh * 0.3} M${tx + 12} ${y - bh * 0.15} L${tx + tw - 12} ${y - bh * 0.22} M${tx + tw - 12} ${y - bh * 0.15} L${tx + 12} ${y - bh * 0.22}`} stroke={INK} strokeWidth={3} />
       <Rect x={tx} y={y - bh * 0.78} width={tw} height={bh * 0.48} rx={4} fill={wood} stroke={INK} strokeWidth={1.5} />
@@ -1226,7 +1226,7 @@ function Ocean({ w, h, horizon, period, landmark }: { w: number; h: number; hori
 }
 
 /** The city in the distance: a row of little pastel towers with outlines, windows and rooftops. */
-function FarCity({ w, base, period }: { w: number; base: number; period: Period }) {
+function FarCity({ w, base, period, tower = false }: { w: number; base: number; period: Period; /** One tall, stepped skyscraper standing in the row. */ tower?: boolean }) {
   const night = period === 'night' || period === 'dusk';
   const walls = night ? ['#4A4A72', '#5A4A6E', '#3E4A72'] : period === 'dawn' ? ['#F2C4D4', '#E8D4F2', '#FADADA'] : ['#E8D4F2', '#FADADA', '#D4E2F7', '#F7E3C4'];
   const glass = night ? '#FFD23F' : '#BFD0F5';
@@ -1234,6 +1234,7 @@ function FarCity({ w, base, period }: { w: number; base: number; period: Period 
   return (
     <G>
       {towers.map(([x, tw, th], i) => {
+        if (tower && i === 3) return <Skyscraper key={i} x={w * 0.25} base={base} tw={w * 0.1} th={th * 1.7} wall={walls[i % walls.length]} glass={glass} night={night} />;
         const bx = w * x;
         const bw = w * tw;
         const top = base - th;
@@ -1255,6 +1256,37 @@ function FarCity({ w, base, period }: { w: number; base: number; period: Period 
           </G>
         );
       })}
+    </G>
+  );
+}
+
+/** A tall art-deco skyscraper: stepped setbacks, rows of windows, and a spire. */
+function Skyscraper({ x, base, tw, th, wall, glass, night }: { x: number; base: number; tw: number; th: number; wall: string; glass: string; night: boolean }) {
+  const tiers: [number, number][] = [[1, 0.62], [0.72, 0.22], [0.46, 0.12]];
+  let top = base;
+  const parts = tiers.map(([wf, hf], k) => {
+    const pw = tw * wf;
+    const ph = th * hf;
+    top -= ph;
+    const px = x + (tw - pw) / 2;
+    const rows = Math.floor((ph - 6) / 9);
+    const cols = Math.max(2, Math.floor(pw / 8));
+    return (
+      <G key={k}>
+        <Rect x={px} y={top} width={pw} height={ph} fill={wall} stroke={INK} strokeWidth={1} />
+        {Array.from({ length: rows }, (_, r) =>
+          Array.from({ length: cols }, (_, c) => (
+            <Rect key={`${r}:${c}`} x={px + 2 + c * ((pw - 4) / cols) + 0.8} y={top + 4 + r * 9} width={(pw - 4) / cols - 2} height={5} fill={(r + c) % 3 === 0 ? glass : night ? '#2E2E44' : '#FFFFFF'} stroke={INK} strokeWidth={0.5} />
+          )),
+        )}
+      </G>
+    );
+  });
+  return (
+    <G>
+      {parts}
+      <Path d={`M${x + tw / 2} ${top} V${top - th * 0.18}`} stroke={INK} strokeWidth={2} />
+      <Circle cx={x + tw / 2} cy={top - th * 0.18} r={2} fill={colors.pink} />
     </G>
   );
 }
