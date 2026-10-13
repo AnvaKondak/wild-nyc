@@ -363,19 +363,35 @@ export default function RightNow() {
                 { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 10, paddingLeft: 22, paddingRight: 8, paddingTop: 18 },
                 // Over a close-up scene, the time and weather sit on their own little card so they always read.
                 onCard
-                  ? { marginLeft: 12, marginRight: 8, marginTop: 14, paddingLeft: 12, paddingRight: 12, paddingTop: 8, paddingBottom: 8, borderRadius: 18, borderWidth: border.width, borderColor: theme.ink, backgroundColor: theme.bg }
+                  ? {
+                      flex: 0,
+                      alignSelf: 'flex-start',
+                      gap: 7,
+                      marginLeft: 16,
+                      marginRight: 8,
+                      marginTop: 14,
+                      paddingLeft: 10,
+                      paddingRight: 14,
+                      paddingTop: 6,
+                      paddingBottom: 6,
+                      borderRadius: 999,
+                      borderWidth: border.width,
+                      borderColor: theme.ink,
+                      backgroundColor: theme.card,
+                      boxShadow: offsetShadow(theme.shadow, 3),
+                    }
                   : null,
               ]}
             >
-              <PeriodIcon period={header.period} color={theme.ink} />
-              <View style={{ flex: 1 }}>
+              <PeriodIcon period={header.period} color={theme.ink} size={onCard ? 18 : undefined} />
+              <View style={{ flex: onCard ? 0 : 1 }}>
                 {/* Smaller on the little card over a scene. */}
-                <Text style={{ fontFamily: fonts.display, fontSize: onCard ? 16 : 20, color: theme.ink }}>
+                <Text style={{ fontFamily: fonts.display, fontSize: onCard ? 14 : 20, color: theme.ink }} numberOfLines={onCard ? 1 : undefined}>
                   {header.label} · {header.clock}
                 </Text>
-                <Text style={{ fontFamily: fonts.body, fontSize: onCard ? 11.5 : 13, color: theme.muted }}>{weatherLine}</Text>
-                {state.soundOn && (
-                  <Text style={{ fontFamily: fonts.body, fontSize: onCard ? 11.5 : 13, color: theme.muted }}>Listening to {listening}</Text>
+                <Text style={{ fontFamily: fonts.body, fontSize: onCard ? 11 : 13, color: theme.muted }} numberOfLines={onCard ? 1 : undefined}>{weatherLine}</Text>
+                {state.soundOn && !onCard && (
+                  <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>Listening to {listening}</Text>
                 )}
               </View>
             </Pressable>

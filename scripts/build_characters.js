@@ -1234,11 +1234,11 @@ ART.squirrelBody = {
       ${shape(ears, '#A6A2B6')}
       <ellipse cx="129" cy="108" rx="7" ry="15" transform="rotate(-16 129 108)" fill="${C.pink}"/><ellipse cx="185" cy="104" rx="7" ry="15" transform="rotate(14 185 104)" fill="${C.pink}"/>
       ${shape(head, '#A6A2B6')}
-      <ellipse cx="120" cy="184" rx="38" ry="28" fill="#EDE8F2"/>
+      <ellipse cx="128" cy="184" rx="36" ry="26" fill="#EDE8F2"/>
       ${eye(m.eyes, 136, 150, 16, { lid: '#A6A2B6' })}${eye(m.eyes, 186, 152, 14, { lid: '#A6A2B6' })}
       <ellipse cx="166" cy="190" rx="14" ry="9" fill="${C.pink}"/>
-      <path d="M90 172 Q100 166 110 172 Q104 184 100 184 Q96 184 90 172 Z" fill="${C.pink}" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>
-      <rect x="96" y="190" width="18" height="16" rx="3" fill="#fff" stroke="${C.ink}" stroke-width="5"/><path d="M105 190 V206" stroke="${C.ink}" stroke-width="3"/>
+      <path d="M112 172 Q122 166 132 172 Q126 184 122 184 Q118 184 112 172 Z" fill="${C.pink}" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>
+      <rect x="114" y="186" width="16" height="14" rx="3" fill="#fff" stroke="${C.ink}" stroke-width="5"/><path d="M122 186 V200" stroke="${C.ink}" stroke-width="3"/>
       ${m.snack ? `<ellipse cx="158" cy="232" rx="18" ry="21" fill="#D9954F" stroke="${C.ink}" stroke-width="6"/><path d="M137 226 Q158 200 179 226 Q158 232 137 226 Z" fill="#7A4E2A" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>` : ''}
       <g fill="#A6A2B6" ${OL}><ellipse cx="146" cy="246" rx="13" ry="10"/><ellipse cx="174" cy="250" rx="13" ry="10"/></g>
       ${m.hearts ? heart(290, 40, 44) + heart(70, 70, 30) : ''}
@@ -1350,14 +1350,14 @@ ART.deerBody = {
       <path d="M180 356 h10 M216 356 h10 M296 356 h10 M330 352 h10" stroke="${C.ink}" stroke-width="10" stroke-linecap="round"/>
       ${shadow([body, neck, head, ears])}
       ${'' /* Body and neck as one shape: outline both, then fill both on top, so there's no seam between them. */}
-      <g fill="none" ${OL}>${body}${neck}</g>
-      <g fill="#B9875E">${body}${neck}</g>
+      ${shape(ears, '#B9875E')}
+      <ellipse cx="161" cy="72" rx="7" ry="18" transform="rotate(30 161 72)" fill="#F4EDE4"/><ellipse cx="128" cy="69" rx="6" ry="16" transform="rotate(-8 128 69)" fill="#F4EDE4"/>
+      <g fill="none" ${OL}>${body}${neck}${head}</g>
+      <g fill="#B9875E">${body}${neck}${head}</g>
       <clipPath id="db-body">${body}</clipPath>
       <g clip-path="url(#db-body)"><ellipse cx="262" cy="276" rx="96" ry="26" fill="#F4EDE4"/></g>
       <path d="M352 210 C372 198 382 214 368 230 C362 236 354 232 354 226 Z" fill="#F4EDE4" stroke="${C.ink}" stroke-width="6"/>
-      ${shape(ears, '#B9875E')}
-      <ellipse cx="161" cy="72" rx="7" ry="18" transform="rotate(30 161 72)" fill="#F4EDE4"/><ellipse cx="128" cy="69" rx="6" ry="16" transform="rotate(-8 128 69)" fill="#F4EDE4"/>
-      ${shape(head, '#B9875E')}
+
       <path d="M66 126 C80 136 100 138 116 134" fill="none" stroke="#F4EDE4" stroke-width="8" stroke-linecap="round"/>
       <ellipse cx="62" cy="120" rx="9" ry="7" fill="${C.ink}"/>
       ${eye(m.eyes, 118, 104, 13, { lid: '#B9875E' })}
