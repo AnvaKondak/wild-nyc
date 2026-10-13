@@ -425,8 +425,8 @@ const woodpecker = (p) => ({
     const body = `<path d="${bodyPath}"/>`;
     const head = '<circle cx="176" cy="126" r="70"/>';
     const tail = '<path d="M238 320 L276 392 L252 400 L214 330 Z"/>';
-    return `<rect x="276" y="-10" width="140" height="420" fill="#9A6A44"/><path d="M276 -10 V410" stroke="${C.ink}" stroke-width="10"/>
-      <path d="M320 40 C316 90 326 130 318 180 M360 200 C354 250 366 290 356 350 M338 300 V380" fill="none" stroke="#7A4E2A" stroke-width="8" stroke-linecap="round"/>
+    return `${m.cut ? '' : `<rect x="276" y="-10" width="140" height="420" fill="#9A6A44"/><path d="M276 -10 V410" stroke="${C.ink}" stroke-width="10"/>
+      <path d="M320 40 C316 90 326 130 318 180 M360 200 C354 250 366 290 356 350 M338 300 V380" fill="none" stroke="#7A4E2A" stroke-width="8" stroke-linecap="round"/>`}
       ${shadow([tail, body, head])}
       ${shape(tail, C.ink)}
       ${shape(body, p.back)}
@@ -542,7 +542,7 @@ ART.goose = {
     const tail = '<path d="M352 230 L392 214 L396 250 L366 262 Z"/>';
     const neck = '<path d="M126 256 C108 204 102 150 112 108 L166 110 C156 150 160 200 180 238 Z"/>';
     const head = '<ellipse cx="128" cy="96" rx="54" ry="44"/>';
-    return `<rect x="-10" y="336" width="420" height="80" fill="#8BC27A"/><path d="M-10 336 H410" stroke="${C.ink}" stroke-width="10"/>
+    return `${m.cut ? '' : `<rect x="-10" y="336" width="420" height="80" fill="#8BC27A"/><path d="M-10 336 H410" stroke="${C.ink}" stroke-width="10"/>`}
       <path d="M206 330 L200 366 M262 330 L268 366" stroke="${C.ink}" stroke-width="16" stroke-linecap="round"/>
       <path d="M176 372 L200 360 L216 374 Z M248 374 L268 360 L290 372 Z" fill="${C.ink}" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/>
       ${shadow([tail, body, neck, head])}
@@ -663,7 +663,7 @@ const floater = (p) => ({
       <ellipse cx="${hx + 14}" cy="${hy + 24}" rx="15" ry="9" fill="${C.pink}"/>
       <path d="${p.bill}" fill="${p.billColor}" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/>
       ${m.snack ? `<path d="M36 170 C32 186 42 196 36 212 M46 172 C48 188 58 194 56 210" fill="none" stroke="#3E8E4E" stroke-width="6" stroke-linecap="round"/>` : ''}
-      ${WATER}
+      ${m.cut ? '' : WATER}
       ${UP_RIGHT(m)}`;
   },
 });
@@ -710,7 +710,7 @@ ART.swan = {
       <path d="M74 92 C60 94 44 102 36 112 C48 118 64 116 78 110 Z" fill="#F2804A" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
       <ellipse cx="80" cy="86" rx="10" ry="8" fill="${C.ink}"/>
       ${m.snack ? `<path d="M40 118 C36 134 46 144 40 160 M50 118 C52 134 62 140 60 156" fill="none" stroke="#3E8E4E" stroke-width="6" stroke-linecap="round"/>` : ''}
-      ${WATER}
+      ${m.cut ? '' : WATER}
       ${UP_RIGHT(m)}`;
   },
 };
@@ -725,7 +725,7 @@ ART.cormorant = {
     const body = '<ellipse cx="200" cy="250" rx="58" ry="88"/>';
     const head = '<ellipse cx="170" cy="100" rx="40" ry="32"/>';
     const neckLine = 'M200 186 C196 156 186 132 176 112';
-    return `<rect x="168" y="322" width="64" height="100" fill="#9A6A44" stroke="${C.ink}" stroke-width="9"/><ellipse cx="200" cy="322" rx="32" ry="10" fill="#B9875E" stroke="${C.ink}" stroke-width="8"/>
+    return `${m.cut ? '' : `<rect x="168" y="322" width="64" height="100" fill="#9A6A44" stroke="${C.ink}" stroke-width="9"/><ellipse cx="200" cy="322" rx="32" ry="10" fill="#B9875E" stroke="${C.ink}" stroke-width="8"/>`}
       ${shadow([wingL, wingR, body, head])}
       ${shape(wingL, '#25253A')}${shape(wingR, '#25253A')}
       <path d="M40 200 q14 12 28 0 M80 190 q14 12 28 0 M120 196 q14 12 28 0 M60 236 q14 12 28 0 M100 232 q14 12 28 0 M252 196 q14 12 28 0 M292 190 q14 12 28 0 M332 200 q14 12 28 0 M272 232 q14 12 28 0 M312 236 q14 12 28 0" fill="none" stroke="#7A6A4A" stroke-width="5" stroke-linecap="round"/>
@@ -773,8 +773,8 @@ ART.heron = {
       <path d="M96 88 C80 86 46 92 8 102 C46 108 80 108 98 102 Z" fill="#F2C94C" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
       ${m.snack ? droplet(26, 118) : ''}
       </g>
-      <path d="M-10 330 Q40 318 90 330 T190 330 T290 330 T390 330 T490 330 V420 H-10 Z" fill="#8FB3E8" stroke="${C.ink}" stroke-width="8"/>
-      <path d="M60 360 q20 -10 40 0 M260 366 q20 -10 40 0" fill="none" stroke="#F7F5F2" stroke-width="6" stroke-linecap="round"/>
+      ${m.cut ? '' : `<path d="M-10 330 Q40 318 90 330 T190 330 T290 330 T390 330 T490 330 V420 H-10 Z" fill="#8FB3E8" stroke="${C.ink}" stroke-width="8"/>
+      <path d="M60 360 q20 -10 40 0 M260 366 q20 -10 40 0" fill="none" stroke="#F7F5F2" stroke-width="6" stroke-linecap="round"/>`}
       ${UP_RIGHT(m)}`;
   },
 };
@@ -869,9 +869,9 @@ ART.turtle = {
     const shell = '<path d="M108 292 C108 200 176 160 246 160 C316 160 368 208 368 292 Z"/>';
     const head = '<ellipse cx="80" cy="236" rx="46" ry="34"/>';
     const neck = '<path d="M96 262 C110 270 128 280 140 290 L150 260 C134 250 118 240 104 234 Z"/>';
-    return `<path d="M-10 336 Q40 324 90 336 T190 336 T290 336 T390 336 T490 336 V420 H-10 Z" fill="#8FB3E8" stroke="${C.ink}" stroke-width="8"/>
+    return `${m.cut ? '' : `<path d="M-10 336 Q40 324 90 336 T190 336 T290 336 T390 336 T490 336 V420 H-10 Z" fill="#8FB3E8" stroke="${C.ink}" stroke-width="8"/>
       <rect x="-20" y="288" width="440" height="52" rx="26" fill="#9A6A44" stroke="${C.ink}" stroke-width="9"/>
-      <path d="M40 304 H140 M220 320 H330" stroke="#7A4E2A" stroke-width="6" stroke-linecap="round"/>
+      <path d="M40 304 H140 M220 320 H330" stroke="#7A4E2A" stroke-width="6" stroke-linecap="round"/>`}
       ${shadow([shell, head, neck])}
       <g fill="#7A8E52" stroke="${C.ink}" stroke-width="9" stroke-linejoin="round"><ellipse cx="146" cy="294" rx="26" ry="16"/><ellipse cx="330" cy="294" rx="26" ry="16"/><path d="M364 284 L392 296 L362 300 Z"/></g>
       ${shape(neck, '#7A8E52')}
@@ -902,7 +902,7 @@ const bee = (p) => ({
     const thorax = '<circle cx="186" cy="204" r="52"/>';
     const head = '<circle cx="116" cy="200" r="54"/>';
     const wings = '<ellipse cx="206" cy="122" rx="52" ry="30" transform="rotate(-32 206 122)"/><ellipse cx="252" cy="140" rx="44" ry="26" transform="rotate(-12 252 140)"/>';
-    return `${FLOWER}
+    return `${m.cut ? '' : FLOWER}
       <path d="M168 252 L158 300 M196 256 L198 302 M224 252 L240 296" stroke="${C.ink}" stroke-width="9" stroke-linecap="round"/>
       ${shadow([abd, thorax, head])}
       ${shape(abd, p.abdColor)}
@@ -946,7 +946,7 @@ ART.monarch = {
     const loL = '<path d="M194 230 C120 232 68 262 78 302 C94 342 160 332 194 262 Z"/>';
     const loR = '<path d="M206 230 C280 232 332 262 322 302 C306 342 240 332 206 262 Z"/>';
     const wings = [upL, upR, loL, loR];
-    return `<g fill="#F2A0C8" stroke="${C.ink}" stroke-width="6">${[[170, 360], [200, 350], [230, 360], [185, 380], [215, 380], [200, 372]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="14"/>`).join('')}</g>
+    return `${m.cut ? '' : `<g fill="#F2A0C8" stroke="${C.ink}" stroke-width="6">${[[170, 360], [200, 350], [230, 360], [185, 380], [215, 380], [200, 372]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="14"/>`).join('')}</g>`}
       ${shadow(wings)}
       <g fill="${C.ink}" stroke="${C.ink}" stroke-width="16" stroke-linejoin="round">${wings.join('')}</g>
       <g fill="#F28C28">${wings.join('')}</g>
@@ -973,7 +973,7 @@ ART.moth = {
     const loL = '<path d="M194 238 C140 248 80 278 96 318 C120 348 170 318 194 278 Z"/>';
     const loR = '<path d="M206 238 C260 248 320 278 304 318 C280 348 230 318 206 278 Z"/>';
     const feather = (d, flip) => `<path d="${d}" fill="none" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>${[0, 1, 2, 3].map((i) => { const x = flip ? 214 + i * 12 : 186 - i * 12; const y = 118 - i * 12; return `<path d="M${x} ${y} l${flip ? 10 : -10} -2 M${x} ${y} l${flip ? 4 : -4} -10" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>`; }).join('')}`;
-    return `<circle cx="330" cy="70" r="34" fill="#FFF4C7" stroke="${C.ink}" stroke-width="7"/>
+    return `${m.cut ? '' : `<circle cx="330" cy="70" r="34" fill="#FFF4C7" stroke="${C.ink}" stroke-width="7"/>`}
       ${shadow([upL, upR, loL, loR])}
       ${shape(loL + loR, '#F7D55A')}
       ${shape(upL + upR, '#F2A0B8')}
@@ -1049,7 +1049,7 @@ ART.milkweedbug = {
   tilt: 8,
   svg: (m) => {
     const body = '<ellipse cx="200" cy="246" rx="80" ry="108"/>';
-    return `<path d="M60 420 C40 300 120 140 240 120 C340 110 400 200 380 420 Z" fill="#7FBF5A" stroke="${C.ink}" stroke-width="8"/><path d="M110 400 C150 300 220 200 320 150" fill="none" stroke="#3E8E4E" stroke-width="6"/>
+    return `${m.cut ? '' : `<path d="M60 420 C40 300 120 140 240 120 C340 110 400 200 380 420 Z" fill="#7FBF5A" stroke="${C.ink}" stroke-width="8"/><path d="M110 400 C150 300 220 200 320 150" fill="none" stroke="#3E8E4E" stroke-width="6"/>`}
       <path d="M130 200 L80 180 M126 250 L70 254 M134 300 L86 330 M270 200 L320 180 M274 250 L330 254 M266 300 L314 330" stroke="${C.ink}" stroke-width="8" stroke-linecap="round"/>
       ${shadow([body, '<circle cx="200" cy="112" r="40"/>'])}
       ${shape(body, '#F28C28')}
@@ -1076,8 +1076,8 @@ ART.orbweaver = {
     const abd = '<circle cx="200" cy="250" r="78"/>';
     const ceph = '<circle cx="200" cy="152" r="42"/>';
     const legs = 'M170 150 C120 110 90 100 60 60 M164 166 C110 150 70 150 30 130 M164 184 C110 200 74 220 40 260 M172 200 C130 240 110 270 90 320 M230 150 C280 110 310 100 340 60 M236 166 C290 150 330 150 370 130 M236 184 C290 200 326 220 360 260 M228 200 C270 240 290 270 310 320';
-    return `<g fill="none" stroke="#C9C1B4" stroke-width="3">${[0, 30, 60, 90, 120, 150].map((a) => `<path d="M${200 - 260 * Math.cos((a * Math.PI) / 180)} ${200 - 260 * Math.sin((a * Math.PI) / 180)} L${200 + 260 * Math.cos((a * Math.PI) / 180)} ${200 + 260 * Math.sin((a * Math.PI) / 180)}"/>`).join('')}${[50, 90, 130, 170].map((r) => `<circle cx="200" cy="200" r="${r}"/>`).join('')}</g>
-      <path d="M200 -10 V110" stroke="#C9C1B4" stroke-width="3"/>
+    return `${m.cut ? '' : `<g fill="none" stroke="#C9C1B4" stroke-width="3">${[0, 30, 60, 90, 120, 150].map((a) => `<path d="M${200 - 260 * Math.cos((a * Math.PI) / 180)} ${200 - 260 * Math.sin((a * Math.PI) / 180)} L${200 + 260 * Math.cos((a * Math.PI) / 180)} ${200 + 260 * Math.sin((a * Math.PI) / 180)}"/>`).join('')}${[50, 90, 130, 170].map((r) => `<circle cx="200" cy="200" r="${r}"/>`).join('')}</g>
+      <path d="M200 -10 V110" stroke="#C9C1B4" stroke-width="3"/>`}
       <path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="${legs}" fill="none" stroke="#B88A5E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="14 8"/>
       ${shadow([abd, ceph])}
@@ -1142,6 +1142,41 @@ ART.peregrine = raptorSelfie({
   chestMarks: `<path d="M70 380 H330 M60 404 H340" stroke="#3B4256" stroke-width="7" stroke-linecap="round" stroke-dasharray="16 10"/>`,
   headMarks: `<path d="M40 40 H360 V150 C300 138 250 146 200 146 C150 146 100 138 40 150 Z" fill="${C.ink}"/><path d="M40 150 C62 172 72 204 78 250 L40 250 Z M360 150 C338 172 328 204 322 250 L360 250 Z" fill="${C.ink}"/><path d="M112 212 C112 240 116 266 110 296 L148 288 C152 262 152 236 146 212 Z M288 212 C288 240 284 266 290 296 L252 288 C248 262 248 236 254 212 Z" fill="${C.ink}"/>`,
   tilt: 4,
+});
+
+// Perched hawks, for close-up scenes (their stickers are face close-ups).
+ART.redtailBody = perched({
+  id: 'redtailb', tint: C.yellowT,
+  headAt: [150, 150, 86], eyeAt: [134, 138, 22],
+  back: '#7A5236', breast: '#F4EDE4', wing: '#6A4630', tail: '#C0532E', head: '#8A5E40',
+  underside: dots([[104, 286], [124, 296], [146, 302], [168, 306], [116, 312], [140, 318], [190, 308]], 8, '#6A4630'),
+  tailMarks: `<path d="M318 300 L384 318" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`,
+  wingMarks: dots([[246, 210], [276, 204], [262, 244], [294, 238], [282, 274]], 7, '#B9946E'),
+  face: '<path d="M90 176 C104 170 128 174 140 188 C138 204 120 212 104 208 C96 200 92 190 90 176 Z" fill="#F4EDE4"/>',
+  beakShape: HOOK, beak: '#5E5E6E', beakMarks: CERE, legs: '#F2C94C', snack: feather(),
+});
+
+ART.coopersBody = perched({
+  id: 'coopersb', tint: C.blueT,
+  headAt: [150, 150, 84], eyeAt: [134, 138, 18], eyeRing: '#E5484D',
+  back: '#5E6A80', breast: '#F4EDE4', wing: '#556075', tail: '#5E6A80', head: '#C9B8AE',
+  tailShape: '<path d="M300 256 L404 284 L400 318 L294 302 Z"/>',
+  tailMarks: `<path d="M330 268 l-6 30 M356 276 l-6 30 M382 284 l-6 28" stroke="${C.ink}" stroke-width="7" stroke-linecap="round"/><path d="M398 290 L394 314" stroke="#F4F2F0" stroke-width="7"/>`,
+  underside: `<path d="M96 224 H210 M92 248 H210 M94 272 H210 M100 296 H210 M110 320 H210" stroke="#D9774A" stroke-width="9" stroke-linecap="round"/>`,
+  headMarks: '<path d="M50 50 H260 V118 C210 100 160 96 60 112 Z" fill="#3B4256"/>',
+  beakShape: HOOK, beak: '#3B3A50', beakMarks: CERE, legs: '#F2C94C', snack: feather(),
+});
+
+ART.peregrineBody = perched({
+  id: 'peregrineb', tint: C.yellowT, rail: true,
+  headAt: [150, 150, 84], eyeAt: [132, 138, 19], eyeRing: '#F2C94C', lid: C.ink,
+  back: '#5E6A80', breast: '#F4F2F0', wing: '#4E5A70', tail: '#4E5A70', head: '#F4F2F0',
+  underside: `<path d="M100 270 H220 M104 292 H220 M112 314 H220" stroke="#3B4256" stroke-width="7" stroke-linecap="round" stroke-dasharray="14 10"/>`,
+  tailMarks: `<path d="M330 268 l-6 28 M358 276 l-6 28" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`,
+  headMarks: `<path d="M40 40 H260 V200 C230 180 214 150 196 140 C170 130 140 128 110 132 L40 140 Z" fill="${C.ink}"/>`,
+  face: `<path d="M116 150 C128 170 132 196 126 222 L150 216 C154 192 150 166 140 148 Z" fill="${C.ink}"/>`,
+  blushAt: [172, 196],
+  beakShape: HOOK, beak: '#3B3A50', beakMarks: CERE, legs: '#F2C94C', snack: feather(),
 });
 
 // ── Full-body versions of the selfie animals, for close-up scenes (no background, no
@@ -1210,16 +1245,184 @@ ART.squirrelBody = {
   },
 };
 
-// Who appears in close-up scenes (the pilot), which drawing, and where their feet are
-// on the 400 canvas (as a fraction), so the scene can stand them on its branch, sidewalk
-// or water.
+ART.raccoonBody = {
+  // Sitting up, paws together, ringed tail curled around the side.
+  tint: 'none',
+  tilt: 0,
+  svg: (m) => {
+    const tail = '<path d="M250 356 C330 362 380 330 386 278 C390 240 362 226 350 252 C342 280 320 312 260 318 Z"/>';
+    const body = '<path d="M130 360 C100 300 112 226 170 206 C230 188 284 220 290 282 C294 330 270 360 240 360 Z"/>';
+    const ears = '<circle cx="132" cy="96" r="24"/><circle cx="228" cy="96" r="24"/>';
+    const head = '<ellipse cx="180" cy="148" rx="82" ry="66"/>';
+    return `${shadow([tail, body, ears, head])}
+      ${shape(tail, '#A7A3B3')}
+      <clipPath id="rb-tail">${tail}</clipPath>
+      <g clip-path="url(#rb-tail)"><path d="M300 360 L330 250 M330 360 L360 250 M360 360 L392 250" stroke="#3B3A50" stroke-width="16"/></g>
+      ${tail.replace('/>', ` fill="none" ${OL}/>`)}
+      ${shape(body, '#9C98A8')}
+      <ellipse cx="200" cy="300" rx="44" ry="52" fill="#D8D4DE"/>
+      <g fill="#8C889C" ${OL}><ellipse cx="170" cy="354" rx="28" ry="10"/><ellipse cx="236" cy="356" rx="26" ry="10"/></g>
+      ${shape(ears, '#8C889C')}
+      <g fill="#F1EEF4"><circle cx="132" cy="98" r="11"/><circle cx="228" cy="98" r="11"/></g>
+      ${shape(head, '#A7A3B3')}
+      <ellipse cx="180" cy="172" rx="52" ry="36" fill="#F1EEF4"/>
+      <path d="M112 136 C132 116 164 124 180 142 C196 124 228 116 248 136 C250 158 228 170 208 166 C196 164 188 156 180 156 C172 156 164 164 152 166 C132 170 110 158 112 136 Z" fill="${C.ink}"/>
+      ${eye(m.eyes, 150, 142, 13, { dark: true })}${eye(m.eyes, 210, 142, 13, { dark: true })}
+      <ellipse cx="180" cy="176" rx="13" ry="9" fill="${C.ink}"/>
+      <path d="M170 192 Q180 200 190 192" fill="none" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>
+      <ellipse cx="130" cy="182" rx="14" ry="8" fill="${C.pink}"/><ellipse cx="230" cy="182" rx="14" ry="8" fill="${C.pink}"/>
+      ${m.snack ? `<path d="M196 234 C198 220 206 212 216 208" fill="none" stroke="#3E8E4E" stroke-width="5" stroke-linecap="round"/><circle cx="196" cy="246" r="16" fill="#E5484D" stroke="${C.ink}" stroke-width="6"/><circle cx="190" cy="240" r="4" fill="#fff"/>` : ''}
+      <g fill="#8C889C" ${OL}><ellipse cx="174" cy="256" rx="14" ry="11"/><ellipse cx="216" cy="258" rx="14" ry="11"/></g>
+      ${m.hearts ? heart(300, 50, 44) + heart(68, 74, 30) : ''}
+      ${m.zees ? zee(250, 70, 30) + zee(288, 44, 20) : ''}`;
+  },
+};
+
+ART.opossumBody = {
+  // On all fours, facing left: white pointy face, gray coat, black ears and legs, pink tail.
+  tint: 'none',
+  tilt: 0,
+  svg: (m) => {
+    const tail = '<path d="M330 290 C372 300 394 330 380 352 C372 362 360 356 364 346 C372 330 356 312 326 306 Z"/>';
+    const body = '<path d="M120 266 C120 210 180 186 250 192 C320 198 346 240 340 280 C334 312 290 322 230 320 C170 318 120 306 120 266 Z"/>';
+    const head = '<path d="M150 208 C110 196 72 214 44 248 C40 256 46 262 56 260 C90 262 128 268 160 262 Z"/>';
+    const ears = '<circle cx="122" cy="196" r="17"/>';
+    const legs = 'M170 312 V356 M210 316 V358 M270 316 V358 M310 310 V354';
+    return `<path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="22" stroke-linecap="round"/>
+      <path d="${legs}" fill="none" stroke="#2E2E44" stroke-width="12" stroke-linecap="round"/>
+      ${shadow([tail, body, head, ears])}
+      ${shape(tail, '#F2B8C6')}
+      ${shape(body, '#A9A6AE')}
+      <path d="M150 210 C170 230 200 236 240 232" fill="none" stroke="#E8E6EA" stroke-width="10" stroke-linecap="round"/>
+      ${shape(ears, C.ink)}
+      ${shape(head, '#F7F5F2')}
+      <circle cx="50" cy="252" r="7" fill="#F2A0B0" stroke="${C.ink}" stroke-width="4"/>
+      ${eye(m.eyes, 104, 226, 10, { lid: '#F7F5F2' })}
+      <ellipse cx="126" cy="246" rx="11" ry="6" fill="${C.pink}"/>
+      <path d="M70 248 L46 238 M70 254 L44 258" stroke="${C.ink}" stroke-width="3" stroke-linecap="round"/>
+      ${m.snack ? `<g fill="#7B4BB5" stroke="${C.ink}" stroke-width="5"><circle cx="34" cy="268" r="10"/><circle cx="50" cy="270" r="10"/><circle cx="42" cy="284" r="10"/></g>` : ''}
+      ${m.hearts ? heart(300, 120, 40) + heart(240, 150, 26) : ''}
+      ${m.zees ? zee(200, 130, 30) + zee(238, 104, 20) : ''}`;
+  },
+};
+
+ART.groundhogBody = {
+  // Sitting up tall on their haunches, looking around, the classic groundhog pose.
+  tint: 'none',
+  tilt: 0,
+  svg: (m) => {
+    const body = '<path d="M130 360 C96 300 104 210 160 186 C220 164 276 200 282 268 C288 330 266 360 236 360 Z"/>';
+    const head = '<ellipse cx="184" cy="134" rx="66" ry="58"/>';
+    const ears = '<circle cx="138" cy="94" r="15"/><circle cx="230" cy="94" r="15"/>';
+    const tail = '<path d="M262 344 C300 348 318 330 316 312 C304 318 286 326 262 326 Z"/>';
+    return `${shadow([tail, body, ears, head])}
+      ${shape(tail, '#6E4A30')}
+      ${shape(body, '#9A6E48')}
+      <ellipse cx="196" cy="292" rx="46" ry="58" fill="#C9A884"/>
+      <g fill="#6E4A30" ${OL}><ellipse cx="168" cy="354" rx="28" ry="10"/><ellipse cx="232" cy="356" rx="26" ry="10"/></g>
+      ${shape(ears, '#7A5236')}
+      ${shape(head, '#9A6E48')}
+      <ellipse cx="184" cy="156" rx="40" ry="28" fill="#D9C2A6"/>
+      ${eye(m.eyes, 160, 126, 12, { lid: '#9A6E48' })}${eye(m.eyes, 208, 126, 12, { lid: '#9A6E48' })}
+      <ellipse cx="184" cy="146" rx="10" ry="7" fill="${C.ink}"/>
+      <rect x="176" y="160" width="16" height="16" rx="3" fill="#F7F0E0" stroke="${C.ink}" stroke-width="4"/><path d="M184 160 V176" stroke="${C.ink}" stroke-width="3"/>
+      <ellipse cx="140" cy="162" rx="12" ry="7" fill="${C.pink}"/><ellipse cx="228" cy="162" rx="12" ry="7" fill="${C.pink}"/>
+      ${m.snack ? `<path d="M196 236 V196" stroke="#3E8E4E" stroke-width="5" stroke-linecap="round"/><circle cx="196" cy="190" r="12" fill="#F2D23C" stroke="${C.ink}" stroke-width="5"/><circle cx="196" cy="190" r="5" fill="#E8A23C"/>` : ''}
+      <g fill="#6E4A30" ${OL}><ellipse cx="174" cy="232" rx="13" ry="10"/><ellipse cx="216" cy="234" rx="13" ry="10"/></g>
+      ${m.hearts ? heart(300, 50, 44) + heart(70, 70, 30) : ''}
+      ${m.zees ? zee(250, 64, 30) + zee(288, 40, 20) : ''}`;
+  },
+};
+
+ART.deerBody = {
+  // Standing side-on, facing left: big ears, white tail tuft, slim legs.
+  tint: 'none',
+  tilt: 0,
+  svg: (m) => {
+    const body = '<path d="M150 210 C150 176 210 164 280 170 C340 176 362 206 356 236 C350 266 310 272 250 270 C190 268 150 254 150 210 Z"/>';
+    const neck = '<path d="M150 214 C138 182 136 150 146 118 L188 120 C182 150 186 180 196 204 Z"/>';
+    const head = '<path d="M180 120 C190 92 160 70 128 74 C96 78 72 98 60 120 C56 132 64 140 76 140 C110 146 160 146 180 120 Z"/>';
+    const ears = '<ellipse cx="160" cy="70" rx="14" ry="30" transform="rotate(30 160 70)"/><ellipse cx="128" cy="66" rx="13" ry="28" transform="rotate(-8 128 66)"/>';
+    const legs = 'M186 262 L184 356 M220 266 L222 356 M300 264 L302 356 M330 258 L336 352';
+    return `<path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="20" stroke-linecap="round"/>
+      <path d="${legs}" fill="none" stroke="#A9784E" stroke-width="10" stroke-linecap="round"/>
+      <path d="M180 356 h10 M216 356 h10 M296 356 h10 M330 352 h10" stroke="${C.ink}" stroke-width="10" stroke-linecap="round"/>
+      ${shadow([body, neck, head, ears])}
+      ${shape(body, '#B9875E')}
+      <path d="M190 252 C230 262 290 262 330 252" fill="none" stroke="#F4EDE4" stroke-width="12" stroke-linecap="round"/>
+      <path d="M352 210 C372 198 382 214 368 230 C362 236 354 232 354 226 Z" fill="#F4EDE4" stroke="${C.ink}" stroke-width="6"/>
+      ${shape(neck, '#B9875E')}
+      ${shape(ears, '#B9875E')}
+      <ellipse cx="161" cy="72" rx="7" ry="18" transform="rotate(30 161 72)" fill="#F4EDE4"/><ellipse cx="128" cy="69" rx="6" ry="16" transform="rotate(-8 128 69)" fill="#F4EDE4"/>
+      ${shape(head, '#B9875E')}
+      <path d="M66 126 C80 136 100 138 116 134" fill="none" stroke="#F4EDE4" stroke-width="8" stroke-linecap="round"/>
+      <ellipse cx="62" cy="120" rx="9" ry="7" fill="${C.ink}"/>
+      ${eye(m.eyes, 118, 104, 13, { lid: '#B9875E' })}
+      <ellipse cx="144" cy="124" rx="12" ry="7" fill="${C.pink}"/>
+      ${m.snack ? `<path d="M48 134 C32 142 26 158 40 166 C54 160 58 146 48 134 Z" fill="#7FBF5A" stroke="${C.ink}" stroke-width="5"/>` : ''}
+      ${m.hearts ? heart(300, 60, 44) + heart(240, 100, 28) : ''}
+      ${m.zees ? zee(230, 80, 30) + zee(268, 54, 20) : ''}`;
+  },
+};
+
+// Every neighbor in close-up scenes: which drawing, how they're posed, and where their
+// feet are on the 400 canvas (as a fraction), so the scene can stand them on its branch,
+// sidewalk, grass or water. Poses: perch (on a branch, ledge or wire), stand (on the
+// ground), swim (at the waterline), wade (legs in the shallows), cling (to a trunk),
+// fly (in the air) and web (in the middle of a web).
+const P = (art, pose, feet = 0.815) => ({ art, pose, feet });
 const CUTOUTS = {
-  'house-sparrow': { art: 'sparrow', feet: 0.815 },
-  'american-robin': { art: 'robin', feet: 0.815 },
-  'northern-cardinal': { art: 'cardinal', feet: 0.815 },
-  mallard: { art: 'mallard', feet: 0.74 },
-  'rock-pigeon': { art: 'pigeonBody', feet: 0.9 },
-  'eastern-gray-squirrel': { art: 'squirrelBody', feet: 0.9 },
+  'rock-pigeon': P('pigeonBody', 'stand', 0.9),
+  'house-sparrow': P('sparrow', 'perch'),
+  'eastern-gray-squirrel': P('squirrelBody', 'stand', 0.9),
+  'european-starling': P('starling', 'perch'),
+  'mourning-dove': P('dove', 'perch'),
+  'american-robin': P('robin', 'perch'),
+  'herring-gull': P('gull', 'perch'),
+  raccoon: P('raccoonBody', 'stand', 0.9),
+  monarch: P('monarch', 'fly', 0.75),
+  'red-tailed-hawk': P('redtailBody', 'perch'),
+  'blue-jay': P('jay', 'perch'),
+  'dark-eyed-junco': P('junco', 'perch'),
+  'virginia-opossum': P('opossumBody', 'stand', 0.92),
+  'american-crow': P('crow', 'perch'),
+  'white-throated-sparrow': P('whitethroat', 'perch'),
+  'chimney-swift': P('swift', 'fly', 0.6),
+  moths: P('moth', 'fly', 0.75),
+  'canada-goose': P('goose', 'stand', 0.935),
+  mallard: P('mallard', 'swim', 0.74),
+  brant: P('brant', 'swim', 0.74),
+  'double-crested-cormorant': P('cormorant', 'stand', 0.81),
+  'ring-billed-gull': P('ringbill', 'perch'),
+  'common-tern': P('tern', 'perch'),
+  'great-blue-heron': P('heron', 'wade', 0.82),
+  'black-crowned-night-heron': P('nightheron', 'perch'),
+  bufflehead: P('bufflehead', 'swim', 0.74),
+  'mute-swan': P('swan', 'swim', 0.74),
+  'red-winged-blackbird': P('redwing', 'perch'),
+  'white-tailed-deer': P('deerBody', 'stand', 0.9),
+  'northern-mockingbird': P('mockingbird', 'perch'),
+  'northern-cardinal': P('cardinal', 'perch'),
+  'common-grackle': P('grackle', 'perch'),
+  'gray-catbird': P('catbird', 'perch'),
+  'song-sparrow': P('songsparrow', 'perch'),
+  'american-kestrel': P('kestrel', 'perch'),
+  'coopers-hawk': P('coopersBody', 'perch'),
+  'peregrine-falcon': P('peregrineBody', 'perch'),
+  'downy-woodpecker': P('downy', 'cling', 0.9),
+  'red-bellied-woodpecker': P('redbelly', 'cling', 0.9),
+  'tufted-titmouse': P('titmouse', 'perch'),
+  'hermit-thrush': P('thrush', 'perch'),
+  'yellow-rumped-warbler': P('warbler', 'perch'),
+  'common-eastern-bumble-bee': P('bumblebee', 'fly', 0.75),
+  'western-honey-bee': P('honeybee', 'fly', 0.75),
+  'eastern-carpenter-bee': P('carpenterbee', 'fly', 0.75),
+  'common-eastern-firefly': P('firefly', 'fly', 0.75),
+  'blue-dasher': P('dasher', 'fly', 0.75),
+  'large-milkweed-bug': P('milkweedbug', 'fly', 0.85),
+  'pond-slider': P('turtle', 'swim', 0.73),
+  groundhog: P('groundhogBody', 'stand', 0.9),
+  'orb-weavers': P('orbweaver', 'web', 0.8),
 };
 
 // Species id → drawing.
@@ -1294,9 +1497,10 @@ for (const [id, key] of Object.entries(SPECIES)) {
 }
 
 const cutouts = {};
-for (const [id, { art, feet }] of Object.entries(CUTOUTS)) {
+for (const [id, { art, pose, feet }] of Object.entries(CUTOUTS)) {
   cutouts[id] = {
     feet,
+    pose,
     frames: MOODS.map((m) => ({
       mood: m.name,
       open: drawCut(ART[art], m),
@@ -1316,7 +1520,7 @@ if (require.main === module) {
       `export type CharacterFrame = { mood: string; open: string; shut?: string };\n\n` +
       `export const characterXml: Record<string, CharacterFrame[]> = ${JSON.stringify(characters, null, 2)};\n\n` +
       `/** Close-up scene versions: no background or perch; \`feet\` is where they stand, as a fraction of the height. */\n` +
-      `export const cutoutXml: Record<string, { feet: number; frames: CharacterFrame[] }> = ${JSON.stringify(cutouts, null, 2)};\n`,
+      `export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' | 'swim' | 'wade' | 'cling' | 'fly' | 'web'; frames: CharacterFrame[] }> = ${JSON.stringify(cutouts, null, 2)};\n`,
   );
   console.log(`wrote ${Object.keys(characters).length} neighbors × ${MOODS.length} moods`);
 }

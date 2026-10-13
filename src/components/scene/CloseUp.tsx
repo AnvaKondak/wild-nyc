@@ -1,15 +1,19 @@
-// A close-up scene for a story slide, drawn to fill the whole screen: the animal standing
-// in their setting, instead of a round sticker over the wide neighborhood scene.
-// Pilot: a branch, a sidewalk (with a puddle, for walkers at the water) and a pond.
+// A close-up scene for a story slide, drawn to fill the whole screen: the animal right in
+// their setting, instead of a round sticker over the wide neighborhood scene.
 //
-// The screen is built around the `band` where the sticker would sit: sky above it (in the
-// time of day's color, so the pills and time stay readable, with the sun, moon, clouds,
-// rain or snow the weather calls for), the animal in it, and the ground carrying on below,
-// under the story card. Leaves follow the season.
+// Every story setting maps to one of a handful of scenes, picked to suit the animal's
+// pose: a pink brownstone (ledges, fences, sidewalks, a puddle for walkers at the water),
+// a tree branch, a tree trunk (for woodpeckers), a hedge, a lawn, flowers, a burrow, a
+// wire under open sky, open sky (for fliers), a pond (for swimmers and waders), a shore
+// or pier, reeds, and a web.
 //
-// Motion is gentle and never visibly restarts: leaves flutter on smooth back-and-forth
-// cycles, and ripples, rain and snow move one way on loops that line up seamlessly. The
-// branch and the animal on it hold still. Reduce Motion stops it all.
+// The screen is built around the `band` where the sticker would sit: sky (or stone)
+// above, the animal in the band, and the ground carrying on below, under the story card.
+// Leaves follow the season; the sky shows the sun, moon, clouds, rain or snow.
+//
+// Motion is gentle and never visibly restarts: leaves flutter, ripples drift one way,
+// rain and snow fall on seamless loops. Branches and animals hold still. Reduce Motion
+// stops it all.
 
 import { useEffect, useRef } from 'react';
 import { Animated, Easing, View } from 'react-native';
@@ -18,18 +22,64 @@ import type { Mood, Period, Season, Setting } from '@/content/types';
 import type { Sky } from '@/lib/weather';
 import { colors } from '@/theme/tokens';
 import { useReduceMotion } from '../backdrop/motion';
-import { Character, cutoutFeet, hasCutout } from '../characters/Character';
+import { Character, cutoutFeet, cutoutPose, hasCutout } from '../characters/Character';
 
-export type CloseUpSetting = 'branch' | 'sidewalk' | 'water' | 'puddle';
-const SETTINGS: Setting[] = ['branch', 'sidewalk', 'water'];
-/** Who swims. Everyone else "at the water" is at a puddle on the sidewalk, drinking or bathing. */
-const SWIMMERS = ['mallard'];
+export type CloseUpSetting =
+  | 'building' | 'puddle' | 'branch' | 'trunk' | 'hedge' | 'lawn' | 'flowers' | 'burrow'
+  | 'wire' | 'sky' | 'water' | 'wade' | 'shore' | 'pier' | 'reeds' | 'web';
 
-/** The close-up for this slide, if the pilot covers both the animal and the setting. */
+// Who walks to the water rather than swims: at a puddle in the city.
+const CITY_WALKERS = ['rock-pigeon', 'house-sparrow', 'european-starling', 'raccoon', 'eastern-gray-squirrel', 'american-robin', 'northern-cardinal'];
+// Who lives in burrows and dens on the ground.
+const BURROWERS = ['groundhog', 'virginia-opossum'];
+
+/** The close-up scene for this animal in this setting, or nothing (then the sticker shows). */
 export function closeUpFor(speciesId: string | undefined, setting: Setting | undefined): CloseUpSetting | undefined {
-  if (!hasCutout(speciesId) || !setting || !SETTINGS.includes(setting)) return undefined;
-  if (setting === 'water') return SWIMMERS.includes(speciesId) ? 'water' : 'puddle';
-  return setting as CloseUpSetting;
+  if (!hasCutout(speciesId) || !setting) return undefined;
+  const pose = cutoutPose(speciesId);
+  if (pose === 'web') return 'web';
+  if (pose === 'cling') return 'trunk';
+  if (pose === 'fly') {
+    if (setting === 'flowers' || setting === 'branch' || setting === 'hedge' || setting === 'fence') return 'flowers';
+    if (setting === 'reeds' || setting === 'water') return 'reeds';
+    if (setting === 'lawn' || setting === 'night-sky') return 'lawn';
+    return 'sky';
+  }
+  if (pose === 'swim') return 'water';
+  if (pose === 'wade') return setting === 'branch' ? 'branch' : 'wade';
+  switch (setting) {
+    case 'branch':
+    case 'trunk':
+      return 'branch';
+    case 'den':
+      return BURROWERS.includes(speciesId) ? 'burrow' : 'branch';
+    case 'hedge':
+      return 'hedge';
+    case 'lawn':
+    case 'flowers':
+      return 'lawn';
+    case 'sidewalk':
+    case 'ledge':
+    case 'rooftop':
+    case 'fence':
+    case 'trashcan':
+    case 'streetlight':
+      return 'building';
+    case 'wire':
+    case 'sky':
+    case 'night-sky':
+      return 'wire';
+    case 'water':
+      return CITY_WALKERS.includes(speciesId) ? 'puddle' : 'shore';
+    case 'shore':
+      return 'shore';
+    case 'pier':
+      return 'pier';
+    case 'reeds':
+      return pose === 'perch' ? 'reeds' : 'shore';
+    default:
+      return undefined;
+  }
 }
 
 const INK = colors.ink;
@@ -45,6 +95,9 @@ const BARK = '#8A6247';
 const BRICK: Record<Period, [string, string]> = { dawn: ['#E2BAB1', '#CEA59C'], midday: ['#D9AFA6', '#C49A91'], dusk: ['#B88E92', '#A37C80'], night: ['#5A4048', '#4A343C'] };
 const PAVEMENT: Record<Period, string> = { dawn: '#E6E1EA', midday: '#DAD7E0', dusk: '#B9B6C8', night: '#55546A' };
 const FAR: Record<Period, string> = { dawn: '#F2C4D4', midday: '#F2DFA0', dusk: '#4A6FE0', night: '#3B3A50' };
+const GRASS: Record<Period, string> = { dawn: '#A9D394', midday: '#9CCB86', dusk: '#4C7A5A', night: '#2F4A3A' };
+const SAND: Record<Period, string> = { dawn: '#F2DDBE', midday: '#EAD3AE', dusk: '#B9A07E', night: '#5A5046' };
+const HEDGE: Record<Season, string[]> = { spring: ['#6FB45A', '#8DC772'], summer: ['#3E9A5E', '#56B070'], fall: ['#5E9A4E', '#C9873A'], winter: ['#4E7A5A', '#5E8A6A'] };
 
 type Props = {
   setting: CloseUpSetting;
@@ -62,70 +115,300 @@ type Props = {
   weather?: Sky;
 };
 
+/** Where the animal's feet go (from the band's top, as a fraction of its height) and how big they are, per scene. */
+const PLACE: Record<CloseUpSetting, { ground: number; size: number; x: number }> = {
+  building: { ground: 0.94, size: 1.0, x: 0.5 },
+  puddle: { ground: 0.94, size: 1.0, x: 0.58 },
+  branch: { ground: 0.8, size: 0.86, x: 0.5 },
+  trunk: { ground: 0.95, size: 1.0, x: 0.42 },
+  hedge: { ground: 0.94, size: 0.9, x: 0.5 },
+  lawn: { ground: 0.94, size: 0.95, x: 0.5 },
+  flowers: { ground: 0.72, size: 0.75, x: 0.5 },
+  burrow: { ground: 0.94, size: 0.92, x: 0.42 },
+  wire: { ground: 0.82, size: 0.82, x: 0.5 },
+  sky: { ground: 0.75, size: 0.85, x: 0.5 },
+  water: { ground: 0.82, size: 0.9, x: 0.5 },
+  wade: { ground: 0.96, size: 1.05, x: 0.5 },
+  shore: { ground: 0.94, size: 0.95, x: 0.5 },
+  pier: { ground: 0.92, size: 0.95, x: 0.5 },
+  reeds: { ground: 0.82, size: 0.8, x: 0.5 },
+  web: { ground: 0.86, size: 0.95, x: 0.5 },
+};
+const OPEN_SKY: CloseUpSetting[] = ['branch', 'trunk', 'hedge', 'lawn', 'flowers', 'burrow', 'wire', 'sky', 'water', 'wade', 'shore', 'pier', 'reeds', 'web'];
+
 export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, period, season, sky, weather }: Props) {
   const bt = band.top;
   const bh = band.height;
-
-  // Where the animal's feet go, and how big they are.
-  const ground = setting === 'branch' ? bt + bh * 0.8 : setting === 'water' ? bt + bh * 0.82 : bt + bh * 0.94;
-  const size = setting === 'water' ? bh * 0.9 : setting === 'branch' ? bh * 0.86 : bh * 1.0;
+  const place = PLACE[setting];
+  const ground = bt + bh * place.ground;
+  const size = bh * place.size;
   const top = ground - size * cutoutFeet(speciesId);
-  // At a puddle they stand at its edge, beak over the water (everyone faces left).
-  const left = setting === 'puddle' ? w * 0.4 - size * 0.12 : w * 0.5 - size * 0.45;
+  const left = w * place.x - size * 0.45;
   const animal = (
     <View style={{ position: 'absolute', left, top }}>
       <Character speciesId={speciesId} size={size} mood={mood} cutout />
     </View>
   );
-  const horizon = bt + bh * 0.5; // the far shore, by the pond
+  const horizon = bt + bh * 0.5; // the far shore, by the water
   const pavement = ground - bh * 0.08; // where the sidewalk starts
   const leaves = LEAVES[season];
+  const city = setting === 'building' || setting === 'puddle';
+  const watery = setting === 'water' || setting === 'wade' || setting === 'reeds' || setting === 'shore' || setting === 'pier';
+  // How deep the water comes up, in front of whoever's in it.
+  const waterline = setting === 'wade' ? bt + bh * 0.8 : ground;
 
   return (
-    <View style={{ position: 'absolute', left: 0, top: 0, width: w, height: h, backgroundColor: sky }}>
-      {/* Up close to a brownstone there's no open sky: no sun, moon or clouds. Rain and snow still fall. */}
-      {setting !== 'sidewalk' && setting !== 'puddle' && <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} behind />}
+    <View style={{ position: 'absolute', left: 0, top: 0, width: w, height: h, backgroundColor: sky, overflow: 'hidden' }}>
+      {OPEN_SKY.includes(setting) && <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} behind />}
       <Svg width={w} height={h} style={{ position: 'absolute' }}>
-        {setting === 'sidewalk' || setting === 'puddle' ? (
+        {city && (
           <>
-            {/* Up close, the brownstone fills the whole screen; the cornice marks the floor line. */}
+            {/* Up close, the brownstone fills the whole screen. */}
             <Wall w={w} top={0} bottom={pavement} band={band} period={period} />
-            {/* The cornice crowns the building at the very top of the screen. */}
             <Cornice w={w} y={4} period={period} brackets={false} />
             <WallBranch y={bt} bh={bh} w={w} />
             <Sidewalk w={w} h={h} top={pavement} period={period} />
           </>
-        ) : setting === 'water' ? (
-          <Pond w={w} h={h} horizon={horizon} period={period} season={season} />
-        ) : (
+        )}
+        {setting === 'puddle' && (
+          <>
+            <Ellipse cx={w * 0.3} cy={ground + bh * 0.03} rx={w * 0.2} ry={bh * 0.06} fill={WATER[period]} stroke={INK} strokeWidth={1.5} />
+            <Path d={`M${w * 0.2} ${ground + bh * 0.02} q${w * 0.04} -4 ${w * 0.08} 0`} stroke={colors.paper} strokeWidth={2.5} fill="none" strokeLinecap="round" />
+          </>
+        )}
+        {(setting === 'branch' || setting === 'web') && (
           <>
             <Treeline w={w} h={h} base={ground + bh * 0.9} period={period} season={season} />
             <Branch w={w} y={ground} bh={bh} />
           </>
         )}
-        {setting === 'puddle' && (
-          <>
-            <Ellipse cx={w * 0.28} cy={ground + bh * 0.03} rx={w * 0.22} ry={bh * 0.06} fill={WATER[period]} stroke={INK} strokeWidth={1.5} />
-            <Path d={`M${w * 0.17} ${ground + bh * 0.02} q${w * 0.04} -4 ${w * 0.08} 0`} stroke={colors.paper} strokeWidth={2.5} fill="none" strokeLinecap="round" />
-          </>
+        {setting === 'web' && <Web cx={left + size * 0.5} cy={top + size * 0.5} r={bh * 0.6} />}
+        {setting === 'trunk' && <TrunkScene w={w} h={h} bt={bt} bh={bh} ground={ground} trunkX={left + size * 0.69} period={period} season={season} />}
+        {(setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && (
+          <Park w={w} h={h} ground={setting === 'flowers' ? bt + bh * 0.94 : ground} bh={bh} period={period} season={season} />
         )}
+        {setting === 'hedge' && <Hedge w={w} ground={ground} bh={bh} season={season} period={period} />}
+        {setting === 'burrow' && <Burrow x={w * 0.78} ground={ground} bh={bh} />}
+        {(setting === 'wire' || setting === 'sky') && <Skyline w={w} h={h} base={bt + bh * 1.05} period={period} />}
+        {setting === 'wire' && <Wire w={w} y={ground} bh={bh} />}
+        {watery && <Pond w={w} h={h} horizon={horizon} period={period} season={season} />}
+        {setting === 'reeds' && <Reeds w={w} ground={ground} bh={bh} back />}
+        {setting === 'reeds' && <BentReed w={w} y={ground} bh={bh} />}
+        {setting === 'shore' && <Shore w={w} h={h} top={ground - bh * 0.06} period={period} />}
+        {setting === 'pier' && <Pier w={w} h={h} top={ground - bh * 0.04} />}
       </Svg>
 
-      {(setting === 'sidewalk' || setting === 'puddle') && leaves.length > 0 && WALL_LEAVES.map((l, i) => <Leaf key={`w${i}`} {...l} w={w} y={bt} bh={bh} color={leaves[i % leaves.length]} />)}
-      {setting === 'branch' && leaves.length > 0 && BACK_LEAVES.map((l, i) => <Leaf key={i} {...l} w={w} y={ground} bh={bh} color={leaves[i % leaves.length]} />)}
-      {setting === 'water' && <Ripples w={w} from={horizon} to={ground} />}
+      {city && leaves.length > 0 && WALL_LEAVES.map((l, i) => <Leaf key={`w${i}`} {...l} w={w} y={bt} bh={bh} color={leaves[i % leaves.length]} />)}
+      {(setting === 'branch' || setting === 'web') && leaves.length > 0 && BACK_LEAVES.map((l, i) => <Leaf key={i} {...l} w={w} y={ground} bh={bh} color={leaves[i % leaves.length]} />)}
+      {(setting === 'water' || setting === 'wade' || setting === 'reeds') && <Ripples w={w} from={horizon} to={waterline} />}
       {animal}
-      {setting === 'water' && (
+      {(setting === 'water' || setting === 'wade') && (
         <>
           <Svg width={w} height={h} style={{ position: 'absolute' }} pointerEvents="none">
-            <Rect x={0} y={ground} width={w} height={h - ground} fill={WATER[period]} />
+            <Rect x={0} y={waterline} width={w} height={h - waterline} fill={WATER[period]} />
+            <Path d={`M0 ${waterline} H${w}`} stroke={INK} strokeWidth={1} opacity={0.4} />
           </Svg>
-          <Ripples w={w} from={ground} to={h} />
+          <Ripples w={w} from={waterline} to={h} />
         </>
+      )}
+      {setting === 'flowers' && (
+        <Svg width={w} height={h} style={{ position: 'absolute' }} pointerEvents="none">
+          <Flowers w={w} ground={bt + bh * 0.94} bh={bh} period={period} />
+        </Svg>
+      )}
+      {setting === 'reeds' && (
+        <Svg width={w} height={h} style={{ position: 'absolute' }} pointerEvents="none">
+          <Reeds w={w} ground={ground + bh * 0.2} bh={bh} />
+        </Svg>
       )}
       {setting === 'branch' && leaves.length > 0 && FRONT_LEAVES.map((l, i) => <Leaf key={i} {...l} w={w} y={ground} bh={bh} color={leaves[(i + 1) % leaves.length]} />)}
       <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} />
     </View>
+  );
+}
+
+// ---------------------------------------------------------------- more places
+
+/** Park ground: far trees on a grassy rise, grass down to the bottom of the screen. */
+function Park({ w, h, ground, bh, period, season }: { w: number; h: number; ground: number; bh: number; period: Period; season: Season }) {
+  const top = ground - bh * 0.22;
+  return (
+    <G>
+      <FarTrees w={w} base={top} period={period} season={season} />
+      <Rect x={0} y={top} width={w} height={h - top} fill={GRASS[period]} />
+      <Path d={`M0 ${top} H${w}`} stroke={INK} strokeWidth={1.2} opacity={0.4} />
+      {[0.08, 0.2, 0.33, 0.7, 0.86, 0.95].map((x, i) => (
+        <Path key={i} d={`M${w * x} ${ground + bh * (0.08 + (i % 3) * 0.07)} l-3 -9 M${w * x} ${ground + bh * (0.08 + (i % 3) * 0.07)} l3 -10`} stroke="#5E8A4A" strokeWidth={2} strokeLinecap="round" />
+      ))}
+    </G>
+  );
+}
+
+/** A big rounded hedge behind the animal, in the season's greens. */
+function Hedge({ w, ground, bh, season, period }: { w: number; ground: number; bh: number; season: Season; period: Period }) {
+  const [a, b] = HEDGE[season];
+  const dark = period === 'night' || period === 'dusk';
+  const blobs = [0.04, 0.2, 0.38, 0.56, 0.74, 0.92];
+  return (
+    <G opacity={dark ? 0.85 : 1}>
+      {blobs.map((x, i) => (
+        <Circle key={i} cx={w * x} cy={ground - bh * (0.3 + (i % 2) * 0.12)} r={bh * (0.26 + (i % 3) * 0.04)} fill={i % 2 ? b : a} stroke={INK} strokeWidth={1.5} />
+      ))}
+      <Rect x={0} y={ground - bh * 0.3} width={w} height={bh * 0.3} fill={a} />
+      {season === 'fall' || season === 'spring'
+        ? blobs.map((x, i) => <Circle key={`b${i}`} cx={w * x + 12} cy={ground - bh * (0.42 + (i % 2) * 0.1)} r={4} fill={season === 'fall' ? '#E5484D' : '#FFB3CB'} />)
+        : null}
+    </G>
+  );
+}
+
+/** A few big friendly flowers in front, for bees and butterflies to hover over. */
+function Flowers({ w, ground, bh, period }: { w: number; ground: number; bh: number; period: Period }) {
+  const petals = period === 'night' ? ['#B88AB8', '#C9B86A'] : ['#FF8FB0', '#FFD23F', '#B4A2F2'];
+  return (
+    <G>
+      {[0.12, 0.3, 0.7, 0.88].map((x, i) => {
+        const cx = w * x;
+        const cy = ground - bh * (0.12 + (i % 2) * 0.12);
+        const r = bh * 0.07;
+        return (
+          <G key={i}>
+            <Path d={`M${cx} ${cy} V${ground + bh * 0.2}`} stroke="#3E8E4E" strokeWidth={4} />
+            <Ellipse cx={cx + 12} cy={cy + bh * 0.12} rx={14} ry={6} transform={`rotate(-30 ${cx + 12} ${cy + bh * 0.12})`} fill="#5FC48E" stroke={INK} strokeWidth={1.2} />
+            {[0, 1, 2, 3, 4, 5].map((k) => {
+              const a = (k / 6) * Math.PI * 2;
+              return <Circle key={k} cx={cx + Math.cos(a) * r} cy={cy + Math.sin(a) * r} r={r * 0.7} fill={petals[i % petals.length]} stroke={INK} strokeWidth={1.2} />;
+            })}
+            <Circle cx={cx} cy={cy} r={r * 0.6} fill={colors.yellow} stroke={INK} strokeWidth={1.2} />
+          </G>
+        );
+      })}
+    </G>
+  );
+}
+
+/** A burrow: a mound of earth with a round dark entrance. */
+function Burrow({ x, ground, bh }: { x: number; ground: number; bh: number }) {
+  return (
+    <G>
+      <Ellipse cx={x} cy={ground} rx={bh * 0.32} ry={bh * 0.14} fill="#B98A5E" stroke={INK} strokeWidth={1.5} />
+      <Ellipse cx={x} cy={ground - bh * 0.02} rx={bh * 0.12} ry={bh * 0.08} fill="#4A3426" stroke={INK} strokeWidth={1.5} />
+    </G>
+  );
+}
+
+/** Far-off city rooftops and water towers along the bottom of an open sky. */
+function Skyline({ w, h, base, period }: { w: number; h: number; base: number; period: Period }) {
+  const fill = period === 'night' ? '#3B3A50' : period === 'dusk' ? '#4A62C8' : period === 'dawn' ? '#E8B4C4' : '#C9C3DE';
+  const blocks = [[0, 0.16, 0.12], [0.14, 0.12, 0.2], [0.28, 0.18, 0.1], [0.48, 0.14, 0.16], [0.64, 0.2, 0.08], [0.86, 0.16, 0.14]];
+  return (
+    <G opacity={0.9}>
+      {blocks.map(([x, bw, bh2], i) => (
+        <Rect key={i} x={w * x} y={base - h * bh2} width={w * bw} height={h} fill={fill} />
+      ))}
+      <Rect x={w * 0.55} y={base - h * 0.22} width={16} height={14} rx={2} fill={fill} />
+    </G>
+  );
+}
+
+/** A utility wire sagging across the screen, from a pole at the left. */
+function Wire({ w, y, bh }: { w: number; y: number; bh: number }) {
+  return (
+    <G>
+      <Rect x={w * 0.06} y={y - bh * 0.5} width={10} height={bh * 2} fill="#8A6247" stroke={INK} strokeWidth={1.5} />
+      <Rect x={w * 0.06 - 14} y={y - bh * 0.42} width={38} height={7} fill="#8A6247" stroke={INK} strokeWidth={1.5} />
+      <Path d={`M${w * 0.06 + 5} ${y - bh * 0.02} Q${w * 0.55} ${y + bh * 0.06} ${w + 10} ${y - bh * 0.04}`} stroke={INK} strokeWidth={3} fill="none" />
+      <Path d={`M${w * 0.06 + 5} ${y - bh * 0.32} Q${w * 0.55} ${y - bh * 0.22} ${w + 10} ${y - bh * 0.34}`} stroke={INK} strokeWidth={2} fill="none" opacity={0.6} />
+    </G>
+  );
+}
+
+/** The near shore: sand and a few pebbles, from `top` down. */
+function Shore({ w, h, top, period }: { w: number; h: number; top: number; period: Period }) {
+  return (
+    <G>
+      <Path d={`M0 ${top + 10} Q${w * 0.5} ${top - 10} ${w} ${top + 6} V${h} H0 Z`} fill={SAND[period]} stroke={INK} strokeWidth={1.5} />
+      {[0.15, 0.3, 0.72, 0.88].map((x, i) => (
+        <Ellipse key={i} cx={w * x} cy={top + 40 + (i % 2) * 30} rx={9} ry={6} fill="#B8B2C2" stroke={INK} strokeWidth={1.2} />
+      ))}
+    </G>
+  );
+}
+
+/** A wooden pier from `top` down: planks and two posts. */
+function Pier({ w, h, top }: { w: number; h: number; top: number }) {
+  return (
+    <G>
+      <Rect x={0} y={top} width={w} height={h - top} fill="#B9875E" stroke={INK} strokeWidth={1.5} />
+      {Array.from({ length: 8 }, (_, i) => (
+        <Path key={i} d={`M0 ${top + 18 * (i + 1)} H${w}`} stroke="#8A6247" strokeWidth={2} />
+      ))}
+      {[0.1, 0.9].map((x, i) => (
+        <Rect key={i} x={w * x - 9} y={top - 40} width={18} height={44} rx={4} fill="#8A6247" stroke={INK} strokeWidth={1.5} />
+      ))}
+    </G>
+  );
+}
+
+/** Cattails: tall stems with brown heads, at the sides (back) or along the bottom (front). */
+function Reeds({ w, ground, bh, back = false }: { w: number; ground: number; bh: number; back?: boolean }) {
+  const xs = back ? [0.03, 0.09, 0.15, 0.85, 0.91, 0.97] : [0.05, 0.12, 0.2, 0.8, 0.88, 0.95];
+  return (
+    <G opacity={back ? 0.8 : 1}>
+      {xs.map((x, i) => {
+        const top = ground - bh * (back ? 0.9 + (i % 3) * 0.12 : 0.45 + (i % 2) * 0.12);
+        return (
+          <G key={i}>
+            <Path d={`M${w * x} ${ground + bh * 0.3} Q${w * x + 4} ${(ground + top) / 2} ${w * x - 2} ${top}`} stroke="#5E7A3A" strokeWidth={4} fill="none" strokeLinecap="round" />
+            <Rect x={w * x - 6} y={top} width={12} height={bh * 0.14} rx={6} fill="#8A5A3A" stroke={INK} strokeWidth={1.2} />
+          </G>
+        );
+      })}
+    </G>
+  );
+}
+
+/** A reed bent across the middle, for a blackbird or sparrow to perch on. */
+function BentReed({ w, y, bh }: { w: number; y: number; bh: number }) {
+  const d = `M${w * 0.1} ${y + bh * 0.4} Q${w * 0.35} ${y - bh * 0.02} ${w * 0.95} ${y + bh * 0.02}`;
+  return (
+    <G>
+      <Path d={d} stroke={INK} strokeWidth={9} fill="none" strokeLinecap="round" />
+      <Path d={d} stroke="#7FA24A" strokeWidth={6} fill="none" strokeLinecap="round" />
+      <Rect x={w * 0.88} y={y - bh * 0.04} width={bh * 0.16} height={12} rx={6} fill="#8A5A3A" stroke={INK} strokeWidth={1.2} />
+    </G>
+  );
+}
+
+/** A big tree trunk for a woodpecker to cling to, with bark, a hole and a branch going off. */
+function TrunkScene({ w, h, bt, bh, ground, trunkX, period, season }: { w: number; h: number; bt: number; bh: number; ground: number; trunkX: number; period: Period; season: Season }) {
+  const tw = w * 0.34;
+  return (
+    <G>
+      <Treeline w={w} h={h} base={ground + bh * 0.4} period={period} season={season} />
+      <Rect x={trunkX} y={0} width={tw} height={h} fill={BARK} />
+      <Path d={`M${trunkX} 0 V${h}`} stroke={INK} strokeWidth={2} />
+      <Path d={`M${trunkX + tw} 0 V${h}`} stroke={INK} strokeWidth={2} />
+      {[0.2, 0.5, 0.8].map((x, i) => (
+        <Path key={i} d={`M${trunkX + tw * x} ${bt - bh * 0.3 + i * 40} C${trunkX + tw * x - 6} ${bt + bh * 0.2 + i * 30} ${trunkX + tw * x + 6} ${bt + bh * 0.6} ${trunkX + tw * x} ${bt + bh * 1.4}`} stroke="#6E4E38" strokeWidth={4} fill="none" strokeLinecap="round" />
+      ))}
+      <Ellipse cx={trunkX + tw * 0.55} cy={bt + bh * 0.2} rx={tw * 0.16} ry={tw * 0.2} fill="#3B2A20" stroke={INK} strokeWidth={1.5} />
+    </G>
+  );
+}
+
+/** An orb web: spokes and rings, drawn fine and pale. */
+function Web({ cx, cy, r }: { cx: number; cy: number; r: number }) {
+  return (
+    <G opacity={0.85}>
+      {Array.from({ length: 10 }, (_, i) => {
+        const a = (i / 10) * Math.PI * 2;
+        return <Path key={i} d={`M${cx} ${cy} L${cx + Math.cos(a) * r} ${cy + Math.sin(a) * r}`} stroke={colors.white} strokeWidth={1.5} />;
+      })}
+      {[0.3, 0.5, 0.7, 0.9].map((k, i) => (
+        <Circle key={i} cx={cx} cy={cy} r={r * k} stroke={colors.white} strokeWidth={1.5} fill="none" />
+      ))}
+    </G>
   );
 }
 

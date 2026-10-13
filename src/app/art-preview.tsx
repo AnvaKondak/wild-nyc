@@ -7,7 +7,8 @@ import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { Title } from '@/components/Title';
 import { StoryBackdrop } from '@/components/backdrop';
-import { getSpecies, species, speciesPhoto, type Setting } from '@/content';
+import { getSpecies, moments, species, speciesPhoto, type Period, type Setting } from '@/content';
+import { CloseUp, closeUpFor, type CloseUpSetting } from '@/components/scene/CloseUp';
 import { colors, fonts } from '@/theme/tokens';
 import { periodThemes } from '@/theme/periodTheme';
 import { type } from '@/theme/type';
@@ -17,10 +18,44 @@ const SCENES = (['park', 'block', 'waterfront'] as const).flatMap((placeKind, k)
 );
 const SETTINGS: Setting[] = ['branch', 'trunk', 'den', 'wire', 'ledge', 'rooftop', 'streetlight', 'lawn', 'sidewalk', 'hedge', 'flowers', 'water', 'shore', 'pier', 'reeds', 'fence', 'trashcan', 'web', 'sky', 'night-sky'];
 
+// Close-up scenes: each neighbor in the two scenes their moments use most.
+const CLOSEUPS = species.flatMap((s) => {
+  const counts = new Map<string, number>();
+  for (const m of moments.filter((x) => x.speciesId === s.id)) {
+    const scene = closeUpFor(s.id, m.setting);
+    if (scene) counts.set(scene, (counts.get(scene) ?? 0) + 1);
+  }
+  return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 2).map(([scene]) => ({ s, scene: scene as CloseUpSetting }));
+});
+
 export default function ArtPreview() {
   const raccoon = getSpecies('raccoon')!;
-  const { only, from, accents } = useLocalSearchParams<{ only?: string; from?: string; accents?: string }>();
+  const { only, from, accents, period: p } = useLocalSearchParams<{ only?: string; from?: string; accents?: string; period?: Period }>();
   const { width } = useWindowDimensions();
+  if (only === 'closeups') {
+    // Dev only: ?only=closeups&from=12&period=dusk pages through every close-up, 12 at a time.
+    const period = p ?? 'midday';
+    const cw = (width - 24) / 3;
+    const ch = cw * 1.65;
+    const start = Number(from ?? 0);
+    return (
+      <View style={{ flex: 1, backgroundColor: colors.paper, paddingTop: 54, paddingHorizontal: 8, flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
+        {CLOSEUPS.slice(start, start + 12).map(({ s, scene }, i) => (
+          <View key={i} style={{ width: cw, gap: 2 }}>
+            {/* The real full-screen scene, shrunk to fit: same band as on a story slide. */}
+            <View style={{ width: cw, height: ch, overflow: 'hidden', borderRadius: 8 }}>
+              <View style={{ width, height: width * 1.65, transformOrigin: 'top left', transform: [{ scale: cw / width }] }}>
+                <CloseUp setting={scene} speciesId={s.id} mood="hello" width={width} height={width * 1.65} band={{ top: 228, height: 195 }} period={period} season="fall" sky={periodThemes[period].bg} weather="clear" />
+              </View>
+            </View>
+            <Text numberOfLines={1} style={{ fontFamily: fonts.bodySemi, fontSize: 9, color: colors.ink }}>
+              {start + i + 1}. {s.friendlyName} · {scene}
+            </Text>
+          </View>
+        ))}
+      </View>
+    );
+  }
   const thumb = (width - 32 - 12) / 2;
   if (only === 'backdrops') {
     const h = thumb * 1.9;

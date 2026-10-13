@@ -23,6 +23,11 @@ export function cutoutFeet(speciesId: string): number {
   return cutoutXml[speciesId]?.feet ?? 0.9;
 }
 
+/** How they're posed in close-up scenes: perched, standing, swimming, wading, clinging, flying or in a web. */
+export function cutoutPose(speciesId: string) {
+  return cutoutXml[speciesId]?.pose ?? 'perch';
+}
+
 /** How many moods (different drawings) a species has. */
 export function moodCount(speciesId: string): number {
   return characterXml[speciesId]?.length ?? 0;
