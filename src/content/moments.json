@@ -568,6 +568,233 @@
   ]
  },
  {
+  "id": "pigeon-head-bob",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "sidewalk",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A pigeon is bobbing down the sidewalk",
+    "body": "That head-bob isn't nerves. They push their head forward, then hold it perfectly still while their body catches up, so the world doesn't wobble while they look for crumbs."
+   },
+   {
+    "title": "A pigeon is strutting along {street}",
+    "body": "Bob, step, bob, step. Each bob keeps their view steady, like a camera on a gimbal. Very serious. Very silly."
+   },
+   {
+    "title": "Pigeon, on patrol",
+    "body": "Head forward, freeze, body catches up. Repeat for one entire block. Crumbs don't stand a chance."
+   }
+  ]
+ },
+ {
+  "id": "pigeon-drinking",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "water",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A pigeon is sipping from a puddle",
+    "body": "Most birds scoop and tip their head back to swallow. Pigeons just stick their beak in and slurp, like using a straw."
+   },
+   {
+    "title": "A pigeon is drinking near {green}",
+    "body": "Beak down, long steady sip, no head tipping. Pigeons are one of the few birds who can drink like that."
+   },
+   {
+    "title": "A pigeon found the good puddle",
+    "body": "They suck water up through their beak in one long pull. The other birds are doing it the hard way."
+   }
+  ]
+ },
+ {
+  "id": "pigeon-preening-pair",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "dusk"
+  ],
+  "setting": "ledge",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Two pigeons are preening each other",
+    "body": "Gently nibbling the feathers on each other's necks, the spots they can't reach themselves. This is what pigeon love looks like."
+   },
+   {
+    "title": "A pigeon couple is getting cozy near {landmark}",
+    "body": "Side by side, taking turns fixing each other's neck feathers. Couples often stay together for years."
+   },
+   {
+    "title": "A pigeon is getting a neck rub",
+    "body": "Their partner tidies the feathers they can't reach. Eyes half closed. Total bliss."
+   }
+  ]
+ },
+ {
+  "id": "pigeon-wing-clap",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "sky",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A pigeon just took off with a CLAP",
+    "body": "That loud clap is a show-off move: a male snaps his wings together on takeoff, then glides with them held up in a V. Very dramatic."
+   },
+   {
+    "title": "A pigeon is showing off over {street}",
+    "body": "Clap, clap, then a long glide with wings raised high. It's for the pigeon he likes. She's pretending not to watch."
+   },
+   {
+    "title": "Pigeon air show",
+    "body": "A few loud wing claps, then a slow, swooping glide. Somebody's trying to impress somebody."
+   }
+  ]
+ },
+ {
+  "id": "pigeon-squab-secret",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "ledge",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Somewhere nearby, baby pigeons are hiding",
+    "body": "Squabs stay tucked in nests under bridges and behind signs until they're nearly grown. That's why you never see a baby pigeon."
+   },
+   {
+    "title": "A pigeon is heading home with lunch near {landmark}",
+    "body": "Both parents feed their squabs a \"crop milk\" they make in their own throats. The babies stay hidden until they're almost adult-size."
+   },
+   {
+    "title": "A pigeon slipped behind an air conditioner",
+    "body": "There's probably a nest back there, with one or two squabs waiting for a crop-milk delivery."
+   }
+  ]
+ },
+ {
+  "id": "pigeon-flock-wheel",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "sky",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The pigeons are wheeling over the rooftops",
+    "body": "The whole flock turns at once, flashing their pale underwings. One spooks, everyone goes."
+   },
+   {
+    "title": "A flock of pigeons is circling over {street}",
+    "body": "Up, around, back down to the same ledge. Nobody knows who decided. It looks great anyway."
+   },
+   {
+    "title": "Pigeon flock, all at once",
+    "body": "They lift together, loop the block in a tight swirl and land almost exactly where they started."
+   }
+  ]
+ },
+ {
+  "id": "pigeon-winter-puff",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "ledge",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "A pigeon has puffed up into a ball",
+    "body": "Fluffed feathers trap warm air like a down jacket. They'll often sit right on their feet to keep their toes warm too."
+   },
+   {
+    "title": "Pigeons are huddling on a ledge near {landmark}",
+    "body": "Pressed together out of the wind, feathers puffed, toes tucked. Round, gray and cozy."
+   },
+   {
+    "title": "A pigeon is wearing their winter puffer",
+    "body": "Twice their usual size and very proud of it."
+   }
+  ]
+ },
+ {
+  "id": "pigeon-homing",
+  "speciesId": "rock-pigeon",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "ledge",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "A pigeon is asleep on their home ledge",
+    "body": "Pigeons always find their way back home, guided by the sun and even Earth's magnetic field. Tonight, home is right here."
+   },
+   {
+    "title": "The pigeons are home for the night near {landmark}",
+    "body": "Same ledge as last night, and the night before. Pigeons are champion homebodies."
+   },
+   {
+    "title": "A pigeon is tucked in on the ledge they always come back to",
+    "body": "Racing pigeons can find home from hundreds of miles away. City pigeons mostly use the skill to find this exact spot."
+   }
+  ]
+ },
+ {
   "id": "sparrow-awake",
   "speciesId": "house-sparrow",
   "seasons": [
