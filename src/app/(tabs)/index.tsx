@@ -293,6 +293,8 @@ export default function RightNow() {
   // Pilot: some animals appear right in their setting (on a branch, a sidewalk, the
   // water) instead of on a round sticker.
   const closeUp = slide.kind === 'intro' || slide.cast ? undefined : closeUpFor(species?.id, slide.setting);
+  // The time and weather sit on a little card over a close-up scene.
+  const onCard = !!closeUp && !showHome;
   const sceneH = Math.round(stickerSize * 1.1);
   // From the favorites grid: jump back to that favorite's slide.
   const openFavorite = (id: string) => setIndex(Math.max(0, story.findIndex((s) => s.speciesId === id)));
@@ -360,19 +362,20 @@ export default function RightNow() {
               style={[
                 { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 10, paddingLeft: 22, paddingRight: 8, paddingTop: 18 },
                 // Over a close-up scene, the time and weather sit on their own little card so they always read.
-                closeUp && !showHome
+                onCard
                   ? { marginLeft: 12, marginRight: 8, marginTop: 14, paddingLeft: 12, paddingRight: 12, paddingTop: 8, paddingBottom: 8, borderRadius: 18, borderWidth: border.width, borderColor: theme.ink, backgroundColor: theme.bg }
                   : null,
               ]}
             >
               <PeriodIcon period={header.period} color={theme.ink} />
               <View style={{ flex: 1 }}>
-                <Text style={{ fontFamily: fonts.display, fontSize: 20, color: theme.ink }}>
+                {/* Smaller on the little card over a scene. */}
+                <Text style={{ fontFamily: fonts.display, fontSize: onCard ? 16 : 20, color: theme.ink }}>
                   {header.label} · {header.clock}
                 </Text>
-                <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>{weatherLine}</Text>
+                <Text style={{ fontFamily: fonts.body, fontSize: onCard ? 11.5 : 13, color: theme.muted }}>{weatherLine}</Text>
                 {state.soundOn && (
-                  <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>Listening to {listening}</Text>
+                  <Text style={{ fontFamily: fonts.body, fontSize: onCard ? 11.5 : 13, color: theme.muted }}>Listening to {listening}</Text>
                 )}
               </View>
             </Pressable>
