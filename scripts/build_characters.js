@@ -32,6 +32,11 @@ const eye = (eyes, x, y, r, { ring, dark, lid } = {}) => {
 const heart = (x, y, s) =>
   `<path d="M${x} ${y + s * 0.3} C${x} ${y} ${x - s * 0.5} ${y} ${x - s * 0.5} ${y + s * 0.3} C${x - s * 0.5} ${y + s * 0.6} ${x} ${y + s * 0.8} ${x} ${y + s} C${x} ${y + s * 0.8} ${x + s * 0.5} ${y + s * 0.6} ${x + s * 0.5} ${y + s * 0.3} C${x + s * 0.5} ${y} ${x} ${y} ${x} ${y + s * 0.3} Z" fill="${C.pink}" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>`;
 const zee = (x, y, s) => `<path d="M${x} ${y} H${x + s} L${x} ${y + s} H${x + s}" fill="none" stroke="${C.ink}" stroke-width="${Math.max(6, s * 0.22)}" stroke-linecap="round" stroke-linejoin="round"/>`;
+// Snacks never show another animal: fish-eaters and bug-catchers get a sparkle of
+// water instead (a sip, a splash after a dive).
+const droplet = (x, y, s = 1) => `<path d="M${x} ${y - 16 * s} C${x + 12 * s} ${y} ${x + 12 * s} ${y + 10 * s} ${x} ${y + 12 * s} C${x - 12 * s} ${y + 10 * s} ${x - 12 * s} ${y} ${x} ${y - 16 * s} Z" fill="#9DD0F5" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round"/><circle cx="${x - 4 * s}" cy="${y + 2 * s}" r="${3 * s}" fill="#fff"/>`;
+/** A little cluster of red berries on a stem, with a leaf: unmistakably a berry. */
+const berries = (x, y) => `<path d="M${x + 14} ${y - 22} C${x + 8} ${y - 10} ${x + 2} ${y - 4} ${x - 4} ${y}" fill="none" stroke="#5E7A3A" stroke-width="4" stroke-linecap="round"/><path d="M${x + 14} ${y - 22} C${x + 28} ${y - 30} ${x + 36} ${y - 20} ${x + 30} ${y - 12} C${x + 22} ${y - 10} ${x + 16} ${y - 14} ${x + 14} ${y - 22} Z" fill="#7FBF5A" stroke="${C.ink}" stroke-width="4" stroke-linejoin="round"/>${[[-8, 6], [12, 8], [2, 24]].map(([dx, dy]) => `<circle cx="${x + dx}" cy="${y + dy}" r="13" fill="#E5384D" stroke="${C.ink}" stroke-width="5"/><circle cx="${x + dx - 4}" cy="${y + dy - 4}" r="3.5" fill="#fff"/>`).join('')}`;
 
 // The moods, in the order a story shows them.
 const MOODS = [
@@ -100,8 +105,8 @@ const ART = {
           <path d="M96 140 C110 134 130 132 146 134" stroke="${C.ink}" stroke-width="12" stroke-linecap="round"/>
         </g>
         <circle cx="152" cy="150" r="88" fill="none" ${OL}/>
-        <path d="M84 168 C100 162 132 168 148 184 C162 222 154 262 128 282 C104 266 88 226 84 168 Z" fill="${C.ink}"/>
-        <path d="M108 206 q8 6 16 0 M118 232 q8 6 16 0 M104 252 q8 6 16 0" fill="none" stroke="#6E6C80" stroke-width="5" stroke-linecap="round"/>
+        <path d="M92 166 C112 158 146 166 164 186 C176 212 172 240 150 254 C126 264 102 250 96 228 C90 208 90 186 92 166 Z" fill="${C.ink}"/>
+        <path d="M114 214 q8 5 16 0 M128 236 q8 5 16 0" fill="none" stroke="#55546A" stroke-width="4" stroke-linecap="round"/>
         ${eye(m.eyes, 130, 140, 23, { lid: '#F4F0EA' })}
         <ellipse cx="160" cy="186" rx="20" ry="12" fill="${C.pink}"/>
         <path d="M94 132 C88 126 70 136 50 152 C70 160 88 166 96 164 Z" fill="#6E6C80" stroke="${C.ink}" stroke-width="9" stroke-linejoin="round"/>
@@ -203,7 +208,7 @@ ART.robin = perched({
   wingMarks: `<path d="M236 190 C270 200 300 220 320 250 M250 230 C280 240 304 256 320 280" fill="none" stroke="#4E4A56" stroke-width="8" stroke-linecap="round"/>`,
   face: '<path d="M96 192 l8 16 M114 196 l6 16" stroke="#F4F0EA" stroke-width="6" stroke-linecap="round"/>',
   beak: '#F2B53A', legs: '#B9876A',
-  snack: `<path d="M48 158 c-12 12 10 22 -2 34 c-12 12 10 22 -2 32" fill="none" stroke="${C.ink}" stroke-width="15" stroke-linecap="round"/><path d="M48 158 c-12 12 10 22 -2 34 c-12 12 10 22 -2 32" fill="none" stroke="#F28BA0" stroke-width="7" stroke-linecap="round"/>`,
+  snack: berries(40, 160),
 });
 
 ART.cardinal = perched({
@@ -283,7 +288,7 @@ ART.gull = perched({
   beakShape: 'M98 130 C84 126 54 132 26 146 C24 154 30 160 38 162 C62 164 86 166 98 164 Z', beak: '#F2C94C',
   beakMarks: '<circle cx="46" cy="158" r="6" fill="#E5484D"/>',
   legs: '#F2A0A0',
-  snack: `<g transform="rotate(-14 30 176)"><path d="M6 176 C16 164 40 164 52 176 C40 188 16 188 6 176 Z M52 176 L66 166 L66 186 Z" fill="#B4C3D6" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/><circle cx="16" cy="174" r="3" fill="${C.ink}"/></g>`,
+  snack: droplet(34, 172),
 });
 
 ART.junco = perched({
@@ -362,7 +367,7 @@ ART.grackle = perched({
   wingMarks: `<path d="M226 186 C270 196 310 222 332 256" fill="none" stroke="#8C6E3A" stroke-width="9" stroke-linecap="round"/><path d="M244 240 L296 256 M252 268 L304 284" stroke="#4A4236" stroke-width="6" stroke-linecap="round"/>`,
   headMarks: `<path d="M94 100 C130 80 184 82 218 108" fill="none" stroke="#6E8BE0" stroke-width="12" stroke-linecap="round"/><path d="M180 200 C200 212 216 226 222 244" fill="none" stroke="#7B4BB5" stroke-width="12" stroke-linecap="round"/>`,
   beakShape: 'M100 126 C78 120 44 130 10 150 C44 160 78 166 100 164 Z', beak: '#1A1A2E', legs: '#3B3A50',
-  snack: `<g transform="rotate(-20 20 166)"><ellipse cx="20" cy="166" rx="16" ry="11" fill="#3E8E4E" stroke="${C.ink}" stroke-width="6"/><path d="M20 156 V176" stroke="${C.ink}" stroke-width="4"/></g>`,
+  snack: seed(26, 166),
 });
 
 ART.titmouse = perched({
@@ -408,7 +413,7 @@ ART.ringbill = perched({
   beakShape: 'M98 132 C84 128 56 134 32 146 C30 152 34 158 40 160 C62 162 86 164 98 162 Z', beak: '#F2C94C',
   beakMarks: `<path d="M56 136 L60 162" stroke="${C.ink}" stroke-width="9"/>`,
   legs: '#F2C94C',
-  snack: `<g transform="rotate(-14 30 178)"><path d="M6 178 C16 166 40 166 52 178 C40 190 16 190 6 178 Z M52 178 L66 168 L66 188 Z" fill="#B4C3D6" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/><circle cx="16" cy="176" r="3" fill="${C.ink}"/></g>`,
+  snack: droplet(34, 172),
 });
 
 // Woodpeckers: clinging upright to a trunk, stiff tail braced against the bark.
@@ -439,7 +444,7 @@ const woodpecker = (p) => ({
       ${eye(m.eyes, 154, 118, 18, { lid: p.lid })}
       <ellipse cx="178" cy="160" rx="16" ry="9" fill="${C.pink}"/>
       <path d="M112 118 L64 130 L112 142 Z" fill="#6E6C80" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/>
-      ${m.snack ? `<path d="M64 140 C54 146 52 160 62 166 C72 172 82 164 78 154" fill="none" stroke="${C.ink}" stroke-width="16" stroke-linecap="round"/><path d="M64 140 C54 146 52 160 62 166 C72 172 82 164 78 154" fill="none" stroke="#F4E7C8" stroke-width="8" stroke-linecap="round"/>` : ''}
+      ${m.snack ? `<ellipse cx="58" cy="152" rx="14" ry="16" fill="#D9954F" stroke="${C.ink}" stroke-width="6"/><path d="M42 146 Q58 128 74 146 Q58 152 42 146 Z" fill="#7A4E2A" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>` : ''}
       ${m.hearts ? heart(60, 56, 40) + heart(108, 26, 28) : ''}
       ${m.zees ? zee(48, 62, 32) + zee(92, 34, 22) : ''}`;
   },
@@ -478,18 +483,17 @@ ART.swift = {
       ${eye(m.eyes, 112, 204, 20, { dark: true })}
       <ellipse cx="146" cy="226" rx="15" ry="9" fill="${C.pink}"/>
       <path d="M74 206 L56 214 L74 222 Z" fill="${C.ink}" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round"/>
-      ${m.snack ? `<circle cx="34" cy="210" r="7" fill="${C.ink}"/><path d="M30 204 C22 192 14 196 18 206 M38 204 C46 192 54 196 50 206" fill="#F4F2F0" stroke="${C.ink}" stroke-width="4"/>` : ''}
+      ${m.snack ? droplet(36, 210, 0.8) : ''}
       ${m.hearts ? heart(70, 70, 42) + heart(130, 40, 28) : ''}
       ${m.zees ? zee(80, 80, 34) + zee(124, 50, 22) : ''}`;
   },
 };
 
 // Hawks and falcons: hooked beak with a yellow base. Their snack is a feather for the
-// nest (or, for kestrels, a grasshopper), never prey.
+// nest, never prey.
 const HOOK = 'M98 126 C84 118 60 126 50 146 C48 160 58 168 66 162 C66 152 76 150 98 162 Z';
 const CERE = '<path d="M98 128 C92 126 86 130 84 140 C88 150 94 156 98 158 Z" fill="#F2C94C" stroke="#1A1A2E" stroke-width="6"/>';
 const feather = (x = 44, y = 168) => `<g transform="rotate(-30 ${x} ${y})"><path d="M${x - 30} ${y} C${x - 10} ${y - 14} ${x + 14} ${y - 12} ${x + 30} ${y} C${x + 14} ${y + 12} ${x - 10} ${y + 14} ${x - 30} ${y} Z" fill="#F4F2F0" stroke="#1A1A2E" stroke-width="6"/><path d="M${x - 34} ${y} H${x + 30}" stroke="#1A1A2E" stroke-width="4"/></g>`;
-const fishSnack = (x = 30, y = 178) => `<g transform="rotate(-14 ${x} ${y})"><path d="M${x - 24} ${y} C${x - 14} ${y - 12} ${x + 10} ${y - 12} ${x + 22} ${y} C${x + 10} ${y + 12} ${x - 14} ${y + 12} ${x - 24} ${y} Z M${x + 22} ${y} L${x + 36} ${y - 10} L${x + 36} ${y + 10} Z" fill="#B4C3D6" stroke="#1A1A2E" stroke-width="6" stroke-linejoin="round"/><circle cx="${x - 14}" cy="${y - 2}" r="3" fill="#1A1A2E"/></g>`;
 
 ART.kestrel = perched({
   id: 'kestrel', tint: C.pinkT,
@@ -501,7 +505,7 @@ ART.kestrel = perched({
   face: `<path d="M124 162 L118 202 M190 148 L186 194" stroke="${C.ink}" stroke-width="11" stroke-linecap="round"/>`,
   blushAt: [156, 192],
   beakShape: HOOK, beak: '#5E6A80', beakMarks: CERE, legs: '#F2C94C',
-  snack: `<g transform="rotate(-24 40 170)"><ellipse cx="40" cy="170" rx="26" ry="9" fill="#7FBF5A" stroke="${C.ink}" stroke-width="6"/><path d="M50 166 L68 150 L74 170 M30 174 L22 190" fill="none" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/></g>`,
+  snack: feather(),
 });
 
 ART.tern = perched({
@@ -513,7 +517,7 @@ ART.tern = perched({
   headMarks: `<path d="M40 40 H260 V150 C210 124 160 116 60 132 Z" fill="${C.ink}"/>`,
   beakShape: 'M98 134 C82 130 52 140 16 154 C52 160 82 164 98 162 Z', beak: '#E8603C',
   beakMarks: `<path d="M34 148 L16 154 L34 158 Z" fill="${C.ink}"/>`,
-  legs: '#E5484D', snack: fishSnack(26, 176),
+  legs: '#E5484D', snack: droplet(26, 172),
 });
 
 ART.nightheron = perched({
@@ -525,7 +529,7 @@ ART.nightheron = perched({
   face: `<path d="M216 112 C266 132 296 172 306 222" fill="none" stroke="${C.ink}" stroke-width="14" stroke-linecap="round"/><path d="M216 112 C266 132 296 172 306 222" fill="none" stroke="#F4F2F0" stroke-width="6" stroke-linecap="round"/>`,
   blushAt: [158, 192],
   beakShape: 'M94 128 C78 122 48 132 18 150 C48 160 78 166 96 162 Z', beak: C.ink, legs: '#E8C86A',
-  snack: fishSnack(22, 174),
+  snack: droplet(24, 170),
 });
 
 // ── Water birds with their own poses.
@@ -734,7 +738,7 @@ ART.cormorant = {
       ${eye(m.eyes, 168, 92, 13, { ring: '#3BC4B4', lid: '#2A2A3E' })}
       <ellipse cx="190" cy="114" rx="11" ry="7" fill="${C.pink}"/>
       <path d="M140 90 C120 86 92 92 70 100 C66 110 72 116 80 112 C92 106 120 104 142 104 Z" fill="#6E6C80" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
-      ${m.snack ? fishSnack(64, 120) : ''}
+      ${m.snack ? droplet(62, 124) : ''}
       ${m.hearts ? heart(252, 26, 36) + heart(296, 64, 24) : ''}
       ${m.zees ? zee(222, 44, 30) + zee(258, 22, 20) : ''}`;
   },
@@ -767,7 +771,7 @@ ART.heron = {
       ${eye(m.eyes, 118, 92, 12, { ring: '#F2E28C', lid: '#F4F2F0' })}
       <ellipse cx="140" cy="108" rx="12" ry="7" fill="${C.pink}"/>
       <path d="M96 88 C80 86 46 92 8 102 C46 108 80 108 98 102 Z" fill="#F2C94C" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
-      ${m.snack ? fishSnack(24, 116) : ''}
+      ${m.snack ? droplet(26, 118) : ''}
       </g>
       <path d="M-10 330 Q40 318 90 330 T190 330 T290 330 T390 330 T490 330 V420 H-10 Z" fill="#8FB3E8" stroke="${C.ink}" stroke-width="8"/>
       <path d="M60 360 q20 -10 40 0 M260 366 q20 -10 40 0" fill="none" stroke="#F7F5F2" stroke-width="6" stroke-linecap="round"/>
@@ -1034,7 +1038,7 @@ ART.dasher = {
       ${eye(m.eyes, 176, 84, 18, { ring: '#3BB58A', lid: '#3BB58A' })}${eye(m.eyes, 224, 84, 18, { ring: '#3BB58A', lid: '#3BB58A' })}
       <ellipse cx="182" cy="118" rx="8" ry="5" fill="${C.pink}"/><ellipse cx="218" cy="118" rx="8" ry="5" fill="${C.pink}"/>
       <path d="M192 122 Q200 128 208 122" fill="none" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>
-      ${m.snack ? `<circle cx="252" cy="118" r="6" fill="${C.ink}"/><path d="M248 112 C240 100 232 104 236 114 M256 112 C264 100 272 104 268 114" fill="#F4F2F0" stroke="${C.ink}" stroke-width="3"/>` : ''}
+      ${m.snack ? droplet(252, 116, 0.8) : ''}
       ${m.hearts ? heart(300, 40, 36) + heart(344, 92, 24) : ''}
       ${m.zees ? zee(260, 60, 26) + zee(292, 40, 16) : ''}`;
   },
@@ -1084,7 +1088,7 @@ ART.orbweaver = {
       ${dots([[188, 122], [200, 118], [212, 122]], 4, C.ink)}
       ${eye(m.eyes, 184, 150, 13, { lid: '#B88A5E' })}${eye(m.eyes, 216, 150, 13, { lid: '#B88A5E' })}
       <ellipse cx="200" cy="176" rx="9" ry="6" fill="${C.pink}"/>
-      ${m.snack ? `<ellipse cx="200" cy="208" rx="16" ry="22" fill="#F7F5F2" stroke="${C.ink}" stroke-width="5"/><path d="M186 198 L214 206 M186 212 L214 220" stroke="#C9C1B4" stroke-width="3"/>` : ''}
+      ${m.snack ? droplet(200, 214) : ''}
       ${m.hearts ? heart(290, 52, 32) + heart(80, 60, 26) : ''}
       ${m.zees ? zee(256, 56, 26) + zee(288, 36, 16) : ''}`;
   },

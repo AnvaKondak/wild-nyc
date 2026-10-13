@@ -82,7 +82,8 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
 
   return (
     <View style={{ position: 'absolute', left: 0, top: 0, width: w, height: h, backgroundColor: sky }}>
-      <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} behind />
+      {/* Sun, moon and clouds need open sky: not over the brick wall. Rain and snow still fall. */}
+      {setting !== 'sidewalk' && setting !== 'puddle' && <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} behind />}
       <Svg width={w} height={h} style={{ position: 'absolute' }}>
         {setting === 'sidewalk' || setting === 'puddle' ? (
           <>
@@ -276,27 +277,47 @@ function SkyWeather({ w, h, bt, bh, period, weather, behind = false }: { w: numb
 
 // ---------------------------------------------------------------- places
 
-/** Soft far-off trees along the bottom, below the branch. */
-function Treeline({ w, h, base, period, season }: { w: number; h: number; base: number; period: Period; season: Season }) {
-  const fill = period === 'night' || period === 'dusk' ? FAR[period] : LEAVES[season][0] ?? FAR[period];
+/** A few far-off trees: round crowns on little trunks, softened by distance. */
+function FarTrees({ w, base, period, season, small = false }: { w: number; base: number; period: Period; season: Season; small?: boolean }) {
+  const crown = period === 'night' || period === 'dusk' ? FAR[period] : LEAVES[season][0] ?? FAR[period];
+  const trunk = period === 'night' ? '#2E2E44' : '#8A6247';
+  const r = small ? 26 : 40;
   return (
-    <G opacity={0.5}>
-      {[0.05, 0.22, 0.4, 0.6, 0.78, 0.95].map((x, i) => (
-        <Circle key={i} cx={w * x} cy={base - (i % 2) * 30} r={70 + (i % 3) * 22} fill={fill} />
-      ))}
-      <Rect x={0} y={base} width={w} height={Math.max(0, h - base)} fill={fill} />
+    <G opacity={0.75}>
+      {[0.08, 0.27, 0.5, 0.71, 0.92].map((x, i) => {
+        const cr = r + (i % 3) * (small ? 6 : 10);
+        const h = cr * 1.5;
+        return (
+          <G key={i}>
+            <Rect x={w * x - 3} y={base - h} width={6} height={h} fill={trunk} />
+            <Circle cx={w * x} cy={base - h - cr * 0.4} r={cr} fill={crown} stroke={INK} strokeWidth={1} strokeOpacity={0.35} />
+          </G>
+        );
+      })}
     </G>
   );
 }
 
-/** A pond: far trees and reeds on the far shore, water to the bottom of the screen. */
-function Pond({ w, h, horizon, period, season }: { w: number; h: number; horizon: number; period: Period; season: Season }) {
-  const tree = period === 'night' || period === 'dusk' ? FAR[period] : LEAVES[season][0] ?? FAR[period];
+/** Below the branch: far trees on a grassy hill at the bottom of the screen. */
+function Treeline({ w, h, base, period, season }: { w: number; h: number; base: number; period: Period; season: Season }) {
+  const grass = period === 'night' ? '#2F4A3A' : period === 'dusk' ? '#4C7A5A' : '#9CCB86';
   return (
     <G>
-      {[0.06, 0.24, 0.44, 0.66, 0.86].map((x, i) => (
-        <Circle key={i} cx={w * x} cy={horizon - 18 - (i % 2) * 14} r={44 + (i % 3) * 14} fill={tree} opacity={0.5} />
-      ))}
+      <FarTrees w={w} base={base} period={period} season={season} />
+      <Rect x={0} y={base} width={w} height={Math.max(0, h - base)} fill={grass} />
+      <Path d={`M0 ${base} H${w}`} stroke={INK} strokeWidth={1.2} opacity={0.4} />
+    </G>
+  );
+}
+
+/** A pond: far trees on a grassy bank, reeds at the edges, water to the bottom of the screen. */
+function Pond({ w, h, horizon, period, season }: { w: number; h: number; horizon: number; period: Period; season: Season }) {
+  const grass = period === 'night' ? '#2F4A3A' : period === 'dusk' ? '#4C7A5A' : '#9CCB86';
+  const bank = horizon - 14;
+  return (
+    <G>
+      <FarTrees w={w} base={bank} period={period} season={season} small />
+      <Rect x={0} y={bank} width={w} height={horizon - bank} fill={grass} />
       <Rect x={0} y={horizon} width={w} height={h - horizon} fill={WATER[period]} />
       <Path d={`M0 ${horizon} H${w}`} stroke={INK} strokeWidth={1.2} opacity={0.5} />
       {[0.05, 0.1, 0.88, 0.94].map((x, i) => (
