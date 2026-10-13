@@ -313,7 +313,9 @@ export default function RightNow() {
             period={header.period}
             season={season}
             sky={theme.bg}
-            weather={weather?.sky}
+            weather={faves ? undefined : weather?.sky}
+            placeId={faves ? slide.placeId : hood.placeId}
+            placeKind={faves ? (slide.scene ?? 'park') : hood.kind}
           />
         </View>
       ) : area.width > 0 && !closeUp ? (

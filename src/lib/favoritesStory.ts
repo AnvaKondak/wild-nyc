@@ -97,6 +97,7 @@ function favoriteSlide(s: Species, input: FavoritesInput, n: number, total: numb
     status: sleeping ? 'Napping' : where.status,
     setting: moment.setting,
     scene: where.place.kind,
+    placeId: where.place.placeId,
     mood,
   };
 }

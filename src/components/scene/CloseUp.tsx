@@ -18,11 +18,12 @@
 import { useEffect, useRef } from 'react';
 import { Animated, Easing, View } from 'react-native';
 import Svg, { Circle, Ellipse, G, Path, Rect } from 'react-native-svg';
-import type { Mood, Period, Season, Setting } from '@/content/types';
+import type { Mood, Period, PlaceKind, Season, Setting } from '@/content/types';
 import type { Sky } from '@/lib/weather';
 import { colors } from '@/theme/tokens';
 import { useReduceMotion } from '../backdrop/motion';
 import { Character, cutoutFeet, cutoutPose, hasCutout } from '../characters/Character';
+import { lookFor, type Building, type Landmark } from './looks';
 
 export type CloseUpSetting =
   | 'building' | 'puddle' | 'branch' | 'trunk' | 'hedge' | 'lawn' | 'flowers' | 'burrow'
@@ -113,6 +114,9 @@ type Props = {
   sky: string;
   /** What the sky is doing, for the sun, moon, clouds, rain or snow. */
   weather?: Sky;
+  /** Whose neighborhood this is: sets the building, the water and the landmark. */
+  placeId?: string;
+  placeKind?: PlaceKind;
 };
 
 /** Where the animal's feet go (from the band's top, as a fraction of its height) and how big they are, per scene. */
@@ -136,7 +140,8 @@ const PLACE: Record<CloseUpSetting, { ground: number; size: number; x: number }>
 };
 const OPEN_SKY: CloseUpSetting[] = ['branch', 'trunk', 'hedge', 'lawn', 'flowers', 'burrow', 'wire', 'sky', 'water', 'wade', 'shore', 'pier', 'reeds', 'web'];
 
-export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, period, season, sky, weather }: Props) {
+export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, period, season, sky, weather, placeId, placeKind = 'block' }: Props) {
+  const look = lookFor(placeId, placeKind);
   const bt = band.top;
   const bh = band.height;
   const place = PLACE[setting];
@@ -159,13 +164,13 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
 
   return (
     <View style={{ position: 'absolute', left: 0, top: 0, width: w, height: h, backgroundColor: sky, overflow: 'hidden' }}>
-      {OPEN_SKY.includes(setting) && <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} behind />}
+      {OPEN_SKY.includes(setting) && <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} behind sunLeft={!!look.landmark} />}
       <Svg width={w} height={h} style={{ position: 'absolute' }}>
         {city && (
           <>
             {/* Up close, the brownstone fills the whole screen. */}
-            <Wall w={w} top={0} bottom={pavement} band={band} period={period} />
-            <Cornice w={w} y={4} period={period} brackets={false} />
+            <Facade look={look.building} w={w} bottom={pavement} band={band} period={period} />
+            {look.building === 'brownstone' && <Cornice w={w} y={4} period={period} brackets={false} />}
             <WallBranch y={bt} bh={bh} w={w} />
             <Sidewalk w={w} h={h} top={pavement} period={period} />
           </>
@@ -175,6 +180,16 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
             <Ellipse cx={w * 0.3} cy={ground + bh * 0.03} rx={w * 0.2} ry={bh * 0.06} fill={WATER[period]} stroke={INK} strokeWidth={1.5} />
             <Path d={`M${w * 0.2} ${ground + bh * 0.02} q${w * 0.04} -4 ${w * 0.08} 0`} stroke={colors.paper} strokeWidth={2.5} fill="none" strokeLinecap="round" />
           </>
+        )}
+        {/* The neighborhood's landmark, far off on the horizon, behind the trees or rooftops. */}
+        {look.landmark && (setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && (
+          <LandmarkShape kind={look.landmark} x={w * 0.78} base={ground - bh * 0.22} size={bh * 0.75} period={period} />
+        )}
+        {look.landmark && (setting === 'branch' || setting === 'web' || setting === 'trunk') && (
+          <LandmarkShape kind={look.landmark} x={w * 0.78} base={ground + bh * (setting === 'trunk' ? 0.4 : 0.9)} size={bh * 0.75} period={period} />
+        )}
+        {look.landmark && (setting === 'wire' || setting === 'sky') && (
+          <LandmarkShape kind={look.landmark} x={w * 0.72} base={bt + bh * 1.0} size={bh * 0.9} period={period} />
         )}
         {(setting === 'branch' || setting === 'web') && (
           <>
@@ -191,10 +206,12 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
         {setting === 'burrow' && <Burrow x={w * 0.78} ground={ground} bh={bh} />}
         {(setting === 'wire' || setting === 'sky') && <Skyline w={w} h={h} base={bt + bh * 1.25} bh={bh} period={period} />}
         {setting === 'wire' && <Wire w={w} y={ground} bh={bh} />}
-        {watery && <Pond w={w} h={h} horizon={horizon} period={period} season={season} />}
+        {watery && look.water === 'river' && <River w={w} h={h} horizon={horizon} period={period} landmark={look.landmark} />}
+        {watery && look.water === 'beach' && <Ocean w={w} h={h} horizon={horizon} period={period} landmark={look.landmark} />}
+        {watery && look.water === 'pond' && <Pond w={w} h={h} horizon={horizon} period={period} season={season} />}
         {setting === 'reeds' && <Reeds w={w} ground={ground} bh={bh} back />}
         {setting === 'reeds' && <BentReed w={w} y={ground} bh={bh} />}
-        {setting === 'shore' && <Shore w={w} h={h} top={ground - bh * 0.06} period={period} />}
+        {setting === 'shore' && (look.water === 'river' ? <Pier w={w} h={h} top={ground - bh * 0.04} /> : <Shore w={w} h={h} top={ground - bh * 0.06} period={period} />)}
         {setting === 'pier' && <Pier w={w} h={h} top={ground - bh * 0.04} />}
       </Svg>
 
@@ -569,14 +586,14 @@ const CLOUDY: Sky[] = ['cloudy', 'fog', 'drizzle', 'rain', 'storm', 'snow'];
  * The sky's weather. `behind`: the sun or moon and clouds (drawn first). Otherwise:
  * rain or snow falling in front of everything.
  */
-function SkyWeather({ w, h, bt, bh, period, weather, behind = false }: { w: number; h: number; bt: number; bh: number; period: Period; weather?: Sky; behind?: boolean }) {
+function SkyWeather({ w, h, bt, bh, period, weather, behind = false, sunLeft = false }: { w: number; h: number; bt: number; bh: number; period: Period; weather?: Sky; behind?: boolean; /** Put the sun or moon on the left, clear of a landmark on the right. */ sunLeft?: boolean }) {
   const still = useReduceMotion();
   const fall = useLinear(weather === 'snow' ? 9000 : 900, still || behind || !(weather === 'snow' || (weather && RAINY.includes(weather))));
   if (behind) {
     const day = period === 'dawn' || period === 'midday';
     const cloudy = !!weather && CLOUDY.includes(weather);
     const cloud = period === 'night' ? '#4A4A66' : period === 'dusk' ? '#6E8CE8' : '#FFFFFF';
-    const cx = w * 0.84;
+    const cx = sunLeft ? w * 0.16 : w * 0.84;
     const cy = bt + bh * 0.12;
     return (
       <Svg width={w} height={h} style={{ position: 'absolute' }} pointerEvents="none">
@@ -839,4 +856,297 @@ function Sidewalk({ w, h, top, period }: { w: number; h: number; top: number; pe
       <Path d={`M0 ${curb} H${w}`} stroke={INK} strokeWidth={1.5} />
     </G>
   );
+}
+
+// ---------------------------------------------------------------- neighborhood looks
+
+/** The front of the building on this block, in the neighborhood's style. */
+function Facade({ look, w, bottom, band, period }: { look: Building; w: number; bottom: number; band: { top: number; height: number }; period: Period }) {
+  if (look === 'tenement') return <Tenement w={w} bottom={bottom} band={band} period={period} />;
+  if (look === 'castiron') return <CastIron w={w} bottom={bottom} band={band} period={period} />;
+  if (look === 'glass') return <GlassTower w={w} bottom={bottom} band={band} period={period} />;
+  if (look === 'rowhouse') return <Rowhouse w={w} bottom={bottom} band={band} period={period} />;
+  return <Wall w={w} top={0} bottom={bottom} band={band} period={period} />;
+}
+
+const dim = (period: Period, day: string, dusk: string, night: string) => (period === 'night' ? night : period === 'dusk' ? dusk : day);
+
+/** A window with a sill: lit at night, with a little flower box when asked. */
+function Win({ x, y, ww, wh, period, flowers = false, arch = false }: { x: number; y: number; ww: number; wh: number; period: Period; flowers?: boolean; arch?: boolean }) {
+  const lit = period === 'dusk' || period === 'night';
+  const d = arch
+    ? `M${x} ${y + wh} V${y + ww / 2} A${ww / 2} ${ww / 2} 0 0 1 ${x + ww} ${y + ww / 2} V${y + wh} Z`
+    : `M${x} ${y} H${x + ww} V${y + wh} H${x} Z`;
+  return (
+    <G>
+      <Path d={d} fill={lit ? '#FFD23F' : '#BFD0F5'} stroke={INK} strokeWidth={1.5} />
+      <Path d={`M${x + ww / 2} ${y + (arch ? 4 : 0)} V${y + wh} M${x} ${y + wh * 0.55} H${x + ww}`} stroke={INK} strokeWidth={1} />
+      <Rect x={x - 4} y={y + wh} width={ww + 8} height={5} fill="#E3DACB" stroke={INK} strokeWidth={1} />
+      {flowers &&
+        [0.2, 0.5, 0.8].map((f, i) => <Circle key={i} cx={x + ww * f} cy={y + wh - 3} r={3.5} fill={i % 2 ? colors.yellow : colors.pink} stroke={INK} strokeWidth={0.8} />)}
+    </G>
+  );
+}
+
+/** A simple front door at sidewalk level, with a step and an awning. */
+function StreetDoor({ x, top, bottom, dw, color, awning, period }: { x: number; top: number; bottom: number; dw: number; color: string; awning: string; period: Period }) {
+  const lit = period === 'dusk' || period === 'night';
+  return (
+    <G>
+      <Rect x={x} y={top} width={dw} height={bottom - top} fill={color} stroke={INK} strokeWidth={1.5} />
+      <Rect x={x + dw * 0.15} y={top + 6} width={dw * 0.7} height={(bottom - top) * 0.3} rx={3} fill={lit ? '#FFD23F' : '#BFD0F5'} stroke={INK} strokeWidth={1} />
+      <Circle cx={x + dw * 0.78} cy={top + (bottom - top) * 0.6} r={2.5} fill={colors.yellow} stroke={INK} strokeWidth={0.8} />
+      <Path d={`M${x - 10} ${top - 2} H${x + dw + 10} L${x + dw + 4} ${top - 18} H${x - 4} Z`} fill={awning} stroke={INK} strokeWidth={1.2} strokeLinejoin="round" />
+      {[0, 1, 2, 3].map((i) => <Path key={i} d={`M${x - 10 + ((dw + 20) / 4) * i} ${top - 2} q${(dw + 20) / 8} 6 ${(dw + 20) / 4} 0`} fill={awning} stroke={INK} strokeWidth={1} />)}
+      <Rect x={x - 6} y={bottom - 6} width={dw + 12} height={6} fill="#C9C1B4" stroke={INK} strokeWidth={1.2} />
+    </G>
+  );
+}
+
+/** Brick tenement: red-brown brick, rows of windows, and a black fire escape zigzagging down. */
+function Tenement({ w, bottom, band, period }: { w: number; bottom: number; band: { top: number; height: number }; period: Period }) {
+  const brick = dim(period, '#C46E5A', '#A35C54', '#4E3434');
+  const line = dim(period, '#A95A48', '#8A4C46', '#3E2828');
+  const floor = band.top;
+  const fh = bottom - floor;
+  const row = 14;
+  return (
+    <G>
+      <Rect x={0} y={0} width={w} height={bottom} fill={brick} />
+      {Array.from({ length: Math.ceil(bottom / row) }, (_, r) => (
+        <G key={r}>
+          <Path d={`M0 ${row * (r + 1)} H${w}`} stroke={line} strokeWidth={1} />
+          {Array.from({ length: 13 }, (_, c) => (
+            <Path key={c} d={`M${(w / 12) * c + (r % 2 ? w / 24 : 0)} ${row * r} V${row * (r + 1)}`} stroke={line} strokeWidth={1} />
+          ))}
+        </G>
+      ))}
+      {/* Windows on the floor above, peeking out under the header. */}
+      {[0.08, 0.36, 0.64].map((x, i) => <Win key={i} x={w * x} y={floor - fh * 0.62} ww={w * 0.16} wh={fh * 0.45} period={period} />)}
+      {/* Ground floor: a window with flowers, and the door with an awning. */}
+      <Win x={w * 0.14} y={floor + fh * 0.12} ww={w * 0.17} wh={fh * 0.42} period={period} flowers />
+      <StreetDoor x={w * 0.68} top={floor + fh * 0.18} bottom={bottom} dw={w * 0.15} color="#2F5A52" awning="#E5484D" period={period} />
+      {/* The fire escape: a black landing and a ladder, on the left. */}
+      <G>
+        <Rect x={w * 0.04} y={floor - fh * 0.12} width={w * 0.34} height={6} fill={INK} />
+        {Array.from({ length: 9 }, (_, i) => <Path key={i} d={`M${w * 0.04 + (w * 0.34 / 8) * i} ${floor - fh * 0.12} V${floor - fh * 0.32}`} stroke={INK} strokeWidth={1.5} />)}
+        <Path d={`M${w * 0.04} ${floor - fh * 0.32} H${w * 0.38}`} stroke={INK} strokeWidth={2} />
+        <Path d={`M${w * 0.32} ${floor - fh * 0.12} L${w * 0.4} ${floor + fh * 0.06}`} stroke={INK} strokeWidth={2} />
+      </G>
+      <Cornice w={w} y={4} period={period} brackets={false} />
+    </G>
+  );
+}
+
+/** SoHo cast iron: pale painted columns between tall arched windows. */
+function CastIron({ w, bottom, band, period }: { w: number; bottom: number; band: { top: number; height: number }; period: Period }) {
+  const paint = dim(period, '#E8E2CF', '#C9C2B0', '#5A5648');
+  const shade = dim(period, '#CFC7AE', '#ADA690', '#46423A');
+  const floor = band.top;
+  const fh = bottom - floor;
+  const bays = 4;
+  const bw = w / bays;
+  return (
+    <G>
+      <Rect x={0} y={0} width={w} height={bottom} fill={paint} />
+      {Array.from({ length: bays + 1 }, (_, i) => (
+        <G key={i}>
+          <Rect x={bw * i - 8} y={0} width={16} height={bottom} fill={shade} stroke={INK} strokeWidth={1.2} />
+          <Rect x={bw * i - 12} y={floor - 10} width={24} height={8} fill={paint} stroke={INK} strokeWidth={1.2} />
+        </G>
+      ))}
+      <Rect x={0} y={floor - 10} width={w} height={6} fill={shade} stroke={INK} strokeWidth={1.2} />
+      {Array.from({ length: bays }, (_, i) =>
+        i === 2 ? null : <Win key={i} x={bw * i + bw * 0.2} y={floor + fh * 0.06} ww={bw * 0.6} wh={fh * 0.56} period={period} arch />,
+      )}
+      {Array.from({ length: bays }, (_, i) => <Win key={`u${i}`} x={bw * i + bw * 0.2} y={floor - fh * 0.72} ww={bw * 0.6} wh={fh * 0.5} period={period} arch />)}
+      <StreetDoor x={bw * 2 + bw * 0.14} top={floor + fh * 0.14} bottom={bottom} dw={bw * 0.72} color="#3E4A72" awning="#2F5BEA" period={period} />
+    </G>
+  );
+}
+
+/** A glass tower: a grid of tinted panes with a few bright reflections. */
+function GlassTower({ w, bottom, band, period }: { w: number; bottom: number; band: { top: number; height: number }; period: Period }) {
+  const glass = dim(period, '#A9C4EE', '#6F86C8', '#2E3A62');
+  const frame = dim(period, '#8AA0C8', '#56689E', '#1E2848');
+  const lit = period === 'dusk' || period === 'night';
+  const cols = 5;
+  const rowH = 46;
+  const floor = band.top;
+  return (
+    <G>
+      <Rect x={0} y={0} width={w} height={bottom} fill={glass} />
+      {Array.from({ length: Math.ceil(bottom / rowH) }, (_, r) => (
+        <G key={r}>
+          <Path d={`M0 ${rowH * (r + 1)} H${w}`} stroke={frame} strokeWidth={4} />
+          {lit && Array.from({ length: cols }, (_, c) => ((r * 3 + c) % 4 === 0 ? <Rect key={c} x={(w / cols) * c + 4} y={rowH * r + 4} width={w / cols - 8} height={rowH - 8} fill="#FFD23F" opacity={0.7} /> : null))}
+        </G>
+      ))}
+      {Array.from({ length: cols + 1 }, (_, c) => <Path key={c} d={`M${(w / cols) * c} 0 V${bottom}`} stroke={frame} strokeWidth={4} />)}
+      {/* Reflections: soft diagonal glints. */}
+      {[0.15, 0.55].map((x, i) => <Path key={i} d={`M${w * x} ${floor - 40} l${w * 0.12} -${w * 0.12} l${w * 0.05} 0 l-${w * 0.12} ${w * 0.12} Z`} fill="#FFFFFF" opacity={lit ? 0.12 : 0.45} />)}
+      {/* The lobby: glass doors and planters. */}
+      <Rect x={w * 0.6} y={floor + (bottom - floor) * 0.12} width={w * 0.26} height={(bottom - floor) * 0.88} fill={dim(period, '#DDE6FF', '#9AAADC', '#3E4A78')} stroke={INK} strokeWidth={1.5} />
+      <Path d={`M${w * 0.73} ${floor + (bottom - floor) * 0.12} V${bottom}`} stroke={INK} strokeWidth={1.5} />
+      {[0.2, 0.4].map((x, i) => (
+        <G key={i}>
+          <Rect x={w * x} y={bottom - 22} width={34} height={22} fill="#8A8A9C" stroke={INK} strokeWidth={1.2} />
+          <Circle cx={w * x + 17} cy={bottom - 30} r={14} fill="#5FC48E" stroke={INK} strokeWidth={1.2} />
+        </G>
+      ))}
+    </G>
+  );
+}
+
+/** A little row house: pastel siding, a bay window with flowers, a door with an awning. */
+function Rowhouse({ w, bottom, band, period }: { w: number; bottom: number; band: { top: number; height: number }; period: Period }) {
+  const siding = dim(period, '#CFE8D8', '#9DB8B0', '#3E4E4C');
+  const line = dim(period, '#B4D4C0', '#88A39C', '#34423F');
+  const trim = dim(period, '#FFFFFF', '#E3DACB', '#7A7A8A');
+  const floor = band.top;
+  const fh = bottom - floor;
+  return (
+    <G>
+      <Rect x={0} y={0} width={w} height={bottom} fill={siding} />
+      {Array.from({ length: Math.ceil(bottom / 12) }, (_, r) => <Path key={r} d={`M0 ${12 * (r + 1)} H${w}`} stroke={line} strokeWidth={1.2} />)}
+      {/* Upstairs: two windows with shutters, under the eave. */}
+      {[0.12, 0.6].map((x, i) => (
+        <G key={i}>
+          <Rect x={w * x - 10} y={floor - fh * 0.66} width={8} height={fh * 0.46} fill={colors.pink} stroke={INK} strokeWidth={1} />
+          <Rect x={w * x + w * 0.2 + 2} y={floor - fh * 0.66} width={8} height={fh * 0.46} fill={colors.pink} stroke={INK} strokeWidth={1} />
+          <Win x={w * x} y={floor - fh * 0.66} ww={w * 0.2} wh={fh * 0.46} period={period} />
+        </G>
+      ))}
+      <Rect x={0} y={floor - 8} width={w} height={6} fill={trim} stroke={INK} strokeWidth={1.2} />
+      {/* A bay window with a flower box, and the door. */}
+      <Path d={`M${w * 0.06} ${floor + fh * 0.6} L${w * 0.1} ${floor + fh * 0.08} H${w * 0.36} L${w * 0.4} ${floor + fh * 0.6} Z`} fill={trim} stroke={INK} strokeWidth={1.5} strokeLinejoin="round" />
+      <Win x={w * 0.13} y={floor + fh * 0.14} ww={w * 0.2} wh={fh * 0.38} period={period} flowers />
+      <StreetDoor x={w * 0.66} top={floor + fh * 0.18} bottom={bottom} dw={w * 0.15} color="#F2A65A" awning="#2F5BEA" period={period} />
+      <Rect x={-4} y={0} width={w + 8} height={10} fill={trim} stroke={INK} strokeWidth={1.2} />
+    </G>
+  );
+}
+
+/** A river or harbor: the city across the water, a stone edge on the far side. */
+function River({ w, h, horizon, period, landmark }: { w: number; h: number; horizon: number; period: Period; landmark?: Landmark }) {
+  return (
+    <G>
+      <FarCity w={w} base={horizon - 2} period={period} />
+      {landmark && <LandmarkShape kind={landmark} x={w * 0.72} base={horizon - 2} size={110} period={period} />}
+      <Rect x={0} y={horizon - 4} width={w} height={6} fill={dim(period, '#C9C1B4', '#A39C90', '#4A4652')} />
+      <Rect x={0} y={horizon} width={w} height={h - horizon} fill={WATER[period]} />
+      <Path d={`M0 ${horizon} H${w}`} stroke={INK} strokeWidth={1.2} opacity={0.5} />
+    </G>
+  );
+}
+
+/** The ocean: a flat blue horizon with gentle rolling waves. */
+function Ocean({ w, h, horizon, period, landmark }: { w: number; h: number; horizon: number; period: Period; landmark?: Landmark }) {
+  const sea = dim(period, '#7FA8E8', '#5E7FD6', '#2E3A62');
+  return (
+    <G>
+      {landmark && <LandmarkShape kind={landmark} x={w * 0.75} base={horizon} size={120} period={period} />}
+      <Rect x={0} y={horizon} width={w} height={h - horizon} fill={sea} />
+      <Path d={`M0 ${horizon} H${w}`} stroke={INK} strokeWidth={1.2} opacity={0.5} />
+      {[0.25, 0.5].map((k, i) => (
+        <Path key={i} d={Array.from({ length: 8 }, (_, j) => `${j ? '' : `M0 ${horizon + 24 + i * 30}`} q${w / 16} -8 ${w / 8} 0`).join(' ')} stroke="#FFFFFF" strokeWidth={2.5} fill="none" opacity={0.7} />
+      ))}
+    </G>
+  );
+}
+
+/** The city across the water: a soft row of towers. */
+function FarCity({ w, base, period }: { w: number; base: number; period: Period }) {
+  const fill = dim(period, '#C9C3DE', '#5A6EC8', '#34344E');
+  const towers: [number, number, number][] = [[0, 0.1, 40], [0.09, 0.08, 66], [0.16, 0.12, 48], [0.27, 0.07, 84], [0.33, 0.1, 56], [0.42, 0.09, 70], [0.5, 0.12, 44], [0.6, 0.08, 60], [0.86, 0.14, 50]];
+  return (
+    <G opacity={0.85}>
+      {towers.map(([x, tw, th], i) => (
+        <Rect key={i} x={w * x} y={base - th} width={w * tw} height={th} fill={fill} />
+      ))}
+    </G>
+  );
+}
+
+/** A landmark on the horizon, small and soft so it never competes with the animal. */
+function LandmarkShape({ kind, x, base, size, period }: { kind: Landmark; x: number; base: number; size: number; period: Period }) {
+  const fill = dim(period, '#B4ACD0', '#5468C0', '#3B3A58');
+  const line = dim(period, '#8E86B0', '#3E4E9E', '#2A2A42');
+  const s = size;
+  const sw = { stroke: line, strokeWidth: 1.5 };
+  switch (kind) {
+    case 'verrazzano':
+    case 'williamsburg-bridge':
+    case 'brooklyn-bridge': {
+      const tower = kind === 'brooklyn-bridge'
+        ? (tx: number) => <Path d={`M${tx - 10} ${base} V${base - s * 0.7} H${tx + 10} V${base} Z M${tx - 5} ${base - s * 0.45} a5 7 0 0 1 10 0 V${base - s * 0.3} H${tx - 5} Z`} fill={fill} {...sw} />
+        : (tx: number) => <Path d={`M${tx - 6} ${base} V${base - s * 0.8} H${tx + 6} V${base} Z`} fill={fill} {...sw} />;
+      const a = x - s * 0.55;
+      const b = x + s * 0.55;
+      return (
+        <G opacity={0.9}>
+          <Path d={`M${x - s * 1.4} ${base - s * 0.2} H${x + s * 1.4}`} stroke={line} strokeWidth={4} />
+          <Path d={`M${x - s * 1.4} ${base - s * 0.25} Q${a} ${base - s * 0.2} ${a} ${base - s * 0.78} Q${x} ${base - s * 0.15} ${b} ${base - s * 0.78} Q${b} ${base - s * 0.2} ${x + s * 1.4} ${base - s * 0.25}`} stroke={line} strokeWidth={1.5} fill="none" />
+          {tower(a)}
+          {tower(b)}
+        </G>
+      );
+    }
+    case 'liberty':
+      return (
+        <G opacity={0.95}>
+          <Path d={`M${x - s * 0.14} ${base} L${x - s * 0.1} ${base - s * 0.3} H${x + s * 0.1} L${x + s * 0.14} ${base} Z`} fill={fill} {...sw} />
+          <Path d={`M${x - s * 0.07} ${base - s * 0.3} L${x - s * 0.05} ${base - s * 0.72} H${x + s * 0.05} L${x + s * 0.07} ${base - s * 0.3} Z`} fill="#8FCBB8" {...sw} />
+          <Circle cx={x} cy={base - s * 0.77} r={s * 0.05} fill="#8FCBB8" {...sw} />
+          {[-0.08, -0.04, 0, 0.04, 0.08].map((dx, i) => <Path key={i} d={`M${x} ${base - s * 0.8} l${s * dx} ${-s * 0.06}`} stroke="#8FCBB8" strokeWidth={2} />)}
+          <Path d={`M${x + s * 0.04} ${base - s * 0.66} L${x + s * 0.12} ${base - s * 0.95}`} stroke="#8FCBB8" strokeWidth={5} strokeLinecap="round" />
+          <Circle cx={x + s * 0.12} cy={base - s * 0.98} r={s * 0.03} fill={colors.yellow} />
+        </G>
+      );
+    case 'wonder-wheel':
+      return (
+        <G opacity={0.95}>
+          <Path d={`M${x - s * 0.3} ${base} L${x} ${base - s * 0.45} L${x + s * 0.3} ${base}`} stroke={line} strokeWidth={4} fill="none" />
+          <Circle cx={x} cy={base - s * 0.45} r={s * 0.42} fill="none" stroke={colors.pink} strokeWidth={4} />
+          {Array.from({ length: 8 }, (_, i) => {
+            const a = (i / 8) * Math.PI * 2;
+            return (
+              <G key={i}>
+                <Path d={`M${x} ${base - s * 0.45} l${Math.cos(a) * s * 0.42} ${Math.sin(a) * s * 0.42}`} stroke={line} strokeWidth={1.5} />
+                <Rect x={x + Math.cos(a) * s * 0.42 - 5} y={base - s * 0.45 + Math.sin(a) * s * 0.42 - 2} width={10} height={9} rx={2} fill={i % 2 ? colors.yellow : '#9DD0F5'} stroke={line} strokeWidth={1} />
+              </G>
+            );
+          })}
+        </G>
+      );
+    case 'unisphere':
+      return (
+        <G opacity={0.9}>
+          <Path d={`M${x} ${base} V${base - s * 0.25}`} stroke={line} strokeWidth={5} />
+          <Circle cx={x} cy={base - s * 0.55} r={s * 0.32} fill="none" stroke={line} strokeWidth={2.5} />
+          {[0.12, 0.22].map((k, i) => <Ellipse key={i} cx={x} cy={base - s * 0.55} rx={s * 0.32} ry={s * k} fill="none" stroke={line} strokeWidth={1.5} />)}
+          <Ellipse cx={x} cy={base - s * 0.55} rx={s * 0.12} ry={s * 0.32} fill="none" stroke={line} strokeWidth={1.5} />
+          <Ellipse cx={x - s * 0.08} cy={base - s * 0.6} rx={s * 0.1} ry={s * 0.06} fill={fill} />
+        </G>
+      );
+    case 'empire':
+      return (
+        <G opacity={0.9}>
+          <Path d={`M${x - s * 0.12} ${base} V${base - s * 0.5} H${x - s * 0.08} V${base - s * 0.66} H${x - s * 0.04} V${base - s * 0.8} H${x + s * 0.04} V${base - s * 0.66} H${x + s * 0.08} V${base - s * 0.5} H${x + s * 0.12} V${base} Z`} fill={fill} {...sw} />
+          <Path d={`M${x} ${base - s * 0.8} V${base - s * 1.0}`} stroke={line} strokeWidth={2} />
+          <Rect x={x - s * 0.4} y={base - s * 0.32} width={s * 0.18} height={s * 0.32} fill={fill} {...sw} />
+          <Rect x={x + s * 0.22} y={base - s * 0.4} width={s * 0.16} height={s * 0.4} fill={fill} {...sw} />
+        </G>
+      );
+    default:
+      // The skyline: a cluster of towers, one with a spire.
+      return (
+        <G opacity={0.9}>
+          {[[-0.45, 0.14, 0.4], [-0.28, 0.12, 0.62], [-0.12, 0.14, 0.5], [0.04, 0.1, 0.85], [0.16, 0.14, 0.55], [0.32, 0.12, 0.42]].map(([dx, tw, th], i) => (
+            <Rect key={i} x={x + s * dx} y={base - s * th} width={s * tw} height={s * th} fill={fill} {...sw} />
+          ))}
+          <Path d={`M${x + s * 0.09} ${base - s * 0.85} V${base - s * 1.05}`} stroke={line} strokeWidth={2} />
+        </G>
+      );
+  }
 }

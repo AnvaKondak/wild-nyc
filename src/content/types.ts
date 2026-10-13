@@ -101,6 +101,8 @@ export type StorySlide = {
   status?: string;
   /** Favorites story: the kind of place to draw behind this animal. */
   scene?: PlaceKind;
+  /** Favorites story: the neighborhood they're in, for how the scene looks. */
+  placeId?: string;
   /** Backdrop for the sticker (moments set this). */
   setting?: Setting;
   /** A fun fact about the species, fitting the season and time of day. */
