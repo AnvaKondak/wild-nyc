@@ -189,7 +189,7 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
         )}
         {setting === 'hedge' && <Hedge w={w} ground={ground} bh={bh} season={season} period={period} />}
         {setting === 'burrow' && <Burrow x={w * 0.78} ground={ground} bh={bh} />}
-        {(setting === 'wire' || setting === 'sky') && <Skyline w={w} h={h} base={bt + bh * 1.05} period={period} />}
+        {(setting === 'wire' || setting === 'sky') && <Skyline w={w} h={h} base={bt + bh * 1.25} bh={bh} period={period} />}
         {setting === 'wire' && <Wire w={w} y={ground} bh={bh} />}
         {watery && <Pond w={w} h={h} horizon={horizon} period={period} season={season} />}
         {setting === 'reeds' && <Reeds w={w} ground={ground} bh={bh} back />}
@@ -244,42 +244,60 @@ function Park({ w, h, ground, bh, period, season }: { w: number; h: number; grou
   );
 }
 
-/** A big rounded hedge behind the animal, in the season's greens. */
+/** A long, bushy hedge behind the animal: one scalloped shape with leaf details, in the season's greens. */
 function Hedge({ w, ground, bh, season, period }: { w: number; ground: number; bh: number; season: Season; period: Period }) {
   const [a, b] = HEDGE[season];
   const dark = period === 'night' || period === 'dusk';
-  const blobs = [0.04, 0.2, 0.38, 0.56, 0.74, 0.92];
+  const top = ground - bh * 0.48;
+  const bumps = 7;
+  const bw = w / (bumps - 1);
+  // A scalloped top edge: a row of soft bumps.
+  let d = `M-10 ${ground} L-10 ${top + 10}`;
+  for (let i = 0; i < bumps; i++) d += ` Q${i * bw - bw / 2} ${top - bh * 0.1 - (i % 2) * 8} ${i * bw} ${top + 6}`;
+  d += ` L${w + 10} ${top + 6} L${w + 10} ${ground} Z`;
+  const leaf = (x: number, y: number, r: number, k: number) => (
+    <Path key={k} d={`M${x - r} ${y} Q${x} ${y - r * 0.9} ${x + r} ${y} Q${x} ${y + r * 0.9} ${x - r} ${y} Z`} transform={`rotate(${(k * 37) % 60 - 30} ${x} ${y})`} fill={b} stroke={INK} strokeWidth={1} opacity={0.9} />
+  );
   return (
     <G opacity={dark ? 0.85 : 1}>
-      {blobs.map((x, i) => (
-        <Circle key={i} cx={w * x} cy={ground - bh * (0.3 + (i % 2) * 0.12)} r={bh * (0.26 + (i % 3) * 0.04)} fill={i % 2 ? b : a} stroke={INK} strokeWidth={1.5} />
-      ))}
-      <Rect x={0} y={ground - bh * 0.3} width={w} height={bh * 0.3} fill={a} />
-      {season === 'fall' || season === 'spring'
-        ? blobs.map((x, i) => <Circle key={`b${i}`} cx={w * x + 12} cy={ground - bh * (0.42 + (i % 2) * 0.1)} r={4} fill={season === 'fall' ? '#E5484D' : '#FFB3CB'} />)
-        : null}
+      <Path d={d} fill={a} stroke={INK} strokeWidth={1.8} strokeLinejoin="round" />
+      {Array.from({ length: 18 }, (_, k) => leaf(((k * 53) % 100) / 100 * w, top + bh * 0.08 + ((k * 31) % 100) / 100 * (ground - top - bh * 0.12), 7, k))}
+      {(season === 'fall' || season === 'spring') &&
+        Array.from({ length: 6 }, (_, k) => <Circle key={`b${k}`} cx={((k * 41 + 9) % 100) / 100 * w} cy={top + bh * 0.12 + ((k * 23) % 50)} r={4} fill={season === 'fall' ? '#E5484D' : '#FFB3CB'} stroke={INK} strokeWidth={1} />)}
     </G>
   );
 }
 
-/** A few big friendly flowers in front, for bees and butterflies to hover over. */
+/** A few big, friendly flowers in front, for bees and butterflies to hover over: round petals, a sunny middle, leaves on the stem. */
 function Flowers({ w, ground, bh, period }: { w: number; ground: number; bh: number; period: Period }) {
-  const petals = period === 'night' ? ['#B88AB8', '#C9B86A'] : ['#FF8FB0', '#FFD23F', '#B4A2F2'];
+  const petals = period === 'night' ? ['#C9A0C9', '#D9C98A', '#A9A0D9'] : ['#FF8FB0', '#FFD23F', '#B4A2F2', '#FFB3CB'];
   return (
     <G>
-      {[0.12, 0.3, 0.7, 0.88].map((x, i) => {
+      {[0.1, 0.28, 0.72, 0.9].map((x, i) => {
         const cx = w * x;
-        const cy = ground - bh * (0.12 + (i % 2) * 0.12);
-        const r = bh * 0.07;
+        const cy = ground - bh * (0.12 + (i % 2) * 0.14);
+        const r = bh * 0.06;
+        const stem = `M${cx} ${cy} C${cx + 6} ${cy + bh * 0.15} ${cx - 6} ${cy + bh * 0.25} ${cx} ${ground + bh * 0.3}`;
         return (
           <G key={i}>
-            <Path d={`M${cx} ${cy} V${ground + bh * 0.2}`} stroke="#3E8E4E" strokeWidth={4} />
-            <Ellipse cx={cx + 12} cy={cy + bh * 0.12} rx={14} ry={6} transform={`rotate(-30 ${cx + 12} ${cy + bh * 0.12})`} fill="#5FC48E" stroke={INK} strokeWidth={1.2} />
-            {[0, 1, 2, 3, 4, 5].map((k) => {
-              const a = (k / 6) * Math.PI * 2;
-              return <Circle key={k} cx={cx + Math.cos(a) * r} cy={cy + Math.sin(a) * r} r={r * 0.7} fill={petals[i % petals.length]} stroke={INK} strokeWidth={1.2} />;
+            <Path d={stem} stroke={INK} strokeWidth={5} fill="none" strokeLinecap="round" />
+            <Path d={stem} stroke="#4FA85E" strokeWidth={3} fill="none" strokeLinecap="round" />
+            {[-1, 1].map((s) => (
+              <Path
+                key={s}
+                d={`M${cx} ${cy + bh * 0.16} q${s * 10} -10 ${s * 20} -4 q${-s * 6} 10 ${-s * 20} 4 Z`}
+                fill="#6FC27E"
+                stroke={INK}
+                strokeWidth={1.2}
+                strokeLinejoin="round"
+              />
+            ))}
+            {[0, 1, 2, 3, 4].map((k) => {
+              const a = (k / 5) * Math.PI * 2 - Math.PI / 2;
+              return <Ellipse key={k} cx={cx + Math.cos(a) * r * 0.95} cy={cy + Math.sin(a) * r * 0.95} rx={r * 0.62} ry={r * 0.52} transform={`rotate(${(a * 180) / Math.PI} ${cx + Math.cos(a) * r * 0.95} ${cy + Math.sin(a) * r * 0.95})`} fill={petals[i % petals.length]} stroke={INK} strokeWidth={1.2} />;
             })}
-            <Circle cx={cx} cy={cy} r={r * 0.6} fill={colors.yellow} stroke={INK} strokeWidth={1.2} />
+            <Circle cx={cx} cy={cy} r={r * 0.5} fill={colors.yellow} stroke={INK} strokeWidth={1.2} />
+            <Circle cx={cx - r * 0.15} cy={cy - r * 0.15} r={r * 0.14} fill="#FFFFFF" />
           </G>
         );
       })}
@@ -297,16 +315,53 @@ function Burrow({ x, ground, bh }: { x: number; ground: number; bh: number }) {
   );
 }
 
-/** Far-off city rooftops and water towers along the bottom of an open sky. */
-function Skyline({ w, h, base, period }: { w: number; h: number; base: number; period: Period }) {
-  const fill = period === 'night' ? '#3B3A50' : period === 'dusk' ? '#4A62C8' : period === 'dawn' ? '#E8B4C4' : '#C9C3DE';
-  const blocks = [[0, 0.16, 0.12], [0.14, 0.12, 0.2], [0.28, 0.18, 0.1], [0.48, 0.14, 0.16], [0.64, 0.2, 0.08], [0.86, 0.16, 0.14]];
+/** A row of cute little buildings along the bottom of an open sky: outlined, with windows (some lit), varied rooftops and a water tower. */
+function Skyline({ w, h, base, bh, period }: { w: number; h: number; base: number; bh: number; period: Period }) {
+  const night = period === 'night' || period === 'dusk';
+  const walls = night ? ['#4A4A72', '#5A4A6E', '#3E4A72'] : period === 'dawn' ? ['#F2C4D4', '#E8D4F2', '#FADADA'] : ['#E8D4F2', '#FADADA', '#D4E2F7', '#F7E3C4'];
+  const glass = night ? '#FFD23F' : '#BFD0F5';
+  const blocks: [number, number, number][] = [[-0.02, 0.2, 0.2], [0.17, 0.17, 0.28], [0.33, 0.2, 0.16], [0.52, 0.16, 0.24], [0.67, 0.18, 0.19], [0.84, 0.2, 0.26]];
   return (
-    <G opacity={0.9}>
-      {blocks.map(([x, bw, bh2], i) => (
-        <Rect key={i} x={w * x} y={base - h * bh2} width={w * bw} height={h} fill={fill} />
-      ))}
-      <Rect x={w * 0.55} y={base - h * 0.22} width={16} height={14} rx={2} fill={fill} />
+    <G>
+      {blocks.map(([x, bw, bh2], i) => {
+        const bx = w * x;
+        const bwPx = w * bw;
+        // Low enough to leave plenty of sky over the wire.
+        const top = base - bh * bh2 * 1.6;
+        const cols = 3;
+        const rows = Math.ceil((h - top) / 26);
+        return (
+          <G key={i}>
+            <Rect x={bx} y={top} width={bwPx} height={h} fill={walls[i % walls.length]} stroke={INK} strokeWidth={1.5} />
+            {i % 2 === 0 ? (
+              <Rect x={bx - 3} y={top - 6} width={bwPx + 6} height={7} fill={walls[(i + 1) % walls.length]} stroke={INK} strokeWidth={1.2} />
+            ) : (
+              <Path d={`M${bx} ${top} L${bx + bwPx / 2} ${top - 14} L${bx + bwPx} ${top} Z`} fill={walls[(i + 2) % walls.length]} stroke={INK} strokeWidth={1.2} strokeLinejoin="round" />
+            )}
+            {Array.from({ length: rows }, (_, r) =>
+              Array.from({ length: cols }, (_, c) => (
+                <Rect
+                  key={`${r}:${c}`}
+                  x={bx + bwPx * (0.14 + c * 0.28)}
+                  y={top + 12 + r * 26}
+                  width={bwPx * 0.16}
+                  height={13}
+                  rx={2}
+                  fill={night && (r + c + i) % 3 === 0 ? glass : night ? '#2E2E44' : (r + c + i) % 4 === 0 ? '#FFFFFF' : glass}
+                  stroke={INK}
+                  strokeWidth={1}
+                />
+              )),
+            )}
+          </G>
+        );
+      })}
+      {/* A water tower on top of the tallest building. */}
+      <G>
+        <Path d={`M${w * 0.21} ${base - bh * 0.448} l2 -10 M${w * 0.29} ${base - bh * 0.448} l-2 -10`} stroke={INK} strokeWidth={2} />
+        <Rect x={w * 0.2} y={base - bh * 0.448 - 28} width={w * 0.1} height={18} rx={2} fill="#C9955E" stroke={INK} strokeWidth={1.2} />
+        <Path d={`M${w * 0.195} ${base - bh * 0.448 - 28} L${w * 0.25} ${base - bh * 0.448 - 38} L${w * 0.305} ${base - bh * 0.448 - 28} Z`} fill="#C9955E" stroke={INK} strokeWidth={1.2} strokeLinejoin="round" />
+      </G>
     </G>
   );
 }
@@ -573,20 +628,27 @@ function SkyWeather({ w, h, bt, bh, period, weather, behind = false }: { w: numb
 
 // ---------------------------------------------------------------- places
 
-/** A few far-off trees: round crowns on little trunks, softened by distance. */
+/** A few far-off trees: fluffy, cloud-like crowns with a little highlight, on chunky trunks. */
 function FarTrees({ w, base, period, season, small = false }: { w: number; base: number; period: Period; season: Season; small?: boolean }) {
   const crown = period === 'night' || period === 'dusk' ? FAR[period] : LEAVES[season][0] ?? FAR[period];
+  const shine = period === 'night' || period === 'dusk' ? '#FFFFFF22' : '#FFFFFF66';
   const trunk = period === 'night' ? '#2E2E44' : '#8A6247';
-  const r = small ? 26 : 40;
+  const r = small ? 22 : 32;
   return (
-    <G opacity={0.75}>
-      {[0.08, 0.27, 0.5, 0.71, 0.92].map((x, i) => {
-        const cr = r + (i % 3) * (small ? 6 : 10);
-        const h = cr * 1.5;
+    <G>
+      {[0.08, 0.3, 0.52, 0.74, 0.94].map((x, i) => {
+        const cr = r + (i % 3) * (small ? 5 : 8);
+        const cx = w * x;
+        const cy = base - cr * 1.9;
+        // A crown is a few overlapping puffs: outline them all, then fill them all on top,
+        // so it reads as one fluffy shape.
+        const puffs: [number, number, number][] = [[0, 0, cr], [-cr * 0.7, cr * 0.35, cr * 0.72], [cr * 0.7, cr * 0.35, cr * 0.72], [0, -cr * 0.55, cr * 0.75]];
         return (
           <G key={i}>
-            <Rect x={w * x - 3} y={base - h} width={6} height={h} fill={trunk} />
-            <Circle cx={w * x} cy={base - h - cr * 0.4} r={cr} fill={crown} stroke={INK} strokeWidth={1} strokeOpacity={0.35} />
+            <Path d={`M${cx - 5} ${base} L${cx - 3} ${cy + cr * 0.6} L${cx + 3} ${cy + cr * 0.6} L${cx + 5} ${base} Z`} fill={trunk} stroke={INK} strokeWidth={1.2} strokeLinejoin="round" />
+            {puffs.map(([dx, dy, pr], k) => <Circle key={`o${k}`} cx={cx + dx} cy={cy + dy} r={pr} fill="none" stroke={INK} strokeWidth={2.4} />)}
+            {puffs.map(([dx, dy, pr], k) => <Circle key={`f${k}`} cx={cx + dx} cy={cy + dy} r={pr} fill={crown} />)}
+            <Ellipse cx={cx - cr * 0.3} cy={cy - cr * 0.55} rx={cr * 0.32} ry={cr * 0.18} fill={shine} />
           </G>
         );
       })}

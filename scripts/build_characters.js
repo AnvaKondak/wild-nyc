@@ -1348,10 +1348,12 @@ ART.deerBody = {
       <path d="${legs}" fill="none" stroke="#A9784E" stroke-width="10" stroke-linecap="round"/>
       <path d="M180 356 h10 M216 356 h10 M296 356 h10 M330 352 h10" stroke="${C.ink}" stroke-width="10" stroke-linecap="round"/>
       ${shadow([body, neck, head, ears])}
-      ${shape(body, '#B9875E')}
-      <path d="M190 252 C230 262 290 262 330 252" fill="none" stroke="#F4EDE4" stroke-width="12" stroke-linecap="round"/>
+      ${'' /* Body and neck as one shape: outline both, then fill both on top, so there's no seam between them. */}
+      <g fill="none" ${OL}>${body}${neck}</g>
+      <g fill="#B9875E">${body}${neck}</g>
+      <clipPath id="db-body">${body}</clipPath>
+      <g clip-path="url(#db-body)"><ellipse cx="262" cy="276" rx="96" ry="26" fill="#F4EDE4"/></g>
       <path d="M352 210 C372 198 382 214 368 230 C362 236 354 232 354 226 Z" fill="#F4EDE4" stroke="${C.ink}" stroke-width="6"/>
-      ${shape(neck, '#B9875E')}
       ${shape(ears, '#B9875E')}
       <ellipse cx="161" cy="72" rx="7" ry="18" transform="rotate(30 161 72)" fill="#F4EDE4"/><ellipse cx="128" cy="69" rx="6" ry="16" transform="rotate(-8 128 69)" fill="#F4EDE4"/>
       ${shape(head, '#B9875E')}
