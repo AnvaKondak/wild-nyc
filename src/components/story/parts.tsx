@@ -4,7 +4,7 @@
 import { useMemo, useRef, type ReactNode } from 'react';
 import { PanResponder, Pressable, ScrollView, Text, View } from 'react-native';
 import type { PeriodTheme } from '@/theme/periodTheme';
-import { border, fonts, offsetShadow } from '@/theme/tokens';
+import { border, colors, fonts, offsetShadow } from '@/theme/tokens';
 
 export function StoryProgress({ count, index, theme }: { count: number; index: number; theme: PeriodTheme }) {
   return (
@@ -60,7 +60,7 @@ export function useSwipe(next: () => void, prev: () => void) {
  * The words of a slide on a riso card over the scene. Scrolls when long, so the button
  * below always stays in place. `children` go at the bottom of the card (links, chips).
  */
-export function StoryCard({ kicker, title, body, fact, theme, children, bottom = false, scroll = true }: { kicker: string; title: string; body: string; fact?: string; theme: PeriodTheme; children?: ReactNode; /** Sit at the bottom, just above the button, when there's room to spare. */ bottom?: boolean; /** False when it already sits inside something that scrolls. */ scroll?: boolean }) {
+export function StoryCard({ kicker, title, body, fact, chip, theme, children, bottom = false, scroll = true }: { kicker: string; title: string; body: string; fact?: string; /** A small status tag under the kicker ("Napping"). */ chip?: string; theme: PeriodTheme; children?: ReactNode; /** Sit at the bottom, just above the button, when there's room to spare. */ bottom?: boolean; /** False when it already sits inside something that scrolls. */ scroll?: boolean }) {
   const card = (
       <View
         style={{
@@ -75,6 +75,11 @@ export function StoryCard({ kicker, title, body, fact, theme, children, bottom =
         }}
       >
         <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, letterSpacing: 1.4, textTransform: 'uppercase', color: theme.accent }}>{kicker}</Text>
+        {chip && (
+          <View style={{ alignSelf: 'flex-start', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 12, backgroundColor: colors.pink }}>
+            <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, color: colors.ink }}>{chip}</Text>
+          </View>
+        )}
         <Text accessibilityRole="header" style={{ fontFamily: fonts.display, fontSize: title.length > 44 ? 25 : 29, lineHeight: title.length > 44 ? 29 : 33, color: theme.ink }}>
           {title}
         </Text>

@@ -6,16 +6,35 @@ import { colors } from '@/theme/tokens';
 import { CloseIcon, PencilIcon } from './Icons';
 import { PillRow } from './Pills';
 
-type Props = { ink?: string; background?: string };
+type Props = {
+  ink?: string;
+  background?: string;
+  /** Show a "♥ Favorites" pill first. Selected when `favoritesOn`. */
+  favoritesOn?: boolean;
+  onFavorites?: () => void;
+  /** Called when a neighborhood pill is tapped (after it's selected). */
+  onNeighborhood?: () => void;
+};
 
-/** The user's neighborhoods as pills. Tap to switch, ✕ (or long-press) to remove, the pencil to move Home, "+" to add. */
-export function NeighborhoodPills({ ink = colors.ink, background = colors.paper }: Props) {
+const FAVORITES = '♥ favorites';
+
+/**
+ * The user's neighborhoods as pills, with "♥ Favorites" first when asked for. Tap to
+ * switch, ✕ (or long-press) to remove, the pencil to move Home, "+" to add.
+ */
+export function NeighborhoodPills({ ink = colors.ink, background = colors.paper, favoritesOn = false, onFavorites, onNeighborhood }: Props) {
   const router = useRouter();
   const { state, actions } = useAppState();
   const current = currentNeighborhood(state);
-  const items = state.neighborhoods.length > 0
+  const places = state.neighborhoods.length > 0
     ? state.neighborhoods.map((n) => ({ id: n.id, label: n.label }))
     : [{ id: current.id, label: current.label }];
+  const items = onFavorites ? [{ id: FAVORITES, label: '♥ Favorites' }, ...places] : places;
+  const select = (id: string) => {
+    if (id === FAVORITES) return onFavorites?.();
+    actions.selectNeighborhood(id);
+    onNeighborhood?.();
+  };
 
   const confirmRemove = (id: string) => {
     const n = state.neighborhoods.find((x) => x.id === id);
@@ -30,7 +49,7 @@ export function NeighborhoodPills({ ink = colors.ink, background = colors.paper 
   // else), an ✕ on the others (remove it, after a quick check).
   const isHome = (id: string) => state.neighborhoods.find((n) => n.id === id)?.label === 'Home';
   const trailing = (id: string, selected: boolean) => {
-    if (!selected || state.neighborhoods.length === 0) return null;
+    if (!selected || id === FAVORITES || state.neighborhoods.length === 0) return null;
     const home = isHome(id);
     if (!home && state.neighborhoods.length <= 1) return null;
     return (
@@ -49,8 +68,8 @@ export function NeighborhoodPills({ ink = colors.ink, background = colors.paper 
   return (
     <PillRow
       items={items}
-      selectedId={current.id}
-      onSelect={actions.selectNeighborhood}
+      selectedId={favoritesOn ? FAVORITES : current.id}
+      onSelect={select}
       onLongPress={confirmRemove}
       onAdd={() => router.push('/add-place')}
       ink={ink}

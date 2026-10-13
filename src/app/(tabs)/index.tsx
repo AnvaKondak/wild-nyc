@@ -5,8 +5,9 @@ import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
 import { FavoriteButton } from '@/components/FavoriteButton';
+import { PopIn, RisingHearts } from '@/components/story/Cute';
 import { FloatingCast } from '@/components/Floating';
-import { BellIcon, BellOffIcon, ChevronLeftIcon, ChevronRightIcon, HomeIcon, SoundOffIcon, SoundOnIcon } from '@/components/Icons';
+import { BellIcon, BellOffIcon, ChevronLeftIcon, ChevronRightIcon, HeartIcon, HomeIcon, SoundOffIcon, SoundOnIcon } from '@/components/Icons';
 import { GroupSticker } from '@/components/GroupSticker';
 import { NeighborhoodPills } from '@/components/NeighborhoodPills';
 import { PeriodIcon } from '@/components/PeriodIcon';
@@ -23,6 +24,7 @@ import { buildIntro } from '@/lib/intro';
 import { buildTomorrow } from '@/lib/tomorrow';
 import type { Neighborhood } from '@/lib/neighborhood';
 import { aroundSlide, buildArc, pickAround, pickLead, poolFor, type StoryContext, type StoryPlace } from '@/lib/neighborStory';
+import { favoritesStory } from '@/lib/favoritesStory';
 import { withMoods } from '@/lib/mood';
 import { hashString, seededRandom } from '@/lib/random';
 import { dateKey, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
@@ -77,7 +79,8 @@ export default function RightNow() {
   const realHeader = timeHeader(now, lat, lng);
   // Dev only: tap the time header to preview each time-of-day theme.
   // Dev only: ?period=dusk&weather=rain in the URL starts on a preview too.
-  const params = useLocalSearchParams<{ period?: Period; weather?: WeatherTag; slide?: string }>();
+  // Dev only: ?faves=rock-pigeon,raccoon opens the favorites story with those favorites.
+  const params = useLocalSearchParams<{ period?: Period; weather?: WeatherTag; slide?: string; faves?: string }>();
   const [previewPeriod, setPreviewPeriod] = useState<Period | null>(__DEV__ && params.period ? params.period : null);
   const header = previewPeriod
     ? { ...realHeader, period: previewPeriod, label: `${PERIOD_LABELS[previewPeriod]} (preview)` }
@@ -123,7 +126,7 @@ export default function RightNow() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [season, header.period, hood.id, hood.cell, state.neighborhoods, live, today, weatherKey]);
 
-  const story = useMemo(() => {
+  const hoodStory = useMemo(() => {
     const random = seededRandom(`${hood.cell}:${today}:${header.period}:${visiting ?? 'lead'}`);
     const last = aroundSlide(here, ctx, around, lead, arrived);
     const visit = visiting ? getSpecies(visiting) : undefined;
@@ -157,6 +160,20 @@ export default function RightNow() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lead, around, arrived, ctx, here, visiting, placesInOrder, at]);
 
+  // The ♥ Favorites pill: what your favorite kinds of animals are up to right now, wherever
+  // they are in the city, in story form.
+  const [faves, setFaves] = useState(!!(__DEV__ && params.faves));
+  useEffect(() => {
+    if (!__DEV__ || !params.faves) return;
+    for (const id of params.faves.split(',')) if (!state.favorites.includes(id)) actions.toggleFavorite(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.faves]);
+  const favStory = useMemo(
+    () => withMoods(favoritesStory({ favorites: state.favorites, ctx: { ...ctx, weather: [] }, saved: placesInOrder, places, kinds: placeKinds, date: today })),
+    [state.favorites, ctx, placesInOrder, today],
+  );
+  const story = faves ? favStory : hoodStory;
+
   // Switching neighborhood or time of day restarts the story.
   const [index, setIndex] = useState(0);
   const [area, setArea] = useState({ width: 0, height: 0 });
@@ -167,7 +184,7 @@ export default function RightNow() {
     setIndex(startAt.current);
     startAt.current = 0;
     setVisiting(null);
-  }, [hood.id, header.period, season]);
+  }, [hood.id, header.period, season, faves]);
   const i = Math.min(index, story.length - 1);
   const slide = story[i];
 
@@ -194,11 +211,13 @@ export default function RightNow() {
     setIndex(story.length - 1);
     setHome(false);
   };
-  // Back from the first slide goes home.
-  const back = useCallback(() => (i === 0 ? setHome(true) : prev()), [i, prev]);
+  // Favorites skip the home screen: their story is the page.
+  const showHome = home && !faves;
+  // Back from the first slide goes home (a neighborhood's, not the favorites').
+  const back = useCallback(() => (i === 0 && !faves ? setHome(true) : prev()), [i, prev, faves]);
 
   // Swipe left/right, like stories. On the home screen, swiping left starts the story.
-  const swipe = useSwipe(home ? startStory : next, home ? () => {} : back);
+  const swipe = useSwipe(showHome ? startStory : next, showHome ? () => {} : back);
 
   const [focused, setFocused] = useState(true);
   useFocusEffect(
@@ -228,7 +247,9 @@ export default function RightNow() {
   };
 
   // A gentle sound of the kind of place (or the rain), if sound is on.
-  const soundscape = pickSoundscape(scene, header.period, season, weather?.tags);
+  // In the favorites story each animal brings their own kind of place, and its sound.
+  const sceneNow = faves ? (slide?.scene ?? 'park') : scene;
+  const soundscape = pickSoundscape(sceneNow, header.period, season, faves ? [] : weather?.tags);
   useAmbience(soundscape, state.soundOn, focused);
   const listening = SOUNDSCAPE_LABEL[soundscape];
 
@@ -243,9 +264,10 @@ export default function RightNow() {
   };
   // The button only ever opens a page: the animal's profile or the kindness list.
   // Moving through the story is the arrows' job (and swiping).
-  const opensPage = slide.kind !== 'intro' && slide.kind !== 'tomorrow' && slide.kind !== 'around' && (slide.link === 'kindness' || !!species);
+  const opensPage = slide.kind === 'favorites-empty' || (slide.kind !== 'intro' && slide.kind !== 'tomorrow' && slide.kind !== 'around' && slide.kind !== 'favorites' && (slide.link === 'kindness' || !!species));
   const onCta = () => {
-    if (slide.link === 'kindness') router.push('/kindness');
+    if (slide.kind === 'favorites-empty') router.push('/search');
+    else if (slide.link === 'kindness') router.push('/kindness');
     else if (species) router.push({ pathname: '/species/[id]', params: { id: species.id } });
   };
 
@@ -260,7 +282,11 @@ export default function RightNow() {
   // A different photo of the same animal on each slide of their story.
   const photos = speciesPhotos((species ?? getSpecies('rock-pigeon')!).id);
   const slidePhoto = photos[(slide.photoIndex ?? 0) % photos.length];
-  const weatherLine = weather ? `${describeWeather(weather)}${previewWeather ? ' (preview)' : ''} · ${header.sub}` : header.sub;
+  // Favorites are all over the city, so their story skips one neighborhood's weather.
+  const weatherLine = weather && !faves ? `${describeWeather(weather)}${previewWeather ? ' (preview)' : ''} · ${header.sub}` : header.sub;
+  const isGrid = slide.kind === 'around' || slide.kind === 'favorites';
+  // From the favorites grid: jump back to that favorite's slide.
+  const openFavorite = (id: string) => setIndex(Math.max(0, story.findIndex((s) => s.speciesId === id)));
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.bg }} onLayout={(e) => setArea(e.nativeEvent.layout)}>
@@ -271,12 +297,12 @@ export default function RightNow() {
             setting={setting}
             period={header.period}
             season={season}
-            placeKind={scene}
-            placeId={hood.placeId}
+            placeKind={sceneNow}
+            placeId={faves ? undefined : hood.placeId}
             variant={hashString(`${slide.id}:${today}`) % 3}
             moonLit={moonLitFraction(now)}
-            sky={weather?.sky}
-            weather={weather?.tags}
+            sky={faves ? undefined : weather?.sky}
+            weather={faves ? undefined : weather?.tags}
             cameo={cameoFor(slide.cameo ? getSpecies(slide.cameo) : undefined)}
             width={area.width}
             height={area.height}
@@ -285,10 +311,16 @@ export default function RightNow() {
       )}
       <Screen background="transparent" scroll={false}>
         <View {...swipe} style={{ flex: 1 }}>
-          {!home && <StoryProgress count={story.length} index={i} theme={theme} />}
+          {!showHome && <StoryProgress count={story.length} index={i} theme={theme} />}
 
           <View style={{ paddingTop: 14 }}>
-            <NeighborhoodPills ink={theme.ink} background={theme.bg} />
+            <NeighborhoodPills
+              ink={theme.ink}
+              background={theme.bg}
+              favoritesOn={faves}
+              onFavorites={() => setFaves(true)}
+              onNeighborhood={() => setFaves(false)}
+            />
           </View>
 
           <View style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 16 }}>
@@ -311,7 +343,7 @@ export default function RightNow() {
                 )}
               </View>
             </Pressable>
-            {!home && (
+            {!showHome && !faves && (
               <Pressable
                 onPress={() => setHome(true)}
                 accessibilityRole="button"
@@ -367,7 +399,7 @@ export default function RightNow() {
             </Pressable>
           </View>
 
-          {home ? (
+          {showHome ? (
             <>
               <Text accessibilityRole="header" style={{ fontFamily: fonts.display, fontSize: 30, color: theme.ink, paddingHorizontal: 22, paddingTop: 14, textShadowColor: header.period === 'dusk' || header.period === 'night' ? colors.ink : colors.yellow, textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 0 }}>
                 Wild <Text style={{ fontFamily: fonts.displayItalic, color: theme.accent }}>Neighbors</Text>
@@ -393,9 +425,9 @@ export default function RightNow() {
             <>
               {/* The middle of the slide scrolls as one: picture, shortcut and words. The
                   bars, places and time stay put above; the button stays put below. */}
-              <ScrollView key={`${visiting ?? 'lead'}:${slide.id}`} style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 6 }} showsVerticalScrollIndicator={false}>
-              {slide.kind === 'around' ? (
-                // Who else is around: tap one for their story. Today's neighbor is first.
+              <ScrollView key={`${faves ? 'faves' : visiting ?? 'lead'}:${slide.id}`} style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 6 }} showsVerticalScrollIndicator={false}>
+              {isGrid ? (
+                // Who else is around (or all your favorites): tap one for their story.
                 <>
                 {/* Back to the story, without having to swipe. */}
                 <View style={{ paddingHorizontal: 16, marginTop: 16 }}>
@@ -406,11 +438,11 @@ export default function RightNow() {
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', columnGap: 10, rowGap: 14, paddingHorizontal: 16, marginTop: 8 }}>
                   {(slide.aroundSpecies ?? []).map((id, n) => {
                     const s = getSpecies(id)!;
-                    const isLead = id === lead?.id;
+                    const isLead = !faves && id === lead?.id;
                     return (
                       <Pressable
                         key={id}
-                        onPress={() => openNeighbor(id)}
+                        onPress={() => (faves ? openFavorite(id) : openNeighbor(id))}
                         accessibilityRole="button"
                         accessibilityLabel={`${s.friendlyName}${isLead ? ', today\'s neighbor' : ''}${slide.arrivedSpecies?.includes(id) ? ', just arrived' : ''}. See their story`}
                         style={({ pressed }) => ({ width: 88, alignItems: 'center', gap: 5, opacity: pressed ? 0.6 : 1 })}
@@ -435,7 +467,7 @@ export default function RightNow() {
               ) : (
                 /* Prev / next sit beside the photo, in the middle of the screen. */
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, marginTop: 20 }}>
-                  <RoundNav label={i === 0 ? 'Home' : 'Previous story'} onPress={back} color={theme.ink} fill={theme.bg}>
+                  <RoundNav label={i === 0 && !faves ? 'Home' : 'Previous story'} onPress={back} color={theme.ink} fill={theme.bg}>
                     <ChevronLeftIcon color={theme.ink} />
                   </RoundNav>
                   <View>
@@ -444,7 +476,25 @@ export default function RightNow() {
                       accessibilityRole="button"
                       accessibilityLabel={`${slide.kind === 'intro' ? 'Who\'s up' : species?.friendlyName ?? 'Animal'} photo. Next story`}
                     >
-                      {slide.kind === 'intro' ? (
+                      {slide.kind === 'favorites-empty' ? (
+                        <View style={{ width: stickerSize, height: stickerSize, borderRadius: stickerSize / 2, borderWidth: 6, borderColor: colors.white, backgroundColor: colors.pinkTint, alignItems: 'center', justifyContent: 'center', boxShadow: offsetShadow(theme.shadow, 6) }}>
+                          <HeartIcon size={stickerSize * 0.45} color={colors.ink} fill={colors.pink} />
+                        </View>
+                      ) : slide.kind === 'favorite' ? (
+                        <PopIn key={slide.id}>
+                          <Sticker
+                            art={(species ?? getSpecies('rock-pigeon')!).art}
+                            photo={slidePhoto}
+                            speciesId={species?.id}
+                            mood={slide.mood ?? 0}
+                            size={stickerSize}
+                            tint={tileFor(slide)}
+                            rotate={-5}
+                            shadowColor={theme.shadow}
+                          />
+                          {slide.mood !== 'sleepy' && <RisingHearts size={stickerSize} />}
+                        </PopIn>
+                      ) : slide.kind === 'intro' ? (
                         <GroupSticker period={header.period} speciesIds={slide.introSpecies ?? []} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
                       ) : slide.cast ? (
                         <GroupSticker speciesIds={slide.cast} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
@@ -474,12 +524,12 @@ export default function RightNow() {
                 </View>
               )}
 
-              {/* A shortcut to everyone around, so no one has to tap through the whole story. */}
-              {slide.kind !== 'around' && (
+              {/* A shortcut to everyone around (or all your favorites), without tapping through. */}
+              {!isGrid && slide.kind !== 'favorites-empty' && (
                 <Pressable
                   onPress={() => setIndex(story.length - 1)}
                   accessibilityRole="button"
-                  accessibilityLabel="See everyone around today"
+                  accessibilityLabel={faves ? 'See all your favorites' : 'See everyone around today'}
                   hitSlop={8}
                   style={({ pressed }) => ({
                     alignSelf: 'center',
@@ -495,11 +545,11 @@ export default function RightNow() {
                     opacity: pressed ? 0.6 : 1,
                   })}
                 >
-                  <Text style={{ fontFamily: fonts.bodySemi, fontSize: 13, color: theme.ink }}>See everyone around ›</Text>
+                  <Text style={{ fontFamily: fonts.bodySemi, fontSize: 13, color: theme.ink }}>{faves ? 'All your favorites ›' : 'See everyone around ›'}</Text>
                 </Pressable>
               )}
 
-              <StoryCard kicker={slide.kicker} title={slide.title} body={slide.body} fact={slide.fact} theme={theme} scroll={false} />
+              <StoryCard kicker={slide.kicker} title={slide.title} body={slide.body} fact={slide.fact} chip={slide.status} theme={theme} scroll={false} />
               </ScrollView>
 
               <View style={{ paddingHorizontal: 16, paddingBottom: 20 }}>
