@@ -6,11 +6,21 @@ import { Animated, Easing, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import type { Mood } from '@/content/types';
 import { useReduceMotion } from '../backdrop/motion';
-import { characterXml } from './xml';
+import { characterXml, cutoutXml } from './xml';
 
 /** Is there a drawing of this species yet? Photos fill in for the rest. */
 export function hasCharacter(speciesId?: string): speciesId is string {
   return !!speciesId && speciesId in characterXml;
+}
+
+/** Is there a close-up-scene version (no background, no perch) of this species? */
+export function hasCutout(speciesId?: string): speciesId is string {
+  return !!speciesId && speciesId in cutoutXml;
+}
+
+/** Where a cutout's feet are, as a fraction of its height, to stand them on the scene's ground. */
+export function cutoutFeet(speciesId: string): number {
+  return cutoutXml[speciesId]?.feet ?? 0.9;
 }
 
 /** How many moods (different drawings) a species has. */
@@ -29,10 +39,12 @@ type Props = {
   still?: boolean;
   /** Which drawing: a mood by name, or an index that wraps around like photo indexes. */
   mood?: number | Mood;
+  /** The close-up-scene version: no background, drawn at exactly `size`, free to bob. */
+  cutout?: boolean;
 };
 
-export function Character({ speciesId, size, mood = 0, still: holdStill = false }: Props) {
-  const frames = characterXml[speciesId];
+export function Character({ speciesId, size, mood = 0, still: holdStill = false, cutout = false }: Props) {
+  const frames = cutout ? cutoutXml[speciesId].frames : characterXml[speciesId];
   const at = typeof mood === 'string' ? Math.max(0, frames.findIndex((f) => f.mood === mood)) : ((mood % frames.length) + frames.length) % frames.length;
   const frame = frames[at];
   const still = useReduceMotion() || holdStill;
@@ -65,11 +77,12 @@ export function Character({ speciesId, size, mood = 0, still: holdStill = false 
     return () => anim.stop();
   }, [still, y]);
 
-  // Drawn a little larger than the circle, so the bob never shows an edge.
-  const big = Math.round(size * 1.08);
+  // Drawn a little larger than the circle, so the bob never shows an edge. A cutout has
+  // no edge to hide: it's drawn at its size and bobs freely.
+  const big = cutout ? size : Math.round(size * 1.08);
   const offset = -(big - size) / 2;
   return (
-    <View style={{ width: size, height: size, overflow: 'hidden' }}>
+    <View style={{ width: size, height: size, overflow: cutout ? 'visible' : 'hidden' }}>
       <Animated.View
         style={{
           position: 'absolute',
