@@ -1164,14 +1164,16 @@ ART.pigeonBody = {
         <path d="M188 190 C182 220 186 244 194 262" fill="none" stroke="${C.ink}" stroke-width="7"/>
       </g>
       <path d="${outline}" fill="none" ${OL}/>
-      <path d="M98 150 C98 202 128 236 178 244 C204 232 216 212 214 192 C190 182 170 160 166 138 Z" fill="${C.pink}" ${OL}/>
-      <path d="M108 186 C126 214 152 226 196 222" fill="none" stroke="#36B39A" stroke-width="14" stroke-linecap="round"/>
+      <path d="M96 166 C100 210 130 238 182 244 L216 198 C194 186 178 166 174 146 Z" fill="#8F8EA8"/>
+      <path d="M104 182 C120 214 150 232 194 234" fill="none" stroke="#4FB89A" stroke-width="13" stroke-linecap="round" opacity="0.9"/>
+      <path d="M100 196 C118 222 148 238 186 242" fill="none" stroke="#9B6BC4" stroke-width="9" stroke-linecap="round" opacity="0.85"/>
+      <path d="M96 166 C100 210 130 238 182 244" fill="none" ${OL}/>
       ${shape(head, '#8F8EA8')}
       ${eye(m.eyes, 112, 116, 17, { ring: '#FF8A3D', lid: '#8F8EA8' })}
       <ellipse cx="146" cy="152" rx="16" ry="10" fill="${C.pink}"/>
       <ellipse cx="80" cy="124" rx="11" ry="8" fill="#fff" stroke="${C.ink}" stroke-width="5"/>
       <path d="M74 128 L42 140 L76 148 Z" fill="${C.ink}" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
-      ${m.snack ? `<g transform="rotate(-12 32 150)"><rect x="6" y="136" width="52" height="30" rx="9" fill="#C98A4B" stroke="${C.ink}" stroke-width="6"/><rect x="13" y="142" width="38" height="18" rx="6" fill="#FBE3B5"/></g>` : ''}
+      ${m.snack ? `<g transform="rotate(-14 30 152)"><path d="M6 168 C2 146 16 132 30 138 C40 126 62 132 60 152 L58 170 Z" fill="#FBE3B5" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/><path d="M12 162 C10 148 20 140 30 145 C38 136 52 140 52 154" fill="none" stroke="#C98A4B" stroke-width="5" stroke-linecap="round"/></g>` : ''}
       ${m.hearts ? heart(300, 60, 46) + heart(350, 124, 30) : ''}
       ${m.zees ? zee(220, 70, 34) + zee(262, 40, 22) : ''}`;
   },

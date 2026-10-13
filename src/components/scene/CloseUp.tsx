@@ -12,12 +12,16 @@ import { border, colors, offsetShadow } from '@/theme/tokens';
 import { useReduceMotion } from '../backdrop/motion';
 import { Character, cutoutFeet, hasCutout } from '../characters/Character';
 
-export type CloseUpSetting = 'branch' | 'sidewalk' | 'water';
-const CLOSE_UPS: CloseUpSetting[] = ['branch', 'sidewalk', 'water'];
+export type CloseUpSetting = 'branch' | 'sidewalk' | 'water' | 'puddle';
+const SETTINGS: Setting[] = ['branch', 'sidewalk', 'water'];
+/** Who swims. Everyone else "at the water" is at a puddle on the sidewalk, drinking or bathing. */
+const SWIMMERS = ['mallard'];
 
 /** The close-up for this slide, if the pilot covers both the animal and the setting. */
 export function closeUpFor(speciesId: string | undefined, setting: Setting | undefined): CloseUpSetting | undefined {
-  return hasCutout(speciesId) && setting && (CLOSE_UPS as string[]).includes(setting) ? (setting as CloseUpSetting) : undefined;
+  if (!hasCutout(speciesId) || !setting || !SETTINGS.includes(setting)) return undefined;
+  if (setting === 'water') return SWIMMERS.includes(speciesId) ? 'water' : 'puddle';
+  return setting as CloseUpSetting;
 }
 
 const INK = colors.ink;
@@ -52,7 +56,8 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, period,
   const ground = setting === 'branch' ? h * 0.7 : setting === 'water' ? h * 0.72 : h * 0.84;
   const size = setting === 'water' ? h * 0.78 : setting === 'branch' ? h * 0.72 : h * 0.86;
   const top = ground - size * cutoutFeet(speciesId);
-  const left = w * 0.5 - size * 0.45;
+  // At a puddle they stand at its edge, beak over the water (everyone faces left).
+  const left = setting === 'puddle' ? w * 0.42 - size * 0.12 : w * 0.5 - size * 0.45;
   const animal = (
     <View style={{ position: 'absolute', left, top }}>
       <Character speciesId={speciesId} size={size} mood={mood} cutout />
@@ -63,7 +68,7 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, period,
     <View style={{ width: w, height: h, borderRadius: 24, borderWidth: border.width, borderColor: INK, overflow: 'hidden', backgroundColor: SKY[period], boxShadow: offsetShadow(shadow, 5) }}>
       <Svg width={w} height={h} style={{ position: 'absolute' }}>
         {period === 'night' && [0.12, 0.3, 0.55, 0.78, 0.9].map((x, i) => <Circle key={i} cx={w * x} cy={h * (0.1 + (i % 3) * 0.08)} r={1.6} fill={colors.paper} />)}
-        {setting === 'sidewalk' ? <Wall w={w} h={h} period={period} /> : <Distance w={w} h={h} period={period} season={season} water={setting === 'water'} />}
+        {setting === 'sidewalk' || setting === 'puddle' ? <Wall w={w} h={h} period={period} /> : <Distance w={w} h={h} period={period} season={season} water={setting === 'water'} />}
       </Svg>
 
       {setting === 'branch' ? (
@@ -89,22 +94,22 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, period,
         </Animated.View>
       ) : setting === 'water' ? (
         <>
+          {/* Ripples drift across the whole pond, behind and in front of the swimmer. */}
+          <Ripples w={w} h={h} from={h * 0.5} to={ground} drift={drift} />
           {animal}
-          {/* Water in front of the swimmer, with ripples drifting past. */}
           <Svg width={w} height={h} style={{ position: 'absolute' }} pointerEvents="none">
             <Rect x={0} y={ground} width={w} height={h - ground} fill={WATER} />
-            <Path d={`M0 ${ground} H${w}`} stroke={INK} strokeWidth={1.5} />
           </Svg>
-          <Animated.View
-            pointerEvents="none"
-            style={{ position: 'absolute', left: -w * 0.2, top: ground, transform: [{ translateX: drift.interpolate({ inputRange: [0, 1], outputRange: [0, w * 0.2] }) }] }}
-          >
-            <Svg width={w * 1.4} height={h - ground}>
-              {[0.08, 0.3, 0.52, 0.74, 0.96, 1.18].map((x, i) => (
-                <Path key={i} d={`M${w * x} ${(h - ground) * (i % 2 ? 0.55 : 0.3)} q${w * 0.03} -5 ${w * 0.06} 0`} stroke={colors.paper} strokeWidth={2.5} fill="none" strokeLinecap="round" />
-              ))}
-            </Svg>
-          </Animated.View>
+          <Ripples w={w} h={h} from={ground} to={h} drift={drift} />
+        </>
+      ) : setting === 'puddle' ? (
+        <>
+          <Svg width={w} height={h} style={{ position: 'absolute' }}>
+            <Sidewalk w={w} h={h} y={ground} />
+            <Ellipse cx={w * 0.3} cy={ground + h * 0.03} rx={w * 0.2} ry={h * 0.055} fill={WATER} stroke={INK} strokeWidth={1.5} />
+            <Path d={`M${w * 0.2} ${ground + h * 0.02} q${w * 0.04} -4 ${w * 0.08} 0`} stroke={colors.paper} strokeWidth={2.5} fill="none" strokeLinecap="round" />
+          </Svg>
+          {animal}
         </>
       ) : (
         <>
@@ -115,6 +120,23 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, period,
         </>
       )}
     </View>
+  );
+}
+
+/** Ripple marks drifting sideways across a band of water. */
+function Ripples({ w, h, from, to, drift }: { w: number; h: number; from: number; to: number; drift: Animated.Value }) {
+  const band = to - from;
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={{ position: 'absolute', left: -w * 0.2, top: from, transform: [{ translateX: drift.interpolate({ inputRange: [0, 1], outputRange: [0, w * 0.2] }) }] }}
+    >
+      <Svg width={w * 1.4} height={band}>
+        {[0.06, 0.28, 0.5, 0.72, 0.94, 1.16].map((x, i) => (
+          <Path key={i} d={`M${w * x + (i % 2) * w * 0.08} ${band * (i % 2 ? 0.62 : 0.32)} q${w * 0.03} -5 ${w * 0.06} 0`} stroke={colors.paper} strokeWidth={2.5} fill="none" strokeLinecap="round" />
+        ))}
+      </Svg>
+    </Animated.View>
   );
 }
 
