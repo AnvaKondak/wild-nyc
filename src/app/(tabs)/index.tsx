@@ -572,35 +572,10 @@ export default function RightNow() {
                 </View>
               )}
 
-              {/* A shortcut to everyone around (or all your favorites), without tapping through. */}
-              {!isGrid && slide.kind !== 'favorites-empty' && (
-                <Pressable
-                  onPress={() => setIndex(story.length - 1)}
-                  accessibilityRole="button"
-                  accessibilityLabel={faves ? 'See all your favorites' : 'See everyone around today'}
-                  hitSlop={8}
-                  style={({ pressed }) => ({
-                    alignSelf: 'center',
-                    marginTop: 14,
-                    minHeight: 34,
-                    paddingHorizontal: 14,
-                    borderRadius: 17,
-                    borderWidth: border.width,
-                    borderColor: theme.ink,
-                    backgroundColor: theme.card,
-                    boxShadow: offsetShadow(theme.shadow, 2),
-                    justifyContent: 'center',
-                    opacity: pressed ? 0.6 : 1,
-                  })}
-                >
-                  <Text style={{ fontFamily: fonts.bodySemi, fontSize: 13, color: theme.ink }}>{faves ? 'All your favorites ›' : 'See everyone around ›'}</Text>
-                </Pressable>
-              )}
-
               <StoryCard kicker={slide.kicker} title={slide.title} body={slide.body} fact={slide.fact} chip={slide.status} theme={theme} scroll={false} />
               </ScrollView>
 
-              <View style={{ paddingHorizontal: 16, paddingBottom: 20 }}>
+              <View style={{ paddingHorizontal: 16, paddingBottom: 8 }}>
                 {opensPage && (
                   <Button
                     label={ctaLabel}
@@ -609,6 +584,21 @@ export default function RightNow() {
                     style={{ backgroundColor: theme.btnBg }}
                     color={theme.btnInk}
                   />
+                )}
+                {/* A shortcut to everyone around (or all your favorites), without tapping through. */}
+                {!isGrid && slide.kind !== 'favorites-empty' ? (
+                  <Pressable
+                    onPress={() => setIndex(story.length - 1)}
+                    accessibilityRole="button"
+                    accessibilityLabel={faves ? 'See all your favorites' : 'See everyone around today'}
+                    style={{ minHeight: 44, alignItems: 'center', justifyContent: 'center' }}
+                  >
+                    <Text style={{ fontFamily: fonts.bodySemi, fontSize: 15, color: theme.ink, textDecorationLine: 'underline' }}>
+                      {faves ? 'All your favorites' : 'See everyone around'}
+                    </Text>
+                  </Pressable>
+                ) : (
+                  <View style={{ minHeight: 12 }} />
                 )}
               </View>
             </>
