@@ -5,6 +5,7 @@ import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
 import { FavoriteButton } from '@/components/FavoriteButton';
+import { CloseUp, closeUpFor } from '@/components/scene/CloseUp';
 import { PopIn, RisingHearts } from '@/components/story/Cute';
 import { FloatingCast } from '@/components/Floating';
 import { BellIcon, BellOffIcon, ChevronLeftIcon, ChevronRightIcon, HeartIcon, HomeIcon, SoundOffIcon, SoundOnIcon } from '@/components/Icons';
@@ -66,7 +67,7 @@ function tileFor(slide: StorySlide): string {
 
 export default function RightNow() {
   const router = useRouter();
-  const { height } = useWindowDimensions();
+  const { width: screenWidth, height } = useWindowDimensions();
   // Smaller phones get a smaller sticker so the story still fits without scrolling.
   const stickerSize = Math.min(190, Math.round(height * 0.21));
   const now = useNow();
@@ -285,6 +286,11 @@ export default function RightNow() {
   // Favorites are all over the city, so their story skips one neighborhood's weather.
   const weatherLine = weather && !faves ? `${describeWeather(weather)}${previewWeather ? ' (preview)' : ''} · ${header.sub}` : header.sub;
   const isGrid = slide.kind === 'around' || slide.kind === 'favorites';
+  // Pilot: some animals appear right in their setting (on a branch, a sidewalk, the
+  // water) instead of on a round sticker.
+  const closeUp = slide.kind === 'intro' || slide.cast ? undefined : closeUpFor(species?.id, slide.setting);
+  const sceneW = screenWidth - 32;
+  const sceneH = Math.round(stickerSize * 1.15);
   // From the favorites grid: jump back to that favorite's slide.
   const openFavorite = (id: string) => setIndex(Math.max(0, story.findIndex((s) => s.speciesId === id)));
 
@@ -464,6 +470,32 @@ export default function RightNow() {
                   })}
                 </View>
                 </>
+              ) : closeUp && species ? (
+                // The animal in their setting, framed; prev / next sit on the frame's edges.
+                <View style={{ paddingHorizontal: 16, marginTop: 16 }}>
+                  <Pressable onPress={next} accessibilityRole="button" accessibilityLabel={`${species.friendlyName}. Next story`}>
+                    {slide.kind === 'favorite' ? (
+                      <PopIn key={slide.id}>
+                        <CloseUp setting={closeUp} speciesId={species.id} mood={slide.mood} width={sceneW} height={sceneH} period={header.period} season={season} shadow={theme.shadow} />
+                      </PopIn>
+                    ) : (
+                      <CloseUp setting={closeUp} speciesId={species.id} mood={slide.mood ?? slide.photoIndex ?? 0} width={sceneW} height={sceneH} period={header.period} season={season} shadow={theme.shadow} />
+                    )}
+                  </Pressable>
+                  <View style={{ position: 'absolute', left: 8, top: sceneH / 2 - 26 }}>
+                    <RoundNav label={i === 0 && !faves ? 'Home' : 'Previous story'} onPress={back} color={theme.ink} fill={theme.bg}>
+                      <ChevronLeftIcon color={theme.ink} />
+                    </RoundNav>
+                  </View>
+                  <View style={{ position: 'absolute', right: 8, top: sceneH / 2 - 26 }}>
+                    <RoundNav label="Next story" onPress={next} color={theme.ink} fill={theme.bg}>
+                      <ChevronRightIcon color={theme.ink} />
+                    </RoundNav>
+                  </View>
+                  <View style={{ position: 'absolute', right: 26, top: sceneH - 54 }}>
+                    <FavoriteButton speciesId={species.id} size="round" ink={theme.ink} background={theme.bg} />
+                  </View>
+                </View>
               ) : (
                 /* Prev / next sit beside the photo, in the middle of the screen. */
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, marginTop: 20 }}>
