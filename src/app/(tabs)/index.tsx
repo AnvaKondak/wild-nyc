@@ -320,6 +320,7 @@ export default function RightNow() {
             placeId={faves ? slide.placeId : hood.placeId}
             placeKind={faves ? (slide.scene ?? 'park') : hood.kind}
             variant={hashString(`${slide.id}:${today}`)}
+            action={slide.action}
           />
         </View>
       ) : area.width > 0 && !closeUp ? (

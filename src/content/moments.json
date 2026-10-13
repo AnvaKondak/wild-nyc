@@ -15009,5 +15009,57 @@
     "body": "Round and round in the dark, a fresh trap for the night."
    }
   ]
+ },
+ {
+  "id": "sparrow-dust-bath",
+  "speciesId": "house-sparrow",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "sidewalk",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A sparrow is taking a dust bath",
+    "body": "Wiggling down into a dry patch of dirt, fluffing, flicking dust over their back. It scrubs out oil and tiny pests. Dust is their soap."
+   },
+   {
+    "title": "Sparrows are dust bathing in a tree pit along {street}",
+    "body": "A little row of them, each in their own dusty hollow, wings flapping, dirt flying. Very serious spa day."
+   },
+   {
+    "title": "A sparrow is having a dust-bath spa morning",
+    "body": "Belly down, feathers puffed, shimmying in the dirt. Afterward they'll shake it all out in one big fluffy poof."
+   }
+  ]
+ },
+ {
+  "id": "songsparrow-dust-bath",
+  "speciesId": "song-sparrow",
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "sidewalk",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A song sparrow is taking a dust bath",
+    "body": "Down in a sunny patch of dry dirt, flicking dust through their streaky feathers to keep them clean."
+   },
+   {
+    "title": "A song sparrow is dust bathing near {green}",
+    "body": "Wiggle, flap, puff of dust, repeat. Then a long, satisfied shake."
+   }
+  ]
  }
 ]

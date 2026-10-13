@@ -30,7 +30,7 @@ const CLOSEUPS = species.flatMap((s) => {
 
 export default function ArtPreview() {
   const raccoon = getSpecies('raccoon')!;
-  const { only, from, accents, period: p, place, scene: forced } = useLocalSearchParams<{ only?: string; from?: string; accents?: string; period?: Period; place?: string; scene?: CloseUpSetting }>();
+  const { only, from, accents, period: p, place, scene: forced, action } = useLocalSearchParams<{ only?: string; from?: string; accents?: string; period?: Period; place?: string; scene?: CloseUpSetting; action?: 'fly' | 'sleep' | 'dust' | 'drink' }>();
   const { width } = useWindowDimensions();
   if (only === 'closeups') {
     // Dev only: ?only=closeups&from=12&period=dusk pages through every close-up, 12 at a time.
@@ -45,7 +45,7 @@ export default function ArtPreview() {
             {/* The real full-screen scene, shrunk to fit: same band as on a story slide. */}
             <View style={{ width: cw, height: ch, overflow: 'hidden', borderRadius: 8 }}>
               <View style={{ width, height: width * 1.65, transformOrigin: 'top left', transform: [{ scale: cw / width }] }}>
-                <CloseUp setting={forced ?? scene} speciesId={s.id} mood="hello" width={width} height={width * 1.65} band={{ top: 228, height: 195 }} period={period} season="fall" sky={periodThemes[period].bg} weather="clear" placeId={place} placeKind={places.find((x) => x.id === place)?.kind} variant={start + i} />
+                <CloseUp setting={forced ?? scene} speciesId={s.id} mood="hello" width={width} height={width * 1.65} band={{ top: 228, height: 195 }} period={period} season="fall" sky={periodThemes[period].bg} weather="clear" placeId={place} placeKind={places.find((x) => x.id === place)?.kind} variant={start + i} action={action} />
               </View>
             </View>
             <Text numberOfLines={1} style={{ fontFamily: fonts.bodySemi, fontSize: 9, color: colors.ink }}>

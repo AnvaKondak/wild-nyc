@@ -4,9 +4,10 @@
 // branch). Only lowercase words count, so place names filled into the text ("near Shore
 // Road Park", "along Bedford Avenue") never move anyone.
 
-import type { Setting, StorySlide } from '@/content/types';
+import type { Action, Setting, StorySlide } from '@/content/types';
 
 const RULES: [RegExp, Setting][] = [
+  [/\bdust[- ]?bath/, 'sidewalk'],
   [/\bfire escapes?\b/, 'fire-escape'],
   [/\b(webs?|spinning|silk)\b/, 'web'],
   [/\b(hollows?|dens?|burrows?|holes? in|tree holes?|attics?)\b/, 'den'],
@@ -36,6 +37,19 @@ export function settingFromWords(text: string): Setting | undefined {
   return undefined;
 }
 
+const ACTIONS: [RegExp, Action][] = [
+  [/\bdust[- ]?bath/, 'dust'],
+  [/\b(asleep|sleeps?|sleeping|napping|naps?|dozing|dozes|snoozing|roosting|tucked in|curled up)\b/, 'sleep'],
+  [/\b(sips?|sipping|drinks?|drinking|slurp\w*)\b/, 'drink'],
+  [/\b(flying|flies|soaring|soars|circling|wheeling|gliding|glides|on the wing|in flight|overhead|fly over|migrating)\b/, 'fly'],
+];
+
+/** What the words say they're doing, if it's something drawn differently. */
+export function actionFromWords(text: string): Action | undefined {
+  for (const [re, action] of ACTIONS) if (re.test(text)) return action;
+  return undefined;
+}
+
 /**
  * The scene for each slide: what the title says, else what the body says, else the
  * slide's own setting. So a slide that only inherited its setting (the season, family
@@ -44,6 +58,7 @@ export function settingFromWords(text: string): Setting | undefined {
 export function withSettings(slides: StorySlide[]): StorySlide[] {
   return slides.map((slide) => {
     const said = settingFromWords(slide.title) ?? settingFromWords(slide.body);
-    return said && said !== slide.setting ? { ...slide, setting: said } : slide;
+    const action = actionFromWords(slide.title) ?? actionFromWords(slide.body);
+    return { ...slide, ...(said ? { setting: said } : {}), ...(action ? { action } : {}) };
   });
 }

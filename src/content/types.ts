@@ -84,6 +84,8 @@ export type Family = {
   seasons: Record<Season, { title: string; body: string }>;
 };
 
+export type Action = 'fly' | 'sleep' | 'dust' | 'drink';
+
 export type Mood = 'hello' | 'snack' | 'happy' | 'sleepy';
 
 export type StorySlide = {
@@ -121,6 +123,8 @@ export type StorySlide = {
   photoIndex?: number;
   /** Which drawing of the animal fits what the slide says: sleeping, eating, delighted or just saying hello. */
   mood?: Mood;
+  /** What they're doing, when the words say: flying, sleeping, dust bathing or drinking. Drawn to match. */
+  action?: Action;
   /** Two or more neighbors in one moment (an encounter): shown together in the sticker. */
   cast?: string[];
   /** A neighbor who appears in the scene behind this slide (flying past, perched nearby). */

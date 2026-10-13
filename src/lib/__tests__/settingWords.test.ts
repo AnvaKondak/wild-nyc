@@ -1,6 +1,6 @@
 import { getSpecies } from '@/content';
 import type { StorySlide } from '@/content/types';
-import { settingFromWords, withSettings } from '../settingWords';
+import { actionFromWords, settingFromWords, withSettings } from '../settingWords';
 
 const slide = (title: string, body: string, setting?: StorySlide['setting']): StorySlide => ({ id: 'x', season: 'winter', period: 'midday', kicker: '', title, body, kind: 'scene', setting });
 
@@ -31,5 +31,19 @@ describe('withSettings', () => {
   it('keeps the slide\'s own setting when the words name no place', () => {
     const [s] = withSettings([slide('Hello there', 'Just saying hi.', 'branch')]);
     expect(s.setting).toBe('branch');
+  });
+});
+
+describe('actionFromWords', () => {
+  it('reads what they are doing', () => {
+    expect(actionFromWords('A sparrow is taking a dust bath in the planter')).toBe('dust');
+    expect(actionFromWords('Curled up in a hollow, fast asleep')).toBe('sleep');
+    expect(actionFromWords('A pigeon is sipping from a puddle')).toBe('drink');
+    expect(actionFromWords('Gulls are wheeling over the harbor')).toBe('fly');
+    expect(actionFromWords('Hello there')).toBeUndefined();
+  });
+
+  it('puts a dust bath on the ground', () => {
+    expect(settingFromWords('A sparrow is taking a dust bath')).toBe('sidewalk');
   });
 });

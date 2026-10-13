@@ -18,7 +18,9 @@
 import { useEffect, useRef, type ReactElement } from 'react';
 import { Animated, Easing, View } from 'react-native';
 import Svg, { Circle, Ellipse, G, Path, Rect } from 'react-native-svg';
-import type { Mood, Period, PlaceKind, Season, Setting } from '@/content/types';
+import type { Action, Mood, Period, PlaceKind, Season, Setting } from '@/content/types';
+import { getSpecies } from '@/content';
+import { inks, type Ink } from '../art/inks';
 import type { Sky } from '@/lib/weather';
 import { colors } from '@/theme/tokens';
 import { useReduceMotion } from '../backdrop/motion';
@@ -27,7 +29,7 @@ import { lookFor, type Building, type Landmark } from './looks';
 
 export type CloseUpSetting =
   | 'building' | 'puddle' | 'branch' | 'trunk' | 'hedge' | 'lawn' | 'flowers' | 'burrow'
-  | 'wire' | 'sky' | 'water' | 'wade' | 'shore' | 'pier' | 'reeds' | 'web' | 'fireescape' | 'highledge';
+  | 'wire' | 'sky' | 'water' | 'wade' | 'shore' | 'pier' | 'reeds' | 'web' | 'fireescape' | 'highledge' | 'hollow';
 
 // Who walks to the water rather than swims: at a puddle in the city.
 const CITY_WALKERS = ['rock-pigeon', 'house-sparrow', 'european-starling', 'raccoon', 'eastern-gray-squirrel', 'american-robin', 'northern-cardinal'];
@@ -54,7 +56,7 @@ export function closeUpFor(speciesId: string | undefined, setting: Setting | und
     case 'trunk':
       return 'branch';
     case 'den':
-      return BURROWERS.includes(speciesId) ? 'burrow' : 'branch';
+      return BURROWERS.includes(speciesId) ? 'burrow' : 'hollow';
     case 'hedge':
       return 'hedge';
     case 'lawn':
@@ -122,12 +124,14 @@ type Props = {
   placeKind?: PlaceKind;
   /** Which version of the scene, so the same animal doesn't always get the same view. */
   variant?: number;
+  /** What they're doing: flying, sleeping, dust bathing or drinking. */
+  action?: Action;
 };
 
 /** Where the animal's feet go (from the band's top, as a fraction of its height) and how big they are, per scene. */
 const PLACE: Record<CloseUpSetting, { ground: number; size: number; x: number }> = {
   building: { ground: 0.94, size: 1.0, x: 0.5 },
-  puddle: { ground: 0.94, size: 1.0, x: 0.58 },
+  puddle: { ground: 0.94, size: 1.0, x: 0.52 },
   branch: { ground: 0.8, size: 0.86, x: 0.5 },
   trunk: { ground: 0.95, size: 1.0, x: 0.42 },
   hedge: { ground: 0.94, size: 0.9, x: 0.5 },
@@ -144,10 +148,11 @@ const PLACE: Record<CloseUpSetting, { ground: number; size: number; x: number }>
   web: { ground: 0.86, size: 0.95, x: 0.5 },
   fireescape: { ground: 0.84, size: 0.84, x: 0.5 },
   highledge: { ground: 0.86, size: 0.9, x: 0.46 },
+  hollow: { ground: 0.86, size: 0.86, x: 0.5 },
 };
-const OPEN_SKY: CloseUpSetting[] = ['highledge', 'branch', 'trunk', 'hedge', 'lawn', 'flowers', 'burrow', 'wire', 'sky', 'water', 'wade', 'shore', 'pier', 'reeds', 'web'];
+const OPEN_SKY: CloseUpSetting[] = ['highledge', 'hollow', 'branch', 'trunk', 'hedge', 'lawn', 'flowers', 'burrow', 'wire', 'sky', 'water', 'wade', 'shore', 'pier', 'reeds', 'web'];
 
-export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, period, season, sky, weather, placeId, placeKind = 'block', variant = 0 }: Props) {
+export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, period, season, sky, weather, placeId, placeKind = 'block', variant = 0, action }: Props) {
   const look = lookFor(placeId, placeKind);
   const bt = band.top;
   const bh = band.height;
@@ -158,7 +163,9 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
   const left = w * place.x - size * 0.45;
   const animal = (
     <View style={{ position: 'absolute', left, top }}>
-      <Character speciesId={speciesId} size={size} mood={mood} cutout />
+      <Acting action={action} speciesId={speciesId} size={size} setting={setting}>
+        <Character speciesId={speciesId} size={size} mood={mood} cutout />
+      </Acting>
     </View>
   );
   const horizon = bt + bh * 0.5; // the far shore, by the water
@@ -182,6 +189,7 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
             <Sidewalk w={w} h={h} top={pavement} period={period} />
           </>
         )}
+        {setting === 'hollow' && <Hollow w={w} h={h} ground={ground} bh={bh} period={period} season={season} />}
         {setting === 'highledge' && <HighLedge w={w} h={h} y={ground} bh={bh} bt={bt} period={period} look={look.building} variant={variant % 3} />}
         {setting === 'fireescape' && <FireEscape w={w} h={h} y={ground} bh={bh} period={period} look={look.building} />}
         {setting === 'puddle' && (
@@ -245,13 +253,145 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
           <Reeds w={w} ground={ground + bh * 0.2} bh={bh} />
         </Svg>
       )}
+      {setting === 'hollow' && (
+        <Svg width={w} height={h} style={{ position: 'absolute' }} pointerEvents="none">
+          {/* The lower lip of the hollow, in front, so they're snug inside. */}
+          <Path d={`M${w * 0.24} ${ground - 4} Q${w * 0.5} ${ground + bh * 0.14} ${w * 0.76} ${ground - 4} L${w * 0.78} ${ground + 18} Q${w * 0.5} ${ground + bh * 0.24} ${w * 0.22} ${ground + 18} Z`} fill={BARK} stroke={INK} strokeWidth={1.5} />
+        </Svg>
+      )}
       {setting === 'branch' && leaves.length > 0 && FRONT_LEAVES.map((l, i) => <Leaf key={i} {...l} w={w} y={ground} bh={bh} color={leaves[(i + 1) % leaves.length]} />)}
       <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} />
     </View>
   );
 }
 
+// ---------------------------------------------------------------- actions
+
+/** A smooth 0 → 1 → 0 loop (seamless: it starts and ends at the same place). */
+function useSine(duration: number, still: boolean) {
+  const t = useLinear(duration, still);
+  return t;
+}
+const wave = (t: Animated.Value, a: number | string, b: number | string) =>
+  t.interpolate({ inputRange: [0, 0.25, 0.5, 0.75, 1], outputRange: [a, b, a, b, a] as never });
+
+/**
+ * Wraps the animal in what they're doing. Flying: wings flap (birds who are drawn
+ * perched get a pair of soft wings) and they float gently. Sleeping: fluffed up into a
+ * round little ball. Dust bathing: a happy wiggle in a puff of dust. Drinking: beak
+ * dipped down to the water.
+ */
+function Acting({ action, speciesId, size, setting, children }: { action?: Action; speciesId: string; size: number; setting: CloseUpSetting; children: React.ReactNode }) {
+  const still = useReduceMotion();
+  const t = useSine(action === 'fly' ? 1400 : action === 'dust' ? 900 : 3000, still || !action);
+  const pose = cutoutPose(speciesId);
+  if (action === 'fly' && (setting === 'sky' || setting === 'wire')) {
+    const species = getSpecies(speciesId);
+    const wing = inks[(species?.art.second ?? species?.art.main ?? 'gray') as Ink] ?? '#9C9AB0';
+    const drawnFlying = pose === 'fly' || pose === 'swim' || species?.group !== 'birds';
+    return (
+      <Animated.View style={{ transform: [{ translateY: wave(t, 0, -size * 0.05) }] }}>
+        {!drawnFlying && (
+          <>
+            {/* Two soft wings, flapping from the shoulders. */}
+            {[0, 1].map((k) => (
+              <Animated.View
+                key={k}
+                style={{
+                  position: 'absolute',
+                  left: size * (k ? 0.46 : 0.36),
+                  top: size * 0.26,
+                  width: size * 0.62,
+                  height: size * 0.36,
+                  transformOrigin: 'left bottom',
+                  transform: [{ rotate: wave(t, k ? '-28deg' : '-18deg', k ? '14deg' : '22deg') as never }],
+                }}
+              >
+                <Svg width={size * 0.62} height={size * 0.36} viewBox="0 0 100 56">
+                  <Path d="M4 52 C10 10 60 0 96 8 C80 22 70 40 4 52 Z" fill={wing} stroke={INK} strokeWidth={5} strokeLinejoin="round" opacity={k ? 1 : 0.85} />
+                  <Path d="M30 40 C46 28 64 20 84 14 M22 46 C40 38 56 32 74 28" stroke={INK} strokeWidth={3} fill="none" opacity={0.5} />
+                </Svg>
+              </Animated.View>
+            ))}
+          </>
+        )}
+        {drawnFlying ? (
+          children
+        ) : (
+          // Legs tucked up in flight: show them down to just above their feet.
+          <View style={{ width: size, height: size * (cutoutFeet(speciesId) - 0.07), overflow: 'hidden' }}>{children}</View>
+        )}
+      </Animated.View>
+    );
+  }
+  if (action === 'sleep') {
+    // Fluffed up into a round little ball, breathing slowly.
+    return (
+      <Animated.View style={{ transformOrigin: 'center bottom', transform: [{ scaleX: wave(t, 1.08, 1.11) }, { scaleY: wave(t, 0.88, 0.86) }] }}>{children}</Animated.View>
+    );
+  }
+  if (action === 'dust') {
+    // A happy wiggle, low to the ground, in a puff of dust.
+    return (
+      <View>
+        <Svg width={size} height={size} style={{ position: 'absolute' }}>
+          <Ellipse cx={size * 0.5} cy={size * cutoutFeet(speciesId)} rx={size * 0.46} ry={size * 0.07} fill="#C9A87A" stroke={INK} strokeWidth={1.5} />
+        </Svg>
+        <Animated.View style={{ transformOrigin: 'center bottom', transform: [{ scaleY: 0.9 }, { rotate: wave(t, '-7deg', '7deg') as never }] }}>{children}</Animated.View>
+        {[0, 1, 2, 3, 4].map((k) => (
+          <DustPuff key={k} k={k} size={size} still={still} />
+        ))}
+      </View>
+    );
+  }
+  if (action === 'drink') {
+    // Beak dipped down to the water, then a little lift, then down again.
+    return <Animated.View style={{ transformOrigin: 'center bottom', transform: [{ rotate: wave(t, '-30deg', '-20deg') as never }] }}>{children}</Animated.View>;
+  }
+  return <>{children}</>;
+}
+
+/** One soft puff of dust rising from the ground and fading. */
+function DustPuff({ k, size, still }: { k: number; size: number; still: boolean }) {
+  const t = useLinear(1600 + k * 230, still);
+  const x = size * (0.18 + k * 0.16);
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={{
+        position: 'absolute',
+        left: x - size * 0.05,
+        top: size * 0.74,
+        opacity: t.interpolate({ inputRange: [0, 0.2, 1], outputRange: [0, 0.85, 0] }),
+        transform: [{ translateY: t.interpolate({ inputRange: [0, 1], outputRange: [0, -size * 0.18] }) }, { scale: t.interpolate({ inputRange: [0, 1], outputRange: [0.5, 1.4] }) }],
+      }}
+    >
+      <Svg width={size * 0.24} height={size * 0.18} viewBox="0 0 40 30">
+        <Path d="M6 24 C0 24 0 14 8 14 C8 6 20 4 22 12 C28 6 38 10 34 18 C40 20 38 28 32 27 Z" fill="#E8D7B4" stroke={INK} strokeWidth={2} strokeLinejoin="round" />
+      </Svg>
+    </Animated.View>
+  );
+}
+
 // ---------------------------------------------------------------- more places
+
+/** A big tree trunk with a cozy hollow, for napping in. */
+function Hollow({ w, h, ground, bh, period, season }: { w: number; h: number; ground: number; bh: number; period: Period; season: Season }) {
+  const top = ground - bh * 0.9;
+  return (
+    <G>
+      <Treeline w={w} h={h} base={ground + bh * 0.9} period={period} season={season} />
+      <Rect x={w * 0.14} y={0} width={w * 0.72} height={h} fill={BARK} />
+      <Path d={`M${w * 0.14} 0 V${h} M${w * 0.86} 0 V${h}`} stroke={INK} strokeWidth={2} />
+      {[0.2, 0.32, 0.72, 0.8].map((x, i) => (
+        <Path key={i} d={`M${w * x} ${i % 2 ? 20 : 60} C${w * x - 6} ${ground * 0.4} ${w * x + 6} ${ground * 0.7} ${w * x} ${h}`} stroke="#6E4E38" strokeWidth={4} fill="none" strokeLinecap="round" />
+      ))}
+      {/* The hollow: a dark, cozy opening with a lighter rim. */}
+      <Ellipse cx={w * 0.5} cy={(top + ground) / 2} rx={w * 0.31} ry={(ground - top) / 2 + 10} fill="#B07E58" stroke={INK} strokeWidth={1.5} />
+      <Ellipse cx={w * 0.5} cy={(top + ground) / 2 + 4} rx={w * 0.27} ry={(ground - top) / 2} fill="#3B2A20" />
+    </G>
+  );
+}
 
 /** High up on a building: a carved stone ledge across the screen, the wall rising at the right, and the city's rooftops far below. */
 function HighLedge({ w, h, y, bh, bt, period, look, variant }: { w: number; h: number; y: number; bh: number; bt: number; period: Period; look: Building; variant: number }) {
