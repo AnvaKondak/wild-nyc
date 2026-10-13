@@ -90,7 +90,8 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
           <>
             {/* Up close, the brownstone fills the whole screen; the cornice marks the floor line. */}
             <Wall w={w} top={0} bottom={pavement} band={band} period={period} />
-            <Cornice w={w} y={bt} period={period} />
+            {/* The cornice crowns the building at the very top of the screen. */}
+            <Cornice w={w} y={4} period={period} brackets={false} />
             <WallBranch y={bt} bh={bh} w={w} />
             <Sidewalk w={w} h={h} top={pavement} period={period} />
           </>
@@ -368,19 +369,20 @@ function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom
   const rows = Math.ceil((bottom - top) / row);
   const lit = period === 'dusk' || period === 'night';
   const H = bottom - top;
-  // The ground floor: from the cornice (the top of the band) down to the sidewalk.
+  // The ground floor: from just under the header down to the sidewalk.
   const floor = band.top;
   const FH = bottom - floor;
   // The window, on the left.
-  const winW = w * 0.13;
-  const winX = w * 0.19;
-  const winTop = band.top + band.height * 0.16;
-  const winH = band.height * 0.4;
+  // The window and the door are the same height, so the front feels balanced.
+  const winW = w * 0.16;
+  const winX = w * 0.17;
+  const winTop = floor + FH * 0.06;
+  const winH = FH * 0.52;
   // The front door and stoop, on the right.
-  const dX = w * 0.7;
-  const dW = w * 0.13;
-  const dTop = floor + FH * 0.2;
-  const landing = floor + FH * 0.56;
+  const dX = w * 0.66;
+  const dW = w * 0.19;
+  const dTop = floor + FH * 0.06;
+  const landing = floor + FH * 0.58;
   const steps = 4;
   const stepH = (bottom - landing) / steps;
   return (
@@ -446,10 +448,10 @@ function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom
 }
 
 /** A stone cornice along the top of the wall: a cap, a band and a soft shadow under it, with a few chunky brackets. */
-function Cornice({ w, y, period }: { w: number; y: number; period: Period }) {
+function Cornice({ w, y, period, brackets: withBrackets = true }: { w: number; y: number; period: Period; /** Off at the very top, where the status bar sits. */ brackets?: boolean }) {
   const stone = period === 'night' ? '#6E6A80' : period === 'dusk' ? '#B3ABA0' : '#E3DACB';
   const shade = period === 'night' ? '#55546A' : period === 'dusk' ? '#9A9086' : '#C2B6A3';
-  const brackets = Math.max(4, Math.round(w / 70));
+  const brackets = withBrackets ? Math.max(4, Math.round(w / 70)) : 0;
   return (
     <G>
       <Rect x={-4} y={y - 14} width={w + 8} height={6} rx={2} fill={stone} stroke={INK} strokeWidth={1.5} />
