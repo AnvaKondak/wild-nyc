@@ -94,7 +94,6 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
             <Circle cx={24} cy={bt - 12} r={16} fill={colors.yellow} stroke={INK} strokeWidth={1.5} />
           </G>
         )}
-        {(setting === 'sidewalk' || setting === 'puddle') && <Rooftops w={w} y={bt} period={period} />}
         {setting === 'sidewalk' || setting === 'puddle' ? (
           <>
             {/* The wall starts just below the header, so the time and weather stay on sky. */}
@@ -396,35 +395,19 @@ function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom
   );
 }
 
-/** Soft rooftops peeking over the wall: a water tower and a few chimneys, kept low and muted so the header reads over them. */
-function Rooftops({ w, y, period }: { w: number; y: number; period: Period }) {
-  const roof = period === 'night' ? '#3B3A50' : period === 'dusk' ? '#4A6FE0' : period === 'dawn' ? '#F2C4D4' : '#F2DFA0';
-  const line = period === 'night' || period === 'dusk' ? '#1A1A2E' : '#C9B98A';
-  const base = y - 10;
-  return (
-    <G>
-      {/* Only on the right, under the buttons: the time and "Listening to…" lines run across the left. */}
-      <Rect x={w * 0.68} y={base - 10} width={w * 0.34} height={10} fill={roof} />
-      {/* A water tower on stilts. */}
-      <Path d={`M${w * 0.74} ${base} L${w * 0.75} ${base - 10} M${w * 0.8} ${base} L${w * 0.79} ${base - 10}`} stroke={line} strokeWidth={2} />
-      <Rect x={w * 0.735} y={base - 26} width={w * 0.07} height={16} rx={2} fill={roof} stroke={line} strokeWidth={1} />
-      <Path d={`M${w * 0.73} ${base - 26} L${w * 0.77} ${base - 34} L${w * 0.81} ${base - 26} Z`} fill={roof} stroke={line} strokeWidth={1} />
-      <Rect x={w * 0.88} y={base - 18} width={8} height={10} fill={roof} stroke={line} strokeWidth={1} />
-    </G>
-  );
-}
-
-/** A stone cornice along the top of the wall, with little blocks under the ledge. */
+/** A stone cornice along the top of the wall: a cap, a band and a soft shadow under it, with a few chunky brackets. */
 function Cornice({ w, y, period }: { w: number; y: number; period: Period }) {
-  const stone = period === 'night' ? '#6E6A80' : period === 'dusk' ? '#B3ABA0' : '#D9D1C4';
-  const shade = period === 'night' ? '#55546A' : '#B9AE9E';
+  const stone = period === 'night' ? '#6E6A80' : period === 'dusk' ? '#B3ABA0' : '#E3DACB';
+  const shade = period === 'night' ? '#55546A' : period === 'dusk' ? '#9A9086' : '#C2B6A3';
+  const brackets = Math.max(4, Math.round(w / 70));
   return (
     <G>
-      <Rect x={-2} y={y - 12} width={w + 4} height={12} fill={stone} stroke={INK} strokeWidth={1.5} />
-      <Rect x={-2} y={y} width={w + 4} height={6} fill={shade} stroke={INK} strokeWidth={1.2} />
-      {Array.from({ length: Math.ceil(w / 22) }, (_, i) => (
-        <Rect key={i} x={i * 22 + 6} y={y + 6} width={10} height={7} fill={shade} stroke={INK} strokeWidth={1} />
-      ))}
+      <Rect x={-4} y={y - 14} width={w + 8} height={6} rx={2} fill={stone} stroke={INK} strokeWidth={1.5} />
+      <Rect x={-4} y={y - 8} width={w + 8} height={10} fill={shade} stroke={INK} strokeWidth={1.5} />
+      {Array.from({ length: brackets }, (_, i) => {
+        const bx = ((i + 0.5) * w) / brackets;
+        return <Path key={i} d={`M${bx - 7} ${y + 2} H${bx + 7} V${y + 8} Q${bx} ${y + 16} ${bx - 7} ${y + 8} Z`} fill={shade} stroke={INK} strokeWidth={1.2} strokeLinejoin="round" />;
+      })}
     </G>
   );
 }
