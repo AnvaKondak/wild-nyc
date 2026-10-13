@@ -319,6 +319,7 @@ export default function RightNow() {
             weather={faves ? undefined : weather?.sky}
             placeId={faves ? slide.placeId : hood.placeId}
             placeKind={faves ? (slide.scene ?? 'park') : hood.kind}
+            variant={hashString(`${slide.id}:${today}`)}
           />
         </View>
       ) : area.width > 0 && !closeUp ? (

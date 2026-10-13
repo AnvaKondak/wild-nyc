@@ -12,6 +12,7 @@ describe('settingFromWords', () => {
     expect(settingFromWords('Gathering in small groups to pick seeds off the ground in parks and yards.')).toBe('lawn');
     expect(settingFromWords('Paddling along the edge of the pond')).toBe('water');
     expect(settingFromWords('Calling from deep in the hedge')).toBe('hedge');
+    expect(settingFromWords('Peregrine nests on bridges and tall buildings are protected. Enjoy them from the street.')).toBe('ledge');
   });
 
   it('ignores place names filled into the text', () => {

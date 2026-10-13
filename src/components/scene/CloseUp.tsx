@@ -27,7 +27,7 @@ import { lookFor, type Building, type Landmark } from './looks';
 
 export type CloseUpSetting =
   | 'building' | 'puddle' | 'branch' | 'trunk' | 'hedge' | 'lawn' | 'flowers' | 'burrow'
-  | 'wire' | 'sky' | 'water' | 'wade' | 'shore' | 'pier' | 'reeds' | 'web' | 'fireescape';
+  | 'wire' | 'sky' | 'water' | 'wade' | 'shore' | 'pier' | 'reeds' | 'web' | 'fireescape' | 'highledge';
 
 // Who walks to the water rather than swims: at a puddle in the city.
 const CITY_WALKERS = ['rock-pigeon', 'house-sparrow', 'european-starling', 'raccoon', 'eastern-gray-squirrel', 'american-robin', 'northern-cardinal'];
@@ -60,9 +60,11 @@ export function closeUpFor(speciesId: string | undefined, setting: Setting | und
     case 'lawn':
     case 'flowers':
       return 'lawn';
-    case 'sidewalk':
     case 'ledge':
     case 'rooftop':
+      // Up high: a stone ledge with the city's rooftops far below.
+      return 'highledge';
+    case 'sidewalk':
     case 'fence':
     case 'trashcan':
     case 'streetlight':
@@ -118,6 +120,8 @@ type Props = {
   /** Whose neighborhood this is: sets the building, the water and the landmark. */
   placeId?: string;
   placeKind?: PlaceKind;
+  /** Which version of the scene, so the same animal doesn't always get the same view. */
+  variant?: number;
 };
 
 /** Where the animal's feet go (from the band's top, as a fraction of its height) and how big they are, per scene. */
@@ -139,10 +143,11 @@ const PLACE: Record<CloseUpSetting, { ground: number; size: number; x: number }>
   reeds: { ground: 0.82, size: 0.8, x: 0.5 },
   web: { ground: 0.86, size: 0.95, x: 0.5 },
   fireescape: { ground: 0.84, size: 0.84, x: 0.5 },
+  highledge: { ground: 0.86, size: 0.9, x: 0.46 },
 };
-const OPEN_SKY: CloseUpSetting[] = ['branch', 'trunk', 'hedge', 'lawn', 'flowers', 'burrow', 'wire', 'sky', 'water', 'wade', 'shore', 'pier', 'reeds', 'web'];
+const OPEN_SKY: CloseUpSetting[] = ['highledge', 'branch', 'trunk', 'hedge', 'lawn', 'flowers', 'burrow', 'wire', 'sky', 'water', 'wade', 'shore', 'pier', 'reeds', 'web'];
 
-export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, period, season, sky, weather, placeId, placeKind = 'block' }: Props) {
+export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, period, season, sky, weather, placeId, placeKind = 'block', variant = 0 }: Props) {
   const look = lookFor(placeId, placeKind);
   const bt = band.top;
   const bh = band.height;
@@ -177,6 +182,7 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
             <Sidewalk w={w} h={h} top={pavement} period={period} />
           </>
         )}
+        {setting === 'highledge' && <HighLedge w={w} h={h} y={ground} bh={bh} bt={bt} period={period} look={look.building} variant={variant % 3} />}
         {setting === 'fireescape' && <FireEscape w={w} h={h} y={ground} bh={bh} period={period} look={look.building} />}
         {setting === 'puddle' && (
           <>
@@ -246,6 +252,86 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
 }
 
 // ---------------------------------------------------------------- more places
+
+/** High up on a building: a carved stone ledge across the screen, the wall rising at the right, and the city's rooftops far below. */
+function HighLedge({ w, h, y, bh, bt, period, look, variant }: { w: number; h: number; y: number; bh: number; bt: number; period: Period; look: Building; variant: number }) {
+  if (variant === 1) return <BridgeGirder w={w} h={h} y={y} bh={bh} period={period} />;
+  if (variant === 2) return <WaterTowerRoof w={w} h={h} y={y} bh={bh} period={period} />;
+  const [stone, line] = look === 'ivy' ? IVY_BRICK[period] : BRICK[period];
+  const trim = period === 'night' ? '#6E6A80' : period === 'dusk' ? '#B3ABA0' : '#E3DACB';
+  const shade = period === 'night' ? '#55546A' : period === 'dusk' ? '#9A9086' : '#C2B6A3';
+  const wallX = w * 0.8;
+  return (
+    <G>
+      {/* The city's rooftops far below. */}
+      <Skyline w={w} h={h} base={y + bh * 1.05} bh={bh} period={period} />
+      {/* The wall rising at the right, with a window. */}
+      <Rect x={wallX} y={0} width={w - wallX} height={y + 10} fill={stone} />
+      {Array.from({ length: Math.ceil(y / 30) }, (_, r) => <Path key={r} d={`M${wallX} ${30 * (r + 1)} H${w}`} stroke={line} strokeWidth={1.2} />)}
+      <Path d={`M${wallX} 0 V${y}`} stroke={INK} strokeWidth={1.5} />
+      <Rect x={wallX + 14} y={bt + bh * 0.1} width={w - wallX - 20} height={bh * 0.5} fill="#BFD0F5" stroke={INK} strokeWidth={1.5} />
+      {/* The ledge: a thick stone slab with a carved edge and brackets below. */}
+      <Rect x={-4} y={y} width={w + 8} height={16} fill={trim} stroke={INK} strokeWidth={1.5} />
+      <Rect x={-4} y={y + 16} width={w + 8} height={10} fill={shade} stroke={INK} strokeWidth={1.5} />
+      {Array.from({ length: 6 }, (_, i) => {
+        const bx = ((i + 0.5) * w) / 6;
+        return <Path key={i} d={`M${bx - 8} ${y + 26} H${bx + 8} V${y + 34} Q${bx} ${y + 46} ${bx - 8} ${y + 34} Z`} fill={shade} stroke={INK} strokeWidth={1.2} strokeLinejoin="round" />;
+      })}
+    </G>
+  );
+}
+
+/** Up on a bridge: a blue steel girder with rivets, cables rising, the river and the city far below. */
+function BridgeGirder({ w, h, y, bh, period }: { w: number; h: number; y: number; bh: number; period: Period }) {
+  const steel = dim(period, '#7F97C9', '#5E74B0', '#34405E');
+  const dark = dim(period, '#5E74A8', '#46588E', '#262E48');
+  const river = y + bh * 0.95;
+  return (
+    <G>
+      <FarCity w={w} base={river} period={period} />
+      <Rect x={0} y={river} width={w} height={h - river} fill={WATER[period]} />
+      <Path d={`M0 ${river} H${w}`} stroke={INK} strokeWidth={1} opacity={0.4} />
+      {/* A tower and its cables sweeping up and away. */}
+      <Rect x={w * 0.84} y={0} width={22} height={y} fill={steel} stroke={INK} strokeWidth={1.5} />
+      {[0.2, 0.4, 0.6].map((f, i) => <Path key={i} d={`M${w * 0.84} ${y * f} Q${w * 0.4} ${y * (f + 0.35)} ${-10} ${y * (f + 0.5)}`} stroke={dark} strokeWidth={3} fill="none" />)}
+      {Array.from({ length: 8 }, (_, i) => <Path key={i} d={`M${w * 0.1 * i} ${y * 0.55 + i * 6} V${y}`} stroke={dark} strokeWidth={1.5} />)}
+      {/* The girder: a beam with rivets and an X truss below. */}
+      <Rect x={-4} y={y} width={w + 8} height={18} fill={steel} stroke={INK} strokeWidth={1.5} />
+      {Array.from({ length: 18 }, (_, i) => <Circle key={i} cx={8 + (w / 17) * i} cy={y + 9} r={2} fill={dark} />)}
+      {Array.from({ length: 5 }, (_, i) => {
+        const x = (w / 5) * i;
+        return <Path key={i} d={`M${x} ${y + 18} L${x + w / 5} ${y + 70} M${x + w / 5} ${y + 18} L${x} ${y + 70}`} stroke={steel} strokeWidth={5} />;
+      })}
+      <Rect x={-4} y={y + 70} width={w + 8} height={10} fill={steel} stroke={INK} strokeWidth={1.2} />
+    </G>
+  );
+}
+
+/** A rooftop: a classic wooden water tower on stilts, a parapet to perch on, and towers in the distance. */
+function WaterTowerRoof({ w, h, y, bh, period }: { w: number; h: number; y: number; bh: number; period: Period }) {
+  const wood = dim(period, '#C9955E', '#A9785A', '#5A4A44');
+  const band = dim(period, '#55546A', '#3B3A50', '#1F1F2E');
+  const roof = dim(period, '#B8B2C2', '#8E88A0', '#3E3A50');
+  const tx = w * 0.72;
+  const tw = w * 0.26;
+  return (
+    <G>
+      <FarCity w={w} base={y - bh * 0.05} period={period} />
+      <LandmarkShape kind="empire" x={w * 0.28} base={y - bh * 0.05} size={bh * 0.9} period={period} />
+      {/* The water tower. */}
+      <Path d={`M${tx + 8} ${y} L${tx + 14} ${y - bh * 0.3} M${tx + tw - 8} ${y} L${tx + tw - 14} ${y - bh * 0.3} M${tx + 12} ${y - bh * 0.15} L${tx + tw - 12} ${y - bh * 0.22} M${tx + tw - 12} ${y - bh * 0.15} L${tx + 12} ${y - bh * 0.22}`} stroke={INK} strokeWidth={3} />
+      <Rect x={tx} y={y - bh * 0.78} width={tw} height={bh * 0.48} rx={4} fill={wood} stroke={INK} strokeWidth={1.5} />
+      {[0.25, 0.55, 0.85].map((f, i) => <Path key={i} d={`M${tx} ${y - bh * 0.78 + bh * 0.48 * f} H${tx + tw}`} stroke={band} strokeWidth={3} />)}
+      {Array.from({ length: 5 }, (_, i) => <Path key={i} d={`M${tx + (tw / 5) * (i + 0.5)} ${y - bh * 0.78} V${y - bh * 0.3}`} stroke={dim(period, '#A87A4E', '#8A6048', '#4A3E38')} strokeWidth={1.5} />)}
+      <Path d={`M${tx - 6} ${y - bh * 0.78} L${tx + tw / 2} ${y - bh * 1.02} L${tx + tw + 6} ${y - bh * 0.78} Z`} fill={wood} stroke={INK} strokeWidth={1.5} strokeLinejoin="round" />
+      <Circle cx={tx + tw / 2} cy={y - bh * 1.04} r={4} fill={band} />
+      {/* The roof and its parapet. */}
+      <Rect x={0} y={y + 14} width={w} height={h - y} fill={roof} />
+      <Rect x={-4} y={y} width={w + 8} height={16} fill={dim(period, '#E3DACB', '#B3ABA0', '#5E5A6E')} stroke={INK} strokeWidth={1.5} />
+      {Array.from({ length: 10 }, (_, i) => <Path key={i} d={`M${(w / 9) * i} ${y} V${y + 16}`} stroke={INK} strokeWidth={1} opacity={0.5} />)}
+    </G>
+  );
+}
 
 /** Upstairs on the building: the wall, a big window behind, and a black iron fire escape to perch on. */
 function FireEscape({ w, h, y, bh, period, look }: { w: number; h: number; y: number; bh: number; period: Period; look: Building }) {

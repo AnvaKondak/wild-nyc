@@ -11,6 +11,7 @@ const RULES: [RegExp, Setting][] = [
   [/\b(webs?|spinning|silk)\b/, 'web'],
   [/\b(hollows?|dens?|burrows?|holes? in|tree holes?|attics?)\b/, 'den'],
   [/\b(flying|flies|fly over|soaring|soars|circling|circles|wheeling|overhead|in the air|on the wing|migrating|flock(?:s)? (?:over|across))\b/, 'sky'],
+  [/\b(bridges?|tall buildings?|skyscrapers?|towers?|steeples?|spires?|high ledges?|up high)\b/, 'ledge'],
   [/\b(wires?|power lines?|phone lines?|telephone lines?|cables?)\b/, 'wire'],
   [/\b(windowsills?|window sills?|sills?|ledges?|air conditioners?|cornices?)\b/, 'ledge'],
   [/\b(rooftops?|roofs?|chimneys?|water towers?)\b/, 'rooftop'],

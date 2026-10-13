@@ -45,7 +45,7 @@ export default function ArtPreview() {
             {/* The real full-screen scene, shrunk to fit: same band as on a story slide. */}
             <View style={{ width: cw, height: ch, overflow: 'hidden', borderRadius: 8 }}>
               <View style={{ width, height: width * 1.65, transformOrigin: 'top left', transform: [{ scale: cw / width }] }}>
-                <CloseUp setting={forced ?? scene} speciesId={s.id} mood="hello" width={width} height={width * 1.65} band={{ top: 228, height: 195 }} period={period} season="fall" sky={periodThemes[period].bg} weather="clear" placeId={place} placeKind={places.find((x) => x.id === place)?.kind} />
+                <CloseUp setting={forced ?? scene} speciesId={s.id} mood="hello" width={width} height={width * 1.65} band={{ top: 228, height: 195 }} period={period} season="fall" sky={periodThemes[period].bg} weather="clear" placeId={place} placeKind={places.find((x) => x.id === place)?.kind} variant={start + i} />
               </View>
             </View>
             <Text numberOfLines={1} style={{ fontFamily: fonts.bodySemi, fontSize: 9, color: colors.ink }}>
