@@ -374,7 +374,10 @@ function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom
   const row = 26;
   const rows = Math.ceil((bottom - top) / row);
   const lit = period === 'dusk' || period === 'night';
-  const winTop = band.top + band.height * 0.08;
+  // A cute arched window, well below the cornice, with curtains and a flower box.
+  const winW = w * 0.17;
+  const winX = w * 0.63;
+  const winTop = band.top + band.height * 0.14;
   const winH = band.height * 0.42;
   return (
     <G>
@@ -388,9 +391,22 @@ function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom
           ))}
         </G>
       ))}
-      <Rect x={w * 0.68} y={winTop} width={w * 0.24} height={winH} rx={4} fill={lit ? '#FFD23F' : '#BFD0F5'} stroke={INK} strokeWidth={1.5} />
-      <Path d={`M${w * 0.8} ${winTop} V${winTop + winH} M${w * 0.68} ${winTop + winH / 2} H${w * 0.92}`} stroke={INK} strokeWidth={1.5} />
-      <Rect x={w * 0.66} y={winTop + winH} width={w * 0.28} height={10} fill="#C9C1B4" stroke={INK} strokeWidth={1.5} />
+      <G>
+        <Path d={`M${winX} ${winTop + winH} V${winTop + winW / 2} A${winW / 2} ${winW / 2} 0 0 1 ${winX + winW} ${winTop + winW / 2} V${winTop + winH} Z`} fill="#FFFFFF" stroke={INK} strokeWidth={1.5} />
+        <Path d={`M${winX + 5} ${winTop + winH} V${winTop + winW / 2} A${winW / 2 - 5} ${winW / 2 - 5} 0 0 1 ${winX + winW - 5} ${winTop + winW / 2} V${winTop + winH} Z`} fill={lit ? '#FFD23F' : '#BFD0F5'} />
+        {/* Little curtains, tied back. */}
+        <Path d={`M${winX + 5} ${winTop + winW / 2 - 4} Q${winX + winW * 0.28} ${winTop + winH * 0.5} ${winX + 5} ${winTop + winH - 6} Z`} fill={colors.pinkTint} stroke={INK} strokeWidth={1} />
+        <Path d={`M${winX + winW - 5} ${winTop + winW / 2 - 4} Q${winX + winW * 0.72} ${winTop + winH * 0.5} ${winX + winW - 5} ${winTop + winH - 6} Z`} fill={colors.pinkTint} stroke={INK} strokeWidth={1} />
+        <Path d={`M${winX + winW / 2} ${winTop + 5} V${winTop + winH}`} stroke={INK} strokeWidth={1.2} />
+        {/* A flower box on the sill, flowers poking up out of it. */}
+        {[0.15, 0.35, 0.55, 0.75, 0.92].map((f, i) => (
+          <G key={i}>
+            <Path d={`M${winX + winW * f} ${winTop + winH + 6} V${winTop + winH - 4}`} stroke="#3E8E4E" strokeWidth={2} />
+            <Circle cx={winX + winW * f} cy={winTop + winH - 6} r={4.5} fill={i % 2 ? colors.yellow : colors.pink} stroke={INK} strokeWidth={1} />
+          </G>
+        ))}
+        <Rect x={winX - 5} y={winTop + winH + 2} width={winW + 10} height={13} rx={3} fill="#9A6A44" stroke={INK} strokeWidth={1.2} />
+      </G>
     </G>
   );
 }
