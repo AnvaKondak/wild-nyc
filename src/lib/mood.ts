@@ -18,15 +18,16 @@ export function moodFromWords(text: string): Mood | undefined {
 }
 
 /**
- * A mood for each slide. The words decide first (the title counts most, then the
- * body). Kindness slides are a warm goodbye: happy. Otherwise hello and happy take
- * turns, so two slides in a row don't show the same drawing.
+ * A mood for each slide. A mood already set (asleep, in the favorites story) stays;
+ * otherwise the words decide (the title counts most, then the body). Kindness slides
+ * are a warm goodbye: happy. Otherwise hello and happy take turns, so two slides in a
+ * row don't show the same drawing.
  */
 export function withMoods(slides: StorySlide[]): StorySlide[] {
   let last: Mood | undefined;
   return slides.map((slide) => {
     const kindness = slide.id.endsWith(':kindness');
-    const said = kindness ? 'happy' : (moodFromWords(slide.title) ?? moodFromWords(slide.body));
+    const said = slide.mood ?? (kindness ? 'happy' : (moodFromWords(slide.title) ?? moodFromWords(slide.body)));
     const mood: Mood = said ?? (last === 'hello' ? 'happy' : 'hello');
     last = mood;
     return { ...slide, mood };

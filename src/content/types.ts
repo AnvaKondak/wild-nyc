@@ -96,7 +96,11 @@ export type StorySlide = {
   /** May contain {where}. */
   body: string;
   speciesId?: string;
-  kind?: 'intro' | 'scene' | 'arriving' | 'goodbye' | 'around' | 'tomorrow' | 'event';
+  kind?: 'intro' | 'scene' | 'arriving' | 'goodbye' | 'around' | 'tomorrow' | 'event' | 'favorite' | 'favorites' | 'favorites-empty';
+  /** Favorites story: a short status chip ("Around Williamsburg", "Napping", "Away until April"). */
+  status?: string;
+  /** Favorites story: the kind of place to draw behind this animal. */
+  scene?: PlaceKind;
   /** Backdrop for the sticker (moments set this). */
   setting?: Setting;
   /** A fun fact about the species, fitting the season and time of day. */
