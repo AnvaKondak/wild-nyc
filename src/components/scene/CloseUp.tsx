@@ -3,15 +3,19 @@
 // Pilot: a branch, a sidewalk (with a puddle, for walkers at the water) and a pond.
 //
 // The screen is built around the `band` where the sticker would sit: sky above it (in the
-// time of day's color, so the pills and time stay readable), the animal in it, and the
-// ground carrying on below, under the story card. Leaves follow the season. Things move
-// gently (the branch sways, the water ripples) unless the person has asked their phone
-// to reduce motion.
+// time of day's color, so the pills and time stay readable, with the sun, moon, clouds,
+// rain or snow the weather calls for), the animal in it, and the ground carrying on below,
+// under the story card. Leaves follow the season.
+//
+// Motion is gentle and never visibly restarts: leaves flutter on smooth back-and-forth
+// cycles, and ripples, rain and snow move one way on loops that line up seamlessly. The
+// branch and the animal on it hold still. Reduce Motion stops it all.
 
 import { useEffect, useRef } from 'react';
 import { Animated, Easing, View } from 'react-native';
 import Svg, { Circle, Ellipse, G, Path, Rect } from 'react-native-svg';
 import type { Mood, Period, Season, Setting } from '@/content/types';
+import type { Sky } from '@/lib/weather';
 import { colors } from '@/theme/tokens';
 import { useReduceMotion } from '../backdrop/motion';
 import { Character, cutoutFeet, hasCutout } from '../characters/Character';
@@ -30,9 +34,9 @@ export function closeUpFor(speciesId: string | undefined, setting: Setting | und
 
 const INK = colors.ink;
 const LEAVES: Record<Season, string[]> = {
-  spring: ['#9BD27A', '#FFB3CB'],
-  summer: ['#3FA66B', '#5FC48E'],
-  fall: ['#F28C28', '#E5484D', '#FFD23F'],
+  spring: ['#9BD27A', '#7FBF5A', '#FFB3CB'],
+  summer: ['#3FA66B', '#5FC48E', '#2F8F5A'],
+  fall: ['#F28C28', '#E5484D', '#FFD23F', '#E8A23C'],
   winter: [],
 };
 const WATER: Record<Period, string> = { dawn: '#9DB9F2', midday: '#8FB3E8', dusk: '#6F8FE0', night: '#3E4A78' };
@@ -53,12 +57,11 @@ type Props = {
   season: Season;
   /** The time of day's background color, used for the sky. */
   sky: string;
+  /** What the sky is doing, for the sun, moon, clouds, rain or snow. */
+  weather?: Sky;
 };
 
-export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, period, season, sky }: Props) {
-  const still = useReduceMotion();
-  const sway = useLoop(still, 4200);
-  const drift = useLoop(still, 6000);
+export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, period, season, sky, weather }: Props) {
   const bt = band.top;
   const bh = band.height;
 
@@ -75,11 +78,12 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
   );
   const horizon = bt + bh * 0.5; // the far shore, by the pond
   const pavement = ground - bh * 0.08; // where the sidewalk starts
+  const leaves = LEAVES[season];
 
   return (
     <View style={{ position: 'absolute', left: 0, top: 0, width: w, height: h, backgroundColor: sky }}>
+      <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} behind />
       <Svg width={w} height={h} style={{ position: 'absolute' }}>
-        {period === 'night' && [0.1, 0.27, 0.5, 0.68, 0.86, 0.94].map((x, i) => <Circle key={i} cx={w * x} cy={bt * (0.25 + (i % 3) * 0.25)} r={1.8} fill={colors.paper} />)}
         {setting === 'sidewalk' || setting === 'puddle' ? (
           <>
             {/* The wall starts just below the header, so the time and weather stay on sky. */}
@@ -89,7 +93,10 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
         ) : setting === 'water' ? (
           <Pond w={w} h={h} horizon={horizon} period={period} season={season} />
         ) : (
-          <Treeline w={w} h={h} base={ground + bh * 0.9} period={period} season={season} />
+          <>
+            <Treeline w={w} h={h} base={ground + bh * 0.9} period={period} season={season} />
+            <Branch w={w} y={ground} bh={bh} />
+          </>
         )}
         {setting === 'puddle' && (
           <>
@@ -99,59 +106,56 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
         )}
       </Svg>
 
-      {setting === 'branch' ? (
-        // The branch and whoever's on it sway together, pivoting near the trunk.
-        <Animated.View
-          style={{
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            width: w,
-            height: h,
-            transformOrigin: `0px ${ground}px`,
-            transform: [{ rotate: sway.interpolate({ inputRange: [0, 1], outputRange: ['-0.7deg', '0.7deg'] }) }],
-          }}
-        >
-          <Svg width={w} height={h} style={{ position: 'absolute' }}>
-            <Branch w={w} y={ground} bh={bh} season={season} />
-          </Svg>
-          {animal}
-          <Svg width={w} height={h} style={{ position: 'absolute' }} pointerEvents="none">
-            <FrontLeaves w={w} y={ground} bh={bh} season={season} />
-          </Svg>
-        </Animated.View>
-      ) : setting === 'water' ? (
+      {setting === 'branch' && leaves.length > 0 && BACK_LEAVES.map((l, i) => <Leaf key={i} {...l} w={w} y={ground} bh={bh} color={leaves[i % leaves.length]} />)}
+      {setting === 'water' && <Ripples w={w} from={horizon} to={ground} />}
+      {animal}
+      {setting === 'water' && (
         <>
-          {/* Ripples drift across the whole pond, behind and in front of the swimmer. */}
-          <Ripples w={w} from={horizon} to={ground} drift={drift} />
-          {animal}
           <Svg width={w} height={h} style={{ position: 'absolute' }} pointerEvents="none">
             <Rect x={0} y={ground} width={w} height={h - ground} fill={WATER[period]} />
           </Svg>
-          <Ripples w={w} from={ground} to={h} drift={drift} />
+          <Ripples w={w} from={ground} to={h} />
         </>
-      ) : (
-        animal
       )}
+      {setting === 'branch' && leaves.length > 0 && FRONT_LEAVES.map((l, i) => <Leaf key={i} {...l} w={w} y={ground} bh={bh} color={leaves[(i + 1) % leaves.length]} />)}
+      <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} />
     </View>
   );
 }
 
-/** Ripple marks drifting sideways across a band of water. */
-function Ripples({ w, from, to, drift }: { w: number; from: number; to: number; drift: Animated.Value }) {
+// ---------------------------------------------------------------- motion
+
+/** 0 → 1 forever, at a steady pace: for one-way motion that loops seamlessly. */
+function useLinear(duration: number, still: boolean) {
+  const v = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    if (still) return;
+    const loop = Animated.loop(Animated.timing(v, { toValue: 1, duration, easing: Easing.linear, useNativeDriver: true }));
+    loop.start();
+    return () => loop.stop();
+  }, [still, duration, v]);
+  return v;
+}
+
+/** Ripples drifting one way across a band of water. The pattern repeats every `step`, so the loop never shows a seam. */
+function Ripples({ w, from, to }: { w: number; from: number; to: number }) {
+  const still = useReduceMotion();
+  const t = useLinear(7000, still);
   const band = to - from;
-  const rows = Math.max(1, Math.round(band / 70));
+  const step = w * 0.32;
+  const rows = Math.max(1, Math.round(band / 64));
+  const count = Math.ceil(w / step) + 2;
   return (
     <Animated.View
       pointerEvents="none"
-      style={{ position: 'absolute', left: -w * 0.2, top: from, transform: [{ translateX: drift.interpolate({ inputRange: [0, 1], outputRange: [0, w * 0.2] }) }] }}
+      style={{ position: 'absolute', left: -step, top: from, transform: [{ translateX: t.interpolate({ inputRange: [0, 1], outputRange: [0, step] }) }] }}
     >
-      <Svg width={w * 1.4} height={band}>
+      <Svg width={w + step * 2} height={band}>
         {Array.from({ length: rows }, (_, r) =>
-          [0.06, 0.32, 0.58, 0.84, 1.1].map((x, i) => (
+          Array.from({ length: count }, (_, i) => (
             <Path
               key={`${r}:${i}`}
-              d={`M${w * x + ((r + i) % 2) * w * 0.1} ${band * ((r + 0.4 + (i % 2) * 0.3) / rows)} q${w * 0.03} -5 ${w * 0.06} 0`}
+              d={`M${step * i + (r % 2) * step * 0.5} ${band * ((r + 0.5) / rows)} q${w * 0.03} -5 ${w * 0.06} 0`}
               stroke={colors.paper}
               strokeWidth={2.5}
               fill="none"
@@ -164,18 +168,113 @@ function Ripples({ w, from, to, drift }: { w: number; from: number; to: number; 
   );
 }
 
-/** A value that eases 0 → 1 → 0 forever (or sits at 0.5, holding still). */
-function useLoop(still: boolean, duration: number) {
-  const v = useRef(new Animated.Value(0.5)).current;
-  useEffect(() => {
-    if (still) return;
-    const half = { duration: duration / 2, easing: Easing.inOut(Easing.sin), useNativeDriver: true };
-    const loop = Animated.loop(Animated.sequence([Animated.timing(v, { ...half, toValue: 1 }), Animated.timing(v, { ...half, toValue: 0 })]));
-    loop.start();
-    return () => loop.stop();
-  }, [still, duration, v]);
-  return v;
+// Leaves, as fractions of the screen width (x) and of the band height below the branch (dy).
+const BACK_LEAVES = [
+  { x: 0.04, dy: -0.12, len: 0.15, angle: -30 },
+  { x: 0.13, dy: -0.09, len: 0.13, angle: 20 },
+  { x: 0.19, dy: 0.05, len: 0.12, angle: 140 },
+  { x: 0.62, dy: -0.14, len: 0.12, angle: -50 },
+  { x: 0.74, dy: -0.26, len: 0.14, angle: -20 },
+  { x: 0.82, dy: -0.36, len: 0.13, angle: 30 },
+  { x: 0.9, dy: -0.31, len: 0.15, angle: -60 },
+  { x: 0.95, dy: -0.12, len: 0.13, angle: 10 },
+  { x: 0.86, dy: -0.04, len: 0.12, angle: 150 },
+];
+const FRONT_LEAVES = [
+  { x: 0.27, dy: 0.06, len: 0.12, angle: 160 },
+  { x: 0.33, dy: 0.1, len: 0.1, angle: 120 },
+  { x: 0.78, dy: -0.18, len: 0.11, angle: 70 },
+];
+
+/** One leaf on the branch, fluttering a little in the wind on their own rhythm. */
+function Leaf({ x, dy, len, angle, w, y, bh, color }: { x: number; dy: number; len: number; angle: number; w: number; y: number; bh: number; color: string }) {
+  const still = useReduceMotion();
+  // Each leaf gets its own pace, so they don't move in lockstep.
+  const t = useLinear(2600 + Math.round(x * 1700) + Math.round(len * 3000), still);
+  const L = bh * len;
+  const W = L * 0.42;
+  const swing = t.interpolate({ inputRange: [0, 0.25, 0.5, 0.75, 1], outputRange: [`${angle}deg`, `${angle + 9}deg`, `${angle}deg`, `${angle - 6}deg`, `${angle}deg`] });
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={{ position: 'absolute', left: w * x - L / 2, top: y + bh * dy - L / 2, width: L, height: L, transform: [{ rotate: swing }] }}
+    >
+      <Svg width={L} height={L} viewBox={`${-L / 2} ${-L / 2} ${L} ${L}`}>
+        {/* Stem at the left end (where the leaf joins the twig), pointed tip at the right. */}
+        <Path d={`M${-L / 2} 0 C${-L / 6} ${-W} ${L / 4} ${-W * 0.8} ${L / 2} 0 C${L / 4} ${W * 0.8} ${-L / 6} ${W} ${-L / 2} 0 Z`} fill={color} stroke={INK} strokeWidth={1.5} strokeLinejoin="round" />
+        <Path d={`M${-L / 2} 0 L${L * 0.38} 0`} stroke={INK} strokeWidth={1} opacity={0.5} />
+      </Svg>
+    </Animated.View>
+  );
 }
+
+// ---------------------------------------------------------------- weather
+
+const RAINY: Sky[] = ['drizzle', 'rain', 'storm'];
+const CLOUDY: Sky[] = ['cloudy', 'fog', 'drizzle', 'rain', 'storm', 'snow'];
+
+/**
+ * The sky's weather. `behind`: the sun or moon and clouds (drawn first). Otherwise:
+ * rain or snow falling in front of everything.
+ */
+function SkyWeather({ w, h, bt, bh, period, weather, behind = false }: { w: number; h: number; bt: number; bh: number; period: Period; weather?: Sky; behind?: boolean }) {
+  const still = useReduceMotion();
+  const fall = useLinear(weather === 'snow' ? 9000 : 900, still || behind || !(weather === 'snow' || (weather && RAINY.includes(weather))));
+  if (behind) {
+    const day = period === 'dawn' || period === 'midday';
+    const cloudy = !!weather && CLOUDY.includes(weather);
+    const cloud = period === 'night' ? '#4A4A66' : period === 'dusk' ? '#6E8CE8' : '#FFFFFF';
+    const cx = w * 0.84;
+    const cy = bt + bh * 0.12;
+    return (
+      <Svg width={w} height={h} style={{ position: 'absolute' }} pointerEvents="none">
+        {period === 'night' && [0.1, 0.27, 0.5, 0.68, 0.94].map((x, i) => <Circle key={i} cx={w * x} cy={bt * (0.35 + (i % 3) * 0.22)} r={1.8} fill={colors.paper} />)}
+        {!cloudy && day && (
+          <G>
+            {Array.from({ length: 8 }, (_, i) => {
+              const a = (i / 8) * Math.PI * 2;
+              return <Path key={i} d={`M${cx + Math.cos(a) * 34} ${cy + Math.sin(a) * 34} L${cx + Math.cos(a) * 46} ${cy + Math.sin(a) * 46}`} stroke={colors.yellow} strokeWidth={5} strokeLinecap="round" />;
+            })}
+            <Circle cx={cx} cy={cy} r={26} fill={colors.yellow} stroke={INK} strokeWidth={1.5} />
+          </G>
+        )}
+        {!cloudy && period === 'night' && <Path d={`M${cx + 6} ${cy - 24} a24 24 0 1 0 18 38 a20 20 0 1 1 -18 -38 Z`} fill={colors.yellow} stroke={INK} strokeWidth={1.5} />}
+        {cloudy &&
+          [[0.18, 0.02], [0.66, 0.1], [0.92, -0.02]].map(([x, dy], i) => (
+            <G key={i} opacity={weather === 'fog' ? 0.6 : 0.95}>
+              <Ellipse cx={w * x} cy={bt + bh * dy} rx={44} ry={18} fill={cloud} />
+              <Circle cx={w * x - 16} cy={bt + bh * dy - 10} r={18} fill={cloud} />
+              <Circle cx={w * x + 12} cy={bt + bh * dy - 14} r={22} fill={cloud} />
+            </G>
+          ))}
+      </Svg>
+    );
+  }
+  if (!weather || !(weather === 'snow' || RAINY.includes(weather))) return null;
+  // Rain or snow: a tile of drops that repeats every `tile` points, sliding down one tile per loop.
+  const tile = weather === 'snow' ? 180 : 140;
+  const drops = weather === 'drizzle' ? 10 : weather === 'snow' ? 14 : 22;
+  const rows = Math.ceil(h / tile) + 1;
+  return (
+    <Animated.View pointerEvents="none" style={{ position: 'absolute', left: 0, top: -tile, transform: [{ translateY: fall.interpolate({ inputRange: [0, 1], outputRange: [0, tile] }) }] }}>
+      <Svg width={w} height={tile * (rows + 1)}>
+        {Array.from({ length: rows + 1 }, (_, r) =>
+          Array.from({ length: drops }, (_, i) => {
+            const x = ((i * 53) % 100) / 100 * w + (r % 2) * 9;
+            const y = r * tile + ((i * 37) % tile);
+            return weather === 'snow' ? (
+              <Circle key={`${r}:${i}`} cx={x} cy={y} r={3} fill={colors.white} opacity={0.9} />
+            ) : (
+              <Path key={`${r}:${i}`} d={`M${x} ${y} l-3 12`} stroke={period === 'night' ? '#9DB9F2' : '#5E7FD6'} strokeWidth={2} strokeLinecap="round" opacity={0.7} />
+            );
+          }),
+        )}
+      </Svg>
+    </Animated.View>
+  );
+}
+
+// ---------------------------------------------------------------- places
 
 /** Soft far-off trees along the bottom, below the branch. */
 function Treeline({ w, h, base, period, season }: { w: number; h: number; base: number; period: Period; season: Season }) {
@@ -207,36 +306,23 @@ function Pond({ w, h, horizon, period, season }: { w: number; h: number; horizon
   );
 }
 
-/** A big branch across the screen from the left, with leaves for the season. */
-function Branch({ w, y, bh, season }: { w: number; y: number; bh: number; season: Season }) {
+/** A big branch across the screen from the left, with a twig reaching up on the right. */
+function Branch({ w, y, bh }: { w: number; y: number; bh: number }) {
   const t = bh * 0.07;
   const d = `M${-w * 0.05} ${y + t * 0.9} C${w * 0.3} ${y + t * 0.5} ${w * 0.65} ${y + t * 0.6} ${w * 1.05} ${y - t * 0.3}`;
   const twig = `M${w * 0.66} ${y + t * 0.2} C${w * 0.74} ${y - bh * 0.12} ${w * 0.82} ${y - bh * 0.22} ${w * 0.9} ${y - bh * 0.28}`;
-  const leaves = LEAVES[season];
+  const twig2 = `M${w * 0.12} ${y + t * 0.6} C${w * 0.1} ${y - bh * 0.04} ${w * 0.06} ${y - bh * 0.1} ${w * 0.02} ${y - bh * 0.13}`;
   return (
     <G>
+      {[twig2, twig].map((p, i) => (
+        <G key={i}>
+          <Path d={p} stroke={INK} strokeWidth={t * 0.7 + 3} strokeLinecap="round" fill="none" />
+          <Path d={p} stroke={BARK} strokeWidth={t * 0.7} strokeLinecap="round" fill="none" />
+        </G>
+      ))}
       <Path d={d} stroke={INK} strokeWidth={t * 2 + 3} strokeLinecap="round" fill="none" />
       <Path d={d} stroke={BARK} strokeWidth={t * 2} strokeLinecap="round" fill="none" />
-      <Path d={twig} stroke={INK} strokeWidth={t * 0.8 + 3} strokeLinecap="round" fill="none" />
-      <Path d={twig} stroke={BARK} strokeWidth={t * 0.8} strokeLinecap="round" fill="none" />
       <Path d={`M${w * 0.05} ${y + t * 0.6} C${w * 0.25} ${y + t * 0.35} ${w * 0.4} ${y + t * 0.4} ${w * 0.5} ${y + t * 0.45}`} stroke="#6E4E38" strokeWidth={2} fill="none" />
-      {leaves.length > 0 &&
-        [[0.08, -0.1], [0.2, -0.06], [0.84, -0.33], [0.92, -0.25], [0.74, -0.2], [0.97, -0.06]].map(([x, dy], i) => (
-          <Ellipse key={i} cx={w * x} cy={y + bh * dy} rx={bh * 0.075} ry={bh * 0.042} transform={`rotate(${i % 2 ? 30 : -25} ${w * x} ${y + bh * dy})`} fill={leaves[i % leaves.length]} stroke={INK} strokeWidth={1.5} />
-        ))}
-    </G>
-  );
-}
-
-/** A few leaves in front of the branch, so the animal sits in the tree, not on top of it. */
-function FrontLeaves({ w, y, bh, season }: { w: number; y: number; bh: number; season: Season }) {
-  const leaves = LEAVES[season];
-  if (leaves.length === 0) return null;
-  return (
-    <G>
-      {[[0.28, 0.06], [0.34, 0.1]].map(([x, dy], i) => (
-        <Ellipse key={i} cx={w * x} cy={y + bh * dy} rx={bh * 0.065} ry={bh * 0.037} transform={`rotate(${i ? 25 : -20} ${w * x} ${y + bh * dy})`} fill={leaves[(i + 1) % leaves.length]} stroke={INK} strokeWidth={1.5} />
-      ))}
     </G>
   );
 }

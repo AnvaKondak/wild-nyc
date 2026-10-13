@@ -313,6 +313,7 @@ export default function RightNow() {
             period={header.period}
             season={season}
             sky={theme.bg}
+            weather={weather?.sky}
           />
         </View>
       ) : area.width > 0 && !closeUp ? (

@@ -579,7 +579,7 @@ ART.mallard = {
         <path d="M70 180 C140 186 180 240 176 330 L70 330 Z" fill="#8E4A3A"/>
         <path d="M330 190 L400 190 L400 330 L320 330 C340 290 344 240 330 190 Z" fill="#2E2E44"/>
         <path d="M210 214 C270 206 330 220 350 246 C320 270 260 272 220 262 Z" fill="#A9ACB8"/>
-        <path d="M262 246 L322 246 L318 262 L258 262 Z" fill="#4A4FD6" stroke="#F7F5F2" stroke-width="5"/>
+        <path d="M254 244 C274 238 304 238 330 246" fill="none" stroke="#F7F5F2" stroke-width="14" stroke-linecap="round"/><path d="M254 244 C274 238 304 238 330 246" fill="none" stroke="#5B4FC8" stroke-width="8" stroke-linecap="round"/>
       </g>
       <path d="${bodyPath}" fill="none" ${OL}/>
       <path d="M346 206 C350 186 372 182 372 198 C372 210 358 210 358 200" fill="none" stroke="${C.ink}" stroke-width="8" stroke-linecap="round"/>

@@ -67,15 +67,16 @@ export function Character({ speciesId, size, mood = 0, still: holdStill = false,
     return () => clearTimeout(timer);
   }, [still, frame.shut]);
 
-  // Bob: a slow breath up and down.
+  // Bob: a slow breath up and down. Not in a close-up scene, where they stand on
+  // something (a branch, the sidewalk) and bobbing would look like floating.
   const y = useRef(new Animated.Value(0)).current;
   useEffect(() => {
-    if (still) return;
+    if (still || cutout) return;
     const half = { duration: 1600, easing: Easing.inOut(Easing.sin), useNativeDriver: true };
     const anim = Animated.loop(Animated.sequence([Animated.timing(y, { ...half, toValue: 1 }), Animated.timing(y, { ...half, toValue: 0 })]));
     anim.start();
     return () => anim.stop();
-  }, [still, y]);
+  }, [still, cutout, y]);
 
   // Drawn a little larger than the circle, so the bob never shows an edge. A cutout has
   // no edge to hide: it's drawn at its size and bobs freely.
