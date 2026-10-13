@@ -15,7 +15,7 @@
 // rain and snow fall on seamless loops. Branches and animals hold still. Reduce Motion
 // stops it all.
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactElement } from 'react';
 import { Animated, Easing, View } from 'react-native';
 import Svg, { Circle, Ellipse, G, Path, Rect } from 'react-native-svg';
 import type { Mood, Period, PlaceKind, Season, Setting } from '@/content/types';
@@ -164,13 +164,13 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
 
   return (
     <View style={{ position: 'absolute', left: 0, top: 0, width: w, height: h, backgroundColor: sky, overflow: 'hidden' }}>
-      {OPEN_SKY.includes(setting) && <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} behind sunLeft={!!look.landmark} />}
+      {OPEN_SKY.includes(setting) && <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} behind sunLeft={!!look.landmark && setting !== 'wire' && setting !== 'sky'} />}
       <Svg width={w} height={h} style={{ position: 'absolute' }}>
         {city && (
           <>
             {/* Up close, the brownstone fills the whole screen. */}
             <Facade look={look.building} w={w} bottom={pavement} band={band} period={period} />
-            {look.building === 'brownstone' && <Cornice w={w} y={4} period={period} brackets={false} />}
+            <Cornice w={w} y={4} period={period} brackets={false} />
             <WallBranch y={bt} bh={bh} w={w} />
             <Sidewalk w={w} h={h} top={pavement} period={period} />
           </>
@@ -182,14 +182,12 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
           </>
         )}
         {/* The neighborhood's landmark, far off on the horizon, behind the trees or rooftops. */}
-        {look.landmark && (setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && (
+        {/* The Wonder Wheel only shows by the water; nothing peeks out from behind rooftops. */}
+        {look.landmark && look.landmark !== 'wonder-wheel' && (setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && (
           <LandmarkShape kind={look.landmark} x={w * 0.78} base={ground - bh * 0.22} size={bh * 0.75} period={period} />
         )}
-        {look.landmark && (setting === 'branch' || setting === 'web' || setting === 'trunk') && (
+        {look.landmark && look.landmark !== 'wonder-wheel' && (setting === 'branch' || setting === 'web' || setting === 'trunk') && (
           <LandmarkShape kind={look.landmark} x={w * 0.78} base={ground + bh * (setting === 'trunk' ? 0.4 : 0.9)} size={bh * 0.75} period={period} />
-        )}
-        {look.landmark && (setting === 'wire' || setting === 'sky') && (
-          <LandmarkShape kind={look.landmark} x={w * 0.72} base={bt + bh * 1.0} size={bh * 0.9} period={period} />
         )}
         {(setting === 'branch' || setting === 'web') && (
           <>
@@ -395,29 +393,89 @@ function Wire({ w, y, bh }: { w: number; y: number; bh: number }) {
   );
 }
 
-/** The near shore: sand and a few pebbles, from `top` down. */
+/** The near shore: soft sand meeting the water in a frothy edge, with shells, pebbles and beach grass. */
 function Shore({ w, h, top, period }: { w: number; h: number; top: number; period: Period }) {
+  const sand = SAND[period];
+  const darkSand = dim(period, '#DCC39C', '#A88E6E', '#4E463E');
+  const foam = dim(period, '#FFFFFF', '#E8ECF7', '#9DA8C8');
+  const edge = `M0 ${top + 10} Q${w * 0.25} ${top - 4} ${w * 0.5} ${top + 4} T${w} ${top + 2}`;
   return (
     <G>
-      <Path d={`M0 ${top + 10} Q${w * 0.5} ${top - 10} ${w} ${top + 6} V${h} H0 Z`} fill={SAND[period]} stroke={INK} strokeWidth={1.5} />
-      {[0.15, 0.3, 0.72, 0.88].map((x, i) => (
-        <Ellipse key={i} cx={w * x} cy={top + 40 + (i % 2) * 30} rx={9} ry={6} fill="#B8B2C2" stroke={INK} strokeWidth={1.2} />
+      <Path d={`${edge} V${h} H0 Z`} fill={sand} stroke={INK} strokeWidth={1.5} />
+      {/* Wet sand just past the foam, then the foam's scalloped edge. */}
+      <Path d={`${edge} V${top + 30} Q${w * 0.5} ${top + 18} 0 ${top + 32} Z`} fill={darkSand} />
+      <Path d={Array.from({ length: 12 }, (_, i) => `${i ? '' : `M0 ${top + 8}`} q${w / 24} 8 ${w / 12} 0`).join(' ')} stroke={foam} strokeWidth={4} fill="none" strokeLinecap="round" />
+      {/* Speckles in the sand. */}
+      {Array.from({ length: 26 }, (_, i) => (
+        <Circle key={i} cx={((i * 37) % 100) / 100 * w} cy={top + 46 + ((i * 53) % 100) / 100 * (h - top - 60)} r={1.6} fill={darkSand} />
+      ))}
+      {/* A few shells and pebbles. */}
+      {[[0.16, 60, '#FFC2D1'], [0.74, 90, '#FFE3B8'], [0.42, 130, '#F7D4E8']].map(([x, dy, c], i) => {
+        const cx = w * (x as number);
+        const cy = top + (dy as number);
+        return (
+          <G key={i}>
+            <Path d={`M${cx - 10} ${cy + 4} Q${cx} ${cy - 14} ${cx + 10} ${cy + 4} Z`} fill={c as string} stroke={INK} strokeWidth={1.2} strokeLinejoin="round" />
+            {[-5, 0, 5].map((dx, k) => <Path key={k} d={`M${cx} ${cy + 4} L${cx + dx} ${cy - 7}`} stroke={INK} strokeWidth={0.8} opacity={0.6} />)}
+          </G>
+        );
+      })}
+      {[0.3, 0.86, 0.58].map((x, i) => <Ellipse key={i} cx={w * x} cy={top + 70 + i * 38} rx={8} ry={5} fill="#B8B2C2" stroke={INK} strokeWidth={1.2} />)}
+      {/* Beach grass at the edges. */}
+      {[0.02, 0.06, 0.94, 0.98].map((x, i) => (
+        <Path key={i} d={`M${w * x} ${top + 60} q-6 -26 -2 -44 M${w * x} ${top + 60} q4 -24 10 -38 M${w * x} ${top + 60} q-1 -30 2 -50`} stroke="#7FA24A" strokeWidth={2.5} fill="none" strokeLinecap="round" />
       ))}
     </G>
   );
 }
 
-/** A wooden pier from `top` down: planks and two posts. */
+/** A wooden pier from `top` down: staggered planks with grain and nails, two posts wrapped in rope, and a life ring. */
 function Pier({ w, h, top }: { w: number; h: number; top: number }) {
+  const plank = 22;
+  const rows = Math.ceil((h - top) / plank);
+  const woods = ['#C9955E', '#BE8A55', '#D2A06A'];
   return (
     <G>
-      <Rect x={0} y={top} width={w} height={h - top} fill="#B9875E" stroke={INK} strokeWidth={1.5} />
-      {Array.from({ length: 8 }, (_, i) => (
-        <Path key={i} d={`M0 ${top + 18 * (i + 1)} H${w}`} stroke="#8A6247" strokeWidth={2} />
+      {Array.from({ length: rows }, (_, r) => {
+        const y = top + r * plank;
+        const seams = [0.22, 0.58, 0.86].map((f) => w * ((f + (r % 3) * 0.13) % 1));
+        return (
+          <G key={r}>
+            <Rect x={0} y={y} width={w} height={plank} fill={woods[r % 3]} stroke={INK} strokeWidth={1.2} />
+            <Path d={`M${w * 0.05} ${y + plank * 0.45} q${w * 0.1} -3 ${w * 0.2} 0 M${w * 0.55} ${y + plank * 0.6} q${w * 0.08} 3 ${w * 0.16} 0`} stroke="#9A6A44" strokeWidth={1.2} fill="none" opacity={0.7} />
+            {seams.map((x, k) => (
+              <G key={k}>
+                <Path d={`M${x} ${y} V${y + plank}`} stroke={INK} strokeWidth={1} />
+                <Circle cx={x - 5} cy={y + 6} r={1.4} fill="#5E4A3A" />
+                <Circle cx={x - 5} cy={y + plank - 6} r={1.4} fill="#5E4A3A" />
+              </G>
+            ))}
+          </G>
+        );
+      })}
+      {/* Posts with rope wrapped around them. */}
+      {[0.08, 0.92].map((x, i) => (
+        <G key={i}>
+          <Rect x={w * x - 10} y={top - 42} width={20} height={48} rx={5} fill="#8A6247" stroke={INK} strokeWidth={1.5} />
+          <Ellipse cx={w * x} cy={top - 42} rx={10} ry={4} fill="#A87A58" stroke={INK} strokeWidth={1.2} />
+          {[0, 1, 2].map((k) => <Path key={k} d={`M${w * x - 11} ${top - 26 + k * 6} q11 4 22 0`} stroke="#E8D7B4" strokeWidth={3} fill="none" />)}
+        </G>
       ))}
-      {[0.1, 0.9].map((x, i) => (
-        <Rect key={i} x={w * x - 9} y={top - 40} width={18} height={44} rx={4} fill="#8A6247" stroke={INK} strokeWidth={1.5} />
-      ))}
+      {/* A life ring hanging on the right post. */}
+      <G>
+        <Circle cx={w * 0.92} cy={top - 8} r={15} fill="none" stroke={INK} strokeWidth={9} />
+        <Circle cx={w * 0.92} cy={top - 8} r={15} fill="none" stroke="#F7F3EC" strokeWidth={6} />
+        {[0, 1, 2, 3].map((k) => {
+          const a = (k / 4) * Math.PI * 2 + Math.PI / 4;
+          return <Path key={k} d={`M${w * 0.92 + Math.cos(a - 0.3) * 15} ${top - 8 + Math.sin(a - 0.3) * 15} A15 15 0 0 1 ${w * 0.92 + Math.cos(a + 0.3) * 15} ${top - 8 + Math.sin(a + 0.3) * 15}`} stroke="#E5484D" strokeWidth={6} fill="none" />;
+        })}
+      </G>
+      {/* A coil of rope on the planks. */}
+      <G>
+        <Ellipse cx={w * 0.22} cy={top + 40} rx={20} ry={8} fill="none" stroke={INK} strokeWidth={6} />
+        <Ellipse cx={w * 0.22} cy={top + 40} rx={20} ry={8} fill="none" stroke="#E8D7B4" strokeWidth={4} />
+        <Ellipse cx={w * 0.22} cy={top + 38} rx={12} ry={5} fill="none" stroke="#E8D7B4" strokeWidth={3} />
+      </G>
     </G>
   );
 }
@@ -723,88 +781,207 @@ function Branch({ w, y, bh }: { w: number; y: number; bh: number }) {
   );
 }
 
-/** A pink brownstone front from `top` to `bottom`: big smooth stone blocks, a cute arched window on the left, and the front door up a stoop on the right. */
-function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom: number; band: { top: number; height: number }; period: Period }) {
-  const [stone, line] = BRICK[period];
-  const trim = period === 'night' ? '#76586A' : period === 'dusk' ? '#D3AEB0' : '#EED3CC';
-  const row = 34;
+// The ivy townhouse's brick, and its ivy.
+const IVY_BRICK: Record<Period, [string, string]> = { dawn: ['#DE8C74', '#C77661'], midday: ['#D47D66', '#BA6853'], dusk: ['#A85E5C', '#8E4C4C'], night: ['#4E3434', '#3E2828'] };
+const IVY: Record<Period, string[]> = { dawn: ['#4E9A54', '#6DB862', '#8BCB72'], midday: ['#3E8E4E', '#5FAE5E', '#7FC26A'], dusk: ['#2F6E48', '#3E8452', '#4E9658'], night: ['#24402E', '#2E5038', '#365A3E'] };
+
+/** A little ivy leaf: a soft three-lobed heart. */
+const ivyLeaf = (x: number, y: number, s: number, a: number, fill: string, k: string) => (
+  <Path
+    key={k}
+    d={`M${x} ${y + s * 0.55} C${x - s * 1.05} ${y} ${x - s * 0.55} ${y - s * 0.95} ${x} ${y - s * 0.45} C${x + s * 0.55} ${y - s * 0.95} ${x + s * 1.05} ${y} ${x} ${y + s * 0.55} Z`}
+    transform={`rotate(${a} ${x} ${y})`}
+    fill={fill}
+    stroke={INK}
+    strokeWidth={0.8}
+  />
+);
+
+/** Lush ivy along a vine (a list of points): a soft green mass with big overlapping leaves on top. */
+function ivyAlong(points: [number, number][], period: Period, seed: number, spread = 14) {
+  const greens = IVY[period];
+  const leaves: ReactElement[] = [];
+  let n = seed;
+  const rnd = () => ((n = (n * 9301 + 49297) % 233280) / 233280);
+  const d = points.map(([x, y], i) => `${i ? 'L' : 'M'}${x} ${y}`).join(' ');
+  leaves.push(<Path key={`${seed}:mass`} d={d} stroke={greens[0]} strokeWidth={spread * 2.4} strokeLinecap="round" strokeLinejoin="round" fill="none" opacity={0.9} />);
+  for (let i = 0; i < points.length - 1; i++) {
+    const [x1, y1] = points[i];
+    const [x2, y2] = points[i + 1];
+    const steps = Math.max(1, Math.round(Math.hypot(x2 - x1, y2 - y1) / 4));
+    for (let k = 0; k < steps; k++) {
+      const f = k / steps;
+      const x = x1 + (x2 - x1) * f + (rnd() - 0.5) * spread * 2.2;
+      const y = y1 + (y2 - y1) * f + (rnd() - 0.5) * spread * 2.2;
+      leaves.push(ivyLeaf(x, y, 8 + rnd() * 6, rnd() * 360, greens[1 + Math.floor(rnd() * (greens.length - 1))], `${seed}:${i}:${k}`));
+    }
+  }
+  return leaves;
+}
+
+/**
+ * The front of the building, up close, filling the screen from `top` to `bottom`: a pink
+ * brownstone (tall arched windows under carved hoods, a black arched door, iron stoop
+ * railings, a topiary) or a red brick townhouse covered in ivy (white trim, shutters, an
+ * iron fence). A window on the left, the door up a stoop on the right.
+ */
+function Wall({ w, top, bottom, band, period, style = 'brownstone' }: { w: number; top: number; bottom: number; band: { top: number; height: number }; period: Period; style?: Building }) {
+  const ivy = style === 'ivy';
+  const [stone, line] = ivy ? IVY_BRICK[period] : BRICK[period];
+  const pinkTrim = period === 'night' ? '#76586A' : period === 'dusk' ? '#D3AEB0' : '#EED3CC';
+  const whiteTrim = period === 'night' ? '#7A7A8A' : period === 'dusk' ? '#D9D0C8' : '#F7F3EC';
+  const trim = ivy ? whiteTrim : pinkTrim;
+  const steps = ivy ? (period === 'night' ? '#5A4A44' : '#B9A094') : pinkTrim;
+  const iron = '#1F1F2E';
+  const row = ivy ? 15 : 34;
+  const per = ivy ? 9 : 3;
   const rows = Math.ceil((bottom - top) / row);
   const lit = period === 'dusk' || period === 'night';
   const H = bottom - top;
-  // The ground floor: from just under the header down to the sidewalk.
   const floor = band.top;
   const FH = bottom - floor;
-  // The window, on the left.
-  // The window and the door are the same height, so the front feels balanced.
+  const glass = lit ? '#FFD23F' : '#BFD0F5';
+  // The window, on the left, and the door and stoop on the right: the same height, balanced.
   const winW = w * 0.16;
   const winX = w * 0.17;
   const winTop = floor + FH * 0.06;
   const winH = FH * 0.52;
-  // The front door and stoop, on the right.
   const dX = w * 0.66;
   const dW = w * 0.19;
   const dTop = floor + FH * 0.06;
   const landing = floor + FH * 0.58;
-  const steps = 4;
-  const stepH = (bottom - landing) / steps;
+  const stepCount = 4;
+  const stepH = (bottom - landing) / stepCount;
+  // Windows on the floor above, peeking out under the header.
+  const upper = [w * 0.17, w * 0.66];
+
+  const archWindow = (x: number, y: number, ww: number, wh: number, k: string) => (
+    <G key={k}>
+      {/* A carved hood over the window, then the arched frame and glass. */}
+      <Path d={`M${x - 8} ${y + ww / 2 - 2} Q${x + ww / 2} ${y - ww * 0.25} ${x + ww + 8} ${y + ww / 2 - 2} L${x + ww + 8} ${y + ww / 2 + 6} Q${x + ww / 2} ${y - ww * 0.12} ${x - 8} ${y + ww / 2 + 6} Z`} fill={pinkTrim} stroke={INK} strokeWidth={1.2} />
+      <Path d={`M${x} ${y + wh} V${y + ww / 2} A${ww / 2} ${ww / 2} 0 0 1 ${x + ww} ${y + ww / 2} V${y + wh} Z`} fill={iron} stroke={INK} strokeWidth={1.5} />
+      <Path d={`M${x + 4} ${y + wh} V${y + ww / 2} A${ww / 2 - 4} ${ww / 2 - 4} 0 0 1 ${x + ww - 4} ${y + ww / 2} V${y + wh} Z`} fill={glass} />
+      <Path d={`M${x + 4} ${y + wh * 0.5} H${x + ww - 4}`} stroke={iron} strokeWidth={3} />
+      <Rect x={x - 6} y={y + wh} width={ww + 12} height={6} fill={pinkTrim} stroke={INK} strokeWidth={1.2} />
+    </G>
+  );
+  const squareWindow = (x: number, y: number, ww: number, wh: number, k: string) => (
+    <G key={k}>
+      {/* Navy shutters, a white frame and lintel, six panes. */}
+      <Rect x={x - ww * 0.32} y={y} width={ww * 0.28} height={wh} fill="#2E3A52" stroke={INK} strokeWidth={1.2} />
+      <Rect x={x + ww + ww * 0.04} y={y} width={ww * 0.28} height={wh} fill="#2E3A52" stroke={INK} strokeWidth={1.2} />
+      <Rect x={x - 4} y={y - 10} width={ww + 8} height={8} fill={whiteTrim} stroke={INK} strokeWidth={1.2} />
+      <Rect x={x} y={y} width={ww} height={wh} fill={whiteTrim} stroke={INK} strokeWidth={1.5} />
+      <Rect x={x + 4} y={y + 4} width={ww - 8} height={wh - 8} fill={glass} />
+      <Path d={`M${x + ww / 2} ${y + 4} V${y + wh - 4} M${x + 4} ${y + wh / 3} H${x + ww - 4} M${x + 4} ${y + (wh * 2) / 3} H${x + ww - 4}`} stroke={whiteTrim} strokeWidth={2.5} />
+      <Rect x={x - 6} y={y + wh} width={ww + 12} height={6} fill={whiteTrim} stroke={INK} strokeWidth={1.2} />
+    </G>
+  );
+  const window = ivy ? squareWindow : archWindow;
+
   return (
     <G>
       <Rect x={0} y={top} width={w} height={H} fill={stone} />
       {Array.from({ length: rows }, (_, r) => (
         <G key={r}>
-          <Path d={`M0 ${top + row * (r + 1)} H${w}`} stroke={line} strokeWidth={1.5} />
-          {Array.from({ length: 4 }, (_, c) => (
-            <Path key={c} d={`M${(w / 3) * c + (r % 2 ? w / 6 : 0)} ${top + row * r} V${top + row * (r + 1)}`} stroke={line} strokeWidth={1.5} />
+          <Path d={`M0 ${top + row * (r + 1)} H${w}`} stroke={line} strokeWidth={ivy ? 1 : 1.5} />
+          {Array.from({ length: per + 1 }, (_, c) => (
+            <Path key={c} d={`M${(w / per) * c + (r % 2 ? w / per / 2 : 0)} ${top + row * r} V${top + row * (r + 1)}`} stroke={line} strokeWidth={ivy ? 1 : 1.5} />
           ))}
         </G>
       ))}
 
-      {/* The window: arched, with curtains and a flower box. */}
-      <Path d={`M${winX} ${winTop + winH} V${winTop + winW / 2} A${winW / 2} ${winW / 2} 0 0 1 ${winX + winW} ${winTop + winW / 2} V${winTop + winH} Z`} fill="#FFFFFF" stroke={INK} strokeWidth={1.5} />
-      <Path d={`M${winX + 5} ${winTop + winH} V${winTop + winW / 2} A${winW / 2 - 5} ${winW / 2 - 5} 0 0 1 ${winX + winW - 5} ${winTop + winW / 2} V${winTop + winH} Z`} fill={lit ? '#FFD23F' : '#BFD0F5'} />
-      <Path d={`M${winX + 5} ${winTop + winW / 2 - 4} Q${winX + winW * 0.28} ${winTop + winH * 0.5} ${winX + 5} ${winTop + winH - 6} Z`} fill={colors.pinkTint} stroke={INK} strokeWidth={1} />
-      <Path d={`M${winX + winW - 5} ${winTop + winW / 2 - 4} Q${winX + winW * 0.72} ${winTop + winH * 0.5} ${winX + winW - 5} ${winTop + winH - 6} Z`} fill={colors.pinkTint} stroke={INK} strokeWidth={1} />
-      <Path d={`M${winX + winW / 2} ${winTop + 5} V${winTop + winH}`} stroke={INK} strokeWidth={1.2} />
+      {/* Ivy climbs the brick: up the left side, along the top, around the door. Windows sit on top of it. */}
+      {ivy && (
+        <G>
+          {ivyAlong([[w * 0.03, bottom], [w * 0.07, floor + FH * 0.5], [w * 0.04, floor], [w * 0.1, floor - FH * 0.6], [w * 0.05, top]], period, 7, 20)}
+          {ivyAlong([[w * 0.06, floor - FH * 0.08], [w * 0.28, floor - FH * 0.02], [w * 0.48, floor - FH * 0.1], [w * 0.6, floor - FH * 0.03]], period, 11, 14)}
+          {ivyAlong([[w * 0.0, top + 26], [w * 0.3, top + 44], [w * 0.56, top + 30], [w * 0.8, top + 48]], period, 13, 18)}
+          {ivyAlong([[w * 0.46, top + 40], [w * 0.5, floor - FH * 0.4], [w * 0.44, floor + FH * 0.1], [w * 0.5, floor + FH * 0.5]], period, 19, 14)}
+          {ivyAlong([[w * 0.97, bottom - 20], [w * 0.93, landing], [w * 0.95, dTop - 10], [w * 0.86, dTop - 30], [w * 0.96, top + 60]], period, 17, 16)}
+        </G>
+      )}
+
+      {upper.map((x, i) => window(x, floor - FH * 0.78, winW, FH * 0.5, `u${i}`))}
+      {window(winX, winTop, winW, winH, 'main')}
+      {/* A flower box under the ground-floor window. */}
       {[0.15, 0.35, 0.55, 0.75, 0.92].map((f, i) => (
         <G key={i}>
-          <Path d={`M${winX + winW * f} ${winTop + winH + 6} V${winTop + winH - 4}`} stroke="#3E8E4E" strokeWidth={2} />
-          <Circle cx={winX + winW * f} cy={winTop + winH - 6} r={4.5} fill={i % 2 ? colors.yellow : colors.pink} stroke={INK} strokeWidth={1} />
+          <Path d={`M${winX + winW * f} ${winTop + winH + 8} V${winTop + winH - 2}`} stroke="#3E8E4E" strokeWidth={2} />
+          <Circle cx={winX + winW * f} cy={winTop + winH - 4} r={4.5} fill={i % 2 ? colors.yellow : colors.pink} stroke={INK} strokeWidth={1} />
         </G>
       ))}
-      <Rect x={winX - 5} y={winTop + winH + 2} width={winW + 10} height={13} rx={3} fill="#9A6A44" stroke={INK} strokeWidth={1.2} />
+      <Rect x={winX - 5} y={winTop + winH + 4} width={winW + 10} height={12} rx={3} fill="#9A6A44" stroke={INK} strokeWidth={1.2} />
 
-      {/* The doorway: a little pediment, columns, an arched transom and a double door with a wreath. */}
-      <Path d={`M${dX - 10} ${dTop - 6} L${dX + dW / 2} ${dTop - 22} L${dX + dW + 10} ${dTop - 6} Z`} fill={trim} stroke={INK} strokeWidth={1.5} strokeLinejoin="round" />
-      <Rect x={dX - 12} y={dTop - 6} width={dW + 24} height={7} fill={trim} stroke={INK} strokeWidth={1.5} />
-      <Rect x={dX - 10} y={dTop + 1} width={8} height={landing - dTop - 1} fill={trim} stroke={INK} strokeWidth={1.2} />
-      <Rect x={dX + dW + 2} y={dTop + 1} width={8} height={landing - dTop - 1} fill={trim} stroke={INK} strokeWidth={1.2} />
-      <Path d={`M${dX} ${landing} V${dTop + dW / 2} A${dW / 2} ${dW / 2} 0 0 1 ${dX + dW} ${dTop + dW / 2} V${landing} Z`} fill="#2F5A52" stroke={INK} strokeWidth={1.5} />
-      <Path d={`M${dX + 3} ${dTop + dW / 2} A${dW / 2 - 3} ${dW / 2 - 3} 0 0 1 ${dX + dW - 3} ${dTop + dW / 2} Z`} fill={lit ? '#FFD23F' : '#BFD0F5'} stroke={INK} strokeWidth={1} />
-      <Path d={`M${dX + dW / 2} ${dTop + dW / 2} V${landing}`} stroke={INK} strokeWidth={1.2} />
-      <Circle cx={dX + dW / 2} cy={dTop + dW / 2 + (landing - dTop - dW / 2) * 0.32} r={dW * 0.17} fill="none" stroke="#5E8A3A" strokeWidth={5} />
-      {[0, 1, 2, 3, 4, 5].map((i) => {
-        const a = (i / 6) * Math.PI * 2;
-        const cy = dTop + dW / 2 + (landing - dTop - dW / 2) * 0.32;
-        return <Circle key={i} cx={dX + dW / 2 + Math.cos(a) * dW * 0.17} cy={cy + Math.sin(a) * dW * 0.17} r={2.2} fill={i % 2 ? colors.pink : '#E5484D'} />;
-      })}
-      {/* Pots of flowers on the landing. */}
-      {[dX - 4, dX + dW + 4].map((px, i) => (
-        <G key={i}>
-          <Path d={`M${px - 7} ${landing - 12} L${px + 7} ${landing - 12} L${px + 5} ${landing} L${px - 5} ${landing} Z`} fill="#E07A4A" stroke={INK} strokeWidth={1.2} />
-          {[-5, 0, 5].map((dx, j) => <Circle key={j} cx={px + dx} cy={landing - 16 - (j === 1 ? 3 : 0)} r={4} fill={j === 1 ? colors.yellow : colors.pink} stroke={INK} strokeWidth={1} />)}
+      {/* The doorway: a heavy hood on carved brackets (brownstone) or a white columned surround (ivy), and the door. */}
+      {ivy ? (
+        <G>
+          <Rect x={dX - 14} y={dTop - 14} width={dW + 28} height={10} fill={whiteTrim} stroke={INK} strokeWidth={1.5} />
+          <Rect x={dX - 12} y={dTop - 4} width={10} height={landing - dTop + 4} fill={whiteTrim} stroke={INK} strokeWidth={1.2} />
+          <Rect x={dX + dW + 2} y={dTop - 4} width={10} height={landing - dTop + 4} fill={whiteTrim} stroke={INK} strokeWidth={1.2} />
+          <Rect x={dX} y={dTop - 4} width={dW} height={dW * 0.28} fill={glass} stroke={INK} strokeWidth={1.2} />
+          <Rect x={dX} y={dTop - 4 + dW * 0.28} width={dW} height={landing - dTop + 4 - dW * 0.28} fill="#7A4E2A" stroke={INK} strokeWidth={1.5} />
+          <Rect x={dX + dW * 0.16} y={dTop + dW * 0.4} width={dW * 0.68} height={(landing - dTop) * 0.36} rx={2} fill="none" stroke="#5E3A20" strokeWidth={2} />
+          <Circle cx={dX + dW * 0.8} cy={(dTop + landing) / 2 + 10} r={2.6} fill={colors.yellow} stroke={INK} strokeWidth={0.8} />
+          {/* A little lantern beside the door. */}
+          <Rect x={dX + dW + 16} y={dTop + 20} width={10} height={14} rx={2} fill={lit ? colors.yellow : '#F7F3EC'} stroke={INK} strokeWidth={1.2} />
         </G>
-      ))}
+      ) : (
+        <G>
+          <Path d={`M${dX - 18} ${dTop - 4} Q${dX + dW / 2} ${dTop - 30} ${dX + dW + 18} ${dTop - 4} L${dX + dW + 18} ${dTop + 4} Q${dX + dW / 2} ${dTop - 18} ${dX - 18} ${dTop + 4} Z`} fill={pinkTrim} stroke={INK} strokeWidth={1.5} />
+          {[dX - 16, dX + dW + 6].map((bx, i) => (
+            <Path key={i} d={`M${bx} ${dTop + 4} H${bx + 10} V${dTop + 22} Q${bx + 5} ${dTop + 30} ${bx} ${dTop + 22} Z`} fill={pinkTrim} stroke={INK} strokeWidth={1.2} strokeLinejoin="round" />
+          ))}
+          <Path d={`M${dX} ${landing} V${dTop + dW / 2} A${dW / 2} ${dW / 2} 0 0 1 ${dX + dW} ${dTop + dW / 2} V${landing} Z`} fill={iron} stroke={INK} strokeWidth={1.5} />
+          <Path d={`M${dX + dW / 2} ${dTop + 8} V${landing}`} stroke="#3A3A4E" strokeWidth={2} />
+          {[0.22, 0.62].map((f, i) => (
+            <Rect key={i} x={dX + dW * (i ? 0.56 : 0.14)} y={dTop + dW * 0.6} width={dW * 0.3} height={(landing - dTop) * 0.38} rx={2} fill="none" stroke="#3A3A4E" strokeWidth={2} />
+          ))}
+          <Circle cx={dX + dW * 0.42} cy={(dTop + landing) / 2 + 8} r={2.6} fill={colors.yellow} stroke={INK} strokeWidth={0.8} />
+        </G>
+      )}
+      {/* A boxwood topiary in a pot on the landing. */}
+      <G>
+        <Path d={`M${dX - 22} ${landing - 14} L${dX - 6} ${landing - 14} L${dX - 8} ${landing} L${dX - 20} ${landing} Z`} fill={ivy ? '#C9C1B4' : '#E3DACB'} stroke={INK} strokeWidth={1.2} />
+        <Circle cx={dX - 14} cy={landing - 26} r={14} fill="#3E8E4E" stroke={INK} strokeWidth={1.2} />
+        <Circle cx={dX - 18} cy={landing - 30} r={4} fill="#5FAE5E" />
+      </G>
 
-      {/* The stoop: steps fanning out down to the sidewalk, a railing and a round newel post. */}
-      {Array.from({ length: steps }, (_, i) => {
+      {/* The stoop: steps fanning down to the sidewalk, with black iron railings. */}
+      {Array.from({ length: stepCount }, (_, i) => {
         const y = landing + stepH * i;
         const spread = 8 + i * 5;
-        return <Rect key={i} x={dX - spread} y={y} width={dW + spread * 2} height={stepH} fill={trim} stroke={INK} strokeWidth={1.2} />;
+        return <Rect key={i} x={dX - spread} y={y} width={dW + spread * 2} height={stepH} fill={steps} stroke={INK} strokeWidth={1.2} />;
       })}
-      <Path d={`M${dX - 14} ${landing - 18} L${dX - 34} ${bottom - 22}`} stroke={INK} strokeWidth={8} strokeLinecap="round" />
-      <Path d={`M${dX - 14} ${landing - 18} L${dX - 34} ${bottom - 22}`} stroke={trim} strokeWidth={5} strokeLinecap="round" />
-      <Rect x={dX - 44} y={bottom - 30} width={18} height={30} rx={3} fill={trim} stroke={INK} strokeWidth={1.2} />
-      <Circle cx={dX - 35} cy={bottom - 34} r={8} fill={trim} stroke={INK} strokeWidth={1.2} />
+      {[
+        [dX - 6, dX - 30],
+        [dX + dW + 6, dX + dW + 30],
+      ].map(([x1, x2], i) => (
+        <G key={i}>
+          <Path d={`M${x1} ${landing - 22} L${x2} ${bottom - 26}`} stroke={iron} strokeWidth={4} strokeLinecap="round" />
+          {Array.from({ length: 5 }, (_, k) => {
+            const f = (k + 0.5) / 5;
+            const x = x1 + (x2 - x1) * f;
+            const y = landing - 22 + (bottom - 26 - landing + 22) * f;
+            return <Path key={k} d={`M${x} ${y} V${y + 22}`} stroke={iron} strokeWidth={2} />;
+          })}
+          <Rect x={x2 - 6} y={bottom - 30} width={12} height={30} rx={2} fill={iron} />
+          <Circle cx={x2} cy={bottom - 33} r={6} fill={iron} />
+        </G>
+      ))}
+
+      {/* An iron fence along the front, on the ivy townhouse. */}
+      {ivy && (
+        <G>
+          <Path d={`M0 ${bottom - 24} H${dX - 40}`} stroke={iron} strokeWidth={3} />
+          {Array.from({ length: Math.floor((dX - 40) / 12) }, (_, k) => (
+            <G key={k}>
+              <Path d={`M${6 + k * 12} ${bottom} V${bottom - 30}`} stroke={iron} strokeWidth={2} />
+              <Path d={`M${2 + k * 12} ${bottom - 30} L${6 + k * 12} ${bottom - 38} L${10 + k * 12} ${bottom - 30} Z`} fill={iron} />
+            </G>
+          ))}
+        </G>
+      )}
     </G>
   );
 }
@@ -862,170 +1039,10 @@ function Sidewalk({ w, h, top, period }: { w: number; h: number; top: number; pe
 
 /** The front of the building on this block, in the neighborhood's style. */
 function Facade({ look, w, bottom, band, period }: { look: Building; w: number; bottom: number; band: { top: number; height: number }; period: Period }) {
-  if (look === 'tenement') return <Tenement w={w} bottom={bottom} band={band} period={period} />;
-  if (look === 'castiron') return <CastIron w={w} bottom={bottom} band={band} period={period} />;
-  if (look === 'glass') return <GlassTower w={w} bottom={bottom} band={band} period={period} />;
-  if (look === 'rowhouse') return <Rowhouse w={w} bottom={bottom} band={band} period={period} />;
-  return <Wall w={w} top={0} bottom={bottom} band={band} period={period} />;
+  return <Wall w={w} top={0} bottom={bottom} band={band} period={period} style={look} />;
 }
 
 const dim = (period: Period, day: string, dusk: string, night: string) => (period === 'night' ? night : period === 'dusk' ? dusk : day);
-
-/** A window with a sill: lit at night, with a little flower box when asked. */
-function Win({ x, y, ww, wh, period, flowers = false, arch = false }: { x: number; y: number; ww: number; wh: number; period: Period; flowers?: boolean; arch?: boolean }) {
-  const lit = period === 'dusk' || period === 'night';
-  const d = arch
-    ? `M${x} ${y + wh} V${y + ww / 2} A${ww / 2} ${ww / 2} 0 0 1 ${x + ww} ${y + ww / 2} V${y + wh} Z`
-    : `M${x} ${y} H${x + ww} V${y + wh} H${x} Z`;
-  return (
-    <G>
-      <Path d={d} fill={lit ? '#FFD23F' : '#BFD0F5'} stroke={INK} strokeWidth={1.5} />
-      <Path d={`M${x + ww / 2} ${y + (arch ? 4 : 0)} V${y + wh} M${x} ${y + wh * 0.55} H${x + ww}`} stroke={INK} strokeWidth={1} />
-      <Rect x={x - 4} y={y + wh} width={ww + 8} height={5} fill="#E3DACB" stroke={INK} strokeWidth={1} />
-      {flowers &&
-        [0.2, 0.5, 0.8].map((f, i) => <Circle key={i} cx={x + ww * f} cy={y + wh - 3} r={3.5} fill={i % 2 ? colors.yellow : colors.pink} stroke={INK} strokeWidth={0.8} />)}
-    </G>
-  );
-}
-
-/** A simple front door at sidewalk level, with a step and an awning. */
-function StreetDoor({ x, top, bottom, dw, color, awning, period }: { x: number; top: number; bottom: number; dw: number; color: string; awning: string; period: Period }) {
-  const lit = period === 'dusk' || period === 'night';
-  return (
-    <G>
-      <Rect x={x} y={top} width={dw} height={bottom - top} fill={color} stroke={INK} strokeWidth={1.5} />
-      <Rect x={x + dw * 0.15} y={top + 6} width={dw * 0.7} height={(bottom - top) * 0.3} rx={3} fill={lit ? '#FFD23F' : '#BFD0F5'} stroke={INK} strokeWidth={1} />
-      <Circle cx={x + dw * 0.78} cy={top + (bottom - top) * 0.6} r={2.5} fill={colors.yellow} stroke={INK} strokeWidth={0.8} />
-      <Path d={`M${x - 10} ${top - 2} H${x + dw + 10} L${x + dw + 4} ${top - 18} H${x - 4} Z`} fill={awning} stroke={INK} strokeWidth={1.2} strokeLinejoin="round" />
-      {[0, 1, 2, 3].map((i) => <Path key={i} d={`M${x - 10 + ((dw + 20) / 4) * i} ${top - 2} q${(dw + 20) / 8} 6 ${(dw + 20) / 4} 0`} fill={awning} stroke={INK} strokeWidth={1} />)}
-      <Rect x={x - 6} y={bottom - 6} width={dw + 12} height={6} fill="#C9C1B4" stroke={INK} strokeWidth={1.2} />
-    </G>
-  );
-}
-
-/** Brick tenement: red-brown brick, rows of windows, and a black fire escape zigzagging down. */
-function Tenement({ w, bottom, band, period }: { w: number; bottom: number; band: { top: number; height: number }; period: Period }) {
-  const brick = dim(period, '#C46E5A', '#A35C54', '#4E3434');
-  const line = dim(period, '#A95A48', '#8A4C46', '#3E2828');
-  const floor = band.top;
-  const fh = bottom - floor;
-  const row = 14;
-  return (
-    <G>
-      <Rect x={0} y={0} width={w} height={bottom} fill={brick} />
-      {Array.from({ length: Math.ceil(bottom / row) }, (_, r) => (
-        <G key={r}>
-          <Path d={`M0 ${row * (r + 1)} H${w}`} stroke={line} strokeWidth={1} />
-          {Array.from({ length: 13 }, (_, c) => (
-            <Path key={c} d={`M${(w / 12) * c + (r % 2 ? w / 24 : 0)} ${row * r} V${row * (r + 1)}`} stroke={line} strokeWidth={1} />
-          ))}
-        </G>
-      ))}
-      {/* Windows on the floor above, peeking out under the header. */}
-      {[0.08, 0.36, 0.64].map((x, i) => <Win key={i} x={w * x} y={floor - fh * 0.62} ww={w * 0.16} wh={fh * 0.45} period={period} />)}
-      {/* Ground floor: a window with flowers, and the door with an awning. */}
-      <Win x={w * 0.14} y={floor + fh * 0.12} ww={w * 0.17} wh={fh * 0.42} period={period} flowers />
-      <StreetDoor x={w * 0.68} top={floor + fh * 0.18} bottom={bottom} dw={w * 0.15} color="#2F5A52" awning="#E5484D" period={period} />
-      {/* The fire escape: a black landing and a ladder, on the left. */}
-      <G>
-        <Rect x={w * 0.04} y={floor - fh * 0.12} width={w * 0.34} height={6} fill={INK} />
-        {Array.from({ length: 9 }, (_, i) => <Path key={i} d={`M${w * 0.04 + (w * 0.34 / 8) * i} ${floor - fh * 0.12} V${floor - fh * 0.32}`} stroke={INK} strokeWidth={1.5} />)}
-        <Path d={`M${w * 0.04} ${floor - fh * 0.32} H${w * 0.38}`} stroke={INK} strokeWidth={2} />
-        <Path d={`M${w * 0.32} ${floor - fh * 0.12} L${w * 0.4} ${floor + fh * 0.06}`} stroke={INK} strokeWidth={2} />
-      </G>
-      <Cornice w={w} y={4} period={period} brackets={false} />
-    </G>
-  );
-}
-
-/** SoHo cast iron: pale painted columns between tall arched windows. */
-function CastIron({ w, bottom, band, period }: { w: number; bottom: number; band: { top: number; height: number }; period: Period }) {
-  const paint = dim(period, '#E8E2CF', '#C9C2B0', '#5A5648');
-  const shade = dim(period, '#CFC7AE', '#ADA690', '#46423A');
-  const floor = band.top;
-  const fh = bottom - floor;
-  const bays = 4;
-  const bw = w / bays;
-  return (
-    <G>
-      <Rect x={0} y={0} width={w} height={bottom} fill={paint} />
-      {Array.from({ length: bays + 1 }, (_, i) => (
-        <G key={i}>
-          <Rect x={bw * i - 8} y={0} width={16} height={bottom} fill={shade} stroke={INK} strokeWidth={1.2} />
-          <Rect x={bw * i - 12} y={floor - 10} width={24} height={8} fill={paint} stroke={INK} strokeWidth={1.2} />
-        </G>
-      ))}
-      <Rect x={0} y={floor - 10} width={w} height={6} fill={shade} stroke={INK} strokeWidth={1.2} />
-      {Array.from({ length: bays }, (_, i) =>
-        i === 2 ? null : <Win key={i} x={bw * i + bw * 0.2} y={floor + fh * 0.06} ww={bw * 0.6} wh={fh * 0.56} period={period} arch />,
-      )}
-      {Array.from({ length: bays }, (_, i) => <Win key={`u${i}`} x={bw * i + bw * 0.2} y={floor - fh * 0.72} ww={bw * 0.6} wh={fh * 0.5} period={period} arch />)}
-      <StreetDoor x={bw * 2 + bw * 0.14} top={floor + fh * 0.14} bottom={bottom} dw={bw * 0.72} color="#3E4A72" awning="#2F5BEA" period={period} />
-    </G>
-  );
-}
-
-/** A glass tower: a grid of tinted panes with a few bright reflections. */
-function GlassTower({ w, bottom, band, period }: { w: number; bottom: number; band: { top: number; height: number }; period: Period }) {
-  const glass = dim(period, '#A9C4EE', '#6F86C8', '#2E3A62');
-  const frame = dim(period, '#8AA0C8', '#56689E', '#1E2848');
-  const lit = period === 'dusk' || period === 'night';
-  const cols = 5;
-  const rowH = 46;
-  const floor = band.top;
-  return (
-    <G>
-      <Rect x={0} y={0} width={w} height={bottom} fill={glass} />
-      {Array.from({ length: Math.ceil(bottom / rowH) }, (_, r) => (
-        <G key={r}>
-          <Path d={`M0 ${rowH * (r + 1)} H${w}`} stroke={frame} strokeWidth={4} />
-          {lit && Array.from({ length: cols }, (_, c) => ((r * 3 + c) % 4 === 0 ? <Rect key={c} x={(w / cols) * c + 4} y={rowH * r + 4} width={w / cols - 8} height={rowH - 8} fill="#FFD23F" opacity={0.7} /> : null))}
-        </G>
-      ))}
-      {Array.from({ length: cols + 1 }, (_, c) => <Path key={c} d={`M${(w / cols) * c} 0 V${bottom}`} stroke={frame} strokeWidth={4} />)}
-      {/* Reflections: soft diagonal glints. */}
-      {[0.15, 0.55].map((x, i) => <Path key={i} d={`M${w * x} ${floor - 40} l${w * 0.12} -${w * 0.12} l${w * 0.05} 0 l-${w * 0.12} ${w * 0.12} Z`} fill="#FFFFFF" opacity={lit ? 0.12 : 0.45} />)}
-      {/* The lobby: glass doors and planters. */}
-      <Rect x={w * 0.6} y={floor + (bottom - floor) * 0.12} width={w * 0.26} height={(bottom - floor) * 0.88} fill={dim(period, '#DDE6FF', '#9AAADC', '#3E4A78')} stroke={INK} strokeWidth={1.5} />
-      <Path d={`M${w * 0.73} ${floor + (bottom - floor) * 0.12} V${bottom}`} stroke={INK} strokeWidth={1.5} />
-      {[0.2, 0.4].map((x, i) => (
-        <G key={i}>
-          <Rect x={w * x} y={bottom - 22} width={34} height={22} fill="#8A8A9C" stroke={INK} strokeWidth={1.2} />
-          <Circle cx={w * x + 17} cy={bottom - 30} r={14} fill="#5FC48E" stroke={INK} strokeWidth={1.2} />
-        </G>
-      ))}
-    </G>
-  );
-}
-
-/** A little row house: pastel siding, a bay window with flowers, a door with an awning. */
-function Rowhouse({ w, bottom, band, period }: { w: number; bottom: number; band: { top: number; height: number }; period: Period }) {
-  const siding = dim(period, '#CFE8D8', '#9DB8B0', '#3E4E4C');
-  const line = dim(period, '#B4D4C0', '#88A39C', '#34423F');
-  const trim = dim(period, '#FFFFFF', '#E3DACB', '#7A7A8A');
-  const floor = band.top;
-  const fh = bottom - floor;
-  return (
-    <G>
-      <Rect x={0} y={0} width={w} height={bottom} fill={siding} />
-      {Array.from({ length: Math.ceil(bottom / 12) }, (_, r) => <Path key={r} d={`M0 ${12 * (r + 1)} H${w}`} stroke={line} strokeWidth={1.2} />)}
-      {/* Upstairs: two windows with shutters, under the eave. */}
-      {[0.12, 0.6].map((x, i) => (
-        <G key={i}>
-          <Rect x={w * x - 10} y={floor - fh * 0.66} width={8} height={fh * 0.46} fill={colors.pink} stroke={INK} strokeWidth={1} />
-          <Rect x={w * x + w * 0.2 + 2} y={floor - fh * 0.66} width={8} height={fh * 0.46} fill={colors.pink} stroke={INK} strokeWidth={1} />
-          <Win x={w * x} y={floor - fh * 0.66} ww={w * 0.2} wh={fh * 0.46} period={period} />
-        </G>
-      ))}
-      <Rect x={0} y={floor - 8} width={w} height={6} fill={trim} stroke={INK} strokeWidth={1.2} />
-      {/* A bay window with a flower box, and the door. */}
-      <Path d={`M${w * 0.06} ${floor + fh * 0.6} L${w * 0.1} ${floor + fh * 0.08} H${w * 0.36} L${w * 0.4} ${floor + fh * 0.6} Z`} fill={trim} stroke={INK} strokeWidth={1.5} strokeLinejoin="round" />
-      <Win x={w * 0.13} y={floor + fh * 0.14} ww={w * 0.2} wh={fh * 0.38} period={period} flowers />
-      <StreetDoor x={w * 0.66} top={floor + fh * 0.18} bottom={bottom} dw={w * 0.15} color="#F2A65A" awning="#2F5BEA" period={period} />
-      <Rect x={-4} y={0} width={w + 8} height={10} fill={trim} stroke={INK} strokeWidth={1.2} />
-    </G>
-  );
-}
 
 /** A river or harbor: the city across the water, a stone edge on the far side. */
 function River({ w, h, horizon, period, landmark }: { w: number; h: number; horizon: number; period: Period; landmark?: Landmark }) {
@@ -1103,22 +1120,33 @@ function LandmarkShape({ kind, x, base, size, period }: { kind: Landmark; x: num
           <Circle cx={x + s * 0.12} cy={base - s * 0.98} r={s * 0.03} fill={colors.yellow} />
         </G>
       );
-    case 'wonder-wheel':
+    case 'wonder-wheel': {
+      // A cute pastel Ferris wheel: a double rim, colorful pods, a little star on top.
+      const cy = base - s * 0.5;
+      const r = s * 0.4;
+      const pods = ['#FF8FB0', '#FFD23F', '#9DD0F5', '#8BD9B8', '#B4A2F2', '#FFB38A', '#FF8FB0', '#9DD0F5'];
       return (
-        <G opacity={0.95}>
-          <Path d={`M${x - s * 0.3} ${base} L${x} ${base - s * 0.45} L${x + s * 0.3} ${base}`} stroke={line} strokeWidth={4} fill="none" />
-          <Circle cx={x} cy={base - s * 0.45} r={s * 0.42} fill="none" stroke={colors.pink} strokeWidth={4} />
+        <G>
+          <Path d={`M${x - s * 0.28} ${base} L${x} ${cy} L${x + s * 0.28} ${base}`} stroke={INK} strokeWidth={6} fill="none" strokeLinejoin="round" />
+          <Path d={`M${x - s * 0.28} ${base} L${x} ${cy} L${x + s * 0.28} ${base}`} stroke="#9DB9F2" strokeWidth={3.5} fill="none" strokeLinejoin="round" />
           {Array.from({ length: 8 }, (_, i) => {
             const a = (i / 8) * Math.PI * 2;
-            return (
-              <G key={i}>
-                <Path d={`M${x} ${base - s * 0.45} l${Math.cos(a) * s * 0.42} ${Math.sin(a) * s * 0.42}`} stroke={line} strokeWidth={1.5} />
-                <Rect x={x + Math.cos(a) * s * 0.42 - 5} y={base - s * 0.45 + Math.sin(a) * s * 0.42 - 2} width={10} height={9} rx={2} fill={i % 2 ? colors.yellow : '#9DD0F5'} stroke={line} strokeWidth={1} />
-              </G>
-            );
+            return <Path key={i} d={`M${x} ${cy} l${Math.cos(a) * r} ${Math.sin(a) * r}`} stroke="#F7F3EC" strokeWidth={2} />;
           })}
+          <Circle cx={x} cy={cy} r={r} fill="none" stroke={INK} strokeWidth={6} />
+          <Circle cx={x} cy={cy} r={r} fill="none" stroke={colors.pink} strokeWidth={3.5} />
+          <Circle cx={x} cy={cy} r={r * 0.62} fill="none" stroke="#FFB3CB" strokeWidth={2} />
+          {Array.from({ length: 8 }, (_, i) => {
+            const a = (i / 8) * Math.PI * 2;
+            const px = x + Math.cos(a) * r;
+            const py = cy + Math.sin(a) * r;
+            return <Path key={`p${i}`} d={`M${px - 6} ${py} H${px + 6} V${py + 7} Q${px} ${py + 13} ${px - 6} ${py + 7} Z`} fill={pods[i]} stroke={INK} strokeWidth={1.2} strokeLinejoin="round" />;
+          })}
+          <Circle cx={x} cy={cy} r={6} fill={colors.yellow} stroke={INK} strokeWidth={1.5} />
+          <Path d={`M${x} ${cy - r - 12} l2.5 5 5.5 0.8 -4 3.8 1 5.4 -5 -2.6 -5 2.6 1 -5.4 -4 -3.8 5.5 -0.8 Z`} fill={colors.yellow} stroke={INK} strokeWidth={1} strokeLinejoin="round" />
         </G>
       );
+    }
     case 'unisphere':
       return (
         <G opacity={0.9}>

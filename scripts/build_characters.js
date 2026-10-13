@@ -759,10 +759,11 @@ ART.heron = {
       <path d="M222 276 L214 346 M252 278 L258 346" stroke="#8A7356" stroke-width="7" stroke-linecap="round"/>
       ${shadow([tail, body, head])}
       ${shape(tail, '#5E6E8E')}
+      ${'' /* The neck's outline goes behind the body, and its fill on top, so there's no line where they meet. */}
+      <path d="${neckLine}" fill="none" stroke="${C.ink}" stroke-width="38" stroke-linecap="round"/>
       ${shape(body, '#7D8FAE')}
       <path d="M210 196 C256 182 312 190 340 222 C306 246 252 248 214 236 Z" fill="#5E6E8E"/>
       <path d="M170 236 C176 252 186 262 200 268 M184 232 C190 248 200 258 214 264" fill="none" stroke="#C9D3E3" stroke-width="7" stroke-linecap="round"/>
-      <path d="${neckLine}" fill="none" stroke="${C.ink}" stroke-width="38" stroke-linecap="round"/>
       <path d="${neckLine}" fill="none" stroke="#B8C3D6" stroke-width="22" stroke-linecap="round"/>
       <path d="M160 196 C148 180 150 160 156 144" fill="none" stroke="#5E4A3A" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 8"/>
       ${shape(head, '#F4F2F0')}
