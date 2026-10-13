@@ -1163,15 +1163,13 @@ ART.pigeonBody = {
       ${shape(body, '#BDBCD0')}
       <clipPath id="pb-body"><path d="${outline}"/></clipPath>
       <g clip-path="url(#pb-body)">
+        <path d="M108 190 C130 222 168 236 214 228" fill="none" stroke="#4FB89A" stroke-width="16" stroke-linecap="round" opacity="0.85"/>
+        <path d="M110 212 C134 240 172 252 216 244" fill="none" stroke="#9B6BC4" stroke-width="11" stroke-linecap="round" opacity="0.75"/>
         <path d="M188 190 C258 182 322 212 340 258 C302 288 240 288 194 262 Z" fill="#A3A2BC"/>
         <path d="M238 224 C268 232 294 248 308 264 M262 210 C292 220 316 236 330 252" fill="none" stroke="${C.ink}" stroke-width="10" stroke-linecap="round"/>
         <path d="M188 190 C182 220 186 244 194 262" fill="none" stroke="${C.ink}" stroke-width="7"/>
       </g>
       <path d="${outline}" fill="none" ${OL}/>
-      <path d="M96 166 C100 210 130 238 182 244 L216 198 C194 186 178 166 174 146 Z" fill="#8F8EA8"/>
-      <path d="M104 182 C120 214 150 232 194 234" fill="none" stroke="#4FB89A" stroke-width="13" stroke-linecap="round" opacity="0.9"/>
-      <path d="M100 196 C118 222 148 238 186 242" fill="none" stroke="#9B6BC4" stroke-width="9" stroke-linecap="round" opacity="0.85"/>
-      <path d="M96 166 C100 210 130 238 182 244" fill="none" ${OL}/>
       ${shape(head, '#8F8EA8')}
       ${eye(m.eyes, 112, 116, 17, { ring: '#FF8A3D', lid: '#8F8EA8' })}
       <ellipse cx="146" cy="152" rx="16" ry="10" fill="${C.pink}"/>
