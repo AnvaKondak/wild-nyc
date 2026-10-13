@@ -13,6 +13,8 @@ export type AppState = {
   soundOn: boolean;
   /** The one-a-day morning note. Off until the person turns it on. */
   notesOn: boolean;
+  /** Species the person loves, in the order they added them. Kinds of animals, never individuals. */
+  favorites: string[];
 };
 
 export const initialState: AppState = {
@@ -22,6 +24,7 @@ export const initialState: AppState = {
   kindness: { seasonKey: '', done: {} },
   soundOn: false,
   notesOn: false,
+  favorites: [],
 };
 
 export type Action =
@@ -31,6 +34,7 @@ export type Action =
   | { type: 'selectNeighborhood'; id: string }
   | { type: 'removeNeighborhood'; id: string }
   | { type: 'replaceHome'; neighborhood: Neighborhood }
+  | { type: 'toggleFavorite'; speciesId: string }
   | { type: 'toggleKindness'; id: string; seasonKey: string }
   | { type: 'setSound'; on: boolean }
   | { type: 'setNotes'; on: boolean };
@@ -76,6 +80,11 @@ export function reducer(state: AppState, action: Action): AppState {
       const others = state.neighborhoods.filter((n, i) => i !== at && n.id !== next.id);
       const neighborhoods = state.neighborhoods.length === 0 ? [next] : [...others.slice(0, at), next, ...others.slice(at)];
       return { ...state, neighborhoods, currentId: next.id };
+    }
+
+    case 'toggleFavorite': {
+      const on = state.favorites.includes(action.speciesId);
+      return { ...state, favorites: on ? state.favorites.filter((id) => id !== action.speciesId) : [...state.favorites, action.speciesId] };
     }
 
     case 'toggleKindness': {

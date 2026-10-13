@@ -7,6 +7,7 @@ import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { HeartIcon } from '@/components/Icons';
 import { StoryBackdrop } from '@/components/backdrop';
+import { FavoriteButton } from '@/components/FavoriteButton';
 import { PeriodIcon } from '@/components/PeriodIcon';
 import { PhotoViewer } from '@/components/PhotoViewer';
 import { Screen } from '@/components/Screen';
@@ -82,6 +83,9 @@ function Profile({ species, startPhoto, startY }: { species: Species; startPhoto
           </View>
         )}
         <BackButton style={{ position: 'absolute', left: 16, top: insets.top + 8 }} />
+        <View style={{ position: 'absolute', right: 16, top: insets.top + 8 }}>
+          <FavoriteButton speciesId={species.id} />
+        </View>
         <View style={{ position: 'absolute', left: 0, right: 0, top: insets.top + 60, alignItems: 'center' }}>
           <Pressable onPress={() => photos.length && setViewing(0)} disabled={!photos.length} accessibilityRole="imagebutton" accessibilityLabel={`${species.friendlyName} photo. Open it big`}>
             <Sticker art={species.art} photo={speciesPhoto(species.id)} speciesId={species.id} size={170} tint={colors.white} rotate={-5} shadowColor={colors.blue} />

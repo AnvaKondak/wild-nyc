@@ -47,6 +47,22 @@ describe('neighborhoods', () => {
   });
 });
 
+describe('favorites', () => {
+  it('adds and removes a species, keeping the order they were added', () => {
+    let s = reducer(initialState, { type: 'toggleFavorite', speciesId: 'rock-pigeon' });
+    s = reducer(s, { type: 'toggleFavorite', speciesId: 'blue-jay' });
+    expect(s.favorites).toEqual(['rock-pigeon', 'blue-jay']);
+    s = reducer(s, { type: 'toggleFavorite', speciesId: 'rock-pigeon' });
+    expect(s.favorites).toEqual(['blue-jay']);
+  });
+
+  it('starts empty for saves from before favorites existed', () => {
+    const old = { ...initialState } as Partial<AppState>;
+    delete old.favorites;
+    expect(reducer(initialState, { type: 'hydrate', state: old as AppState }).favorites).toEqual([]);
+  });
+});
+
 describe('hydrate', () => {
   it('drops "I noticed them" records from older saves', () => {
     const old = { ...initialState, noticed: [{ speciesId: 'rock-pigeon', date: '2026-10-01', cell: 'dr5rsp' }] } as AppState;

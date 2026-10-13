@@ -4,6 +4,7 @@ import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
+import { FavoriteButton } from '@/components/FavoriteButton';
 import { FloatingCast } from '@/components/Floating';
 import { BellIcon, BellOffIcon, ChevronLeftIcon, ChevronRightIcon, HomeIcon, SoundOffIcon, SoundOnIcon } from '@/components/Icons';
 import { GroupSticker } from '@/components/GroupSticker';
@@ -437,28 +438,36 @@ export default function RightNow() {
                   <RoundNav label={i === 0 ? 'Home' : 'Previous story'} onPress={back} color={theme.ink} fill={theme.bg}>
                     <ChevronLeftIcon color={theme.ink} />
                   </RoundNav>
-                  <Pressable
-                    onPress={next}
-                    accessibilityRole="button"
-                    accessibilityLabel={`${slide.kind === 'intro' ? 'Who\'s up' : species?.friendlyName ?? 'Animal'} photo. Next story`}
-                  >
-                    {slide.kind === 'intro' ? (
-                      <GroupSticker period={header.period} speciesIds={slide.introSpecies ?? []} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
-                    ) : slide.cast ? (
-                      <GroupSticker speciesIds={slide.cast} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
-                    ) : (
-                      <Sticker
-                        art={(species ?? getSpecies('rock-pigeon')!).art}
-                        photo={slidePhoto}
-                        speciesId={species?.id}
-                        mood={slide.mood ?? slide.photoIndex ?? 0}
-                        size={stickerSize}
-                        tint={tileFor(slide)}
-                        rotate={-5}
-                        shadowColor={theme.shadow}
-                      />
+                  <View>
+                    <Pressable
+                      onPress={next}
+                      accessibilityRole="button"
+                      accessibilityLabel={`${slide.kind === 'intro' ? 'Who\'s up' : species?.friendlyName ?? 'Animal'} photo. Next story`}
+                    >
+                      {slide.kind === 'intro' ? (
+                        <GroupSticker period={header.period} speciesIds={slide.introSpecies ?? []} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
+                      ) : slide.cast ? (
+                        <GroupSticker speciesIds={slide.cast} size={stickerSize} tint={theme.card} ink={theme.ink} shadowColor={theme.shadow} />
+                      ) : (
+                        <Sticker
+                          art={(species ?? getSpecies('rock-pigeon')!).art}
+                          photo={slidePhoto}
+                          speciesId={species?.id}
+                          mood={slide.mood ?? slide.photoIndex ?? 0}
+                          size={stickerSize}
+                          tint={tileFor(slide)}
+                          rotate={-5}
+                          shadowColor={theme.shadow}
+                        />
+                      )}
+                    </Pressable>
+                    {/* Add them to your favorites right from the story. */}
+                    {species && slide.kind !== 'intro' && !slide.cast && (
+                      <View style={{ position: 'absolute', right: -6, bottom: 0 }}>
+                        <FavoriteButton speciesId={species.id} size="round" ink={theme.ink} background={theme.bg} />
+                      </View>
                     )}
-                  </Pressable>
+                  </View>
                   <RoundNav label="Next story" onPress={next} color={theme.ink} fill={theme.bg}>
                     <ChevronRightIcon color={theme.ink} />
                   </RoundNav>
