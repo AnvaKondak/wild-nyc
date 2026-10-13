@@ -170,8 +170,6 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
           <>
             {/* Up close, the brownstone fills the whole screen. */}
             <Facade look={look.building} w={w} bottom={pavement} band={band} period={period} />
-            {/* A soft wash of the time of day over the wall behind the header, so the text reads on any building. */}
-            <Rect x={0} y={0} width={w} height={bt - 4} fill={sky} opacity={0.72} />
             <Cornice w={w} y={4} period={period} brackets={false} />
             <WallBranch y={bt} bh={bh} w={w} />
             <Sidewalk w={w} h={h} top={pavement} period={period} />

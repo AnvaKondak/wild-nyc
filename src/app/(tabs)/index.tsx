@@ -357,7 +357,13 @@ export default function RightNow() {
               disabled={!__DEV__}
               accessible
               accessibilityLabel={`${header.label}, ${header.clock}. ${weatherLine}`}
-              style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 10, paddingLeft: 22, paddingRight: 8, paddingTop: 18 }}
+              style={[
+                { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 10, paddingLeft: 22, paddingRight: 8, paddingTop: 18 },
+                // Over a close-up scene, the time and weather sit on their own little card so they always read.
+                closeUp && !showHome
+                  ? { marginLeft: 12, marginRight: 8, marginTop: 14, paddingLeft: 12, paddingRight: 12, paddingTop: 8, paddingBottom: 8, borderRadius: 18, borderWidth: border.width, borderColor: theme.ink, backgroundColor: theme.bg }
+                  : null,
+              ]}
             >
               <PeriodIcon period={header.period} color={theme.ink} />
               <View style={{ flex: 1 }}>
