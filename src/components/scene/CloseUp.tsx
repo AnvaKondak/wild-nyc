@@ -41,7 +41,8 @@ const LEAVES: Record<Season, string[]> = {
 };
 const WATER: Record<Period, string> = { dawn: '#9DB9F2', midday: '#8FB3E8', dusk: '#6F8FE0', night: '#3E4A78' };
 const BARK = '#8A6247';
-const BRICK: Record<Period, [string, string]> = { dawn: ['#F0C2AE', '#DCA48C'], midday: ['#E8B9A2', '#D49A80'], dusk: ['#C98E86', '#B07870'], night: ['#6E4A4A', '#5A3C3C'] };
+// Brownstone: warm chocolate-brown sandstone, in big smooth blocks.
+const BRICK: Record<Period, [string, string]> = { dawn: ['#A8705A', '#93604C'], midday: ['#9C664F', '#875744'], dusk: ['#7E5248', '#6C463E'], night: ['#4E3634', '#402C2A'] };
 const PAVEMENT: Record<Period, string> = { dawn: '#E6E1EA', midday: '#DAD7E0', dusk: '#B9B6C8', night: '#55546A' };
 const FAR: Record<Period, string> = { dawn: '#F2C4D4', midday: '#F2DFA0', dusk: '#4A6FE0', night: '#3B3A50' };
 
@@ -82,18 +83,9 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
 
   return (
     <View style={{ position: 'absolute', left: 0, top: 0, width: w, height: h, backgroundColor: sky }}>
-      {/* Sun, moon and clouds need open sky: not over the brick wall. Rain and snow still fall. */}
+      {/* Up close to a brownstone there's no open sky: no sun, moon or clouds. Rain and snow still fall. */}
       {setting !== 'sidewalk' && setting !== 'puddle' && <SkyWeather w={w} h={h} bt={bt} bh={bh} period={period} weather={weather} behind />}
       <Svg width={w} height={h} style={{ position: 'absolute' }}>
-        {(setting === 'sidewalk' || setting === 'puddle') && weather === 'clear' && (period === 'dawn' || period === 'midday') && (
-          // On a clear day the sun peeks over the roof at the far left, clear of the text.
-          <G>
-            {[-0.9, -0.5, 0, 0.5, 0.9].map((a, i) => (
-              <Path key={i} d={`M${24 + Math.sin(a) * 22} ${bt - 12 - Math.cos(a) * 22} L${24 + Math.sin(a) * 29} ${bt - 12 - Math.cos(a) * 29}`} stroke={colors.yellow} strokeWidth={3.5} strokeLinecap="round" />
-            ))}
-            <Circle cx={24} cy={bt - 12} r={16} fill={colors.yellow} stroke={INK} strokeWidth={1.5} />
-          </G>
-        )}
         {setting === 'sidewalk' || setting === 'puddle' ? (
           <>
             {/* The wall starts just below the header, so the time and weather stay on sky. */}
@@ -368,10 +360,10 @@ function Branch({ w, y, bh }: { w: number; y: number; bh: number }) {
   );
 }
 
-/** A brick wall from `top` to `bottom`, with a window beside the animal. */
+/** A brownstone front from `top` to `bottom`: big smooth stone blocks, with a window beside the animal. */
 function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom: number; band: { top: number; height: number }; period: Period }) {
   const [brick, line] = BRICK[period];
-  const row = 26;
+  const row = 34;
   const rows = Math.ceil((bottom - top) / row);
   const lit = period === 'dusk' || period === 'night';
   // A cute arched window, well below the cornice, with curtains and a flower box.
@@ -386,8 +378,8 @@ function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom
       {Array.from({ length: rows }, (_, r) => (
         <G key={r}>
           <Path d={`M0 ${top + row * (r + 1)} H${w}`} stroke={line} strokeWidth={1.5} />
-          {Array.from({ length: 9 }, (_, c) => (
-            <Path key={c} d={`M${(w / 8) * c + (r % 2 ? w / 16 : 0)} ${top + row * r} V${top + row * (r + 1)}`} stroke={line} strokeWidth={1.5} />
+          {Array.from({ length: 4 }, (_, c) => (
+            <Path key={c} d={`M${(w / 3) * c + (r % 2 ? w / 6 : 0)} ${top + row * r} V${top + row * (r + 1)}`} stroke={line} strokeWidth={1.5} />
           ))}
         </G>
       ))}
