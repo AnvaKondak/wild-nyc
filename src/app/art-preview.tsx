@@ -1,6 +1,7 @@
 // Dev-only gallery of the PLACEHOLDER art: every species, and every story setting.
 // Open with the deep link wildneighbors://art-preview (or /art-preview on web).
-import { Text, useWindowDimensions, View } from 'react-native';
+import { useState } from 'react';
+import { FlatList, Pressable, Text, useWindowDimensions, View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { BackButton } from '@/components/BackButton';
 import { Screen } from '@/components/Screen';
@@ -32,30 +33,7 @@ export default function ArtPreview() {
   const raccoon = getSpecies('raccoon')!;
   const { only, from, accents, period: p, place, scene: forced, action } = useLocalSearchParams<{ only?: string; from?: string; accents?: string; period?: Period; place?: string; scene?: CloseUpSetting; action?: 'fly' | 'sleep' | 'dust' | 'drink' }>();
   const { width } = useWindowDimensions();
-  if (only === 'closeups') {
-    // Dev only: ?only=closeups&from=12&period=dusk pages through every close-up, 12 at a time.
-    const period = p ?? 'midday';
-    const cw = (width - 24) / 3;
-    const ch = cw * 1.65;
-    const start = Number(from ?? 0);
-    return (
-      <View style={{ flex: 1, backgroundColor: colors.paper, paddingTop: 54, paddingHorizontal: 8, flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
-        {CLOSEUPS.slice(start, start + 12).map(({ s, scene }, i) => (
-          <View key={i} style={{ width: cw, gap: 2 }}>
-            {/* The real full-screen scene, shrunk to fit: same band as on a story slide. */}
-            <View style={{ width: cw, height: ch, overflow: 'hidden', borderRadius: 8 }}>
-              <View style={{ width, height: width * 1.65, transformOrigin: 'top left', transform: [{ scale: cw / width }] }}>
-                <CloseUp setting={forced ?? scene} speciesId={s.id} mood="hello" width={width} height={width * 1.65} band={{ top: 228, height: 195 }} period={period} season="fall" sky={periodThemes[period].bg} weather="clear" placeId={place} placeKind={places.find((x) => x.id === place)?.kind} variant={start + i} action={action} />
-              </View>
-            </View>
-            <Text numberOfLines={1} style={{ fontFamily: fonts.bodySemi, fontSize: 9, color: colors.ink }}>
-              {start + i + 1}. {s.friendlyName} · {forced ?? scene}
-            </Text>
-          </View>
-        ))}
-      </View>
-    );
-  }
+  if (only === 'closeups') return <CloseUpGallery width={width} initial={{ period: p, place, scene: forced, action }} />;
   const thumb = (width - 32 - 12) / 2;
   if (only === 'backdrops') {
     const h = thumb * 1.9;
@@ -113,5 +91,59 @@ export default function ArtPreview() {
         ))}
       </View>
     </Screen>
+  );
+}
+
+// Dev only: every close-up, scrollable, with buttons to try each action, time of day and look.
+type Act = 'fly' | 'sleep' | 'dust' | 'drink' | undefined;
+const ACTION_SCENES: Record<string, CloseUpSetting> = { fly: 'sky', sleep: 'hollow', dust: 'building', drink: 'puddle' };
+const LOOKS = ['park-slope', 'chelsea', 'coney-island', 'battery-park-city', 'bay-ridge'];
+
+function CloseUpGallery({ width, initial }: { width: number; initial: { period?: Period; place?: string; scene?: CloseUpSetting; action?: Act } }) {
+  const [period, setPeriod] = useState<Period>(initial.period ?? 'midday');
+  const [place, setPlace] = useState(initial.place ?? 'park-slope');
+  const [action, setAction] = useState<Act>(initial.action);
+  const cw = (width - 24) / 3;
+  const ch = cw * 1.65;
+  const chip = (label: string, on: boolean, onPress: () => void) => (
+    <Pressable key={label} onPress={onPress} style={{ paddingHorizontal: 10, minHeight: 32, justifyContent: 'center', borderRadius: 16, borderWidth: 1.5, borderColor: colors.ink, backgroundColor: on ? colors.ink : colors.white }}>
+      <Text style={{ fontFamily: fonts.bodySemi, fontSize: 12, color: on ? colors.white : colors.ink }}>{label}</Text>
+    </Pressable>
+  );
+  const scene = (own: CloseUpSetting) => initial.scene ?? (action ? ACTION_SCENES[action] : own);
+  return (
+    <View style={{ flex: 1, backgroundColor: colors.paper, paddingTop: 54 }}>
+      <View style={{ paddingHorizontal: 8, gap: 6, paddingBottom: 6 }}>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
+          {chip('No action', !action, () => setAction(undefined))}
+          {(['fly', 'sleep', 'dust', 'drink'] as const).map((a) => chip(a, action === a, () => setAction(a)))}
+        </View>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
+          {(['dawn', 'midday', 'dusk', 'night'] as const).map((x) => chip(x, period === x, () => setPeriod(x)))}
+        </View>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>{LOOKS.map((x) => chip(x, place === x, () => setPlace(x)))}</View>
+      </View>
+      <FlatList
+        data={CLOSEUPS}
+        numColumns={3}
+        keyExtractor={(_, i) => String(i)}
+        contentContainerStyle={{ paddingHorizontal: 8, paddingBottom: 40, gap: 4 }}
+        columnWrapperStyle={{ gap: 4 }}
+        initialNumToRender={9}
+        windowSize={3}
+        renderItem={({ item: { s, scene: own }, index }) => (
+          <View style={{ width: cw, gap: 2 }}>
+            <View style={{ width: cw, height: ch, overflow: 'hidden', borderRadius: 8 }}>
+              <View style={{ width, height: width * 1.65, transformOrigin: 'top left', transform: [{ scale: cw / width }] }}>
+                <CloseUp setting={scene(own)} speciesId={s.id} mood={action === 'sleep' ? 'sleepy' : 'hello'} width={width} height={width * 1.65} band={{ top: 228, height: 195 }} period={period} season="fall" sky={periodThemes[period].bg} weather="clear" placeId={place} placeKind={places.find((x) => x.id === place)?.kind} variant={index} action={action} />
+              </View>
+            </View>
+            <Text numberOfLines={1} style={{ fontFamily: fonts.bodySemi, fontSize: 9, color: colors.ink }}>
+              {index + 1}. {s.friendlyName} · {scene(own)}
+            </Text>
+          </View>
+        )}
+      />
+    </View>
   );
 }
