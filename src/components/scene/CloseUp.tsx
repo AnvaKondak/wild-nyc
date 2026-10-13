@@ -260,16 +260,34 @@ function HighLedge({ w, h, y, bh, bt, period, look, variant }: { w: number; h: n
   const [stone, line] = look === 'ivy' ? IVY_BRICK[period] : BRICK[period];
   const trim = period === 'night' ? '#6E6A80' : period === 'dusk' ? '#B3ABA0' : '#E3DACB';
   const shade = period === 'night' ? '#55546A' : period === 'dusk' ? '#9A9086' : '#C2B6A3';
-  const wallX = w * 0.8;
+  const wallX = w * 0.74;
   return (
     <G>
       {/* The city's rooftops far below. */}
       <Skyline w={w} h={h} base={y + bh * 1.05} bh={bh} period={period} />
-      {/* The wall rising at the right, with a window. */}
+      {/* The building this ledge belongs to, rising at the right: stone blocks, arched windows with hoods, a flower box. */}
       <Rect x={wallX} y={0} width={w - wallX} height={y + 10} fill={stone} />
-      {Array.from({ length: Math.ceil(y / 30) }, (_, r) => <Path key={r} d={`M${wallX} ${30 * (r + 1)} H${w}`} stroke={line} strokeWidth={1.2} />)}
+      {Array.from({ length: Math.ceil(y / 30) }, (_, r) => (
+        <G key={r}>
+          <Path d={`M${wallX} ${30 * (r + 1)} H${w}`} stroke={line} strokeWidth={1.2} />
+          <Path d={`M${wallX + ((w - wallX) * (r % 2 ? 0.5 : 0.25))} ${30 * r} V${30 * (r + 1)}`} stroke={line} strokeWidth={1.2} />
+        </G>
+      ))}
       <Path d={`M${wallX} 0 V${y}`} stroke={INK} strokeWidth={1.5} />
-      <Rect x={wallX + 14} y={bt + bh * 0.1} width={w - wallX - 20} height={bh * 0.5} fill="#BFD0F5" stroke={INK} strokeWidth={1.5} />
+      {[bt - bh * 0.1, bt + bh * 0.42].map((wy, i) => {
+        const wx = wallX + (w - wallX) * 0.2;
+        const ww = (w - wallX) * 0.6;
+        const wh = bh * 0.4;
+        return (
+          <G key={i}>
+            <Path d={`M${wx - 5} ${wy + ww / 2 - 1} Q${wx + ww / 2} ${wy - ww * 0.3} ${wx + ww + 5} ${wy + ww / 2 - 1} V${wy + ww / 2 + 5} Q${wx + ww / 2} ${wy - ww * 0.16} ${wx - 5} ${wy + ww / 2 + 5} Z`} fill={trim} stroke={INK} strokeWidth={1.2} />
+            <Path d={`M${wx} ${wy + wh} V${wy + ww / 2} A${ww / 2} ${ww / 2} 0 0 1 ${wx + ww} ${wy + ww / 2} V${wy + wh} Z`} fill={period === 'dusk' || period === 'night' ? '#FFD23F' : '#BFD0F5'} stroke={INK} strokeWidth={1.5} />
+            <Path d={`M${wx + ww / 2} ${wy + 4} V${wy + wh} M${wx} ${wy + wh * 0.6} H${wx + ww}`} stroke={INK} strokeWidth={1} />
+            <Rect x={wx - 4} y={wy + wh} width={ww + 8} height={6} fill={trim} stroke={INK} strokeWidth={1.2} />
+            {i === 1 && [0.2, 0.5, 0.8].map((f, k) => <Circle key={k} cx={wx + ww * f} cy={wy + wh - 3} r={4} fill={k % 2 ? colors.yellow : colors.pink} stroke={INK} strokeWidth={0.8} />)}
+          </G>
+        );
+      })}
       {/* The ledge: a thick stone slab with a carved edge and brackets below. */}
       <Rect x={-4} y={y} width={w + 8} height={16} fill={trim} stroke={INK} strokeWidth={1.5} />
       <Rect x={-4} y={y + 16} width={w + 8} height={10} fill={shade} stroke={INK} strokeWidth={1.5} />
@@ -1207,15 +1225,36 @@ function Ocean({ w, h, horizon, period, landmark }: { w: number; h: number; hori
   );
 }
 
-/** The city across the water: a soft row of towers. */
+/** The city in the distance: a row of little pastel towers with outlines, windows and rooftops. */
 function FarCity({ w, base, period }: { w: number; base: number; period: Period }) {
-  const fill = dim(period, '#C9C3DE', '#5A6EC8', '#34344E');
+  const night = period === 'night' || period === 'dusk';
+  const walls = night ? ['#4A4A72', '#5A4A6E', '#3E4A72'] : period === 'dawn' ? ['#F2C4D4', '#E8D4F2', '#FADADA'] : ['#E8D4F2', '#FADADA', '#D4E2F7', '#F7E3C4'];
+  const glass = night ? '#FFD23F' : '#BFD0F5';
   const towers: [number, number, number][] = [[0, 0.1, 40], [0.09, 0.08, 66], [0.16, 0.12, 48], [0.27, 0.07, 84], [0.33, 0.1, 56], [0.42, 0.09, 70], [0.5, 0.12, 44], [0.6, 0.08, 60], [0.86, 0.14, 50]];
   return (
-    <G opacity={0.85}>
-      {towers.map(([x, tw, th], i) => (
-        <Rect key={i} x={w * x} y={base - th} width={w * tw} height={th} fill={fill} />
-      ))}
+    <G>
+      {towers.map(([x, tw, th], i) => {
+        const bx = w * x;
+        const bw = w * tw;
+        const top = base - th;
+        const rows = Math.floor((th - 8) / 11);
+        const cols = Math.max(2, Math.floor(bw / 10));
+        return (
+          <G key={i}>
+            <Rect x={bx} y={top} width={bw} height={th} fill={walls[i % walls.length]} stroke={INK} strokeWidth={1} />
+            {i % 3 === 1 ? (
+              <Path d={`M${bx} ${top} L${bx + bw / 2} ${top - 8} L${bx + bw} ${top} Z`} fill={walls[(i + 1) % walls.length]} stroke={INK} strokeWidth={1} strokeLinejoin="round" />
+            ) : (
+              <Rect x={bx - 1.5} y={top - 3} width={bw + 3} height={4} fill={walls[(i + 2) % walls.length]} stroke={INK} strokeWidth={0.8} />
+            )}
+            {Array.from({ length: rows }, (_, r) =>
+              Array.from({ length: cols }, (_, c) => (
+                <Rect key={`${r}:${c}`} x={bx + 3 + c * ((bw - 6) / cols) + 1} y={top + 6 + r * 11} width={(bw - 6) / cols - 3} height={6} fill={(r + c + i) % 3 === 0 ? glass : night ? '#2E2E44' : '#FFFFFF'} stroke={INK} strokeWidth={0.6} />
+              )),
+            )}
+          </G>
+        );
+      })}
     </G>
   );
 }
