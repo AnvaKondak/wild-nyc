@@ -59,8 +59,8 @@ export function Character({ speciesId, size, mood = 0, still: holdStill = false,
       setShut(true);
       timer = setTimeout(() => {
         setShut(false);
-        timer = left > 1 ? setTimeout(() => blink(left - 1), 180) : setTimeout(() => blink(3), 1500 + Math.random() * 1000);
-      }, 150);
+        timer = left > 1 ? setTimeout(() => blink(left - 1), 90) : setTimeout(() => blink(3), 1500 + Math.random() * 1000);
+      }, 100);
     };
     timer = setTimeout(() => blink(3), 400 + Math.random() * 1200);
     return () => clearTimeout(timer);
