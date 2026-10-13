@@ -41,8 +41,8 @@ const LEAVES: Record<Season, string[]> = {
 };
 const WATER: Record<Period, string> = { dawn: '#9DB9F2', midday: '#8FB3E8', dusk: '#6F8FE0', night: '#3E4A78' };
 const BARK = '#8A6247';
-// Brownstone: warm chocolate-brown sandstone, in big smooth blocks.
-const BRICK: Record<Period, [string, string]> = { dawn: ['#A8705A', '#93604C'], midday: ['#9C664F', '#875744'], dusk: ['#7E5248', '#6C463E'], night: ['#4E3634', '#402C2A'] };
+// A pink brownstone: dusty rose sandstone in big smooth blocks.
+const BRICK: Record<Period, [string, string]> = { dawn: ['#E2BAB1', '#CEA59C'], midday: ['#D9AFA6', '#C49A91'], dusk: ['#B88E92', '#A37C80'], night: ['#5A4048', '#4A343C'] };
 const PAVEMENT: Record<Period, string> = { dawn: '#E6E1EA', midday: '#DAD7E0', dusk: '#B9B6C8', night: '#55546A' };
 const FAR: Record<Period, string> = { dawn: '#F2C4D4', midday: '#F2DFA0', dusk: '#4A6FE0', night: '#3B3A50' };
 
@@ -360,20 +360,29 @@ function Branch({ w, y, bh }: { w: number; y: number; bh: number }) {
   );
 }
 
-/** A brownstone front from `top` to `bottom`: big smooth stone blocks, with a window beside the animal. */
+/** A pink brownstone front from `top` to `bottom`: big smooth stone blocks, a cute arched window on the left, and the front door up a stoop on the right. */
 function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom: number; band: { top: number; height: number }; period: Period }) {
-  const [brick, line] = BRICK[period];
+  const [stone, line] = BRICK[period];
+  const trim = period === 'night' ? '#76586A' : period === 'dusk' ? '#D3AEB0' : '#EED3CC';
   const row = 34;
   const rows = Math.ceil((bottom - top) / row);
   const lit = period === 'dusk' || period === 'night';
-  // A cute arched window, well below the cornice, with curtains and a flower box.
-  const winW = w * 0.17;
-  const winX = w * 0.63;
-  const winTop = band.top + band.height * 0.14;
-  const winH = band.height * 0.42;
+  const H = bottom - top;
+  // The window, on the left.
+  const winW = w * 0.13;
+  const winX = w * 0.19;
+  const winTop = band.top + band.height * 0.16;
+  const winH = band.height * 0.4;
+  // The front door and stoop, on the right.
+  const dX = w * 0.7;
+  const dW = w * 0.13;
+  const dTop = top + H * 0.2;
+  const landing = top + H * 0.56;
+  const steps = 4;
+  const stepH = (bottom - landing) / steps;
   return (
     <G>
-      <Rect x={0} y={top} width={w} height={bottom - top} fill={brick} />
+      <Rect x={0} y={top} width={w} height={H} fill={stone} />
       <Path d={`M0 ${top} H${w}`} stroke={INK} strokeWidth={1.5} />
       {Array.from({ length: rows }, (_, r) => (
         <G key={r}>
@@ -383,22 +392,53 @@ function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom
           ))}
         </G>
       ))}
-      <G>
-        <Path d={`M${winX} ${winTop + winH} V${winTop + winW / 2} A${winW / 2} ${winW / 2} 0 0 1 ${winX + winW} ${winTop + winW / 2} V${winTop + winH} Z`} fill="#FFFFFF" stroke={INK} strokeWidth={1.5} />
-        <Path d={`M${winX + 5} ${winTop + winH} V${winTop + winW / 2} A${winW / 2 - 5} ${winW / 2 - 5} 0 0 1 ${winX + winW - 5} ${winTop + winW / 2} V${winTop + winH} Z`} fill={lit ? '#FFD23F' : '#BFD0F5'} />
-        {/* Little curtains, tied back. */}
-        <Path d={`M${winX + 5} ${winTop + winW / 2 - 4} Q${winX + winW * 0.28} ${winTop + winH * 0.5} ${winX + 5} ${winTop + winH - 6} Z`} fill={colors.pinkTint} stroke={INK} strokeWidth={1} />
-        <Path d={`M${winX + winW - 5} ${winTop + winW / 2 - 4} Q${winX + winW * 0.72} ${winTop + winH * 0.5} ${winX + winW - 5} ${winTop + winH - 6} Z`} fill={colors.pinkTint} stroke={INK} strokeWidth={1} />
-        <Path d={`M${winX + winW / 2} ${winTop + 5} V${winTop + winH}`} stroke={INK} strokeWidth={1.2} />
-        {/* A flower box on the sill, flowers poking up out of it. */}
-        {[0.15, 0.35, 0.55, 0.75, 0.92].map((f, i) => (
-          <G key={i}>
-            <Path d={`M${winX + winW * f} ${winTop + winH + 6} V${winTop + winH - 4}`} stroke="#3E8E4E" strokeWidth={2} />
-            <Circle cx={winX + winW * f} cy={winTop + winH - 6} r={4.5} fill={i % 2 ? colors.yellow : colors.pink} stroke={INK} strokeWidth={1} />
-          </G>
-        ))}
-        <Rect x={winX - 5} y={winTop + winH + 2} width={winW + 10} height={13} rx={3} fill="#9A6A44" stroke={INK} strokeWidth={1.2} />
-      </G>
+
+      {/* The window: arched, with curtains and a flower box. */}
+      <Path d={`M${winX} ${winTop + winH} V${winTop + winW / 2} A${winW / 2} ${winW / 2} 0 0 1 ${winX + winW} ${winTop + winW / 2} V${winTop + winH} Z`} fill="#FFFFFF" stroke={INK} strokeWidth={1.5} />
+      <Path d={`M${winX + 5} ${winTop + winH} V${winTop + winW / 2} A${winW / 2 - 5} ${winW / 2 - 5} 0 0 1 ${winX + winW - 5} ${winTop + winW / 2} V${winTop + winH} Z`} fill={lit ? '#FFD23F' : '#BFD0F5'} />
+      <Path d={`M${winX + 5} ${winTop + winW / 2 - 4} Q${winX + winW * 0.28} ${winTop + winH * 0.5} ${winX + 5} ${winTop + winH - 6} Z`} fill={colors.pinkTint} stroke={INK} strokeWidth={1} />
+      <Path d={`M${winX + winW - 5} ${winTop + winW / 2 - 4} Q${winX + winW * 0.72} ${winTop + winH * 0.5} ${winX + winW - 5} ${winTop + winH - 6} Z`} fill={colors.pinkTint} stroke={INK} strokeWidth={1} />
+      <Path d={`M${winX + winW / 2} ${winTop + 5} V${winTop + winH}`} stroke={INK} strokeWidth={1.2} />
+      {[0.15, 0.35, 0.55, 0.75, 0.92].map((f, i) => (
+        <G key={i}>
+          <Path d={`M${winX + winW * f} ${winTop + winH + 6} V${winTop + winH - 4}`} stroke="#3E8E4E" strokeWidth={2} />
+          <Circle cx={winX + winW * f} cy={winTop + winH - 6} r={4.5} fill={i % 2 ? colors.yellow : colors.pink} stroke={INK} strokeWidth={1} />
+        </G>
+      ))}
+      <Rect x={winX - 5} y={winTop + winH + 2} width={winW + 10} height={13} rx={3} fill="#9A6A44" stroke={INK} strokeWidth={1.2} />
+
+      {/* The doorway: a little pediment, columns, an arched transom and a double door with a wreath. */}
+      <Path d={`M${dX - 10} ${dTop - 6} L${dX + dW / 2} ${dTop - 22} L${dX + dW + 10} ${dTop - 6} Z`} fill={trim} stroke={INK} strokeWidth={1.5} strokeLinejoin="round" />
+      <Rect x={dX - 12} y={dTop - 6} width={dW + 24} height={7} fill={trim} stroke={INK} strokeWidth={1.5} />
+      <Rect x={dX - 10} y={dTop + 1} width={8} height={landing - dTop - 1} fill={trim} stroke={INK} strokeWidth={1.2} />
+      <Rect x={dX + dW + 2} y={dTop + 1} width={8} height={landing - dTop - 1} fill={trim} stroke={INK} strokeWidth={1.2} />
+      <Path d={`M${dX} ${landing} V${dTop + dW / 2} A${dW / 2} ${dW / 2} 0 0 1 ${dX + dW} ${dTop + dW / 2} V${landing} Z`} fill="#2F5A52" stroke={INK} strokeWidth={1.5} />
+      <Path d={`M${dX + 3} ${dTop + dW / 2} A${dW / 2 - 3} ${dW / 2 - 3} 0 0 1 ${dX + dW - 3} ${dTop + dW / 2} Z`} fill={lit ? '#FFD23F' : '#BFD0F5'} stroke={INK} strokeWidth={1} />
+      <Path d={`M${dX + dW / 2} ${dTop + dW / 2} V${landing}`} stroke={INK} strokeWidth={1.2} />
+      <Circle cx={dX + dW / 2} cy={dTop + dW / 2 + (landing - dTop - dW / 2) * 0.32} r={dW * 0.17} fill="none" stroke="#5E8A3A" strokeWidth={5} />
+      {[0, 1, 2, 3, 4, 5].map((i) => {
+        const a = (i / 6) * Math.PI * 2;
+        const cy = dTop + dW / 2 + (landing - dTop - dW / 2) * 0.32;
+        return <Circle key={i} cx={dX + dW / 2 + Math.cos(a) * dW * 0.17} cy={cy + Math.sin(a) * dW * 0.17} r={2.2} fill={i % 2 ? colors.pink : '#E5484D'} />;
+      })}
+      {/* Pots of flowers on the landing. */}
+      {[dX - 4, dX + dW + 4].map((px, i) => (
+        <G key={i}>
+          <Path d={`M${px - 7} ${landing - 12} L${px + 7} ${landing - 12} L${px + 5} ${landing} L${px - 5} ${landing} Z`} fill="#E07A4A" stroke={INK} strokeWidth={1.2} />
+          {[-5, 0, 5].map((dx, j) => <Circle key={j} cx={px + dx} cy={landing - 16 - (j === 1 ? 3 : 0)} r={4} fill={j === 1 ? colors.yellow : colors.pink} stroke={INK} strokeWidth={1} />)}
+        </G>
+      ))}
+
+      {/* The stoop: steps fanning out down to the sidewalk, a railing and a round newel post. */}
+      {Array.from({ length: steps }, (_, i) => {
+        const y = landing + stepH * i;
+        const spread = 8 + i * 5;
+        return <Rect key={i} x={dX - spread} y={y} width={dW + spread * 2} height={stepH} fill={trim} stroke={INK} strokeWidth={1.2} />;
+      })}
+      <Path d={`M${dX - 14} ${landing - 18} L${dX - 34} ${bottom - 22}`} stroke={INK} strokeWidth={8} strokeLinecap="round" />
+      <Path d={`M${dX - 14} ${landing - 18} L${dX - 34} ${bottom - 22}`} stroke={trim} strokeWidth={5} strokeLinecap="round" />
+      <Rect x={dX - 44} y={bottom - 30} width={18} height={30} rx={3} fill={trim} stroke={INK} strokeWidth={1.2} />
+      <Circle cx={dX - 35} cy={bottom - 34} r={8} fill={trim} stroke={INK} strokeWidth={1.2} />
     </G>
   );
 }
