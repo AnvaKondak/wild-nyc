@@ -49,8 +49,8 @@ export function Character({ speciesId, size, mood = 0, still: holdStill = false,
   const frame = frames[at];
   const still = useReduceMotion() || holdStill;
 
-  // Blink: three quick blinks in a row (blink-blink-blink), then a pause of a few
-  // seconds, then three more. The pause varies a little so it never feels mechanical.
+  // Blink: three quick blinks in a row (blink-blink-blink), then a pause of about two
+  // seconds, then three more. Each blink is long enough to always show on screen. The pause varies a little so it never feels mechanical.
   const [shut, setShut] = useState(false);
   useEffect(() => {
     if (still || !frame.shut) return;
@@ -59,10 +59,10 @@ export function Character({ speciesId, size, mood = 0, still: holdStill = false,
       setShut(true);
       timer = setTimeout(() => {
         setShut(false);
-        timer = left > 1 ? setTimeout(() => blink(left - 1), 160) : setTimeout(() => blink(3), 3000 + Math.random() * 2500);
-      }, 110);
+        timer = left > 1 ? setTimeout(() => blink(left - 1), 180) : setTimeout(() => blink(3), 1500 + Math.random() * 1000);
+      }, 150);
     };
-    timer = setTimeout(() => blink(3), 800 + Math.random() * 2000);
+    timer = setTimeout(() => blink(3), 400 + Math.random() * 1200);
     return () => clearTimeout(timer);
   }, [still, frame.shut]);
 
