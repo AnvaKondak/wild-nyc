@@ -27,7 +27,7 @@ export type Spots = { block?: BlockSpot; park?: ParkSpot; waterfront?: Waterfron
 /** Backdrop drawn behind the animal on a story sticker. */
 export type Setting =
   | 'branch' | 'trunk' | 'wire' | 'ledge' | 'rooftop' | 'streetlight' | 'lawn' | 'sidewalk' | 'hedge'
-  | 'flowers' | 'water' | 'shore' | 'pier' | 'sky' | 'night-sky' | 'web' | 'trashcan' | 'fence' | 'reeds' | 'den';
+  | 'flowers' | 'water' | 'shore' | 'pier' | 'sky' | 'night-sky' | 'web' | 'trashcan' | 'fence' | 'reeds' | 'den' | 'fire-escape';
 
 export type TintName = 'pinkTint' | 'yellowTint' | 'blueTint' | 'yellow' | 'pink';
 

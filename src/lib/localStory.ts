@@ -27,7 +27,7 @@ export function fillPlace(text: string, phrase: string, local?: LocalNames, rand
 const SPOT_FOR_SETTING: Record<Setting, 'water' | 'green' | 'street' | 'sky'> = {
   water: 'water', shore: 'water', pier: 'water', reeds: 'water',
   lawn: 'green', flowers: 'green', branch: 'green', trunk: 'green', hedge: 'green', den: 'green', web: 'green',
-  ledge: 'street', rooftop: 'street', wire: 'street', streetlight: 'street', sidewalk: 'street', trashcan: 'street', fence: 'street',
+  ledge: 'street', rooftop: 'street', wire: 'street', streetlight: 'street', sidewalk: 'street', trashcan: 'street', fence: 'street', 'fire-escape': 'street',
   sky: 'sky', 'night-sky': 'sky',
 };
 

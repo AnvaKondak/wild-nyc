@@ -27,7 +27,7 @@ import { lookFor, type Building, type Landmark } from './looks';
 
 export type CloseUpSetting =
   | 'building' | 'puddle' | 'branch' | 'trunk' | 'hedge' | 'lawn' | 'flowers' | 'burrow'
-  | 'wire' | 'sky' | 'water' | 'wade' | 'shore' | 'pier' | 'reeds' | 'web';
+  | 'wire' | 'sky' | 'water' | 'wade' | 'shore' | 'pier' | 'reeds' | 'web' | 'fireescape';
 
 // Who walks to the water rather than swims: at a puddle in the city.
 const CITY_WALKERS = ['rock-pigeon', 'house-sparrow', 'european-starling', 'raccoon', 'eastern-gray-squirrel', 'american-robin', 'northern-cardinal'];
@@ -47,6 +47,7 @@ export function closeUpFor(speciesId: string | undefined, setting: Setting | und
     return 'sky';
   }
   if (pose === 'swim') return 'water';
+  if (setting === 'fire-escape') return 'fireescape';
   if (pose === 'wade') return setting === 'branch' ? 'branch' : 'wade';
   switch (setting) {
     case 'branch':
@@ -137,6 +138,7 @@ const PLACE: Record<CloseUpSetting, { ground: number; size: number; x: number }>
   pier: { ground: 0.92, size: 0.95, x: 0.5 },
   reeds: { ground: 0.82, size: 0.8, x: 0.5 },
   web: { ground: 0.86, size: 0.95, x: 0.5 },
+  fireescape: { ground: 0.84, size: 0.84, x: 0.5 },
 };
 const OPEN_SKY: CloseUpSetting[] = ['branch', 'trunk', 'hedge', 'lawn', 'flowers', 'burrow', 'wire', 'sky', 'water', 'wade', 'shore', 'pier', 'reeds', 'web'];
 
@@ -175,6 +177,7 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
             <Sidewalk w={w} h={h} top={pavement} period={period} />
           </>
         )}
+        {setting === 'fireescape' && <FireEscape w={w} h={h} y={ground} bh={bh} period={period} look={look.building} />}
         {setting === 'puddle' && (
           <>
             <Ellipse cx={w * 0.3} cy={ground + bh * 0.03} rx={w * 0.2} ry={bh * 0.06} fill={WATER[period]} stroke={INK} strokeWidth={1.5} />
@@ -243,6 +246,55 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
 }
 
 // ---------------------------------------------------------------- more places
+
+/** Upstairs on the building: the wall, a big window behind, and a black iron fire escape to perch on. */
+function FireEscape({ w, h, y, bh, period, look }: { w: number; h: number; y: number; bh: number; period: Period; look: Building }) {
+  const [stone, line] = look === 'ivy' ? IVY_BRICK[period] : BRICK[period];
+  const row = look === 'ivy' ? 15 : 34;
+  const per = look === 'ivy' ? 9 : 3;
+  const lit = period === 'dusk' || period === 'night';
+  const iron = '#1F1F2E';
+  const winX = w * 0.26;
+  const winW = w * 0.48;
+  const winTop = y - bh * 0.95;
+  const winH = bh * 0.82;
+  const railTop = y - bh * 0.34;
+  return (
+    <G>
+      <Rect x={0} y={0} width={w} height={h} fill={stone} />
+      {Array.from({ length: Math.ceil(h / row) }, (_, r) => (
+        <G key={r}>
+          <Path d={`M0 ${row * (r + 1)} H${w}`} stroke={line} strokeWidth={1} />
+          {Array.from({ length: per + 1 }, (_, c) => (
+            <Path key={c} d={`M${(w / per) * c + (r % 2 ? w / per / 2 : 0)} ${row * r} V${row * (r + 1)}`} stroke={line} strokeWidth={1} />
+          ))}
+        </G>
+      ))}
+      {/* The window behind the fire escape: white frame, four panes, curtains. */}
+      <Rect x={winX - 6} y={winTop - 12} width={winW + 12} height={10} fill="#F7F3EC" stroke={INK} strokeWidth={1.2} />
+      <Rect x={winX} y={winTop} width={winW} height={winH} fill="#F7F3EC" stroke={INK} strokeWidth={1.5} />
+      <Rect x={winX + 5} y={winTop + 5} width={winW - 10} height={winH - 10} fill={lit ? '#FFD23F' : '#BFD0F5'} />
+      <Path d={`M${winX + 6} ${winTop + 6} Q${winX + winW * 0.2} ${winTop + winH * 0.45} ${winX + 6} ${winTop + winH - 8} Z M${winX + winW - 6} ${winTop + 6} Q${winX + winW * 0.8} ${winTop + winH * 0.45} ${winX + winW - 6} ${winTop + winH - 8} Z`} fill={colors.pinkTint} stroke={INK} strokeWidth={1} />
+      <Path d={`M${winX + winW / 2} ${winTop + 5} V${winTop + winH - 5} M${winX + 5} ${winTop + winH / 2} H${winX + winW - 5}`} stroke="#F7F3EC" strokeWidth={3} />
+      {/* The fire escape: a slatted platform, a railing with bars, and a ladder going up. */}
+      <Path d={`M${w * 0.82} ${y} L${w * 0.86} ${winTop - 20} M${w * 0.9} ${y} L${w * 0.94} ${winTop - 20}`} stroke={iron} strokeWidth={3} />
+      {Array.from({ length: 8 }, (_, k) => {
+        const f = (k + 1) / 9;
+        const ly = y + (winTop - 20 - y) * f;
+        return <Path key={k} d={`M${w * 0.82 + w * 0.04 * f} ${ly} H${w * 0.9 + w * 0.04 * f}`} stroke={iron} strokeWidth={2} />;
+      })}
+      <Path d={`M${w * 0.04} ${railTop} H${w * 0.96}`} stroke={iron} strokeWidth={4} strokeLinecap="round" />
+      <Path d={`M${w * 0.04} ${railTop + bh * 0.14} H${w * 0.96}`} stroke={iron} strokeWidth={2} />
+      {Array.from({ length: 15 }, (_, k) => <Path key={k} d={`M${w * 0.04 + (w * 0.92 * k) / 14} ${railTop} V${y}`} stroke={iron} strokeWidth={2} />)}
+      <Rect x={w * 0.02} y={y} width={w * 0.96} height={8} fill={iron} />
+      {Array.from({ length: 20 }, (_, k) => <Path key={k} d={`M${w * 0.03 + (w * 0.94 * k) / 19} ${y + 8} V${y + 16}`} stroke={iron} strokeWidth={2} />)}
+      <Path d={`M${w * 0.02} ${y + 16} H${w * 0.98}`} stroke={iron} strokeWidth={3} />
+      {/* A little pot of flowers on the platform. */}
+      <Path d={`M${w * 0.12} ${y - 18} H${w * 0.12 + 22} L${w * 0.12 + 19} ${y} H${w * 0.12 + 3} Z`} fill="#E07A4A" stroke={INK} strokeWidth={1.2} />
+      {[-6, 0, 6].map((dx, k) => <Circle key={k} cx={w * 0.12 + 11 + dx} cy={y - 24 - (k === 1 ? 4 : 0)} r={5} fill={k === 1 ? colors.yellow : colors.pink} stroke={INK} strokeWidth={1} />)}
+    </G>
+  );
+}
 
 /** Park ground: far trees on a grassy rise, grass down to the bottom of the screen. */
 function Park({ w, h, ground, bh, period, season }: { w: number; h: number; ground: number; bh: number; period: Period; season: Season }) {

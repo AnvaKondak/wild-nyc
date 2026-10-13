@@ -27,6 +27,7 @@ import type { Neighborhood } from '@/lib/neighborhood';
 import { aroundSlide, buildArc, pickAround, pickLead, poolFor, type StoryContext, type StoryPlace } from '@/lib/neighborStory';
 import { favoritesStory } from '@/lib/favoritesStory';
 import { withMoods } from '@/lib/mood';
+import { withSettings } from '@/lib/settingWords';
 import { hashString, seededRandom } from '@/lib/random';
 import { dateKey, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
 import { askForNotes, cancelNotes, scheduleNotes } from '@/lib/notifications';
@@ -133,7 +134,7 @@ export default function RightNow() {
     const visit = visiting ? getSpecies(visiting) : undefined;
     // Today's cast: encounters are with neighbors who are actually around.
     const cast = [...(lead ? [lead.id] : []), ...around.map((s) => s.id)];
-    if (visit) return withMoods([...buildArc(visit, here, ctx, 'visit', random, { today: cast, favor: lead?.id }), last]);
+    if (visit) return withMoods(withSettings([...buildArc(visit, here, ctx, 'visit', random, { today: cast, favor: lead?.id }), last]));
     // The story opens on where we are, how it feels, who's up, and who we're following.
     const intro = buildIntro({
       period: header.period,
@@ -157,7 +158,7 @@ export default function RightNow() {
     const moment = activeEvent(events, now, weather);
     const big = moment ? [eventSlide(moment, now, phrase, here.local, random)] : [];
     // Each drawing matches what its slide says: asleep, snacking, delighted or saying hello.
-    return withMoods([intro, ...big, ...(arrival ? [arrival] : []), ...(lead ? buildArc(lead, here, ctx, 'lead', random, { today: cast }) : []), teaser, last]);
+    return withMoods(withSettings([intro, ...big, ...(arrival ? [arrival] : []), ...(lead ? buildArc(lead, here, ctx, 'lead', random, { today: cast }) : []), teaser, last]));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lead, around, arrived, ctx, here, visiting, placesInOrder, at]);
 
@@ -170,7 +171,7 @@ export default function RightNow() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.faves]);
   const favStory = useMemo(
-    () => withMoods(favoritesStory({ favorites: state.favorites, ctx: { ...ctx, weather: [] }, saved: placesInOrder, places, kinds: placeKinds, date: today })),
+    () => withMoods(withSettings(favoritesStory({ favorites: state.favorites, ctx: { ...ctx, weather: [] }, saved: placesInOrder, places, kinds: placeKinds, date: today }))),
     [state.favorites, ctx, placesInOrder, today],
   );
   const story = faves ? favStory : hoodStory;
