@@ -88,8 +88,8 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
       <Svg width={w} height={h} style={{ position: 'absolute' }}>
         {setting === 'sidewalk' || setting === 'puddle' ? (
           <>
-            {/* The wall starts just below the header, so the time and weather stay on sky. */}
-            <Wall w={w} top={bt} bottom={pavement} band={band} period={period} />
+            {/* Up close, the brownstone fills the whole screen; the cornice marks the floor line. */}
+            <Wall w={w} top={0} bottom={pavement} band={band} period={period} />
             <Cornice w={w} y={bt} period={period} />
             <WallBranch y={bt} bh={bh} w={w} />
             <Sidewalk w={w} h={h} top={pavement} period={period} />
@@ -368,6 +368,9 @@ function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom
   const rows = Math.ceil((bottom - top) / row);
   const lit = period === 'dusk' || period === 'night';
   const H = bottom - top;
+  // The ground floor: from the cornice (the top of the band) down to the sidewalk.
+  const floor = band.top;
+  const FH = bottom - floor;
   // The window, on the left.
   const winW = w * 0.13;
   const winX = w * 0.19;
@@ -376,14 +379,13 @@ function Wall({ w, top, bottom, band, period }: { w: number; top: number; bottom
   // The front door and stoop, on the right.
   const dX = w * 0.7;
   const dW = w * 0.13;
-  const dTop = top + H * 0.2;
-  const landing = top + H * 0.56;
+  const dTop = floor + FH * 0.2;
+  const landing = floor + FH * 0.56;
   const steps = 4;
   const stepH = (bottom - landing) / steps;
   return (
     <G>
       <Rect x={0} y={top} width={w} height={H} fill={stone} />
-      <Path d={`M0 ${top} H${w}`} stroke={INK} strokeWidth={1.5} />
       {Array.from({ length: rows }, (_, r) => (
         <G key={r}>
           <Path d={`M0 ${top + row * (r + 1)} H${w}`} stroke={line} strokeWidth={1.5} />
