@@ -1178,38 +1178,69 @@ ART.peregrine = raptorSelfie({
 });
 
 // Perched hawks, for close-up scenes (their stickers are face close-ups).
-ART.redtailBody = perched({
-  id: 'redtailb', tint: C.yellowT,
-  headAt: [150, 150, 86], eyeAt: [134, 138, 22],
-  back: '#7A5236', breast: '#F4EDE4', wing: '#6A4630', tail: '#C0532E', head: '#8A5E40',
-  underside: dots([[104, 286], [124, 296], [146, 302], [168, 306], [116, 312], [140, 318], [190, 308]], 8, '#6A4630'),
-  tailMarks: `<path d="M318 300 L384 318" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`,
-  wingMarks: dots([[246, 210], [276, 204], [262, 244], [294, 238], [282, 274]], 7, '#B9946E'),
-  face: '<path d="M90 176 C104 170 128 174 140 188 C138 204 120 212 104 208 C96 200 92 190 90 176 Z" fill="#F4EDE4"/>',
-  beakShape: HOOK, beak: '#5E5E6E', beakMarks: CERE, legs: '#F2C94C', snack: feather(),
+// Hawks perched for close-up scenes: tall and upright, a small flat-topped head with a
+// heavy brow (the glare), a hooked beak, a barred chest, a long banded tail hanging
+// below the perch, and strong yellow legs gripping it. Feet at y = 330.
+const hawkPerched = (p) => ({
+  tint: 'none',
+  tilt: 0,
+  svg: (m) => {
+    const tail = '<path d="M206 286 L258 284 L262 398 L216 398 Z"/>';
+    const bodyPath = 'M150 156 C150 112 192 94 232 102 C278 112 294 164 290 228 C286 274 262 300 222 304 C184 306 158 282 152 240 Z';
+    const body = `<path d="${bodyPath}"/>`;
+    const wing = '<path d="M236 112 C282 122 300 174 296 240 C292 280 272 300 252 308 C236 270 230 200 236 112 Z"/>';
+    const headPath = 'M106 98 C106 66 140 50 174 54 C204 58 218 80 214 106 C210 134 186 148 158 148 C128 148 106 128 106 98 Z';
+    const head = `<path d="${headPath}"/>`;
+    const legs = 'M202 290 L198 330 M234 292 L240 330';
+    const talons = 'M182 336 Q190 324 198 330 Q206 324 214 336 M226 336 Q234 324 240 330 Q248 324 256 336';
+    return `${shadow([tail, body, wing, head])}
+      ${shape(tail, p.tail)}
+      <clipPath id="${p.id}-tail">${tail}</clipPath>
+      <g clip-path="url(#${p.id}-tail)">${[316, 344, 372].map((y) => `<rect x="200" y="${y}" width="70" height="9" fill="${p.tailBand}"/>`).join('')}</g>
+      ${tail.replace('/>', ` fill="none" ${OL}/>`)}
+      ${shape(body, p.chest)}
+      <clipPath id="${p.id}-body">${body}</clipPath>
+      <g clip-path="url(#${p.id}-body)">${p.chestMarks}</g>
+      <path d="${bodyPath}" fill="none" ${OL}/>
+      ${shape(wing, p.wing)}
+      <path d="M252 170 C266 200 274 240 272 290 M266 150 C280 186 286 230 284 280" fill="none" stroke="${p.wingLine}" stroke-width="6" stroke-linecap="round"/>
+      ${shape(head, p.head)}
+      <clipPath id="${p.id}-head">${head}</clipPath>
+      <g clip-path="url(#${p.id}-head)">${p.headMarks ?? ''}</g>
+      <path d="${headPath}" fill="none" ${OL}/>
+      ${eye(m.eyes, 140, 96, 11, { ring: p.eyeRing, lid: p.head })}
+      ${'' /* The heavy brow cuts across the top of the eye: that's the glare. */}
+      <path d="M118 88 C132 76 152 74 172 80 L168 92 C152 86 134 88 124 96 Z" fill="${p.brow}"/>
+      <path d="M110 100 C98 96 84 104 80 120 C80 130 86 134 92 130 C92 122 98 118 110 120 Z" fill="#3B3A50" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M112 98 C106 98 102 104 104 114 L112 118 Z" fill="#F2C94C" stroke="${C.ink}" stroke-width="4"/>
+      <path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="16" stroke-linecap="round"/>
+      <path d="${legs}" fill="none" stroke="#F2C94C" stroke-width="9" stroke-linecap="round"/>
+      <path d="${talons}" fill="none" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>
+      ${m.snack ? feather(60, 150) : ''}
+      ${m.hearts ? heart(300, 40, 40) + heart(60, 40, 26) : ''}
+      ${m.zees ? zee(220, 40, 28) + zee(256, 20, 18) : ''}`;
+  },
 });
 
-ART.coopersBody = perched({
-  id: 'coopersb', tint: C.blueT,
-  headAt: [150, 150, 84], eyeAt: [134, 138, 18], eyeRing: '#E5484D',
-  back: '#5E6A80', breast: '#F4EDE4', wing: '#556075', tail: '#5E6A80', head: '#C9B8AE',
-  tailShape: '<path d="M300 256 L404 284 L400 318 L294 302 Z"/>',
-  tailMarks: `<path d="M330 268 l-6 30 M356 276 l-6 30 M382 284 l-6 28" stroke="${C.ink}" stroke-width="7" stroke-linecap="round"/><path d="M398 290 L394 314" stroke="#F4F2F0" stroke-width="7"/>`,
-  underside: `<path d="M96 224 H210 M92 248 H210 M94 272 H210 M100 296 H210 M110 320 H210" stroke="#D9774A" stroke-width="9" stroke-linecap="round"/>`,
-  headMarks: '<path d="M50 50 H260 V118 C210 100 160 96 60 112 Z" fill="#3B4256"/>',
-  beakShape: HOOK, beak: '#3B3A50', beakMarks: CERE, legs: '#F2C94C', snack: feather(),
-});
+const bars = (color, from = 170, step = 18, w = 7) => Array.from({ length: 9 }, (_, i) => `<path d="M140 ${from + i * step} q20 -6 40 0 q20 6 40 0 q20 -6 40 0" fill="none" stroke="${color}" stroke-width="${w}" stroke-linecap="round"/>`).join('');
 
-ART.peregrineBody = perched({
-  id: 'peregrineb', tint: C.yellowT, rail: true,
-  headAt: [150, 150, 84], eyeAt: [132, 138, 19], eyeRing: '#F2C94C', lid: C.ink,
-  back: '#5E6A80', breast: '#F4F2F0', wing: '#4E5A70', tail: '#4E5A70', head: '#F4F2F0',
-  underside: `<path d="M100 270 H220 M104 292 H220 M112 314 H220" stroke="#3B4256" stroke-width="7" stroke-linecap="round" stroke-dasharray="14 10"/>`,
-  tailMarks: `<path d="M330 268 l-6 28 M358 276 l-6 28" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`,
-  headMarks: `<path d="M40 40 H260 V200 C230 180 214 150 196 140 C170 130 140 128 110 132 L40 140 Z" fill="${C.ink}"/>`,
-  face: `<path d="M116 150 C128 170 132 196 126 222 L150 216 C154 192 150 166 140 148 Z" fill="${C.ink}"/>`,
-  blushAt: [172, 196],
-  beakShape: HOOK, beak: '#3B3A50', beakMarks: CERE, legs: '#F2C94C', snack: feather(),
+ART.redtailBody = hawkPerched({
+  id: 'redtailp', head: '#8A5E40', chest: '#F4EDE4', wing: '#6A4630', wingLine: '#4E3220', tail: '#C0532E', tailBand: '#9A3A1E', brow: '#4E3220', eyeRing: '#C9955E',
+  // A belly band of dark streaks, the red-tail's signature.
+  chestMarks: `${Array.from({ length: 14 }, (_, i) => `<path d="M${150 + (i % 7) * 18} ${236 + Math.floor(i / 7) * 22} l4 12" stroke="#6A4630" stroke-width="7" stroke-linecap="round"/>`).join('')}`,
+  headMarks: '<path d="M106 120 C130 138 170 144 214 120 L214 160 L106 160 Z" fill="#F4EDE4"/>',
+});
+ART.coopersBody = hawkPerched({
+  id: 'coopersp', head: '#5E6A80', chest: '#F4E2D2', wing: '#4E5A70', wingLine: '#3B4256', tail: '#6E7A90', tailBand: '#2E3448', brow: '#2E3448', eyeRing: '#E5484D',
+  // Fine rusty-orange barring, like the adult in the photo.
+  chestMarks: bars('#D9774A', 168, 16, 6),
+  headMarks: '<path d="M106 40 H220 V82 C190 74 150 74 106 86 Z" fill="#2E3448"/><path d="M110 118 C140 136 180 140 214 120 L214 160 L110 160 Z" fill="#E8C2A8"/>',
+});
+ART.peregrineBody = hawkPerched({
+  id: 'peregrinep', head: '#F4F2F0', chest: '#F4F2F0', wing: '#4E5A70', wingLine: '#2E3448', tail: '#5E6A80', tailBand: '#2E3448', brow: '#1A1A2E', eyeRing: '#F2C94C',
+  chestMarks: bars('#3B4256', 214, 16, 5),
+  // The dark hood and "mustache".
+  headMarks: `<path d="M100 40 H220 V100 C200 92 182 92 168 100 C156 106 150 118 150 140 L128 146 C122 128 118 110 108 100 Z" fill="${C.ink}"/>`,
 });
 
 // ── Full-body versions of the selfie animals, for close-up scenes (no background, no
@@ -1417,7 +1448,7 @@ const CUTOUTS = {
   'herring-gull': P('gull', 'perch'),
   raccoon: P('raccoonBody', 'stand', 0.9),
   monarch: P('monarch', 'fly', 0.75),
-  'red-tailed-hawk': P('redtailBody', 'perch'),
+  'red-tailed-hawk': P('redtailBody', 'perch', 0.84),
   'blue-jay': P('jay', 'perch'),
   'dark-eyed-junco': P('junco', 'perch'),
   'virginia-opossum': P('opossumBody', 'stand', 0.92),
@@ -1445,8 +1476,8 @@ const CUTOUTS = {
   'gray-catbird': P('catbird', 'perch'),
   'song-sparrow': P('songsparrow', 'perch'),
   'american-kestrel': P('kestrel', 'perch'),
-  'coopers-hawk': P('coopersBody', 'perch'),
-  'peregrine-falcon': P('peregrineBody', 'perch'),
+  'coopers-hawk': P('coopersBody', 'perch', 0.84),
+  'peregrine-falcon': P('peregrineBody', 'perch', 0.84),
   'downy-woodpecker': P('downy', 'cling', 0.9),
   'red-bellied-woodpecker': P('redbelly', 'cling', 0.9),
   'tufted-titmouse': P('titmouse', 'perch'),
