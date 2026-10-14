@@ -367,7 +367,8 @@ export default function RightNow() {
                 // Over a close-up scene, the time and weather sit on their own little card so they always read.
                 onCard
                   ? {
-                      flex: 0,
+                      // Fills the space up to the buttons (and no further), so they always fit.
+                      flex: 1,
                       alignSelf: 'flex-start',
                       gap: 7,
                       marginLeft: 16,
@@ -387,7 +388,7 @@ export default function RightNow() {
               ]}
             >
               <PeriodIcon period={header.period} color={theme.ink} size={onCard ? 18 : undefined} />
-              <View style={{ flex: onCard ? 0 : 1 }}>
+              <View style={{ flex: 1 }}>
                 {/* Smaller on the little card over a scene. */}
                 <Text style={{ fontFamily: fonts.display, fontSize: onCard ? 14 : 20, color: theme.ink }} numberOfLines={onCard ? 1 : undefined}>
                   {header.label} · {header.clock}

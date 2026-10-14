@@ -36,6 +36,8 @@ export type CloseUpSetting =
 const CITY_WALKERS = ['rock-pigeon', 'house-sparrow', 'european-starling', 'raccoon', 'eastern-gray-squirrel', 'american-robin', 'northern-cardinal'];
 // Who lives in burrows and dens on the ground.
 const BURROWERS = ['groundhog', 'virginia-opossum'];
+// Never up in trees or on ledges.
+const GROUND_ONLY = ['white-tailed-deer', 'canada-goose', 'groundhog', 'pond-slider'];
 // Where each city walker's mouth is on their drawing (fractions), for the drinking straw.
 const MOUTH: Record<string, [number, number]> = {
   'rock-pigeon': [0.12, 0.34],
@@ -90,6 +92,10 @@ export function closeUpFor(speciesId: string | undefined, setting: Setting | und
   if (!hasCutout(speciesId) || !setting) return undefined;
   // Swifts sleep clinging inside chimneys, which we don't draw: their sleeping slides keep the sticker.
   if (speciesId === SWIFT && action === 'sleep') return undefined;
+  // Animals who never climb or perch (deer, geese, groundhogs) stay on the ground.
+  if (GROUND_ONLY.includes(speciesId) && ['branch', 'trunk', 'ledge', 'rooftop', 'wire', 'fire-escape', 'sky', 'night-sky', 'fence', 'streetlight'].includes(setting) && action !== 'fly') {
+    return 'lawn';
+  }
   if (action && canDo(speciesId, action)) {
     const scene = sceneForAction(speciesId, action);
     if (scene) return scene;
@@ -257,10 +263,10 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
         {/* The neighborhood's landmark, far off on the horizon, behind the trees or rooftops. */}
         {/* The Wonder Wheel only shows by the water; nothing peeks out from behind rooftops. */}
         {look.landmark && look.landmark !== 'wonder-wheel' && (setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && (
-          <LandmarkShape kind={look.landmark} x={w * 0.78} base={ground - bh * 0.22} size={bh * 0.75} period={period} />
+          <LandmarkShape kind={look.landmark} x={w * 0.78} base={ground - bh * 0.22} size={bh * 0.75} period={period} top={bt} />
         )}
         {look.landmark && look.landmark !== 'wonder-wheel' && (setting === 'branch' || setting === 'web' || setting === 'trunk') && (
-          <LandmarkShape kind={look.landmark} x={w * 0.78} base={ground + bh * (setting === 'trunk' ? 0.4 : 0.9)} size={bh * 0.75} period={period} />
+          <LandmarkShape kind={look.landmark} x={w * 0.78} base={ground + bh * (setting === 'trunk' ? 0.4 : 0.9)} size={bh * 0.75} period={period} top={bt} />
         )}
         {(setting === 'branch' || setting === 'web') && (
           <>
@@ -277,8 +283,8 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
         {setting === 'burrow' && <Burrow x={w * 0.78} ground={ground} bh={bh} />}
         {(setting === 'wire' || setting === 'sky') && <Skyline w={w} h={h} base={bt + bh * 1.25} bh={bh} period={period} />}
         {setting === 'wire' && <Wire w={w} y={ground} bh={bh} />}
-        {watery && look.water === 'river' && <River w={w} h={h} horizon={horizon} period={period} landmark={look.landmark} />}
-        {watery && look.water === 'beach' && <Ocean w={w} h={h} horizon={horizon} period={period} landmark={look.landmark} />}
+        {watery && look.water === 'river' && <River w={w} h={h} horizon={horizon} period={period} landmark={look.landmark} top={bt} />}
+        {watery && look.water === 'beach' && <Ocean w={w} h={h} horizon={horizon} period={period} landmark={look.landmark} top={bt} />}
         {watery && look.water === 'pond' && <Pond w={w} h={h} horizon={horizon} period={period} season={season} />}
         {setting === 'reeds' && <Reeds w={w} ground={ground} bh={bh} back />}
         {setting === 'reeds' && <BentReed w={w} y={ground} bh={bh} />}
@@ -1409,11 +1415,11 @@ function Facade({ look, w, bottom, band, period }: { look: Building; w: number; 
 const dim = (period: Period, day: string, dusk: string, night: string) => (period === 'night' ? night : period === 'dusk' ? dusk : day);
 
 /** A river or harbor: the city across the water, a stone edge on the far side. */
-function River({ w, h, horizon, period, landmark }: { w: number; h: number; horizon: number; period: Period; landmark?: Landmark }) {
+function River({ w, h, horizon, period, landmark, top = 0 }: { w: number; h: number; horizon: number; period: Period; landmark?: Landmark; top?: number }) {
   return (
     <G>
       <FarCity w={w} base={horizon - 2} period={period} />
-      {landmark && <LandmarkShape kind={landmark} x={w * 0.72} base={horizon - 2} size={110} period={period} />}
+      {landmark && <LandmarkShape kind={landmark} x={w * 0.72} base={horizon - 2} size={110} period={period} top={top} />}
       <Rect x={0} y={horizon - 4} width={w} height={6} fill={dim(period, '#C9C1B4', '#A39C90', '#4A4652')} />
       <Rect x={0} y={horizon} width={w} height={h - horizon} fill={WATER[period]} />
       <Path d={`M0 ${horizon} H${w}`} stroke={INK} strokeWidth={1.2} opacity={0.5} />
@@ -1422,11 +1428,11 @@ function River({ w, h, horizon, period, landmark }: { w: number; h: number; hori
 }
 
 /** The ocean: a flat blue horizon with gentle rolling waves. */
-function Ocean({ w, h, horizon, period, landmark }: { w: number; h: number; horizon: number; period: Period; landmark?: Landmark }) {
+function Ocean({ w, h, horizon, period, landmark, top = 0 }: { w: number; h: number; horizon: number; period: Period; landmark?: Landmark; top?: number }) {
   const sea = dim(period, '#7FA8E8', '#5E7FD6', '#2E3A62');
   return (
     <G>
-      {landmark && <LandmarkShape kind={landmark} x={w * 0.75} base={horizon} size={120} period={period} />}
+      {landmark && <LandmarkShape kind={landmark} x={w * 0.75} base={horizon} size={120} period={period} top={top} />}
       <Rect x={0} y={horizon} width={w} height={h - horizon} fill={sea} />
       <Path d={`M0 ${horizon} H${w}`} stroke={INK} strokeWidth={1.2} opacity={0.5} />
       {[0.25, 0.5].map((k, i) => (
@@ -1503,10 +1509,11 @@ function Skyscraper({ x, base, tw, th, wall, glass, night }: { x: number; base: 
 }
 
 /** A landmark on the horizon, small and soft so it never competes with the animal. */
-function LandmarkShape({ kind, x, base, size, period }: { kind: Landmark; x: number; base: number; size: number; period: Period }) {
+function LandmarkShape({ kind, x, base, size, period, top = 0 }: { kind: Landmark; x: number; base: number; size: number; period: Period; /** Never reach above this (the header). */ top?: number }) {
   const fill = dim(period, '#B4ACD0', '#5468C0', '#3B3A58');
   const line = dim(period, '#8E86B0', '#3E4E9E', '#2A2A42');
-  const s = size;
+  // Small enough that the tallest part stays below the header.
+  const s = Math.min(size, Math.max(20, (base - top) / 1.1));
   const sw = { stroke: line, strokeWidth: 1.5 };
   switch (kind) {
     case 'verrazzano':

@@ -14,7 +14,7 @@ const RULES: [RegExp, Setting][] = [
   [/\b(flying|flies|fly over|soaring|soars|circling|circles|wheeling|overhead|in the air|on the wing|migrating|flock(?:s)? (?:over|across))\b/, 'sky'],
   [/\b(bridges?|tall buildings?|skyscrapers?|towers?|steeples?|spires?|high ledges?|up high)\b/, 'ledge'],
   [/\b(wires?|power lines?|phone lines?|telephone lines?|cables?)\b/, 'wire'],
-  [/\b(windowsills?|window sills?|sills?|ledges?|air conditioners?|cornices?)\b/, 'ledge'],
+  [/\b(windowsills?|window sills?|sills?|ledges?|air conditioners?|cornices?|eaves|under the bridge)\b/, 'ledge'],
   [/\b(rooftops?|roofs?|chimneys?|water towers?)\b/, 'rooftop'],
   [/\b(piers?|docks?|pilings?|posts? in the water)\b/, 'pier'],
   [/\b(beach|sand|shore|shoreline|mudflats?|tide line)\b/, 'shore'],
