@@ -27,6 +27,7 @@ import type { Neighborhood } from '@/lib/neighborhood';
 import { aroundSlide, buildArc, pickAround, pickLead, poolFor, type StoryContext, type StoryPlace } from '@/lib/neighborStory';
 import { favoritesStory } from '@/lib/favoritesStory';
 import { withMoods } from '@/lib/mood';
+import { homeSetting } from '@/lib/profile';
 import { withSettings } from '@/lib/settingWords';
 import { hashString, seededRandom } from '@/lib/random';
 import { dateKey, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
@@ -293,7 +294,8 @@ export default function RightNow() {
   const isGrid = slide.kind === 'around' || slide.kind === 'favorites';
   // Pilot: some animals appear right in their setting (on a branch, a sidewalk, the
   // water) instead of on a round sticker.
-  const closeUp = slide.kind === 'intro' || slide.cast ? undefined : closeUpFor(species?.id, slide.setting, slide.action);
+  // Every single-animal slide gets a scene: from its words, or else where that animal usually is.
+  const closeUp = slide.kind === 'intro' || slide.cast || !species ? undefined : closeUpFor(species.id, slide.setting ?? homeSetting(species), slide.action);
   // The time and weather sit on a little card over a close-up scene.
   const onCard = !!closeUp && !showHome;
   const sceneH = Math.round(stickerSize * 1.1);
