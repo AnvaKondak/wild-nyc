@@ -360,9 +360,9 @@ const SHOULDER: Record<string, [number, number]> = {
   'herring-gull': [0.6, 0.42],
   'ring-billed-gull': [0.6, 0.42],
   'common-tern': [0.6, 0.42],
-  'rock-pigeon': [0.58, 0.44],
+  'rock-pigeon': [0.5, 0.42],
 };
-const shoulderOf = (id: string): [number, number] => SHOULDER[id] ?? [0.58, 0.44];
+const shoulderOf = (id: string): [number, number] => SHOULDER[id] ?? [0.46, 0.46];
 
 const WING_FILL = 'M0 52 C6 26 32 6 70 4 C80 4 90 6 98 10 L90 16 L97 20 L88 25 L94 30 L84 33 L88 39 L76 40 L78 46 L64 45 L62 51 C40 55 20 56 0 52 Z';
 const WING_EDGE = 'M12 30 C22 16 40 6 70 4 C80 4 90 6 98 10 L90 16 L97 20 L88 25 L94 30 L84 33 L88 39 L76 40 L78 46 L64 45 L62 51 C46 53 32 54 18 53';
@@ -386,7 +386,7 @@ function Acting({ action: wanted, speciesId, size, setting, children }: { action
       style={{
         position: 'absolute',
         // The wing's base sits on the shoulder; it spreads up and out from there.
-        left: size * (shoulderOf(speciesId)[0] - (flutter ? 0.08 : k ? 0.04 : 0.1)),
+        left: size * (shoulderOf(speciesId)[0] - (flutter ? 0.04 : k ? 0 : 0.05)),
         top: size * (shoulderOf(speciesId)[1] - (flutter ? 0.14 : 0.3)),
         width: size * (flutter ? 0.34 : 0.6),
         height: size * (flutter ? 0.2 : 0.34),
