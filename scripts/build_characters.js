@@ -71,6 +71,7 @@ const ART = {
     },
   },
   sparrow: {
+    shoulder: [(40 + 0.8 * (152 + 88 * 0.92)) / 400, (30 + 0.8 * (150 + 88 * 0.62)) / 400],
     // Full body, three-quarter pose: plump, standing tall on a twig, facing left.
     tint: C.yellowT,
     tilt: 0,
@@ -153,6 +154,12 @@ const dots = (pts, r, fill) => pts.map(([x, y]) => `<circle cx="${x}" cy="${y}" 
 const perched = (p) => ({
   tint: p.tint,
   tilt: 0,
+  // Where the back of the head meets the back, on the 400 canvas (as fractions): the
+  // drawing sits at translate(40 30) scale(0.8), so map the head through that.
+  shoulder: (() => {
+    const [hx, hy, hr] = p.headAt ?? [152, 150, 88];
+    return [(40 + 0.8 * (hx + hr * 0.92)) / 400, (30 + 0.8 * (hy + hr * 0.62)) / 400];
+  })(),
   svg: (m) => {
     const tail = p.tailShape ?? '<path d="M300 262 L390 292 L382 322 L294 302 Z"/>';
     const bodyPath = p.bodyPath ?? PERCH_BODY;
@@ -534,6 +541,7 @@ ART.nightheron = perched({
 
 // ── Water birds with their own poses.
 ART.goose = {
+  shoulder: [0.5, 0.48],
   // Standing on the grass: plump brown body, long black neck, white chin strap.
   tint: C.blueT,
   tilt: 0,
@@ -747,6 +755,7 @@ ART.cormorantSpread = {
 };
 
 ART.cormorant = {
+  shoulder: [0.5, 0.46],
   // Standing tall on a post, wings folded: long neck, hooked beak, orange face, a long stiff tail.
   tint: C.yellowT,
   tilt: 0,
@@ -777,6 +786,7 @@ ART.cormorant = {
 };
 
 ART.heron = {
+  shoulder: [0.5, 0.52],
   // Tall in the shallows: blue-gray, S neck, black head stripe and plume, dagger bill.
   tint: C.pinkT,
   tilt: 0,
@@ -1184,6 +1194,7 @@ ART.peregrine = raptorSelfie({
 const hawkPerched = (p) => ({
   tint: 'none',
   tilt: 0,
+  shoulder: [0.56, 0.34],
   svg: (m) => {
     const tail = '<path d="M206 286 L258 284 L262 398 L216 398 Z"/>';
     const bodyPath = 'M150 156 C150 112 192 94 232 102 C278 112 294 164 290 228 C286 274 262 300 222 304 C184 306 158 282 152 240 Z';
@@ -1246,6 +1257,7 @@ ART.peregrineBody = hawkPerched({
 // ── Full-body versions of the selfie animals, for close-up scenes (no background, no
 // perch: the scene draws the ground). Feet rest on y = 360 of the 400 canvas.
 ART.pigeonBody = {
+  shoulder: [0.47, 0.42],
   tint: 'none',
   tilt: 0,
   svg: (m) => {
@@ -1570,6 +1582,7 @@ for (const [id, { art, pose, feet }] of Object.entries(CUTOUTS)) {
   cutouts[id] = {
     feet,
     pose,
+    ...(ART[art].shoulder ? { shoulder: ART[art].shoulder.map((v) => Math.round(v * 1000) / 1000) } : {}),
     frames: MOODS.map((m) => ({
       mood: m.name,
       open: drawCut(ART[art], m),
@@ -1589,7 +1602,7 @@ if (require.main === module) {
       `export type CharacterFrame = { mood: string; open: string; shut?: string };\n\n` +
       `export const characterXml: Record<string, CharacterFrame[]> = ${JSON.stringify(characters, null, 2)};\n\n` +
       `/** Close-up scene versions: no background or perch; \`feet\` is where they stand, as a fraction of the height. */\n` +
-      `export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' | 'swim' | 'wade' | 'cling' | 'fly' | 'web'; frames: CharacterFrame[] }> = ${JSON.stringify(cutouts, null, 2)};\n`,
+      `export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' | 'swim' | 'wade' | 'cling' | 'fly' | 'web'; shoulder?: [number, number]; frames: CharacterFrame[] }> = ${JSON.stringify(cutouts, null, 2)};\n`,
   );
   console.log(`wrote ${Object.keys(characters).length} neighbors × ${MOODS.length} moods`);
 }

@@ -25,6 +25,7 @@ import type { Sky } from '@/lib/weather';
 import { colors } from '@/theme/tokens';
 import { useReduceMotion } from '../backdrop/motion';
 import { Character, cutoutFeet, cutoutPose, hasCutout } from '../characters/Character';
+import { cutoutXml } from '../characters/xml';
 import { lookFor, type Building, type Landmark } from './looks';
 
 export type CloseUpSetting =
@@ -347,22 +348,9 @@ function useSine(duration: number, still: boolean) {
   const t = useLinear(duration, still);
   return t;
 }
-// Where each bird's wings join their back (fractions of their drawing), so wings sprout
-// from the shoulders instead of the same spot on everyone. Small perched birds share one.
-const SHOULDER: Record<string, [number, number]> = {
-  'red-tailed-hawk': [0.6, 0.32],
-  'coopers-hawk': [0.6, 0.32],
-  'peregrine-falcon': [0.6, 0.32],
-  'double-crested-cormorant': [0.52, 0.46],
-  'great-blue-heron': [0.6, 0.52],
-  'black-crowned-night-heron': [0.58, 0.44],
-  'canada-goose': [0.62, 0.52],
-  'herring-gull': [0.6, 0.42],
-  'ring-billed-gull': [0.6, 0.42],
-  'common-tern': [0.6, 0.42],
-  'rock-pigeon': [0.5, 0.42],
-};
-const shoulderOf = (id: string): [number, number] => SHOULDER[id] ?? [0.46, 0.46];
+// Where each bird's wings join their back, calculated from their drawing (see
+// scripts/build_characters.js), so wings sprout from the shoulders on every body shape.
+const shoulderOf = (id: string): [number, number] => cutoutXml[id]?.shoulder ?? [0.55, 0.48];
 
 const WING_FILL = 'M0 52 C6 26 32 6 70 4 C80 4 90 6 98 10 L90 16 L97 20 L88 25 L94 30 L84 33 L88 39 L76 40 L78 46 L64 45 L62 51 C40 55 20 56 0 52 Z';
 const WING_EDGE = 'M12 30 C22 16 40 6 70 4 C80 4 90 6 98 10 L90 16 L97 20 L88 25 L94 30 L84 33 L88 39 L76 40 L78 46 L64 45 L62 51 C46 53 32 54 18 53';
@@ -386,8 +374,8 @@ function Acting({ action: wanted, speciesId, size, setting, children }: { action
       style={{
         position: 'absolute',
         // The wing's base sits on the shoulder; it spreads up and out from there.
-        left: size * (shoulderOf(speciesId)[0] - (flutter ? 0.04 : k ? 0 : 0.05)),
-        top: size * (shoulderOf(speciesId)[1] - (flutter ? 0.14 : 0.3)),
+        left: size * (shoulderOf(speciesId)[0] - (flutter ? 0.06 : k ? 0.03 : 0.08)),
+        top: size * (shoulderOf(speciesId)[1] - (flutter ? 0.16 : 0.32)),
         width: size * (flutter ? 0.34 : 0.6),
         height: size * (flutter ? 0.2 : 0.34),
         transformOrigin: 'left bottom',

@@ -1026,10 +1026,14 @@ export const characterXml: Record<string, CharacterFrame[]> = {
 };
 
 /** Close-up scene versions: no background or perch; `feet` is where they stand, as a fraction of the height. */
-export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' | 'swim' | 'wade' | 'cling' | 'fly' | 'web'; frames: CharacterFrame[] }> = {
+export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' | 'swim' | 'wade' | 'cling' | 'fly' | 'web'; shoulder?: [number, number]; frames: CharacterFrame[] }> = {
   "rock-pigeon": {
     "feet": 0.9,
     "pose": "stand",
+    "shoulder": [
+      0.47,
+      0.42
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1054,6 +1058,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "house-sparrow": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1102,6 +1110,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "european-starling": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.559,
+      0.486
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1126,6 +1138,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "mourning-dove": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.514,
+      0.49
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1150,6 +1166,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "american-robin": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1174,6 +1194,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "herring-gull": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.547,
+      0.474
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1246,6 +1270,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "red-tailed-hawk": {
     "feet": 0.84,
     "pose": "perch",
+    "shoulder": [
+      0.56,
+      0.34
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1270,6 +1298,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "blue-jay": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1294,6 +1326,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "dark-eyed-junco": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1342,6 +1378,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "american-crow": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.555,
+      0.479
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1366,6 +1406,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "white-throated-sparrow": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1438,6 +1482,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "canada-goose": {
     "feet": 0.935,
     "pose": "stand",
+    "shoulder": [
+      0.5,
+      0.48
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1510,6 +1558,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "double-crested-cormorant": {
     "feet": 0.81,
     "pose": "stand",
+    "shoulder": [
+      0.5,
+      0.46
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1558,6 +1610,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "ring-billed-gull": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.547,
+      0.474
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1582,6 +1638,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "common-tern": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.544,
+      0.472
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1606,6 +1666,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "great-blue-heron": {
     "feet": 0.82,
     "pose": "wade",
+    "shoulder": [
+      0.5,
+      0.52
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1630,6 +1694,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "black-crowned-night-heron": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.561,
+      0.493
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1702,6 +1770,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "red-winged-blackbird": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1750,6 +1822,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "northern-mockingbird": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1774,6 +1850,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "northern-cardinal": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1798,6 +1878,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "common-grackle": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1822,6 +1906,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "gray-catbird": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1846,6 +1934,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "song-sparrow": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1870,6 +1962,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "american-kestrel": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1894,6 +1990,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "coopers-hawk": {
     "feet": 0.84,
     "pose": "perch",
+    "shoulder": [
+      0.56,
+      0.34
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1918,6 +2018,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "peregrine-falcon": {
     "feet": 0.84,
     "pose": "perch",
+    "shoulder": [
+      0.56,
+      0.34
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -1990,6 +2094,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "tufted-titmouse": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -2014,6 +2122,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "hermit-thrush": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
@@ -2038,6 +2150,10 @@ export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' |
   "yellow-rumped-warbler": {
     "feet": 0.815,
     "pose": "perch",
+    "shoulder": [
+      0.566,
+      0.484
+    ],
     "frames": [
       {
         "mood": "hello",
