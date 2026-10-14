@@ -698,8 +698,9 @@ ART.swan = {
     const neckLine = 'M150 262 C114 214 158 170 152 128 C148 100 130 88 112 92';
     const head = '<ellipse cx="102" cy="94" rx="36" ry="27"/>';
     return `${shadow([body, wing, head, `<path d="${neckLine}" fill="none" stroke-width="40"/>`])}
-      ${shape(body, '#F7F5F2')}
+      ${'' /* The neck's outline behind the body and its white fill on top: no seam where they meet. */}
       <path d="${neckLine}" fill="none" stroke="${C.ink}" stroke-width="42" stroke-linecap="round"/>
+      ${shape(body, '#F7F5F2')}
       <path d="${neckLine}" fill="none" stroke="#F7F5F2" stroke-width="24" stroke-linecap="round"/>
       ${shape(wing, '#F7F5F2')}
       <path d="M220 214 C250 186 296 180 330 200 M238 230 C266 210 300 206 330 220" fill="none" stroke="#C9CCD6" stroke-width="7" stroke-linecap="round"/>
@@ -715,7 +716,7 @@ ART.swan = {
   },
 };
 
-ART.cormorant = {
+ART.cormorantSpread = {
   // Standing on a post, wings spread out to dry.
   tint: C.yellowT,
   tilt: 0,
@@ -740,6 +741,36 @@ ART.cormorant = {
       <ellipse cx="190" cy="114" rx="11" ry="7" fill="${C.pink}"/>
       <path d="M140 90 C120 86 92 92 70 100 C66 110 72 116 80 112 C92 106 120 104 142 104 Z" fill="#6E6C80" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
       ${m.snack ? droplet(62, 124) : ''}
+      ${m.hearts ? heart(252, 26, 36) + heart(296, 64, 24) : ''}
+      ${m.zees ? zee(222, 44, 30) + zee(258, 22, 20) : ''}`;
+  },
+};
+
+ART.cormorant = {
+  // Standing tall on a post, wings folded: long neck, hooked beak, orange face, a long stiff tail.
+  tint: C.yellowT,
+  tilt: 0,
+  svg: (m) => {
+    const body = '<path d="M172 166 C212 156 252 186 262 236 C270 282 250 312 214 316 C180 318 160 284 158 234 C156 198 160 174 172 166 Z"/>';
+    const tail = '<path d="M238 298 L284 362 L264 370 L224 312 Z"/>';
+    const wing = 'M196 180 C236 178 262 216 266 262 C268 288 254 306 234 312 C212 282 200 234 196 180 Z';
+    const head = '<ellipse cx="160" cy="96" rx="34" ry="28"/>';
+    const neckLine = 'M184 180 C168 150 192 126 168 104';
+    return `${m.cut ? '' : `<rect x="168" y="322" width="64" height="100" fill="#9A6A44" stroke="${C.ink}" stroke-width="9"/><ellipse cx="200" cy="322" rx="32" ry="10" fill="#B9875E" stroke="${C.ink}" stroke-width="8"/>`}
+      <path d="M200 312 L196 324 M220 312 L224 324" stroke="${C.ink}" stroke-width="10" stroke-linecap="round"/>
+      ${shadow([tail, body, head])}
+      ${shape(tail, '#25253A')}
+      <path d="${neckLine}" fill="none" stroke="${C.ink}" stroke-width="40" stroke-linecap="round"/>
+      ${shape(body, '#2A2A3E')}
+      <path d="${wing}" fill="#3E3646" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M214 214 q12 8 24 0 M220 240 q12 8 24 0 M226 266 q12 8 24 0 M230 290 q10 6 20 0" fill="none" stroke="#8A7A5A" stroke-width="5" stroke-linecap="round"/>
+      <path d="${neckLine}" fill="none" stroke="#2A2A3E" stroke-width="24" stroke-linecap="round"/>
+      ${shape(head, '#2A2A3E')}
+      <path d="M128 100 C134 116 148 122 160 118 C158 108 150 100 140 98 Z" fill="#F2994A"/>
+      ${eye(m.eyes, 160, 90, 12, { ring: '#3BC4B4', lid: '#2A2A3E' })}
+      <ellipse cx="180" cy="112" rx="10" ry="6" fill="${C.pink}"/>
+      <path d="M134 88 C112 84 84 88 62 96 C58 104 64 110 72 106 C92 100 116 100 136 102 Z" fill="#6E6C80" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
+      ${m.snack ? droplet(56, 116) : ''}
       ${m.hearts ? heart(252, 26, 36) + heart(296, 64, 24) : ''}
       ${m.zees ? zee(222, 44, 30) + zee(258, 22, 20) : ''}`;
   },
@@ -1398,6 +1429,8 @@ const CUTOUTS = {
   mallard: P('mallard', 'swim', 0.74),
   brant: P('brant', 'swim', 0.74),
   'double-crested-cormorant': P('cormorant', 'stand', 0.81),
+  // Wings spread to dry, for the slides that say so.
+  'double-crested-cormorant:spread': P('cormorantSpread', 'stand', 0.81),
   'ring-billed-gull': P('ringbill', 'perch'),
   'common-tern': P('tern', 'perch'),
   'great-blue-heron': P('heron', 'wade', 0.82),

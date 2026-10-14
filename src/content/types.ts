@@ -84,7 +84,7 @@ export type Family = {
   seasons: Record<Season, { title: string; body: string }>;
 };
 
-export type Action = 'fly' | 'sleep' | 'dust' | 'drink';
+export type Action = 'fly' | 'sleep' | 'dust' | 'drink' | 'dry';
 
 export type Mood = 'hello' | 'snack' | 'happy' | 'sleepy';
 

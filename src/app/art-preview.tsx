@@ -31,7 +31,7 @@ const CLOSEUPS = species.flatMap((s) => {
 
 export default function ArtPreview() {
   const raccoon = getSpecies('raccoon')!;
-  const { only, from, accents, period: p, place, scene: forced, action } = useLocalSearchParams<{ only?: string; from?: string; accents?: string; period?: Period; place?: string; scene?: CloseUpSetting; action?: 'fly' | 'sleep' | 'dust' | 'drink' }>();
+  const { only, from, accents, period: p, place, scene: forced, action } = useLocalSearchParams<{ only?: string; from?: string; accents?: string; period?: Period; place?: string; scene?: CloseUpSetting; action?: 'fly' | 'sleep' | 'dust' | 'drink' | 'dry' }>();
   const { width } = useWindowDimensions();
   if (only === 'closeups') return <CloseUpGallery width={width} initial={{ period: p, place, scene: forced, action }} />;
   const thumb = (width - 32 - 12) / 2;
@@ -95,7 +95,7 @@ export default function ArtPreview() {
 }
 
 // Dev only: every close-up, scrollable, with buttons to try each action, time of day and look.
-type Act = 'fly' | 'sleep' | 'dust' | 'drink' | undefined;
+type Act = 'fly' | 'sleep' | 'dust' | 'drink' | 'dry' | undefined;
 const LOOKS = ['park-slope', 'chelsea', 'coney-island', 'battery-park-city', 'bay-ridge'];
 
 function CloseUpGallery({ width, initial }: { width: number; initial: { period?: Period; place?: string; scene?: CloseUpSetting; action?: Act } }) {
@@ -117,7 +117,7 @@ function CloseUpGallery({ width, initial }: { width: number; initial: { period?:
       <View style={{ paddingHorizontal: 8, gap: 6, paddingBottom: 6 }}>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
           {chip('No action', !action, () => setAction(undefined))}
-          {(['fly', 'sleep', 'dust', 'drink'] as const).map((a) => chip(a, action === a, () => setAction(a)))}
+          {(['fly', 'sleep', 'dust', 'drink', 'dry'] as const).map((a) => chip(a, action === a, () => setAction(a)))}
         </View>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
           {(['dawn', 'midday', 'dusk', 'night'] as const).map((x) => chip(x, period === x, () => setPeriod(x)))}

@@ -65,6 +65,8 @@ export function canDo(speciesId: string, action: Action): boolean {
       return DUST_BATHERS.includes(speciesId);
     case 'drink':
       return CITY_WALKERS.includes(speciesId);
+    case 'dry':
+      return speciesId === 'double-crested-cormorant';
   }
 }
 
@@ -74,6 +76,7 @@ function sceneForAction(speciesId: string, action: Action): CloseUpSetting | und
   if (action === 'fly') return 'sky';
   if (action === 'dust') return 'building';
   if (action === 'drink') return 'puddle';
+  if (action === 'dry') return undefined; // wherever they are, wings spread
   if (HOLLOW_SLEEPERS.includes(speciesId)) return 'hollow';
   if (BURROWERS.includes(speciesId) || speciesId === 'groundhog') return 'burrow';
   if (pose === 'swim') return 'water';
@@ -86,7 +89,10 @@ export function closeUpFor(speciesId: string | undefined, setting: Setting | und
   if (!hasCutout(speciesId) || !setting) return undefined;
   // Swifts sleep clinging inside chimneys, which we don't draw: their sleeping slides keep the sticker.
   if (speciesId === SWIFT && action === 'sleep') return undefined;
-  if (action && canDo(speciesId, action)) return sceneForAction(speciesId, action);
+  if (action && canDo(speciesId, action)) {
+    const scene = sceneForAction(speciesId, action);
+    if (scene) return scene;
+  }
   const pose = cutoutPose(speciesId);
   if (pose === 'web') return 'web';
   if (pose === 'cling') return 'trunk';
@@ -212,7 +218,8 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
   const animal = (
     <View style={{ position: 'absolute', left, top }}>
       <Acting action={action} speciesId={speciesId} size={size} setting={setting}>
-        <Character speciesId={speciesId} size={size} mood={mood} cutout />
+        {/* Cormorants drying off are drawn with their wings spread wide. */}
+        <Character speciesId={action === 'dry' && canDo(speciesId, 'dry') ? `${speciesId}:spread` : speciesId} size={size} mood={mood} cutout />
       </Acting>
     </View>
   );
@@ -340,14 +347,15 @@ function useSine(duration: number, still: boolean) {
   const t = useLinear(duration, still);
   return t;
 }
+const WING_FILL = 'M0 52 C6 26 32 6 70 4 C80 4 90 6 98 10 L90 16 L97 20 L88 25 L94 30 L84 33 L88 39 L76 40 L78 46 L64 45 L62 51 C40 55 20 56 0 52 Z';
+const WING_EDGE = 'M12 30 C22 16 40 6 70 4 C80 4 90 6 98 10 L90 16 L97 20 L88 25 L94 30 L84 33 L88 39 L76 40 L78 46 L64 45 L62 51 C46 53 32 54 18 53';
 const wave = (t: Animated.Value, a: number | string, b: number | string) =>
   t.interpolate({ inputRange: [0, 0.25, 0.5, 0.75, 1], outputRange: [a, b, a, b, a] as never });
 
 /**
  * Wraps the animal in what they're doing, if they really do it (see canDo). Flying: both
  * wings flap and they float gently, legs tucked. Sleeping: fluffed up into a round ball.
- * Dust bathing: settled low in the dust, wiggling their tail and fluttering their wings,
- * dust puffing up. Drinking: standing tall, sipping through a straw (drawn by the scene).
+ * Dust bathing: sitting still in the dust, just fluttering their wings, dust puffing up. Drinking: standing tall, sipping through a straw (drawn by the scene).
  */
 function Acting({ action: wanted, speciesId, size, setting, children }: { action?: Action; speciesId: string; size: number; setting: CloseUpSetting; children: React.ReactNode }) {
   const still = useReduceMotion();
@@ -360,17 +368,20 @@ function Acting({ action: wanted, speciesId, size, setting, children }: { action
       key={k}
       style={{
         position: 'absolute',
-        left: size * (flutter ? 0.5 : k ? 0.42 : 0.34),
-        top: size * (flutter ? 0.46 : 0.28),
+        left: size * (flutter ? 0.46 : k ? 0.4 : 0.34),
+        top: size * (flutter ? 0.44 : 0.28),
         width: size * (flutter ? 0.34 : 0.6),
         height: size * (flutter ? 0.2 : 0.34),
         transformOrigin: 'left bottom',
-        transform: [{ rotate: wave(t, flutter ? '-10deg' : k ? '-30deg' : '-22deg', flutter ? '-45deg' : k ? '20deg' : '26deg') as never }],
+        transform: [{ rotate: wave(t, flutter ? '-6deg' : k ? '-30deg' : '-22deg', flutter ? '-28deg' : k ? '20deg' : '26deg') as never }],
       }}
     >
       <Svg width="100%" height="100%" viewBox="0 0 100 56">
-        <Path d="M4 52 C10 10 60 0 96 8 C88 16 92 22 84 26 C82 34 76 38 70 40 C64 46 40 50 4 52 Z" fill={wingColor} stroke={INK} strokeWidth={5} strokeLinejoin="round" opacity={k === 0 && !flutter ? 0.8 : 1} />
-        <Path d="M30 40 C46 28 64 20 84 14 M22 46 C40 38 56 32 74 28" stroke={INK} strokeWidth={3} fill="none" opacity={0.45} />
+        {/* A broad wing with long separate feathers at the tip. Outlined everywhere except
+            where it joins the body, so it reads as part of them, not stuck on. */}
+        <Path d={WING_FILL} fill={wingColor} opacity={k === 0 && !flutter ? 0.85 : 1} />
+        <Path d={WING_EDGE} fill="none" stroke={INK} strokeWidth={4} strokeLinejoin="round" strokeLinecap="round" />
+        <Path d="M40 36 L86 14 M36 42 L84 26 M34 47 L74 38" stroke={INK} strokeWidth={2.5} fill="none" opacity={0.35} strokeLinecap="round" />
       </Svg>
     </Animated.View>
   );
@@ -394,7 +405,7 @@ function Acting({ action: wanted, speciesId, size, setting, children }: { action
         <Svg width={size} height={size} style={{ position: 'absolute' }}>
           <Ellipse cx={size * 0.5} cy={size * cutoutFeet(speciesId)} rx={size * 0.46} ry={size * 0.07} fill="#C9A87A" stroke={INK} strokeWidth={1.5} />
         </Svg>
-        <Animated.View style={{ transformOrigin: 'left bottom', transform: [{ translateY: size * 0.06 }, { scaleY: 0.86 }, { skewX: wave(t, '0deg', '-8deg') as never }] }}>{children}</Animated.View>
+        <View>{children}</View>
         {wing(1, true)}
         {[0, 1, 2, 3, 4].map((k) => (
           <DustPuff key={k} k={k} size={size} still={still} />

@@ -38,6 +38,7 @@ export function settingFromWords(text: string): Setting | undefined {
 }
 
 const ACTIONS: [RegExp, Action][] = [
+  [/\b(drying|dry (?:their|its) wings|wings (?:out|spread|open|wide)|spread(?:ing)? (?:their )?wings|hanging (?:their )?wings)\b/, 'dry'],
   [/\bdust[- ]?bath/, 'dust'],
   [/\b(asleep|sleeps?|sleeping|napping|naps?|dozing|dozes|snoozing|roosting|tucked in|curled up)\b/, 'sleep'],
   [/\b(sips?|sipping|drinks?|drinking|slurp\w*)\b/, 'drink'],
