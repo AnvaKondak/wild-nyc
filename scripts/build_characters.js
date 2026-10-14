@@ -1567,13 +1567,18 @@ const draw = (a, m) =>
 // A cutout: no background, no tilt, no perch (the close-up scene draws those).
 const drawCut = (a, m) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">${a.svg({ ...m, cut: true })}</svg>`.replace(/\s+/g, ' ');
 
+// Each frame gets its own clip-path ids: on the phone, two drawings on screen with the
+// same id (the open-eye and blink frames) can grab each other's shapes, so a blink would
+// nudge a wing or tail patch. Suffixing keeps every frame self-contained.
+const uniqueIds = (svg, tag) => svg.replace(/id="([^"]+)"/g, `id="$1-${tag}"`).replace(/url\(#([^)]+)\)/g, `url(#$1-${tag})`);
+
 const characters = {};
 for (const [id, key] of Object.entries(SPECIES)) {
   characters[id] = MOODS.map((m) => ({
     mood: m.name,
-    open: draw(ART[key], m),
+    open: uniqueIds(draw(ART[key], m), `${m.name}-o`),
     // A blink frame for moods with open eyes.
-    ...(m.eyes === 'open' ? { shut: draw(ART[key], { ...m, eyes: 'shut' }) } : {}),
+    ...(m.eyes === 'open' ? { shut: uniqueIds(draw(ART[key], { ...m, eyes: 'shut' }), `${m.name}-s`) } : {}),
   }));
 }
 
@@ -1585,8 +1590,8 @@ for (const [id, { art, pose, feet }] of Object.entries(CUTOUTS)) {
     ...(ART[art].shoulder ? { shoulder: ART[art].shoulder.map((v) => Math.round(v * 1000) / 1000) } : {}),
     frames: MOODS.map((m) => ({
       mood: m.name,
-      open: drawCut(ART[art], m),
-      ...(m.eyes === 'open' ? { shut: drawCut(ART[art], { ...m, eyes: 'shut' }) } : {}),
+      open: uniqueIds(drawCut(ART[art], m), `c-${m.name}-o`),
+      ...(m.eyes === 'open' ? { shut: uniqueIds(drawCut(ART[art], { ...m, eyes: 'shut' }), `c-${m.name}-s`) } : {}),
     })),
   };
 }
