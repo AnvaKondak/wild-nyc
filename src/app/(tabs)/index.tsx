@@ -393,7 +393,10 @@ export default function RightNow() {
                 <Text style={{ fontFamily: fonts.display, fontSize: onCard ? 14 : 20, color: theme.ink }} numberOfLines={onCard ? 1 : undefined}>
                   {header.label} · {header.clock}
                 </Text>
-                <Text style={{ fontFamily: fonts.body, fontSize: onCard ? 11 : 13, color: theme.muted }} numberOfLines={onCard ? 1 : undefined}>{weatherLine}</Text>
+                <Text style={{ fontFamily: fonts.body, fontSize: onCard ? 11 : 13, color: theme.muted }} numberOfLines={onCard ? 1 : undefined}>
+                  {/* On the pill: just the temperature and the weather words. */}
+                  {onCard && weather && !faves ? describeWeather(weather) : weatherLine}
+                </Text>
                 {state.soundOn && !onCard && (
                   <Text style={{ fontFamily: fonts.body, fontSize: 13, color: theme.muted }}>Listening to {listening}</Text>
                 )}
