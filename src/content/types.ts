@@ -86,7 +86,8 @@ export type Family = {
 
 export type Action = 'fly' | 'sleep' | 'dust' | 'drink' | 'dry';
 
-export type Mood = 'hello' | 'snack' | 'happy' | 'sleepy';
+/** The everyday four take turns; the rest show only when the words call for them. */
+export type Mood = 'hello' | 'snack' | 'happy' | 'sleepy' | 'surprised' | 'curious' | 'singing' | 'chilly';
 
 export type StorySlide = {
   id: string;

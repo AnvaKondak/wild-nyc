@@ -2,8 +2,9 @@
 // Builds the drawn neighbors (chubby riso stickers) as SVG strings for the app:
 // src/components/characters/xml.ts. Run: node scripts/build_characters.js
 //
-// Each neighbor has a few moods (hello, snack, happy, sleepy), so a story shows a
-// different drawing on each slide. Moods with open eyes also get an eyes-shut frame,
+// Each neighbor has a few everyday moods (hello, snack, happy, sleepy), so a story shows a
+// different drawing on each slide, plus a few the words can call for (surprised, curious,
+// singing, chilly). Moods with open eyes also get an eyes-shut frame,
 // for blinking. Little birds stand full-body; bigger animals are close-up "selfies".
 // Everything is drawn on a 400×400 canvas.
 
@@ -22,6 +23,15 @@ const blush = (pts) => pts.map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="22"
  * `ring` an iris ring (pigeons); `dark` a white rim on a dark mask (raccoons).
  */
 const eye = (eyes, x, y, r, { ring, dark, lid } = {}) => {
+  // Surprised: big round eyes under raised brows. Curious: one brow up, eyes glancing up.
+  if (eyes === 'wide' || eyes === 'curious') {
+    const brow = dark ? '#fff' : C.ink;
+    const big = eyes === 'wide' ? r * 1.18 : r;
+    const lift = eyes === 'wide' ? r * 0.75 : r * 0.45;
+    const arch = `<path d="M${x - r * 0.85} ${y - big - r * 0.55} Q${x} ${y - big - r * 0.55 - lift} ${x + r * 0.85} ${y - big - r * 0.55 + (eyes === 'curious' ? r * 0.3 : 0)}" fill="none" stroke="${brow}" stroke-width="${Math.max(5, r * 0.28)}" stroke-linecap="round"/>`;
+    const look = eyes === 'curious' ? -r * 0.18 : 0;
+    return `${dark ? `<circle cx="${x}" cy="${y}" r="${big + 7}" fill="#fff"/>` : ''}${ring ? `<circle cx="${x}" cy="${y}" r="${big + 9}" fill="${ring}" stroke="${C.ink}" stroke-width="6"/>` : ''}<circle cx="${x}" cy="${y}" r="${big}" fill="${C.ink}"/><circle cx="${x - r * 0.3 + look}" cy="${y - r * 0.42 + look}" r="${r * (eyes === 'wide' ? 0.42 : 0.34)}" fill="#fff"/><circle cx="${x + r * 0.4}" cy="${y + r * 0.38}" r="${r * 0.18}" fill="#fff"/>${arch}`;
+  }
   if (eyes === 'open') {
     return `${dark ? `<circle cx="${x}" cy="${y}" r="${r + 7}" fill="#fff"/>` : ''}${ring ? `<circle cx="${x}" cy="${y}" r="${r + 9}" fill="${ring}" stroke="${C.ink}" stroke-width="6"/>` : ''}<circle cx="${x}" cy="${y}" r="${r}" fill="${C.ink}"/><circle cx="${x - r * 0.35}" cy="${y - r * 0.38}" r="${r * 0.34}" fill="#fff"/><circle cx="${x + r * 0.38}" cy="${y + r * 0.35}" r="${r * 0.16}" fill="#fff"/>`;
   }
@@ -32,6 +42,32 @@ const eye = (eyes, x, y, r, { ring, dark, lid } = {}) => {
 const heart = (x, y, s) =>
   `<path d="M${x} ${y + s * 0.3} C${x} ${y} ${x - s * 0.5} ${y} ${x - s * 0.5} ${y + s * 0.3} C${x - s * 0.5} ${y + s * 0.6} ${x} ${y + s * 0.8} ${x} ${y + s} C${x} ${y + s * 0.8} ${x + s * 0.5} ${y + s * 0.6} ${x + s * 0.5} ${y + s * 0.3} C${x + s * 0.5} ${y} ${x} ${y} ${x} ${y + s * 0.3} Z" fill="${C.pink}" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>`;
 const zee = (x, y, s) => `<path d="M${x} ${y} H${x + s} L${x} ${y + s} H${x + s}" fill="none" stroke="${C.ink}" stroke-width="${Math.max(6, s * 0.22)}" stroke-linecap="round" stroke-linejoin="round"/>`;
+// A music note: a pink head on an ink stem with a little flag.
+const note = (x, y, s) => `<path d="M${x + s * 0.32} ${y + s * 0.85} V${y} q${s * 0.3} ${s * 0.12} ${s * 0.5} ${s * 0.38}" fill="none" stroke="${C.ink}" stroke-width="${Math.max(5, s * 0.16)}" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="${x + s * 0.1}" cy="${y + s * 0.88}" rx="${s * 0.26}" ry="${s * 0.2}" transform="rotate(-20 ${x + s * 0.1} ${y + s * 0.88})" fill="${C.pink}" stroke="${C.ink}" stroke-width="5"/>`;
+// "!" for a surprise: a chunky yellow bar and dot, outlined.
+const bang = (x, y, s) => `<path d="M${x + s * 0.3} ${y} H${x + s * 0.7} L${x + s * 0.6} ${y + s * 0.9} H${x + s * 0.4} Z" fill="#FFD23F" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/><circle cx="${x + s * 0.5}" cy="${y + s * 1.17}" r="${s * 0.15}" fill="#FFD23F" stroke="${C.ink}" stroke-width="6"/><path d="M${x - s * 0.15} ${y + s * 0.15} l${-s * 0.2} ${-s * 0.12} M${x + s * 1.15} ${y + s * 0.15} l${s * 0.2} ${-s * 0.12}" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`;
+// "?" for curiosity, in blue.
+const huh = (x, y, s) => `<path d="M${x + s * 0.12} ${y + s * 0.3} C${x + s * 0.12} ${y - s * 0.12} ${x + s * 0.9} ${y - s * 0.12} ${x + s * 0.88} ${y + s * 0.3} C${x + s * 0.86} ${y + s * 0.58} ${x + s * 0.5} ${y + s * 0.58} ${x + s * 0.5} ${y + s * 0.9}" fill="none" stroke="${C.ink}" stroke-width="${Math.max(10, s * 0.34)}" stroke-linecap="round"/><path d="M${x + s * 0.12} ${y + s * 0.3} C${x + s * 0.12} ${y - s * 0.12} ${x + s * 0.9} ${y - s * 0.12} ${x + s * 0.88} ${y + s * 0.3} C${x + s * 0.86} ${y + s * 0.58} ${x + s * 0.5} ${y + s * 0.58} ${x + s * 0.5} ${y + s * 0.9}" fill="none" stroke="#2F5BEA" stroke-width="${Math.max(5, s * 0.18)}" stroke-linecap="round"/><circle cx="${x + s * 0.5}" cy="${y + s * 1.18}" r="${s * 0.12}" fill="#2F5BEA" stroke="${C.ink}" stroke-width="4"/>`;
+// A snowflake for a chilly day: six white arms, outlined.
+const flake = (x, y, s) => {
+  const cx = x + s / 2;
+  const cy = y + s / 2;
+  const arms = [0, 60, 120].map((a) => {
+    const dx = (Math.cos((a * Math.PI) / 180) * s) / 2;
+    const dy = (Math.sin((a * Math.PI) / 180) * s) / 2;
+    return `M${cx - dx} ${cy - dy} L${cx + dx} ${cy + dy}`;
+  }).join(' ');
+  return `<path d="${arms}" stroke="${C.ink}" stroke-width="${Math.max(9, s * 0.3)}" stroke-linecap="round"/><path d="${arms}" stroke="#FFFFFF" stroke-width="${Math.max(4, s * 0.15)}" stroke-linecap="round"/>`;
+};
+/** What floats by their head, at the two spots the sleepy zees use: zees, notes, "!", "?" or snowflakes. */
+const deco = (m, x1, y1, s1, x2, y2, s2) => {
+  if (m.zees) return zee(x1, y1, s1) + zee(x2, y2, s2);
+  if (m.notes) return note(x1 - s1 * 0.3, y1 - s1 * 0.7, s1 * 1.7) + note(x2 + s2 * 0.4, y2 - s2 * 1.2, s2 * 1.6);
+  if (m.wow) return bang(x2 - s1 * 0.45, y2 - s1 * 0.75, s1 * 1.6);
+  if (m.huh) return huh(x2 - s1 * 0.4, y2 - s1 * 0.6, s1 * 1.45);
+  if (m.chilly) return flake(x1 - s1 * 0.4, y1 - s1 * 0.8, s1 * 1.5) + flake(x2 + s2 * 0.5, y2 - s2 * 1.1, s2 * 1.4);
+  return '';
+};
 // Snacks never show another animal: fish-eaters and bug-catchers get a sparkle of
 // water instead (a sip, a splash after a dive).
 const droplet = (x, y, s = 1) => `<path d="M${x} ${y - 16 * s} C${x + 12 * s} ${y} ${x + 12 * s} ${y + 10 * s} ${x} ${y + 12 * s} C${x - 12 * s} ${y + 10 * s} ${x - 12 * s} ${y} ${x} ${y - 16 * s} Z" fill="#9DD0F5" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round"/><circle cx="${x - 4 * s}" cy="${y + 2 * s}" r="${3 * s}" fill="#fff"/>`;
@@ -44,7 +80,14 @@ const MOODS = [
   { name: 'snack', eyes: 'open', snack: true },
   { name: 'happy', eyes: 'happy', hearts: true },
   { name: 'sleepy', eyes: 'shut', zees: true },
+  // Picked only when the words call for them (see src/lib/mood.ts), never by turns.
+  { name: 'surprised', eyes: 'wide', wow: true },
+  { name: 'curious', eyes: 'curious', huh: true },
+  { name: 'singing', eyes: 'happy', notes: true },
+  { name: 'chilly', eyes: 'open', chilly: true },
 ];
+// Moods with eyes open blink.
+const BLINKS = ['open', 'wide', 'curious'];
 
 const ART = {
   pigeon: {
@@ -67,7 +110,7 @@ const ART = {
         <path d="M178 224 Q200 218 222 224 L200 262 Z" fill="${C.ink}" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/>
         ${m.wave ? `${shape(wing, '#A3A2BC')}<path d="M270 324 C286 314 304 310 322 312 M264 356 C282 346 304 342 328 344" fill="none" stroke="${C.ink}" stroke-width="9" stroke-linecap="round"/>` : ''}
         ${m.hearts ? heart(334, 54, 44) + heart(70, 84, 32) : ''}
-        ${m.zees ? zee(240, 70, 30) + zee(280, 44, 22) : ''}`;
+        ${deco(m, 240, 70, 30, 280, 44, 22)}`;
     },
   },
   sparrow: {
@@ -113,7 +156,7 @@ const ART = {
         <path d="M94 132 C88 126 70 136 50 152 C70 160 88 166 96 164 Z" fill="#6E6C80" stroke="${C.ink}" stroke-width="9" stroke-linejoin="round"/>
         ${m.snack ? `<ellipse cx="50" cy="156" rx="16" ry="10" transform="rotate(-24 50 156)" fill="#E8C27A" stroke="${C.ink}" stroke-width="7"/>` : ''}
         ${m.hearts ? heart(290, 40, 50) + heart(350, 110, 34) : ''}
-        ${m.zees ? zee(270, 50, 40) + zee(326, 10, 28) : ''}
+        ${deco(m, 270, 50, 40, 326, 10, 28)}
         </g>`;
     },
   },
@@ -141,7 +184,7 @@ const ART = {
         ${m.snack ? `<path d="M280 266 C282 242 294 228 312 222" fill="none" stroke="#3E8E4E" stroke-width="7" stroke-linecap="round"/><circle cx="280" cy="284" r="26" fill="#E5484D" stroke="${C.ink}" stroke-width="8"/><circle cx="271" cy="275" r="7" fill="#fff"/>` : ''}
         ${m.wave || m.snack ? `${shape(paw, '#8C889C')}<g fill="${C.ink}"><circle cx="270" cy="328" r="9"/><circle cx="294" cy="318" r="9"/><circle cx="318" cy="328" r="9"/><ellipse cx="296" cy="356" rx="20" ry="15"/></g>` : ''}
         ${m.hearts ? heart(52, 300, 36) + heart(350, 286, 30) : ''}
-        ${m.zees ? zee(210, 92, 30) + zee(250, 66, 22) : ''}`;
+        ${deco(m, 210, 92, 30, 250, 66, 22)}`;
     },
   },
 };
@@ -203,7 +246,7 @@ const perched = (p) => ({
       ${p.beakMarks ?? ''}
       ${m.snack ? p.snack : ''}
       ${m.hearts ? heart(290, 40, 50) + heart(350, 110, 34) : ''}
-      ${m.zees ? zee(270, 50, 40) + zee(326, 10, 28) : ''}
+      ${deco(m, 270, 50, 40, 326, 10, 28)}
       </g>`;
   },
 });
@@ -453,7 +496,7 @@ const woodpecker = (p) => ({
       <path d="M112 118 L64 130 L112 142 Z" fill="#6E6C80" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/>
       ${m.snack ? `<ellipse cx="58" cy="152" rx="14" ry="16" fill="#D9954F" stroke="${C.ink}" stroke-width="6"/><path d="M42 146 Q58 128 74 146 Q58 152 42 146 Z" fill="#7A4E2A" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>` : ''}
       ${m.hearts ? heart(60, 56, 40) + heart(108, 26, 28) : ''}
-      ${m.zees ? zee(48, 62, 32) + zee(92, 34, 22) : ''}`;
+      ${deco(m, 48, 62, 32, 92, 34, 22)}`;
   },
 });
 
@@ -492,7 +535,7 @@ ART.swift = {
       <path d="M74 206 L56 214 L74 222 Z" fill="${C.ink}" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round"/>
       ${m.snack ? droplet(36, 210, 0.8) : ''}
       ${m.hearts ? heart(70, 70, 42) + heart(130, 40, 28) : ''}
-      ${m.zees ? zee(80, 80, 34) + zee(124, 50, 22) : ''}`;
+      ${deco(m, 80, 80, 34, 124, 50, 22)}`;
   },
 };
 
@@ -572,7 +615,7 @@ ART.goose = {
       ${m.snack ? `<path d="M50 112 C40 126 34 142 36 160 M60 112 C58 128 60 144 66 156" fill="none" stroke="#3E8E4E" stroke-width="7" stroke-linecap="round"/>` : ''}
       <path d="M80 88 C66 86 48 94 34 106 C48 112 68 112 82 108 Z" fill="${C.ink}" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/>
       ${m.hearts ? heart(300, 50, 46) + heart(352, 112, 30) : ''}
-      ${m.zees ? zee(250, 64, 34) + zee(292, 34, 22) : ''}`;
+      ${deco(m, 250, 64, 34, 292, 34, 22)}`;
   },
 };
 
@@ -606,7 +649,7 @@ ART.mallard = {
       ${m.cut ? '' : `<path d="M-10 296 Q40 282 90 296 T190 296 T290 296 T390 296 T490 296 V420 H-10 Z" fill="#8FB3E8" stroke="${C.ink}" stroke-width="8"/>
       <path d="M40 330 q20 -10 40 0 M180 346 q20 -10 40 0 M300 328 q20 -10 40 0" fill="none" stroke="#F7F5F2" stroke-width="6" stroke-linecap="round"/>`}
       ${m.hearts ? heart(300, 50, 46) + heart(352, 112, 30) : ''}
-      ${m.zees ? zee(250, 64, 34) + zee(292, 34, 22) : ''}`;
+      ${deco(m, 250, 64, 34, 292, 34, 22)}`;
   },
 };
 
@@ -637,13 +680,13 @@ ART.squirrel = {
       ${m.snack ? `<ellipse cx="282" cy="292" rx="26" ry="30" fill="#D9954F" stroke="${C.ink}" stroke-width="8"/><path d="M252 282 Q282 246 312 282 Q282 292 252 282 Z" fill="#7A4E2A" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/><path d="M282 262 V 248" stroke="${C.ink}" stroke-width="7" stroke-linecap="round"/>` : ''}
       ${m.wave || m.snack ? `${shape(paw, '#A6A2B6')}<path d="M262 330 V 350 M286 320 V 342 M310 330 V 350" stroke="${C.ink}" stroke-width="7" stroke-linecap="round"/>` : ''}
       ${m.hearts ? heart(52, 300, 36) + heart(336, 300, 30) : ''}
-      ${m.zees ? zee(184, 96, 28) + zee(222, 70, 20) : ''}`;
+      ${deco(m, 184, 96, 28, 222, 70, 20)}`;
   },
 };
 
 // ── More water birds.
 const WATER = `<path d="M-10 296 Q40 282 90 296 T190 296 T290 296 T390 296 T490 296 V420 H-10 Z" fill="#8FB3E8" stroke="${C.ink}" stroke-width="8"/><path d="M40 330 q20 -10 40 0 M180 346 q20 -10 40 0 M300 328 q20 -10 40 0" fill="none" stroke="#F7F5F2" stroke-width="6" stroke-linecap="round"/>`;
-const UP_RIGHT = (m) => `${m.hearts ? heart(300, 50, 46) + heart(352, 112, 30) : ''}${m.zees ? zee(250, 64, 34) + zee(292, 34, 22) : ''}`;
+const UP_RIGHT = (m) => `${m.hearts ? heart(300, 50, 46) + heart(352, 112, 30) : ''}${deco(m, 250, 64, 34, 292, 34, 22)}`;
 
 // Small ducks and geese afloat (the mallard's pose).
 const floater = (p) => ({
@@ -750,7 +793,7 @@ ART.cormorantSpread = {
       <path d="M140 90 C120 86 92 92 70 100 C66 110 72 116 80 112 C92 106 120 104 142 104 Z" fill="#6E6C80" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
       ${m.snack ? droplet(62, 124) : ''}
       ${m.hearts ? heart(252, 26, 36) + heart(296, 64, 24) : ''}
-      ${m.zees ? zee(222, 44, 30) + zee(258, 22, 20) : ''}`;
+      ${deco(m, 222, 44, 30, 258, 22, 20)}`;
   },
 };
 
@@ -781,7 +824,7 @@ ART.cormorant = {
       <path d="M134 88 C112 84 84 88 62 96 C58 104 64 110 72 106 C92 100 116 100 136 102 Z" fill="#6E6C80" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
       ${m.snack ? droplet(56, 116) : ''}
       ${m.hearts ? heart(252, 26, 36) + heart(296, 64, 24) : ''}
-      ${m.zees ? zee(222, 44, 30) + zee(258, 22, 20) : ''}`;
+      ${deco(m, 222, 44, 30, 258, 22, 20)}`;
   },
 };
 
@@ -848,7 +891,7 @@ ART.opossum = {
       ${m.snack ? `<g fill="#7B4BB5" stroke="${C.ink}" stroke-width="6"><circle cx="270" cy="290" r="14"/><circle cx="294" cy="290" r="14"/><circle cx="282" cy="310" r="14"/></g><path d="M282 276 C284 264 292 256 302 252" fill="none" stroke="#3E8E4E" stroke-width="6" stroke-linecap="round"/>` : ''}
       ${m.wave || m.snack ? `${shape(hand, '#F2B8C6')}<path d="M262 334 V316 M282 326 V306 M302 328 V308 M320 338 V320" stroke="${C.ink}" stroke-width="8" stroke-linecap="round"/>` : ''}
       ${m.hearts ? heart(52, 300, 36) + heart(342, 292, 30) : ''}
-      ${m.zees ? zee(184, 100, 28) + zee(222, 74, 20) : ''}`;
+      ${deco(m, 184, 100, 28, 222, 74, 20)}`;
   },
 };
 
@@ -873,7 +916,7 @@ ART.deer = {
       <path d="M200 318 V326 M186 330 Q200 338 214 330" fill="none" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>
       ${m.snack ? `<path d="M212 330 C238 316 270 318 286 336 C264 350 234 348 212 330 Z" fill="#7FBF5A" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/><path d="M216 332 C242 328 264 330 282 336" fill="none" stroke="#3E8E4E" stroke-width="4"/>` : ''}
       ${m.hearts ? heart(52, 300, 36) + heart(340, 292, 30) : ''}
-      ${m.zees ? zee(184, 100, 28) + zee(222, 74, 20) : ''}`;
+      ${deco(m, 184, 100, 28, 222, 74, 20)}`;
   },
 };
 
@@ -900,7 +943,7 @@ ART.groundhog = {
       ${m.snack ? `<path d="M282 330 V262" stroke="#3E8E4E" stroke-width="7" stroke-linecap="round"/><g fill="#F2D23C" stroke="${C.ink}" stroke-width="5">${[0, 60, 120, 180, 240, 300].map((a) => `<ellipse cx="${282 + 14 * Math.cos((a * Math.PI) / 180)}" cy="${250 + 14 * Math.sin((a * Math.PI) / 180)}" rx="11" ry="7" transform="rotate(${a} ${282 + 14 * Math.cos((a * Math.PI) / 180)} ${250 + 14 * Math.sin((a * Math.PI) / 180)})"/>`).join('')}</g><circle cx="282" cy="250" r="9" fill="#E8A23C" stroke="${C.ink}" stroke-width="5"/>` : ''}
       ${m.wave || m.snack ? `${shape(paw, '#6E4A30')}<path d="M262 330 l-4 -14 M282 322 l0 -16 M302 324 l4 -14" stroke="#F4EDE4" stroke-width="6" stroke-linecap="round"/>` : ''}
       ${m.hearts ? heart(52, 300, 36) + heart(342, 292, 30) : ''}
-      ${m.zees ? zee(184, 104, 28) + zee(222, 78, 20) : ''}`;
+      ${deco(m, 184, 104, 28, 222, 78, 20)}`;
   },
 };
 
@@ -1002,7 +1045,7 @@ ART.monarch = {
       <ellipse cx="176" cy="174" rx="9" ry="6" fill="${C.pink}"/><ellipse cx="224" cy="174" rx="9" ry="6" fill="${C.pink}"/>
       ${m.snack ? nectar(200, 206) : ''}
       ${m.hearts ? heart(296, 46, 28) + heart(84, 60, 22) : ''}
-      ${m.zees ? zee(236, 70, 24) + zee(262, 50, 16) : ''}`;
+      ${deco(m, 236, 70, 24, 262, 50, 16)}`;
   },
 };
 
@@ -1030,7 +1073,7 @@ ART.moth = {
       <ellipse cx="172" cy="180" rx="9" ry="6" fill="${C.pink}"/><ellipse cx="228" cy="180" rx="9" ry="6" fill="${C.pink}"/>
       ${m.snack ? nectar(200, 222) : ''}
       ${m.hearts ? heart(84, 64, 26) + heart(120, 40, 18) : ''}
-      ${m.zees ? zee(84, 62, 24) + zee(114, 42, 16) : ''}`;
+      ${deco(m, 84, 62, 24, 114, 42, 16)}`;
   },
 };
 
@@ -1057,7 +1100,7 @@ ART.firefly = {
       <ellipse cx="108" cy="250" rx="9" ry="6" fill="${C.pink}"/>
       ${m.snack ? `<path d="M64 250 C70 262 70 270 64 274 C58 270 58 262 64 250 Z" fill="#B4D6F2" stroke="${C.ink}" stroke-width="4"/>` : ''}
       ${m.hearts ? heart(80, 70, 34) + heart(124, 44, 22) : ''}
-      ${m.zees ? zee(76, 76, 28) + zee(112, 50, 18) : ''}`;
+      ${deco(m, 76, 76, 28, 112, 50, 18)}`;
   },
 };
 
@@ -1083,7 +1126,7 @@ ART.dasher = {
       <path d="M192 122 Q200 128 208 122" fill="none" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>
       ${m.snack ? droplet(252, 116, 0.8) : ''}
       ${m.hearts ? heart(300, 40, 36) + heart(344, 92, 24) : ''}
-      ${m.zees ? zee(260, 60, 26) + zee(292, 40, 16) : ''}`;
+      ${deco(m, 260, 60, 26, 292, 40, 16)}`;
   },
 };
 
@@ -1107,7 +1150,7 @@ ART.milkweedbug = {
       <ellipse cx="200" cy="132" rx="9" ry="6" fill="${C.pink}"/>
       ${m.snack ? `<path d="M120 100 C110 110 112 126 122 128 C132 126 134 110 120 100 Z" fill="#8A5A3A" stroke="${C.ink}" stroke-width="5"/><path d="M120 100 C112 84 100 76 90 74 M120 100 C120 84 116 70 110 62 M120 100 C128 86 134 74 142 68" fill="none" stroke="#F7F5F2" stroke-width="4" stroke-linecap="round"/>` : ''}
       ${m.hearts ? heart(300, 50, 36) + heart(340, 104, 24) : ''}
-      ${m.zees ? zee(262, 62, 26) + zee(294, 42, 16) : ''}`;
+      ${deco(m, 262, 62, 26, 294, 42, 16)}`;
   },
 };
 
@@ -1133,7 +1176,7 @@ ART.orbweaver = {
       <ellipse cx="200" cy="176" rx="9" ry="6" fill="${C.pink}"/>
       ${m.snack ? droplet(200, 214) : ''}
       ${m.hearts ? heart(290, 52, 32) + heart(80, 60, 26) : ''}
-      ${m.zees ? zee(256, 56, 26) + zee(288, 36, 16) : ''}`;
+      ${deco(m, 256, 56, 26, 288, 36, 16)}`;
   },
 };
 
@@ -1161,7 +1204,7 @@ const raptorSelfie = (p) => ({
       <path d="M190 228 C190 250 194 266 200 280" fill="none" stroke="#8A8A9A" stroke-width="5" stroke-linecap="round"/>
       ${m.snack ? feather(250, 290) : ''}
       ${m.hearts ? heart(334, 54, 40) + heart(68, 84, 28) : ''}
-      ${m.zees ? zee(240, 70, 28) + zee(278, 46, 20) : ''}`;
+      ${deco(m, 240, 70, 28, 278, 46, 20)}`;
   },
 });
 
@@ -1229,7 +1272,7 @@ const hawkPerched = (p) => ({
       <path d="${talons}" fill="none" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>
       ${m.snack ? feather(60, 150) : ''}
       ${m.hearts ? heart(300, 40, 40) + heart(60, 40, 26) : ''}
-      ${m.zees ? zee(220, 40, 28) + zee(256, 20, 18) : ''}`;
+      ${deco(m, 220, 40, 28, 256, 20, 18)}`;
   },
 });
 
@@ -1288,7 +1331,7 @@ ART.pigeonBody = {
       <path d="M74 128 L42 140 L76 148 Z" fill="${C.ink}" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
       ${m.snack ? `<g transform="rotate(-14 30 152)"><path d="M6 168 C2 146 16 132 30 138 C40 126 62 132 60 152 L58 170 Z" fill="#FBE3B5" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/><path d="M12 162 C10 148 20 140 30 145 C38 136 52 140 52 154" fill="none" stroke="#C98A4B" stroke-width="5" stroke-linecap="round"/></g>` : ''}
       ${m.hearts ? heart(300, 60, 46) + heart(350, 124, 30) : ''}
-      ${m.zees ? zee(220, 70, 34) + zee(262, 40, 22) : ''}`;
+      ${deco(m, 220, 70, 34, 262, 40, 22)}`;
   },
 };
 
@@ -1317,7 +1360,7 @@ ART.squirrelBody = {
       ${m.snack ? `<ellipse cx="158" cy="232" rx="18" ry="21" fill="#D9954F" stroke="${C.ink}" stroke-width="6"/><path d="M137 226 Q158 200 179 226 Q158 232 137 226 Z" fill="#7A4E2A" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>` : ''}
       <g fill="#A6A2B6" ${OL}><ellipse cx="146" cy="246" rx="13" ry="10"/><ellipse cx="174" cy="250" rx="13" ry="10"/></g>
       ${m.hearts ? heart(290, 40, 44) + heart(70, 70, 30) : ''}
-      ${m.zees ? zee(214, 70, 30) + zee(252, 44, 20) : ''}`;
+      ${deco(m, 214, 70, 30, 252, 44, 20)}`;
   },
 };
 
@@ -1350,7 +1393,7 @@ ART.raccoonBody = {
       ${m.snack ? `<path d="M196 234 C198 220 206 212 216 208" fill="none" stroke="#3E8E4E" stroke-width="5" stroke-linecap="round"/><circle cx="196" cy="246" r="16" fill="#E5484D" stroke="${C.ink}" stroke-width="6"/><circle cx="190" cy="240" r="4" fill="#fff"/>` : ''}
       <g fill="#8C889C" ${OL}><ellipse cx="174" cy="256" rx="14" ry="11"/><ellipse cx="216" cy="258" rx="14" ry="11"/></g>
       ${m.hearts ? heart(300, 50, 44) + heart(68, 74, 30) : ''}
-      ${m.zees ? zee(250, 70, 30) + zee(288, 44, 20) : ''}`;
+      ${deco(m, 250, 70, 30, 288, 44, 20)}`;
   },
 };
 
@@ -1378,7 +1421,7 @@ ART.opossumBody = {
       <path d="M70 248 L46 238 M70 254 L44 258" stroke="${C.ink}" stroke-width="3" stroke-linecap="round"/>
       ${m.snack ? `<g fill="#7B4BB5" stroke="${C.ink}" stroke-width="5"><circle cx="34" cy="268" r="10"/><circle cx="50" cy="270" r="10"/><circle cx="42" cy="284" r="10"/></g>` : ''}
       ${m.hearts ? heart(300, 120, 40) + heart(240, 150, 26) : ''}
-      ${m.zees ? zee(200, 130, 30) + zee(238, 104, 20) : ''}`;
+      ${deco(m, 200, 130, 30, 238, 104, 20)}`;
   },
 };
 
@@ -1406,7 +1449,7 @@ ART.groundhogBody = {
       ${m.snack ? `<path d="M196 236 V196" stroke="#3E8E4E" stroke-width="5" stroke-linecap="round"/><circle cx="196" cy="190" r="12" fill="#F2D23C" stroke="${C.ink}" stroke-width="5"/><circle cx="196" cy="190" r="5" fill="#E8A23C"/>` : ''}
       <g fill="#6E4A30" ${OL}><ellipse cx="174" cy="232" rx="13" ry="10"/><ellipse cx="216" cy="234" rx="13" ry="10"/></g>
       ${m.hearts ? heart(300, 50, 44) + heart(70, 70, 30) : ''}
-      ${m.zees ? zee(250, 64, 30) + zee(288, 40, 20) : ''}`;
+      ${deco(m, 250, 64, 30, 288, 40, 20)}`;
   },
 };
 
@@ -1440,7 +1483,7 @@ ART.deerBody = {
       <ellipse cx="144" cy="124" rx="12" ry="7" fill="${C.pink}"/>
       ${m.snack ? `<path d="M48 134 C32 142 26 158 40 166 C54 160 58 146 48 134 Z" fill="#7FBF5A" stroke="${C.ink}" stroke-width="5"/>` : ''}
       ${m.hearts ? heart(300, 60, 44) + heart(240, 100, 28) : ''}
-      ${m.zees ? zee(230, 80, 30) + zee(268, 54, 20) : ''}`;
+      ${deco(m, 230, 80, 30, 268, 54, 20)}`;
   },
 };
 
@@ -1561,26 +1604,48 @@ const SPECIES = {
   'orb-weavers': 'orbweaver',
 };
 
+// Smaller strings for the app: one space at most, none between tags, and coordinates
+// rounded to a tenth of a point (invisible on a 400-point canvas).
+const tidy = (svg) =>
+  svg
+    .replace(/\s+/g, ' ')
+    .replace(/>\s+</g, '><')
+    .replace(/-?\d+\.\d{2,}/g, (n) => String(Math.round(Number(n) * 10) / 10));
+
 const draw = (a, m) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="${a.tint}"/><g transform="rotate(${a.tilt} 200 220)">${a.svg(m)}</g></svg>`.replace(/\s+/g, ' ');
+  tidy(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="${a.tint}"/><g transform="rotate(${a.tilt} 200 220)">${a.svg(m)}</g></svg>`);
 
 // A cutout: no background, no tilt, no perch (the close-up scene draws those).
-const drawCut = (a, m) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">${a.svg({ ...m, cut: true })}</svg>`.replace(/\s+/g, ' ');
+const drawCut = (a, m) => tidy(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">${a.svg({ ...m, cut: true })}</svg>`);
 
-// Each frame gets its own clip-path ids: on the phone, two drawings on screen with the
-// same id (the open-eye and blink frames) can grab each other's shapes, so a blink would
-// nudge a wing or tail patch. Suffixing keeps every frame self-contained.
-const uniqueIds = (svg, tag) => svg.replace(/id="([^"]+)"/g, `id="$1-${tag}"`).replace(/url\(#([^)]+)\)/g, `url(#$1-${tag})`);
+// Most of a mood's drawing is the same as the hello drawing: only the eyes and what
+// floats by the head change. So each frame is stored as a patch on the species' hello
+// drawing: [characters kept from the start, the new middle, characters kept from the
+// end]. src/components/characters/frames.ts rebuilds them on the phone, and gives each
+// frame its own clip-path ids there (two drawings on screen sharing an id can grab each
+// other's shapes, so a blink would nudge a wing or tail patch).
+const patch = (base, svg) => {
+  let a = 0;
+  while (a < base.length && a < svg.length && base[a] === svg[a]) a++;
+  let b = 0;
+  while (b < base.length - a && b < svg.length - a && base[base.length - 1 - b] === svg[svg.length - 1 - b]) b++;
+  return [a, svg.slice(a, svg.length - b), b];
+};
+const framesOf = (render) => {
+  const base = render(MOODS[0]);
+  return {
+    base,
+    frames: MOODS.map((m) => ({
+      mood: m.name,
+      open: patch(base, render(m)),
+      // A blink frame for moods with open eyes.
+      ...(BLINKS.includes(m.eyes) ? { shut: patch(base, render({ ...m, eyes: 'shut' })) } : {}),
+    })),
+  };
+};
 
 const characters = {};
-for (const [id, key] of Object.entries(SPECIES)) {
-  characters[id] = MOODS.map((m) => ({
-    mood: m.name,
-    open: uniqueIds(draw(ART[key], m), `${m.name}-o`),
-    // A blink frame for moods with open eyes.
-    ...(m.eyes === 'open' ? { shut: uniqueIds(draw(ART[key], { ...m, eyes: 'shut' }), `${m.name}-s`) } : {}),
-  }));
-}
+for (const [id, key] of Object.entries(SPECIES)) characters[id] = framesOf((m) => draw(ART[key], m));
 
 const cutouts = {};
 for (const [id, { art, pose, feet }] of Object.entries(CUTOUTS)) {
@@ -1588,15 +1653,11 @@ for (const [id, { art, pose, feet }] of Object.entries(CUTOUTS)) {
     feet,
     pose,
     ...(ART[art].shoulder ? { shoulder: ART[art].shoulder.map((v) => Math.round(v * 1000) / 1000) } : {}),
-    frames: MOODS.map((m) => ({
-      mood: m.name,
-      open: uniqueIds(drawCut(ART[art], m), `c-${m.name}-o`),
-      ...(m.eyes === 'open' ? { shut: uniqueIds(drawCut(ART[art], { ...m, eyes: 'shut' }), `c-${m.name}-s`) } : {}),
-    })),
+    ...framesOf((m) => drawCut(ART[art], m)),
   };
 }
 
-module.exports = { characters, cutouts };
+module.exports = { characters, cutouts, MOODS };
 
 if (require.main === module) {
   const file = path.join(__dirname, '..', 'src', 'components', 'characters', 'xml.ts');
@@ -1604,10 +1665,13 @@ if (require.main === module) {
   fs.writeFileSync(
     file,
     `// Generated by scripts/build_characters.js. Do not edit by hand.\n\n` +
-      `export type CharacterFrame = { mood: string; open: string; shut?: string };\n\n` +
-      `export const characterXml: Record<string, CharacterFrame[]> = ${JSON.stringify(characters, null, 2)};\n\n` +
+      `/** [characters kept from the start of the base drawing, the new middle, characters kept from the end]. */\n` +
+      `export type Patch = [number, string, number];\n` +
+      `export type PatchedFrame = { mood: string; open: Patch; shut?: Patch };\n` +
+      `export type Drawings = { base: string; frames: PatchedFrame[] };\n\n` +
+      `export const characterXml: Record<string, Drawings> = ${JSON.stringify(characters)};\n\n` +
       `/** Close-up scene versions: no background or perch; \`feet\` is where they stand, as a fraction of the height. */\n` +
-      `export const cutoutXml: Record<string, { feet: number; pose: 'perch' | 'stand' | 'swim' | 'wade' | 'cling' | 'fly' | 'web'; shoulder?: [number, number]; frames: CharacterFrame[] }> = ${JSON.stringify(cutouts, null, 2)};\n`,
+      `export const cutoutXml: Record<string, Drawings & { feet: number; pose: 'perch' | 'stand' | 'swim' | 'wade' | 'cling' | 'fly' | 'web'; shoulder?: [number, number] }> = ${JSON.stringify(cutouts)};\n`,
   );
   console.log(`wrote ${Object.keys(characters).length} neighbors × ${MOODS.length} moods`);
 }

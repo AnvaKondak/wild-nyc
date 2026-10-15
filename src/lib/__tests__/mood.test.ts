@@ -9,8 +9,17 @@ describe('moodFromWords', () => {
     expect(moodFromWords('Fast asleep in a hollow tree')).toBe('sleepy');
     expect(moodFromWords('Burying acorns for winter')).toBe('snack');
     expect(moodFromWords('The robins are pulling up worms')).toBe('snack');
-    expect(moodFromWords('A whole song from the fire escape')).toBe('happy');
-    expect(moodFromWords('They look around the corner')).toBeUndefined();
+    expect(moodFromWords('Two squirrels are chasing each other')).toBe('happy');
+    expect(moodFromWords('They wait by the corner')).toBeUndefined();
+  });
+
+  it('calls for the other expressions when the words do', () => {
+    expect(moodFromWords('A whole song from the fire escape')).toBe('singing');
+    expect(moodFromWords('A cardinal is whistling from the hedge')).toBe('singing');
+    expect(moodFromWords('Something spooked the pigeons')).toBe('surprised');
+    expect(moodFromWords('A pigeon has puffed up into a ball')).toBe('chilly');
+    expect(moodFromWords('A crow is keeping an eye on the block')).toBe('curious');
+    expect(moodFromWords('A raccoon is peeking out of the hollow')).toBe('curious');
   });
 
   it('puts sleeping ahead of eating when both are said', () => {

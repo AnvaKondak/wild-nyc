@@ -6,6 +6,7 @@ import { Animated, Easing, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import type { Mood } from '@/content/types';
 import { useReduceMotion } from '../backdrop/motion';
+import { EVERYDAY_MOODS, framesFor } from './frames';
 import { characterXml, cutoutXml } from './xml';
 
 /** Is there a drawing of this species yet? Photos fill in for the rest. */
@@ -28,9 +29,9 @@ export function cutoutPose(speciesId: string) {
   return cutoutXml[speciesId]?.pose ?? 'perch';
 }
 
-/** How many moods (different drawings) a species has. */
+/** How many everyday moods (drawings that take turns) a species has. */
 export function moodCount(speciesId: string): number {
-  return characterXml[speciesId]?.length ?? 0;
+  return Math.min(EVERYDAY_MOODS, characterXml[speciesId]?.frames.length ?? 0);
 }
 
 // The drawings themselves never change between blinks, so they're drawn once: a blink
@@ -42,15 +43,16 @@ type Props = {
   size: number;
   /** Hold still: no blink, no bob (long lists). */
   still?: boolean;
-  /** Which drawing: a mood by name, or an index that wraps around like photo indexes. */
+  /** Which drawing: a mood by name, or an index that wraps around the everyday moods like photo indexes. */
   mood?: number | Mood;
   /** The close-up-scene version: no background, drawn at exactly `size`, free to bob. */
   cutout?: boolean;
 };
 
 export function Character({ speciesId, size, mood = 0, still: holdStill = false, cutout = false }: Props) {
-  const frames = cutout ? cutoutXml[speciesId].frames : characterXml[speciesId];
-  const at = typeof mood === 'string' ? Math.max(0, frames.findIndex((f) => f.mood === mood)) : ((mood % frames.length) + frames.length) % frames.length;
+  const frames = framesFor(speciesId, cutout);
+  const turns = Math.min(EVERYDAY_MOODS, frames.length);
+  const at = typeof mood === 'string' ? Math.max(0, frames.findIndex((f) => f.mood === mood)) : ((mood % turns) + turns) % turns;
   const frame = frames[at];
   const still = useReduceMotion() || holdStill;
 
