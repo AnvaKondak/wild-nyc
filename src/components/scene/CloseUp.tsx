@@ -27,7 +27,7 @@ import { useReduceMotion } from '../backdrop/motion';
 import { Character, cutoutFeet, cutoutPose, hasCutout } from '../characters/Character';
 import { cutoutXml } from '../characters/xml';
 import { lookFor, type Building, type Landmark } from './looks';
-import { Beehive, BirchBark, Birdhouse, Boardwalk, Cafe, Driftwood, FarFlock, Ferry, FootBridge, Kite, LaundryLine, LifeguardChair, Lighthouse, LilyPads, Nest, ParkFence, ParkPath, Rowboat, ShelfFungus, Sneakers, StreetTree, StringLights, TrafficLight } from './props';
+import { Beehive, BirchBark, Birdhouse, Boardwalk, Cafe, Driftwood, FarFlock, Ferry, FootBridge, Kite, LaundryLine, LifeguardChair, Lighthouse, LilyPads, Nest, OldTree, ParkFence, ParkPath, Rowboat, ShelfFungus, Sneakers, StreetTree, StringLights, TrafficLight } from './props';
 
 export type CloseUpSetting =
   | 'building' | 'puddle' | 'branch' | 'trunk' | 'hedge' | 'lawn' | 'flowers' | 'burrow'
@@ -498,8 +498,10 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
           <Park w={w} h={h} ground={setting === 'flowers' ? bt + bh * 0.94 : ground} bh={bh} period={period} season={season} />
         )}
         {(setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && v === 1 && <ParkPath w={w} h={h} top={parkTop} bh={bh} period={period} />}
-        {(setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && v === 2 && <ParkFence w={w} h={h} top={parkTop} bh={bh} period={period} season={season} />}
+        {(setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && v === 2 && <ParkFence w={w} top={parkTop} bh={bh} period={period} />}
         {setting === 'hedge' && <Hedge w={w} ground={ground} bh={bh} season={season} period={period} />}
+        {/* The big old tree stands in front of the hedge, its crown below the header. */}
+        {(setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && v === 2 && <OldTree w={w} h={h} top={parkTop} bh={bh} ceiling={bt} period={period} season={season} />}
         {setting === 'burrow' && <Burrow x={w * 0.78} ground={ground} bh={bh} />}
         {(setting === 'wire' || setting === 'sky') && <Skyline w={w} h={h} base={bt + bh * 1.25} bh={bh} period={period} />}
         {setting === 'wire' && <Wire w={w} y={ground} bh={bh} />}

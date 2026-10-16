@@ -144,17 +144,32 @@ export function ParkPath({ w, h, top, bh, period }: { w: number; h: number; top:
 }
 
 /** A split-rail wooden fence along the back of the lawn, and a big old tree at the left edge. */
-export function ParkFence({ w, h, top, bh, period, season }: { w: number; h: number; top: number; bh: number; period: Period; season: Season }) {
+/** A split-rail wooden fence along the back of the lawn. (Its big old tree is OldTree, drawn in front of any hedge.) */
+export function ParkFence({ w, top, bh, period }: { w: number; top: number; bh: number; period: Period }) {
   const wood = WOOD(period);
-  const leaves = season === 'winter' ? undefined : dim(period, season === 'fall' ? '#F28C28' : season === 'spring' ? '#9BD27A' : '#3FA66B', '#4C7A5A', '#2F4A3A');
   return (
     <G>
       {[0.12, 0.38, 0.62, 0.86].map((f, i) => <Rect key={i} x={w * f - 4} y={top - bh * 0.16} width={8} height={bh * 0.2} fill={wood} stroke={INK} strokeWidth={1.2} />)}
       {[0.06, 0.13].map((d, i) => <Path key={i} d={`M0 ${top - bh * d} H${w}`} stroke={INK} strokeWidth={6} />)}
       {[0.06, 0.13].map((d, i) => <Path key={`f${i}`} d={`M0 ${top - bh * d} H${w}`} stroke={wood} strokeWidth={3.5} />)}
-      <Rect x={-10} y={top - bh * 1.5} width={w * 0.1} height={h} fill="#8A6247" stroke={INK} strokeWidth={1.5} />
-      <Path d={`M${w * 0.03} ${top - bh * 1.2} C${w * 0.02} ${top - bh * 0.6} ${w * 0.05} ${top} ${w * 0.03} ${top + bh * 0.4}`} stroke="#6E4E38" strokeWidth={3} fill="none" />
-      {leaves && [[0.04, -1.5, 0.3], [0.14, -1.35, 0.22], [0.0, -1.2, 0.22]].map(([x, dy, r], i) => <Circle key={i} cx={w * x} cy={top + bh * dy} r={bh * r} fill={leaves} stroke={INK} strokeWidth={1.5} />)}
+    </G>
+  );
+}
+
+/**
+ * A big old tree at the left edge, in front of the hedge. The crown stays below `ceiling`
+ * (the top of the scene's band), so it never reaches up behind the time and the pills.
+ */
+export function OldTree({ w, h, top, bh, ceiling, period, season }: { w: number; h: number; top: number; bh: number; ceiling: number; period: Period; season: Season }) {
+  const leaves = season === 'winter' ? undefined : dim(period, season === 'fall' ? '#F28C28' : season === 'spring' ? '#9BD27A' : '#3FA66B', '#4C7A5A', '#2F4A3A');
+  const r = bh * 0.24;
+  // The crown's middle: as high as it can go with its top edge still under the ceiling.
+  const cy = Math.max(top - bh * 0.7, ceiling + r * 1.1);
+  return (
+    <G>
+      <Rect x={-10} y={cy} width={w * 0.1} height={h} fill="#8A6247" stroke={INK} strokeWidth={1.5} />
+      <Path d={`M${w * 0.03} ${cy + r} C${w * 0.02} ${top - bh * 0.3} ${w * 0.05} ${top} ${w * 0.03} ${top + bh * 0.4}`} stroke="#6E4E38" strokeWidth={3} fill="none" />
+      {leaves && [[0.04, 0, 1], [0.15, 0.35, 0.75], [-0.02, 0.5, 0.75]].map(([x, dy, k], i) => <Circle key={i} cx={w * x} cy={cy + r * dy} r={r * k} fill={leaves} stroke={INK} strokeWidth={1.5} />)}
     </G>
   );
 }
