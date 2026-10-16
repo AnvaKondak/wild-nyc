@@ -59,9 +59,9 @@ const MOODS: Mood[] = ['hello', 'snack', 'happy', 'sleepy', 'surprised', 'curiou
 
 export default function ArtPreview() {
   const raccoon = getSpecies('raccoon')!;
-  const { only, from, accents, period: p, place, scene: forced, action, groups, skip } = useLocalSearchParams<{ groups?: string; skip?: string; only?: string; from?: string; accents?: string; period?: Period; place?: string; scene?: CloseUpSetting; action?: 'fly' | 'sleep' | 'dust' | 'drink' | 'dry' }>();
+  const { only, from, accents, period: p, place, scene: forced, action, groups, skip, v } = useLocalSearchParams<{ v?: string; groups?: string; skip?: string; only?: string; from?: string; accents?: string; period?: Period; place?: string; scene?: CloseUpSetting; action?: 'fly' | 'sleep' | 'dust' | 'drink' | 'dry' }>();
   const { width } = useWindowDimensions();
-  if (only === 'closeups') return <CloseUpGallery width={width} initial={{ period: p, place, scene: forced, action, groups: !!groups, skip: Number(skip ?? 0) }} />;
+  if (only === 'closeups') return <CloseUpGallery width={width} initial={{ period: p, place, scene: forced, action, groups: !!groups, skip: Number(skip ?? 0), version: v === undefined ? undefined : Number(v) }} />;
   const thumb = (width - 32 - 12) / 2;
   if (only === 'backdrops') {
     const h = thumb * 1.9;
@@ -126,14 +126,14 @@ export default function ArtPreview() {
 type Act = 'fly' | 'sleep' | 'dust' | 'drink' | 'dry' | undefined;
 const LOOKS = ['park-slope', 'chelsea', 'coney-island', 'battery-park-city', 'bay-ridge'];
 
-function CloseUpGallery({ width, initial }: { width: number; initial: { period?: Period; place?: string; scene?: CloseUpSetting; action?: Act; groups?: boolean; skip?: number } }) {
+function CloseUpGallery({ width, initial }: { width: number; initial: { period?: Period; place?: string; scene?: CloseUpSetting; action?: Act; groups?: boolean; skip?: number; version?: number } }) {
   const [period, setPeriod] = useState<Period>(initial.period ?? 'midday');
   const [place, setPlace] = useState(initial.place ?? 'park-slope');
   const [action, setAction] = useState<Act>(initial.action);
   const [mood, setMood] = useState<Mood>('hello');
   const [groups, setGroups] = useState(!!initial.groups);
   // Which version of each scene: "mixed" gives each tile its own, like the story does.
-  const [version, setVersion] = useState<number | undefined>(undefined);
+  const [version, setVersion] = useState<number | undefined>(initial.version);
   const cw = (width - 24) / 3;
   const ch = cw * 1.65;
   const chip = (label: string, on: boolean, onPress: () => void) => (

@@ -27,6 +27,7 @@ import { useReduceMotion } from '../backdrop/motion';
 import { Character, cutoutFeet, cutoutPose, hasCutout } from '../characters/Character';
 import { cutoutXml } from '../characters/xml';
 import { lookFor, type Building, type Landmark } from './looks';
+import { BirchBark, Birdhouse, Boardwalk, Cafe, Driftwood, FarFlock, Ferry, FootBridge, Kite, LaundryLine, LifeguardChair, Lighthouse, LilyPads, Nest, ParkFence, ParkPath, Rowboat, ShelfFungus, Sneakers, StreetTree, StringLights, TrafficLight } from './props';
 
 export type CloseUpSetting =
   | 'building' | 'puddle' | 'branch' | 'trunk' | 'hedge' | 'lawn' | 'flowers' | 'burrow'
@@ -296,14 +297,18 @@ function curveY(pts: [number, number][], x: number): number {
  * at `x0` on `ground`: the same, except on the branch and the wire, which aren't level.
  */
 function groundAt(scene: CloseUpSetting, w: number, ground: number, bh: number, x: number, x0: number): number {
-  let curve: [number, number][] | undefined;
+  const curve = perchCurve(scene, w, ground, bh);
+  return curve ? ground + curveY(curve, x) - curveY(curve, x0) : ground;
+}
+
+/** The branch's and the wire's curves (the same ones Branch and Wire draw). */
+function perchCurve(scene: CloseUpSetting, w: number, y: number, bh: number): [number, number][] | undefined {
   if (scene === 'branch') {
     const t = bh * 0.07;
-    curve = [[-w * 0.05, ground + t * 0.9], [w * 0.3, ground + t * 0.5], [w * 0.65, ground + t * 0.6], [w * 1.05, ground - t * 0.3]];
-  } else if (scene === 'wire') {
-    curve = [[w * 0.06 + 5, ground - bh * 0.02], [w * 0.55, ground + bh * 0.06], [w + 10, ground - bh * 0.04]];
+    return [[-w * 0.05, y + t * 0.9], [w * 0.3, y + t * 0.5], [w * 0.65, y + t * 0.6], [w * 1.05, y - t * 0.3]];
   }
-  return curve ? ground + curveY(curve, x) - curveY(curve, x0) : ground;
+  if (scene === 'wire') return [[w * 0.06 + 5, y - bh * 0.02], [w * 0.55, y + bh * 0.06], [w + 10, y - bh * 0.04]];
+  return undefined;
 }
 
 const INK = colors.ink;
@@ -409,6 +414,9 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
   const watery = setting === 'water' || setting === 'wade' || setting === 'reeds' || setting === 'shore' || setting === 'pier';
   // How deep the water comes up, in front of whoever's in it.
   const waterline = setting === 'wade' ? bt + bh * 0.8 : ground;
+  // Which version of the scene: 0 is the plain one, 1 and 2 add their own little things.
+  const v = ((variant % 3) + 3) % 3;
+  const parkTop = (setting === 'flowers' ? bt + bh * 0.94 : ground) - bh * 0.22;
 
   return (
     <View style={{ position: 'absolute', left: 0, top: 0, width: w, height: h, backgroundColor: sky, overflow: 'hidden' }}>
@@ -419,13 +427,18 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
             {/* Up close, the brownstone fills the whole screen. */}
             <Facade look={look.building} w={w} bottom={pavement} band={band} period={period} />
             <Cornice w={w} y={4} period={period} brackets={false} />
-            <WallBranch y={bt} bh={bh} w={w} />
+            {v !== 2 && <WallBranch y={bt} bh={bh} w={w} />}
             <Sidewalk w={w} h={h} top={pavement} period={period} />
+            {v === 1 && <Cafe w={w} winX={w * 0.17} winW={w * 0.16} winTop={bt + (pavement - bt) * 0.06} pavement={pavement} period={period} />}
+            {v === 2 && <StreetTree w={w} pavement={pavement} bh={bh} period={period} season={season} />}
           </>
         )}
-        {setting === 'hollow' && <Hollow w={w} h={h} ground={ground} bh={bh} period={period} season={season} />}
+        {setting === 'hollow' && <Hollow w={w} h={h} ground={ground} bh={bh} period={period} season={season} birch={v === 2} />}
+        {setting === 'hollow' && v === 1 && <ShelfFungus x={w * 0.8} y={ground + bh * 0.55} />}
         {setting === 'highledge' && <HighLedge w={w} h={h} y={ground} bh={bh} bt={bt} period={period} look={look.building} variant={variant % 3} />}
         {setting === 'fireescape' && <FireEscape w={w} h={h} y={ground} bh={bh} period={period} look={look.building} />}
+        {setting === 'fireescape' && v === 1 && <StringLights w={w} y={ground - bh * 0.34} period={period} />}
+        {setting === 'fireescape' && v === 2 && <LaundryLine w={w} y={ground - bh * 0.78} />}
         {setting === 'puddle' && (
           <>
             <Ellipse cx={w * 0.3} cy={ground + bh * 0.03} rx={w * 0.2} ry={bh * 0.06} fill={WATER[period]} stroke={INK} strokeWidth={1.5} />
@@ -437,34 +450,51 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
         {look.landmark && look.landmark !== 'wonder-wheel' && (setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && (
           <LandmarkShape kind={look.landmark} x={w * 0.78} base={ground - bh * 0.22} size={bh * 0.75} period={period} top={bt} />
         )}
-        {look.landmark && look.landmark !== 'wonder-wheel' && (setting === 'branch' || setting === 'web' || setting === 'trunk') && (
+        {look.landmark && look.landmark !== 'wonder-wheel' && (((setting === 'branch' || setting === 'web') && v !== 2) || setting === 'trunk') && (
           <LandmarkShape kind={look.landmark} x={w * 0.78} base={ground + bh * (setting === 'trunk' ? 0.4 : 0.9)} size={bh * 0.75} period={period} top={bt} />
         )}
         {(setting === 'branch' || setting === 'web') && (
           <>
-            <Treeline w={w} h={h} base={ground + bh * 0.9} period={period} season={season} />
+            {/* Version 2 is a street tree: rooftops below instead of the park. */}
+            {v === 2 ? <Skyline w={w} h={h} base={ground + bh * 1.15} bh={bh} period={period} /> : <Treeline w={w} h={h} base={ground + bh * 0.9} period={period} season={season} />}
             <Branch w={w} y={ground} bh={bh} />
+            {v === 1 && <Birdhouse x={w * 0.9} y={ground - bh * 0.28} bh={bh} period={period} />}
+            {v === 2 && setting === 'branch' && <Nest x={w * 0.14} y={ground + bh * 0.04} bh={bh} />}
           </>
         )}
         {setting === 'web' && <Web cx={left + size * 0.5} cy={top + size * 0.5} r={bh * 0.6} />}
-        {setting === 'trunk' && <TrunkScene w={w} h={h} bt={bt} bh={bh} ground={ground} trunkX={left + size * 0.69} period={period} season={season} />}
+        {setting === 'trunk' && <TrunkScene w={w} h={h} bt={bt} bh={bh} ground={ground} trunkX={left + size * 0.69} period={period} season={season} variant={v} />}
         {(setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && (
           <Park w={w} h={h} ground={setting === 'flowers' ? bt + bh * 0.94 : ground} bh={bh} period={period} season={season} />
         )}
+        {(setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && v === 1 && <ParkPath w={w} h={h} top={parkTop} bh={bh} period={period} />}
+        {(setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && v === 2 && <ParkFence w={w} h={h} top={parkTop} bh={bh} period={period} season={season} />}
         {setting === 'hedge' && <Hedge w={w} ground={ground} bh={bh} season={season} period={period} />}
         {setting === 'burrow' && <Burrow x={w * 0.78} ground={ground} bh={bh} />}
         {(setting === 'wire' || setting === 'sky') && <Skyline w={w} h={h} base={bt + bh * 1.25} bh={bh} period={period} />}
         {setting === 'wire' && <Wire w={w} y={ground} bh={bh} />}
+        {setting === 'wire' && v === 1 && <TrafficLight x={w * 0.84} y={curveY(perchCurve('wire', w, ground, bh)!, w * 0.84)} bh={bh} period={period} />}
+        {setting === 'wire' && v === 2 && <Sneakers x={w * 0.84} y={curveY(perchCurve('wire', w, ground, bh)!, w * 0.84)} />}
+        {setting === 'sky' && v === 1 && <Kite x={w * 0.2} y={bt + bh * 0.02} s={bh * 0.26} h={bt + bh * 1.3} />}
+        {setting === 'sky' && v === 2 && <FarFlock w={w} y={bt + bh * 0.12} color={period === 'night' || period === 'dusk' ? colors.paper : colors.ink} />}
         {watery && look.water === 'river' && <River w={w} h={h} horizon={horizon} period={period} landmark={look.landmark} top={bt} />}
         {watery && look.water === 'beach' && <Ocean w={w} h={h} horizon={horizon} period={period} landmark={look.landmark} top={bt} />}
         {watery && look.water === 'pond' && <Pond w={w} h={h} horizon={horizon} period={period} season={season} />}
+        {watery && look.water === 'pond' && v === 1 && season !== 'winter' && <LilyPads w={w} y={horizon + 4} />}
+        {watery && look.water === 'pond' && v === 2 && <FootBridge w={w} y={horizon - 2} period={period} />}
+        {watery && look.water !== 'pond' && v === 1 && <Ferry x={w * 0.28} y={horizon + 16} period={period} />}
+        {watery && look.water !== 'pond' && v === 2 && <Lighthouse x={w * 0.1} base={horizon - 2} period={period} />}
         {setting === 'reeds' && <Reeds w={w} ground={ground} bh={bh} back />}
+        {setting === 'reeds' && v === 1 && <Boardwalk w={w} y={ground + bh * 0.42} period={period} />}
         {setting === 'reeds' && <BentReed w={w} y={ground} bh={bh} />}
         {setting === 'shore' && (look.water === 'river' ? <Pier w={w} h={h} top={ground - bh * 0.04} /> : <Shore w={w} h={h} top={ground - bh * 0.06} period={period} />)}
         {setting === 'pier' && <Pier w={w} h={h} top={ground - bh * 0.04} />}
+        {(setting === 'pier' || (setting === 'shore' && look.water === 'river')) && v === 1 && <Rowboat x={w * 0.62} y={ground - bh * 0.1} period={period} />}
+        {setting === 'shore' && look.water !== 'river' && v === 1 && <Driftwood x={w * 0.06} y={ground + bh * 0.22} bh={bh} />}
+        {setting === 'shore' && look.water !== 'river' && v === 2 && <LifeguardChair x={w * 0.88} base={ground - bh * 0.02} bh={bh} period={period} />}
       </Svg>
 
-      {city && leaves.length > 0 && WALL_LEAVES.map((l, i) => <Leaf key={`w${i}`} {...l} w={w} y={bt} bh={bh} color={leaves[i % leaves.length]} />)}
+      {city && v !== 2 && leaves.length > 0 && WALL_LEAVES.map((l, i) => <Leaf key={`w${i}`} {...l} w={w} y={bt} bh={bh} color={leaves[i % leaves.length]} />)}
       {(setting === 'branch' || setting === 'web') && leaves.length > 0 && BACK_LEAVES.map((l, i) => <Leaf key={i} {...l} w={w} y={ground} bh={bh} color={leaves[i % leaves.length]} />)}
       {(setting === 'water' || setting === 'wade' || setting === 'reeds') && <Ripples w={w} from={horizon} to={waterline} />}
       {animal}
@@ -625,16 +655,22 @@ function DustPuff({ k, size, still }: { k: number; size: number; still: boolean 
 // ---------------------------------------------------------------- more places
 
 /** A big tree trunk with a cozy hollow, for napping in. */
-function Hollow({ w, h, ground, bh, period, season }: { w: number; h: number; ground: number; bh: number; period: Period; season: Season }) {
+function Hollow({ w, h, ground, bh, period, season, birch = false }: { w: number; h: number; ground: number; bh: number; period: Period; season: Season; /** A birch: pale bark with dark marks. */ birch?: boolean }) {
   const top = ground - bh * 0.9;
   return (
     <G>
       <Treeline w={w} h={h} base={ground + bh * 0.9} period={period} season={season} />
-      <Rect x={w * 0.14} y={0} width={w * 0.72} height={h} fill={BARK} />
-      <Path d={`M${w * 0.14} 0 V${h} M${w * 0.86} 0 V${h}`} stroke={INK} strokeWidth={2} />
-      {[0.2, 0.32, 0.72, 0.8].map((x, i) => (
-        <Path key={i} d={`M${w * x} ${i % 2 ? 20 : 60} C${w * x - 6} ${ground * 0.4} ${w * x + 6} ${ground * 0.7} ${w * x} ${h}`} stroke="#6E4E38" strokeWidth={4} fill="none" strokeLinecap="round" />
-      ))}
+      {birch ? (
+        <BirchBark x={w * 0.14} w={w * 0.72} h={h} seed={3} />
+      ) : (
+        <>
+          <Rect x={w * 0.14} y={0} width={w * 0.72} height={h} fill={BARK} />
+          <Path d={`M${w * 0.14} 0 V${h} M${w * 0.86} 0 V${h}`} stroke={INK} strokeWidth={2} />
+          {[0.2, 0.32, 0.72, 0.8].map((x, i) => (
+            <Path key={i} d={`M${w * x} ${i % 2 ? 20 : 60} C${w * x - 6} ${ground * 0.4} ${w * x + 6} ${ground * 0.7} ${w * x} ${h}`} stroke="#6E4E38" strokeWidth={4} fill="none" strokeLinecap="round" />
+          ))}
+        </>
+      )}
       {/* The hollow: a dark, cozy opening with a lighter rim. */}
       <Ellipse cx={w * 0.5} cy={(top + ground) / 2} rx={w * 0.31} ry={(ground - top) / 2 + 10} fill="#B07E58" stroke={INK} strokeWidth={1.5} />
       <Ellipse cx={w * 0.5} cy={(top + ground) / 2 + 4} rx={w * 0.27} ry={(ground - top) / 2} fill="#3B2A20" />
@@ -1056,17 +1092,24 @@ function BentReed({ w, y, bh }: { w: number; y: number; bh: number }) {
 }
 
 /** A big tree trunk for a woodpecker to cling to, with bark, a hole and a branch going off. */
-function TrunkScene({ w, h, bt, bh, ground, trunkX, period, season }: { w: number; h: number; bt: number; bh: number; ground: number; trunkX: number; period: Period; season: Season }) {
+function TrunkScene({ w, h, bt, bh, ground, trunkX, period, season, variant = 0 }: { w: number; h: number; bt: number; bh: number; ground: number; trunkX: number; period: Period; season: Season; /** 1: shelf mushrooms; 2: a birch. */ variant?: number }) {
   const tw = w * 0.34;
   return (
     <G>
       <Treeline w={w} h={h} base={ground + bh * 0.4} period={period} season={season} />
-      <Rect x={trunkX} y={0} width={tw} height={h} fill={BARK} />
-      <Path d={`M${trunkX} 0 V${h}`} stroke={INK} strokeWidth={2} />
-      <Path d={`M${trunkX + tw} 0 V${h}`} stroke={INK} strokeWidth={2} />
-      {[0.2, 0.5, 0.8].map((x, i) => (
-        <Path key={i} d={`M${trunkX + tw * x} ${bt - bh * 0.3 + i * 40} C${trunkX + tw * x - 6} ${bt + bh * 0.2 + i * 30} ${trunkX + tw * x + 6} ${bt + bh * 0.6} ${trunkX + tw * x} ${bt + bh * 1.4}`} stroke="#6E4E38" strokeWidth={4} fill="none" strokeLinecap="round" />
-      ))}
+      {variant === 2 ? (
+        <BirchBark x={trunkX} w={tw} h={h} seed={7} />
+      ) : (
+        <>
+          <Rect x={trunkX} y={0} width={tw} height={h} fill={BARK} />
+          <Path d={`M${trunkX} 0 V${h}`} stroke={INK} strokeWidth={2} />
+          <Path d={`M${trunkX + tw} 0 V${h}`} stroke={INK} strokeWidth={2} />
+          {[0.2, 0.5, 0.8].map((x, i) => (
+            <Path key={i} d={`M${trunkX + tw * x} ${bt - bh * 0.3 + i * 40} C${trunkX + tw * x - 6} ${bt + bh * 0.2 + i * 30} ${trunkX + tw * x + 6} ${bt + bh * 0.6} ${trunkX + tw * x} ${bt + bh * 1.4}`} stroke="#6E4E38" strokeWidth={4} fill="none" strokeLinecap="round" />
+          ))}
+        </>
+      )}
+      {variant === 1 && <ShelfFungus x={trunkX + tw - 2} y={ground + bh * 0.45} />}
       <Ellipse cx={trunkX + tw * 0.55} cy={bt + bh * 0.2} rx={tw * 0.16} ry={tw * 0.2} fill="#3B2A20" stroke={INK} strokeWidth={1.5} />
     </G>
   );
