@@ -65,10 +65,12 @@ export function poolFor(kind: PlaceKind, ctx: Pick<StoryContext, 'allSpecies' | 
   // there for sure, and nowhere else, whatever a stray record says.
   const here = (s: Species) => !s.onlyAt || (!!placeId && s.onlyAt.includes(placeId));
   const around = ctx.allSpecies.filter((s) => s.seasons.includes(ctx.season) && here(s));
+  // Neighbors who always show up in this place (Central Park's coyotes, Staten Island's turkeys).
+  const always = (s: Species) => !!placeId && !!s.alwaysAt?.includes(placeId);
   const recorded = around.filter((s) => recordedHere(s, ctx.sightings, placeId, ctx.season) === true);
-  if (!placeId || !ctx.sightings?.[placeId]) return around.filter((s) => usual(s) || seen(s));
-  if (recorded.length >= THIN) return around.filter((s) => recorded.includes(s) || everywhere(s) || !!s.onlyAt || seen(s));
-  return around.filter((s) => recorded.includes(s) || usual(s) || everywhere(s) || seen(s));
+  if (!placeId || !ctx.sightings?.[placeId]) return around.filter((s) => usual(s) || seen(s) || always(s));
+  if (recorded.length >= THIN) return around.filter((s) => recorded.includes(s) || everywhere(s) || !!s.onlyAt || seen(s) || always(s));
+  return around.filter((s) => recorded.includes(s) || usual(s) || everywhere(s) || seen(s) || always(s));
 }
 
 export { MAMMALS };
@@ -319,7 +321,9 @@ export function pickAround(place: StoryPlace, ctx: StoryContext, lead: Species |
   const newcomers = arrived.filter((s) => s.id !== lead?.id && pool.includes(s));
   // Rare neighbors really recorded here (deer at Liberty State Park) always make the grid.
   const locals = pool.filter((s) => s.sightingsOnly && recordedHere(s, ctx.sightings, place.placeId, ctx.season) && !newcomers.includes(s));
-  const first = [...newcomers, ...locals];
+  // Neighbors who always show up here come first (Central Park's coyotes, Staten Island's turkeys).
+  const musts = pool.filter((s) => !!place.placeId && !!s.alwaysAt?.includes(place.placeId));
+  const first = [...musts, ...newcomers.filter((s) => !musts.includes(s)), ...locals.filter((s) => !musts.includes(s))];
   const out = [...first, ...seen.filter((s) => !first.includes(s))].slice(0, AROUND);
   // The neighborhood's own one or two most-seen mammals always make the lineup (when they're
   // around this season and have something to say), so every place has its furry neighbors.

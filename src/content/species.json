@@ -3031,7 +3031,10 @@
     "iNatTaxonId": 42051,
     "sightingsOnly": true,
     "nocturnal": true,
-    "withPeople": "Coyotes in the city usually avoid people completely and move at night. The ones that get fed lose their fear, which gets them into trouble."
+    "withPeople": "Coyotes in the city usually avoid people completely and move at night. The ones that get fed lose their fear, which gets them into trouble.",
+    "alwaysAt": [
+      "central-park"
+    ]
   },
   {
     "id": "bats",
@@ -3205,6 +3208,13 @@
       "van-cortlandt-park",
       "pelham-bay-park"
     ],
-    "withPeople": "Most wild turkeys keep their distance, but where people feed them they can get bold, and spring males sometimes puff up at walkers. Give them space and they'll go about their business."
+    "withPeople": "Most wild turkeys keep their distance, but where people feed them they can get bold, and spring males sometimes puff up at walkers. Give them space and they'll go about their business.",
+    "alwaysAt": [
+      "st-george",
+      "clove-lakes-park",
+      "great-kills-park",
+      "van-cortlandt-park",
+      "pelham-bay-park"
+    ]
   }
 ]

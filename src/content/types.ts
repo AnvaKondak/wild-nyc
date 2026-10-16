@@ -69,6 +69,8 @@ export type Species = {
   sightingsOnly?: boolean;
   /** Only live in these bundled places, and always do (turkeys: Staten Island and the big Bronx parks). */
   onlyAt?: string[];
+  /** Always in the lineup in these bundled places (Central Park's coyotes, Staten Island's turkeys). */
+  alwaysAt?: string[];
   /** Up at night, asleep by day (raccoons, opossums, moths). For the story's intro. */
   nocturnal?: boolean;
   /** Migrants: when they usually arrive in NYC, "MM-DD". The weeks after are "just arrived". */

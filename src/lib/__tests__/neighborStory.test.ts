@@ -204,3 +204,19 @@ describe('mammals in every lineup', () => {
     for (const p of places) expect([p.id, topMammals(species, sightings, p.id).length > 0]).toEqual([p.id, true]);
   });
 });
+
+describe('neighbors who always show up', () => {
+  it("puts Central Park's coyotes and the turkeys of turkey places in every lineup", () => {
+    const cases: [string, string][] = [['central-park', 'coyote'], ['st-george', 'wild-turkey'], ['clove-lakes-park', 'wild-turkey'], ['great-kills-park', 'wild-turkey'], ['van-cortlandt-park', 'wild-turkey'], ['pelham-bay-park', 'wild-turkey']];
+    for (const [placeId, id] of cases) {
+      const p = places.find((x) => x.id === placeId)!;
+      for (const season of ['spring', 'summer', 'fall', 'winter'] as const) for (const period of ['dawn', 'midday', 'dusk', 'night'] as const) for (const date of DAYS.slice(0, 7)) {
+        const ctx = ctxOf(season, period, { sightings });
+        const here = placeOf(p);
+        const lead = pickLead([here], 0, ctx, date, '2026-09-30');
+        const lineup = [lead, ...pickAround(here, ctx, lead, `${here.cell}:${date}:${period}`)].map((s) => s?.id);
+        expect([placeId, season, period, date, lineup.includes(id)]).toEqual([placeId, season, period, date, true]);
+      }
+    }
+  });
+});
