@@ -1,8 +1,9 @@
 // Dev-only gallery of the PLACEHOLDER art: every species, and every story setting.
 // Open with the deep link wildneighbors://art-preview (or /art-preview on web).
+// In a release build it doesn't exist: the link goes home.
 import { useState } from 'react';
 import { FlatList, Pressable, Text, useWindowDimensions, View } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { Redirect, useLocalSearchParams } from 'expo-router';
 import { BackButton } from '@/components/BackButton';
 import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
@@ -82,6 +83,10 @@ const GROUPS: { label: string; plan?: Plan }[] = ([
 const MOODS: Mood[] = ['hello', 'snack', 'happy', 'sleepy', 'surprised', 'curious', 'singing', 'chilly'];
 
 export default function ArtPreview() {
+  return __DEV__ ? <Gallery /> : <Redirect href="/" />;
+}
+
+function Gallery() {
   const raccoon = getSpecies('raccoon')!;
   const { only, from, accents, period: p, place, scene: forced, action, groups, skip, v, ids } = useLocalSearchParams<{ ids?: string; v?: string; groups?: string; skip?: string; only?: string; from?: string; accents?: string; period?: Period; place?: string; scene?: CloseUpSetting; action?: 'fly' | 'sleep' | 'dust' | 'drink' | 'dry' }>();
   const { width } = useWindowDimensions();
