@@ -1,8 +1,9 @@
-import { families, encounters, facts, getSpecies, moments, placeKinds, places, seasonChapters, species } from '@/content';
+import { families, encounters, facts, getSpecies, moments, placeKinds, places, seasonChapters, sightings, species } from '@/content';
 import type { Period, PlaceKind, Season } from '@/content/types';
 import { toLiveMap, type LiveSpecies } from '../live';
 import { aroundSlide, buildArc, leadWeight, pickAround, pickLead, poolFor, type StoryPlace, type StoryContext } from '../neighborStory';
 import { seededRandom } from '../random';
+import { topMammals } from '../sightings';
 
 const lsp = places.find((p) => p.id === 'liberty-state-park')!;
 const prospect = places.find((p) => p.id === 'prospect-park')!;
@@ -181,5 +182,25 @@ describe('Family and friends', () => {
     expect(arc[at].kicker).toBe('Family and friends');
     expect(arc[at].body).toBe(families['white-tailed-deer'].seasons.summer.body);
     expect(arc[at + 1].id).toBe('white-tailed-deer:kindness');
+  });
+});
+
+describe('mammals in every lineup', () => {
+  it("puts each neighborhood's own most-seen mammals in its lineup, every season and time of day", () => {
+    for (const p of places) for (const season of ['spring', 'summer', 'fall', 'winter'] as const) for (const period of ['dawn', 'midday', 'dusk', 'night'] as const) {
+      const ctx = ctxOf(season, period, { sightings });
+      const here = placeOf(p);
+      const lead = pickLead([here], 0, ctx, '2026-10-05', '2026-10-04');
+      const lineup = [lead, ...pickAround(here, ctx, lead, `${here.cell}:2026-10-05:${period}`)].map((s) => s?.id);
+      const own = topMammals(species, sightings, p.id).filter((s) => s.seasons.includes(season));
+      expect([p.id, season, period, own.every((s) => lineup.includes(s.id))]).toEqual([p.id, season, period, true]);
+    }
+  });
+
+  it('picks them from the real records, so places differ', () => {
+    expect(topMammals(species, sightings, 'van-cortlandt-park').map((s) => s.id)).toContain('white-tailed-deer');
+    expect(topMammals(species, sightings, 'inwood-hill-park').map((s) => s.id)).toContain('groundhog');
+    expect(topMammals(species, sightings, 'rockaway-beach').map((s) => s.id)).toEqual(['raccoon']);
+    for (const p of places) expect([p.id, topMammals(species, sightings, p.id).length > 0]).toEqual([p.id, true]);
   });
 });

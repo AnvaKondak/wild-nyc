@@ -13,7 +13,7 @@ import type { LiveMap } from './live';
 import { fillPlace, pickFact, pickVariant, placePhrase, usableVariants, withLocation } from './localStory';
 import { pick, seededRandom, shuffle } from './random';
 import { lowerName, possessive } from './names';
-import { recordedHere, THIN, type Sightings } from './sightings';
+import { MAMMALS, recordedHere, THIN, topMammals, type Sightings } from './sightings';
 
 const PERIODS: Period[] = ['dawn', 'midday', 'dusk', 'night'];
 // "Also around today": today's neighbor plus eight others, nine in all (a 3 × 3 grid).
@@ -58,12 +58,17 @@ export type StoryContext = {
 export function poolFor(kind: PlaceKind, ctx: Pick<StoryContext, 'allSpecies' | 'season' | 'live' | 'sightings'>, placeId?: string): Species[] {
   const seen = (s: Species) => (ctx.live.get(s.id)?.recent ?? 0) > 0;
   const usual = (s: Species) => (s.onlyAt ? !!placeId && s.onlyAt.includes(placeId) : !!s.spots[kind] && !s.sightingsOnly);
+  // The neighborhood's own mammals (seen there most, all year) are here whenever they're in season.
+  const own = topMammals(ctx.allSpecies, ctx.sightings, placeId);
+  const everywhere = (s: Species) => own.includes(s);
   const around = ctx.allSpecies.filter((s) => s.seasons.includes(ctx.season));
   const recorded = around.filter((s) => recordedHere(s, ctx.sightings, placeId, ctx.season) === true);
   if (!placeId || !ctx.sightings?.[placeId]) return around.filter((s) => usual(s) || seen(s));
-  if (recorded.length >= THIN) return around.filter((s) => recorded.includes(s) || seen(s));
-  return around.filter((s) => recorded.includes(s) || usual(s) || seen(s));
+  if (recorded.length >= THIN) return around.filter((s) => recorded.includes(s) || everywhere(s) || seen(s));
+  return around.filter((s) => recorded.includes(s) || usual(s) || everywhere(s) || seen(s));
 }
+
+export { MAMMALS };
 
 /** Moments for this species right now: weather ones when the weather fits, else everyday ones that don't clash. */
 export function momentsNow(speciesId: string, ctx: Pick<StoryContext, 'moments' | 'season' | 'period' | 'weather'>): { weather: Moment[]; everyday: Moment[] } {
@@ -313,6 +318,10 @@ export function pickAround(place: StoryPlace, ctx: StoryContext, lead: Species |
   const locals = pool.filter((s) => s.sightingsOnly && recordedHere(s, ctx.sightings, place.placeId, ctx.season) && !newcomers.includes(s));
   const first = [...newcomers, ...locals];
   const out = [...first, ...seen.filter((s) => !first.includes(s))].slice(0, AROUND);
+  // The neighborhood's own one or two most-seen mammals always make the lineup (when they're
+  // around this season and have something to say), so every place has its furry neighbors.
+  const own = topMammals(ctx.allSpecies, ctx.sightings, place.placeId).filter((s) => s.id !== lead?.id && pool.includes(s) && !out.includes(s));
+  out.splice(Math.max(0, AROUND - own.length), own.length, ...own);
   let rest = pool.filter((s) => !out.includes(s));
   while (out.length < AROUND && rest.length > 0) {
     const next = weightedPick(rest.map((s) => ({ item: s, w: leadWeight(s, place.kind, ctx) })), random)!;

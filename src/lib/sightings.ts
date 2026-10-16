@@ -35,3 +35,22 @@ export function recordedAnySeason(s: Species, sightings: Sightings | undefined, 
   const place = placeId ? sightings?.[placeId] : undefined;
   return place ? steady(s, place) && Object.values(place).some((bySpecies) => enough(s, bySpecies[s.id])) : undefined;
 }
+
+/** The mammals among the neighbors (pond sliders share the "furry" group but are turtles). */
+export const MAMMALS = ['eastern-gray-squirrel', 'raccoon', 'virginia-opossum', 'white-tailed-deer', 'groundhog'];
+
+/**
+ * A neighborhood's own mammals: the one or two seen most near it all year (squirrels in
+ * the East Village, deer in Van Cortlandt Park, groundhogs in Inwood), each recorded
+ * often enough over the year to really live there. Nothing when there's no data for the place.
+ */
+export function topMammals(all: Species[], sightings: Sightings | undefined, placeId: string | undefined, n = 2): Species[] {
+  const place = placeId ? sightings?.[placeId] : undefined;
+  if (!place) return [];
+  const year = (s: Species) => Object.values(place).reduce((sum, bySpecies) => sum + (bySpecies[s.id] ?? 0), 0);
+  return all
+    // Mammals here live here all year, so the year's records count together (and deer still need a steady record).
+    .filter((s) => MAMMALS.includes(s.id) && year(s) >= SEEN_ENOUGH && steady(s, place))
+    .sort((a, b) => year(b) - year(a))
+    .slice(0, n);
+}
