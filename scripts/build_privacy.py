@@ -79,7 +79,7 @@ sections = "\n".join(
 )
 privacy = page(
     "Wild Neighbors Privacy",
-    f"""<h1>Privacy, <em>gently</em></h1>
+    f"""<h1>Privacy</h1>
 <p class="motto">We notice. We don't follow.</p>
 <p class="muted">Updated {html.escape(p['updated'])}</p>
 <div class="card"><p>{html.escape(p['summary'])}</p></div>
