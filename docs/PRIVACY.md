@@ -16,7 +16,7 @@ Only one thing: to get the weather, the app sends Open-Meteo the center of the n
 
 ## What stays on your phone
 
-Your saved neighborhoods, your kindness checkmarks for the season, your sound and morning-note settings, and a cache of recent sightings. Deleting the app deletes all of it. The photos, sounds and stories are built into the app, so looking at them doesn't send anything anywhere.
+Your saved neighborhoods, your favorites, your kindness checkmarks for the season, your sound and morning-note settings, and a cache of recent sightings. Deleting the app deletes all of it. The photos, sounds and stories are built into the app, so looking at them doesn't send anything anywhere.
 
 ## The morning note
 
@@ -32,4 +32,4 @@ No accounts. No ads. No analytics or tracking. We don't sell or share data, beca
 
 ## Changes and questions
 
-If this policy changes, the new version will be in the app with a new date. Questions? Write to the email on our App Store page.
+If this policy changes, the new version will be in the app with a new date. Questions? Write to irisadornnyc@gmail.com.
