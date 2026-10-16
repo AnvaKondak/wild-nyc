@@ -8,7 +8,17 @@
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.wildnyc.wildneighbors"
+      "bundleIdentifier": "com.wildnyc.wildneighbors",
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "infoPlist": {
+        "LSApplicationCategoryType": "public.app-category.education",
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": false,
+          "NSAllowsLocalNetworking": true
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -29,10 +39,17 @@
       "expo-font",
       "expo-sharing",
       [
+        "expo-sensors",
+        {
+          "motionPermission": false
+        }
+      ],
+      [
         "expo-audio",
         {
           "microphonePermission": false,
-          "recordAudioAndroid": false
+          "recordAudioAndroid": false,
+          "enableBackgroundPlayback": false
         }
       ],
       [
@@ -48,6 +65,7 @@
     "scheme": "wildneighbors",
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "description": "Meet the neighbors: what the pigeons, sparrows, squirrels and crows on your block in NYC and Jersey City are up to right now."
   }
 }
