@@ -1580,25 +1580,25 @@ ART.fox = {
   svg: (m) => {
     const orange = '#E8742E';
     const cream = '#FFF6EC';
-    // The tail curls around the front of the paws, the way a sitting fox wraps up.
-    const tail = '<path d="M282 284 C352 280 390 326 374 360 C360 390 300 392 220 390 C156 388 100 384 82 366 C64 346 84 320 112 328 C150 338 210 342 252 330 C284 322 300 306 282 284 Z"/>';
+    // The tail sweeps up beside the body, lifted, white tip high.
+    const tail = '<path d="M244 352 C308 360 362 326 366 270 C370 232 354 204 332 204 C310 204 302 224 314 242 C326 264 318 296 284 318 C268 328 256 332 244 334 Z"/>';
     const body = '<path d="M126 362 C106 306 118 242 160 214 L240 214 C282 242 294 306 274 362 Z"/>';
     const ears = '<path d="M118 124 L96 22 L186 90 Z"/><path d="M282 124 L304 22 L214 90 Z"/>';
     const head = '<path d="M200 76 C252 76 294 108 304 154 C320 166 334 182 326 194 C306 218 262 240 200 242 C138 240 94 218 74 194 C66 182 80 166 96 154 C106 108 148 76 200 76 Z"/>';
     const fluff = (x, y, dir) => `<path d="M${x} ${y} l${8 * dir} -16 l${4 * dir} 14 l${8 * dir} -12 l${2 * dir} 16" fill="none" stroke="${cream}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
-    return `<g transform="translate(0 -10)">${shadow([body, ears, head, tail])}
+    return `<g transform="translate(0 -10)">${shadow([tail, body, ears, head])}
+      ${shape(tail, orange)}
+      <clipPath id="fox-tail">${tail}</clipPath>
+      <g clip-path="url(#fox-tail)">
+        <circle cx="336" cy="214" r="34" fill="${cream}"/>
+        <path d="M290 320 C324 306 348 280 352 250" fill="none" stroke="#D2602A" stroke-width="7" stroke-linecap="round"/>
+      </g>
+      ${tail.replace('/>', ` fill="none" ${OL}/>`)}
+      <path d="M318 196 l-6 -10 M334 192 l0 -12 M350 198 l8 -8" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>
       ${shape(body, orange)}
       <path d="M160 218 C166 262 174 300 200 334 C226 300 234 262 240 218 Z" fill="${cream}"/>
       <path d="M176 316 l8 10 l8 -8 l8 10 l8 -10 l8 8" fill="none" stroke="${cream}" stroke-width="6" stroke-linejoin="round"/>
       <g fill="#D2602A" ${OL}><ellipse cx="170" cy="358" rx="22" ry="11"/><ellipse cx="230" cy="358" rx="22" ry="11"/></g>
-      ${shape(tail, orange)}
-      <clipPath id="fox-tail">${tail}</clipPath>
-      <g clip-path="url(#fox-tail)">
-        <circle cx="90" cy="360" r="44" fill="${cream}"/>
-        <path d="M304 310 C334 326 350 350 344 372 M250 366 C206 372 164 370 136 362" fill="none" stroke="#D2602A" stroke-width="7" stroke-linecap="round"/>
-      </g>
-      ${tail.replace('/>', ` fill="none" ${OL}/>`)}
-      <path d="M76 342 l-8 -8 M70 360 l-12 -2 M78 378 l-10 6" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>
       ${shape(ears, orange)}
       <path d="M124 112 L108 44 L172 92 Z M276 112 L292 44 L228 92 Z" fill="#F4A9A0"/>
       ${fluff(118, 96, 1)}${fluff(282, 96, -1)}
@@ -1828,7 +1828,7 @@ const CUTOUTS = {
   'ring-billed-gull:young': P('gullChick', 'stand', 0.9),
   'common-tern:young': P('ternChick', 'stand', 0.9),
   'white-tailed-deer:young': P('fawn', 'stand', 0.9),
-  'red-fox': P('fox', 'stand', 0.95),
+  'red-fox': P('fox', 'stand', 0.9),
   coyote: P('coyote', 'stand', 0.92),
   'eastern-cottontail': P('rabbit', 'stand', 0.88),
   bats: P('bat', 'fly', 0.75),
