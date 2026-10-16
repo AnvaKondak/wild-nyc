@@ -153,7 +153,8 @@ export type Moment = {
   periods: Period[];
   setting: Setting;
   kicker: string;
-  variants: { title: string; body: string }[];
+  /** Each may be written for some of the moment's times of day ("as the light goes…"); none means any of them. */
+  variants: { title: string; body: string; periods?: Period[] }[];
   /** Only in this weather (rain on feathers, snow on the hedge). Omit for any day. */
   weather?: WeatherTag[];
 };

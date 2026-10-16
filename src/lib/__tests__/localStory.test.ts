@@ -1,4 +1,5 @@
-import { clashesWithWeather, fillPlace, pickFact, placePhrase, withLocation } from '../localStory';
+import type { Moment } from '@/content/types';
+import { clashesWithWeather, fillPlace, pickFact, placePhrase, usableVariants, withLocation } from '../localStory';
 import { pick, seededRandom, shuffle } from '../random';
 
 describe('random', () => {
@@ -64,5 +65,23 @@ describe('clashesWithWeather', () => {
     expect(clashesWithWeather('Turtles are basking in the sun', ['rain'])).toBe(true);
     expect(clashesWithWeather('A squirrel is burying acorns', ['rain'])).toBe(false);
     expect(clashesWithWeather('Frost on the hedge', ['heat'])).toBe(true);
+  });
+});
+
+describe('usableVariants', () => {
+  const moment: Moment = {
+    id: 'm', speciesId: 'rock-pigeon', seasons: ['fall'], periods: ['dawn', 'midday'], setting: 'ledge', kicker: 'Right now',
+    variants: [
+      { title: 'A pigeon is up early', body: 'First light on the ledge.', periods: ['dawn'] },
+      { title: 'A pigeon is sunbathing', body: 'Flat on the warm stone, in the middle of the day.', periods: ['midday'] },
+      { title: 'A pigeon is on the ledge', body: 'Any time at all.' },
+    ],
+  };
+  it('picks the versions written for this time of day, plus the ones for any time', () => {
+    expect(usableVariants(moment, [], 'dawn').map((v) => v.title)).toEqual(['A pigeon is up early', 'A pigeon is on the ledge']);
+    expect(usableVariants(moment, [], 'midday').map((v) => v.title)).toEqual(['A pigeon is sunbathing', 'A pigeon is on the ledge']);
+  });
+  it('still drops the ones that clash with the weather', () => {
+    expect(usableVariants(moment, ['rain'], 'midday').map((v) => v.title)).toEqual(['A pigeon is on the ledge']);
   });
 });

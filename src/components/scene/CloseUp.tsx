@@ -34,7 +34,7 @@ export type CloseUpSetting =
   | 'wire' | 'sky' | 'water' | 'wade' | 'shore' | 'pier' | 'reeds' | 'web' | 'fireescape' | 'highledge' | 'hollow';
 
 // Who walks to the water rather than swims: at a puddle in the city.
-const CITY_WALKERS = ['rock-pigeon', 'house-sparrow', 'european-starling', 'raccoon', 'eastern-gray-squirrel', 'american-robin', 'northern-cardinal'];
+const CITY_WALKERS = ['rock-pigeon', 'house-sparrow', 'european-starling', 'raccoon', 'eastern-gray-squirrel', 'american-robin', 'northern-cardinal', 'mourning-dove'];
 // Who lives in burrows and dens on the ground.
 const BURROWERS = ['groundhog', 'virginia-opossum'];
 // Never up in trees or on ledges.
@@ -74,18 +74,19 @@ export function canDo(speciesId: string, action: Action): boolean {
   }
 }
 
-/** Where they go to do it: a nap happens wherever that animal really sleeps. */
+/**
+ * Where they go to do it. A nap happens where that animal really sleeps: tree-hole
+ * sleepers in a hollow, burrowers in their burrow; everyone else right where the words
+ * put them (pigeons on their ledge, sparrows deep in the hedge, ducks on the water).
+ */
 function sceneForAction(speciesId: string, action: Action): CloseUpSetting | undefined {
-  const pose = cutoutPose(speciesId);
   if (action === 'fly') return 'sky';
   if (action === 'dust') return 'building';
   if (action === 'drink') return 'puddle';
   if (action === 'dry') return undefined; // wherever they are, wings spread
   if (HOLLOW_SLEEPERS.includes(speciesId)) return 'hollow';
-  if (BURROWERS.includes(speciesId) || speciesId === 'groundhog') return 'burrow';
-  if (pose === 'swim') return 'water';
-  if (pose === 'stand' && getSpecies(speciesId)?.group !== 'birds') return 'lawn';
-  return 'branch';
+  if (BURROWERS.includes(speciesId)) return 'burrow';
+  return undefined;
 }
 
 /** The close-up scene for this animal in this setting (and action), or nothing (then the sticker shows). */

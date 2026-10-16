@@ -1,5 +1,5 @@
 // Runs with TZ=America/New_York (see package.json), so local times are NYC times.
-import { dateKey, formatClock, moonPhaseName, periodOf, seasonKey, seasonOf, timeHeader } from '../time';
+import { dateKey, formatClock, momentKicker, moonPhaseName, periodOf, seasonKey, seasonOf, timeHeader } from '../time';
 
 const NYC = { lat: 40.7128, lng: -74.006 };
 // On 2026-10-01 in NYC, sunrise is about 6:59a and sunset about 6:41p.
@@ -79,5 +79,29 @@ describe('moonPhaseName', () => {
 
   it('calls the days between full and last quarter gibbous', () => {
     expect(moonPhaseName(new Date(2026, 9, 1, 21))).toBe('Waning gibbous moon');
+  });
+});
+
+describe('momentKicker', () => {
+  const at = (h: number) => new Date(2026, 9, 15, h, 30);
+  it('ties "now" kickers to the clock', () => {
+    expect(momentKicker('Right now', 'dawn', at(6))).toBe('Early this morning');
+    expect(momentKicker('Right now', 'midday', at(9))).toBe('This morning');
+    expect(momentKicker('Look closer', 'midday', at(12))).toBe('Around lunchtime');
+    expect(momentKicker('Right now', 'midday', at(15))).toBe('This afternoon');
+    expect(momentKicker('Right now', 'dusk', at(18))).toBe('This evening');
+    expect(momentKicker('Tonight', 'night', at(22))).toBe('Tonight');
+    expect(momentKicker('Tonight', 'night', at(2))).toBe('In the middle of the night');
+  });
+
+  it('keeps invitations after the time, and leaves everything else alone', () => {
+    expect(momentKicker('Look up', 'dusk', at(18))).toBe('This evening · Look up');
+    expect(momentKicker('Listen', 'dawn', at(6))).toBe('Early this morning · Listen');
+    expect(momentKicker('In the rain', 'midday', at(12))).toBe('In the rain');
+    expect(momentKicker('Meanwhile', 'midday', at(12))).toBe('Meanwhile');
+  });
+
+  it('uses the time of day alone when previewing one', () => {
+    expect(momentKicker('Right now', 'midday')).toBe('Today');
   });
 });

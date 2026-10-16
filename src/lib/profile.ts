@@ -2,7 +2,7 @@
 // of day, this season) and where they live, drawn as a scene.
 
 import type { LocalNames, Moment, Period, Season, Setting, Species } from '@/content/types';
-import { fillPlace } from './localStory';
+import { fillPlace, usableVariants } from './localStory';
 import { pick, seededRandom } from './random';
 
 const PERIODS: Period[] = ['dawn', 'midday', 'dusk', 'night'];
@@ -15,7 +15,8 @@ export function dayInTheLife(s: Species, season: Season, moments: Moment[], phra
   return PERIODS.flatMap((period) => {
     const options = moments.filter((m) => m.speciesId === s.id && !m.weather && m.seasons.includes(season) && m.periods.includes(period));
     if (options.length === 0) return [];
-    const v = pick(pick(options, random).variants, random);
+    // The version written for this time of day ("as the light goes…" belongs at dusk).
+    const v = pick(usableVariants(pick(options, random), [], period), random);
     return [{ period, title: fillPlace(v.title, phrase, local, random), body: fillPlace(v.body, phrase, local, random) }];
   });
 }

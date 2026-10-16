@@ -21,6 +21,20 @@ stoop. The animals have personalities. We laugh *with* them, never at them.
 ## Rules
 
 - **Action first.** What they're doing right now, in the present tense.
+- **Right now, at this time of day.** A moment answers "what are my neighbors doing right
+  now?", so it's mid-action and tied to the clock: "first light", "in the middle of the
+  day", "as the light goes", "tonight". Middle-of-the-day lines say "midday" or "today",
+  never "lunch" or "afternoon" (that stretch runs from about 9 to 5; the label at the top
+  of the card says "This morning" or "This afternoon" from the real clock). A version
+  can be written for just some of a moment's times of day (`"periods": ["dusk"]`).
+- **Facts are seasoning.** Half a sentence of why, at most ("so the rain soaks right
+  underneath"). Full facts live on the species page. Ending on what's next is nice:
+  "At first light they'll head home."
+- **Words draw the picture.** The scene, the action, the expression and how many are
+  shown come from the words (`src/lib/settingWords.ts`, `src/lib/mood.ts`): "two pigeons"
+  draws a pair, "the sparrows" draws a few, "puffed up" draws snowflakes. Some words pull
+  the scene: "circles" and "overhead" mean the sky, "piling" a pier, "paddling" water,
+  "spinning" a web, "streetlights" the sidewalk, "curled up" asleep.
 - **Titles** are short and punchy. **Bodies** are one to three sentences, up to about
   50 words. Detail is welcome when it makes the moment feel real and local.
 - **One joke per line, at most.** A parenthetical aside is a good place for it.

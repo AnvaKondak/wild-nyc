@@ -87,9 +87,10 @@ function favoriteSlide(s: Species, input: FavoritesInput, n: number, total: numb
   const sleeping = asleep(s, ctx);
   const mood: Mood | undefined = sleeping ? 'sleepy' : undefined;
   if (!moment) {
-    return { ...base, title: `The ${name} right now`, body: s.rightNow[ctx.season], status: sleeping ? 'Napping' : where.status, scene: where.place.kind, mood };
+    // Nothing written for this exact time: the bigger picture, labeled as the season it is.
+    return { ...base, title: `The ${name} this ${ctx.season}`, body: s.rightNow[ctx.season], status: sleeping ? 'Napping' : where.status, scene: where.place.kind, mood };
   }
-  const v = pickVariant(usableVariants(moment, ctx.weather), where.place.placeName !== null, random);
+  const v = pickVariant(usableVariants(moment, ctx.weather, ctx.period), where.place.placeName !== null, random);
   return {
     ...base,
     title: fill(withLocation(v.title, moment.setting, where.place.kind, random)),

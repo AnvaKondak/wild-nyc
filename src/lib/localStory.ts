@@ -65,9 +65,14 @@ export function clashesWithWeather(text: string, weather: WeatherTag[]): boolean
   return weather.some((t) => CLASHES[t].test(text));
 }
 
-export function usableVariants(moment: Moment, weather: WeatherTag[]) {
-  if (moment.weather) return moment.variants;
-  return moment.variants.filter((v) => !clashesWithWeather(`${v.title} ${v.body}`, weather));
+/**
+ * The versions of a moment that fit right now: written for this time of day (when a
+ * version says), and not clashing with the weather (for everyday moments).
+ */
+export function usableVariants(moment: Moment, weather: WeatherTag[], period?: Period) {
+  const now = moment.variants.filter((v) => !period || !v.periods || v.periods.includes(period));
+  if (moment.weather) return now;
+  return now.filter((v) => !clashesWithWeather(`${v.title} ${v.body}`, weather));
 }
 
 /**

@@ -30,7 +30,7 @@ import { withMoods } from '@/lib/mood';
 import { homeSetting } from '@/lib/profile';
 import { withSettings } from '@/lib/settingWords';
 import { hashString, seededRandom } from '@/lib/random';
-import { dateKey, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
+import { dateKey, momentKicker, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
 import { askForNotes, cancelNotes, scheduleNotes } from '@/lib/notifications';
 import { pickSoundscape, SOUNDSCAPE_LABEL } from '@/lib/soundscape';
 import { useAmbience } from '@/lib/useAmbience';
@@ -613,7 +613,7 @@ export default function RightNow() {
                 </View>
               )}
 
-              <StoryCard kicker={slide.kicker} title={slide.title} body={slide.body} fact={slide.fact} chip={slide.status} theme={theme} scroll={false} />
+              <StoryCard kicker={slide.kind === 'scene' ? momentKicker(slide.kicker, header.period, previewPeriod ? undefined : now) : slide.kicker} title={slide.title} body={slide.body} fact={slide.fact} chip={slide.status} theme={theme} scroll={false} />
               </ScrollView>
 
               <View style={{ paddingHorizontal: 16, paddingBottom: 8 }}>

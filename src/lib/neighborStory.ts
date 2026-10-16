@@ -69,8 +69,8 @@ export function poolFor(kind: PlaceKind, ctx: Pick<StoryContext, 'allSpecies' | 
 export function momentsNow(speciesId: string, ctx: Pick<StoryContext, 'moments' | 'season' | 'period' | 'weather'>): { weather: Moment[]; everyday: Moment[] } {
   const now = ctx.moments.filter((m) => m.speciesId === speciesId && m.seasons.includes(ctx.season) && m.periods.includes(ctx.period));
   return {
-    weather: now.filter((m) => m.weather?.some((t) => ctx.weather.includes(t))),
-    everyday: now.filter((m) => !m.weather && usableVariants(m, ctx.weather).length > 0),
+    weather: now.filter((m) => m.weather?.some((t) => ctx.weather.includes(t)) && usableVariants(m, ctx.weather, ctx.period).length > 0),
+    everyday: now.filter((m) => !m.weather && usableVariants(m, ctx.weather, ctx.period).length > 0),
   };
 }
 
@@ -190,7 +190,7 @@ export function buildArc(s: Species, place: StoryPlace, ctx: StoryContext, role:
   };
 
   const momentSlide = (m: Moment, kicker = m.kicker): StorySlide => {
-    const v = pickVariant(usableVariants(m, ctx.weather), named, random);
+    const v = pickVariant(usableVariants(m, ctx.weather, period), named, random);
     return {
       id: `${m.id}:${m.variants.indexOf(v)}`,
       season,

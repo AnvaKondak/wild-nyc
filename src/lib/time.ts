@@ -136,3 +136,37 @@ export function timeHeader(date: Date, lat: number, lng: number): TimeHeader {
       return { period, label: 'Night', clock, sub: moonPhaseName(date) };
   }
 }
+
+// The words at the top of a story moment that only meant "now": swapped for the time of
+// day, so a moment always reads as happening this morning, this afternoon or tonight.
+const NOW_KICKERS = new Set(['Right now', 'Tonight', 'Look closer']);
+// Invitations that stay, after the time: "This morning · Look up".
+const INVITES = new Set(['Look up', 'Look down', 'Listen', 'Overhead']);
+
+/** "This morning", "Around lunchtime", "This afternoon", "This evening", "Tonight", "In the middle of the night". */
+export function nowLabel(period: Period, date?: Date): string {
+  const hour = date?.getHours();
+  switch (period) {
+    case 'dawn':
+      return 'Early this morning';
+    case 'midday':
+      if (hour === undefined) return 'Today';
+      return hour < 11 ? 'This morning' : hour < 14 ? 'Around lunchtime' : 'This afternoon';
+    case 'dusk':
+      return 'This evening';
+    case 'night':
+      return hour !== undefined && hour < 5 ? 'In the middle of the night' : 'Tonight';
+  }
+}
+
+/**
+ * A moment's kicker, tied to the clock: "Right now" becomes "Around lunchtime", "Look
+ * up" becomes "This evening · Look up". Anything else ("In the rain", "Meanwhile",
+ * "Then…") stays as it is. Without a date (a previewed time of day), the label is the
+ * time of day alone.
+ */
+export function momentKicker(kicker: string, period: Period, date?: Date): string {
+  if (NOW_KICKERS.has(kicker)) return nowLabel(period, date);
+  if (INVITES.has(kicker)) return `${nowLabel(period, date)} · ${kicker}`;
+  return kicker;
+}

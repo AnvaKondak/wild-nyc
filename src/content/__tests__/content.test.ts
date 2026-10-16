@@ -95,6 +95,20 @@ describe('moments', () => {
     }
   });
 
+  it('have versions only for their own times of day, and one for every time they cover', () => {
+    for (const m of moments) {
+      for (const v of m.variants) for (const p of v.periods ?? []) expect(m.periods).toContain(p);
+      for (const p of m.periods) expect(m.variants.some((v) => !v.periods || v.periods.includes(p))).toBe(true);
+    }
+  });
+
+  it('give every species something happening at every time of day, in every season they are here', () => {
+    for (const s of species) for (const season of s.seasons) for (const period of PERIODS) {
+      const now = moments.filter((m) => m.speciesId === s.id && !m.weather && m.seasons.includes(season) && m.periods.includes(period));
+      expect([s.id, season, period, now.length > 0]).toEqual([s.id, season, period, true]);
+    }
+  });
+
   it.each(READY_SEASONS)('%s has several species with moments at every time of day', (season) => {
     for (const period of PERIODS) {
       const speciesWithMoments = new Set(moments.filter((m) => m.seasons.includes(season) && m.periods.includes(period)).map((m) => m.speciesId));

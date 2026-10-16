@@ -29,7 +29,8 @@ const RULES: [RegExp, Setting][] = [
   [/\b(streetlights?|street lights?|lamp ?posts?)\b/, 'streetlight'],
   [/\b(sidewalks?|street|curbs?|stoops?|cafés?|cafes?|crumbs)\b/, 'sidewalk'],
   [/\b(lawns?|grass|fields?|meadows?|on the ground|ground|yards?|leaf litter|dirt|dust)\b/, 'lawn'],
-  [/\b(branch(?:es)?|treetops?|trees?|twigs?|oaks?|limbs?)\b/, 'branch'],
+  // Not twigs: those are usually nest material, carried to a ledge as often as a tree.
+  [/\b(branch(?:es)?|treetops?|trees?|oaks?|limbs?)\b/, 'branch'],
 ];
 
 /** The setting a piece of text describes, if it names one (lowercase words only). */
@@ -70,7 +71,7 @@ function namesOf(speciesId: string): { one: string; many: string } | undefined {
 }
 
 /** How many of them the words put in the picture (1 to 3), and how many of those are little ones. */
-export function crowdFromWords(title: string, body: string, speciesId: string | undefined): Crowd {
+export function crowdFromWords(title: string, body: string, speciesId: string | undefined, opts: { young?: 'title' | 'body' } = {}): Crowd {
   const t = title.toLowerCase();
   const b = body.toLowerCase();
   const names = speciesId ? namesOf(speciesId) : undefined;
@@ -81,10 +82,11 @@ export function crowdFromWords(title: string, body: string, speciesId: string | 
   const single = one && !(names && names.one === names.many && plural);
   let count = PAIR.test(t) ? 2 : MANY.test(t) || (plural && !single) ? 3 : 1;
   if (count === 1 && PAIR.test(b)) count = 2;
-  const youngSaid = YOUNG.test(t) || YOUNG.test(b);
+  // Little ones only when the title is about them (a body can mention babies hidden away in a nest).
+  const youngSaid = YOUNG.test(t) || (opts.young === 'body' && YOUNG.test(b));
   if (!youngSaid) return { count, young: 0 };
   // Little ones with a grown-up: one parent and one or two young.
-  const young = MANY_YOUNG.test(t) || MANY_YOUNG.test(b) ? 2 : 1;
+  const young = MANY_YOUNG.test(t) || (opts.young === 'body' && MANY_YOUNG.test(b)) ? 2 : 1;
   return { count: 1 + young, young };
 }
 
@@ -98,8 +100,10 @@ export function withSettings(slides: StorySlide[]): StorySlide[] {
   return slides.map((slide) => {
     const said = settingFromWords(slide.title) ?? settingFromWords(slide.body);
     const action = actionFromWords(slide.title) ?? actionFromWords(slide.body);
-    const crowd = slide.speciesId && !slide.cast ? crowdFromWords(slide.title, slide.body, slide.speciesId) : undefined;
-    if (crowd && slide.id.endsWith(':family') && crowd.count < 2) crowd.count = 2;
+    // Family slides are all about the young, so their body counts too.
+    const family = slide.id.endsWith(':family');
+    const crowd = slide.speciesId && !slide.cast ? crowdFromWords(slide.title, slide.body, slide.speciesId, { young: family ? 'body' : 'title' }) : undefined;
+    if (crowd && family && crowd.count < 2) crowd.count = 2;
     return {
       ...slide,
       ...(said ? { setting: said } : {}),
