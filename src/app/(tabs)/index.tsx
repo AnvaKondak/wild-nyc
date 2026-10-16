@@ -253,7 +253,7 @@ export default function RightNow() {
     }
   };
 
-  // Birds softly chirping, the same everywhere, if sound is on.
+  // Calm forest birdsong, the same everywhere, if sound is on.
   // In the favorites story each animal brings their own kind of place.
   const sceneNow = faves ? (slide?.scene ?? 'park') : scene;
   useAmbience(SOUNDSCAPE, state.soundOn, focused);

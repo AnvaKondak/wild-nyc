@@ -1,15 +1,15 @@
 {
   "loops": {
     "birds": [
-      "song-sparrow"
+      "forest-birdsong"
     ]
   },
   "recordings": {
-    "song-sparrow": {
-      "title": "Melospiza melodia - Song Sparrow XC175236.mp3",
+    "forest-birdsong": {
+      "title": "Birdsong morning 01",
       "license": "CC BY-SA 4.0",
-      "artist": "Jonathon Jongsma",
-      "source": "https://commons.wikimedia.org/wiki/File:Melospiza_melodia_-_Song_Sparrow_XC175236.mp3"
+      "artist": "Matutinho",
+      "source": "https://commons.wikimedia.org/wiki/File:Birdsong_morning_01.ogg"
     }
   }
 }
