@@ -1572,17 +1572,54 @@ const canid = (p) => ({
   },
 });
 
-ART.fox = canid({
-  id: 'fox', tint: C.yellowT,
-  coat: '#E8742E', back: '#D2602A', belly: '#F7F0E6', sock: '#2E2E44', tipColor: '#F7F0E6', earInside: '#2E2E44',
-  legs: 'M146 290 V350 M180 294 V354 M262 294 V354 M296 288 V350',
-  body: 'M130 246 C130 204 190 188 250 192 C310 196 336 222 332 252 C328 286 290 296 230 296 C170 296 130 286 130 246 Z',
-  bellyY: 300,
-  tail: 'M318 244 C356 246 382 226 378 190 C374 166 350 166 350 188 C350 208 336 222 314 226 Z',
-  tip: [376, 182],
-  ear: ['92 96 L136 136', '160 84 L180 140'],
-  earIn: ['100 112 L124 138', '160 102 L172 140'],
-});
+ART.fox = {
+  // Sitting up and facing you: big pointed ears with fluffy insides, a white heart-shaped
+  // muzzle, big shiny eyes, a white bib, and a huge fluffy tail curled around the side.
+  tint: C.yellowT,
+  tilt: 0,
+  svg: (m) => {
+    const orange = '#E8742E';
+    const cream = '#FFF6EC';
+    // The tail curls around the front of the paws, the way a sitting fox wraps up.
+    const tail = '<path d="M282 284 C352 280 390 326 374 360 C360 390 300 392 220 390 C156 388 100 384 82 366 C64 346 84 320 112 328 C150 338 210 342 252 330 C284 322 300 306 282 284 Z"/>';
+    const body = '<path d="M126 362 C106 306 118 242 160 214 L240 214 C282 242 294 306 274 362 Z"/>';
+    const ears = '<path d="M118 124 L96 22 L186 90 Z"/><path d="M282 124 L304 22 L214 90 Z"/>';
+    const head = '<path d="M200 76 C252 76 294 108 304 154 C320 166 334 182 326 194 C306 218 262 240 200 242 C138 240 94 218 74 194 C66 182 80 166 96 154 C106 108 148 76 200 76 Z"/>';
+    const fluff = (x, y, dir) => `<path d="M${x} ${y} l${8 * dir} -16 l${4 * dir} 14 l${8 * dir} -12 l${2 * dir} 16" fill="none" stroke="${cream}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
+    return `<g transform="translate(0 -10)">${shadow([body, ears, head, tail])}
+      ${shape(body, orange)}
+      <path d="M160 218 C166 262 174 300 200 334 C226 300 234 262 240 218 Z" fill="${cream}"/>
+      <path d="M176 316 l8 10 l8 -8 l8 10 l8 -10 l8 8" fill="none" stroke="${cream}" stroke-width="6" stroke-linejoin="round"/>
+      <g fill="#D2602A" ${OL}><ellipse cx="170" cy="358" rx="22" ry="11"/><ellipse cx="230" cy="358" rx="22" ry="11"/></g>
+      ${shape(tail, orange)}
+      <clipPath id="fox-tail">${tail}</clipPath>
+      <g clip-path="url(#fox-tail)">
+        <circle cx="90" cy="360" r="44" fill="${cream}"/>
+        <path d="M304 310 C334 326 350 350 344 372 M250 366 C206 372 164 370 136 362" fill="none" stroke="#D2602A" stroke-width="7" stroke-linecap="round"/>
+      </g>
+      ${tail.replace('/>', ` fill="none" ${OL}/>`)}
+      <path d="M76 342 l-8 -8 M70 360 l-12 -2 M78 378 l-10 6" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>
+      ${shape(ears, orange)}
+      <path d="M124 112 L108 44 L172 92 Z M276 112 L292 44 L228 92 Z" fill="#F4A9A0"/>
+      ${fluff(118, 96, 1)}${fluff(282, 96, -1)}
+      ${shape(head, orange)}
+      <clipPath id="fox-head">${head}</clipPath>
+      <g clip-path="url(#fox-head)">
+        <path d="M70 176 C108 172 152 184 200 200 C248 184 292 172 330 176 C322 214 270 244 200 244 C130 244 78 214 70 176 Z" fill="${cream}"/>
+      </g>
+      <path d="M200 76 C252 76 294 108 304 154 C320 166 334 182 326 194 C306 218 262 240 200 242 C138 240 94 218 74 194 C66 182 80 166 96 154 C106 108 148 76 200 76 Z" fill="none" ${OL}/>
+      <ellipse cx="158" cy="114" rx="10" ry="6" fill="${cream}"/><ellipse cx="242" cy="114" rx="10" ry="6" fill="${cream}"/>
+      ${eye(m.eyes, 158, 152, 23, { lid: orange })}${eye(m.eyes, 242, 152, 23, { lid: orange })}
+      ${m.eyes === 'open' || m.eyes === 'wide' || m.eyes === 'curious' ? '<path d="M132 140 l-12 -6 M134 132 l-10 -10 M268 140 l12 -6 M266 132 l10 -10" stroke="' + C.ink + '" stroke-width="5" stroke-linecap="round"/>' : ''}
+      <ellipse cx="122" cy="196" rx="15" ry="9" fill="${C.pink}"/><ellipse cx="278" cy="196" rx="15" ry="9" fill="${C.pink}"/>
+      <path d="M186 194 C186 186 214 186 214 194 C214 202 204 208 200 208 C196 208 186 202 186 194 Z" fill="${C.ink}"/>
+      <circle cx="194" cy="191" r="3" fill="#fff"/>
+      <path d="M200 208 V216 M188 220 Q194 226 200 216 Q206 226 212 220" fill="none" stroke="${C.ink}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      ${m.snack ? berries(250, 236) : ''}
+      ${m.hearts ? heart(318, 30, 40) + heart(50, 50, 30) : ''}
+      ${deco(m, 300, 58, 28, 336, 32, 18)}</g>`;
+  },
+};
 
 ART.coyote = canid({
   id: 'coyote', tint: C.blueT,
@@ -1791,7 +1828,7 @@ const CUTOUTS = {
   'ring-billed-gull:young': P('gullChick', 'stand', 0.9),
   'common-tern:young': P('ternChick', 'stand', 0.9),
   'white-tailed-deer:young': P('fawn', 'stand', 0.9),
-  'red-fox': P('fox', 'stand', 0.9),
+  'red-fox': P('fox', 'stand', 0.95),
   coyote: P('coyote', 'stand', 0.92),
   'eastern-cottontail': P('rabbit', 'stand', 0.88),
   bats: P('bat', 'fly', 0.75),
