@@ -47,6 +47,15 @@ const GROUPS: { label: string; plan?: Plan }[] = ([
   ['Robin + fledgling, branch', 'american-robin', 'branch', undefined, { count: 2, young: 1 }],
   ['Honey bees at the hive', 'western-honey-bee', 'den', undefined, { count: 3, young: 0 }],
   ['Bumble bee at the burrow', 'common-eastern-bumble-bee', 'den', undefined, { count: 1, young: 0 }],
+  ['Fox + kits at the den', 'red-fox', 'den', undefined, { count: 3, young: 2 }],
+  ['Coyote pair', 'coyote', 'lawn', undefined, { count: 2, young: 0 }],
+  ['Coyote + pups', 'coyote', 'den', undefined, { count: 3, young: 2 }],
+  ['Rabbit + babies', 'eastern-cottontail', 'lawn', undefined, { count: 3, young: 2 }],
+  ['Rabbits leaping', 'eastern-cottontail', 'lawn', undefined, { count: 2, young: 0 }],
+  ['Bats asleep in the roost', 'bats', 'den', 'sleep', { count: 2, young: 0 }],
+  ['Bats out at dusk', 'bats', 'sky', undefined, { count: 3, young: 0 }],
+  ['Turkey hen + poults', 'wild-turkey', 'lawn', undefined, { count: 3, young: 2 }],
+  ['Turkeys roosting', 'wild-turkey', 'branch', 'sleep', { count: 3, young: 0 }],
 ] as const).map(([label, id, setting, action, crowd]): { label: string; plan?: Plan } => ({ label, plan: planCloseUp(id, setting, action, { crowd: { ...crowd } }) }))
   .concat(
     ([
@@ -59,9 +68,14 @@ const GROUPS: { label: string; plan?: Plan }[] = ([
       ['Goose meets mallard', 'canada-goose', 'water', ['canada-goose', 'mallard']],
       ['Gull eyes bufflehead', 'herring-gull', 'water', ['herring-gull', 'bufflehead']],
       ['Moth at the web', 'moths', 'lawn', ['moths', 'orb-weavers']],
+      ['Rabbit freezes, hawk over', 'eastern-cottontail', 'lawn', ['eastern-cottontail', 'red-tailed-hawk']],
+      ['Fox and rabbit', 'red-fox', 'hedge', ['red-fox', 'eastern-cottontail']],
+      ['Coyote and deer', 'coyote', 'lawn', ['coyote', 'white-tailed-deer']],
+      ['Turkeys and deer', 'wild-turkey', 'lawn', ['wild-turkey', 'white-tailed-deer']],
+      ['Bats and moths', 'bats', 'sky', ['bats', 'moths']],
     ] as const).map(([label, id, setting, cast]): { label: string; plan?: Plan } => ({
       label,
-      plan: planCloseUp(id, setting, label.includes(' over ') || label.includes('mob') ? 'fly' : undefined, { cast: [...cast], counts: label.includes('Crows') ? { 'american-crow': 2 } : undefined }),
+      plan: planCloseUp(id, setting, label.includes(' over') || label.includes('mob') ? 'fly' : undefined, { cast: [...cast], counts: label.includes('Crows') ? { 'american-crow': 2 } : label.includes('Turkeys and') ? { 'wild-turkey': 2 } : undefined }),
     })),
   );
 const MOODS: Mood[] = ['hello', 'snack', 'happy', 'sleepy', 'surprised', 'curious', 'singing', 'chilly'];
