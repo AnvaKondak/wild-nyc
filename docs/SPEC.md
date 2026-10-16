@@ -25,7 +25,7 @@ shows a species.
 - Body: "Pigeons on the ledges, sparrows in the hedge, squirrels in the tree. Come meet them."
 - Primary button: **Meet the neighbors** → Right now.
 - Footer line in italic: "We notice. We don't follow."
-- No signup. Ask for location permission here, with a "pick a neighborhood instead" fallback.
+- No signup, and no location permission in v1: pick a neighborhood by searching (name, borough, nickname or a street inside it) or browsing by borough.
 
 ## 2. Right now (`mocks/2-right-now.html`)
 

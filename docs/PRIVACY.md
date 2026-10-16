@@ -2,17 +2,17 @@
 
 **We notice. We don't follow.**
 
-_Updated October 6, 2026_
+_Updated October 16, 2026_
 
 Wild Neighbors works at the level of a neighborhood, never you. There are no accounts, no ads, no analytics and no tracking.
 
 ## Your location
 
-If you choose to use your location, the app asks your phone once, at low accuracy, and turns your position into a neighborhood cell, an area about 1.2 by 0.6 kilometers, right on your phone. Your exact location is never stored and never leaves your phone. You can also pick a neighborhood from the list instead.
+The app never asks for your location. You pick your neighborhood from a list, and that's all it knows: an area about ten blocks across, never where you are.
 
 ## What leaves your phone
 
-Only one thing: to get the weather, the app sends Open-Meteo the center of your neighborhood cell, rounded to about a kilometer. No account, device ID or cookies go with it. Open-Meteo's own privacy policy covers their service.
+Only one thing: to get the weather, the app sends Open-Meteo the center of the neighborhood you picked, rounded to about a kilometer. No account, device ID or cookies go with it. Open-Meteo's own privacy policy covers their service.
 
 ## What stays on your phone
 

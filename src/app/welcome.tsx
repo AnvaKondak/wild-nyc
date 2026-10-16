@@ -15,7 +15,6 @@ import { Screen } from '@/components/Screen';
 import { Sticker } from '@/components/Sticker';
 import { StoryCard, StoryProgress, useSwipe } from '@/components/story/parts';
 import { getSpecies, species, speciesPhoto, type Period, type PlaceKind } from '@/content';
-import { locateNeighborhood } from '@/lib/locate';
 import { seasonOf } from '@/lib/time';
 import { useAppState } from '@/state/AppState';
 import { periodThemes } from '@/theme/periodTheme';
@@ -56,7 +55,6 @@ export default function Welcome() {
   const params = useLocalSearchParams<{ page?: string }>();
   const [index, setIndex] = useState(__DEV__ && params.page ? Math.min(PAGES.length - 1, Number(params.page)) : 0);
   const [area, setArea] = useState({ width: 0, height: 0 });
-  const [locating, setLocating] = useState(false);
   const page = PAGES[index];
   const theme = periodThemes[page.period];
   const last = index === PAGES.length - 1;
@@ -71,23 +69,14 @@ export default function Welcome() {
   const prev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
   const swipe = useSwipe(next, prev);
 
-  const pickInstead = () => router.push({ pathname: '/add-place', params: { from: 'welcome' } });
-  const start = async () => {
+  const pickNeighborhood = () => router.push({ pathname: '/add-place', params: { from: 'welcome' } });
+  const start = () => {
     if (hasHood) {
       actions.finishOnboarding();
       router.replace('/');
       return;
     }
-    setLocating(true);
-    const result = await locateNeighborhood('Home');
-    setLocating(false);
-    if (result.ok) {
-      actions.addNeighborhood(result.neighborhood);
-      actions.finishOnboarding();
-      router.replace('/');
-    } else {
-      pickInstead();
-    }
+    pickNeighborhood();
   };
 
   return (
@@ -121,20 +110,13 @@ export default function Welcome() {
 
           <View style={{ paddingHorizontal: 16, paddingBottom: 12, gap: 4 }}>
             <Button
-              label={!last ? 'Next' : locating ? 'Finding your block…' : hasHood ? 'Meet the neighbors' : 'Find my neighborhood'}
+              label={!last ? 'Next' : hasHood ? 'Meet the neighbors' : 'Pick my neighborhood'}
               onPress={last ? start : next}
               shadow={theme.shadow}
               style={{ backgroundColor: theme.btnBg }}
               color={theme.btnInk}
-              accessibilityHint={last && !hasHood ? 'Uses your location once to find your neighborhood' : undefined}
             />
-            {last && !hasHood ? (
-              <Pressable onPress={pickInstead} accessibilityRole="button" style={{ minHeight: 44, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontFamily: fonts.bodySemi, fontSize: 15, color: theme.ink, textDecorationLine: 'underline' }}>Pick a neighborhood instead</Text>
-              </Pressable>
-            ) : (
-              <View style={{ minHeight: 44 }} />
-            )}
+            <View style={{ minHeight: 44 }} />
           </View>
         </View>
       </Screen>

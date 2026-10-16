@@ -9,8 +9,9 @@ What to enter in App Store Connect → App Privacy. Keep this in step with
 | --- | --- | --- | --- | --- |
 | Coarse Location | Yes | No | No | App Functionality |
 
-Why "coarse location" at all: the app sends the center of the neighborhood cell, rounded
-to two decimals (about 1 km), to Open-Meteo for the weather. Apple counts location that
+Why "coarse location" at all: the app never asks for the person's location (no location
+permission), but it sends the center of the neighborhood they picked, rounded to two
+decimals (about 1 km), to Open-Meteo for the weather. Apple counts location that
 leaves the device, even this coarse and unlinked. (The launch build has no server; if
 the optional live-data API in `server/` is ever turned on, it also receives the cell.)
 
