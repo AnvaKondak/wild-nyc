@@ -1621,17 +1621,67 @@ ART.fox = {
   },
 };
 
-ART.coyote = canid({
-  id: 'coyote', tint: C.blueT,
-  coat: '#B4A285', back: '#8E7E68', belly: '#EFE7DA', sock: '#B4A285', tipColor: '#2E2E44', earInside: '#E8C9B0',
-  legs: 'M146 290 V358 M180 294 V362 M262 294 V362 M296 288 V358',
-  body: 'M130 246 C130 202 190 186 250 190 C310 194 336 222 332 252 C328 286 290 296 230 296 C170 296 130 286 130 246 Z',
-  bellyY: 300,
-  tail: 'M318 248 C352 262 370 296 360 330 C354 346 338 342 340 326 C344 302 328 282 306 268 Z',
-  tip: [352, 340],
-  ear: ['86 86 L136 136', '162 74 L182 140'],
-  earIn: ['96 104 L124 138', '162 94 L174 140'],
-});
+ART.coyote = {
+  // Standing side-on, facing left, handsome and alert: long muzzle, tall ears, amber
+  // eyes, white throat and chest, a grizzled gray-brown saddle, tawny legs, and a long
+  // bushy tail hanging down with a black tip.
+  tint: C.blueT,
+  tilt: 0,
+  svg: (m) => {
+    const coat = '#B8A68A';
+    const saddle = '#8A7C6C';
+    const tawny = '#C9A274';
+    const cream = '#F4EEE4';
+    const legs = 'M156 252 L152 348 M186 258 L184 350 M292 248 C306 280 298 310 304 346 M320 240 C336 276 328 312 332 344';
+    const tail = '<path d="M318 194 C356 198 376 244 376 294 C376 334 360 360 340 352 C324 344 330 310 326 284 C322 258 314 234 300 216 Z"/>';
+    const body = '<path d="M122 212 C118 172 162 154 212 158 C262 162 302 158 330 174 C356 190 356 236 336 254 C314 270 284 262 264 256 C234 250 208 262 182 266 C144 270 124 248 122 212 Z"/>';
+    const neck = '<path d="M100 150 C124 146 160 158 180 188 L140 220 C120 204 104 182 100 150 Z"/>';
+    const head = '<path d="M158 146 C158 110 134 82 102 82 C76 82 58 98 54 116 C38 122 24 130 14 138 C12 152 32 162 58 164 C82 168 104 176 124 196 C146 186 158 168 158 146 Z"/>';
+    const ears = '<path d="M80 104 L76 30 L134 86 Z"/><path d="M114 90 L146 24 L162 100 Z"/>';
+    const open = m.eyes === 'open' || m.eyes === 'wide' || m.eyes === 'curious';
+    return `<path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${legs}" fill="none" stroke="${tawny}" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+      <g fill="${cream}" stroke="${C.ink}" stroke-width="5"><ellipse cx="146" cy="350" rx="16" ry="8"/><ellipse cx="178" cy="352" rx="16" ry="8"/><ellipse cx="298" cy="348" rx="16" ry="8"/><ellipse cx="326" cy="346" rx="16" ry="8"/></g>
+      ${shadow([tail, body, neck, head, ears])}
+      ${shape(tail, coat)}
+      <clipPath id="coy-tail">${tail}</clipPath>
+      <g clip-path="url(#coy-tail)">
+        <path d="M320 198 C352 214 366 252 368 298" fill="none" stroke="${saddle}" stroke-width="16" stroke-linecap="round"/>
+        <path d="M332 250 l14 -6 M336 276 l14 -4 M338 302 l14 0" stroke="#5E5448" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="346" cy="352" r="30" fill="#2E2E44"/>
+      </g>
+      ${tail.replace('/>', ` fill="none" ${OL}/>`)}
+      <g fill="none" ${OL}>${body}${neck}</g>
+      <g fill="${coat}">${body}${neck}</g>
+      <clipPath id="coy-body">${body}${neck}</clipPath>
+      <g clip-path="url(#coy-body)">
+        <path d="M150 146 C210 146 284 148 344 172 C334 196 292 196 250 192 C210 190 180 188 150 172 Z" fill="${saddle}"/>
+        <path d="M180 170 l10 -12 M210 168 l10 -12 M240 168 l10 -12 M270 170 l10 -12 M300 176 l10 -12" stroke="#5E5448" stroke-width="5" stroke-linecap="round"/>
+        <path d="M96 160 C110 206 140 250 196 270 L96 270 Z" fill="${cream}"/>
+        <ellipse cx="244" cy="270" rx="72" ry="18" fill="${cream}"/>
+        <path d="M292 200 C312 230 314 252 302 268 L344 268 L344 200 Z" fill="${tawny}" opacity="0.8"/>
+      </g>
+      ${shape(ears, coat)}
+      <path d="M86 98 L84 50 L124 86 Z M120 88 L142 44 L152 96 Z" fill="${cream}"/>
+      <path d="M92 90 l8 -12 M128 86 l4 -14" stroke="${saddle}" stroke-width="4" stroke-linecap="round"/>
+      ${shape(head, coat)}
+      <clipPath id="coy-head">${head}</clipPath>
+      <g clip-path="url(#coy-head)">
+        <path d="M8 146 C44 146 84 152 108 162 C124 172 138 186 150 204 L8 204 Z" fill="${cream}"/>
+        <path d="M54 118 C76 110 104 110 124 118" fill="none" stroke="${tawny}" stroke-width="12" stroke-linecap="round"/>
+      </g>
+      ${head.replace('/>', ` fill="none" ${OL}/>`)}
+      <ellipse cx="18" cy="139" rx="11" ry="9" fill="${C.ink}"/><circle cx="14" cy="135" r="3" fill="#fff"/>
+      <path d="M32 154 Q48 160 64 154" fill="none" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>
+      ${open ? `<circle cx="100" cy="114" r="${m.eyes === 'wide' ? 17 : 15}" fill="#E8A23C" stroke="${C.ink}" stroke-width="3"/>` : ''}
+      ${eye(m.eyes, 100, 114, 11, { lid: coat })}
+      <path d="M86 98 Q100 92 114 98" fill="none" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="130" cy="146" rx="13" ry="8" fill="${C.pink}"/>
+      ${m.snack ? berries(28, 176) : ''}
+      ${m.hearts ? heart(250, 60, 42) + heart(200, 100, 26) : ''}
+      ${deco(m, 196, 66, 30, 234, 40, 20)}`;
+  },
+};
 
 ART.rabbit = {
   // Sitting up, facing left: long ears, round body, a white cotton tail.
