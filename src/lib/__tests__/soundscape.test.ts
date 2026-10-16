@@ -1,24 +1,19 @@
-import { hasWater } from '@/components/scene/looks';
 import { pickSoundscape } from '../soundscape';
 
 describe('pickSoundscape', () => {
-  it('is soft birdsong everywhere, with water only where there is water', () => {
-    expect(pickSoundscape({ water: false, favorites: false })).toBe('birds');
-    expect(pickSoundscape({ water: true, favorites: false })).toBe('birds-water');
+  it('plays waves and birds only in the neighborhoods right on the water', () => {
+    for (const placeId of ['coney-island', 'red-hook', 'brooklyn-bridge-park', 'rockaway-beach', 'battery-park-city', 'exchange-place']) {
+      expect(pickSoundscape({ placeId, favorites: false })).toBe('birds-water');
+    }
+  });
+
+  it('plays just the birdsong everywhere else', () => {
+    for (const placeId of ['williamsburg', 'upper-west-side', 'park-slope', 'central-park', 'liberty-state-park', undefined]) {
+      expect(pickSoundscape({ placeId, favorites: false })).toBe('birds');
+    }
   });
 
   it('is always just the birdsong in favorites', () => {
-    expect(pickSoundscape({ water: true, favorites: true })).toBe('birds');
-  });
-});
-
-describe('hasWater', () => {
-  it('knows which neighborhoods are by the water', () => {
-    expect(hasWater('brooklyn-bridge-park', 'waterfront')).toBe(true);
-    expect(hasWater('williamsburg', 'block')).toBe(true); // the East River
-    expect(hasWater('bed-stuy', 'block')).toBe(false);
-    expect(hasWater('park-slope', 'block')).toBe(false);
-    expect(hasWater(undefined, 'waterfront')).toBe(true);
-    expect(hasWater(undefined, 'block')).toBe(false);
+    expect(pickSoundscape({ placeId: 'coney-island', favorites: true })).toBe('birds');
   });
 });

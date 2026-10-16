@@ -6,7 +6,6 @@ import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { CloseUp, planCloseUp } from '@/components/scene/CloseUp';
-import { hasWater } from '@/components/scene/looks';
 import { PopIn, RisingHearts } from '@/components/story/Cute';
 import { FloatingCast } from '@/components/Floating';
 import { BellIcon, BellOffIcon, ChevronLeftIcon, ChevronRightIcon, HeartIcon, HomeIcon, SoundOffIcon, SoundOnIcon } from '@/components/Icons';
@@ -254,10 +253,10 @@ export default function RightNow() {
     }
   };
 
-  // Soft birdsong if sound is on, with soft water where the neighborhood has water.
+  // Soft birdsong if sound is on; soft waves and birdsong only in the neighborhoods right on the water.
   // The favorites story spans the city, so there it's always just the birdsong.
   const sceneNow = faves ? (slide?.scene ?? 'park') : scene;
-  const soundscape = pickSoundscape({ water: hasWater(hood.placeId, hood.kind), favorites: faves });
+  const soundscape = pickSoundscape({ placeId: hood.placeId, favorites: faves });
   useAmbience(soundscape, state.soundOn, focused);
   const listening = SOUNDSCAPE_LABEL[soundscape];
 

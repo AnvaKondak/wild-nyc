@@ -70,11 +70,3 @@ const BY_KIND: Record<PlaceKind, Look> = {
 export function lookFor(placeId: string | undefined, kind: PlaceKind): Look {
   return { ...BY_KIND[kind], ...(placeId ? LOOKS[placeId] : undefined) };
 }
-
-/**
- * Is this neighborhood by the water (a river, the harbor or the ocean)? Waterfront places
- * always are; other places only when their look names water (Williamsburg's East River).
- */
-export function hasWater(placeId: string | undefined, kind: PlaceKind): boolean {
-  return kind === 'waterfront' || !!(placeId && LOOKS[placeId]?.water);
-}

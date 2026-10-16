@@ -2,8 +2,9 @@
 """Mix the ambient soundscapes: two calm, seamless loops.
 
 "birds": soft birdsong (robins, song sparrows, cardinals, mourning doves, softened and
-spread out) over the faintest breeze. Plays everywhere, and always in Favorites.
-"birds-water": the same birdsong with soft moving water, for neighborhoods by the water.
+spread out) over a very soft, warm healing tone. Plays everywhere, and always in Favorites.
+"birds-water": the same birdsong with soft waves, only for the neighborhoods right on the
+water (see src/lib/soundscape.ts).
 Real bird recordings are placed at seeded random times; the water and breeze are made
 here. Stereo: beds are wide, and each call comes from somewhere left to right.
 Recordings come from scripts/fetch_sounds.py.
@@ -252,15 +253,33 @@ def soft_calls(name):
     return [lowpass(seg, 4500) for seg in calls(name)]
 
 
+def pad(rnd):
+    """A healing tone: a soft, warm chord (C, G, C, E, D) that slowly swells and settles."""
+    n = len(silence())
+    notes = [(130.81, 1.0), (196.00, 0.7), (261.63, 0.55), (329.63, 0.35), (293.66, 0.25)]
+    phases = [rnd.uniform(0, 2 * math.pi) for _ in notes]
+    swells = [rnd.uniform(9, 15) for _ in notes]
+    out = []
+    for i in range(n):
+        t = i / SR
+        x = 0.0
+        for (f, g), ph, p in zip(notes, phases, swells):
+            x += g * (0.55 + 0.45 * math.sin(2 * math.pi * t / p + ph)) * math.sin(2 * math.pi * f * t + ph)
+        out.append(x)
+    return normalize(lowpass(out, 900))
+
+
 def mix(name, rnd):
     out = Stereo()
     bed = lambda make, gain: out.bed(make, rnd, gain)
-    # The faintest breeze, so the quiet between songs isn't dead silent.
-    bed(lambda r: wind(r, 0.15), 0.04)
     if name == "birds-water":
-        # Soft moving water: the lapping bed, rounded off and kept low.
+        # By the water: soft waves (the lapping bed, rounded off), the faintest breeze.
+        bed(lambda r: wind(r, 0.15), 0.04)
         bed(lambda r: normalize(lowpass(water(r), 1600)), 0.32)
-    elif name != "birds":
+    elif name == "birds":
+        # Everywhere else: no waves, no breeze, just a soft healing tone under the birds.
+        bed(pad, 0.07)
+    else:
         raise ValueError(name)
     pool = {b: soft_calls(b) for b in SOFT_BIRDS}
     t = rnd.uniform(0.5, 2.5)
