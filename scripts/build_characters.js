@@ -1883,7 +1883,7 @@ const CUTOUTS = {
   'common-tern:young': P('ternChick', 'stand', 0.9),
   'white-tailed-deer:young': P('fawn', 'stand', 0.9),
   'red-fox': P('fox', 'stand', 0.9),
-  coyote: P('coyote', 'stand', 0.92),
+  coyote: P('coyote', 'stand', 0.9),
   'eastern-cottontail': P('rabbit', 'stand', 0.88),
   bats: P('bat', 'fly', 0.75),
   // Bats sleep hanging upside down, wings wrapped.
