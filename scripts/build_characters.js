@@ -1639,20 +1639,22 @@ ART.coyote = {
     // A softer, shorter muzzle and a rounder head, for a cuter face.
     const head = '<path d="M160 144 C160 106 134 78 102 78 C74 78 56 96 52 116 C40 122 30 130 24 138 C22 154 40 164 64 166 C86 170 106 178 124 196 C148 186 160 166 160 144 Z"/>';
     const ears = '<path d="M80 104 L76 30 L134 86 Z"/><path d="M114 90 L146 24 L162 100 Z"/>';
+    // A lighter outline than the other neighbors: thinner, in dark brown instead of ink.
+    const line = '#5E5448';
+    const LINE = `stroke="${line}" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"`;
     const open = m.eyes === 'open' || m.eyes === 'wide' || m.eyes === 'curious';
-    return `<path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+    return `<path d="${legs}" fill="none" stroke="${line}" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="${legs}" fill="none" stroke="${tawny}" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
-      <g fill="${cream}" stroke="${C.ink}" stroke-width="5"><ellipse cx="146" cy="350" rx="16" ry="8"/><ellipse cx="178" cy="352" rx="16" ry="8"/><ellipse cx="298" cy="348" rx="16" ry="8"/><ellipse cx="326" cy="346" rx="16" ry="8"/></g>
-      ${shadow([tail, body, neck])}
-      ${shape(tail, coat)}
+      <g fill="${cream}" stroke="${line}" stroke-width="4"><ellipse cx="146" cy="350" rx="16" ry="8"/><ellipse cx="178" cy="352" rx="16" ry="8"/><ellipse cx="298" cy="348" rx="16" ry="8"/><ellipse cx="326" cy="346" rx="16" ry="8"/></g>
+      <g fill="${coat}" ${LINE}>${tail}</g>
       <clipPath id="coy-tail">${tail}</clipPath>
       <g clip-path="url(#coy-tail)">
         <path d="M320 198 C352 214 366 252 368 298" fill="none" stroke="${saddle}" stroke-width="16" stroke-linecap="round"/>
         <path d="M332 250 l14 -6 M336 276 l14 -4 M338 302 l14 0" stroke="#5E5448" stroke-width="4" stroke-linecap="round"/>
         <circle cx="346" cy="352" r="30" fill="#2E2E44"/>
       </g>
-      ${tail.replace('/>', ` fill="none" ${OL}/>`)}
-      <g fill="none" ${OL}>${body}${neck}</g>
+      ${tail.replace('/>', ` fill="none" ${LINE}/>`)}
+      <g fill="none" stroke="${line}" stroke-width="8" stroke-linejoin="round">${body}${neck}</g>
       <g fill="${coat}">${body}${neck}</g>
       <clipPath id="coy-body">${body}${neck}</clipPath>
       <g clip-path="url(#coy-body)">
@@ -1662,7 +1664,7 @@ ART.coyote = {
         <ellipse cx="244" cy="270" rx="72" ry="18" fill="${cream}"/>
         <path d="M292 200 C312 230 314 252 302 268 L344 268 L344 200 Z" fill="${tawny}" opacity="0.8"/>
       </g>
-      <g fill="${coat}" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round">${ears}</g>
+      <g fill="${coat}" ${LINE}>${ears}</g>
       <path d="M86 98 L84 50 L124 86 Z M120 88 L142 44 L152 96 Z" fill="${cream}"/>
       <path d="M92 90 l8 -12 M128 86 l4 -14" stroke="${saddle}" stroke-width="4" stroke-linecap="round"/>
       ${'' /* No heavy outline on the face: just a soft edge in the darker coat color. */}<g fill="${coat}" stroke="${saddle}" stroke-width="3">${head}</g>
