@@ -1654,7 +1654,7 @@ ART.coyote = {
         <circle cx="346" cy="352" r="30" fill="#2E2E44"/>
       </g>
       ${tail.replace('/>', ` fill="none" ${LINE}/>`)}
-      <g fill="none" stroke="${line}" stroke-width="8" stroke-linejoin="round">${body}${neck}</g>
+      <g fill="none" stroke="${line}" stroke-width="7" stroke-linejoin="round">${body}${neck}</g>
       <g fill="${coat}">${body}${neck}</g>
       <clipPath id="coy-body">${body}${neck}</clipPath>
       <g clip-path="url(#coy-body)">
@@ -1667,7 +1667,7 @@ ART.coyote = {
       <g fill="${coat}" ${LINE}>${ears}</g>
       <path d="M86 98 L84 50 L124 86 Z M120 88 L142 44 L152 96 Z" fill="${cream}"/>
       <path d="M92 90 l8 -12 M128 86 l4 -14" stroke="${saddle}" stroke-width="4" stroke-linecap="round"/>
-      ${'' /* No heavy outline on the face: just a soft edge in the darker coat color. */}<g fill="${coat}" stroke="${saddle}" stroke-width="3">${head}</g>
+      ${'' /* A slight dark-brown outline, like the rest of the coyote. */}<g fill="${coat}" stroke="${line}" stroke-width="4">${head}</g>
       <clipPath id="coy-head">${head}</clipPath>
       <g clip-path="url(#coy-head)">
         <path d="M18 144 C52 142 86 150 110 160 C126 170 140 186 152 204 L18 204 Z" fill="${cream}"/>
