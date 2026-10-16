@@ -1636,7 +1636,8 @@ ART.coyote = {
     const tail = '<path d="M318 194 C356 198 376 244 376 294 C376 334 360 360 340 352 C324 344 330 310 326 284 C322 258 314 234 300 216 Z"/>';
     const body = '<path d="M122 212 C118 172 162 154 212 158 C262 162 302 158 330 174 C356 190 356 236 336 254 C314 270 284 262 264 256 C234 250 208 262 182 266 C144 270 124 248 122 212 Z"/>';
     const neck = '<path d="M100 150 C124 146 160 158 180 188 L140 220 C120 204 104 182 100 150 Z"/>';
-    const head = '<path d="M158 146 C158 110 134 82 102 82 C76 82 58 98 54 116 C38 122 24 130 14 138 C12 152 32 162 58 164 C82 168 104 176 124 196 C146 186 158 168 158 146 Z"/>';
+    // A softer, shorter muzzle and a rounder head, for a cuter face.
+    const head = '<path d="M160 144 C160 106 134 78 102 78 C74 78 56 96 52 116 C40 122 30 130 24 138 C22 154 40 164 64 166 C86 170 106 178 124 196 C148 186 160 166 160 144 Z"/>';
     const ears = '<path d="M80 104 L76 30 L134 86 Z"/><path d="M114 90 L146 24 L162 100 Z"/>';
     const open = m.eyes === 'open' || m.eyes === 'wide' || m.eyes === 'curious';
     return `<path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1667,17 +1668,19 @@ ART.coyote = {
       ${shape(head, coat)}
       <clipPath id="coy-head">${head}</clipPath>
       <g clip-path="url(#coy-head)">
-        <path d="M8 146 C44 146 84 152 108 162 C124 172 138 186 150 204 L8 204 Z" fill="${cream}"/>
+        <path d="M18 144 C52 142 86 150 110 160 C126 170 140 186 152 204 L18 204 Z" fill="${cream}"/>
+        <ellipse cx="124" cy="150" rx="22" ry="16" fill="${cream}"/>
         <path d="M54 118 C76 110 104 110 124 118" fill="none" stroke="${tawny}" stroke-width="12" stroke-linecap="round"/>
       </g>
       ${head.replace('/>', ` fill="none" ${OL}/>`)}
-      <ellipse cx="18" cy="139" rx="11" ry="9" fill="${C.ink}"/><circle cx="14" cy="135" r="3" fill="#fff"/>
-      <path d="M32 154 Q48 160 64 154" fill="none" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>
-      ${open ? `<circle cx="100" cy="114" r="${m.eyes === 'wide' ? 17 : 15}" fill="#E8A23C" stroke="${C.ink}" stroke-width="3"/>` : ''}
-      ${eye(m.eyes, 100, 114, 11, { lid: coat })}
-      <path d="M86 98 Q100 92 114 98" fill="none" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>
-      <ellipse cx="130" cy="146" rx="13" ry="8" fill="${C.pink}"/>
-      ${m.snack ? berries(28, 176) : ''}
+      <path d="M18 134 C18 124 38 124 38 134 C38 144 30 148 28 148 C26 148 18 144 18 134 Z" fill="${C.ink}"/><circle cx="24" cy="131" r="3.5" fill="#fff"/>
+      <path d="M30 150 V156 M40 160 Q50 166 60 158" fill="none" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>
+      ${open ? `<circle cx="98" cy="116" r="${m.eyes === 'wide' ? 22 : 20}" fill="#E8A23C" stroke="${C.ink}" stroke-width="3"/>` : ''}
+      ${eye(m.eyes, 98, 116, 16, { lid: coat })}
+      ${open ? `<path d="M116 104 l10 -6 M118 112 l12 -2" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>` : ''}
+      <ellipse cx="98" cy="88" rx="9" ry="5" fill="${cream}"/>
+      <ellipse cx="132" cy="152" rx="16" ry="10" fill="${C.pink}"/>
+      ${m.snack ? berries(36, 180) : ''}
       ${m.hearts ? heart(250, 60, 42) + heart(200, 100, 26) : ''}
       ${deco(m, 196, 66, 30, 234, 40, 20)}`;
   },
