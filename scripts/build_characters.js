@@ -1643,7 +1643,7 @@ ART.coyote = {
     return `<path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="${legs}" fill="none" stroke="${tawny}" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
       <g fill="${cream}" stroke="${C.ink}" stroke-width="5"><ellipse cx="146" cy="350" rx="16" ry="8"/><ellipse cx="178" cy="352" rx="16" ry="8"/><ellipse cx="298" cy="348" rx="16" ry="8"/><ellipse cx="326" cy="346" rx="16" ry="8"/></g>
-      ${shadow([tail, body, neck, head, ears])}
+      ${shadow([tail, body, neck])}
       ${shape(tail, coat)}
       <clipPath id="coy-tail">${tail}</clipPath>
       <g clip-path="url(#coy-tail)">
@@ -1662,24 +1662,23 @@ ART.coyote = {
         <ellipse cx="244" cy="270" rx="72" ry="18" fill="${cream}"/>
         <path d="M292 200 C312 230 314 252 302 268 L344 268 L344 200 Z" fill="${tawny}" opacity="0.8"/>
       </g>
-      ${shape(ears, coat)}
+      <g fill="${coat}" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round">${ears}</g>
       <path d="M86 98 L84 50 L124 86 Z M120 88 L142 44 L152 96 Z" fill="${cream}"/>
       <path d="M92 90 l8 -12 M128 86 l4 -14" stroke="${saddle}" stroke-width="4" stroke-linecap="round"/>
-      ${shape(head, coat)}
+      ${'' /* No heavy outline on the face: just a soft edge in the darker coat color. */}<g fill="${coat}" stroke="${saddle}" stroke-width="3">${head}</g>
       <clipPath id="coy-head">${head}</clipPath>
       <g clip-path="url(#coy-head)">
         <path d="M18 144 C52 142 86 150 110 160 C126 170 140 186 152 204 L18 204 Z" fill="${cream}"/>
         <ellipse cx="124" cy="150" rx="22" ry="16" fill="${cream}"/>
         <path d="M54 118 C76 110 104 110 124 118" fill="none" stroke="${tawny}" stroke-width="12" stroke-linecap="round"/>
       </g>
-      ${head.replace('/>', ` fill="none" ${OL}/>`)}
       <path d="M18 134 C18 124 38 124 38 134 C38 144 30 148 28 148 C26 148 18 144 18 134 Z" fill="${C.ink}"/><circle cx="24" cy="131" r="3.5" fill="#fff"/>
       <path d="M30 150 V156 M40 160 Q50 166 60 158" fill="none" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>
-      ${open ? `<circle cx="98" cy="116" r="${m.eyes === 'wide' ? 22 : 20}" fill="#E8A23C" stroke="${C.ink}" stroke-width="3"/>` : ''}
-      ${eye(m.eyes, 98, 116, 16, { lid: coat })}
-      ${open ? `<path d="M116 104 l10 -6 M118 112 l12 -2" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>` : ''}
-      <ellipse cx="98" cy="88" rx="9" ry="5" fill="${cream}"/>
-      <ellipse cx="132" cy="152" rx="16" ry="10" fill="${C.pink}"/>
+      ${open ? `<circle cx="98" cy="116" r="${m.eyes === 'wide' ? 19 : 17}" fill="#E8A23C" stroke="${C.ink}" stroke-width="3"/>` : ''}
+      ${eye(m.eyes, 98, 116, 13, { lid: coat })}
+      <path d="M80 98 Q96 90 116 96" fill="none" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>
+      <ellipse cx="132" cy="152" rx="12" ry="7" fill="${C.pink}"/>
+      ${'' /* A ruff of fur at the throat. */}<path d="M104 176 l8 12 l6 -10 l8 14 l6 -12 l8 14 l6 -10" fill="none" stroke="${cream}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
       ${m.snack ? berries(36, 180) : ''}
       ${m.hearts ? heart(250, 60, 42) + heart(200, 100, 26) : ''}
       ${deco(m, 196, 66, 30, 234, 40, 20)}`;
