@@ -173,6 +173,8 @@ function fits(id: string, scene: CloseUpSetting): boolean {
   const pose = cutoutPose(id);
   switch (scene) {
     case 'web':
+      // A bug can blunder into the web; nobody else belongs there.
+      return pose === 'fly' || pose === 'web';
     case 'trunk':
       return false;
     case 'water':
@@ -235,25 +237,43 @@ function layout(scene: CloseUpSetting, id: string, crowd: Crowd | undefined, act
  * otherwise they meet in the other one's place, if the lead belongs there too. Nothing
  * when the two can't be drawn together (the round group sticker shows instead).
  */
-export function planCloseUp(speciesId: string | undefined, setting: Setting | undefined, action?: Action, opts: { crowd?: Crowd; cast?: string[] } = {}): Plan | undefined {
+export function planCloseUp(speciesId: string | undefined, setting: Setting | undefined, action?: Action, opts: { crowd?: Crowd; cast?: string[]; counts?: Record<string, number> } = {}): Plan | undefined {
   const scene = closeUpFor(speciesId, setting, action);
   if (!scene || !speciesId) return undefined;
   const others = (opts.cast ?? []).filter((id) => id !== speciesId).slice(0, 2);
   if (others.length === 0) return { scene, figures: layout(scene, speciesId, opts.crowd, action) };
   if (!others.every(hasCutout)) return undefined;
+  // How many of each the words put in the picture ("three crows… a hawk"): up to three in all.
+  const count = (id: string) => Math.max(1, Math.min(2, opts.counts?.[id] ?? 1));
+  const lineup = [speciesId, ...others];
+  for (const id of [...lineup].sort((x, y) => count(y) - count(x))) if (lineup.length < 3 && count(id) > 1) lineup.push(id);
   const together = (where: CloseUpSetting): Plan | undefined => {
     const act = (id: string) => (action && action !== 'drink' && canDo(id, action) ? action : undefined);
-    const figures: Figure[] = [{ id: speciesId, x: 0.7, scale: 0.76, action: act(speciesId) }];
-    let ground = 0;
-    for (const id of others) {
-      // Said to be flying (and the lead can't): overhead. Otherwise beside the lead if they belong here.
+    const figures: Figure[] = [];
+    // Spots by where they are: the lead's side on the right, everyone else's on the left.
+    const slots = { lead: [[0.7, 0.76], [0.9, 0.58]], ground: [[0.3, 0.76], [0.1, 0.58]], air: [[0.3, 0.56, 0.62], [0.56, 0.44, 0.84]], water: [[0.3, 0.55, 0.24], [0.1, 0.45, 0.28]] };
+    const used = { lead: 0, ground: 0, air: 0, water: 0 };
+    const take = (k: keyof typeof slots) => slots[k][Math.min(used[k]++, slots[k].length - 1)];
+    for (const id of lineup) {
+      if (id === speciesId) {
+        const [x, scale] = take('lead');
+        figures.push({ id, x, scale, action: act(id) });
+        continue;
+      }
       if (act(id) === 'fly' && where !== 'sky') {
-        figures.push({ id, x: 0.3, scale: 0.56, dy: 0.62, flip: true, action: 'fly' });
+        // Said to be flying (and the lead can't): overhead.
+        const [x, scale, dy] = take('air');
+        figures.push({ id, x, scale, dy, flip: true, action: 'fly' });
       } else if (fits(id, where)) {
-        figures.push({ id, x: ground === 0 ? 0.3 : 0.12, scale: ground === 0 ? 0.76 : 0.6, flip: true, action: act(id) });
-        ground++;
+        const [x, scale] = take('ground');
+        figures.push({ id, x, scale, flip: true, action: act(id) });
+      } else if (cutoutPose(id) === 'swim' && (where === 'shore' || where === 'pier')) {
+        // A swimmer meeting someone on the shore floats on the water just behind them.
+        const [x, scale, dy] = take('water');
+        figures.push({ id, x, scale, dy, flip: true });
       } else if (canDo(id, 'fly') || cutoutPose(id) === 'fly') {
-        figures.push({ id, x: 0.3, scale: 0.56, dy: 0.62, flip: true, action: cutoutPose(id) === 'fly' ? undefined : 'fly' });
+        const [x, scale, dy] = take('air');
+        figures.push({ id, x, scale, dy, flip: true, action: cutoutPose(id) === 'fly' ? undefined : 'fly' });
       } else {
         return undefined;
       }
@@ -264,7 +284,10 @@ export function planCloseUp(speciesId: string | undefined, setting: Setting | un
   if (here) return here;
   // Meet where the other one lives, if the lead belongs there too.
   const theirs = closeUpFor(others[0], setting);
-  return theirs && theirs !== scene && fits(speciesId, theirs) ? together(theirs) : undefined;
+  const there = theirs && theirs !== scene && fits(speciesId, theirs) ? together(theirs) : undefined;
+  if (there) return there;
+  // A swimmer and someone who walks: meet at the shore, one on the sand, one on the water.
+  return others.some((id) => cutoutPose(id) === 'swim') && fits(speciesId, 'shore') ? together('shore') : undefined;
 }
 
 /** A point on a Bézier curve (2 or 3 control points after the start). */
@@ -397,8 +420,9 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
     const top = groundAt(setting, w, ground, bh, gx, w * place.x) - bh * (f.dy ?? 0) - size * cutoutFeet(f.id);
     return { f, size, top, left: gx - size * 0.45 };
   });
-  // The first one leads: the web, the trunk and the straw are drawn around them.
+  // The first one leads: the trunk and the straw are drawn around them. The web goes around the spider.
   const { size, top, left } = spots[0];
+  const webAt = spots.find((sp) => cutoutPose(sp.f.id) === 'web') ?? spots[0];
   // Smaller ones (further back, or little) first, so the bigger ones stand in front.
   const animal = [...spots]
     .map((spot, i) => ({ ...spot, i }))
@@ -467,7 +491,7 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
             {v === 2 && setting === 'branch' && <Nest x={w * 0.14} y={ground + bh * 0.04} bh={bh} />}
           </>
         )}
-        {setting === 'web' && <Web cx={left + size * 0.5} cy={top + size * 0.5} r={bh * 0.6} />}
+        {setting === 'web' && <Web cx={webAt.left + webAt.size * 0.5} cy={webAt.top + webAt.size * 0.5} r={bh * 0.6} />}
         {setting === 'trunk' && <TrunkScene w={w} h={h} bt={bt} bh={bh} ground={ground} trunkX={left + size * 0.69} period={period} season={season} variant={v} />}
         {(setting === 'hedge' || setting === 'lawn' || setting === 'flowers' || setting === 'burrow') && (
           <Park w={w} h={h} ground={setting === 'flowers' ? bt + bh * 0.94 : ground} bh={bh} period={period} season={season} />
@@ -580,7 +604,11 @@ function Acting({ action: wanted, speciesId, size, setting, children }: { action
   const action = wanted && canDo(speciesId, wanted) ? wanted : undefined;
   const t = useSine(action === 'fly' ? 900 : action === 'dust' ? 520 : 3000, still || !action || action === 'drink');
   const species = getSpecies(speciesId);
-  const wingColor = inks[(species?.art.second ?? species?.art.main ?? 'gray') as Ink] ?? '#9C9AB0';
+  const base = inks[(species?.art.second ?? species?.art.main ?? 'gray') as Ink] ?? '#9C9AB0';
+  // Very dark birds (crows, grackles) get a slightly lighter wing with pale feather lines, so it reads against their body.
+  const dark = luminance(base) < 0.18;
+  const wingColor = dark ? mix(base, '#9C9AB0', 0.35) : base;
+  const featherLine = dark ? colors.paper : INK;
   const wing = (k: number, flutter: boolean) => (
     <Animated.View
       key={k}
@@ -600,7 +628,7 @@ function Acting({ action: wanted, speciesId, size, setting, children }: { action
             where it joins the body, so it reads as part of them, not stuck on. */}
         <Path d={WING_FILL} fill={wingColor} opacity={k === 0 && !flutter ? 0.85 : 1} />
         <Path d={WING_EDGE} fill="none" stroke={INK} strokeWidth={4} strokeLinejoin="round" strokeLinecap="round" />
-        <Path d="M40 36 L86 14 M36 42 L84 26 M34 47 L74 38" stroke={INK} strokeWidth={2.5} fill="none" opacity={0.35} strokeLinecap="round" />
+        <Path d="M40 36 L86 14 M36 42 L84 26 M34 47 L74 38" stroke={featherLine} strokeWidth={2.5} fill="none" opacity={dark ? 0.55 : 0.35} strokeLinecap="round" />
       </Svg>
     </Animated.View>
   );
@@ -633,6 +661,19 @@ function Acting({ action: wanted, speciesId, size, setting, children }: { action
     );
   }
   return <>{children}</>;
+}
+
+/** How light a #rrggbb color is, 0 (black) to 1 (white). */
+function luminance(hex: string): number {
+  const n = parseInt(hex.slice(1, 7), 16);
+  return (0.299 * ((n >> 16) & 255) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255;
+}
+
+/** A blend of two #rrggbb colors, `t` of the way from a to b. */
+function mix(a: string, b: string, t: number): string {
+  const [x, y] = [parseInt(a.slice(1, 7), 16), parseInt(b.slice(1, 7), 16)];
+  const ch = (k: number) => Math.round(((x >> k) & 255) * (1 - t) + ((y >> k) & 255) * t);
+  return `#${[16, 8, 0].map((k) => ch(k).toString(16).padStart(2, '0')).join('')}`;
 }
 
 /** One soft puff of dust rising from the ground and fading. */

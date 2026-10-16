@@ -131,6 +131,8 @@ export type StorySlide = {
   action?: Action;
   /** More than one of them in the picture: a pair, a few, or a parent with little ones (from the words). */
   crowd?: Crowd;
+  /** In an encounter, how many of each neighbor the words mention (from the words). */
+  counts?: Record<string, number>;
   /** Two or more neighbors in one moment (an encounter): shown together in the sticker. */
   cast?: string[];
   /** A neighbor who appears in the scene behind this slide (flying past, perched nearby). */

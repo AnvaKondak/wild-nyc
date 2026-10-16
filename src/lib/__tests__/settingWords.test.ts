@@ -1,6 +1,6 @@
 import { getSpecies } from '@/content';
 import type { StorySlide } from '@/content/types';
-import { actionFromWords, crowdFromWords, settingFromWords, withSettings } from '../settingWords';
+import { actionFromWords, countInWords, crowdFromWords, settingFromWords, withSettings } from '../settingWords';
 
 const slide = (title: string, body: string, setting?: StorySlide['setting']): StorySlide => ({ id: 'x', season: 'winter', period: 'midday', kicker: '', title, body, kind: 'scene', setting });
 
@@ -72,5 +72,14 @@ describe('withSettings crowds', () => {
   it('shows at least two on a family slide', () => {
     const [s] = withSettings([{ ...slide('Cozy couples', 'Pairs stay close all winter.'), id: 'rock-pigeon:family', speciesId: 'rock-pigeon' }]);
     expect(s.crowd?.count).toBeGreaterThanOrEqual(2);
+  });
+});
+
+describe('countInWords', () => {
+  it('counts only the words about that neighbor', () => {
+    const text = 'Three crows are taking turns swooping at a red-tailed hawk on a branch.';
+    expect(countInWords(text, 'american-crow')).toBe(2);
+    expect(countInWords(text, 'red-tailed-hawk')).toBe(1);
+    expect(countInWords('Two night owls, one trash can. A raccoon and an opossum arrive.', 'raccoon')).toBe(1);
   });
 });

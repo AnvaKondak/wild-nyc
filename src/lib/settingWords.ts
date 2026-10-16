@@ -92,6 +92,21 @@ export function crowdFromWords(title: string, body: string, speciesId: string | 
 }
 
 /**
+ * How many of one species a sentence about several neighbors mentions: only words about
+ * them count ("three crows", "the sparrows", "a pair of doves"), not "together" or "two
+ * night owls" said of everyone. 1 or 2 (two stands in for a few).
+ */
+export function countInWords(text: string, speciesId: string): number {
+  const names = namesOf(speciesId);
+  if (!names) return 1;
+  const t = text.toLowerCase();
+  const name = `(?:${names.many}|${names.one})`;
+  if (new RegExp(`\\b(two|three|four|a few|several|a pair of|a couple of|dozens of|hundreds of|a crowd of|a flock of|a gang of|a group of|a raft of|a family of)\\s+(?:[\\w'-]+\\s+)?${name}\\b`).test(t)) return 2;
+  if (names.one !== names.many && new RegExp(`\\b${names.many}\\b`).test(t)) return 2;
+  return 1;
+}
+
+/**
  * The scene for each slide: what the title says, else what the body says, else the
  * slide's own setting. So a slide that only inherited its setting (the season, family
  * or goodbye slides) gets the place its own words describe. Also who's in the picture:
@@ -105,8 +120,11 @@ export function withSettings(slides: StorySlide[]): StorySlide[] {
     const family = slide.id.endsWith(':family');
     const crowd = slide.speciesId && !slide.cast ? crowdFromWords(slide.title, slide.body, slide.speciesId, { young: family ? 'body' : 'title' }) : undefined;
     if (crowd && family && crowd.count < 2) crowd.count = 2;
+    // Two neighbors meeting: how many of each the words mention ("three crows… the hawk").
+    const counts = slide.cast ? Object.fromEntries(slide.cast.map((id) => [id, countInWords(`${slide.title} ${slide.body}`, id)])) : undefined;
     return {
       ...slide,
+      ...(counts ? { counts } : {}),
       ...(said ? { setting: said } : {}),
       ...(action ? { action } : {}),
       ...(crowd && crowd.count > 1 ? { crowd } : {}),

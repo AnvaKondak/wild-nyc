@@ -50,8 +50,18 @@ describe('planCloseUp', () => {
     expect(plan.figures[0].action).toBeUndefined();
   });
 
-  it('meets in the other neighbor\'s place, or not at all', () => {
-    // A swimmer can't stand on a sidewalk, and a pigeon can't swim: no shared scene.
-    expect(planCloseUp('rock-pigeon', 'sidewalk', undefined, { cast: ['rock-pigeon', 'mallard'] })).toBeUndefined();
+  it('meets a swimmer at the shore: one on the sand, one floating behind', () => {
+    const plan = planCloseUp('rock-pigeon', 'sidewalk', undefined, { cast: ['rock-pigeon', 'mallard'] })!;
+    expect(plan.scene).toBe('shore');
+    expect(plan.figures.find((f) => f.id === 'mallard')!.dy).toBeGreaterThan(0);
+  });
+
+  it('draws as many of each as the words say, three at most', () => {
+    const plan = planCloseUp('red-tailed-hawk', 'branch', 'fly', { cast: ['red-tailed-hawk', 'american-crow'], counts: { 'red-tailed-hawk': 1, 'american-crow': 2 } })!;
+    expect(plan.figures.map((f) => f.id).sort()).toEqual(['american-crow', 'american-crow', 'red-tailed-hawk']);
+  });
+
+  it('puts a moth by the spider\'s web', () => {
+    expect(planCloseUp('moths', 'lawn', undefined, { cast: ['moths', 'orb-weavers'] })?.scene).toBe('web');
   });
 });

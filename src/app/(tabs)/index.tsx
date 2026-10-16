@@ -296,7 +296,7 @@ export default function RightNow() {
   // water) instead of on a round sticker.
   // Every single-animal slide gets a scene: from its words, or else where that animal usually is.
   // Friends and family share it: a pair, a few, a parent with little ones, or two different neighbors meeting.
-  const plan = slide.kind === 'intro' || !species ? undefined : planCloseUp(species.id, slide.setting ?? homeSetting(species), slide.action, { crowd: slide.crowd, cast: slide.cast });
+  const plan = slide.kind === 'intro' || !species ? undefined : planCloseUp(species.id, slide.setting ?? homeSetting(species), slide.action, { crowd: slide.crowd, cast: slide.cast, counts: slide.counts });
   const closeUp = plan?.scene;
   // Who's in the picture, for VoiceOver: "Blue jay and squirrel", "Three sparrows".
   const pictured = plan ? [...new Set(plan.figures.map((f) => getSpecies(f.id)?.friendlyName ?? ''))].join(' and ') : species?.friendlyName;
