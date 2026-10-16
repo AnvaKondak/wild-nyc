@@ -1,80 +1,30 @@
 {
   "loops": {
-    "waterfront-day": [
-      "gull",
-      "song-sparrow",
-      "red-wing"
-    ],
-    "waterfront-night": [
-      "insects-nj"
-    ],
-    "park-day": [
+    "birds": [
       "robin",
-      "cardinal",
       "song-sparrow",
-      "blue-jay",
+      "cardinal",
       "mourning-dove"
     ],
-    "park-night": [
-      "insects-nj",
-      "katydid"
-    ],
-    "block-day": [
-      "cardinal",
-      "mourning-dove",
+    "birds-water": [
       "robin",
-      "song-sparrow"
-    ],
-    "block-night": [
-      "insects-nj"
-    ],
-    "waterfront-winter-night": [],
-    "park-winter-night": [],
-    "block-winter-night": [],
-    "rain": []
+      "song-sparrow",
+      "cardinal",
+      "mourning-dove"
+    ]
   },
   "recordings": {
-    "blue-jay": {
-      "title": "Cyanocitta cristata - Blue Jay XC179708.mp3",
-      "license": "CC BY-SA 4.0",
-      "artist": "Jonathon Jongsma",
-      "source": "https://commons.wikimedia.org/wiki/File:Cyanocitta_cristata_-_Blue_Jay_XC179708.mp3"
-    },
     "cardinal": {
       "title": "Cardinalis cardinalis - Northern Cardinal XC175226.mp3",
       "license": "CC BY-SA 4.0",
       "artist": "Jonathon Jongsma",
       "source": "https://commons.wikimedia.org/wiki/File:Cardinalis_cardinalis_-_Northern_Cardinal_XC175226.mp3"
     },
-    "gull": {
-      "title": "Herring Gull (Larus argentatus) (W1CDR0001420 BD12).ogg",
-      "license": "CC BY-SA 4.0",
-      "artist": "The British Library",
-      "source": "https://commons.wikimedia.org/wiki/File:Herring_Gull_(Larus_argentatus)_(W1CDR0001420_BD12).ogg"
-    },
-    "insects-nj": {
-      "title": "Orthoptera Calls - Wyckoff, New Jersey 2024-08-15.mp3",
-      "license": "CC BY-SA 4.0",
-      "artist": "Ryan Hodnett",
-      "source": "https://commons.wikimedia.org/wiki/File:Orthoptera_Calls_-_Wyckoff,_New_Jersey_2024-08-15.mp3"
-    },
-    "katydid": {
-      "title": "Pterophylla camellifolia singing.wav",
-      "license": "CC BY 4.0",
-      "artist": "peterwchen",
-      "source": "https://commons.wikimedia.org/wiki/File:Pterophylla_camellifolia_singing.wav"
-    },
     "mourning-dove": {
       "title": "Zenaida macroura - Mourning Dove XC128006.ogg",
       "license": "CC BY-SA 3.0",
       "artist": "Jonathon Jongsma",
       "source": "https://commons.wikimedia.org/wiki/File:Zenaida_macroura_-_Mourning_Dove_XC128006.ogg"
-    },
-    "red-wing": {
-      "title": "Agelaius phoeniceus - Red-winged Blackbird XC142658.ogg",
-      "license": "CC BY-SA 3.0",
-      "artist": "Jonathon Jongsma",
-      "source": "https://commons.wikimedia.org/wiki/File:Agelaius_phoeniceus_-_Red-winged_Blackbird_XC142658.ogg"
     },
     "robin": {
       "title": "Turdus migratorius - American Robin XC174852.mp3",

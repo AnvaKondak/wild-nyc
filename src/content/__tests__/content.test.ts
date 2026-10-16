@@ -272,7 +272,7 @@ describe('privacy policy', () => {
   it('is complete, and promises what the code does', () => {
     const text = [privacy.summary, ...privacy.sections.map((s) => s.body)].join(' ');
     expect(privacy.sections.length).toBeGreaterThanOrEqual(5);
-    expect(text).toMatch(/never stored and never leaves your phone/);
+    expect(text).toMatch(/never asks for your location/);
     expect(text).toMatch(/Open-Meteo/);
     expect(text).toMatch(/No ads/);
     expect(text.replace('{contact}', '')).not.toMatch(/[{}]/);

@@ -1,21 +1,24 @@
+import { hasWater } from '@/components/scene/looks';
 import { pickSoundscape } from '../soundscape';
 
 describe('pickSoundscape', () => {
-  it('sounds like the kind of place: birds by day, crickets by night', () => {
-    expect(pickSoundscape('park', 'dawn', 'spring')).toBe('park-day');
-    expect(pickSoundscape('park', 'night', 'summer', ['cold'])).toBe('park-night');
-    expect(pickSoundscape('waterfront', 'midday', 'fall')).toBe('waterfront-day');
-    expect(pickSoundscape('block', 'dusk', 'fall', ['wind'])).toBe('block-night');
+  it('is soft birdsong everywhere, with water only where there is water', () => {
+    expect(pickSoundscape({ water: false, favorites: false })).toBe('birds');
+    expect(pickSoundscape({ water: true, favorites: false })).toBe('birds-water');
   });
 
-  it('has no crickets on winter nights', () => {
-    expect(pickSoundscape('park', 'night', 'winter')).toBe('park-winter-night');
-    expect(pickSoundscape('block', 'dusk', 'winter')).toBe('block-winter-night');
-    expect(pickSoundscape('waterfront', 'dawn', 'winter')).toBe('waterfront-day');
+  it('is always just the birdsong in favorites', () => {
+    expect(pickSoundscape({ water: true, favorites: true })).toBe('birds');
   });
+});
 
-  it('plays the rain when it rains, wherever and whenever', () => {
-    expect(pickSoundscape('park', 'dawn', 'spring', ['rain', 'wind'])).toBe('rain');
-    expect(pickSoundscape('waterfront', 'night', 'winter', ['rain'])).toBe('rain');
+describe('hasWater', () => {
+  it('knows which neighborhoods are by the water', () => {
+    expect(hasWater('brooklyn-bridge-park', 'waterfront')).toBe(true);
+    expect(hasWater('williamsburg', 'block')).toBe(true); // the East River
+    expect(hasWater('bed-stuy', 'block')).toBe(false);
+    expect(hasWater('park-slope', 'block')).toBe(false);
+    expect(hasWater(undefined, 'waterfront')).toBe(true);
+    expect(hasWater(undefined, 'block')).toBe(false);
   });
 });

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Mix the ambient soundscapes: a gentle, seamless loop for each kind of place.
+"""Mix the ambient soundscapes: two calm, seamless loops.
 
-Birds by day, crickets by night, and no crickets on winter nights. By the water: water
-lapping. In the park: birdsong, or crickets after dark. On the block: a calm street with
-the odd car rolling by. When it rains: rain. Each loop is a bed (synthesized water, traffic or rain, or a recorded insect
-chorus) with real bird recordings placed on top at seeded random times. Stereo: beds
-are wide, and each call comes from somewhere left to right. Recordings come from
-scripts/fetch_sounds.py; everything else is made here.
+"birds": soft birdsong (robins, song sparrows, cardinals, mourning doves, softened and
+spread out) over the faintest breeze. Plays everywhere, and always in Favorites.
+"birds-water": the same birdsong with soft moving water, for neighborhoods by the water.
+Real bird recordings are placed at seeded random times; the water and breeze are made
+here. Stereo: beds are wide, and each call comes from somewhere left to right.
+Recordings come from scripts/fetch_sounds.py.
 
 Plain Python (no numpy), so it's slow-ish but has no dependencies. Encodes AAC with
 macOS afconvert and writes src/content/sounds.json (which loop uses which credits)
@@ -243,61 +243,36 @@ def scatter(dst, rnd, sources, every, gain=1.0):
 
 # ---------------------------------------------------------------- soundscapes
 
+# The gentlest singers only: no gulls, jays or blackbirds.
+SOFT_BIRDS = ["robin", "song-sparrow", "cardinal", "mourning-dove"]
+
+
+def soft_calls(name):
+    """A bird's calls, softened: the sharpest highs rounded off."""
+    return [lowpass(seg, 4500) for seg in calls(name)]
+
+
 def mix(name, rnd):
     out = Stereo()
     bed = lambda make, gain: out.bed(make, rnd, gain)
-    birds = lambda srcs, every, g=0.5: scatter(out, rnd, srcs, every, g)
-    crickets = lambda r: bed_from("insects-nj", r)
-    if name == "waterfront-day":
-        bed(water, 0.45)
-        bed(hum, 0.03)
-        birds(["gull", "gull", "song-sparrow", "red-wing"], 5.0, 0.45)
-    elif name == "waterfront-night":
-        bed(water, 0.4)
-        bed(crickets, 0.18)
-    elif name == "park-day":
-        bed(hum, 0.03)
-        birds(["robin", "cardinal", "song-sparrow", "blue-jay", "mourning-dove"], 2.6)
-    elif name == "park-night":
-        bed(crickets, 0.4)
-        bed(lambda r: bed_from("katydid", r), 0.12)
-    elif name == "block-day":
-        bed(traffic, 0.3)
-        birds(["cardinal", "mourning-dove", "robin", "song-sparrow"], 4.5, 0.45)
-    elif name == "block-night":
-        bed(traffic, 0.18)
-        bed(crickets, 0.25)
-    elif name == "waterfront-winter-night":
-        bed(water, 0.4)
-        bed(hum, 0.04)
-    elif name == "park-winter-night":
-        bed(lambda r: wind(r, 0.4), 0.18)
-        bed(hum, 0.03)
-    elif name == "block-winter-night":
-        bed(traffic, 0.16)
-        bed(lambda r: wind(r, 0.3), 0.05)
-    elif name == "rain":
-        bed(rain, 0.4)
-        bed(hum, 0.03)
-    else:
+    # The faintest breeze, so the quiet between songs isn't dead silent.
+    bed(lambda r: wind(r, 0.15), 0.04)
+    if name == "birds-water":
+        # Soft moving water: the lapping bed, rounded off and kept low.
+        bed(lambda r: normalize(lowpass(water(r), 1600)), 0.32)
+    elif name != "birds":
         raise ValueError(name)
+    pool = {b: soft_calls(b) for b in SOFT_BIRDS}
+    t = rnd.uniform(0.5, 2.5)
+    while t < LOOP:
+        b = rnd.choice(SOFT_BIRDS)
+        out.place(rnd.choice(pool[b]), int(t * SR), 0.32 * rnd.uniform(0.5, 1.0), rnd.uniform(-0.8, 0.8))
+        t += rnd.uniform(2.5, 5.0)
     return out
 
 
-# Which recordings each loop uses, for credits. Birds by day, crickets by night.
-USES = {
-    "waterfront-day": ["gull", "song-sparrow", "red-wing"],
-    "waterfront-night": ["insects-nj"],
-    "park-day": ["robin", "cardinal", "song-sparrow", "blue-jay", "mourning-dove"],
-    "park-night": ["insects-nj", "katydid"],
-    "block-day": ["cardinal", "mourning-dove", "robin", "song-sparrow"],
-    "block-night": ["insects-nj"],
-    # Crickets go quiet in winter.
-    "waterfront-winter-night": [],
-    "park-winter-night": [],
-    "block-winter-night": [],
-    "rain": [],
-}
+# Which recordings each loop uses, for credits.
+USES = {"birds": SOFT_BIRDS, "birds-water": SOFT_BIRDS}
 
 
 def fold(st):

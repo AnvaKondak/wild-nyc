@@ -6,6 +6,7 @@ import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { CloseUp, planCloseUp } from '@/components/scene/CloseUp';
+import { hasWater } from '@/components/scene/looks';
 import { PopIn, RisingHearts } from '@/components/story/Cute';
 import { FloatingCast } from '@/components/Floating';
 import { BellIcon, BellOffIcon, ChevronLeftIcon, ChevronRightIcon, HeartIcon, HomeIcon, SoundOffIcon, SoundOnIcon } from '@/components/Icons';
@@ -253,10 +254,10 @@ export default function RightNow() {
     }
   };
 
-  // A gentle sound of the kind of place (or the rain), if sound is on.
-  // In the favorites story each animal brings their own kind of place, and its sound.
+  // Soft birdsong if sound is on, with soft water where the neighborhood has water.
+  // The favorites story spans the city, so there it's always just the birdsong.
   const sceneNow = faves ? (slide?.scene ?? 'park') : scene;
-  const soundscape = pickSoundscape(sceneNow, header.period, season, faves ? [] : weather?.tags);
+  const soundscape = pickSoundscape({ water: hasWater(hood.placeId, hood.kind), favorites: faves });
   useAmbience(soundscape, state.soundOn, focused);
   const listening = SOUNDSCAPE_LABEL[soundscape];
 

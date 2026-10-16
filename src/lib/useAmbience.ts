@@ -1,6 +1,6 @@
-// The story's sound, continuous across the whole Right now screen: one gentle loop for
-// the kind of place (water, park or street, with birds) or the rain. It changes only
-// when you switch to a different kind of place or the rain starts or stops.
+// The story's sound, continuous across the whole Right now screen: soft birdsong, with
+// soft water where the neighborhood has water. It changes only when you switch between a
+// neighborhood by the water and one that isn't (or into Favorites, which is birdsong only).
 //
 // Respects the silent switch, mixes with whatever else is playing (your podcast keeps
 // going), and stops when the app goes to the background.
