@@ -1641,11 +1641,11 @@ ART.coyote = {
     const ears = '<path d="M80 104 L76 30 L134 86 Z"/><path d="M114 90 L146 24 L162 100 Z"/>';
     // A lighter outline than the other neighbors: thinner, in dark brown instead of ink.
     const line = '#5E5448';
-    const LINE = `stroke="${line}" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"`;
+    const LINE = `stroke="${line}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"`;
     const open = m.eyes === 'open' || m.eyes === 'wide' || m.eyes === 'curious';
-    return `<path d="${legs}" fill="none" stroke="${line}" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    return `<path d="${legs}" fill="none" stroke="${line}" stroke-width="25" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="${legs}" fill="none" stroke="${tawny}" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
-      <g fill="${cream}" stroke="${line}" stroke-width="4"><ellipse cx="146" cy="350" rx="16" ry="8"/><ellipse cx="178" cy="352" rx="16" ry="8"/><ellipse cx="298" cy="348" rx="16" ry="8"/><ellipse cx="326" cy="346" rx="16" ry="8"/></g>
+      <g fill="${cream}" stroke="${line}" stroke-width="6"><ellipse cx="146" cy="350" rx="16" ry="8"/><ellipse cx="178" cy="352" rx="16" ry="8"/><ellipse cx="298" cy="348" rx="16" ry="8"/><ellipse cx="326" cy="346" rx="16" ry="8"/></g>
       <g fill="${coat}" ${LINE}>${tail}</g>
       <clipPath id="coy-tail">${tail}</clipPath>
       <g clip-path="url(#coy-tail)">
@@ -1654,7 +1654,7 @@ ART.coyote = {
         <circle cx="346" cy="352" r="30" fill="#2E2E44"/>
       </g>
       ${tail.replace('/>', ` fill="none" ${LINE}/>`)}
-      <g fill="none" stroke="${line}" stroke-width="7" stroke-linejoin="round">${body}${neck}</g>
+      <g fill="none" stroke="${line}" stroke-width="11" stroke-linejoin="round">${body}${neck}</g>
       <g fill="${coat}">${body}${neck}</g>
       <clipPath id="coy-body">${body}${neck}</clipPath>
       <g clip-path="url(#coy-body)">
@@ -1667,7 +1667,7 @@ ART.coyote = {
       <g fill="${coat}" ${LINE}>${ears}</g>
       <path d="M86 98 L84 50 L124 86 Z M120 88 L142 44 L152 96 Z" fill="${cream}"/>
       <path d="M92 90 l8 -12 M128 86 l4 -14" stroke="${saddle}" stroke-width="4" stroke-linecap="round"/>
-      ${'' /* A slight dark-brown outline, like the rest of the coyote. */}<g fill="${coat}" stroke="${line}" stroke-width="4">${head}</g>
+      ${'' /* A slight dark-brown outline, like the rest of the coyote. */}<g fill="${coat}" stroke="${line}" stroke-width="6">${head}</g>
       <clipPath id="coy-head">${head}</clipPath>
       <g clip-path="url(#coy-head)">
         <path d="M18 144 C52 142 86 150 110 160 C126 170 140 186 152 204 L18 204 Z" fill="${cream}"/>
