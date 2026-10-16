@@ -35,9 +35,9 @@ export default function AddPlace() {
   const searching = deferred.trim().length > 0;
 
   const done = () => {
+    // Joining: next, pick some favorites (that step finishes onboarding).
     if (fromWelcome) {
-      actions.finishOnboarding();
-      router.replace('/');
+      router.replace('/pick-favorites');
     } else {
       router.back();
     }

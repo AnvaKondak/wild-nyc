@@ -49,6 +49,7 @@ function Navigator() {
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="welcome" options={{ gestureEnabled: false, animation: 'fade' }} />
           <Stack.Screen name="add-place" options={{ presentation: 'modal' }} />
+          <Stack.Screen name="pick-favorites" options={{ gestureEnabled: false, animation: 'fade' }} />
           <Stack.Screen name="species/[id]" />
           <Stack.Screen name="hurt-animal" />
           <Stack.Screen name="privacy" />
