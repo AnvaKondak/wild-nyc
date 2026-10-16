@@ -2,5 +2,4 @@
 
 export const soundAssets: Record<string, number> = {
   'birds': require('../../assets/sounds/birds.m4a'),
-  'birds-water': require('../../assets/sounds/birds-water.m4a'),
 };

@@ -1,17 +1,11 @@
 #!/usr/bin/env python3
-"""Mix the ambient soundscapes: two calm, seamless loops.
-
-"birds": soft birdsong (robins, song sparrows, cardinals, mourning doves, softened and
-spread out) over a very soft, warm healing tone. Plays everywhere, and always in Favorites.
-"birds-water": the same birdsong with soft waves, only for the neighborhoods right on the
-water (see src/lib/soundscape.ts).
-Real bird recordings are placed at seeded random times; the water and breeze are made
-here. Stereo: beds are wide, and each call comes from somewhere left to right.
-Recordings come from scripts/fetch_sounds.py.
+"""Mix the ambient soundscape: one calm, seamless loop of birds softly chirping (robins,
+song sparrows, cardinals, mourning doves, softened and spread out), and nothing else.
+It plays everywhere in the app. Real bird recordings are placed at seeded random times;
+stereo, each call from somewhere left to right. Recordings come from scripts/fetch_sounds.py.
 
 Plain Python (no numpy), so it's slow-ish but has no dependencies. Encodes AAC with
-macOS afconvert and writes src/content/sounds.json (which loop uses which credits)
-and src/content/soundAssets.ts.
+macOS afconvert and writes src/content/sounds.json (credits) and src/content/soundAssets.ts.
 
 Run from the repo root:  python3 scripts/build_soundscapes.py
 """
@@ -270,17 +264,9 @@ def pad(rnd):
 
 
 def mix(name, rnd):
-    out = Stereo()
-    bed = lambda make, gain: out.bed(make, rnd, gain)
-    if name == "birds-water":
-        # By the water: soft waves (the lapping bed, rounded off), the faintest breeze.
-        bed(lambda r: wind(r, 0.15), 0.04)
-        bed(lambda r: normalize(lowpass(water(r), 1600)), 0.32)
-    elif name == "birds":
-        # Everywhere else: no waves, no breeze, just a soft healing tone under the birds.
-        bed(pad, 0.07)
-    else:
+    if name != "birds":
         raise ValueError(name)
+    out = Stereo()
     pool = {b: soft_calls(b) for b in SOFT_BIRDS}
     t = rnd.uniform(0.5, 2.5)
     while t < LOOP:
@@ -291,7 +277,7 @@ def mix(name, rnd):
 
 
 # Which recordings each loop uses, for credits.
-USES = {"birds": SOFT_BIRDS, "birds-water": SOFT_BIRDS}
+USES = {"birds": SOFT_BIRDS}
 
 
 def fold(st):

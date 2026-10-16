@@ -32,7 +32,7 @@ import { withSettings } from '@/lib/settingWords';
 import { hashString, seededRandom } from '@/lib/random';
 import { dateKey, momentKicker, moonLitFraction, seasonOf, timeHeader } from '@/lib/time';
 import { askForNotes, cancelNotes, scheduleNotes } from '@/lib/notifications';
-import { pickSoundscape, SOUNDSCAPE_LABEL } from '@/lib/soundscape';
+import { SOUNDSCAPE, SOUNDSCAPE_LABEL } from '@/lib/soundscape';
 import { useAmbience } from '@/lib/useAmbience';
 import { useNow } from '@/lib/useNow';
 import { describeWeather, PREVIEW_WEATHER, type WeatherTag } from '@/lib/weather';
@@ -253,12 +253,11 @@ export default function RightNow() {
     }
   };
 
-  // Soft birdsong if sound is on; soft waves and birdsong only in the neighborhoods right on the water.
-  // The favorites story spans the city, so there it's always just the birdsong.
+  // Birds softly chirping, the same everywhere, if sound is on.
+  // In the favorites story each animal brings their own kind of place.
   const sceneNow = faves ? (slide?.scene ?? 'park') : scene;
-  const soundscape = pickSoundscape({ placeId: hood.placeId, favorites: faves });
-  useAmbience(soundscape, state.soundOn, focused);
-  const listening = SOUNDSCAPE_LABEL[soundscape];
+  useAmbience(SOUNDSCAPE, state.soundOn, focused);
+  const listening = SOUNDSCAPE_LABEL;
 
   if (!slide) return <Screen background={theme.bg} scroll={false}>{null}</Screen>;
 
