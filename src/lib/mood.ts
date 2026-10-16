@@ -1,6 +1,6 @@
 // Which drawing of a neighbor fits a slide: if the words say they're asleep, they're
 // drawn asleep; eating, they're drawn with a snack; singing, with music notes; startled,
-// wide-eyed; puffed up in the cold, with snowflakes; checking something out, curious;
+// wide-eyed; puffed up in the cold, with snowflakes; checking something out, curious (a raised brow);
 // playing, delighted. When the words don't say, the everyday drawings take turns so a
 // story doesn't repeat one.
 
