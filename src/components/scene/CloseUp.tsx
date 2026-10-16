@@ -248,17 +248,24 @@ export function planCloseUp(speciesId: string | undefined, setting: Setting | un
   const count = (id: string) => Math.max(1, Math.min(2, opts.counts?.[id] ?? 1));
   const lineup = [speciesId, ...others];
   for (const id of [...lineup].sort((x, y) => count(y) - count(x))) if (lineup.length < 3 && count(id) > 1) lineup.push(id);
-  const together = (where: CloseUpSetting): Plan | undefined => {
+  const together = (where: CloseUpSetting, fliers: boolean): Plan | undefined => {
     const act = (id: string) => (action && action !== 'drink' && canDo(id, action) ? action : undefined);
     const figures: Figure[] = [];
     // Spots by where they are: the lead's side on the right, everyone else's on the left.
-    const slots = { lead: [[0.7, 0.76], [0.9, 0.58]], ground: [[0.3, 0.76], [0.1, 0.58]], air: [[0.3, 0.56, 0.62], [0.56, 0.44, 0.84]], water: [[0.3, 0.55, 0.24], [0.1, 0.45, 0.28]] };
-    const used = { lead: 0, ground: 0, air: 0, water: 0 };
+    const slots = { lead: [[0.7, 0.76], [0.9, 0.58]], leadWater: [[0.72, 0.6, 0.24], [0.9, 0.48, 0.28]], ground: [[0.3, 0.76], [0.1, 0.58]], air: [[0.3, 0.56, 0.62], [0.56, 0.44, 0.84]], water: [[0.3, 0.55, 0.24], [0.1, 0.45, 0.28]] };
+    const used = { lead: 0, leadWater: 0, ground: 0, air: 0, water: 0 };
+    const shoreside = where === 'shore' || where === 'pier';
     const take = (k: keyof typeof slots) => slots[k][Math.min(used[k]++, slots[k].length - 1)];
     for (const id of lineup) {
       if (id === speciesId) {
-        const [x, scale] = take('lead');
-        figures.push({ id, x, scale, action: act(id) });
+        if (shoreside && cutoutPose(id) === 'swim') {
+          // A swimmer leading a shore meeting floats on the water behind the sand.
+          const [x, scale, dy] = take('leadWater');
+          figures.push({ id, x, scale, dy });
+        } else {
+          const [x, scale] = take('lead');
+          figures.push({ id, x, scale, action: act(id) });
+        }
         continue;
       }
       if (act(id) === 'fly' && where !== 'sky') {
@@ -268,11 +275,12 @@ export function planCloseUp(speciesId: string | undefined, setting: Setting | un
       } else if (fits(id, where)) {
         const [x, scale] = take('ground');
         figures.push({ id, x, scale, flip: true, action: act(id) });
-      } else if (cutoutPose(id) === 'swim' && (where === 'shore' || where === 'pier')) {
+      } else if (cutoutPose(id) === 'swim' && shoreside) {
         // A swimmer meeting someone on the shore floats on the water just behind them.
         const [x, scale, dy] = take('water');
         figures.push({ id, x, scale, dy, flip: true });
-      } else if (canDo(id, 'fly') || cutoutPose(id) === 'fly') {
+      } else if (fliers && (canDo(id, 'fly') || cutoutPose(id) === 'fly')) {
+        // Only when there's no better place to meet: a bird flies in overhead.
         const [x, scale, dy] = take('air');
         figures.push({ id, x, scale, dy, flip: true, action: cutoutPose(id) === 'fly' ? undefined : 'fly' });
       } else {
@@ -281,14 +289,20 @@ export function planCloseUp(speciesId: string | undefined, setting: Setting | un
     }
     return { scene: where, figures };
   };
-  const here = together(scene);
-  if (here) return here;
-  // Meet where the other one lives, if the lead belongs there too.
+  // Best first: both standing in the lead's scene, then in the other one's, then a
+  // swimmer and a walker meeting at the shore. Only then a bird flying in overhead.
   const theirs = closeUpFor(others[0], setting);
-  const there = theirs && theirs !== scene && fits(speciesId, theirs) ? together(theirs) : undefined;
-  if (there) return there;
-  // A swimmer and someone who walks: meet at the shore, one on the sand, one on the water.
-  return others.some((id) => cutoutPose(id) === 'swim') && fits(speciesId, 'shore') ? together('shore') : undefined;
+  const swimmer = [speciesId, ...others].some((id) => cutoutPose(id) === 'swim');
+  const candidates: CloseUpSetting[] = [scene, ...(theirs && theirs !== scene && fits(speciesId, theirs) ? [theirs] : []), ...(swimmer ? (['shore'] as CloseUpSetting[]) : [])];
+  for (const where of candidates) {
+    const plan = together(where, false);
+    if (plan) return plan;
+  }
+  for (const where of candidates) {
+    const plan = together(where, true);
+    if (plan) return plan;
+  }
+  return undefined;
 }
 
 /** A point on a Bézier curve (2 or 3 control points after the start). */
@@ -418,7 +432,8 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
     if (f.young && hasCutout(`${f.id}:young`)) f = { ...f, id: `${f.id}:young` };
     const size = bh * place.size * f.scale;
     const gx = w * f.x;
-    const top = groundAt(setting, w, ground, bh, gx, w * place.x) - bh * (f.dy ?? 0) - size * cutoutFeet(f.id);
+    // Someone flying in stays below the band's top, clear of the time and the pills.
+    const top = Math.max(f.dy ? bt : -Infinity, groundAt(setting, w, ground, bh, gx, w * place.x) - bh * (f.dy ?? 0) - size * cutoutFeet(f.id));
     return { f, size, top, left: gx - size * 0.45 };
   });
   // The first one leads: the trunk and the straw are drawn around them. The web goes around the spider.

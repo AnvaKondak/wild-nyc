@@ -73,9 +73,10 @@ const GROUPS: { label: string; plan?: Plan }[] = ([
       ['Coyote and deer', 'coyote', 'lawn', ['coyote', 'white-tailed-deer']],
       ['Turkeys and deer', 'wild-turkey', 'lawn', ['wild-turkey', 'white-tailed-deer']],
       ['Bats and moths', 'bats', 'sky', ['bats', 'moths']],
+      ['Brant and Canada geese', 'brant', 'water', ['brant', 'canada-goose']],
     ] as const).map(([label, id, setting, cast]): { label: string; plan?: Plan } => ({
       label,
-      plan: planCloseUp(id, setting, label.includes(' over') || label.includes('mob') ? 'fly' : undefined, { cast: [...cast], counts: label.includes('Crows') ? { 'american-crow': 2 } : label.includes('Turkeys and') ? { 'wild-turkey': 2 } : undefined }),
+      plan: planCloseUp(id, setting, label.includes(' over') || label.includes('mob') ? 'fly' : undefined, { cast: [...cast], counts: label.includes('Crows') ? { 'american-crow': 2 } : label.includes('Turkeys and') ? { 'wild-turkey': 2 } : label.includes('Brant') ? { brant: 2, 'canada-goose': 2 } : undefined }),
     })),
   );
 const MOODS: Mood[] = ['hello', 'snack', 'happy', 'sleepy', 'surprised', 'curious', 'singing', 'chilly'];
