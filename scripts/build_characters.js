@@ -1664,8 +1664,8 @@ ART.coyote = {
         <ellipse cx="244" cy="270" rx="72" ry="18" fill="${cream}"/>
         <path d="M292 200 C312 230 314 252 302 268 L344 268 L344 200 Z" fill="${tawny}" opacity="0.8"/>
       </g>
-      <g fill="${coat}" ${LINE}>${ears}</g>
-      <path d="M86 98 L84 50 L124 86 Z M120 88 L142 44 L152 96 Z" fill="${cream}"/>
+      <g fill="${coat}" stroke="${line}" stroke-width="6" stroke-linejoin="round">${ears}</g>
+      <path d="M90 96 L88 54 L120 86 Z M126 88 L143 50 L151 94 Z" fill="${cream}"/>
       <path d="M92 90 l8 -12 M128 86 l4 -14" stroke="${saddle}" stroke-width="4" stroke-linecap="round"/>
       ${'' /* A slight dark-brown outline, like the rest of the coyote. */}<g fill="${coat}" stroke="${line}" stroke-width="6">${head}</g>
       <clipPath id="coy-head">${head}</clipPath>
