@@ -44,8 +44,6 @@ const heart = (x, y, s) =>
 const zee = (x, y, s) => `<path d="M${x} ${y} H${x + s} L${x} ${y + s} H${x + s}" fill="none" stroke="${C.ink}" stroke-width="${Math.max(6, s * 0.22)}" stroke-linecap="round" stroke-linejoin="round"/>`;
 // A music note: a pink head on an ink stem with a little flag.
 const note = (x, y, s) => `<path d="M${x + s * 0.32} ${y + s * 0.85} V${y} q${s * 0.3} ${s * 0.12} ${s * 0.5} ${s * 0.38}" fill="none" stroke="${C.ink}" stroke-width="${Math.max(5, s * 0.16)}" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="${x + s * 0.1}" cy="${y + s * 0.88}" rx="${s * 0.26}" ry="${s * 0.2}" transform="rotate(-20 ${x + s * 0.1} ${y + s * 0.88})" fill="${C.pink}" stroke="${C.ink}" stroke-width="5"/>`;
-// "!" for a surprise: a chunky yellow bar and dot, outlined.
-const bang = (x, y, s) => `<path d="M${x + s * 0.3} ${y} H${x + s * 0.7} L${x + s * 0.6} ${y + s * 0.9} H${x + s * 0.4} Z" fill="#FFD23F" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/><circle cx="${x + s * 0.5}" cy="${y + s * 1.17}" r="${s * 0.15}" fill="#FFD23F" stroke="${C.ink}" stroke-width="6"/><path d="M${x - s * 0.15} ${y + s * 0.15} l${-s * 0.2} ${-s * 0.12} M${x + s * 1.15} ${y + s * 0.15} l${s * 0.2} ${-s * 0.12}" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`;
 // A snowflake for a chilly day: six white arms, outlined.
 const flake = (x, y, s) => {
   const cx = x + s / 2;
@@ -57,11 +55,10 @@ const flake = (x, y, s) => {
   }).join(' ');
   return `<path d="${arms}" stroke="${C.ink}" stroke-width="${Math.max(9, s * 0.3)}" stroke-linecap="round"/><path d="${arms}" stroke="#FFFFFF" stroke-width="${Math.max(4, s * 0.15)}" stroke-linecap="round"/>`;
 };
-/** What floats by their head, at the two spots the sleepy zees use: zees, notes, "!" or snowflakes. */
+/** What floats by their head, at the two spots the sleepy zees use: zees, notes or snowflakes. */
 const deco = (m, x1, y1, s1, x2, y2, s2) => {
   if (m.zees) return zee(x1, y1, s1) + zee(x2, y2, s2);
   if (m.notes) return note(x1 - s1 * 0.3, y1 - s1 * 0.7, s1 * 1.7) + note(x2 + s2 * 0.4, y2 - s2 * 1.2, s2 * 1.6);
-  if (m.wow) return bang(x2 - s1 * 0.45, y2 - s1 * 0.75, s1 * 1.6);
   if (m.chilly) return flake(x1 - s1 * 0.4, y1 - s1 * 0.8, s1 * 1.5) + flake(x2 + s2 * 0.5, y2 - s2 * 1.1, s2 * 1.4);
   return '';
 };
@@ -78,7 +75,8 @@ const MOODS = [
   { name: 'happy', eyes: 'happy', hearts: true },
   { name: 'sleepy', eyes: 'shut', zees: true },
   // Picked only when the words call for them (see src/lib/mood.ts), never by turns.
-  { name: 'surprised', eyes: 'wide', wow: true },
+  // Surprised is all in the face too: big round eyes under raised brows.
+  { name: 'surprised', eyes: 'wide' },
   // Curious is all in the face: one brow up, eyes glancing up. Nothing floating by.
   { name: 'curious', eyes: 'curious' },
   { name: 'singing', eyes: 'happy', notes: true },
