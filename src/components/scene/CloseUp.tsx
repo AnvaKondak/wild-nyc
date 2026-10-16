@@ -27,11 +27,11 @@ import { useReduceMotion } from '../backdrop/motion';
 import { Character, cutoutFeet, cutoutPose, hasCutout } from '../characters/Character';
 import { cutoutXml } from '../characters/xml';
 import { lookFor, type Building, type Landmark } from './looks';
-import { BirchBark, Birdhouse, Boardwalk, Cafe, Driftwood, FarFlock, Ferry, FootBridge, Kite, LaundryLine, LifeguardChair, Lighthouse, LilyPads, Nest, ParkFence, ParkPath, Rowboat, ShelfFungus, Sneakers, StreetTree, StringLights, TrafficLight } from './props';
+import { Beehive, BirchBark, Birdhouse, Boardwalk, Cafe, Driftwood, FarFlock, Ferry, FootBridge, Kite, LaundryLine, LifeguardChair, Lighthouse, LilyPads, Nest, ParkFence, ParkPath, Rowboat, ShelfFungus, Sneakers, StreetTree, StringLights, TrafficLight } from './props';
 
 export type CloseUpSetting =
   | 'building' | 'puddle' | 'branch' | 'trunk' | 'hedge' | 'lawn' | 'flowers' | 'burrow'
-  | 'wire' | 'sky' | 'water' | 'wade' | 'shore' | 'pier' | 'reeds' | 'web' | 'fireescape' | 'highledge' | 'hollow';
+  | 'wire' | 'sky' | 'water' | 'wade' | 'shore' | 'pier' | 'reeds' | 'web' | 'fireescape' | 'highledge' | 'hollow' | 'hive';
 
 // Who walks to the water rather than swims: at a puddle in the city.
 const CITY_WALKERS = ['rock-pigeon', 'house-sparrow', 'european-starling', 'raccoon', 'eastern-gray-squirrel', 'american-robin', 'northern-cardinal', 'mourning-dove'];
@@ -106,6 +106,8 @@ export function closeUpFor(speciesId: string | undefined, setting: Setting | und
   if (pose === 'web') return 'web';
   if (pose === 'cling') return 'trunk';
   if (pose === 'fly') {
+    // Home for bees: honey bees at their rooftop hive, bumble bees at an old burrow in the ground.
+    if (setting === 'den') return speciesId === 'western-honey-bee' ? 'hive' : 'burrow';
     if (setting === 'flowers' || setting === 'branch' || setting === 'hedge' || setting === 'fence') return 'flowers';
     if (setting === 'reeds' || setting === 'water') return 'reeds';
     if (setting === 'lawn' || setting === 'night-sky') return 'lawn';
@@ -375,8 +377,9 @@ const PLACE: Record<CloseUpSetting, { ground: number; size: number; x: number }>
   fireescape: { ground: 0.84, size: 0.84, x: 0.5 },
   highledge: { ground: 0.86, size: 0.9, x: 0.46 },
   hollow: { ground: 0.86, size: 0.86, x: 0.5 },
+  hive: { ground: 0.9, size: 0.62, x: 0.5 },
 };
-const OPEN_SKY: CloseUpSetting[] = ['highledge', 'hollow', 'branch', 'trunk', 'hedge', 'lawn', 'flowers', 'burrow', 'wire', 'sky', 'water', 'wade', 'shore', 'pier', 'reeds', 'web'];
+const OPEN_SKY: CloseUpSetting[] = ['hive', 'highledge', 'hollow', 'branch', 'trunk', 'hedge', 'lawn', 'flowers', 'burrow', 'wire', 'sky', 'water', 'wade', 'shore', 'pier', 'reeds', 'web'];
 
 export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, period, season, sky, weather, placeId, placeKind = 'block', variant = 0, action, figures }: Props) {
   const look = lookFor(placeId, placeKind);
@@ -401,7 +404,7 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
     .map((spot, i) => ({ ...spot, i }))
     .sort((a, b) => a.size - b.size)
     .map(({ f, size: s, top: y, left: x, i }) => (
-      <View key={i} style={{ position: 'absolute', left: x, top: y, width: s, height: s, transform: f.flip ? [{ scaleX: -1 }] : undefined }}>
+      <View key={i} style={{ position: 'absolute', left: x, top: y, width: s, height: s, transform: [{ scaleX: f.flip ? -1 : 1 }] }}>
         <Acting action={f.action} speciesId={f.id} size={s} setting={setting}>
           {/* Cormorants drying off are drawn with their wings spread wide. */}
           <Character speciesId={f.action === 'dry' && canDo(f.id, 'dry') ? `${f.id}:spread` : f.id} size={s} mood={mood} cutout />
@@ -437,6 +440,7 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
         {setting === 'hollow' && <Hollow w={w} h={h} ground={ground} bh={bh} period={period} season={season} birch={v === 2} />}
         {setting === 'hollow' && v === 1 && <ShelfFungus x={w * 0.8} y={ground + bh * 0.55} />}
         {setting === 'highledge' && <HighLedge w={w} h={h} y={ground} bh={bh} bt={bt} period={period} look={look.building} variant={variant % 3} />}
+        {setting === 'hive' && <Beehive w={w} h={h} y={ground} bh={bh} period={period} />}
         {setting === 'fireescape' && <FireEscape w={w} h={h} y={ground} bh={bh} period={period} look={look.building} />}
         {setting === 'fireescape' && v === 1 && <StringLights w={w} y={ground - bh * 0.34} period={period} />}
         {setting === 'fireescape' && v === 2 && <LaundryLine w={w} y={ground - bh * 0.78} />}

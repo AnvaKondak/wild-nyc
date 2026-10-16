@@ -11,7 +11,8 @@ const RULES: [RegExp, Setting][] = [
   [/\bdust[- ]?bath/, 'sidewalk'],
   [/\bfire escapes?\b/, 'fire-escape'],
   [/\b(webs?|spinning|silk)\b/, 'web'],
-  [/\b(hollows?|dens?|burrows?|holes? in|tree holes?|attics?)\b/, 'den'],
+  // A hive only when they're in it ("carrying water to cool the hive" happens at the water).
+  [/\b(hollows?|dens?|burrows?|holes? in|tree holes?|attics?|(?:in|into|inside|at) (?:the|a|their) hive|hive door)\b/, 'den'],
   [/\b(flying|flies|fly over|soaring|soars|circling|circles|wheeling|overhead|in the air|on the wing|migrating|flock(?:s)? (?:over|across))\b/, 'sky'],
   [/\b(bridges?|tall buildings?|skyscrapers?|towers?|steeples?|spires?|high ledges?|up high)\b/, 'ledge'],
   [/\b(wires?|power lines?|phone lines?|telephone lines?|cables?)\b/, 'wire'],

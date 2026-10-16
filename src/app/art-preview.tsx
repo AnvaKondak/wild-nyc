@@ -45,6 +45,8 @@ const GROUPS: { label: string; plan?: Plan }[] = ([
   ['Pigeons at a puddle', 'rock-pigeon', 'water', 'drink', { count: 2, young: 0 }],
   ['Deer + fawn', 'white-tailed-deer', 'lawn', undefined, { count: 2, young: 1 }],
   ['Robin + fledgling, branch', 'american-robin', 'branch', undefined, { count: 2, young: 1 }],
+  ['Honey bees at the hive', 'western-honey-bee', 'den', undefined, { count: 3, young: 0 }],
+  ['Bumble bee at the burrow', 'common-eastern-bumble-bee', 'den', undefined, { count: 1, young: 0 }],
 ] as const).map(([label, id, setting, action, crowd]): { label: string; plan?: Plan } => ({ label, plan: planCloseUp(id, setting, action, { crowd: { ...crowd } }) }))
   .concat(
     ([

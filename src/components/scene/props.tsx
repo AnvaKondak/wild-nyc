@@ -419,3 +419,45 @@ export function BirchBark({ x, w, h, seed = 0 }: { x: number; w: number; h: numb
     </G>
   );
 }
+
+/**
+ * A rooftop beehive: a stack of white wooden boxes on a stand, a little roof, and the
+ * landing board at the entrance (where the bees stand), the city's rooftops behind.
+ */
+export function Beehive({ w, h, y, bh, period }: { w: number; h: number; y: number; bh: number; period: Period }) {
+  const white = dim(period, '#F7F3EC', '#D9D0C8', '#6E6A7A');
+  const shade = dim(period, '#E3DACB', '#B3ABA0', '#55546A');
+  const roof = dim(period, '#E5484D', '#B83A40', '#5A2A30');
+  const roofTop = dim(period, '#B8B2C2', '#8E88A0', '#3E3A50');
+  const glow = period === 'night' || period === 'dusk';
+  const hw = w * 0.56;
+  const hx = w * 0.5 - hw / 2;
+  const box = bh * 0.3;
+  const bottom = y - 4;
+  return (
+    <G>
+      {/* The roof the hive sits on, and its parapet. */}
+      <Rect x={0} y={y + bh * 0.12} width={w} height={h} fill={roofTop} />
+      <Rect x={-4} y={y + bh * 0.1} width={w + 8} height={10} fill={shade} stroke={INK} strokeWidth={1.2} />
+      {/* The stand. */}
+      <Path d={`M${hx + 10} ${bottom + 10} V${y + bh * 0.12} M${hx + hw - 10} ${bottom + 10} V${y + bh * 0.12}`} stroke={INK} strokeWidth={5} />
+      {/* Two boxes, each with a handhold, then the roof. */}
+      {[0, 1].map((k) => {
+        const top = bottom - box * (k + 1);
+        return (
+          <G key={k}>
+            <Rect x={hx} y={top} width={hw} height={box} fill={white} stroke={INK} strokeWidth={1.5} />
+            <Path d={`M${hx + hw * 0.4} ${top + box * 0.35} h${hw * 0.2}`} stroke={shade} strokeWidth={5} strokeLinecap="round" />
+          </G>
+        );
+      })}
+      <Rect x={hx - 8} y={bottom - box * 2 - 14} width={hw + 16} height={14} fill={roof} stroke={INK} strokeWidth={1.5} />
+      {/* The entrance slot, warm inside, and the landing board. */}
+      <Rect x={hx + hw * 0.25} y={bottom - 12} width={hw * 0.5} height={8} rx={2} fill={glow ? '#FFD23F' : INK} stroke={INK} strokeWidth={1} />
+      <Path d={`M${hx + hw * 0.18} ${bottom} H${hx + hw * 0.82} L${hx + hw * 0.88} ${bottom + 10} H${hx + hw * 0.12} Z`} fill={shade} stroke={INK} strokeWidth={1.2} strokeLinejoin="round" />
+      {/* A pot of flowers on the roof beside the hive. */}
+      <Path d={`M${w * 0.06} ${y + bh * 0.1} h26 l-4 -22 h-18 Z`} fill="#E07A4A" stroke={INK} strokeWidth={1.2} />
+      {[-7, 0, 7].map((dx, k) => <Circle key={k} cx={w * 0.06 + 13 + dx} cy={y + bh * 0.1 - 28 - (k === 1 ? 5 : 0)} r={5.5} fill={k === 1 ? colors.yellow : colors.pink} stroke={INK} strokeWidth={1} />)}
+    </G>
+  );
+}
