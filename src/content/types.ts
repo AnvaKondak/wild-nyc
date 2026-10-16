@@ -67,7 +67,7 @@ export type Species = {
    * nearby (deer: Staten Island, the Bronx, some waterfront parks), never by default.
    */
   sightingsOnly?: boolean;
-  /** Only live in these bundled places (deer: St. George, on Staten Island). */
+  /** Only live in these bundled places, and always do (turkeys: Staten Island and the big Bronx parks). */
   onlyAt?: string[];
   /** Up at night, asleep by day (raccoons, opossums, moths). For the story's intro. */
   nocturnal?: boolean;

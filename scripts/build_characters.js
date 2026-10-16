@@ -1529,6 +1529,200 @@ ART.cygnet = chick({ id: 'cygnet', pose: 'swim', back: '#B8B6C4', wing: '#9C9AAC
 ART.gullChick = chick({ id: 'gullchick', pose: 'stand', back: '#BDAE92', wing: '#A39478', belly: '#D9CDB4', face: '#D2C4A8', speckle: '#5E5446', bill: '#3E3D4F', legs: '#C98A7A' });
 ART.ternChick = chick({ id: 'ternchick', pose: 'stand', back: '#E3D3B0', wing: '#CBB990', belly: '#F2E8D2', face: '#EADCBC', speckle: '#7A6A50', bill: '#F2804A', legs: '#E5484D' });
 
+// ── New neighbors: red fox, coyote, eastern cottontail, bats and wild turkey. Each is
+// one full-body drawing used for the round sticker and the close-up scenes alike.
+
+/** A dog-shaped neighbor standing side-on, facing left: the fox and the coyote share the build. */
+const canid = (p) => ({
+  tint: p.tint,
+  tilt: 0,
+  svg: (m) => {
+    const legs = p.legs;
+    const body = `<path d="${p.body}"/>`;
+    const tail = `<path d="${p.tail}"/>`;
+    const head = '<path d="M184 184 C184 150 158 128 128 130 C102 132 84 150 80 172 C62 186 44 204 34 220 C42 234 78 240 114 236 C152 238 184 216 184 184 Z"/>';
+    const ears = `<path d="M98 152 L ${p.ear[0]} Z"/><path d="M146 136 L ${p.ear[1]} Z"/>`;
+    return `<path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="22" stroke-linecap="round"/>
+      <path d="${legs}" fill="none" stroke="${p.sock}" stroke-width="12" stroke-linecap="round"/>
+      ${shadow([tail, body, head, ears])}
+      ${shape(tail, p.coat)}
+      <clipPath id="${p.id}-tail">${tail}</clipPath>
+      <g clip-path="url(#${p.id}-tail)"><circle cx="${p.tip[0]}" cy="${p.tip[1]}" r="30" fill="${p.tipColor}"/></g>
+      ${tail.replace('/>', ` fill="none" ${OL}/>`)}
+      ${shape(body, p.coat)}
+      <clipPath id="${p.id}-body">${body}</clipPath>
+      <g clip-path="url(#${p.id}-body)">
+        <ellipse cx="196" cy="${p.bellyY}" rx="78" ry="30" fill="${p.belly}"/>
+        <path d="M200 196 C240 192 290 200 320 220" fill="none" stroke="${p.back}" stroke-width="16" stroke-linecap="round"/>
+      </g>
+      ${body.replace('/>', ` fill="none" ${OL}/>`)}
+      ${shape(ears, p.coat)}
+      <path d="M104 154 L ${p.earIn[0]} Z M148 140 L ${p.earIn[1]} Z" fill="${p.earInside}"/>
+      ${shape(head, p.coat)}
+      <clipPath id="${p.id}-head">${head}</clipPath>
+      <g clip-path="url(#${p.id}-head)"><path d="M30 214 C64 206 104 206 140 214 C160 222 176 236 186 250 L30 250 Z" fill="${p.belly}"/></g>
+      ${head.replace('/>', ` fill="none" ${OL}/>`)}
+      <circle cx="38" cy="219" r="9" fill="${C.ink}"/>
+      ${eye(m.eyes, 122, 176, 13, { lid: p.coat })}
+      <ellipse cx="152" cy="206" rx="13" ry="8" fill="${C.pink}"/>
+      <path d="M58 232 Q68 238 78 233" fill="none" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>
+      ${m.snack ? berries(42, 252) : ''}
+      ${m.hearts ? heart(296, 60, 44) + heart(236, 96, 28) : ''}
+      ${deco(m, 196, 82, 30, 234, 56, 20)}`;
+  },
+});
+
+ART.fox = canid({
+  id: 'fox', tint: C.yellowT,
+  coat: '#E8742E', back: '#D2602A', belly: '#F7F0E6', sock: '#2E2E44', tipColor: '#F7F0E6', earInside: '#2E2E44',
+  legs: 'M146 290 V350 M180 294 V354 M262 294 V354 M296 288 V350',
+  body: 'M130 246 C130 204 190 188 250 192 C310 196 336 222 332 252 C328 286 290 296 230 296 C170 296 130 286 130 246 Z',
+  bellyY: 300,
+  tail: 'M318 244 C356 246 382 226 378 190 C374 166 350 166 350 188 C350 208 336 222 314 226 Z',
+  tip: [376, 182],
+  ear: ['92 96 L136 136', '160 84 L180 140'],
+  earIn: ['100 112 L124 138', '160 102 L172 140'],
+});
+
+ART.coyote = canid({
+  id: 'coyote', tint: C.blueT,
+  coat: '#B4A285', back: '#8E7E68', belly: '#EFE7DA', sock: '#B4A285', tipColor: '#2E2E44', earInside: '#E8C9B0',
+  legs: 'M146 290 V358 M180 294 V362 M262 294 V362 M296 288 V358',
+  body: 'M130 246 C130 202 190 186 250 190 C310 194 336 222 332 252 C328 286 290 296 230 296 C170 296 130 286 130 246 Z',
+  bellyY: 300,
+  tail: 'M318 248 C352 262 370 296 360 330 C354 346 338 342 340 326 C344 302 328 282 306 268 Z',
+  tip: [352, 340],
+  ear: ['86 86 L136 136', '162 74 L182 140'],
+  earIn: ['96 104 L124 138', '162 94 L174 140'],
+});
+
+ART.rabbit = {
+  // Sitting up, facing left: long ears, round body, a white cotton tail.
+  tint: C.pinkT,
+  tilt: 0,
+  svg: (m) => {
+    const body = '<path d="M146 340 C116 300 124 226 186 210 C252 194 302 236 300 290 C298 330 268 350 228 350 Z"/>';
+    const tail = '<circle cx="300" cy="306" r="26"/>';
+    const ears = '<ellipse cx="150" cy="86" rx="20" ry="62" transform="rotate(-6 150 86)"/><ellipse cx="196" cy="94" rx="19" ry="58" transform="rotate(22 196 94)"/>';
+    const head = '<ellipse cx="150" cy="180" rx="62" ry="56"/>';
+    return `${shadow([tail, body, ears, head])}
+      ${shape(tail, '#F7F5F2')}
+      ${shape(body, '#A88A6E')}
+      <clipPath id="rabbit-body">${body}</clipPath>
+      <g clip-path="url(#rabbit-body)"><ellipse cx="170" cy="300" rx="50" ry="56" fill="#E8DCC8"/></g>
+      ${body.replace('/>', ` fill="none" ${OL}/>`)}
+      <g fill="#A88A6E" ${OL}><ellipse cx="150" cy="346" rx="34" ry="11"/><ellipse cx="226" cy="348" rx="30" ry="10"/></g>
+      ${shape(ears, '#A88A6E')}
+      <ellipse cx="150" cy="90" rx="9" ry="44" transform="rotate(-6 150 90)" fill="${C.pink}"/><ellipse cx="194" cy="98" rx="8" ry="40" transform="rotate(22 194 98)" fill="${C.pink}"/>
+      ${shape(head, '#A88A6E')}
+      <ellipse cx="128" cy="204" rx="38" ry="26" fill="#E8DCC8"/>
+      ${eye(m.eyes, 140, 170, 15, { lid: '#A88A6E' })}
+      <path d="M100 196 Q106 190 112 196 Q108 204 106 204 Q104 204 100 196 Z" fill="${C.pink}" stroke="${C.ink}" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M106 206 V212 M98 216 Q106 220 114 216" fill="none" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>
+      <path d="M96 204 L66 198 M96 210 L68 214" stroke="${C.ink}" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="176" cy="200" rx="13" ry="8" fill="${C.pink}"/>
+      ${m.snack ? `<path d="M100 222 C96 240 104 250 110 262 M110 262 C96 262 90 252 92 244 M110 262 C122 258 126 248 120 240" fill="none" stroke="#3E8E4E" stroke-width="5" stroke-linecap="round"/><g fill="#7FBF5A" stroke="${C.ink}" stroke-width="4"><circle cx="88" cy="238" r="9"/><circle cx="102" cy="230" r="9"/><circle cx="96" cy="246" r="9"/></g>` : ''}
+      <g fill="#E8DCC8" stroke="${C.ink}" stroke-width="6"><ellipse cx="138" cy="262" rx="11" ry="9"/><ellipse cx="176" cy="268" rx="11" ry="9"/></g>
+      ${m.hearts ? heart(296, 70, 44) + heart(250, 130, 28) : ''}
+      ${deco(m, 252, 80, 30, 290, 54, 20)}`;
+  },
+};
+
+/** A little brown bat. Flying: wings out, facing you. Hanging (`hang`): upside down, wings wrapped. */
+const BAT = { fur: '#7A5A48', face: '#A07E66', wing: '#4A3A40', ear: '#5E4638' };
+ART.bat = {
+  tint: C.blueT,
+  tilt: 0,
+  svg: (m) => {
+    const wings = '<path d="M168 196 C130 150 70 132 22 150 C40 168 44 190 36 210 C58 202 80 210 88 230 C104 216 126 218 140 236 C150 224 160 214 168 214 Z"/><path d="M232 196 C270 150 330 132 378 150 C360 168 356 190 364 210 C342 202 320 210 312 230 C296 216 274 218 260 236 C250 224 240 214 232 214 Z"/>';
+    const body = '<ellipse cx="200" cy="222" rx="50" ry="64"/>';
+    const ears = '<path d="M160 156 L150 96 L190 140 Z"/><path d="M240 156 L250 96 L210 140 Z"/>';
+    return `${shadow([wings, body, ears])}
+      ${shape(wings, BAT.wing)}
+      <path d="M150 190 L60 156 M146 210 L72 204 M150 226 L104 226 M250 190 L340 156 M254 210 L328 204 M250 226 L296 226" stroke="#6E5A62" stroke-width="5" stroke-linecap="round"/>
+      ${shape(ears, BAT.ear)}
+      <path d="M162 150 L156 112 L182 142 Z M238 150 L244 112 L218 142 Z" fill="#E8B4BC"/>
+      ${shape(body, BAT.fur)}
+      <ellipse cx="200" cy="200" rx="40" ry="34" fill="${BAT.face}"/>
+      ${eye(m.eyes, 180, 194, 12, { lid: BAT.face })}${eye(m.eyes, 220, 194, 12, { lid: BAT.face })}
+      <ellipse cx="200" cy="212" rx="9" ry="6" fill="${C.ink}"/>
+      <path d="M190 222 Q200 230 210 222" fill="none" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>
+      <path d="M196 224 L198 231 L200 224 Z" fill="#fff" stroke="${C.ink}" stroke-width="1.5"/>
+      <ellipse cx="166" cy="216" rx="11" ry="7" fill="${C.pink}"/><ellipse cx="234" cy="216" rx="11" ry="7" fill="${C.pink}"/>
+      <path d="M182 282 l-6 12 M218 282 l6 12" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>
+      ${m.snack ? droplet(200, 270, 0.8) : ''}
+      ${m.hearts ? heart(300, 60, 40) + heart(70, 70, 28) : ''}
+      ${deco(m, 252, 76, 28, 288, 50, 18)}`;
+  },
+};
+ART.batHang = {
+  tint: C.blueT,
+  tilt: 0,
+  svg: (m) => {
+    // Feet hooked at the top, wings wrapped like a little cloak, head at the bottom.
+    const pod = '<path d="M200 70 C254 74 268 140 260 196 C254 236 232 262 200 266 C168 262 146 236 140 196 C132 140 146 74 200 70 Z"/>';
+    const head = '<ellipse cx="200" cy="286" rx="46" ry="40"/>';
+    const ears = '<path d="M168 300 L156 352 L190 318 Z"/><path d="M232 300 L244 352 L210 318 Z"/>';
+    return `<path d="M184 74 l-6 -22 M216 74 l6 -22" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>
+      ${shadow([pod, head, ears])}
+      ${shape(pod, BAT.wing)}
+      <path d="M200 84 C186 140 186 210 200 258 M172 96 C160 150 162 210 176 246 M228 96 C240 150 238 210 224 246" fill="none" stroke="#6E5A62" stroke-width="5" stroke-linecap="round"/>
+      ${shape(ears, BAT.ear)}
+      ${shape(head, BAT.fur)}
+      <ellipse cx="200" cy="292" rx="34" ry="26" fill="${BAT.face}"/>
+      ${eye(m.eyes, 184, 296, 10, { lid: BAT.face })}${eye(m.eyes, 216, 296, 10, { lid: BAT.face })}
+      <ellipse cx="200" cy="280" rx="7" ry="5" fill="${C.ink}"/>
+      <ellipse cx="170" cy="284" rx="9" ry="6" fill="${C.pink}"/><ellipse cx="230" cy="284" rx="9" ry="6" fill="${C.pink}"/>
+      ${m.hearts ? heart(300, 120, 36) : ''}
+      ${deco(m, 270, 150, 26, 304, 124, 18)}`;
+  },
+};
+
+ART.turkey = {
+  // A wild turkey, standing side-on facing left: tail fanned, bronze feathers, a bare
+  // blue-and-red head with a wattle and a little snood over the beak.
+  tint: C.yellowT,
+  tilt: 0,
+  shoulder: [0.56, 0.5],
+  svg: (m) => {
+    const fan = '<path d="M240 250 C200 182 214 80 280 50 C336 26 388 62 380 128 C374 188 318 246 240 250 Z"/>';
+    const body = '<path d="M120 270 C110 210 170 176 236 182 C300 188 330 236 316 282 C304 322 250 338 196 332 C150 326 126 304 120 270 Z"/>';
+    const neck = '<path d="M150 214 C140 190 132 160 134 130 L170 132 C168 160 174 186 186 206 Z"/>';
+    const head = '<ellipse cx="146" cy="120" rx="30" ry="26"/>';
+    const legs = 'M190 330 L184 372 M240 330 L246 372 M166 376 L184 366 L198 378 M232 378 L246 366 L262 376';
+    return `<path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${legs}" fill="none" stroke="#C9A098" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      ${shadow([fan, body, neck, head])}
+      ${shape(fan, '#7A5A3A')}
+      <clipPath id="tk-fan">${fan}</clipPath>
+      <g clip-path="url(#tk-fan)">
+        <path d="M240 250 L240 0 M240 250 L310 0 M240 250 L390 20 M240 250 L400 110 M240 250 L400 190" stroke="#5E4428" stroke-width="5"/>
+        <path d="M214 120 C240 56 324 18 378 74 C390 150 334 216 280 234" fill="none" stroke="#E8D2B0" stroke-width="16"/>
+        <path d="M214 120 C240 56 324 18 378 74 C390 150 334 216 280 234" fill="none" stroke="#2E2E44" stroke-width="6" transform="translate(-10 10)"/>
+      </g>
+      ${fan.replace('/>', ` fill="none" ${OL}/>`)}
+      ${shape(body, '#6E4A30')}
+      <clipPath id="tk-body">${body}</clipPath>
+      <g clip-path="url(#tk-body)">
+        <path d="M150 230 q14 12 28 0 M186 220 q14 12 28 0 M222 216 q14 12 28 0 M258 222 q14 12 28 0 M170 262 q14 12 28 0 M206 256 q14 12 28 0 M242 256 q14 12 28 0 M280 262 q14 12 28 0" fill="none" stroke="#C9A060" stroke-width="5" stroke-linecap="round"/>
+        <path d="M220 250 C260 240 300 250 320 280 C296 300 250 304 220 290 Z" fill="#5A3A24"/>
+        <path d="M232 262 H304 M236 278 H300" stroke="#F4EDE4" stroke-width="5" opacity="0.8"/>
+      </g>
+      ${body.replace('/>', ` fill="none" ${OL}/>`)}
+      <path d="M150 232 C156 252 160 268 156 286" stroke="#2E2E44" stroke-width="7" stroke-linecap="round" fill="none"/>
+      ${shape(neck, '#C9D6F2')}
+      <path d="M150 170 C142 190 140 204 146 214 C156 206 162 190 160 170 Z" fill="#E5484D" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round"/>
+      ${shape(head, '#9DB9F2')}
+      <path d="M132 120 C120 128 112 150 116 160 C126 156 134 140 136 124 Z" fill="#E5484D" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round"/>
+      ${eye(m.eyes, 144, 112, 9, { lid: '#9DB9F2' })}
+      <path d="M118 112 C108 112 98 118 94 124 C102 130 112 128 120 124 Z" fill="#E8C27A" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round"/>
+      <ellipse cx="162" cy="130" rx="9" ry="6" fill="${C.pink}"/>
+      ${m.snack ? `<ellipse cx="88" cy="134" rx="10" ry="7" transform="rotate(-20 88 134)" fill="#D9954F" stroke="${C.ink}" stroke-width="5"/>` : ''}
+      ${m.hearts ? heart(70, 40, 40) + heart(40, 120, 26) : ''}
+      ${deco(m, 196, 48, 28, 232, 26, 18)}`;
+  },
+};
+
 // Every neighbor in close-up scenes: which drawing, how they're posed, and where their
 // feet are on the 400 canvas (as a fraction), so the scene can stand them on its branch,
 // sidewalk, grass or water. Poses: perch (on a branch, ledge or wire), stand (on the
@@ -1597,6 +1791,13 @@ const CUTOUTS = {
   'ring-billed-gull:young': P('gullChick', 'stand', 0.9),
   'common-tern:young': P('ternChick', 'stand', 0.9),
   'white-tailed-deer:young': P('fawn', 'stand', 0.9),
+  'red-fox': P('fox', 'stand', 0.9),
+  coyote: P('coyote', 'stand', 0.92),
+  'eastern-cottontail': P('rabbit', 'stand', 0.88),
+  bats: P('bat', 'fly', 0.75),
+  // Bats sleep hanging upside down, wings wrapped.
+  'bats:hang': P('batHang', 'fly', 0.9),
+  'wild-turkey': P('turkey', 'stand', 0.93),
 };
 
 // Species id → drawing.
@@ -1642,6 +1843,11 @@ const SPECIES = {
   'virginia-opossum': 'opossum',
   'white-tailed-deer': 'deer',
   groundhog: 'groundhog',
+  'red-fox': 'fox',
+  coyote: 'coyote',
+  'eastern-cottontail': 'rabbit',
+  bats: 'bat',
+  'wild-turkey': 'turkey',
   'pond-slider': 'turtle',
   'common-eastern-bumble-bee': 'bumblebee',
   'western-honey-bee': 'honeybee',

@@ -68,9 +68,9 @@ const MOODS: Mood[] = ['hello', 'snack', 'happy', 'sleepy', 'surprised', 'curiou
 
 export default function ArtPreview() {
   const raccoon = getSpecies('raccoon')!;
-  const { only, from, accents, period: p, place, scene: forced, action, groups, skip, v } = useLocalSearchParams<{ v?: string; groups?: string; skip?: string; only?: string; from?: string; accents?: string; period?: Period; place?: string; scene?: CloseUpSetting; action?: 'fly' | 'sleep' | 'dust' | 'drink' | 'dry' }>();
+  const { only, from, accents, period: p, place, scene: forced, action, groups, skip, v, ids } = useLocalSearchParams<{ ids?: string; v?: string; groups?: string; skip?: string; only?: string; from?: string; accents?: string; period?: Period; place?: string; scene?: CloseUpSetting; action?: 'fly' | 'sleep' | 'dust' | 'drink' | 'dry' }>();
   const { width } = useWindowDimensions();
-  if (only === 'closeups') return <CloseUpGallery width={width} initial={{ period: p, place, scene: forced, action, groups: !!groups, skip: Number(skip ?? 0), version: v === undefined ? undefined : Number(v) }} />;
+  if (only === 'closeups') return <CloseUpGallery width={width} initial={{ period: p, place, scene: forced, action, groups: !!groups, skip: Number(skip ?? 0), version: v === undefined ? undefined : Number(v), ids: ids?.split(',') }} />;
   const thumb = (width - 32 - 12) / 2;
   if (only === 'backdrops') {
     const h = thumb * 1.9;
@@ -135,7 +135,7 @@ export default function ArtPreview() {
 type Act = 'fly' | 'sleep' | 'dust' | 'drink' | 'dry' | undefined;
 const LOOKS = ['park-slope', 'chelsea', 'coney-island', 'battery-park-city', 'bay-ridge'];
 
-function CloseUpGallery({ width, initial }: { width: number; initial: { period?: Period; place?: string; scene?: CloseUpSetting; action?: Act; groups?: boolean; skip?: number; version?: number } }) {
+function CloseUpGallery({ width, initial }: { width: number; initial: { period?: Period; place?: string; scene?: CloseUpSetting; action?: Act; groups?: boolean; skip?: number; version?: number; ids?: string[] } }) {
   const [period, setPeriod] = useState<Period>(initial.period ?? 'midday');
   const [place, setPlace] = useState(initial.place ?? 'park-slope');
   const [action, setAction] = useState<Act>(initial.action);
@@ -157,8 +157,8 @@ function CloseUpGallery({ width, initial }: { width: number; initial: { period?:
     plan: { scene: scene(s.id, own), figures: [{ id: s.id, x: 0.5, scale: 1, action: action && canDo(s.id, action) ? action : undefined }] } as Plan,
     id: s.id,
   }));
-  // ?skip=6 starts further down (for screenshots).
-  const list = (groups ? GROUPS.filter((g) => g.plan).map((g) => ({ ...g, id: g.plan!.figures[0].id })) : singles).slice(initial.skip ?? 0);
+  // ?skip=6 starts further down, ?ids=red-fox,bats shows only those neighbors (for screenshots).
+  const list = (groups ? GROUPS.filter((g) => g.plan).map((g) => ({ ...g, id: g.plan!.figures[0].id })) : singles).filter((x) => !initial.ids || initial.ids.includes(x.id)).slice(initial.skip ?? 0);
   return (
     <View style={{ flex: 1, backgroundColor: colors.paper, paddingTop: 54 }}>
       <View style={{ paddingHorizontal: 8, gap: 6, paddingBottom: 6 }}>

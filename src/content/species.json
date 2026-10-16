@@ -2920,5 +2920,291 @@
     ],
     "iNatTaxonId": 47535,
     "withPeople": "Orb-weavers are shy and almost never bite people. They'd much rather wait in their web for a moth."
+  },
+  {
+    "id": "red-fox",
+    "friendlyName": "Red Foxes",
+    "commonName": "Red Fox",
+    "scientificName": "Vulpes vulpes",
+    "collectiveNoun": "a skulk",
+    "group": "furry",
+    "art": {
+      "body": "deer",
+      "main": "orange",
+      "second": "ink",
+      "belly": "paper"
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Sneaky One",
+      "traits": [
+        "Light on their feet",
+        "Big pouncer",
+        "Dusk wanderer"
+      ],
+      "blurb": "Red foxes trot along the edges of the dunes and meadows at dawn and dusk, listening for mice in the grass, then leap up and pounce nose-first."
+    },
+    "origin": "Native to New York (and found all over the northern half of the world), living in the city's wildest waterfront parks, mostly on Staten Island and around the outer beaches.",
+    "home": "Along the edges of dunes, meadows and brushy parkland, with a den dug into a sandy bank.",
+    "rightNow": {
+      "spring": "Kits are tumbling out of the den, play-fighting while their parents bring home food.",
+      "summer": "The kits are learning to hunt, pouncing on grasshoppers in the tall grass at dusk.",
+      "fall": "This year's young are heading off to find their own patch.",
+      "winter": "They're courting in the snow, and you might hear their eerie barks after dark."
+    },
+    "funFact": {
+      "title": "The mouse pounce",
+      "body": "A fox can hear a mouse squeak under the snow, then jump high and dive nose-first right on top of them. They seem to aim better when facing northeast."
+    },
+    "kindness": {
+      "title": "Watch from far away.",
+      "body": "Never feed foxes or leave food out for them. Keep dogs leashed and give dens plenty of room, especially in spring."
+    },
+    "homeScene": "waterfront",
+    "spots": {
+      "park": "lawn",
+      "waterfront": "grass"
+    },
+    "spotHint": "Look at dawn or dusk along dune trails and meadow edges in the quietest waterfront parks. A flash of orange with a white-tipped tail.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 42069,
+    "sightingsOnly": true,
+    "nocturnal": true,
+    "withPeople": "Foxes are shy and keep their distance. They may get bold where people feed them, which isn't good for them, so watch quietly and let them be wild."
+  },
+  {
+    "id": "coyote",
+    "friendlyName": "Coyotes",
+    "commonName": "Coyote",
+    "scientificName": "Canis latrans",
+    "collectiveNoun": "a band",
+    "group": "furry",
+    "art": {
+      "body": "deer",
+      "main": "tan",
+      "second": "gray",
+      "belly": "paper"
+    },
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Quiet Explorer",
+      "traits": [
+        "Night traveler",
+        "Clever",
+        "Keeps to themselves"
+      ],
+      "blurb": "Coyotes moved into the city on their own, trotting down rail lines and greenways. They travel at night, keep their distance from people and know every shortcut in the park."
+    },
+    "origin": "Native to North America, spreading east over the last century. They reached the Bronx in the 1990s and now live in its big parks, with a few wandering farther.",
+    "home": "In the woods and meadows of the biggest parks, resting in thickets by day.",
+    "rightNow": {
+      "spring": "Pups are being born in dens hidden in the thickest corners of the park.",
+      "summer": "Families are out at night, the pups learning to hunt mice and voles.",
+      "fall": "The young are heading out to find their own territory, some traveling a long way.",
+      "winter": "Pairs are courting, and their yips and howls carry across the park on cold nights."
+    },
+    "funFact": {
+      "title": "Sneaking into the city",
+      "body": "Coyotes reached the Bronx by following highways, rail lines and green corridors south. One even made it across a bridge into Queens."
+    },
+    "kindness": {
+      "title": "Let them stay wild.",
+      "body": "Never feed coyotes. Keep pets inside at night, put trash away and give any coyote you see plenty of space."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "lawn",
+      "waterfront": "grass"
+    },
+    "spotHint": "Very rarely seen. Early morning or late evening in the biggest Bronx parks, a gray-brown dog with a bushy, black-tipped tail trotting away.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 42051,
+    "sightingsOnly": true,
+    "nocturnal": true,
+    "withPeople": "Coyotes in the city usually avoid people completely and move at night. The ones that get fed lose their fear, which gets them into trouble."
+  },
+  {
+    "id": "bats",
+    "friendlyName": "Bats",
+    "commonName": "Bats",
+    "scientificName": "Chiroptera",
+    "collectiveNoun": "a colony",
+    "group": "furry",
+    "art": {
+      "body": "moth",
+      "main": "brown",
+      "second": "ink",
+      "belly": "tan"
+    },
+    "tint": "blueTint",
+    "personality": {
+      "type": "The Night Shift",
+      "traits": [
+        "Bug catcher",
+        "Hangs upside down",
+        "Hears in the dark"
+      ],
+      "blurb": "As the light goes, little brown bats come out to zigzag over ponds, streetlights and rooftops, catching bugs by listening to the echoes of their own clicks."
+    },
+    "origin": "Native. Big brown bats live in the city all year, and eastern red bats, hoary bats and others pass through on migration.",
+    "home": "Tucked into tree hollows, loose bark, attics and cracks in old buildings by day.",
+    "rightNow": {
+      "spring": "They're waking up from winter and coming out to hunt on warm evenings.",
+      "summer": "Moms are raising pups in snug roosts, and the sky over the ponds is full of zigzagging bats at dusk.",
+      "fall": "Some are flying south, and the ones who stay are fattening up for a long winter sleep.",
+      "winter": "They're hibernating in cool, quiet spots, barely breathing until spring."
+    },
+    "funFact": {
+      "title": "Seeing with sound",
+      "body": "Bats make high clicks, too high for us to hear, and listen to the echoes to find a moth in the dark. A single bat can catch hundreds of bugs in an hour."
+    },
+    "kindness": {
+      "title": "Turn off a light.",
+      "body": "Dark yards and gardens with native flowers bring the moths bats eat. Never touch a bat on the ground: call a wildlife rehabber instead."
+    },
+    "homeScene": "park",
+    "spots": {
+      "block": "sky",
+      "park": "sky",
+      "waterfront": "sky"
+    },
+    "spotHint": "Right at dusk on warm evenings, look up over ponds, lawns and streetlights for fast, fluttery zigzags.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "iNatTaxonId": 40268,
+    "nocturnal": true,
+    "withPeople": "Bats stay out of our way and eat the bugs who bite us. They're gentle, but a bat on the ground may be sick, so never pick one up."
+  },
+  {
+    "id": "eastern-cottontail",
+    "friendlyName": "Cottontails",
+    "commonName": "Eastern Cottontail",
+    "scientificName": "Sylvilagus floridanus",
+    "collectiveNoun": "a fluffle",
+    "group": "furry",
+    "art": {
+      "body": "groundhog",
+      "main": "tan",
+      "second": "brown",
+      "belly": "paper"
+    },
+    "tint": "pinkTint",
+    "personality": {
+      "type": "The Freezer",
+      "traits": [
+        "Stays very still",
+        "Zigzag runner",
+        "Clover fan"
+      ],
+      "blurb": "Cottontails nibble clover at the edges of lawns and freeze perfectly still when anyone comes near. If that doesn't work, they zigzag away, flashing their white tail."
+    },
+    "origin": "Native rabbits of eastern North America, living in parks, meadows and leafy edges all over the city.",
+    "home": "On the grassy edges of parks, close to thick bushes they can dash into.",
+    "rightNow": {
+      "spring": "Moms are tucking tiny babies into shallow nests in the grass, lined with their own fur.",
+      "summer": "Young rabbits are everywhere, nibbling clover at the edges of the lawns.",
+      "fall": "They're fattening up and growing thick winter coats.",
+      "winter": "They're nibbling twigs and bark, staying close to the thickest bushes."
+    },
+    "funFact": {
+      "title": "Hidden in plain sight",
+      "body": "A mother cottontail visits her nest only at dawn and dusk, so she doesn't lead anyone to it. Babies alone in the nest are usually just fine."
+    },
+    "kindness": {
+      "title": "Leave the nest be.",
+      "body": "If you find a nest of baby rabbits, leave it and keep dogs away. Mom is coming back after dark."
+    },
+    "homeScene": "park",
+    "spots": {
+      "park": "lawn",
+      "waterfront": "grass"
+    },
+    "spotHint": "At dawn and dusk, look along the edges of big lawns, close to bushes, for a small brown rabbit sitting very, very still.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 43111,
+    "withPeople": "Cottontails freeze or zigzag away from people, but in busy parks some get used to walkers and keep munching."
+  },
+  {
+    "id": "wild-turkey",
+    "friendlyName": "Wild Turkeys",
+    "commonName": "Wild Turkey",
+    "scientificName": "Meleagris gallopavo",
+    "collectiveNoun": "a rafter",
+    "group": "birds",
+    "art": {
+      "body": "goose",
+      "main": "brown",
+      "second": "tan",
+      "belly": "brown",
+      "accent": "red"
+    },
+    "tint": "yellowTint",
+    "personality": {
+      "type": "The Strutter",
+      "traits": [
+        "Big and proud",
+        "Gobbles",
+        "Sleeps in trees"
+      ],
+      "blurb": "Wild turkeys stroll through Staten Island yards and parks in big flocks, the males puffing up and fanning their tails, and at night they fly up into tall trees to sleep."
+    },
+    "origin": "Native. Gone from the area for a long time, they came back and are now a familiar sight on Staten Island and in the big Bronx parks.",
+    "home": "In flocks on lawns, woods and quiet streets, roosting high in tall trees at night.",
+    "rightNow": {
+      "spring": "The males are strutting with their tails fanned and gobbling to impress the hens.",
+      "summer": "Hens are leading little flocks of poults through the tall grass.",
+      "fall": "Big flocks are roaming the parks and yards, scratching for acorns.",
+      "winter": "They're traveling in big flocks, roosting together high in the trees on cold nights."
+    },
+    "funFact": {
+      "title": "They can fly",
+      "body": "Wild turkeys are strong fliers for short bursts, up to 55 miles an hour, and every night they fly up into tall trees to sleep."
+    },
+    "kindness": {
+      "title": "Give them the road.",
+      "body": "Drive slowly where turkeys cross, never feed them, and give a puffed-up spring male plenty of room."
+    },
+    "homeScene": "park",
+    "spots": {
+      "block": "sidewalk",
+      "park": "lawn",
+      "waterfront": "grass"
+    },
+    "spotHint": "On Staten Island, look for a flock on a lawn or a quiet street, or listen for gobbling in spring.",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "iNatTaxonId": 906,
+    "ebirdCode": "wiltur",
+    "sightingsOnly": true,
+    "onlyAt": [
+      "st-george",
+      "clove-lakes-park",
+      "great-kills-park",
+      "van-cortlandt-park",
+      "pelham-bay-park"
+    ],
+    "withPeople": "Most wild turkeys keep their distance, but where people feed them they can get bold, and spring males sometimes puff up at walkers. Give them space and they'll go about their business."
   }
 ]

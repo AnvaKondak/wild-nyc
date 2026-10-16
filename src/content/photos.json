@@ -17,6 +17,12 @@
     "attribution": "(c) Judy Gallagher, some rights reserved (CC BY)",
     "source": "https://www.inaturalist.org/photos/111891996"
   },
+  "bats": {
+    "file": "bats.jpg",
+    "license": "CC BY-SA",
+    "attribution": "(c) Juan Cruzado Cortés, some rights reserved (CC BY-SA), uploaded by Juan Cruzado Cortés",
+    "source": "https://www.inaturalist.org/photos/411695"
+  },
   "black-crowned-night-heron": {
     "file": "black-crowned-night-heron.jpg",
     "license": "CC0",
@@ -89,6 +95,12 @@
     "attribution": "no rights reserved",
     "source": "https://www.inaturalist.org/photos/12118242"
   },
+  "coyote": {
+    "file": "coyote.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Kevin Lynch, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/61403705"
+  },
   "dark-eyed-junco": {
     "file": "dark-eyed-junco.jpg",
     "license": "CC BY",
@@ -112,6 +124,12 @@
     "license": "CC BY",
     "attribution": "(c) Christopher Eliot, some rights reserved (CC BY), uploaded by Christopher Eliot",
     "source": "https://www.inaturalist.org/photos/33118717"
+  },
+  "eastern-cottontail": {
+    "file": "eastern-cottontail.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Andrew Murray, some rights reserved (CC BY), uploaded by Andrew Murray",
+    "source": "https://www.inaturalist.org/photos/277644122"
   },
   "eastern-gray-squirrel": {
     "file": "eastern-gray-squirrel.jpg",
@@ -239,6 +257,12 @@
     "attribution": "(c) Troy B, some rights reserved (CC BY)",
     "source": "https://www.inaturalist.org/photos/163013382"
   },
+  "red-fox": {
+    "file": "red-fox.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Mourad Harzallah, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/62915862"
+  },
   "red-tailed-hawk": {
     "file": "red-tailed-hawk.jpg",
     "license": "CC0",
@@ -298,6 +322,12 @@
     "license": "CC BY",
     "attribution": "(c) Judy Gallagher, some rights reserved (CC BY)",
     "source": "https://www.inaturalist.org/photos/359148504"
+  },
+  "wild-turkey": {
+    "file": "wild-turkey.jpg",
+    "license": "CC BY",
+    "attribution": "(c) Judy Gallagher, some rights reserved (CC BY)",
+    "source": "https://www.inaturalist.org/photos/114655826"
   },
   "yellow-rumped-warbler": {
     "file": "yellow-rumped-warbler.jpg",

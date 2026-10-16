@@ -1140,5 +1140,107 @@
    "dusk",
    "night"
   ]
+ },
+ {
+  "speciesId": "red-fox",
+  "text": "A red fox's tail is almost half the length of their whole body. They curl it over their nose to keep warm when they sleep."
+ },
+ {
+  "speciesId": "red-fox",
+  "text": "Foxes can hear a watch ticking from 40 yards away."
+ },
+ {
+  "speciesId": "red-fox",
+  "text": "Fox parents bring food back to the den for the kits, and older brothers and sisters sometimes help.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "red-fox",
+  "text": "Red foxes have whiskers on their legs as well as their faces, to feel their way in the dark.",
+  "periods": [
+   "night",
+   "dusk"
+  ]
+ },
+ {
+  "speciesId": "coyote",
+  "text": "Coyotes can run up to 40 miles an hour and jump over an eight-foot fence."
+ },
+ {
+  "speciesId": "coyote",
+  "text": "A coyote's howl can make two coyotes sound like a whole pack. It's a trick of echoes and fast changes in pitch.",
+  "periods": [
+   "dusk",
+   "night"
+  ]
+ },
+ {
+  "speciesId": "coyote",
+  "text": "Coyote couples often stay together for years and raise their pups together."
+ },
+ {
+  "speciesId": "coyote",
+  "text": "City coyotes shift to being active at night to avoid people."
+ },
+ {
+  "speciesId": "bats",
+  "text": "One little brown bat can catch hundreds of mosquito-sized bugs in an hour."
+ },
+ {
+  "speciesId": "bats",
+  "text": "Bats are the only mammals who can really fly."
+ },
+ {
+  "speciesId": "bats",
+  "text": "A bat's knees bend backward, which helps them hang upside down without any effort at all."
+ },
+ {
+  "speciesId": "bats",
+  "text": "Most bats have just one pup a year, and moms gather in nursery roosts to raise them together.",
+  "seasons": [
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "eastern-cottontail",
+  "text": "A cottontail can run up to 18 miles an hour, zigzagging to throw off anyone chasing them."
+ },
+ {
+  "speciesId": "eastern-cottontail",
+  "text": "Baby cottontails leave the nest when they're only about three weeks old.",
+  "seasons": [
+   "spring",
+   "summer"
+  ]
+ },
+ {
+  "speciesId": "eastern-cottontail",
+  "text": "Rabbits' teeth never stop growing. Chewing twigs and grass keeps them the right length."
+ },
+ {
+  "speciesId": "eastern-cottontail",
+  "text": "Cottontails don't dig burrows. They rest in a shallow dip in the grass called a form."
+ },
+ {
+  "speciesId": "wild-turkey",
+  "text": "Wild turkeys sleep in trees, flying up at dusk and down again at dawn."
+ },
+ {
+  "speciesId": "wild-turkey",
+  "text": "A turkey's head can change color from red to white to blue when they're excited."
+ },
+ {
+  "speciesId": "wild-turkey",
+  "text": "Wild turkeys can see in color and have a much wider view than we do, almost all the way around."
+ },
+ {
+  "speciesId": "wild-turkey",
+  "text": "Turkey poults can leave the nest and follow their mom within a day of hatching.",
+  "seasons": [
+   "summer"
+  ]
  }
 ]

@@ -8,7 +8,7 @@ import type { Mood, StorySlide } from '@/content/types';
 
 const SLEEPY = /\b(asleep|sleeps?|sleeping|slept|naps?|napping|doz(e|es|ing)|snooz\w*|roost(s|ing)?|tucked in|curled up|hibernat\w*|dream\w*|bedtime|resting|hunker\w*)\b/;
 const SURPRISED = /\b(startl\w*|spook\w*|surpris\w*|alarm(s|ed)?|whoa|uh-oh|oops|sudden(ly)?|scatter(s|ed|ing)?|dive-bomb\w*|scold(s|ing)?|mob(s|bing)?|on alert|jumps?|bolts?|flinch\w*|yikes)\b/;
-const SINGING = /\b(sings?|singing|sang|songs?|tunes?|whistl\w*|chirp\w*|trill\w*|coo(s|ing)?|warbl\w*|chorus|concerts?|serenad\w*|caw(s|ing)?|honk\w*|quack\w*|chatter\w*|calling|squawk\w*|hoot(s|ing)?|buzz(es|ing)?|duet)\b/;
+const SINGING = /\b(sings?|singing|sang|songs?|tunes?|whistl\w*|chirp\w*|trill\w*|coo(s|ing)?|warbl\w*|chorus|concerts?|serenad\w*|caw(s|ing)?|honk\w*|quack\w*|chatter\w*|calling|squawk\w*|hoot(s|ing)?|buzz(es|ing)?|duet|yip\w*|howl\w*|bark(s|ing)|gobbl\w*)\b/;
 const SNACK = /\b(eats?|eating|ate|snacks?|food|feed(s|ing)?|forag\w*|munch\w*|nibbl\w*|crumbs?|seeds?|berr(y|ies)|nuts?|acorns?|worms?|bugs?|insects?|hunt(s|ing)?|catch(es|ing)?|caught|fish(ing)?|prey|nectar|lunch|breakfast|dinner|meals?|peck(s|ing)?|gulp\w*|cach(e|es|ing)|stash\w*|bur(y|ies|ying)|grub\w*|sips?|sipping|drinks?)\b/;
 // Not plain "cold": a "cold gray ocean" on a mild night shouldn't bring snowflakes.
 const CHILLY = /\b(chilly|frost\w*|freez\w*|snow\w*|icy|shiver\w*|puff(s|ed|ing)? up|puffed|puffer|fluff(s|ed|ing)? up|down jacket|winter coats?|huddl\w*|bundled|in the cold|cold (morning|evening|night|day|air|wind|ledge|rooftop))\b/;

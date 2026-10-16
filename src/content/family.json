@@ -1120,5 +1120,115 @@
         "body": "The eggs are tucked in silk sacs in safe spots, waiting out the winter."
       }
     }
+  },
+  "red-fox": {
+    "young": "Both parents raise a litter of four to six kits in a den. The kits come out to play in spring and are on their own by fall.",
+    "social": "Mostly solo outside the breeding season, but parents stay together while they raise the kits.",
+    "seasons": {
+      "spring": {
+        "title": "Kits at the den",
+        "body": "Kits are tumbling outside the den while both parents bring food home."
+      },
+      "summer": {
+        "title": "Hunting lessons",
+        "body": "The kits are following their parents out at dusk, learning to pounce."
+      },
+      "fall": {
+        "title": "Moving out",
+        "body": "This year's young are leaving to find territories of their own."
+      },
+      "winter": {
+        "title": "Finding a mate",
+        "body": "Foxes are pairing up, barking to each other across the snowy meadows."
+      }
+    }
+  },
+  "coyote": {
+    "young": "Both parents raise four to seven pups in a hidden den, and last year's young sometimes help.",
+    "social": "Families stick together in small groups, keeping in touch with yips and howls.",
+    "seasons": {
+      "spring": {
+        "title": "Pups in the den",
+        "body": "Pups are being born in dens hidden in the thickest corners of the park."
+      },
+      "summer": {
+        "title": "Family outings",
+        "body": "The pups are following their parents at night, learning the trails."
+      },
+      "fall": {
+        "title": "Heading out",
+        "body": "The young are leaving home, some traveling miles to find a place of their own."
+      },
+      "winter": {
+        "title": "Pairs together",
+        "body": "Couples are traveling and calling together through the cold nights."
+      }
+    }
+  },
+  "bats": {
+    "young": "Most bats have one pup a year. Moms gather in warm nursery roosts, and the pups can fly in about a month.",
+    "social": "Social sleepers: they roost together in groups, from a few to hundreds.",
+    "seasons": {
+      "spring": {
+        "title": "Back in the roost",
+        "body": "Bats are waking from winter and gathering in their summer roosts."
+      },
+      "summer": {
+        "title": "Nursery roosts",
+        "body": "Moms are hanging together with their pups in warm, snug roosts."
+      },
+      "fall": {
+        "title": "Getting ready",
+        "body": "Some bats are flying south, and the rest are fattening up for winter."
+      },
+      "winter": {
+        "title": "Hibernating",
+        "body": "They're hibernating in cool, quiet places, huddled together."
+      }
+    }
+  },
+  "eastern-cottontail": {
+    "young": "Moms raise several litters a year in shallow grass nests lined with their own fur, visiting only at dawn and dusk.",
+    "social": "Mostly solo, though you'll often see a few on the same lawn at dusk.",
+    "seasons": {
+      "spring": {
+        "title": "Hidden nests",
+        "body": "Moms are tucking babies into fur-lined nests in the grass."
+      },
+      "summer": {
+        "title": "Lots of little ones",
+        "body": "Young rabbits are everywhere on the lawns, and moms are on their next litter."
+      },
+      "fall": {
+        "title": "On their own",
+        "body": "This year's young are grown and on their own, fattening up for winter."
+      },
+      "winter": {
+        "title": "Winter coats",
+        "body": "Each rabbit is keeping to their own patch of bushes, fluffed up in a thick coat."
+      }
+    }
+  },
+  "wild-turkey": {
+    "young": "Hens raise the poults on their own. The babies leave the nest within a day and follow mom everywhere.",
+    "social": "Very social: flocks of hens and young, and separate groups of males, roam together and roost together.",
+    "seasons": {
+      "spring": {
+        "title": "Strutting season",
+        "body": "Males are fanning their tails and gobbling, and hens are picking nest spots."
+      },
+      "summer": {
+        "title": "Poults in tow",
+        "body": "Hens are leading lines of fluffy poults through the tall grass."
+      },
+      "fall": {
+        "title": "Big flocks",
+        "body": "Families are joining up into big flocks that roam the parks and yards."
+      },
+      "winter": {
+        "title": "Roosting together",
+        "body": "Big flocks are roosting side by side high in the trees on cold nights."
+      }
+    }
   }
 }

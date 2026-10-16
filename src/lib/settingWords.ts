@@ -60,8 +60,8 @@ export function actionFromWords(text: string): Action | undefined {
 // ("side by side") or little ones, never take anyone away.
 const PAIR = /\b(two|pair|couple|both|twins|each other|side by side|partners?|mates?|duet)\b/;
 const MANY = /\b(three|few|flocks?|famil(y|ies)|gang|groups?|crowds?|huddl\w*|bunch|everyone|everybody|together|rafts?|herds?|colon(y|ies)|pairs|couples|lines of|dozens?|hundreds?|thousands?|neighbors)\b/;
-const YOUNG = /\b(bab(y|ies)|kids?|chicks?|youngsters?|young ones|young|fledglings?|kits?|squabs?|ducklings?|goslings?|cygnets?|fawns?|pups?|nestlings?|little ones|siblings?|juveniles?|teens?|brood)\b/;
-const MANY_YOUNG = /\b(babies|kids|chicks|youngsters|young ones|fledglings|kits|squabs|ducklings|goslings|cygnets|fawns|pups|nestlings|little ones|siblings|juveniles|teens|brood)\b/;
+const YOUNG = /\b(bab(y|ies)|kids?|chicks?|youngsters?|young ones|young|fledglings?|kits?|squabs?|ducklings?|goslings?|cygnets?|fawns?|pups?|nestlings?|little ones|siblings?|juveniles?|teens?|brood|poults?)\b/;
+const MANY_YOUNG = /\b(babies|kids|chicks|youngsters|young ones|fledglings|kits|squabs|ducklings|goslings|cygnets|fawns|pups|nestlings|little ones|siblings|juveniles|teens|brood|poults)\b/;
 
 /** The species' name in a sentence: one ("pigeon") and several ("pigeons"). */
 function namesOf(speciesId: string): { one: string; many: string } | undefined {

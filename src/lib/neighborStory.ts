@@ -61,10 +61,13 @@ export function poolFor(kind: PlaceKind, ctx: Pick<StoryContext, 'allSpecies' | 
   // The neighborhood's own mammals (seen there most, all year) are here whenever they're in season.
   const own = topMammals(ctx.allSpecies, ctx.sightings, placeId);
   const everywhere = (s: Species) => own.includes(s);
-  const around = ctx.allSpecies.filter((s) => s.seasons.includes(ctx.season));
+  // Species kept to certain places (turkeys: Staten Island and the big Bronx parks) live
+  // there for sure, and nowhere else, whatever a stray record says.
+  const here = (s: Species) => !s.onlyAt || (!!placeId && s.onlyAt.includes(placeId));
+  const around = ctx.allSpecies.filter((s) => s.seasons.includes(ctx.season) && here(s));
   const recorded = around.filter((s) => recordedHere(s, ctx.sightings, placeId, ctx.season) === true);
   if (!placeId || !ctx.sightings?.[placeId]) return around.filter((s) => usual(s) || seen(s));
-  if (recorded.length >= THIN) return around.filter((s) => recorded.includes(s) || everywhere(s) || seen(s));
+  if (recorded.length >= THIN) return around.filter((s) => recorded.includes(s) || everywhere(s) || !!s.onlyAt || seen(s));
   return around.filter((s) => recorded.includes(s) || usual(s) || everywhere(s) || seen(s));
 }
 

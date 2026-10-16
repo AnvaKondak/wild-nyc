@@ -34,6 +34,16 @@ const KIND_WORDS: Record<string, string[]> = {
   turtle: ['reptile'],
 };
 
+// Neighbors whose placeholder art borrows another animal's body (the fox uses the deer's)
+// get their own words instead, so searching "deer" doesn't find a fox.
+const OWN_WORDS: Record<string, string[]> = {
+  'red-fox': ['mammal', 'fox'],
+  coyote: ['mammal', 'wild dog'],
+  bats: ['mammal', 'bat'],
+  'eastern-cottontail': ['mammal', 'rabbit', 'bunny', 'bunnies'],
+  'wild-turkey': ['bird', 'turkey', 'gobbler'],
+};
+
 const plain = (text: string) =>
   text
     .toLowerCase()
@@ -46,7 +56,8 @@ export function searchSpecies(all: Species[], query: string): Species[] {
   const words = plain(query).split(' ').filter(Boolean);
   return all
     .filter((s) => {
-      const hay = plain([s.friendlyName, s.commonName, s.scientificName, s.collectiveNoun, s.art.body, ...(KIND_WORDS[s.art.body] ?? [])].join(' '));
+      const kind = OWN_WORDS[s.id] ?? [s.art.body, ...(KIND_WORDS[s.art.body] ?? [])];
+      const hay = plain([s.friendlyName, s.commonName, s.scientificName, s.collectiveNoun, ...kind].join(' '));
       return words.every((w) => hay.includes(w));
     })
     .sort((a, b) => a.friendlyName.localeCompare(b.friendlyName));

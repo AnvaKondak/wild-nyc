@@ -17109,5 +17109,1156 @@
     "body": "Wiggle, flap, puff of dust, repeat. Then a long, satisfied shake."
    }
   ]
+ },
+ {
+  "id": "fox-dawn-hunt",
+  "speciesId": "red-fox",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A fox is pouncing in the meadow",
+    "body": "First light, ears swiveling at a rustle in the grass. Then a high leap and a nose-first dive. Missed. One more try before heading home."
+   },
+   {
+    "title": "A fox is trotting home along the grass",
+    "body": "The sky is going pink and the night shift is over. A flash of orange, a white-tipped tail, and they slip into the brush near {green}."
+   },
+   {
+    "title": "A fox is listening very hard",
+    "body": "Frozen at the edge of the meadow in the early light, head tilted, one paw lifted. Something squeaked down there."
+   }
+  ]
+ },
+ {
+  "id": "fox-den-nap",
+  "speciesId": "red-fox",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "den",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A fox is napping by the den",
+    "body": "Curled into a tight orange ball in the middle of the day, tail wrapped over their nose like a scarf. They were up all night."
+   },
+   {
+    "title": "Shh, a fox is asleep",
+    "body": "Somewhere near {green}, tucked against a sandy bank, a fox is dozing in the sun with one ear still twitching."
+   },
+   {
+    "title": "A fox is sleeping the day away",
+    "body": "Tail over nose, eyes shut, perfectly still. They'll wake up when the light starts to go."
+   }
+  ]
+ },
+ {
+  "id": "fox-dusk-trot",
+  "speciesId": "red-fox",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A fox is heading out for the night",
+    "body": "As the light goes, a fox steps out of the brush, stretches, and trots off along the edge of the grass."
+   },
+   {
+    "title": "A fox is crossing the meadow at dusk",
+    "body": "Low and quick, nose down, tail straight out behind. Dinner is out there somewhere near {green}."
+   },
+   {
+    "title": "A red fox just stepped out of the brush",
+    "body": "A long look around in the evening light, ears up, then off along the path at a quiet trot."
+   }
+  ]
+ },
+ {
+  "id": "fox-night",
+  "speciesId": "red-fox",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "lawn",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "A fox is hunting in the dark",
+    "body": "Trotting along the dune path tonight, stopping every few steps to listen for mice in the grass."
+   },
+   {
+    "title": "A fox is on the night shift",
+    "body": "Quiet paws, sharp ears, a white tail tip bobbing through the dark near {green}."
+   },
+   {
+    "title": "A fox is checking the meadow edges",
+    "body": "Tonight they're working the same loop as always: the grass, the brush, the beach path, then back."
+   }
+  ]
+ },
+ {
+  "id": "fox-kits",
+  "speciesId": "red-fox",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "dusk"
+  ],
+  "setting": "den",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Fox kits are play-fighting by the den",
+    "body": "First light, and the kits are out tumbling over each other at the den mouth while a parent keeps watch.",
+    "periods": [
+     "dawn"
+    ]
+   },
+   {
+    "title": "The fox kits are waiting for dinner",
+    "body": "As the light goes, the kits are sitting by the den, ears up, watching for a parent coming home with food.",
+    "periods": [
+     "dusk"
+    ]
+   },
+   {
+    "title": "A fox family is out by the den near {green}",
+    "body": "Kits pouncing on each other's tails in the evening light, a parent lying nearby, pretending not to watch.",
+    "periods": [
+     "dusk"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "fox-winter-bark",
+  "speciesId": "red-fox",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "night",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A fox is barking in the dark",
+    "body": "That eerie scream tonight isn't anything scary. It's a fox calling to their mate. Winter is courting season.",
+    "periods": [
+     "night"
+    ]
+   },
+   {
+    "title": "Two foxes are trotting together",
+    "body": "A pair crossing the frosty meadow as the light goes, side by side. Courting season.",
+    "periods": [
+     "dusk"
+    ]
+   },
+   {
+    "title": "A fox is calling near {green}",
+    "body": "A sharp bark, then quiet, then an answer from far off. Two foxes finding each other in the cold.",
+    "periods": [
+     "night"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "fox-snow-pounce",
+  "speciesId": "red-fox",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A fox is mousing in the snow",
+    "body": "A snowy morning: listening, listening, then a high leap and a dive headfirst into the snow. Only the tail is sticking out.",
+    "periods": [
+     "dawn"
+    ]
+   },
+   {
+    "title": "A fox is curled up in the snow",
+    "body": "A round orange ball on the white, tail over nose, snow settling on their back. Perfectly cozy.",
+    "periods": [
+     "midday"
+    ]
+   },
+   {
+    "title": "A fox is leaving tracks in the snow near {green}",
+    "body": "A neat straight line of paw prints across the meadow in the early light, one paw right in front of the other.",
+    "periods": [
+     "dawn"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "fox-beach",
+  "speciesId": "red-fox",
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "shore",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A fox is checking the tide line",
+    "body": "Early morning on the beach, nose down along the wrack line, seeing what the night tide left behind."
+   },
+   {
+    "title": "A fox is trotting along the dunes",
+    "body": "Orange against the pale sand at first light, then up over the dune and gone."
+   },
+   {
+    "title": "A fox is out on the beach near {water}",
+    "body": "Paw prints on the wet sand, a quick look at the gulls, then back into the beach grass before the walkers arrive."
+   }
+  ]
+ },
+ {
+  "id": "coyote-dawn",
+  "speciesId": "coyote",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A coyote is trotting home at first light",
+    "body": "Along the edge of the woods, head low, tail down, at an easy steady trot. Time to rest."
+   },
+   {
+    "title": "A coyote is crossing the meadow",
+    "body": "Early morning mist on the grass and a gray-brown shape moving through it, quietly, toward the trees near {green}."
+   },
+   {
+    "title": "A coyote just disappeared into the woods",
+    "body": "One look back over their shoulder in the early light, then gone between the trees."
+   }
+  ]
+ },
+ {
+  "id": "coyote-day",
+  "speciesId": "coyote",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "hedge",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A coyote is resting in a thicket",
+    "body": "Curled up deep in the brush in the middle of the day, tail over nose, ears still turning at every sound."
+   },
+   {
+    "title": "Shh, a coyote is napping",
+    "body": "Somewhere in the thickest corner near {green}, a coyote is sleeping off a long night."
+   },
+   {
+    "title": "A coyote is dozing in the brush",
+    "body": "Hidden, still and patient, waiting for evening. Most people walk right past without knowing."
+   }
+  ]
+ },
+ {
+  "id": "coyote-dusk",
+  "speciesId": "coyote",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A coyote is heading out for the night",
+    "body": "As the light goes, they stretch, shake and trot off along the edge of the field, nose working."
+   },
+   {
+    "title": "A coyote is watching the meadow",
+    "body": "Sitting at the edge of the woods in the evening light, ears up, very still."
+   },
+   {
+    "title": "A coyote is crossing the path near {green}",
+    "body": "Quick and quiet in the dusk, one glance at the path, then into the tall grass."
+   }
+  ]
+ },
+ {
+  "id": "coyote-night",
+  "speciesId": "coyote",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "lawn",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "A coyote is mousing in the meadow",
+    "body": "A pause, a tilt of the head, then a stiff-legged pounce into the grass. Got one. Tonight they'll do this all night."
+   },
+   {
+    "title": "A coyote is on the night trail",
+    "body": "Trotting the same quiet route as always tonight, along the edge of the woods near {green}."
+   },
+   {
+    "title": "A coyote is out in the dark",
+    "body": "Moving through the park while the city is quiet, keeping well away from the lights."
+   }
+  ]
+ },
+ {
+  "id": "coyote-howl",
+  "speciesId": "coyote",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "lawn",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "The coyotes are yipping tonight",
+    "body": "A burst of high yips and howls from the woods, then silence. That's a family checking in with each other.",
+    "periods": [
+     "night"
+    ]
+   },
+   {
+    "title": "A coyote is howling at dusk",
+    "body": "One long howl as the light goes, and an answer from the far side of the park.",
+    "periods": [
+     "dusk"
+    ]
+   },
+   {
+    "title": "Coyotes are calling near {green}",
+    "body": "Yips and howls rising over the trees tonight, then quiet again. Just saying where everyone is.",
+    "periods": [
+     "night"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "coyote-pups",
+  "speciesId": "coyote",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "setting": "den",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Coyote pups are out by the den",
+    "body": "As the light goes, the pups are wrestling outside the den while a parent watches from the brush.",
+    "periods": [
+     "dusk"
+    ]
+   },
+   {
+    "title": "A coyote family is out together",
+    "body": "Tonight the pups are following a parent through the meadow, learning to listen for mice.",
+    "periods": [
+     "night"
+    ]
+   },
+   {
+    "title": "Coyote pups are waiting near {green}",
+    "body": "Ears too big for their heads, tumbling in the grass by the den, waiting for a parent to come back.",
+    "periods": [
+     "dusk"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "coyote-pair",
+  "speciesId": "coyote",
+  "seasons": [
+   "winter",
+   "spring"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Two coyotes are traveling together",
+    "body": "A pair trotting side by side through the frosty meadow at first light. Coyote couples stay together for years."
+   },
+   {
+    "title": "A coyote pair is heading home",
+    "body": "One in front, one just behind, crossing the field toward the woods in the early light."
+   },
+   {
+    "title": "Two coyotes are crossing near {green}",
+    "body": "Side by side in the morning chill, tails low, perfectly in step."
+   }
+  ]
+ },
+ {
+  "id": "bats-dusk",
+  "speciesId": "bats",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "The bats are out",
+    "body": "Right at dusk, the first little bats are flying out, zigzagging over the lawn after the evening bugs."
+   },
+   {
+    "title": "A bat is zigzagging overhead",
+    "body": "Quick, fluttery, changing direction every second. Every swerve is a bug caught in the air."
+   },
+   {
+    "title": "Bats are flying over {green}",
+    "body": "As the light goes, small dark shapes are swooping low over the grass, catching mosquitoes and moths."
+   }
+  ]
+ },
+ {
+  "id": "bats-night",
+  "speciesId": "bats",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "streetlight",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "A bat is hunting around the streetlight",
+    "body": "The light pulls in moths, and tonight a bat is swooping through the glow, picking them off one by one."
+   },
+   {
+    "title": "A bat is flying in the dark",
+    "body": "Clicking too high for us to hear, listening to the echoes, finding bugs by sound."
+   },
+   {
+    "title": "A bat is circling the lamp on {street}",
+    "body": "Swoop, flutter, swoop, through the cloud of moths around the light."
+   }
+  ]
+ },
+ {
+  "id": "bats-day",
+  "speciesId": "bats",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "den",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A bat is asleep upside down",
+    "body": "Hanging by their toes in a tree hollow in the middle of the day, wings wrapped around like a little cloak."
+   },
+   {
+    "title": "Shh, the bats are sleeping",
+    "body": "Tucked behind loose bark and inside tree holes near {green}, hanging upside down until dusk."
+   },
+   {
+    "title": "A bat is napping in a tree hole",
+    "body": "Upside down, wrapped up tight, perfectly still. They'll wake up when the light starts to go."
+   }
+  ]
+ },
+ {
+  "id": "bats-dawn",
+  "speciesId": "bats",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "den",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A bat is coming home to roost",
+    "body": "First light, and a bat is swooping up to a tree hole, squeezing inside, and turning upside down for the day."
+   },
+   {
+    "title": "The bats are back from the night shift",
+    "body": "One by one in the early light, they're disappearing into cracks in the bark near {green}."
+   },
+   {
+    "title": "A bat just tucked in for the day",
+    "body": "One last loop in the pale sky, then into the roost, wings folded, upside down."
+   }
+  ]
+ },
+ {
+  "id": "bats-pond",
+  "speciesId": "bats",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "water",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A bat is skimming the pond",
+    "body": "Low over the water as the light goes, dipping down for a quick sip on the wing."
+   },
+   {
+    "title": "Bats are flying over the pond",
+    "body": "Swooping low over the water at dusk, where the bugs are thickest."
+   },
+   {
+    "title": "A bat is drinking on the wing at {water}",
+    "body": "A quick dip over the surface in the evening light, a tiny splash, and up again."
+   }
+  ]
+ },
+ {
+  "id": "bats-pups",
+  "speciesId": "bats",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "den",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A bat mom is snuggled with her pup",
+    "body": "Hanging upside down in the roost, fast asleep in the middle of the day, her pup tucked under her wing."
+   },
+   {
+    "title": "Bat pups are growing up in the roost",
+    "body": "Moms and pups are packed together in a warm tree hollow near {green}, sleeping the day away."
+   },
+   {
+    "title": "A baby bat is holding on tight",
+    "body": "Hanging next to mom in the roost, wrapped up and asleep, waiting for tonight."
+   }
+  ]
+ },
+ {
+  "id": "bats-fall",
+  "speciesId": "bats",
+  "seasons": [
+   "fall"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A bat is flying south tonight",
+    "body": "Some bats migrate, and right now one is flying overhead at dusk, headed for somewhere warmer."
+   },
+   {
+    "title": "The bats are out one last time",
+    "body": "A mild fall evening, a few bats still zigzagging over the lawn, fattening up for winter."
+   },
+   {
+    "title": "A red bat is passing over {green}",
+    "body": "Rusty orange and fast, flying south through the evening sky."
+   }
+  ]
+ },
+ {
+  "id": "bats-spring",
+  "speciesId": "bats",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "sky",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "The first bats of spring are out",
+    "body": "A warm evening, and the bats are awake again, zigzagging over the lawn after the first bugs of the year."
+   },
+   {
+    "title": "A bat just woke up from winter",
+    "body": "Out at dusk for the first time in months, hungry, fluttering after gnats."
+   },
+   {
+    "title": "Bats are back over {green}",
+    "body": "As the light goes, quick little shapes are swooping overhead again. Spring is here."
+   }
+  ]
+ },
+ {
+  "id": "rabbit-dawn",
+  "speciesId": "eastern-cottontail",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A rabbit is nibbling clover",
+    "body": "First light, the grass still wet, and a cottontail is sitting at the edge of the lawn, munching steadily."
+   },
+   {
+    "title": "A cottontail is having breakfast near {green}",
+    "body": "Nose twitching, ears up, one clover leaf after another in the early light."
+   },
+   {
+    "title": "A rabbit just froze",
+    "body": "Someone walked by this morning, so the rabbit went perfectly still. If they don't move, maybe you won't see them."
+   }
+  ]
+ },
+ {
+  "id": "rabbit-midday",
+  "speciesId": "eastern-cottontail",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "hedge",
+  "kicker": "Look closer",
+  "variants": [
+   {
+    "title": "A rabbit is resting under the hedge",
+    "body": "Tucked into a little hollow in the grass in the middle of the day, ears flat, very still."
+   },
+   {
+    "title": "A cottontail is hiding in plain sight",
+    "body": "Right at the edge of the bushes near {green}, perfectly still, blending into the shade."
+   },
+   {
+    "title": "A rabbit is dozing in the shade",
+    "body": "Eyes half closed, nose still twitching, safe under the bushes until the evening."
+   }
+  ]
+ },
+ {
+  "id": "rabbit-dusk",
+  "speciesId": "eastern-cottontail",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A rabbit is out on the lawn at dusk",
+    "body": "As the light goes, a cottontail hops out from the bushes and starts nibbling, one ear always turning."
+   },
+   {
+    "title": "A cottontail just zigzagged away",
+    "body": "A dog came by in the evening light, and the rabbit bolted, zigzagging, white tail flashing."
+   },
+   {
+    "title": "A rabbit is snacking near {green}",
+    "body": "The lawn is quiet now and the clover is all theirs."
+   }
+  ]
+ },
+ {
+  "id": "rabbit-night",
+  "speciesId": "eastern-cottontail",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "lawn",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "A rabbit is nibbling in the dark",
+    "body": "Out on the grass tonight, close to the bushes, munching and listening."
+   },
+   {
+    "title": "A cottontail is on the lawn tonight",
+    "body": "A small round shape near {green}, perfectly still, then a hop, then munching again."
+   },
+   {
+    "title": "A rabbit is listening to the night",
+    "body": "Ears up, swiveling, nose working. All clear. Back to the clover."
+   }
+  ]
+ },
+ {
+  "id": "rabbit-babies",
+  "speciesId": "eastern-cottontail",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dawn",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A rabbit mom is visiting her babies",
+    "body": "As the light goes, she slips over to a shallow nest in the grass, feeds the babies quickly, and leaves again.",
+    "periods": [
+     "dusk"
+    ]
+   },
+   {
+    "title": "Baby rabbits are out on the lawn",
+    "body": "Tiny cottontails, barely bigger than a fist, nibbling clover in the early light.",
+    "periods": [
+     "dawn"
+    ]
+   },
+   {
+    "title": "Little rabbits are exploring near {green}",
+    "body": "First light, and two young cottontails are hopping around the edge of the lawn, very brave, very small.",
+    "periods": [
+     "dawn"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "rabbit-jumps",
+  "speciesId": "eastern-cottontail",
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "Two rabbits are doing the leap dance",
+    "body": "One dashes at the other, who jumps straight up, high in the air. It's cottontail courtship, and it's happening right now on the lawn."
+   },
+   {
+    "title": "The rabbits are chasing each other",
+    "body": "Round and round the lawn as the light goes, then a big jump. Spring romance, rabbit style."
+   },
+   {
+    "title": "Two cottontails are leaping near {green}",
+    "body": "Dash, leap, land, repeat, in the evening light."
+   }
+  ]
+ },
+ {
+  "id": "rabbit-winter",
+  "speciesId": "eastern-cottontail",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "hedge",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A rabbit is nibbling twigs in the snow",
+    "body": "A cold morning, and a cottontail is chewing the tips of low bushes, fluffed up round.",
+    "periods": [
+     "dawn"
+    ]
+   },
+   {
+    "title": "A rabbit is hiding under the snowy hedge",
+    "body": "Tucked under the bushes in the middle of the day, snow all around, cozy in a thick winter coat.",
+    "periods": [
+     "midday"
+    ]
+   },
+   {
+    "title": "Rabbit tracks are crossing the snow near {green}",
+    "body": "Two big back feet in front, two little front feet behind, from the hedge to the lawn and back.",
+    "periods": [
+     "dawn"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "turkey-dawn",
+  "speciesId": "wild-turkey",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A turkey just flew down from the roost",
+    "body": "First light, a big flap from high in a tree, and a heavy landing on the lawn. Breakfast time."
+   },
+   {
+    "title": "The turkeys are coming down for breakfast",
+    "body": "One by one in the early light, they're dropping out of the trees and gathering on the grass."
+   },
+   {
+    "title": "Turkeys are gathering near {green}",
+    "body": "A little flock in the morning light, stretching their wings and starting to scratch for breakfast."
+   }
+  ]
+ },
+ {
+  "id": "turkey-midday",
+  "speciesId": "wild-turkey",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A flock of turkeys is crossing the lawn",
+    "body": "Scratching, pecking, strolling, all together in the middle of the day. Nobody is in a hurry."
+   },
+   {
+    "title": "A turkey is scratching for acorns",
+    "body": "Kick back with one big foot, peck, kick back with the other. They've found the good acorn spot."
+   },
+   {
+    "title": "Turkeys are strolling near {green}",
+    "body": "A whole rafter of them, heads bobbing, wandering across the grass in the middle of the day."
+   }
+  ]
+ },
+ {
+  "id": "turkey-dusk",
+  "speciesId": "wild-turkey",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "setting": "branch",
+  "kicker": "Look up",
+  "variants": [
+   {
+    "title": "A turkey is flying up to roost",
+    "body": "As the light goes, a big flap and a scramble, and they're up in a tall tree for the night."
+   },
+   {
+    "title": "The turkeys are going to bed in the trees",
+    "body": "One by one at dusk they're flapping up into the branches, settling in side by side."
+   },
+   {
+    "title": "Turkeys are roosting near {green}",
+    "body": "Big dark shapes high in the trees as it gets dark, shuffling along the branches."
+   }
+  ]
+ },
+ {
+  "id": "turkey-night",
+  "speciesId": "wild-turkey",
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "night"
+  ],
+  "setting": "branch",
+  "kicker": "Tonight",
+  "variants": [
+   {
+    "title": "The turkeys are asleep in the trees",
+    "body": "High up on the big branches tonight, safe from anything on the ground."
+   },
+   {
+    "title": "A turkey is sleeping in a tall tree",
+    "body": "Head tucked, feathers fluffed, perched way above the lawn until morning."
+   },
+   {
+    "title": "Turkeys are roosting in the trees near {green}",
+    "body": "A row of big round shapes up in the dark branches, fast asleep."
+   }
+  ]
+ },
+ {
+  "id": "turkey-strut",
+  "speciesId": "wild-turkey",
+  "seasons": [
+   "spring"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "setting": "lawn",
+  "kicker": "Listen",
+  "variants": [
+   {
+    "title": "A turkey is gobbling at sunrise",
+    "body": "Gobble-obble-obble! A male on the lawn, tail fanned, telling the whole neighborhood he's here.",
+    "periods": [
+     "dawn"
+    ]
+   },
+   {
+    "title": "A turkey is strutting with his tail fanned",
+    "body": "Feathers fanned out, wings dragging, tail spread like a big fan, turning slowly so the hens can see.",
+    "periods": [
+     "midday"
+    ]
+   },
+   {
+    "title": "A turkey is showing off near {green}",
+    "body": "Tail up, head bright red and blue, gobbling at anything that moves. Even a car.",
+    "periods": [
+     "dawn"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "turkey-poults",
+  "speciesId": "wild-turkey",
+  "seasons": [
+   "summer"
+  ],
+  "periods": [
+   "midday",
+   "dusk"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "A turkey hen is leading her poults",
+    "body": "Fluffy babies trailing behind her through the tall grass, peeping, catching bugs.",
+    "periods": [
+     "midday"
+    ]
+   },
+   {
+    "title": "Turkey babies are chasing bugs",
+    "body": "Little poults darting after grasshoppers while mom keeps watch.",
+    "periods": [
+     "midday"
+    ]
+   },
+   {
+    "title": "A turkey family is out near {green}",
+    "body": "Mom and a line of poults crossing the lawn in the evening light, heading for the trees.",
+    "periods": [
+     "dusk"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "turkey-street",
+  "speciesId": "wild-turkey",
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "setting": "sidewalk",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The turkeys are crossing the street",
+    "body": "A whole flock, strolling across one at a time while the cars wait. They take their time."
+   },
+   {
+    "title": "A turkey is checking out the yard",
+    "body": "Pecking along the front walk in the middle of the day, then up onto the porch steps for a look around."
+   },
+   {
+    "title": "Turkeys are walking down {street}",
+    "body": "A big flock taking a stroll down the sidewalk, completely unbothered."
+   }
+  ]
+ },
+ {
+  "id": "turkey-snow",
+  "speciesId": "wild-turkey",
+  "seasons": [
+   "winter"
+  ],
+  "periods": [
+   "midday",
+   "dawn"
+  ],
+  "setting": "lawn",
+  "kicker": "Right now",
+  "variants": [
+   {
+    "title": "The turkeys are scratching through the snow",
+    "body": "Kicking the snow aside with big feet, looking for acorns underneath.",
+    "periods": [
+     "midday"
+    ]
+   },
+   {
+    "title": "Turkey tracks are crossing the snow",
+    "body": "Big three-toed prints across the lawn this morning, a whole flock's worth.",
+    "periods": [
+     "dawn"
+    ]
+   },
+   {
+    "title": "Turkeys are puffed up in the cold near {green}",
+    "body": "Feathers fluffed out, standing together in the snow, looking twice their size.",
+    "periods": [
+     "midday"
+    ]
+   }
+  ]
  }
 ]

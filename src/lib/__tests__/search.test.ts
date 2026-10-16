@@ -22,3 +22,15 @@ describe('searchSpecies', () => {
     expect(ids(searchSpecies(species, 'blue jay'))).toEqual(['blue-jay']);
   });
 });
+
+describe('searchSpecies: the newest neighbors', () => {
+  it('finds them by everyday names, and not by borrowed art', () => {
+    const ids = (q: string) => searchSpecies(species, q).map((s) => s.id);
+    expect(ids('bunny')).toEqual(['eastern-cottontail']);
+    expect(ids('fox')).toEqual(['red-fox']);
+    expect(ids('bat')).toContain('bats');
+    expect(ids('turkey')).toEqual(['wild-turkey']);
+    expect(ids('deer')).toEqual(['white-tailed-deer']);
+    expect(ids('mammal')).toEqual(expect.arrayContaining(['coyote', 'red-fox', 'bats', 'eastern-cottontail']));
+  });
+});

@@ -36,9 +36,10 @@ export type CloseUpSetting =
 // Who walks to the water rather than swims: at a puddle in the city.
 const CITY_WALKERS = ['rock-pigeon', 'house-sparrow', 'european-starling', 'raccoon', 'eastern-gray-squirrel', 'american-robin', 'northern-cardinal', 'mourning-dove'];
 // Who lives in burrows and dens on the ground.
-const BURROWERS = ['groundhog', 'virginia-opossum'];
+// Foxes and coyotes raise their pups in dens dug into banks. (Cottontails don't dig: they rest in a hollow in the grass.)
+const BURROWERS = ['groundhog', 'virginia-opossum', 'red-fox', 'coyote'];
 // Never up in trees or on ledges.
-const GROUND_ONLY = ['white-tailed-deer', 'canada-goose', 'groundhog', 'pond-slider'];
+const GROUND_ONLY = ['white-tailed-deer', 'canada-goose', 'groundhog', 'pond-slider', 'red-fox', 'coyote', 'eastern-cottontail'];
 // Where each city walker's mouth is on their drawing (fractions), for the drinking straw.
 const MOUTH: Record<string, [number, number]> = {
   'rock-pigeon': [0.12, 0.34],
@@ -50,7 +51,7 @@ const MOUTH: Record<string, [number, number]> = {
 // Who really does what. Only these get drawn doing it; for anyone else the action is ignored.
 const SWIFT = 'chimney-swift';
 // Sleep inside tree cavities: everyone else sleeps where they normally rest.
-const HOLLOW_SLEEPERS = ['raccoon', 'eastern-gray-squirrel', 'downy-woodpecker', 'red-bellied-woodpecker', 'tufted-titmouse', 'european-starling'];
+const HOLLOW_SLEEPERS = ['raccoon', 'eastern-gray-squirrel', 'downy-woodpecker', 'red-bellied-woodpecker', 'tufted-titmouse', 'european-starling', 'bats'];
 // Real dust-bathers.
 const DUST_BATHERS = ['house-sparrow', 'song-sparrow', 'white-throated-sparrow'];
 
@@ -95,7 +96,7 @@ export function closeUpFor(speciesId: string | undefined, setting: Setting | und
   // Swifts sleep clinging inside chimneys, which we don't draw: their sleeping slides keep the sticker.
   if (speciesId === SWIFT && action === 'sleep') return undefined;
   // Animals who never climb or perch (deer, geese, groundhogs) stay on the ground.
-  if (GROUND_ONLY.includes(speciesId) && ['branch', 'trunk', 'ledge', 'rooftop', 'wire', 'fire-escape', 'sky', 'night-sky', 'fence', 'streetlight'].includes(setting) && action !== 'fly') {
+  if (GROUND_ONLY.includes(speciesId) && ['branch', 'trunk', 'ledge', 'rooftop', 'wire', 'fire-escape', 'sky', 'night-sky', 'fence', 'streetlight'].includes(setting) && !(action === 'fly' && canDo(speciesId, 'fly'))) {
     return 'lawn';
   }
   if (action && canDo(speciesId, action)) {
@@ -106,8 +107,8 @@ export function closeUpFor(speciesId: string | undefined, setting: Setting | und
   if (pose === 'web') return 'web';
   if (pose === 'cling') return 'trunk';
   if (pose === 'fly') {
-    // Home for bees: honey bees at their rooftop hive, bumble bees at an old burrow in the ground.
-    if (setting === 'den') return speciesId === 'western-honey-bee' ? 'hive' : 'burrow';
+    // Home: honey bees at their rooftop hive, bats in a tree hollow, bumble bees at an old burrow in the ground.
+    if (setting === 'den') return speciesId === 'western-honey-bee' ? 'hive' : speciesId === 'bats' ? 'hollow' : 'burrow';
     if (setting === 'flowers' || setting === 'branch' || setting === 'hedge' || setting === 'fence') return 'flowers';
     if (setting === 'reeds' || setting === 'water') return 'reeds';
     if (setting === 'lawn' || setting === 'night-sky') return 'lawn';
@@ -430,8 +431,8 @@ export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, p
     .map(({ f, size: s, top: y, left: x, i }) => (
       <View key={i} style={{ position: 'absolute', left: x, top: y, width: s, height: s, transform: [{ scaleX: f.flip ? -1 : 1 }] }}>
         <Acting action={f.action} speciesId={f.id} size={s} setting={setting}>
-          {/* Cormorants drying off are drawn with their wings spread wide. */}
-          <Character speciesId={f.action === 'dry' && canDo(f.id, 'dry') ? `${f.id}:spread` : f.id} size={s} mood={mood} cutout />
+          {/* Cormorants drying off spread their wings; bats asleep hang upside down. */}
+          <Character speciesId={f.action === 'dry' && canDo(f.id, 'dry') ? `${f.id}:spread` : f.action === 'sleep' && hasCutout(`${f.id}:hang`) ? `${f.id}:hang` : f.id} size={s} mood={mood} cutout />
         </Acting>
       </View>
     ));

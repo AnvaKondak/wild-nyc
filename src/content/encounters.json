@@ -986,5 +986,132 @@
    "midday",
    "dawn"
   ]
+ },
+ {
+  "id": "hawk-rabbit-freeze",
+  "species": [
+   "eastern-cottontail",
+   "red-tailed-hawk"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday",
+   "dusk"
+  ],
+  "title": "The rabbit freezes",
+  "body": "A red-tailed hawk is circling over the lawn. The cottontail goes perfectly still, ears flat, not even a twitch. The hawk circles twice and drifts away. The rabbit waits a long time, then goes back to the clover."
+ },
+ {
+  "id": "fox-rabbit-zigzag",
+  "species": [
+   "red-fox",
+   "eastern-cottontail"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "dusk"
+  ],
+  "title": "The zigzag",
+  "body": "A fox steps out of the brush. A rabbit at the edge of the lawn bolts, zigzagging, white tail flashing, and dives under the bushes. The fox sits down and looks like they meant to do that."
+ },
+ {
+  "id": "coyote-deer-stamp",
+  "species": [
+   "coyote",
+   "white-tailed-deer"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "dusk"
+  ],
+  "title": "The deer stamps",
+  "body": "A coyote trots along the edge of the meadow. A deer lifts her head, stamps a front hoof hard and snorts. The coyote decides this is not the night for it and keeps going."
+ },
+ {
+  "id": "turkey-deer-lawn",
+  "species": [
+   "wild-turkey",
+   "white-tailed-deer"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "dawn",
+   "midday"
+  ],
+  "title": "Breakfast for everyone",
+  "body": "A flock of turkeys is scratching under the oaks while two deer browse the bushes nearby. Everyone ignores everyone. There are enough acorns for all."
+ },
+ {
+  "id": "bats-moths",
+  "species": [
+   "bats",
+   "moths"
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall"
+  ],
+  "periods": [
+   "dusk",
+   "night"
+  ],
+  "title": "The moth dodges",
+  "body": "A bat swoops through the cloud of moths around the streetlight. One moth hears the bat's clicks and drops straight down into the grass. The bat loops around and tries another."
+ },
+ {
+  "id": "swifts-bats-shift",
+  "species": [
+   "chimney-swift",
+   "bats"
+  ],
+  "seasons": [
+   "spring",
+   "summer"
+  ],
+  "periods": [
+   "dusk"
+  ],
+  "title": "The shift change in the sky",
+  "body": "As the light goes, the chimney swifts swirl down into their chimney for the night. At the same moment, the first bats flutter out. Day shift out, night shift in, and the bugs never get a break."
+ },
+ {
+  "id": "turkey-squirrel-acorns",
+  "species": [
+   "wild-turkey",
+   "eastern-gray-squirrel"
+  ],
+  "seasons": [
+   "fall",
+   "winter"
+  ],
+  "periods": [
+   "midday"
+  ],
+  "title": "The acorn rivals",
+  "body": "A squirrel is burying acorns in the leaves on the lawn. A flock of turkeys arrives and starts scratching up the leaves right next to them. The squirrel grabs one more acorn and leaves in a huff."
  }
 ]

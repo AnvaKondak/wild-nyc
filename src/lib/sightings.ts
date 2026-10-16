@@ -37,7 +37,7 @@ export function recordedAnySeason(s: Species, sightings: Sightings | undefined, 
 }
 
 /** The mammals among the neighbors (pond sliders share the "furry" group but are turtles). */
-export const MAMMALS = ['eastern-gray-squirrel', 'raccoon', 'virginia-opossum', 'white-tailed-deer', 'groundhog'];
+export const MAMMALS = ['eastern-gray-squirrel', 'raccoon', 'virginia-opossum', 'white-tailed-deer', 'groundhog', 'red-fox', 'coyote', 'eastern-cottontail', 'bats'];
 
 /**
  * A neighborhood's own mammals: the one or two seen most near it all year (squirrels in

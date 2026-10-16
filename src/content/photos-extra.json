@@ -59,6 +59,26 @@
       "source": "https://www.inaturalist.org/photos/184255332"
     }
   ],
+  "bats": [
+    {
+      "file": "bats-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Fyn Kynd, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/52280979"
+    },
+    {
+      "file": "bats-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Thomas Irvine, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/172788114"
+    },
+    {
+      "file": "bats-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Dan Riskin, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/82415923"
+    }
+  ],
   "black-crowned-night-heron": [
     {
       "file": "black-crowned-night-heron-2.jpg",
@@ -281,6 +301,26 @@
       "source": "https://www.inaturalist.org/photos/52268108"
     }
   ],
+  "coyote": [
+    {
+      "file": "coyote-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Subir B. Shakya, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/42305987"
+    },
+    {
+      "file": "coyote-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Katrina Smith, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/651082324"
+    },
+    {
+      "file": "coyote-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Laura Mae, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/35262057"
+    }
+  ],
   "dark-eyed-junco": [
     {
       "file": "dark-eyed-junco-2.jpg",
@@ -359,6 +399,26 @@
       "license": "CC BY",
       "attribution": "(c) Leila Dasher, some rights reserved (CC BY)",
       "source": "https://www.inaturalist.org/photos/263996725"
+    }
+  ],
+  "eastern-cottontail": [
+    {
+      "file": "eastern-cottontail-2.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Jim, the Photographer, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/5947555"
+    },
+    {
+      "file": "eastern-cottontail-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Bernie Paquette, some rights reserved (CC BY), uploaded by Bernie Paquette",
+      "source": "https://www.inaturalist.org/photos/258976334"
+    },
+    {
+      "file": "eastern-cottontail-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Michael J. Papay, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/323992869"
     }
   ],
   "eastern-gray-squirrel": [
@@ -763,6 +823,26 @@
       "source": "https://www.inaturalist.org/photos/178610027"
     }
   ],
+  "red-fox": [
+    {
+      "file": "red-fox-2.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/593398391"
+    },
+    {
+      "file": "red-fox-3.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Robyn Perkins, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/541460005"
+    },
+    {
+      "file": "red-fox-4.jpg",
+      "license": "CC BY",
+      "attribution": "(c) Mickey Wu, some rights reserved (CC BY)",
+      "source": "https://www.inaturalist.org/photos/558541533"
+    }
+  ],
   "red-tailed-hawk": [
     {
       "file": "red-tailed-hawk-4.jpg",
@@ -931,6 +1011,26 @@
       "license": "CC BY",
       "attribution": "(c) Michael Newlon, some rights reserved (CC BY)",
       "source": "https://www.inaturalist.org/photos/472001169"
+    }
+  ],
+  "wild-turkey": [
+    {
+      "file": "wild-turkey-2.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/331816513"
+    },
+    {
+      "file": "wild-turkey-3.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/336763556"
+    },
+    {
+      "file": "wild-turkey-4.jpg",
+      "license": "CC0",
+      "attribution": "no rights reserved",
+      "source": "https://www.inaturalist.org/photos/256581764"
     }
   ],
   "yellow-rumped-warbler": [
