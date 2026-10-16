@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Mix the ambient soundscape: one calm, seamless loop of birds softly chirping (robins,
-song sparrows, cardinals, mourning doves, softened and spread out), and nothing else.
+"""Mix the ambient soundscape: one calm, seamless loop of a single song sparrow softly
+chirping now and then (softened), and nothing else.
 It plays everywhere in the app. Real bird recordings are placed at seeded random times;
 stereo, each call from somewhere left to right. Recordings come from scripts/fetch_sounds.py.
 
@@ -239,7 +239,8 @@ def scatter(dst, rnd, sources, every, gain=1.0):
 # ---------------------------------------------------------------- soundscapes
 
 # The gentlest singers only: no gulls, jays or blackbirds.
-SOFT_BIRDS = ["robin", "song-sparrow", "cardinal", "mourning-dove"]
+# Just one soft singer: a song sparrow, chirping now and then.
+SOFT_BIRDS = ["song-sparrow"]
 
 
 def soft_calls(name):
@@ -271,8 +272,8 @@ def mix(name, rnd):
     t = rnd.uniform(0.5, 2.5)
     while t < LOOP:
         b = rnd.choice(SOFT_BIRDS)
-        out.place(rnd.choice(pool[b]), int(t * SR), 0.32 * rnd.uniform(0.5, 1.0), rnd.uniform(-0.8, 0.8))
-        t += rnd.uniform(2.5, 5.0)
+        out.place(rnd.choice(pool[b]), int(t * SR), 0.28 * rnd.uniform(0.6, 1.0), rnd.uniform(-0.6, 0.6))
+        t += rnd.uniform(3.5, 6.5)
     return out
 
 
