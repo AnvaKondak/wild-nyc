@@ -55,7 +55,14 @@ const GROUPS: { label: string; plan?: Plan }[] = ([
       ['Crow meets raccoon', 'american-crow', 'sidewalk', ['american-crow', 'raccoon']],
       ['Heron meets cormorant', 'great-blue-heron', 'shore', ['great-blue-heron', 'double-crested-cormorant']],
       ['Sparrow meets pigeon', 'house-sparrow', 'sidewalk', ['house-sparrow', 'rock-pigeon']],
-    ] as const).map(([label, id, setting, cast]): { label: string; plan?: Plan } => ({ label, plan: planCloseUp(id, setting, label.includes(' over ') ? 'fly' : undefined, { cast: [...cast] }) })),
+      ['Crows mob the hawk', 'red-tailed-hawk', 'branch', ['red-tailed-hawk', 'american-crow']],
+      ['Goose meets mallard', 'canada-goose', 'water', ['canada-goose', 'mallard']],
+      ['Gull eyes bufflehead', 'herring-gull', 'water', ['herring-gull', 'bufflehead']],
+      ['Moth at the web', 'moths', 'lawn', ['moths', 'orb-weavers']],
+    ] as const).map(([label, id, setting, cast]): { label: string; plan?: Plan } => ({
+      label,
+      plan: planCloseUp(id, setting, label.includes(' over ') || label.includes('mob') ? 'fly' : undefined, { cast: [...cast], counts: label.includes('Crows') ? { 'american-crow': 2 } : undefined }),
+    })),
   );
 const MOODS: Mood[] = ['hello', 'snack', 'happy', 'sleepy', 'surprised', 'curious', 'singing', 'chilly'];
 
