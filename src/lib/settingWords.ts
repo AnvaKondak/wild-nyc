@@ -4,7 +4,8 @@
 // branch). Only lowercase words count, so place names filled into the text ("near Shore
 // Road Park", "along Bedford Avenue") never move anyone.
 
-import type { Action, Setting, StorySlide } from '@/content/types';
+import { getSpecies } from '@/content';
+import type { Action, Crowd, Setting, StorySlide } from '@/content/types';
 
 const RULES: [RegExp, Setting][] = [
   [/\bdust[- ]?bath/, 'sidewalk'],
@@ -51,15 +52,59 @@ export function actionFromWords(text: string): Action | undefined {
   return undefined;
 }
 
+// How many are in the picture. "Two pigeons are preening each other" draws a pair;
+// "The sparrows are taking a dust bath" draws a few; "A squirrel mom is checking on her
+// babies" draws mom and two little ones. The title decides; the body can add a pair
+// ("side by side") or little ones, never take anyone away.
+const PAIR = /\b(two|pair|couple|both|twins|each other|side by side|partners?|mates?|duet)\b/;
+const MANY = /\b(three|few|flocks?|famil(y|ies)|gang|groups?|crowds?|huddl\w*|bunch|everyone|everybody|together|rafts?|herds?|colon(y|ies)|pairs|couples|lines of|dozens?|hundreds?|thousands?|neighbors)\b/;
+const YOUNG = /\b(bab(y|ies)|kids?|chicks?|youngsters?|young ones|young|fledglings?|kits?|squabs?|ducklings?|goslings?|cygnets?|fawns?|pups?|nestlings?|little ones|siblings?|juveniles?|teens?|brood)\b/;
+const MANY_YOUNG = /\b(babies|kids|chicks|youngsters|young ones|fledglings|kits|squabs|ducklings|goslings|cygnets|fawns|pups|nestlings|little ones|siblings|juveniles|teens|brood)\b/;
+
+/** The species' name in a sentence: one ("pigeon") and several ("pigeons"). */
+function namesOf(speciesId: string): { one: string; many: string } | undefined {
+  const s = getSpecies(speciesId);
+  if (!s) return undefined;
+  const last = (name: string) => name.toLowerCase().split(' ').at(-1)!;
+  return { one: last(s.commonName), many: last(s.friendlyName) };
+}
+
+/** How many of them the words put in the picture (1 to 3), and how many of those are little ones. */
+export function crowdFromWords(title: string, body: string, speciesId: string | undefined): Crowd {
+  const t = title.toLowerCase();
+  const b = body.toLowerCase();
+  const names = speciesId ? namesOf(speciesId) : undefined;
+  // "A pigeon is…", "One crow…": just them (unless the words go on to say a pair).
+  const one = names ? new RegExp(`(^|\\b(a|an|one|this|that)\\s+([\\w'-]+\\s+)?)${names.one}\\b`).test(t) : /^(a|an|one)\b/.test(t);
+  // "The pigeons are…"; for names that don't change (deer, brant), "the deer are…".
+  const plural = !!names && (names.one !== names.many ? new RegExp(`\\b${names.many}\\b`).test(t) : new RegExp(`\\b${names.many} (are|were)\\b`).test(t));
+  const single = one && !(names && names.one === names.many && plural);
+  let count = PAIR.test(t) ? 2 : MANY.test(t) || (plural && !single) ? 3 : 1;
+  if (count === 1 && PAIR.test(b)) count = 2;
+  const youngSaid = YOUNG.test(t) || YOUNG.test(b);
+  if (!youngSaid) return { count, young: 0 };
+  // Little ones with a grown-up: one parent and one or two young.
+  const young = MANY_YOUNG.test(t) || MANY_YOUNG.test(b) ? 2 : 1;
+  return { count: 1 + young, young };
+}
+
 /**
  * The scene for each slide: what the title says, else what the body says, else the
  * slide's own setting. So a slide that only inherited its setting (the season, family
- * or goodbye slides) gets the place its own words describe.
+ * or goodbye slides) gets the place its own words describe. Also who's in the picture:
+ * one, a pair, a few, or a parent with little ones. Family slides always show at least two.
  */
 export function withSettings(slides: StorySlide[]): StorySlide[] {
   return slides.map((slide) => {
     const said = settingFromWords(slide.title) ?? settingFromWords(slide.body);
     const action = actionFromWords(slide.title) ?? actionFromWords(slide.body);
-    return { ...slide, ...(said ? { setting: said } : {}), ...(action ? { action } : {}) };
+    const crowd = slide.speciesId && !slide.cast ? crowdFromWords(slide.title, slide.body, slide.speciesId) : undefined;
+    if (crowd && slide.id.endsWith(':family') && crowd.count < 2) crowd.count = 2;
+    return {
+      ...slide,
+      ...(said ? { setting: said } : {}),
+      ...(action ? { action } : {}),
+      ...(crowd && crowd.count > 1 ? { crowd } : {}),
+    };
   });
 }

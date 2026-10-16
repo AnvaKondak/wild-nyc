@@ -5,7 +5,7 @@ import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
 import { Button } from '@/components/Button';
 import { FavoriteButton } from '@/components/FavoriteButton';
-import { CloseUp, closeUpFor } from '@/components/scene/CloseUp';
+import { CloseUp, planCloseUp } from '@/components/scene/CloseUp';
 import { PopIn, RisingHearts } from '@/components/story/Cute';
 import { FloatingCast } from '@/components/Floating';
 import { BellIcon, BellOffIcon, ChevronLeftIcon, ChevronRightIcon, HeartIcon, HomeIcon, SoundOffIcon, SoundOnIcon } from '@/components/Icons';
@@ -295,7 +295,11 @@ export default function RightNow() {
   // Pilot: some animals appear right in their setting (on a branch, a sidewalk, the
   // water) instead of on a round sticker.
   // Every single-animal slide gets a scene: from its words, or else where that animal usually is.
-  const closeUp = slide.kind === 'intro' || slide.cast || !species ? undefined : closeUpFor(species.id, slide.setting ?? homeSetting(species), slide.action);
+  // Friends and family share it: a pair, a few, a parent with little ones, or two different neighbors meeting.
+  const plan = slide.kind === 'intro' || !species ? undefined : planCloseUp(species.id, slide.setting ?? homeSetting(species), slide.action, { crowd: slide.crowd, cast: slide.cast });
+  const closeUp = plan?.scene;
+  // Who's in the picture, for VoiceOver: "Blue jay and squirrel", "Three sparrows".
+  const pictured = plan ? [...new Set(plan.figures.map((f) => getSpecies(f.id)?.friendlyName ?? ''))].join(' and ') : species?.friendlyName;
   // The time and weather sit on a little card over a close-up scene.
   const onCard = !!closeUp && !showHome;
   const sceneH = Math.round(stickerSize * 1.1);
@@ -323,6 +327,7 @@ export default function RightNow() {
             placeKind={faves ? (slide.scene ?? 'park') : hood.kind}
             variant={hashString(`${slide.id}:${today}`)}
             action={slide.action}
+            figures={plan?.figures}
           />
         </View>
       ) : area.width > 0 && !closeUp ? (
@@ -533,7 +538,7 @@ export default function RightNow() {
                   onLayout={() => bandRef.current?.measureInWindow((_x, y, _w, h) => setBand((b) => (b && b.top === y && b.height === h ? b : { top: y, height: h })))}
                   style={{ height: sceneH, marginTop: 16 }}
                 >
-                  <Pressable onPress={next} accessibilityRole="button" accessibilityLabel={`${species.friendlyName}. Next story`} style={{ position: 'absolute', left: 70, right: 70, top: 0, bottom: 0 }} />
+                  <Pressable onPress={next} accessibilityRole="button" accessibilityLabel={`${pictured}. Next story`} style={{ position: 'absolute', left: 70, right: 70, top: 0, bottom: 0 }} />
                   <View style={{ position: 'absolute', left: 16, top: sceneH / 2 - 26 }}>
                     <RoundNav label={i === 0 && !faves ? 'Home' : 'Previous story'} onPress={back} color={theme.ink} fill={theme.bg}>
                       <ChevronLeftIcon color={theme.ink} />

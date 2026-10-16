@@ -1,6 +1,6 @@
 import { getSpecies } from '@/content';
 import type { StorySlide } from '@/content/types';
-import { actionFromWords, settingFromWords, withSettings } from '../settingWords';
+import { actionFromWords, crowdFromWords, settingFromWords, withSettings } from '../settingWords';
 
 const slide = (title: string, body: string, setting?: StorySlide['setting']): StorySlide => ({ id: 'x', season: 'winter', period: 'midday', kicker: '', title, body, kind: 'scene', setting });
 
@@ -45,5 +45,32 @@ describe('actionFromWords', () => {
 
   it('puts a dust bath on the ground', () => {
     expect(settingFromWords('A sparrow is taking a dust bath')).toBe('sidewalk');
+  });
+});
+
+describe('crowdFromWords', () => {
+  it('reads how many are in the picture', () => {
+    expect(crowdFromWords('A pigeon is bobbing down the sidewalk', '', 'rock-pigeon')).toEqual({ count: 1, young: 0 });
+    expect(crowdFromWords('Two pigeons are preening each other', '', 'rock-pigeon')).toEqual({ count: 2, young: 0 });
+    expect(crowdFromWords('The sparrows are taking a dust bath', '', 'house-sparrow')).toEqual({ count: 3, young: 0 });
+    expect(crowdFromWords('A pigeon couple is getting cozy', '', 'rock-pigeon')).toEqual({ count: 2, young: 0 });
+    expect(crowdFromWords('The deer are grazing at the edge of the woods', '', 'white-tailed-deer')).toEqual({ count: 3, young: 0 });
+    expect(crowdFromWords('A deer is grazing', '', 'white-tailed-deer')).toEqual({ count: 1, young: 0 });
+  });
+
+  it('draws a parent with little ones', () => {
+    expect(crowdFromWords('A squirrel mom is checking on her babies', '', 'eastern-gray-squirrel')).toEqual({ count: 3, young: 2 });
+    expect(crowdFromWords('A deer mom and her fawn are out together', '', 'white-tailed-deer')).toEqual({ count: 2, young: 1 });
+  });
+
+  it('lets the body add a pair, never take anyone away', () => {
+    expect(crowdFromWords('A dove is on the wire', 'Side by side with their partner.', 'mourning-dove')).toEqual({ count: 2, young: 0 });
+  });
+});
+
+describe('withSettings crowds', () => {
+  it('shows at least two on a family slide', () => {
+    const [s] = withSettings([{ ...slide('Cozy couples', 'Pairs stay close all winter.'), id: 'rock-pigeon:family', speciesId: 'rock-pigeon' }]);
+    expect(s.crowd?.count).toBeGreaterThanOrEqual(2);
   });
 });

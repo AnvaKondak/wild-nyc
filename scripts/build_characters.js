@@ -1475,6 +1475,7 @@ ART.deerBody = {
       <g fill="#B9875E">${body}${headNeck}</g>
       <clipPath id="db-body">${body}</clipPath>
       <g clip-path="url(#db-body)"><ellipse cx="262" cy="276" rx="96" ry="26" fill="#F4EDE4"/></g>
+      ${m.fawn ? `<g clip-path="url(#db-body)">${dots([[196, 192], [228, 184], [262, 184], [296, 188], [326, 198], [212, 218], [246, 212], [280, 214], [312, 224], [338, 222]], 7, '#F4EDE4')}</g>` : ''}
       <path d="M352 210 C372 198 382 214 368 230 C362 236 354 232 354 226 Z" fill="#F4EDE4" stroke="${C.ink}" stroke-width="6"/>
 
       <path d="M66 126 C80 136 100 138 116 134" fill="none" stroke="#F4EDE4" stroke-width="8" stroke-linecap="round"/>
@@ -1486,6 +1487,51 @@ ART.deerBody = {
       ${deco(m, 230, 80, 30, 268, 54, 20)}`;
   },
 };
+
+// Little ones, for family scenes. Most babies are drawn as small grown-ups, but some look
+// nothing like their parents: ducklings, goslings and cygnets are fuzzy puffballs, gull and
+// tern chicks are speckled fluff, and fawns have spots.
+ART.fawn = { ...ART.deerBody, svg: (m) => ART.deerBody.svg({ ...m, fawn: true }) };
+const chick = (p) => ({
+  tint: C.yellowT,
+  tilt: 0,
+  svg: (m) => {
+    const body = '<ellipse cx="236" cy="248" rx="116" ry="84"/>';
+    const head = '<circle cx="146" cy="168" r="70"/>';
+    const tuft = 'M146 100 q-8 -22 4 -32 M162 102 q4 -22 20 -24 M130 106 q-16 -12 -12 -28';
+    const legs = 'M208 324 L204 362 M262 324 L268 362 M186 366 L204 358 L218 368 M250 368 L268 358 L286 366';
+    return `${p.pose === 'stand' ? `<path d="${legs}" fill="none" stroke="${C.ink}" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/><path d="${legs}" fill="none" stroke="${p.legs}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>` : ''}
+      ${shadow([body, head])}
+      ${shape(body, p.back)}
+      <clipPath id="${p.id}-b">${body}</clipPath>
+      <g clip-path="url(#${p.id}-b)">
+        <ellipse cx="196" cy="306" rx="116" ry="58" fill="${p.belly}"/>
+        ${p.speckle ? dots([[250, 196], [290, 208], [318, 236], [226, 222], [270, 238], [304, 266], [248, 266]], 6, p.speckle) : ''}
+      </g>
+      <ellipse cx="236" cy="248" rx="116" ry="84" fill="none" ${OL}/>
+      <path d="M252 222 C302 214 340 242 332 280 C302 290 268 280 252 254 Z" fill="${p.wing}" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>
+      <path d="${tuft}" fill="none" stroke="${C.ink}" stroke-width="14" stroke-linecap="round"/>
+      <path d="${tuft}" fill="none" stroke="${p.face}" stroke-width="6" stroke-linecap="round"/>
+      ${shape(head, p.face)}
+      <clipPath id="${p.id}-h">${head}</clipPath>
+      <g clip-path="url(#${p.id}-h)">
+        ${p.cap ? `<path d="M60 80 H240 V156 C206 136 160 132 96 148 L60 150 Z" fill="${p.cap}"/>` : ''}
+        ${p.stripe ? `<path d="M70 160 C110 150 160 152 220 166" fill="none" stroke="${p.stripe}" stroke-width="12" stroke-linecap="round"/>` : ''}
+      </g>
+      <circle cx="146" cy="168" r="70" fill="none" ${OL}/>
+      ${eye(m.eyes, 128, 162, 20, { lid: p.face })}
+      <ellipse cx="168" cy="200" rx="18" ry="10" fill="${C.pink}"/>
+      <path d="M84 172 C68 168 50 174 42 184 C52 194 70 194 86 186 Z" fill="${p.bill}" stroke="${C.ink}" stroke-width="8" stroke-linejoin="round"/>
+      ${m.snack ? droplet(40, 204) : ''}
+      ${m.hearts ? heart(300, 60, 44) + heart(352, 122, 28) : ''}
+      ${deco(m, 250, 70, 32, 290, 42, 22)}`;
+  },
+});
+ART.duckling = chick({ id: 'duckling', pose: 'swim', back: '#8A6A3E', wing: '#6E5230', belly: '#F7D774', face: '#F7D774', cap: '#8A6A3E', stripe: '#5E4A30', bill: '#3E3D4F', legs: '#E8A23C' });
+ART.gosling = chick({ id: 'gosling', pose: 'stand', back: '#C9C26A', wing: '#A8A050', belly: '#F2E58A', face: '#F2E27A', cap: '#B8B060', bill: '#3E3D4F', legs: '#55546A' });
+ART.cygnet = chick({ id: 'cygnet', pose: 'swim', back: '#B8B6C4', wing: '#9C9AAC', belly: '#D2D0DA', face: '#CFCDD8', bill: '#3E3D4F', legs: '#55546A' });
+ART.gullChick = chick({ id: 'gullchick', pose: 'stand', back: '#BDAE92', wing: '#A39478', belly: '#D9CDB4', face: '#D2C4A8', speckle: '#5E5446', bill: '#3E3D4F', legs: '#C98A7A' });
+ART.ternChick = chick({ id: 'ternchick', pose: 'stand', back: '#E3D3B0', wing: '#CBB990', belly: '#F2E8D2', face: '#EADCBC', speckle: '#7A6A50', bill: '#F2804A', legs: '#E5484D' });
 
 // Every neighbor in close-up scenes: which drawing, how they're posed, and where their
 // feet are on the 400 canvas (as a fraction), so the scene can stand them on its branch,
@@ -1547,6 +1593,14 @@ const CUTOUTS = {
   'pond-slider': P('turtle', 'swim', 0.73),
   groundhog: P('groundhogBody', 'stand', 0.9),
   'orb-weavers': P('orbweaver', 'web', 0.8),
+  // Little ones who don't look like their parents (the rest are drawn as small grown-ups).
+  'mallard:young': P('duckling', 'swim', 0.74),
+  'mute-swan:young': P('cygnet', 'swim', 0.74),
+  'canada-goose:young': P('gosling', 'stand', 0.9),
+  'herring-gull:young': P('gullChick', 'stand', 0.9),
+  'ring-billed-gull:young': P('gullChick', 'stand', 0.9),
+  'common-tern:young': P('ternChick', 'stand', 0.9),
+  'white-tailed-deer:young': P('fawn', 'stand', 0.9),
 };
 
 // Species id → drawing.

@@ -18,7 +18,7 @@
 import { useEffect, useRef, type ReactElement } from 'react';
 import { Animated, Easing, View } from 'react-native';
 import Svg, { Circle, Ellipse, G, Path, Rect } from 'react-native-svg';
-import type { Action, Mood, Period, PlaceKind, Season, Setting } from '@/content/types';
+import type { Action, Crowd, Mood, Period, PlaceKind, Season, Setting } from '@/content/types';
 import { getSpecies } from '@/content';
 import { inks, type Ink } from '../art/inks';
 import type { Sky } from '@/lib/weather';
@@ -149,6 +149,163 @@ export function closeUpFor(speciesId: string | undefined, setting: Setting | und
   }
 }
 
+// ---------------------------------------------------------------- friends and family
+
+/**
+ * One neighbor in a close-up: who, where along the ground (a fraction of the screen
+ * width), how big (a fraction of the scene's usual size), how far above the ground (a
+ * fraction of the band, for fliers), facing right instead of left, what they're doing,
+ * and whether they're a little one (drawn as a baby where babies look different: fuzzy
+ * ducklings, spotted fawns; otherwise as a small grown-up).
+ */
+export type Figure = { id: string; x: number; scale: number; dy?: number; flip?: boolean; action?: Action; young?: boolean };
+export type Plan = { scene: CloseUpSetting; figures: Figure[] };
+
+const PERCHES: CloseUpSetting[] = ['branch', 'wire', 'highledge', 'fireescape', 'reeds'];
+
+/** Can this neighbor be drawn in this scene, as they really are (no ducks on wires, no deer on branches)? */
+function fits(id: string, scene: CloseUpSetting): boolean {
+  if (!hasCutout(id)) return false;
+  const pose = cutoutPose(id);
+  switch (scene) {
+    case 'web':
+    case 'trunk':
+      return false;
+    case 'water':
+      return pose === 'swim';
+    case 'wade':
+      return pose === 'wade' || pose === 'swim';
+    case 'flowers':
+      return pose === 'fly';
+    case 'sky':
+      return pose === 'fly' || canDo(id, 'fly');
+    case 'hollow':
+      return HOLLOW_SLEEPERS.includes(id);
+  }
+  // Bugs hover over grass and hedges; swimmers, clingers and spiders stay in their own scenes.
+  if (pose === 'fly') return scene === 'lawn' || scene === 'hedge' || scene === 'reeds';
+  if (pose === 'swim' || pose === 'cling' || pose === 'web') return false;
+  if (PERCHES.includes(scene)) {
+    if (GROUND_ONLY.includes(id)) return false;
+    if (scene === 'wire') return pose === 'perch';
+    if (scene === 'reeds') return pose === 'perch' || pose === 'wade';
+  }
+  return true;
+}
+
+/**
+ * Several of the same neighbor: a pair facing each other, a few in a row, or a parent
+ * with little ones trailing behind. They all do the same thing (three sparrows in one
+ * dust bath), except a drink: only one gets the straw, the others wait their turn.
+ */
+function layout(scene: CloseUpSetting, id: string, crowd: Crowd | undefined, action: Action | undefined): Figure[] {
+  const place = PLACE[scene];
+  const act = action && canDo(id, action) ? action : undefined;
+  const max = scene === 'web' || scene === 'trunk' ? 1 : scene === 'hollow' ? 2 : 3;
+  const count = Math.min(max, crowd?.count ?? 1);
+  if (count <= 1) return [{ id, x: place.x, scale: 1, action: act }];
+  const airy = scene === 'sky' || scene === 'flowers' || cutoutPose(id) === 'fly';
+  const lift = (i: number) => (airy ? [0.06, -0.14, 0.12][i] : 0);
+  if (act === 'drink') {
+    // One at the puddle with the straw; the others line up behind.
+    return [{ id, x: 0.46, scale: 0.86, action: act }, ...Array.from({ length: count - 1 }, (_, i) => ({ id, x: 0.84 - i * 0.03, scale: 0.56 - i * 0.08 }))];
+  }
+  const young = Math.min(crowd?.young ?? 0, count - 1);
+  if (young > 0) {
+    // The grown-up in front, the little ones following behind.
+    const kids = young === 1 ? [0.72] : [0.64, 0.85];
+    return [
+      { id, x: 0.34, scale: 0.8, action: act, dy: lift(0) },
+      ...kids.map((x, i) => ({ id, x, scale: 0.48, action: act, dy: lift(i + 1), young: true })),
+    ];
+  }
+  if (scene === 'hollow') return [{ id, x: 0.38, scale: 0.66, flip: true, action: act }, { id, x: 0.63, scale: 0.66, action: act }];
+  if (count === 2) return [{ id, x: 0.3, scale: 0.74, flip: true, action: act, dy: lift(0) }, { id, x: 0.7, scale: 0.74, action: act, dy: lift(1) }];
+  return [0.2, 0.5, 0.8].map((x, i) => ({ id, x, scale: 0.62, flip: i === 0, action: act, dy: lift(i) }));
+}
+
+/**
+ * Who's in the close-up and where. Alone, with others of their kind (from the words),
+ * or with a different neighbor (an encounter): side by side and facing each other when
+ * both belong in the scene; a bird who doesn't (a hawk over the lawn) flies in overhead;
+ * otherwise they meet in the other one's place, if the lead belongs there too. Nothing
+ * when the two can't be drawn together (the round group sticker shows instead).
+ */
+export function planCloseUp(speciesId: string | undefined, setting: Setting | undefined, action?: Action, opts: { crowd?: Crowd; cast?: string[] } = {}): Plan | undefined {
+  const scene = closeUpFor(speciesId, setting, action);
+  if (!scene || !speciesId) return undefined;
+  const others = (opts.cast ?? []).filter((id) => id !== speciesId).slice(0, 2);
+  if (others.length === 0) return { scene, figures: layout(scene, speciesId, opts.crowd, action) };
+  if (!others.every(hasCutout)) return undefined;
+  const together = (where: CloseUpSetting): Plan | undefined => {
+    const act = (id: string) => (action && action !== 'drink' && canDo(id, action) ? action : undefined);
+    const figures: Figure[] = [{ id: speciesId, x: 0.7, scale: 0.76, action: act(speciesId) }];
+    let ground = 0;
+    for (const id of others) {
+      // Said to be flying (and the lead can't): overhead. Otherwise beside the lead if they belong here.
+      if (act(id) === 'fly' && where !== 'sky') {
+        figures.push({ id, x: 0.3, scale: 0.56, dy: 0.62, flip: true, action: 'fly' });
+      } else if (fits(id, where)) {
+        figures.push({ id, x: ground === 0 ? 0.3 : 0.12, scale: ground === 0 ? 0.76 : 0.6, flip: true, action: act(id) });
+        ground++;
+      } else if (canDo(id, 'fly') || cutoutPose(id) === 'fly') {
+        figures.push({ id, x: 0.3, scale: 0.56, dy: 0.62, flip: true, action: cutoutPose(id) === 'fly' ? undefined : 'fly' });
+      } else {
+        return undefined;
+      }
+    }
+    return { scene: where, figures };
+  };
+  const here = together(scene);
+  if (here) return here;
+  // Meet where the other one lives, if the lead belongs there too.
+  const theirs = closeUpFor(others[0], setting);
+  return theirs && theirs !== scene && fits(speciesId, theirs) ? together(theirs) : undefined;
+}
+
+/** A point on a Bézier curve (2 or 3 control points after the start). */
+function bezier(pts: [number, number][], t: number): [number, number] {
+  const n = pts.length - 1;
+  const weights = n === 3 ? [1, 3, 3, 1] : [1, 2, 1];
+  let x = 0;
+  let y = 0;
+  pts.forEach(([px, py], k) => {
+    const c = weights[k] * (1 - t) ** (n - k) * t ** k;
+    x += c * px;
+    y += c * py;
+  });
+  return [x, y];
+}
+
+/** The curve's height under `x`, found by sampling. */
+function curveY(pts: [number, number][], x: number): number {
+  let best = pts[0][1];
+  let gap = Infinity;
+  for (let i = 0; i <= 48; i++) {
+    const [px, py] = bezier(pts, i / 48);
+    if (Math.abs(px - x) < gap) {
+      gap = Math.abs(px - x);
+      best = py;
+    }
+  }
+  return best;
+}
+
+/**
+ * Where to stand someone at `x` (screen points) when the scene's one animal would stand
+ * at `x0` on `ground`: the same, except on the branch and the wire, which aren't level.
+ */
+function groundAt(scene: CloseUpSetting, w: number, ground: number, bh: number, x: number, x0: number): number {
+  let curve: [number, number][] | undefined;
+  if (scene === 'branch') {
+    const t = bh * 0.07;
+    curve = [[-w * 0.05, ground + t * 0.9], [w * 0.3, ground + t * 0.5], [w * 0.65, ground + t * 0.6], [w * 1.05, ground - t * 0.3]];
+  } else if (scene === 'wire') {
+    curve = [[w * 0.06 + 5, ground - bh * 0.02], [w * 0.55, ground + bh * 0.06], [w + 10, ground - bh * 0.04]];
+  }
+  return curve ? ground + curveY(curve, x) - curveY(curve, x0) : ground;
+}
+
 const INK = colors.ink;
 const LEAVES: Record<Season, string[]> = {
   spring: ['#9BD27A', '#7FBF5A', '#FFB3CB'],
@@ -187,6 +344,8 @@ type Props = {
   variant?: number;
   /** What they're doing: flying, sleeping, dust bathing or drinking. */
   action?: Action;
+  /** Everyone in the picture (see planCloseUp). Omit for just this one neighbor. */
+  figures?: Figure[];
 };
 
 /** Where the animal's feet go (from the band's top, as a fraction of its height) and how big they are, per scene. */
@@ -213,23 +372,36 @@ const PLACE: Record<CloseUpSetting, { ground: number; size: number; x: number }>
 };
 const OPEN_SKY: CloseUpSetting[] = ['highledge', 'hollow', 'branch', 'trunk', 'hedge', 'lawn', 'flowers', 'burrow', 'wire', 'sky', 'water', 'wade', 'shore', 'pier', 'reeds', 'web'];
 
-export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, period, season, sky, weather, placeId, placeKind = 'block', variant = 0, action }: Props) {
+export function CloseUp({ setting, speciesId, mood, width: w, height: h, band, period, season, sky, weather, placeId, placeKind = 'block', variant = 0, action, figures }: Props) {
   const look = lookFor(placeId, placeKind);
   const bt = band.top;
   const bh = band.height;
   const place = PLACE[setting];
   const ground = bt + bh * place.ground;
-  const size = bh * place.size;
-  const top = ground - size * cutoutFeet(speciesId);
-  const left = w * place.x - size * 0.45;
-  const animal = (
-    <View style={{ position: 'absolute', left, top }}>
-      <Acting action={action} speciesId={speciesId} size={size} setting={setting}>
-        {/* Cormorants drying off are drawn with their wings spread wide. */}
-        <Character speciesId={action === 'dry' && canDo(speciesId, 'dry') ? `${speciesId}:spread` : speciesId} size={size} mood={mood} cutout />
-      </Acting>
-    </View>
-  );
+  const cast = figures ?? [{ id: speciesId, x: place.x, scale: 1, action: action && canDo(speciesId, action) ? action : undefined }];
+  // Where each one stands: their feet on the scene's ground (or perch), fliers lifted up.
+  const spots = cast.map((f) => {
+    // Little ones who look different from their parents have their own drawing.
+    if (f.young && hasCutout(`${f.id}:young`)) f = { ...f, id: `${f.id}:young` };
+    const size = bh * place.size * f.scale;
+    const gx = w * f.x;
+    const top = groundAt(setting, w, ground, bh, gx, w * place.x) - bh * (f.dy ?? 0) - size * cutoutFeet(f.id);
+    return { f, size, top, left: gx - size * 0.45 };
+  });
+  // The first one leads: the web, the trunk and the straw are drawn around them.
+  const { size, top, left } = spots[0];
+  // Smaller ones (further back, or little) first, so the bigger ones stand in front.
+  const animal = [...spots]
+    .map((spot, i) => ({ ...spot, i }))
+    .sort((a, b) => a.size - b.size)
+    .map(({ f, size: s, top: y, left: x, i }) => (
+      <View key={i} style={{ position: 'absolute', left: x, top: y, width: s, height: s, transform: f.flip ? [{ scaleX: -1 }] : undefined }}>
+        <Acting action={f.action} speciesId={f.id} size={s} setting={setting}>
+          {/* Cormorants drying off are drawn with their wings spread wide. */}
+          <Character speciesId={f.action === 'dry' && canDo(f.id, 'dry') ? `${f.id}:spread` : f.id} size={s} mood={mood} cutout />
+        </Acting>
+      </View>
+    ));
   const horizon = bt + bh * 0.5; // the far shore, by the water
   const pavement = ground - bh * 0.08; // where the sidewalk starts
   const leaves = LEAVES[season];
@@ -397,7 +569,7 @@ function Acting({ action: wanted, speciesId, size, setting, children }: { action
       </Svg>
     </Animated.View>
   );
-  if (action === 'fly' && (setting === 'sky' || setting === 'wire')) {
+  if (action === 'fly') {
     // The far wing behind the body, the near wing in front: both flap together.
     return (
       <Animated.View style={{ transform: [{ translateY: wave(t, 0, -size * 0.04) }] }}>

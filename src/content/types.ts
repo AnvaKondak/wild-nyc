@@ -87,6 +87,9 @@ export type Family = {
 export type Action = 'fly' | 'sleep' | 'dust' | 'drink' | 'dry';
 
 /** The everyday four take turns; the rest show only when the words call for them. */
+/** How many of one kind of neighbor are in the picture, and how many of those are little ones. */
+export type Crowd = { count: number; young: number };
+
 export type Mood = 'hello' | 'snack' | 'happy' | 'sleepy' | 'surprised' | 'curious' | 'singing' | 'chilly';
 
 export type StorySlide = {
@@ -126,6 +129,8 @@ export type StorySlide = {
   mood?: Mood;
   /** What they're doing, when the words say: flying, sleeping, dust bathing or drinking. Drawn to match. */
   action?: Action;
+  /** More than one of them in the picture: a pair, a few, or a parent with little ones (from the words). */
+  crowd?: Crowd;
   /** Two or more neighbors in one moment (an encounter): shown together in the sticker. */
   cast?: string[];
   /** A neighbor who appears in the scene behind this slide (flying past, perched nearby). */
