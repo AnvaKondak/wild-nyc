@@ -64,4 +64,40 @@ Hello, neighbor. This is the very first version.
 
 ## App Review notes
 
-No account or login is needed. On first launch, tap Next through the three welcome pages, pick any neighborhood (try "Central Park"), and optionally pick favorites. The app never requests location; the only network request is the weather for the chosen neighborhood (Open-Meteo). The background sound is off until turned on with the speaker button on the home screen. Animal photos are CC-licensed from iNaturalist and credited on each species page; the birdsong is "Birdsong morning 01" by Matutinho (CC BY-SA 4.0), credited on the Kindness tab.
+Apple asks new developer accounts for this up front (Guideline 2.1, Information Needed),
+so it goes in with the first submission: paste the text below into App Review
+Information → Notes, and attach the screen recording (recorded on a physical iPhone on
+the latest iOS, starting from launching the app) in the Attachment field.
+
+```
+1. SCREEN RECORDING
+Attached: recorded on a physical iPhone running the latest iOS, starting from launch and showing the typical flow. The app has no accounts, no login, no user-generated content and no paid content or in-app purchases.
+
+2. PURPOSE AND AUDIENCE
+Wild Neighbors helps people in New York City and Jersey City notice and understand the everyday animals around them (pigeons, sparrows, squirrels, raccoons, geese and about 50 more) and what those animals are doing at this time of day and season. It's for city residents of all ages: curious adults, families, and people at a desk who want a small, calm moment of nature. Most people walk past these animals every day without knowing who they are or what they're up to; the app turns that into a short daily story, a profile page for each species, and practical ways to help (seasonal kindness tips and what to do if you find a hurt animal). It is free, with no ads, accounts or tracking.
+
+3. HOW TO USE IT
+No login or sample files are needed. Launch the app, tap Next through the three welcome pages, pick a neighborhood (for example "Central Park"), and optionally heart some favorites, then tap "Meet the neighbors". On the home screen: "Today's story" plays the day's story; "See everyone around" lists the animals in that neighborhood; tap any animal for their profile. Tabs: Chapters (seasonal chapters), Search (all species), Kindness (seasonal tips, "Found a hurt animal?" guide, credits, privacy policy). The speaker button plays a soft birdsong background (off by default). The bell turns on an optional morning note, at most one a day, scheduled locally on the device. The pills at the top switch neighborhoods; "+" adds another.
+
+4. EXTERNAL SERVICES
+Open-Meteo (open-meteo.com): the weather forecast for the chosen neighborhood's center, rounded to about 1 km. No API key, account or personal data is sent. Nothing else is called at runtime: all content is bundled in the app. Animal photos are from iNaturalist (CC0, CC BY or CC BY-SA, credited on each species page); neighborhood sighting counts come from iNaturalist's public data and are bundled at build time; the birdsong is "Birdsong morning 01" by Matutinho on Wikimedia Commons (CC BY-SA 4.0), credited on the Kindness tab. No authentication, payments, analytics, advertising or AI services are used.
+
+5. REGIONAL DIFFERENCES
+None. The content is about neighborhoods in New York City and Jersey City, and the app works the same in every region: anyone can pick any of those neighborhoods. English only.
+
+6. REGULATED INDUSTRY / PROTECTED MATERIAL
+Not applicable. The app is not in a regulated industry. All third-party material (photos, sound, weather data) is openly licensed under Creative Commons and credited in the app.
+```
+
+### What to show in the screen recording (about 2 minutes)
+
+Record on your iPhone (Control Center → Screen Recording), with the phone on the latest iOS:
+
+1. Start on the Home Screen and tap the Wild Neighbors icon (it has to begin at launch).
+2. The three welcome pages → Pick my neighborhood → search "Central" → Central Park.
+3. Heart two or three favorites → Meet the neighbors.
+4. Home: tap the speaker (birdsong) → Today's story, tap through a few slides.
+5. Back → See everyone around → tap one animal → scroll their profile.
+6. Search tab → search "pigeon" → open it.
+7. Kindness tab → check one tip → Found a hurt animal? → back → scroll to Credits.
+8. Back to Right now → tap the ♥ Favorites pill.
