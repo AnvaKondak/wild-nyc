@@ -23,7 +23,7 @@ App Privacy answers: `docs/APP_STORE_PRIVACY.md`.
 
 ## Promotional text (170)
 
-The squirrels are burying snacks, the juncos just flew in from Canada, and the pigeons are, as always, on the ledge. See what your neighbors are up to right now.
+Ever look up from your laptop and wonder what the pigeons are up to? Now you can check. (Busy. They're always busy.)
 
 ## Keywords (100)
 
@@ -32,6 +32,8 @@ birds,pigeon,squirrel,wildlife,nature,urban,birding,new york,jersey city,brookly
 ## Description (4000)
 
 Meet the neighbors.
+
+Somewhere between your second meeting and your third coffee, you glance out the window and wonder: what are the pigeons doing right now? Now you can find out.
 
 The pigeons on the ledge. The sparrows in the hedge. The squirrel who definitely buried something in your planter. Wild Neighbors is a little app about the everyday animals who share New York City and Jersey City with you, and what they're up to right now.
 
