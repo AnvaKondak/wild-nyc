@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Write the privacy policy and support page for the web from src/content/privacy.json,
-so the in-app policy, docs/PRIVACY.md and the pages linked from the App Store listing
-always say the same thing.
+so the in-app policy and the pages linked from the App Store listing always say the
+same thing.
 
-  docs/PRIVACY.md            the policy, in the repo
   site/index.html            support page   (https://anvakondak.github.io/wild-nyc/)
   site/privacy/index.html    privacy policy (https://anvakondak.github.io/wild-nyc/privacy/)
 
@@ -16,12 +15,6 @@ import html, json, os
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 p = json.load(open(os.path.join(ROOT, "src/content/privacy.json")))
 CONTACT = p.get("contact") or "the email on our App Store page"
-
-# docs/PRIVACY.md
-lines = [f"# Wild Neighbors {p['title']}", "", "**We notice. We don't follow.**", "", f"_Updated {p['updated']}_", "", p["summary"], ""]
-for s in p["sections"]:
-    lines += [f"## {s['heading']}", "", s["body"].replace("{contact}", CONTACT), ""]
-open(os.path.join(ROOT, "docs/PRIVACY.md"), "w").write("\n".join(lines))
 
 # The web pages: the app's riso look (paper, ink, offset shadows, Fraunces + Instrument Sans).
 STYLE = """
@@ -108,4 +101,4 @@ support = page(
 os.makedirs(os.path.join(ROOT, "site/privacy"), exist_ok=True)
 open(os.path.join(ROOT, "site/privacy/index.html"), "w").write(privacy)
 open(os.path.join(ROOT, "site/index.html"), "w").write(support)
-print("docs/PRIVACY.md, site/index.html, site/privacy/index.html")
+print("site/index.html, site/privacy/index.html")
