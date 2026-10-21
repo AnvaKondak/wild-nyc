@@ -3,6 +3,10 @@
 *Meet the neighbors.* An iOS app about the everyday animals on your block, starting with
 NYC and Jersey City.
 
+Try it on the web: https://wild-nyc.vercel.app/
+
+App Store: coming soon
+
 ## Run it
 
 ```sh
@@ -17,6 +21,9 @@ Live data (optional): start the server (see `server/README.md`). In development 
 talks to `http://localhost:3000`; set `EXPO_PUBLIC_API_URL` to use another server.
 
 Refresh the bundled sightings once or twice a year: `python3 scripts/build_sightings.py`.
+
+Web: every push to `main` deploys to Vercel (`vercel.json` builds with
+`npx expo export -p web`). Note that some features are limited, e.g. animations/morning notes.
 
 In development builds, tap the time header on **Right now** to preview the dawn, midday,
 dusk and night themes.
@@ -36,5 +43,4 @@ src/theme/        design tokens and time-of-day themes
 ## Upcoming Changes
 
 - Turn on live data (docs/DEPLOY.md)
-- A web version
 - More species and more cities
