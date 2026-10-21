@@ -71,7 +71,7 @@ the latest iOS, starting from launching the app) in the Attachment field.
 
 ```
 1. SCREEN RECORDING
-Attached: recorded on a physical iPhone running the latest iOS, starting from launch and showing the typical flow. The app has no accounts, no login, no user-generated content and no paid content or in-app purchases.
+Attached: recorded on a physical iPhone running the latest iOS. It starts with opening the app (launched from TestFlight) and shows the typical flow. The app has no accounts, no login, no user-generated content and no paid content or in-app purchases.
 
 2. PURPOSE AND AUDIENCE
 Wild Neighbors helps people in New York City and Jersey City notice and understand the everyday animals around them (pigeons, sparrows, squirrels, raccoons, geese and about 50 more) and what those animals are doing at this time of day and season. It's for city residents of all ages: curious adults, families, and people at a desk who want a small, calm moment of nature. Most people walk past these animals every day without knowing who they are or what they're up to; the app turns that into a short daily story, a profile page for each species, and practical ways to help (seasonal kindness tips and what to do if you find a hurt animal). It is free, with no ads, accounts or tracking.
@@ -93,7 +93,7 @@ Not applicable. The app is not in a regulated industry. All third-party material
 
 Record on your iPhone (Control Center → Screen Recording), with the phone on the latest iOS:
 
-1. Start on the Home Screen and tap the Wild Neighbors icon (it has to begin at launch).
+1. Start the recording, then open the app (tap Open in TestFlight, or its Home Screen icon). It has to begin at launch.
 2. The three welcome pages → Pick my neighborhood → search "Central" → Central Park.
 3. Heart two or three favorites → Meet the neighbors.
 4. Home: tap the speaker (birdsong) → Today's story, tap through a few slides.
