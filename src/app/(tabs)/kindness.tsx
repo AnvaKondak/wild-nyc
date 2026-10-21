@@ -131,9 +131,9 @@ export default function Kindness() {
         </Text>
         <Text style={type.label}>Credits</Text>
         <Text style={credit}>
-          Sightings from iNaturalist and eBird, at neighborhood level. Weather from Open-Meteo (CC BY 4.0). Photos are credited on each species page.
+          Sightings from iNaturalist, at neighborhood level. Weather from Open-Meteo (CC BY 4.0). Photos are credited on each species page.
         </Text>
-        <Text style={credit}>Sounds: wind, rain, waves and city hum are made in code. Recordings via Wikimedia Commons:</Text>
+        <Text style={credit}>Background sound via Wikimedia Commons:</Text>
         {soundCredits.map((c) => (
           <Text key={c.source} style={[credit, { textDecorationLine: 'underline' }]} accessibilityRole="link" onPress={() => Linking.openURL(c.source)}>
             {c.title.replace(/\.(mp3|ogg|wav)$/, '')}, by {c.artist} ({c.license})
