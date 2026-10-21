@@ -64,10 +64,4 @@ Hello, neighbor. This is the very first version.
 
 ## App Review notes
 
-No account or login is needed. On first launch, swipe through the three welcome pages,
-pick any neighborhood (try "Central Park"), and optionally pick favorites. The app never
-requests location; the only network request is the weather for the chosen neighborhood
-(Open-Meteo). The background sound is off until turned on with the speaker button on the
-home screen. Animal photos are CC-licensed from iNaturalist and credited on each species
-page; the birdsong is "Birdsong morning 01" by Matutinho (CC BY-SA 4.0), credited on the
-Kindness tab.
+No account or login is needed. On first launch, tap Next through the three welcome pages, pick any neighborhood (try "Central Park"), and optionally pick favorites. The app never requests location; the only network request is the weather for the chosen neighborhood (Open-Meteo). The background sound is off until turned on with the speaker button on the home screen. Animal photos are CC-licensed from iNaturalist and credited on each species page; the birdsong is "Birdsong morning 01" by Matutinho (CC BY-SA 4.0), credited on the Kindness tab.
