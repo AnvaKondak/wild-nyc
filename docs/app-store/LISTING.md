@@ -9,7 +9,7 @@ Connect scales them down for smaller iPhones). Upload them in numbered order.
 | Field | Value |
 | --- | --- |
 | Name (30) | Wild Neighbors: NYC Animals |
-| Subtitle (30) | NYC birds, squirrels & more |
+| Subtitle (30) | NYC wildlife, right now |
 | Primary category | Education |
 | Secondary category | Lifestyle |
 | Price | Free |
