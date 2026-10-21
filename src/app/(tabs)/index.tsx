@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { AppState, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { AppState, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
 import { setStatusBarStyle } from 'expo-status-bar';
 import { StoryBackdrop } from '@/components/backdrop';
@@ -34,6 +34,7 @@ import { dateKey, momentKicker, moonLitFraction, seasonOf, timeHeader } from '@/
 import { askForNotes, cancelNotes, scheduleNotes } from '@/lib/notifications';
 import { SOUNDSCAPE, SOUNDSCAPE_LABEL } from '@/lib/soundscape';
 import { useAmbience } from '@/lib/useAmbience';
+import { useAppDimensions } from '@/lib/appFrame';
 import { useNow } from '@/lib/useNow';
 import { describeWeather, PREVIEW_WEATHER, type WeatherTag } from '@/lib/weather';
 import { useAppState } from '@/state/AppState';
@@ -69,7 +70,7 @@ function tileFor(slide: StorySlide): string {
 
 export default function RightNow() {
   const router = useRouter();
-  const { width: screenWidth, height } = useWindowDimensions();
+  const { width: screenWidth, height } = useAppDimensions();
   // Smaller phones get a smaller sticker so the story still fits without scrolling.
   const stickerSize = Math.min(190, Math.round(height * 0.21));
   const now = useNow();
@@ -419,6 +420,8 @@ export default function RightNow() {
                 <HomeIcon color={theme.ink} />
               </Pressable>
             )}
+            {/* The morning note is scheduled on the phone; browsers can't, so no bell on the web. */}
+            {Platform.OS !== 'web' && (
             <Pressable
               onPress={toggleNotes}
               accessibilityRole="switch"
@@ -441,6 +444,7 @@ export default function RightNow() {
             >
               {state.notesOn ? <BellIcon color={theme.bg} /> : <BellOffIcon color={theme.ink} />}
             </Pressable>
+            )}
             <Pressable
               onPress={() => actions.setSound(!state.soundOn)}
               accessibilityRole="switch"

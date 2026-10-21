@@ -2,9 +2,10 @@
 // them, tap ✕ (top left, where the page's back button is) or outside the photo to go back.
 
 import { useRef, useState } from 'react';
-import { Image, Modal, Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
+import { Image, Modal, Pressable, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { PhotoCredit } from '@/content';
+import { useAppDimensions } from '@/lib/appFrame';
 import { border, colors, fonts, offsetShadow } from '@/theme/tokens';
 
 type Props = {
@@ -17,7 +18,7 @@ type Props = {
 };
 
 export function PhotoViewer({ photos, credits, name, index, onClose }: Props) {
-  const { width } = useWindowDimensions();
+  const { width } = useAppDimensions();
   const insets = useSafeAreaInsets();
   const [at, setAt] = useState(0);
   const scroller = useRef<ScrollView>(null);
